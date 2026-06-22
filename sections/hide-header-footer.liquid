@@ -1,0 +1,54 @@
+<style>
+  {% if section.settings.hide_header %}
+    .section-header {
+      display: none !important;
+    }
+  {% endif %}
+  {% if section.settings.hide_announcements %}
+    .shopify-section-group-header-group.announcement-bar-section,
+    .shopify-section-group-header-group.horizontal-ticker-section {
+      display: none !important;
+    }
+  {% endif %}
+  {% if section.settings.hide_footer %}
+    .shopify-section-group-footer-group {
+      display: none !important;
+    }
+  {% endif %}
+</style>
+
+{% schema %}
+{
+  "name": "Hide Header and/or Footer",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Use this section to hide the header, announcement bar & footer ON THIS PAGE ONLY."
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_header",
+      "label": "Hide the Header section",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_announcements",
+      "label": "Hide the Announcement bars & Horizontal tickers",
+      "default": true,
+      "info": "This only applies to these 2 sections added to the header group"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_footer",
+      "label": "Hide the Footer section",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hide Header and/or Footer"
+    }
+  ]
+}
+{% endschema %}

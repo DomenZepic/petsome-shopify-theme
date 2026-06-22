@@ -1,0 +1,117 @@
+<div
+  id="Body-{{ block.id }}"
+  class="timeline-item__body"
+  data-role="body"
+>
+  <div class="timeline-item__content block-margins">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Content",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "custom-liquid"
+    },
+    {
+      "type": "image"
+    },
+    {
+      "type": "json-animation"
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "button"
+    },
+    {
+      "type": "atc-button"
+    },
+    {
+      "type": "heading"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "rating-stars"
+    },
+    {
+      "type": "countdown-timer"
+    },
+    {
+      "type": "collapsible-row"
+    },
+    {
+      "type": "video"
+    },
+    {
+      "type": "slider"
+    },
+    {
+      "type": "container"
+    },
+    {
+      "type": "media-slider"
+    },
+    {
+      "type": "trustpilot-stars"
+    },
+    {
+      "type": "product_popup"
+    },
+    {
+      "type": "payment-badges"
+    },
+    {
+      "type": "product_urgency"
+    },
+    {
+      "type": "review-avatars"
+    },
+    {
+      "type": "icon-with-content"
+    },
+    {
+      "type": "text-with-icon"
+    },
+    {
+      "type": "text-with-icon-new"
+    },
+    {
+      "type": "icon-with-text"
+    },
+    {
+      "type": "reviews"
+    }
+  ],
+  "settings": [
+  ],
+  "presets": [
+    {
+      "name": "Content",
+      "blocks": [
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>Use this stage to outline the key goals or tasks for this step. Add details that help clarify what happens during this part of the process.</p>"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>Include any useful details that help guide the visitor forward.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

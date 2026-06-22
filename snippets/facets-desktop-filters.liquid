@@ -1,0 +1,27 @@
+{% comment %}
+  Desktop filters list (shared for vertical + horizontal)
+{% endcomment %}
+
+<script src="{{ 'show-more.js' | asset_url }}" defer="defer"></script>
+
+{% liquid
+  assign mode = 'desktop-horizontal'
+  if filter_type == 'vertical'
+    assign mode = 'desktop-vertical'
+  endif
+%}
+
+{%- for filter in results.filters -%}
+  {%- render 'facet-block',
+    filter: filter,
+    index: forloop.index,
+    section_id: section.id,
+    mode: mode
+  -%}
+{%- endfor -%}
+
+<noscript>
+  <button type="submit" class="facets__button-no-js button button--secondary">
+    {{ 'products.facets.filter_button' | t }}
+  </button>
+</noscript>

@@ -1,0 +1,219 @@
+{% comment %}
+  Renders the shared price range inputs for facets.
+
+  Accepts:
+  - filter: {PriceRangeFilterDrop} (required)
+  - id_prefix: {String} prefix for input IDs, e.g. "Filter-" or "Mobile-Filter-" (optional, defaults to "Filter-")
+  - show_second_currency: {Boolean} whether to print the 2nd currency span between inputs
+      (desktop horizontal usually wants it, desktop vertical often doesn't)
+  - inputmode: {String} inputmode for number fields (optional, defaults to "decimal")
+{% endcomment %}
+
+{% comment %} {% liquid
+  assign id_prefix = id_prefix | default: 'Filter-'
+  assign inputmode_attr = inputmode | default: 'decimal'
+
+  assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,TRY,UYU,VES,VND' | split: ','
+  assign uses_comma_decimals = false
+  if currencies_using_comma_decimals contains cart.currency.iso_code
+    assign uses_comma_decimals = true
+  endif
+
+  comment
+    Min current value
+  endcomment
+  assign min_value_raw = ''
+  if filter.min_value.value
+    if uses_comma_decimals
+      assign min_value_raw = filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.'
+    else
+      assign min_value_raw = filter.min_value.value | money_without_currency | replace: ',', ''
+    endif
+  endif
+
+  comment
+    Max current value
+  endcomment
+  assign max_value_raw = ''
+  if filter.max_value.value
+    if uses_comma_decimals
+      assign max_value_raw = filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.'
+    else
+      assign max_value_raw = filter.max_value.value | money_without_currency | replace: ',', ''
+    endif
+  endif
+
+  comment
+    Max allowed (for placeholder / max attr)
+  endcomment
+  if uses_comma_decimals
+    assign max_allowed = filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.'
+  else
+    assign max_allowed = filter.range_max | money_without_currency | replace: ',', ''
+  endif
+%}
+
+<price-range class="facets__price">
+  <span class="field-currency">{{ cart.currency.symbol }}</span>
+
+  <div class="field">
+    <input
+      class="field__input"
+      name="{{ filter.min_value.param_name }}"
+      id="{{ id_prefix }}{{ filter.label | escape }}-GTE"
+      {% if min_value_raw != '' %}value="{{ min_value_raw }}"{% endif %}
+      type="number"
+      inputmode="{{ inputmode_attr }}"
+      placeholder="0"
+      min="0"
+      max="{{ max_allowed }}"
+    >
+    <label class="field__label" for="{{ id_prefix }}{{ filter.label | escape }}-GTE">
+      {{- 'products.facets.from' | t -}}
+    </label>
+  </div>
+
+  {% if show_second_currency %}
+    <span class="field-currency">{{ cart.currency.symbol }}</span>
+  {% endif %}
+
+  <div class="field">
+    <input
+      class="field__input"
+      name="{{ filter.max_value.param_name }}"
+      id="{{ id_prefix }}{{ filter.label | escape }}-LTE"
+      {% if max_value_raw != '' %}value="{{ max_value_raw }}"{% endif %}
+      type="number"
+      inputmode="{{ inputmode_attr }}"
+      min="0"
+      placeholder="{{ max_allowed }}"
+      max="{{ max_allowed }}"
+    >
+    <label class="field__label" for="{{ id_prefix }}{{ filter.label | escape }}-LTE">
+      {{- 'products.facets.to' | t -}}
+    </label>
+  </div>
+</price-range> {% endcomment %}
+
+{% comment %}
+  Renders the shared price range inputs for facets, with a JS-enhanced slider.
+
+  Accepts:
+  - filter: {PriceRangeFilterDrop} (required)
+  - id_prefix: {String} e.g. "Filter-" or "Mobile-Filter-" (defaults to "Filter-")
+  - show_second_currency: {Boolean} show currency between fields (desktop horizontal usually true)
+  - inputmode: {String} inputmode for number fields (defaults to "decimal")
+{% endcomment %}
+
+{% liquid
+  assign id_prefix = id_prefix | default: 'Filter-'
+  assign inputmode_attr = inputmode | default: 'decimal'
+
+  assign currencies_using_comma_decimals = 'ANG,ARS,BRL,BYN,BYR,CLF,CLP,COP,CRC,CZK,DKK,EUR,HRK,HUF,IDR,ISK,MZN,NOK,PLN,RON,RUB,SEK,TRY,UYU,VES,VND' | split: ','
+  assign uses_comma_decimals = false
+  if currencies_using_comma_decimals contains cart.currency.iso_code
+    assign uses_comma_decimals = true
+  endif
+
+  # current min
+  assign min_value_raw = ''
+  if filter.min_value.value
+    if uses_comma_decimals
+      assign min_value_raw = filter.min_value.value | money_without_currency | replace: '.', '' | replace: ',', '.'
+    else
+      assign min_value_raw = filter.min_value.value | money_without_currency | replace: ',', ''
+    endif
+  endif
+
+  # current max
+  assign max_value_raw = ''
+  if filter.max_value.value
+    if uses_comma_decimals
+      assign max_value_raw = filter.max_value.value | money_without_currency | replace: '.', '' | replace: ',', '.'
+    else
+      assign max_value_raw = filter.max_value.value | money_without_currency | replace: ',', ''
+    endif
+  endif
+
+  # absolute max
+  if uses_comma_decimals
+    assign max_allowed = filter.range_max | money_without_currency | replace: '.', '' | replace: ',', '.'
+  else
+    assign max_allowed = filter.range_max | money_without_currency | replace: ',', ''
+  endif
+
+  assign initial_min = min_value_raw | default: 0
+  assign initial_max = max_value_raw | default: max_allowed
+%}
+
+<price-range class="facets__price facets__price--{{ section.settings.facets_price_price_position }} accent-color-{{ section.settings.facets_price_color }}"
+  data-max="{{ max_allowed }}"
+  data-initial-min="{{ initial_min }}"
+  data-initial-max="{{ initial_max }}"
+  data-currency="{{ cart.currency.symbol }}"
+  style="--handle-border-width: {{ section.settings.facets_price_btn_border_width }}px"
+>
+  {%- comment -%}
+    1) Real inputs (kept for no-JS and for form wiring).
+       We visually hide them in JS-enabled environments only.
+  {%- endcomment -%}
+  <div class="price-range__fields">
+    <span class="field-currency">{{ cart.currency.symbol }}</span>
+    <div class="field">
+      <input
+        class="field__input"
+        name="{{ filter.min_value.param_name }}"
+        id="{{ id_prefix }}{{ filter.label | escape }}-GTE"
+        {% if min_value_raw != '' %}value="{{ min_value_raw }}"{% endif %}
+        type="number"
+        inputmode="{{ inputmode_attr }}"
+        placeholder="0"
+        min="0"
+        max="{{ max_allowed }}"
+      >
+      <label class="field__label" for="{{ id_prefix }}{{ filter.label | escape }}-GTE">
+        {{- 'products.facets.from' | t -}}
+      </label>
+    </div>
+
+    {% if show_second_currency %}
+      <span class="field-currency">{{ cart.currency.symbol }}</span>
+    {% endif %}
+
+    <div class="field">
+      <input
+        class="field__input"
+        name="{{ filter.max_value.param_name }}"
+        id="{{ id_prefix }}{{ filter.label | escape }}-LTE"
+        {% if max_value_raw != '' %}value="{{ max_value_raw }}"{% endif %}
+        type="number"
+        inputmode="{{ inputmode_attr }}"
+        min="0"
+        placeholder="{{ max_allowed }}"
+        max="{{ max_allowed }}"
+      >
+      <label class="field__label" for="{{ id_prefix }}{{ filter.label | escape }}-LTE">
+        {{- 'products.facets.to' | t -}}
+      </label>
+    </div>
+  </div>
+
+  {%- comment -%}
+    2) Slider UI (JS-enhanced). Hidden when no JS.
+  {%- endcomment -%}
+  <div class="price-slider no-js-hidden" role="group" aria-label="Price range slider">
+    <div class="price-slider__track" aria-hidden="true">&nbsp</div>
+    <div class="price-slider__range" aria-hidden="true">&nbsp</div>
+    <button type="button" class="price-slider__handle price-slider__handle--min price-slider__handle--{{ section.settings.facets_price_btn_style }}" data-handle="min" aria-label="Minimum price">&nbsp</button>
+    <button type="button" class="price-slider__handle price-slider__handle--max price-slider__handle--{{ section.settings.facets_price_btn_style }}" data-handle="max" aria-label="Maximum price">&nbsp</button>
+  </div>
+
+  <div class="price-slider__labels no-js-hidden">
+    <span class="price-slider__label price-slider__label--min">
+      {{ cart.currency.symbol }}<span data-label="min">{{ initial_min }}</span>
+    </span>
+    <span class="price-slider__label price-slider__label--max">
+      {{ cart.currency.symbol }}<span data-label="max">{{ initial_max }}</span>
+    </span>
+  </div>
+</price-range>

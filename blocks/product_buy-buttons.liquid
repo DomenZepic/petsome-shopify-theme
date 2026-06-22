@@ -1,0 +1,383 @@
+{% liquid
+  assign product_form_id = 'product-form-' | append: section.id
+
+  assign quantity_atc_append = 'none'
+  if block.blocks.size > 0
+    assign quantity_atc_append = block.settings.atc_append
+    assign quantity_atc_append_heights = block.settings.atc_append_heights
+  endif
+  
+  assign main_product = true
+  if section.settings.product_images == 'all' or section.settings.product_images == 'one'
+    assign main_product = false
+    assign product = section.settings.product
+  endif
+%}
+
+{% capture quantity_selector_html %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+
+{%- render 'buy-buttons',
+  block: block,
+  product: product,
+  product_form_id: product_form_id,
+  section_id: section.id,
+  show_pickup_availability: true,
+  main_product: main_product,
+  quantity_atc_append: quantity_atc_append,
+  quantity_selector_html: quantity_selector_html,
+  quantity_atc_append_heights: quantity_atc_append_heights
+-%}
+
+{% schema %}
+{
+  "name": "Buy Buttons",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "product_atc-quantity-selector"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "paragraph",
+      "content": "IMPORTANT: Variant selectors in Quantity breaks, gifts & preselected upsells do NOT work with dynamic checkout buttons."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dynamic_checkout",
+      "default": false,
+      "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
+      "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "skip_cart",
+      "label": "Skip cart",
+      "default": false,
+      "info": "Your customers will be sent directly to checkout after click the Add to Cart button."
+    },
+    {
+      "type": "header",
+      "content": "Quantity selector",
+      "info": "To display a quantity selector next to the ATC button, add the Quantity selector block inside this Buy buttons block."
+    },
+    {
+      "type": "select",
+      "id": "atc_append",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left side of the ATC button"
+        },
+        {
+          "value": "right",
+          "label": "Right side of the ATC button"
+        }
+      ],
+      "default": "left",
+      "label": "Quantity selector position"
+    },
+    {
+      "type": "select",
+      "id": "atc_append_heights",
+      "options": [
+        {
+          "value": "original",
+          "label": "Keep original heights"
+        },
+        {
+          "value": "stretch-quantity",
+          "label": "Make quantity selector same height as ATC button"
+        },
+        {
+          "value": "shrink-atc",
+          "label": "Make ATC button same height as quantity selector"
+        }
+      ],
+      "default": "stretch-quantity",
+      "label": "Heights of the quantity selector & ATC button when together",
+      "info": "By default, quantity selector & ATC button are not the same height. When you display the quantity selector next to the ATC button, this setting controls how's that handled."
+    },
+    {
+      "type": "header",
+      "content": "Buttons & icons"
+    },
+    {
+      "type": "checkbox",
+      "id": "uppercase_text",
+      "label": "Uppercase button labels",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "icon_scale",
+      "min": 80,
+      "max": 180,
+      "step": 5,
+      "unit": "%",
+      "label": "Icons scale",
+      "default": 120,
+      "info": "Related to button label font size"
+    },
+    {
+      "type": "range",
+      "id": "icon_spacing",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Icons spacing",
+      "default": 10,
+      "info": "Empty space between the button label & the icons"
+    },
+    {
+      "type": "header",
+      "content": "Main ATC button"
+    },
+    {
+      "type": "text",
+      "id": "atc_custom_label",
+      "label": "Label - Line 1",
+      "info": "If empty, the default Add to Cart label from theme language settings will be displayed."
+    },
+    {
+      "type": "range",
+      "id": "atc_label_size",
+      "label": "Line 1 font size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 18
+    },
+    {
+      "type": "text",
+      "id": "atc_label_2",
+      "label": "Label - Line 2",
+      "info": "Optional secondary line of text displayed under Line 1. Leave empty to disable."
+    },
+    {
+      "type": "range",
+      "id": "atc_label_2_size",
+      "label": "Line 2 font size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12,
+      "visible_if": "{{ block.settings.atc_label_2 != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "atc_label_2_font",
+      "label": "Line 2 font",
+      "options": [
+        { "value": "body", "label": "Body" },
+        { "value": "body-bold", "label": "Body - bold" },
+        { "value": "headings", "label": "Heading" }
+      ],
+      "default": "body",
+      "visible_if": "{{ block.settings.atc_label_2 != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "atc_label_2_uppercase",
+      "label": "Uppercase Line 2",
+      "default": false,
+      "info": "Overrides the global \"Uppercase button labels\" setting for Line 2 only.",
+      "visible_if": "{{ block.settings.atc_label_2 != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "atc_lines_spacing",
+      "label": "Spacing between Line 1 and Line 2",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 3,
+      "visible_if": "{{ block.settings.atc_label_2 != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "atc_button_padding_y",
+      "label": "Button vertical padding",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 8,
+      "info": "Adds extra top & bottom padding to the button.",
+      "visible_if": "{{ block.settings.atc_label_2 != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_price",
+      "label": "Display price inside the button",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "price_position",
+      "label": "Price position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left",
+      "visible_if": "{{ block.settings.display_price == true }}"
+    },
+    {
+      "type": "text",
+      "id": "price_separator",
+      "label": "Price separator",
+      "default": "•",
+      "visible_if": "{{ block.settings.display_price == true }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_custom_color",
+      "label": "Enable custom button colors",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "custom_color",
+      "default": "#dd1d1d",
+      "label": "Button custom color",
+      "visible_if": "{{ block.settings.enable_custom_color == true }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_text_color",
+      "default": "#fff",
+      "label": "Button custom text color",
+      "visible_if": "{{ block.settings.enable_custom_color == true }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "prefix_icon",
+      "label": "Icon #1"
+    },
+    {
+      "type": "select",
+      "id": "icon_1_attach",
+      "label": "Icon #1 placement",
+      "options": [
+        { "value": "both", "label": "Next to both lines" },
+        { "value": "line_1", "label": "Next to Line 1 only" }
+      ],
+      "default": "both",
+      "visible_if": "{{ block.settings.atc_label_2 != blank and block.settings.prefix_icon != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "suffix_icon",
+      "label": "Icon #2"
+    },
+    {
+      "type": "select",
+      "id": "icon_2_attach",
+      "label": "Icon #2 placement",
+      "options": [
+        { "value": "both", "label": "Next to both lines" },
+        { "value": "line_1", "label": "Next to Line 1 only" }
+      ],
+      "default": "both",
+      "visible_if": "{{ block.settings.atc_label_2 != blank and block.settings.suffix_icon != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Secondary Skip cart ATC button"
+    },
+    {
+      "type": "paragraph",
+      "content": "This is a secondary add to cart button which goes straight to checkout. It's a replica of the unbranded \"Buy It Now\" button."
+    },
+    {
+      "type": "paragraph",
+      "content": "Since dynamic checkout buttons don't work with multiple variants, this is meant to be a substitute for it."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_secondary_btn",
+      "label": "Display secondary Skip cart ATC button",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "secondary_btn_label",
+      "label": "Button label",
+      "default": "Buy It Now",
+      "visible_if": "{{ block.settings.enable_secondary_btn == true }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "secondary_btn_enable_custom_color",
+      "label": "Enable custom button color",
+      "default": false,
+      "visible_if": "{{ block.settings.enable_secondary_btn == true }}"
+    },
+    {
+      "type": "color",
+      "id": "secondary_btn_custom_color",
+      "default": "#dd1d1d",
+      "label": "Button custom color",
+      "info": "Applied when Enable custom button color is checked.",
+      "visible_if": "{{ block.settings.enable_secondary_btn == true and block.settings.secondary_btn_enable_custom_color == true }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "secondary_btn_prefix_icon",
+      "label": "Label prefix icon",
+      "visible_if": "{{ block.settings.enable_secondary_btn == true }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "secondary_btn_suffix_icon",
+      "label": "Label suffix icon",
+      "visible_if": "{{ block.settings.enable_secondary_btn == true }}"
+    },
+    {
+      "type": "header",
+      "content": "Block margin"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": "Buy Buttons",
+      "category": "Product basics"
+    }
+  ]
+}
+{% endschema %}

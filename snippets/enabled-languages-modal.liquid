@@ -1,0 +1,70 @@
+<style>
+  body {
+    overflow: hidden;
+  }
+  .displayed-languages-modal {
+    width: 50rem;
+  }
+  .displayed-languages-modal .popup-modal__content {
+    max-width: 100%;
+    padding-top: 2.5rem;
+  }
+  .displayed-languages-modal h3 {
+    margin-top: 0;
+  }
+  .displayed-languages-modal .rte {
+    margin-top: 1.5rem;
+  }
+  .displayed-languages-modal .copy-text {
+    gap: 0.15em;
+  }
+  .displayed-languages-modal .material-icon {
+    font-size: 1em;
+  }
+  .displayed-languages-modal copy-button:not(:hover) .material-icon {
+    display: none;
+  }
+</style>
+<div class="popup-overlay popup-overlay--active">&nbsp</div>
+<div class="displayed-languages-modal popup-modal popup-modal--active color-background-1">
+  <div class="popup-modal__container">
+    <div class="popup-modal__content">
+      <h3 class="sizing-chart__title center h3">
+        Available store languages
+      </h3>
+      <table class="sizing-chart-table">
+        <thead>
+          <tr>
+            <th class="color-inverse sizing-chart-table__th " align="center">
+              Language
+            </th>
+            <th class="color-inverse sizing-chart-table__th " align="center">
+              Code
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for language in localization.available_languages %}
+            <tr>
+              <td class="sizing-chart-table__td" align="center">
+                {{ language.endonym_name }}
+              </td>
+              <td class="sizing-chart-table__td" align="center">
+                <copy-button class="copy-button--success-absolute languages-modal__copy" data-content="{{ language.iso_code }}" data-success="false">
+                  <span class="copy-text flex-center">
+                    {{ language.iso_code }}
+                    {% render 'material-icon', icon: 'content_copy' %}
+                  </span>
+                  <span class="copy-success">Copied!</span>
+                </copy-button>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="center rte">
+        After configuring the languages & writing direction, make sure to <strong>disable this popup</strong> in Theme settings > Typography.
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1005 @@
+{% liquid
+  assign has_desktop_align = true
+  if section.settings.desktop_content_alignment == 'left' or section.settings.desktop_content_alignment == 'center' or section.settings.desktop_content_alignment == 'right'
+    assign has_desktop_align = false
+  endif
+
+  assign has_mobile_align = true
+  if section.settings.mobile_content_alignment == 'left' or section.settings.mobile_content_alignment == 'center' or section.settings.mobile_content_alignment == 'right'
+    assign has_mobile_align = false
+  endif
+%}
+<style>
+  {% if block.settings.enable_custom_color %}
+    .rich-text-block-{{ block.id }} {
+      --color-foreground: {{ block.settings.custom_text_color.red }}, {{ block.settings.custom_text_color.green }}, {{ block.settings.custom_text_color.blue }};
+      color: rgb(var(--color-foreground));
+    }
+  {% endif %}
+  .rich-text-block-{{ block.id }} p {
+    font-size: {{ block.settings.text_size | divided_by: 10.0 }}rem;
+  }
+  {% assign is_highlight_animation = false %}
+  {% if block.settings.text_animation == 'highlight-swipe' or block.settings.text_animation == 'highlight-fade-up' or block.settings.text_animation == 'highlight-underline' or block.settings.text_animation == 'highlight-strike' %}
+    {% assign is_highlight_animation = true %}
+  {% endif %}
+
+  {% if block.settings.bold_text_style != 'none' %}
+    /* Apply styling only to bold text */
+    .rich-text-block-{{ block.id }} strong,
+    .rich-text-block-{{ block.id }} b {
+      {% case block.settings.bold_text_style %}
+        {% when 'solid-color' %}
+          color: {{ block.settings.bold_solid_color }};
+        {% when 'gradient-color' %}
+          background: {{ block.settings.bold_gradient_color }};
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        {% when 'bg-color' %}
+          color: {{ block.settings.bold_bg_text_color }};
+          background-color: {{ block.settings.bold_bg_color }};
+          padding-inline: {{ block.settings.bold_bg_padding_inline }}em;
+          padding-block: {{ block.settings.bold_bg_padding_block }}em;
+          border-radius: {{ block.settings.bold_bg_border_radius }}px;
+          {% if block.settings.bold_bg_border_width > 0 %}
+            border: {{ block.settings.bold_bg_border_width }}px {{ block.settings.bold_bg_border_style }} {{ block.settings.bold_bg_border_color }};
+          {% endif %}
+      {% endcase %}
+      {% if block.settings.bold_remove_weight %}
+        font-weight: normal;
+      {% endif %}
+    }
+  {% endif %}
+
+  {% if block.settings.italic_text_style != 'none' %}
+    /* Apply styling only to italic text */
+    .rich-text-block-{{ block.id }} em,
+    .rich-text-block-{{ block.id }} i {
+      {% case block.settings.italic_text_style %}
+        {% when 'solid-color' %}
+          color: {{ block.settings.italic_solid_color }};
+        {% when 'gradient-color' %}
+          background: {{ block.settings.italic_gradient_color }};
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        {% when 'bg-color' %}
+          color: {{ block.settings.italic_bg_text_color }};
+          background-color: {{ block.settings.italic_bg_color }};
+          padding-inline: {{ block.settings.italic_bg_padding_inline }}em;
+          padding-block: {{ block.settings.italic_bg_padding_block }}em;
+          border-radius: {{ block.settings.italic_bg_border_radius }}px;
+          {% if block.settings.italic_bg_border_width > 0 %}
+            border: {{ block.settings.italic_bg_border_width }}px {{ block.settings.italic_bg_border_style }} {{ block.settings.italic_bg_border_color }};
+          {% endif %}
+      {% endcase %}
+      {% if block.settings.italic_remove_style %}
+        font-style: normal;
+      {% endif %}
+    }
+  {% endif %}
+
+  {% if is_highlight_animation and block.settings.remove_bold_weight %}
+    .rich-text-block-{{ block.id }} strong,
+    .rich-text-block-{{ block.id }} b {
+      font-weight: normal;
+    }
+  {% endif %}
+
+  {% if is_highlight_animation %}
+    @keyframes text-highlighter-swipe-{{ block.id }} {
+      0% {
+        width: 0%;
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        width: 100%;
+        opacity: 1;
+      }
+    }
+
+    @keyframes text-highlighter-fade-up-{{ block.id }} {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes text-highlighter-underline-{{ block.id }} {
+      0% {
+        width: 0%;
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        width: 100%;
+        opacity: 1;
+      }
+    }
+
+    @keyframes text-highlighter-strike-through-{{ block.id }} {
+      0% {
+        width: 0%;
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        width: 100%;
+        opacity: 1;
+      }
+    }
+
+    {% if block.settings.highlight_bold_only %}
+      /* Only highlight bold/strong elements */
+      .rich-text-block-{{ block.id }} strong,
+      .rich-text-block-{{ block.id }} b {
+        display: inline;
+        position: relative;
+        z-index: 1;
+      }
+
+      {% if block.settings.highlighter_animate_on_scroll %}
+        /* Paused state - waits for scroll trigger */
+        .rich-text-block-{{ block.id }} strong::before,
+        .rich-text-block-{{ block.id }} b::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          {% case block.settings.text_animation %}
+            {% when 'highlight-underline' %}
+              bottom: {{ block.settings.highlighter_underline_offset }}px;
+              width: 0%;
+              height: {{ block.settings.highlighter_underline_thickness }}px;
+              background-color: {{ block.settings.highlighter_underline_color }};
+              z-index: -1;
+            {% when 'highlight-strike' %}
+              top: calc(50% + {{ block.settings.highlighter_strike_offset }}px);
+              width: 0%;
+              height: {{ block.settings.highlighter_strike_thickness }}px;
+              background-color: {{ block.settings.highlighter_strike_color }};
+              z-index: 1;
+            {% else %}
+              bottom: {{ block.settings.highlight_position }}%;
+              width: {% if block.settings.text_animation == 'highlight-swipe' %}0%{% else %}100%{% endif %};
+              opacity: {% if block.settings.text_animation == 'highlight-fade-up' %}0{% else %}1{% endif %};
+              height: {{ block.settings.highlight_height }}%;
+              background-color: {{ block.settings.highlight_color }};
+              z-index: -1;
+          {% endcase %}
+          animation-play-state: paused;
+          {% case block.settings.text_animation %}
+            {% when 'highlight-swipe' %}
+              animation: text-highlighter-swipe-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-fade-up' %}
+              animation: text-highlighter-fade-up-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-underline' %}
+              animation: text-highlighter-underline-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-strike' %}
+              animation: text-highlighter-strike-through-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+          {% endcase %}
+          animation-delay: {{ block.settings.highlighter_animation_delay | divided_by: 1000.0 }}s;
+        }
+
+        /* Triggered state - plays animation when parent section is visible */
+        .animate-section.animate--shown .rich-text-block-{{ block.id }} strong::before,
+        .animate-section.animate--shown .rich-text-block-{{ block.id }} b::before {
+          animation-play-state: running;
+        }
+      {% else %}
+        /* Immediate animation - no scroll trigger */
+        .rich-text-block-{{ block.id }} strong::before,
+        .rich-text-block-{{ block.id }} b::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          {% case block.settings.text_animation %}
+            {% when 'highlight-underline' %}
+              bottom: {{ block.settings.highlighter_underline_offset }}px;
+              width: 0%;
+              height: {{ block.settings.highlighter_underline_thickness }}px;
+              background-color: {{ block.settings.highlighter_underline_color }};
+              z-index: -1;
+            {% when 'highlight-strike' %}
+              top: calc(50% + {{ block.settings.highlighter_strike_offset }}px);
+              width: 0%;
+              height: {{ block.settings.highlighter_strike_thickness }}px;
+              background-color: {{ block.settings.highlighter_strike_color }};
+              z-index: 1;
+            {% else %}
+              bottom: {{ block.settings.highlight_position }}%;
+              width: {% if block.settings.text_animation == 'highlight-swipe' %}0%{% else %}100%{% endif %};
+              opacity: {% if block.settings.text_animation == 'highlight-fade-up' %}0{% else %}1{% endif %};
+              height: {{ block.settings.highlight_height }}%;
+              background-color: {{ block.settings.highlight_color }};
+              z-index: -1;
+          {% endcase %}
+          {% case block.settings.text_animation %}
+            {% when 'highlight-swipe' %}
+              animation: text-highlighter-swipe-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-fade-up' %}
+              animation: text-highlighter-fade-up-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-underline' %}
+              animation: text-highlighter-underline-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-strike' %}
+              animation: text-highlighter-strike-through-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+          {% endcase %}
+          animation-delay: {{ block.settings.highlighter_animation_delay | divided_by: 1000.0 }}s;
+        }
+      {% endif %}
+    {% else %}
+      /* Highlight all text - target paragraph elements inside rich text */
+      .rich-text-block-{{ block.id }}.text-highlighter-active p,
+      .rich-text-block-{{ block.id }}.text-highlighter-active {
+        display: inline;
+        position: relative;
+        z-index: 1;
+      }
+
+      {% if block.settings.highlighter_animate_on_scroll %}
+        /* Paused state - waits for scroll trigger */
+        .rich-text-block-{{ block.id }}.text-highlighter-active p::before,
+        .rich-text-block-{{ block.id }}.text-highlighter-active::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          {% case block.settings.text_animation %}
+            {% when 'highlight-underline' %}
+              bottom: {{ block.settings.highlighter_underline_offset }}px;
+              width: 0%;
+              height: {{ block.settings.highlighter_underline_thickness }}px;
+              background-color: {{ block.settings.highlighter_underline_color }};
+              z-index: -1;
+            {% when 'highlight-strike' %}
+              top: calc(50% + {{ block.settings.highlighter_strike_offset }}px);
+              width: 0%;
+              height: {{ block.settings.highlighter_strike_thickness }}px;
+              background-color: {{ block.settings.highlighter_strike_color }};
+              z-index: 1;
+            {% else %}
+              bottom: {{ block.settings.highlight_position }}%;
+              width: {% if block.settings.text_animation == 'highlight-swipe' %}0%{% else %}100%{% endif %};
+              opacity: {% if block.settings.text_animation == 'highlight-fade-up' %}0{% else %}1{% endif %};
+              height: {{ block.settings.highlight_height }}%;
+              background-color: {{ block.settings.highlight_color }};
+              z-index: -1;
+          {% endcase %}
+          animation-play-state: paused;
+          {% case block.settings.text_animation %}
+            {% when 'highlight-swipe' %}
+              animation: text-highlighter-swipe-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-fade-up' %}
+              animation: text-highlighter-fade-up-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-underline' %}
+              animation: text-highlighter-underline-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-strike' %}
+              animation: text-highlighter-strike-through-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+          {% endcase %}
+          animation-delay: {{ block.settings.highlighter_animation_delay | divided_by: 1000.0 }}s;
+        }
+
+        /* Triggered state - plays animation when parent section is visible */
+        .animate-section.animate--shown .rich-text-block-{{ block.id }}.text-highlighter-active p::before,
+        .animate-section.animate--shown .rich-text-block-{{ block.id }}.text-highlighter-active::before {
+          animation-play-state: running;
+        }
+      {% else %}
+        /* Immediate animation - no scroll trigger */
+        .rich-text-block-{{ block.id }}.text-highlighter-active p::before,
+        .rich-text-block-{{ block.id }}.text-highlighter-active::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          {% case block.settings.text_animation %}
+            {% when 'highlight-underline' %}
+              bottom: {{ block.settings.highlighter_underline_offset }}px;
+              width: 0%;
+              height: {{ block.settings.highlighter_underline_thickness }}px;
+              background-color: {{ block.settings.highlighter_underline_color }};
+              z-index: -1;
+            {% when 'highlight-strike' %}
+              top: calc(50% + {{ block.settings.highlighter_strike_offset }}px);
+              width: 0%;
+              height: {{ block.settings.highlighter_strike_thickness }}px;
+              background-color: {{ block.settings.highlighter_strike_color }};
+              z-index: 1;
+            {% else %}
+              bottom: {{ block.settings.highlight_position }}%;
+              width: {% if block.settings.text_animation == 'highlight-swipe' %}0%{% else %}100%{% endif %};
+              opacity: {% if block.settings.text_animation == 'highlight-fade-up' %}0{% else %}1{% endif %};
+              height: {{ block.settings.highlight_height }}%;
+              background-color: {{ block.settings.highlight_color }};
+              z-index: -1;
+          {% endcase %}
+          {% case block.settings.text_animation %}
+            {% when 'highlight-swipe' %}
+              animation: text-highlighter-swipe-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-fade-up' %}
+              animation: text-highlighter-fade-up-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-underline' %}
+              animation: text-highlighter-underline-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-strike' %}
+              animation: text-highlighter-strike-through-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+          {% endcase %}
+          animation-delay: {{ block.settings.highlighter_animation_delay | divided_by: 1000.0 }}s;
+        }
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+  {% if block.settings.text_animation == 'split' %}
+    .rich-text-block-{{ block.id }}.split-text-parent {
+      overflow: visible;
+    }
+
+    .rich-text-block-{{ block.id }} .split-char,
+    .rich-text-block-{{ block.id }} .split-word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY({{ block.settings.split_y_offset }}px);
+      transition: opacity {{ block.settings.split_duration | divided_by: 1000.0 }}s ease-out,
+                  transform {{ block.settings.split_duration | divided_by: 1000.0 }}s ease-out;
+      will-change: opacity, transform;
+    }
+
+    .rich-text-block-{{ block.id }}.split-text-visible .split-char,
+    .rich-text-block-{{ block.id }}.split-text-visible .split-word {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: calc(var(--split-index, 0) * {{ block.settings.split_delay | divided_by: 1000.0 }}s);
+    }
+  {% endif %}
+
+  {% if block.settings.text_animation == 'shiny' %}
+    @keyframes shiny-text-{{ block.id }} {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 200% 50%;
+      }
+    }
+
+    .rich-text-block-{{ block.id }}.shiny-text-active {
+      background: linear-gradient(
+        110deg,
+        currentColor 45%,
+        rgba(255, 255, 255, 0.8) 50%,
+        currentColor 55%
+      );
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shiny-text-{{ block.id }} {{ block.settings.shiny_speed }}s linear infinite;
+      animation-play-state: paused;
+    }
+
+    .rich-text-block-{{ block.id }}.shiny-text-active.shiny-text-visible {
+      animation-play-state: running;
+    }
+
+    .rich-text-block-{{ block.id }}.shiny-text-active.disabled {
+      animation: none;
+      background: none;
+      -webkit-text-fill-color: inherit;
+    }
+  {% endif %}
+
+  {% if block.settings.text_animation == 'typing' %}
+    .rich-text-block-{{ block.id }}.typing-text {
+      display: inline-block;
+    }
+
+    .rich-text-block-{{ block.id }} .typing-cursor {
+      display: inline-block;
+      {% if block.settings.typing_show_cursor %}
+        opacity: 1;
+        animation: cursor-blink-{{ block.id }} {{ block.settings.typing_cursor_blink_duration | divided_by: 1000.0 }}s ease-in-out infinite;
+      {% else %}
+        display: none;
+      {% endif %}
+    }
+
+    .rich-text-block-{{ block.id }} .typing-cursor.cursor-hidden {
+      opacity: 0 !important;
+    }
+
+    @keyframes cursor-blink-{{ block.id }} {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  {% endif %}
+
+  {% if block.settings.text_animation == 'blur' %}
+    .rich-text-block-{{ block.id }}.blur-text-parent {
+      overflow: visible;
+    }
+
+    .rich-text-block-{{ block.id }} .blur-char,
+    .rich-text-block-{{ block.id }} .blur-word {
+      display: inline-block;
+      white-space: pre-wrap;
+      will-change: transform, filter, opacity;
+      {% if block.settings.blur_direction == 'top' %}
+        filter: blur(10px);
+        opacity: 0;
+        transform: translateY(-50px);
+      {% else %}
+        filter: blur(10px);
+        opacity: 0;
+        transform: translateY(50px);
+      {% endif %}
+    }
+
+    .rich-text-block-{{ block.id }}.blur-text-visible .blur-char,
+    .rich-text-block-{{ block.id }}.blur-text-visible .blur-word {
+      filter: blur(0px);
+      opacity: 1;
+      transform: translateY(0);
+      transition:
+        filter {{ block.settings.blur_duration | times: 2 | divided_by: 1000.0 }}s ease-out,
+        opacity {{ block.settings.blur_duration | times: 2 | divided_by: 1000.0 }}s ease-out,
+        transform {{ block.settings.blur_duration | times: 2 | divided_by: 1000.0 }}s ease-out;
+      transition-delay: calc(var(--blur-index, 0) * {{ block.settings.blur_delay | divided_by: 1000.0 }}s);
+    }
+  {% endif %}
+</style>
+<div
+  class="
+    rich-text-block rich-text-block-{{ block.id }} rte
+    {% if has_desktop_align %} {{ block.settings.alignment }}{% endif %}
+    {% if has_mobile_align %} {{ block.settings.mobile_alignment }}{% endif %}
+    {% if block.settings.text_animation == 'split' %} split-text-parent{% endif %}
+    {% if block.settings.text_animation == 'shiny' %} shiny-text-active{% endif %}
+    {% if block.settings.text_animation == 'blur' %} blur-text-parent{% endif %}
+    {% if block.settings.text_animation == 'typing' %} typing-text{% endif %}
+    {% if is_highlight_animation and block.settings.highlight_bold_only == false %} text-highlighter-active{% endif %}
+    {{ block.settings.visibility }}
+  "
+  style="
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  "
+>
+  {{ block.settings.text }}
+</div>
+
+{% if block.settings.text_animation == 'split' %}
+<script>
+(function() {
+  const textBlock = document.querySelector('.rich-text-block-{{ block.id }}.split-text-parent');
+  if (!textBlock) return;
+
+  // Wait for fonts to load
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => initSplitText());
+  } else {
+    initSplitText();
+  }
+
+  function initSplitText() {
+    const splitType = '{{ block.settings.split_type }}';
+
+    // Function to split text nodes while preserving HTML structure
+    function splitTextNodes(element, type) {
+      const walker = document.createTreeWalker(
+        element,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+      );
+
+      const textNodes = [];
+      let node;
+      while (node = walker.nextNode()) {
+        // Only process nodes with non-whitespace content
+        if (node.textContent.trim().length > 0) {
+          textNodes.push(node);
+        }
+      }
+
+      let globalIndex = 0;
+      textNodes.forEach(textNode => {
+        const text = textNode.textContent;
+        const fragment = document.createDocumentFragment();
+
+        // Preserve leading/trailing spaces
+        const leadingSpaces = text.match(/^\s*/)[0];
+        const trailingSpaces = text.match(/\s*$/)[0];
+        const trimmedText = text.trim();
+
+        if (!trimmedText) return; // Skip if only whitespace
+
+        if (type === 'chars') {
+          // Add leading spaces
+          if (leadingSpaces) {
+            fragment.appendChild(document.createTextNode(leadingSpaces));
+          }
+
+          // Split by characters
+          const chars = trimmedText.split('');
+          chars.forEach((char) => {
+            if (char === ' ') {
+              fragment.appendChild(document.createTextNode(' '));
+            } else {
+              const span = document.createElement('span');
+              span.className = 'split-char';
+              span.style.setProperty('--split-index', globalIndex);
+              span.textContent = char;
+              fragment.appendChild(span);
+              globalIndex++;
+            }
+          });
+
+          // Add trailing spaces
+          if (trailingSpaces) {
+            fragment.appendChild(document.createTextNode(trailingSpaces));
+          }
+        } else {
+          // Add leading spaces
+          if (leadingSpaces) {
+            fragment.appendChild(document.createTextNode(leadingSpaces));
+          }
+
+          // Split by words
+          const words = trimmedText.split(/\s+/);
+          words.forEach((word, index) => {
+            if (word) {
+              const span = document.createElement('span');
+              span.className = 'split-word';
+              span.style.setProperty('--split-index', globalIndex);
+              span.textContent = word;
+              fragment.appendChild(span);
+              globalIndex++;
+            }
+            if (index < words.length - 1) {
+              fragment.appendChild(document.createTextNode(' '));
+            }
+          });
+
+          // Add trailing spaces
+          if (trailingSpaces) {
+            fragment.appendChild(document.createTextNode(trailingSpaces));
+          }
+        }
+
+        textNode.parentNode.replaceChild(fragment, textNode);
+      });
+    }
+
+    splitTextNodes(textBlock, splitType);
+
+    {% if block.settings.split_animate_on_scroll %}
+      // Hook into Shrine's animation system
+      const parentSection = textBlock.closest('.animate-section');
+
+      if (parentSection && window.shrineAnimationsObserver) {
+        // Use Shrine's existing observer
+        const mutationObserver = new MutationObserver((mutations) => {
+          mutations.forEach(mutation => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+              if (parentSection.classList.contains('animate--shown')) {
+                textBlock.classList.add('split-text-visible');
+                mutationObserver.disconnect();
+              }
+            }
+          });
+        });
+
+        mutationObserver.observe(parentSection, { attributes: true });
+
+        // If already shown (e.g., in theme editor), trigger immediately
+        if (parentSection.classList.contains('animate--shown')) {
+          textBlock.classList.add('split-text-visible');
+        }
+      } else {
+        // Fallback to custom intersection observer
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              textBlock.classList.add('split-text-visible');
+              observer.unobserve(textBlock);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: '-100px 0px'
+        });
+
+        observer.observe(textBlock);
+      }
+    {% else %}
+      // Animate immediately without scroll trigger
+      requestAnimationFrame(() => {
+        textBlock.classList.add('split-text-visible');
+      });
+    {% endif %}
+  }
+})();
+</script>
+{% endif %}
+
+{% if block.settings.text_animation == 'shiny' %}
+<script>
+(function() {
+  const textBlock = document.querySelector('.rich-text-block-{{ block.id }}.shiny-text-active');
+  if (!textBlock) return;
+
+  {% if block.settings.shiny_on_scroll %}
+    // Hook into Shrine's animation system
+    const parentSection = textBlock.closest('.animate-section');
+
+    if (parentSection && window.shrineAnimationsObserver) {
+      // Use Shrine's existing observer
+      const mutationObserver = new MutationObserver((mutations) => {
+        mutations.forEach(mutation => {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            if (parentSection.classList.contains('animate--shown')) {
+              textBlock.classList.add('shiny-text-visible');
+              mutationObserver.disconnect();
+            }
+          }
+        });
+      });
+
+      mutationObserver.observe(parentSection, { attributes: true });
+
+      // If already shown (e.g., in theme editor), trigger immediately
+      if (parentSection.classList.contains('animate--shown')) {
+        textBlock.classList.add('shiny-text-visible');
+      }
+    } else {
+      // Fallback to custom intersection observer
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            textBlock.classList.add('shiny-text-visible');
+            observer.unobserve(textBlock);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '-100px 0px'
+      });
+
+      observer.observe(textBlock);
+    }
+  {% else %}
+    // Start animation immediately without scroll trigger
+    requestAnimationFrame(() => {
+      textBlock.classList.add('shiny-text-visible');
+    });
+  {% endif %}
+})();
+</script>
+{% endif %}
+
+{% if block.settings.text_animation == 'blur' %}
+<script>
+(function() {
+  const textBlock = document.querySelector('.rich-text-block-{{ block.id }}.blur-text-parent');
+  if (!textBlock) return;
+
+  // Wait for fonts to load
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => initBlurText());
+  } else {
+    initBlurText();
+  }
+
+  function initBlurText() {
+    const blurType = '{{ block.settings.blur_type }}';
+
+    // Function to split text nodes while preserving HTML structure
+    function splitTextNodes(element, type) {
+      const walker = document.createTreeWalker(
+        element,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+      );
+
+      const textNodes = [];
+      let node;
+      while (node = walker.nextNode()) {
+        // Only process nodes with non-whitespace content
+        if (node.textContent.trim().length > 0) {
+          textNodes.push(node);
+        }
+      }
+
+      let globalIndex = 0;
+      textNodes.forEach(textNode => {
+        const text = textNode.textContent;
+        const fragment = document.createDocumentFragment();
+
+        // Preserve leading/trailing spaces
+        const leadingSpaces = text.match(/^\s*/)[0];
+        const trailingSpaces = text.match(/\s*$/)[0];
+        const trimmedText = text.trim();
+
+        if (!trimmedText) return; // Skip if only whitespace
+
+        if (type === 'chars') {
+          // Add leading spaces
+          if (leadingSpaces) {
+            fragment.appendChild(document.createTextNode(leadingSpaces));
+          }
+
+          // Split by characters
+          const chars = trimmedText.split('');
+          chars.forEach((char) => {
+            if (char === ' ') {
+              fragment.appendChild(document.createTextNode(' '));
+            } else {
+              const span = document.createElement('span');
+              span.className = 'blur-char';
+              span.style.setProperty('--blur-index', globalIndex);
+              span.textContent = char;
+              fragment.appendChild(span);
+              globalIndex++;
+            }
+          });
+
+          // Add trailing spaces
+          if (trailingSpaces) {
+            fragment.appendChild(document.createTextNode(trailingSpaces));
+          }
+        } else {
+          // Add leading spaces
+          if (leadingSpaces) {
+            fragment.appendChild(document.createTextNode(leadingSpaces));
+          }
+
+          // Split by words
+          const words = trimmedText.split(/\s+/);
+          words.forEach((word, index) => {
+            if (word) {
+              const span = document.createElement('span');
+              span.className = 'blur-word';
+              span.style.setProperty('--blur-index', globalIndex);
+              span.textContent = word;
+              fragment.appendChild(span);
+              globalIndex++;
+            }
+            if (index < words.length - 1) {
+              fragment.appendChild(document.createTextNode(' '));
+            }
+          });
+
+          // Add trailing spaces
+          if (trailingSpaces) {
+            fragment.appendChild(document.createTextNode(trailingSpaces));
+          }
+        }
+
+        textNode.parentNode.replaceChild(fragment, textNode);
+      });
+    }
+
+    splitTextNodes(textBlock, blurType);
+
+    {% if block.settings.blur_animate_on_scroll %}
+      // Hook into Shrine's animation system
+      const parentSection = textBlock.closest('.animate-section');
+
+      if (parentSection && window.shrineAnimationsObserver) {
+        // Use Shrine's existing observer
+        const mutationObserver = new MutationObserver((mutations) => {
+          mutations.forEach(mutation => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+              if (parentSection.classList.contains('animate--shown')) {
+                textBlock.classList.add('blur-text-visible');
+                mutationObserver.disconnect();
+              }
+            }
+          });
+        });
+
+        mutationObserver.observe(parentSection, { attributes: true });
+
+        // If already shown (e.g., in theme editor), trigger immediately
+        if (parentSection.classList.contains('animate--shown')) {
+          textBlock.classList.add('blur-text-visible');
+        }
+      } else {
+        // Fallback to custom intersection observer
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              textBlock.classList.add('blur-text-visible');
+              observer.unobserve(textBlock);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: '-100px 0px'
+        });
+
+        observer.observe(textBlock);
+      }
+    {% else %}
+      // Animate immediately without scroll trigger
+      requestAnimationFrame(() => {
+        textBlock.classList.add('blur-text-visible');
+      });
+    {% endif %}
+  }
+})();
+</script>
+{% endif %}
+
+{% if is_highlight_animation and block.settings.highlighter_animate_on_scroll %}
+<script>
+(function() {
+  // Fallback observer in case global animations are disabled
+  const element = document.querySelector('.rich-text-block-{{ block.id }}');
+  if (!element) return;
+
+  // Check if the parent section already has animate--shown (global animations enabled)
+  const checkForGlobalAnimation = () => {
+    const parentSection = element.closest('.animate-section');
+    if (parentSection && parentSection.classList.contains('animate--shown')) {
+      // Global animations are working, no need for fallback
+      return;
+    }
+
+    // Global animations might be disabled, create our own observer
+    setTimeout(() => {
+      const parentSection = element.closest('.animate-section');
+      if (!parentSection || !parentSection.classList.contains('animate--shown')) {
+        // Still not animated after delay, use fallback
+        initFallbackObserver();
+      }
+    }, 100);
+  };
+
+  const initFallbackObserver = () => {
+    const parentSection = element.closest('.animate-section');
+    if (!parentSection) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          parentSection.classList.add('animate--shown');
+          observer.unobserve(parentSection);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    observer.observe(parentSection);
+  };
+
+  // Wait for DOM and check
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkForGlobalAnimation);
+  } else {
+    checkForGlobalAnimation();
+  }
+})();
+</script>
+{% endif %}
+
+{% if block.settings.text_animation == 'typing' %}
+<script>
+(function() {
+  const textBlock = document.querySelector('.rich-text-block-{{ block.id }}.typing-text');
+  if (!textBlock) return;
+
+  const typingSpeed = {{ block.settings.typing_speed }};
+  const initialDelay = {{ block.settings.typing_initial_delay }};
+  const pauseDuration = {{ block.settings.typing_pause_duration }};
+  const deletingSpeed = {{ block.settings.typing_deleting_speed }};
+  const loop = {{ block.settings.typing_loop | json }};
+  const showCursor = {{ block.settings.typing_show_cursor | json }};
+  const hideCursorWhileTyping = {{ block.settings.typing_hide_cursor_while_typing | json }};
+  const cursorCharacter = {{ block.settings.typing_cursor_character | json }};
+  const startOnVisible = {{ block.settings.typing_start_on_visible | json }};
+  const reverseMode = {{ block.settings.typing_reverse_mode | json }};
+
+  const originalText = textBlock.textContent.trim();
+  let displayedText = '';
+  let currentCharIndex = 0;
+  let isDeleting = false;
+  let isVisible = !startOnVisible;
+  let timeout;
+
+  // Create content span and cursor
+  const contentSpan = document.createElement('span');
+  contentSpan.className = 'typing-content';
+
+  const cursorSpan = document.createElement('span');
+  cursorSpan.className = 'typing-cursor';
+  if (showCursor) {
+    cursorSpan.textContent = cursorCharacter;
+  }
+
+  textBlock.textContent = '';
+  textBlock.appendChild(contentSpan);
+  if (showCursor) {
+    textBlock.appendChild(cursorSpan);
+  }
+
+  // Intersection observer for start on visible
+  if (startOnVisible) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          isVisible = true;
+          executeTypingAnimation();
+          observer.unobserve(textBlock);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    observer.observe(textBlock);
+  }
+
+  function executeTypingAnimation() {
+    if (!isVisible) return;
+
+    const processedText = reverseMode ? originalText.split('').reverse().join('') : originalText;
+
+    if (isDeleting) {
+      if (displayedText === '') {
+        isDeleting = false;
+        if (!loop) {
+          return;
+        }
+        currentCharIndex = 0;
+        timeout = setTimeout(executeTypingAnimation, pauseDuration);
+      } else {
+        displayedText = displayedText.slice(0, -1);
+        contentSpan.textContent = displayedText;
+        timeout = setTimeout(executeTypingAnimation, deletingSpeed);
+      }
+    } else {
+      if (currentCharIndex < processedText.length) {
+        displayedText += processedText[currentCharIndex];
+        contentSpan.textContent = displayedText;
+        currentCharIndex++;
+
+        // Update cursor visibility
+        if (hideCursorWhileTyping && showCursor) {
+          cursorSpan.classList.add('cursor-hidden');
+        }
+
+        timeout = setTimeout(executeTypingAnimation, typingSpeed);
+      } else {
+        // Finished typing
+        if (hideCursorWhileTyping && showCursor) {
+          cursorSpan.classList.remove('cursor-hidden');
+        }
+
+        if (loop) {
+          timeout = setTimeout(() => {
+            isDeleting = true;
+            executeTypingAnimation();
+          }, pauseDuration);
+        }
+      }
+    }
+  }
+
+  // Start animation
+  if (!startOnVisible) {
+    setTimeout(executeTypingAnimation, initialDelay);
+  }
+})();
+</script>
+{% endif %}

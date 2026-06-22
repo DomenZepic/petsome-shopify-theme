@@ -1,0 +1,1694 @@
+{%- liquid
+  assign line_css = ''
+  case section.settings.line_color_type
+    when 'color'
+      assign line_css = section.settings.line_color_solid
+    when 'gradient'
+      assign line_css = section.settings.line_color_gradient
+    else                   
+      assign line_css = 'rgb(var(--color-base-' | append: section.settings.line_color_type | append: '))'
+  endcase
+
+  assign point_bg_css = ''
+  case section.settings.point_background_type
+    when 'none'
+      assign point_bg_css = 'transparent'
+    when 'color'
+      assign point_bg_css = section.settings.point_background_solid
+    when 'gradient'
+      assign point_bg_css = section.settings.point_background_gradient
+    else
+      assign point_bg_css = 'rgb(var(--color-base-' | append: section.settings.point_background_type | append: '))'
+  endcase
+
+  assign point_border_css = ''
+  if section.settings.point_border_thickness > 0
+    case section.settings.point_border_color_type
+      when 'color'
+        assign point_border_css = section.settings.point_border_color_solid
+      else
+        assign point_border_css = 'rgb(var(--color-base-' | append: section.settings.point_border_color_type | append: '))'
+    endcase
+  endif
+
+  assign icon_color_css = ''
+  case section.settings.point_icon_color_type
+    when 'color'
+      assign icon_color_css = section.settings.point_icon_color_solid
+    when 'gradient'
+      assign icon_color_css = section.settings.point_icon_gradient
+    else
+      assign icon_color_css = 'rgb(var(--color-base-' | append: section.settings.point_icon_color_type | append: '))'
+  endcase
+
+  assign inactive_line_css = 'transparent'
+  case section.settings.inactive_line_color_type
+    when 'color'
+      assign inactive_line_css = section.settings.inactive_line_color_solid
+    when 'gradient'
+      assign inactive_line_css = section.settings.inactive_line_color_gradient
+  endcase
+
+  assign inactive_point_border_css = 'transparent'
+  case section.settings.inactive_point_border_color_type
+    when 'color'
+      assign inactive_point_border_css = section.settings.inactive_point_border_color_solid
+    when 'gradient'
+      assign inactive_point_border_css = section.settings.inactive_point_border_color_gradient
+  endcase
+
+  assign inactive_point_bg_css = 'transparent'
+  case section.settings.inactive_point_background_type
+    when 'color'
+      assign inactive_point_bg_css = section.settings.inactive_point_background_solid
+    when 'gradient'
+      assign inactive_point_bg_css = section.settings.inactive_point_background_gradient
+  endcase
+
+  assign inactive_point_icon_color = 'transparent'
+  case section.settings.inactive_point_icon_color_type
+    when 'color'
+      assign inactive_point_icon_color = section.settings.inactive_point_icon_color_solid
+    when 'gradient'
+      assign inactive_point_icon_color = section.settings.inactive_point_icon_color_gradient
+  endcase
+
+  assign point_animation_duration = section.settings.point_animation_duration
+  assign line_animation_duration = section.settings.point_animation_duration
+  assign active_content_animation_duration = 0.3
+
+  if section.settings.timeline_direction == 'horizontal'
+    assign point_size_desktop = section.settings.horizontal_point_size_desktop
+    assign point_size_mobile = section.settings.horizontal_point_size_mobile
+    assign line_point_spacing = section.settings.line_point_spacing_horizontal
+    else
+    assign point_size_desktop = section.settings.point_size_desktop
+    assign point_size_mobile = section.settings.point_size_mobile
+    assign line_point_spacing = section.settings.line_point_spacing
+  endif
+-%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  {% if section.settings.desktop_page_width == 'custom' %}
+    #PageWidth-{{ section.id }} {
+      max-width: {{ section.settings.custom_page_width | divided_by: 10.0 }}rem;
+    }
+  {% endif %}
+
+  .color-scheme-{{ section.id }}.color-custom {
+    --color-background: {{ section.settings.custom_colors_background.red }}, {{ section.settings.custom_colors_background.green }}, {{ section.settings.custom_colors_background.blue }};
+    --gradient-background: {% if section.settings.custom_gradient_background != blank %}{{ section.settings.custom_gradient_background }}{% else %}{{ section.settings.custom_colors_background }}{% endif %};
+    {% if section.settings.custom_image_background != blank %}
+      {% # theme-check-disable %}
+      --gradient-background: url('{{ section.settings.custom_image_background | img_url: 'master' }}') center center / cover no-repeat;
+      {% # theme-check-enable %}
+    {% endif %}
+    --color-foreground: {{ section.settings.custom_colors_text.red }}, {{ section.settings.custom_colors_text.green }}, {{ section.settings.custom_colors_text.blue }};
+    --color-button: {{ section.settings.custom_colors_solid_button_background.red }}, {{ section.settings.custom_colors_solid_button_background.green }}, {{ section.settings.custom_colors_solid_button_background.blue }};
+    --color-button-text: {{ section.settings.custom_colors_solid_button_text.red }}, {{ section.settings.custom_colors_solid_button_text.green }}, {{ section.settings.custom_colors_solid_button_text.blue }};
+    --color-base-outline-button-labels: {{ section.settings.custom_colors_outline_button.red }}, {{ section.settings.custom_colors_outline_button.green }}, {{ section.settings.custom_colors_outline_button.blue }};
+  }
+  {% if section.settings.custom_mobile_image_background != blank %}
+    @media screen and (max-width: 740px) {
+      .color-scheme-{{ section.id }}.color-custom {
+        {% # theme-check-disable %}
+        --gradient-background: url('{{ section.settings.custom_mobile_image_background | img_url: 'master' }}') center center / cover no-repeat;
+        {% # theme-check-enable %}
+      }
+    }
+  {% endif %}
+  {% if section.settings.pattern_bg != 'none' %}
+    {% render 'pattern-background' %}
+  {% endif %}
+
+  /* ===== Section-scoped (ID only) ===== */
+
+  /* Mobile (< 749px) */
+  @media (max-width: 749px) {
+    /* flow + gap */
+    #Timeline-{{ section.id }} {
+      flex-direction: column;
+      gap: {{ section.settings.spacing_between_blocks_mobile }}px;
+      --horizontal-side-padding: {{ section.settings.horizontal_item_padding_mobile }}px;
+    }
+
+    /* widths + alignment */
+    #Timeline-{{ section.id }} .timeline {
+      width: {{ section.settings.timeline_width_mobile }}%;
+      align-self: {{ section.settings.timeline_alignment_mobile }};
+    }
+
+    #Timeline-{{ section.id }} .timeline-content {
+      {% if section.settings.content_position_mobile == 'hidden' %}
+        display: none;
+      {% else %}
+        width: {{ section.settings.content_width_mobile }}%;
+        align-self: {{ section.settings.content_alignment_mobile }};
+      {% endif %}
+    }
+
+    /* order on mobile */
+    {% if section.settings.content_position_mobile == 'top' %}
+      #Timeline-{{ section.id }} .timeline-content { order: -1; }
+    {% else %}
+      #Timeline-{{ section.id }} .timeline { order: -1; }
+    {% endif %}
+  }
+
+  /* Desktop (>= 750px) */
+  @media (min-width: 750px) {
+    #Timeline-{{ section.id }} {
+      gap: {{ section.settings.spacing_between_blocks_desktop }}px;
+      --horizontal-side-padding: {{ section.settings.horizontal_item_padding }}px;
+    }
+
+    {% if section.settings.content_position == 'left' or section.settings.content_position == 'right' %}
+      /* side-by-side */
+      #Timeline-{{ section.id }} {
+        flex-direction: row;
+        {% if section.settings.sticky_content == false %}
+          align-items: {{ section.settings.content_vertical_alignment }};
+        {% else %}
+          align-items: flex-start;
+        {% endif %}
+      }
+
+      #Timeline-{{ section.id }} .timeline {
+        width: {{ section.settings.timeline_width_side }}%;
+      }
+
+      #Timeline-{{ section.id }} .timeline-content {
+        width: {{ 100 | minus: section.settings.timeline_width_side }}%;
+      }
+
+      /* order for left/right */
+      {% if section.settings.content_position == 'left' %}
+        #Timeline-{{ section.id }} .timeline-content { order: -1; }
+      {% else %}
+        #Timeline-{{ section.id }} .timeline { order: -1; }
+      {% endif %}
+
+    {% elsif section.settings.content_position == 'top' or section.settings.content_position == 'bottom' %}
+      /* stacked */
+      #Timeline-{{ section.id }} {
+        flex-direction: column;
+      }
+
+      #Timeline-{{ section.id }} .timeline {
+        width: {{ section.settings.timeline_width_stacked }}%;
+        margin-inline: auto;
+        align-self: {{ section.settings.timeline_alignment_stacked }};
+      }
+
+      #Timeline-{{ section.id }} .timeline-content {
+        {% if section.settings.content_position == 'hidden' %}
+          display: none;
+        {% else %}
+          width: {{ section.settings.content_width_stacked }}%;
+          margin-inline: auto;
+          align-self: {{ section.settings.content_alignment_stacked }};
+        {% endif %}
+      }
+
+      /* order for top/bottom */
+      {% if section.settings.content_position == 'top' %}
+        #Timeline-{{ section.id }} .timeline-content { order: -1; }
+      {% else %}
+        #Timeline-{{ section.id }} .timeline { order: -1; }
+      {% endif %}
+
+    {% else %}
+      /* hidden content */
+      #Timeline-{{ section.id }} {
+        flex-direction: column;
+      }
+      #Timeline-{{ section.id }} .timeline-content {
+        display: none;
+      }
+      #Timeline-{{ section.id }} .timeline {
+        width: 100%;
+      }
+    {% endif %}
+  }
+  #Timeline-{{ section.id }} {
+    --timeline-active-transition: {{ active_content_animation_duration }}s;
+  }
+  #Timeline-{{ section.id }} .timeline {
+    --point-animation-duration: {{ point_animation_duration }}s;
+    --line-animation-duration: {{ line_animation_duration }}s;
+  }
+  #Timeline-{{ section.id }} .timeline-item__content > *:first-child,
+  #Timeline-{{ section.id }} .timeline-item__content > style:first-child + * {
+    margin-top: {{ section.settings.header_body_spacing | divided_by: 10.0 }}rem !important;
+  }
+{%- endstyle -%}
+
+<div
+  class="
+    gradient
+    animate-section
+    animate--hidden
+    content-for-grouping
+    color-scheme-{{ section.id }}
+    {{ section.settings.visibility }}
+    color-{{ section.settings.color_scheme }}
+  "
+>
+  {% if section.settings.display_id %}
+    <copy-button class="section-id-btn button" data-content="#shopify-section-{{ section.id }}" data-success="false">
+      <span class="copy-text">Click to copy section ID</span>
+      <span class="copy-success">ID copied successfully!</span>
+    </copy-button>
+  {% endif %}
+  <div
+    id="PageWidth-{{ section.id }}"
+    class="
+      page-width
+      section-{{ section.id }}-padding
+      {% if section.settings.desktop_page_width != 'normal' %} {{ section.settings.desktop_page_width }}{% endif %}
+    "
+  >
+    <shrine-timeline
+      id="Timeline-{{ section.id }}"
+      class="timeline-container timeline-container--{{ section.settings.timeline_direction }}"
+      data-direction="{{ section.settings.timeline_direction }}"
+      data-style-vertical="{{ section.settings.style_vertical }}"
+      data-style-horizontal="{{ section.settings.style_horizontal }}"
+      data-desktop-line-position="{{ section.settings.vertical_line_position_desktop }}"
+      data-mobile-line-position="{{ section.settings.vertical_line_position_mobile }}"
+      data-content-position-desktop="{{ section.settings.content_position }}"
+      data-content-position-mobile="{{ section.settings.content_position_mobile }}"
+      data-auto-align="{{ section.settings.auto_align }}"
+      {% if section.settings.content_position == 'left' or section.settings.content_position == 'right' %}
+        data-sticky-content="{{ section.settings.sticky_content }}"
+      {% endif %}
+      data-animate-vertical="{{ section.settings.animate_loading_vertical }}"
+      data-animate-horizontal="{{ section.settings.animate_loading_horizontal }}"
+      data-point-animation-duration="{{ point_animation_duration }}"
+      data-line-animation-duration="{{ line_animation_duration }}"
+      data-active-transition-duration="{{ line_animation_duration }}"
+      style="
+        --items-spacing-vertical: {{ section.settings.vertical_items_spacing }}px;
+        /* line */
+        --line-color: {{ line_css }};
+        --line-thickness: {{ section.settings.line_thickness }}px;
+        --line-point-spacing: {{ line_point_spacing }}px;
+        --inactive-line-color: {{ inactive_line_css }};
+
+        /* points */
+        --point-size-desktop: {{ point_size_desktop }}px;
+        --point-size-mobile: {{ point_size_mobile }}px;
+        --point-bg: {{ point_bg_css}};
+        --point-border: {{ point_border_css }};
+        --point-border-width: {{ section.settings.point_border_thickness }}px;
+        --point-radius: {{ section.settings.point_corner_radius }}%;
+        --point-icon-color: {{ icon_color_css }};
+        --point-icon-scale: {{ section.settings.point_icon_scale | divided_by: 100.0 }};
+        --point-dot-scale: {{ section.settings.point_dot_scale | divided_by: 100.0 }};
+        --point-text-scale: {{ section.settings.point_text_scale | divided_by: 100.0 }};
+        --inactive-point-bg: {{ inactive_point_bg_css }};
+        --inactive-point-border: {{ inactive_point_border_css }};
+        --inactive-point-icon-color: {{ inactive_point_icon_color }};
+        --inactive-item-opacity: {{ section.settings.inactive_item_opacity | divided_by: 100.0 }};
+      "
+    >
+      {% content_for 'blocks' %}
+    </shrine-timeline>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Timeline",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "display_id",
+      "label": "Display section ID",
+      "info": "ID is used in the Sections group section to merge 2 sections. ID can also be put inside any button link and the button will scroll to this section.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "select",
+      "id": "desktop_page_width",
+      "options": [
+        {
+          "value": "page-width--narrow",
+          "label": "Narrow"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "desktop-full-page",
+          "label": "Full width"
+        },
+        {
+          "value": "desktop-full-page-no-padding",
+          "label": "Full width without side spacing"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "normal",
+      "label": "Page width"
+    },
+    {
+      "type": "number",
+      "id": "custom_page_width",
+      "label": "Custom page width",
+      "default": 900,
+      "visible_if": "{{ section.settings.desktop_page_width == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_background",
+      "default": "#FFFFFF",
+      "label": "Custom background color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "custom_gradient_background",
+      "label": "Custom gradient background",
+      "info": "If added, replaces Background color when applicable.",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_image_background",
+      "label": "Custom image background",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_mobile_image_background",
+      "label": "Custom mobile image background",
+      "info": "If empty, the Custom image background will also be applied to mobile devices",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' and section.settings.custom_image_background != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_text",
+      "default": "#2E2A39",
+      "label": "Custom text color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_solid_button_background",
+      "default": "#dd1d1d",
+      "label": "Custom solid button background",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_solid_button_text",
+      "default": "#ffffff",
+      "label": "Custom solid button label color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_outline_button",
+      "default": "#dd1d1d",
+      "label": "Custom outline button color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "pattern_bg",
+      "label": "Background pattern",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "dotted",
+          "label": "Dots"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "curved-grid",
+          "label": "Curved grid"
+        },
+        {
+          "value": "diagonal-stripes",
+          "label": "Stripes"
+        },
+        {
+          "value": "zigzag",
+          "label": "ZigZag"
+        },
+        {
+          "value": "arrow-pattern",
+          "label": "3D Boxes"
+        },
+        {
+          "value": "radial-rings",
+          "label": "Rings"
+        },
+        {
+          "value": "diamond-grid-1",
+          "label": "Diamond grid 1"
+        },
+        {
+          "value": "diamond-grid-2",
+          "label": "Diamond grid 2"
+        },
+        {
+          "value": "quatrefoils",
+          "label": "Quatrefoils"
+        },
+        {
+          "value": "ovals",
+          "label": "Ovals"
+        },
+        {
+          "value": "hexagons",
+          "label": "Hexagons"
+        },
+        {
+          "value": "curvy",
+          "label": "Curvy"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "pattern_color",
+      "label": "Pattern color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_size",
+      "min": 4,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Pattern size / spacing",
+      "default": 20,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_thickness",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Line / dot thickness",
+      "default": 2,
+      "visible_if": "{{ section.settings.pattern_bg == 'dotted' or section.settings.pattern_bg == 'grid' or section.settings.pattern_bg == 'diagonal-stripes' or section.settings.pattern_bg == 'radial-rings' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_angle",
+      "min": 0,
+      "max": 180,
+      "step": 15,
+      "unit": "deg",
+      "label": "Stripe angle",
+      "default": 45,
+      "visible_if": "{{ section.settings.pattern_bg == 'diagonal-stripes' }}"
+    },
+    {
+      "type": "select",
+      "id": "pattern_opacity_mode",
+      "label": "Opacity type",
+      "default": "low",
+      "options": [
+        {
+          "value": "low",
+          "label": "Low"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity_low",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 7,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' and section.settings.pattern_opacity_mode == 'low' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity_normal",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 80,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' and section.settings.pattern_opacity_mode == 'normal' }}"
+    },
+    {
+      "type": "header",
+      "content": "Desktop layout"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "label": "Content position",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "right", "label": "Right" },
+        { "value": "bottom", "label": "Bottom" },
+        { "value": "left", "label": "Left" },
+        { "value": "hidden", "label": "Hidden" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_content",
+      "label": "Sticky content",
+      "default": true,
+      "info": "Makes the 'Content' block stick to the top of the viewport as you scroll past the timeline.",
+      "visible_if": "{{ section.settings.content_position == 'left' or section.settings.content_position == 'right' }}"
+    },
+    {
+      "type": "select",
+      "id": "content_vertical_alignment",
+      "label": "Content vertical alignment",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Middle" },
+        { "value": "flex-end", "label": "Bottom" }
+      ],
+      "default": "flex-start",
+      "visible_if": "{{ section.settings.sticky_content == false and section.settings.content_position == 'left' or section.settings.content_position == 'right' }}"
+    },
+    {
+      "type": "range",
+      "id": "spacing_between_blocks_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Spacing",
+      "default": 45,
+      "info": "Spacing between the timeline & content",
+      "visible_if": "{{ section.settings.content_position != 'hidden' }}"
+    },
+    {
+      "type": "range",
+      "id": "timeline_width_side",
+      "label": "Timeline width",
+      "min": 30,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "default": 50,
+      "visible_if": "{{ section.settings.content_position == 'left' or section.settings.content_position == 'right' }}"
+    },
+    {
+      "type": "range",
+      "id": "timeline_width_stacked",
+      "label": "Timeline width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ section.settings.content_position == 'top' or section.settings.content_position == 'bottom' }}"
+    },
+    {
+      "type": "select",
+      "id": "timeline_alignment_stacked",
+      "label": "Timeline alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "center",
+      "visible_if": "{{ section.settings.timeline_width_stacked < 100 and section.settings.content_position == 'top' or section.settings.content_position == 'bottom' }}"
+    },
+    {
+      "type": "range",
+      "id": "content_width_stacked",
+      "label": "Content width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ section.settings.content_position == 'top' or section.settings.content_position == 'bottom' }}"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment_stacked",
+      "label": "Content alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "center",
+      "visible_if": "{{ section.settings.content_width_stacked < 100 and section.settings.content_position == 'top' or section.settings.content_position == 'bottom' }}"
+    },
+    {
+      "type": "header",
+      "content": "Mobile layout"
+    },
+    {
+      "type": "select",
+      "id": "content_position_mobile",
+      "label": "Content position",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" },
+        { "value": "hidden", "label": "Hidden" }
+      ],
+      "default": "top"
+    },
+    {
+      "type": "range",
+      "id": "spacing_between_blocks_mobile",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "label": "Spacing",
+      "default": 24,
+      "info": "Spacing between the timeline & content",
+      "visible_if": "{{ section.settings.content_position_mobile != 'hidden' }}"
+    },
+    {
+      "type": "range",
+      "id": "timeline_width_mobile",
+      "label": "Timeline width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "timeline_alignment_mobile",
+      "label": "Timeline alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "center",
+      "visible_if": "{{ section.settings.timeline_width_mobile < 100 }}"
+    },
+    {
+      "type": "range",
+      "id": "content_width_mobile",
+      "label": "Content width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ section.settings.content_position_mobile != 'hidden' }}"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment_mobile",
+      "label": "Content alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "center",
+      "visible_if": "{{ section.settings.content_width_mobile < 100 and section.settings.content_position_mobile != 'hidden' }}"
+    },
+    {
+      "type": "header",
+      "content": "Timeline settings"
+    },
+    {
+      "type": "select",
+      "id": "timeline_direction",
+      "label": "Timeline direction",
+      "options": [
+        { "value": "vertical", "label": "Vertical" },
+        { "value": "horizontal", "label": "Horizontal" }
+      ],
+      "default": "vertical"
+    },
+    {
+      "type": "select",
+      "id": "style_vertical",
+      "label": "Style",
+      "options": [
+        { "value": "classic", "label": "Classic" },
+        { "value": "scroll_activated", "label": "Scroll / click activated" },
+        { "value": "accordion", "label": "Accordion" }
+      ],
+      "default": "classic",
+      "visible_if": "{{ section.settings.timeline_direction == 'vertical' }}"
+    },
+    {
+      "type": "select",
+      "id": "style_horizontal",
+      "label": "Style",
+      "options": [
+        { "value": "classic", "label": "Classic" },
+        { "value": "slider_click", "label": "Arrows / click activated" }
+      ],
+      "default": "classic",
+      "visible_if": "{{ section.settings.timeline_direction == 'horizontal' }}"
+    },
+    {
+      "type": "select",
+      "id": "vertical_line_position_desktop",
+      "label": "Desktop line position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "middle", "label": "Middle (alternating items)" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left",
+      "visible_if": "{{ section.settings.timeline_direction == 'vertical' }}"
+    },
+    {
+      "type": "select",
+      "id": "vertical_line_position_mobile",
+      "label": "Mobile line position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left",
+      "visible_if": "{{ section.settings.timeline_direction == 'vertical' }}"
+    },
+    {
+      "type": "range",
+      "id": "vertical_items_spacing",
+      "min": 0,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "label": "Spacing between items",
+      "default": 15,
+      "visible_if": "{{ section.settings.timeline_direction == 'vertical' }}"
+    },
+    {
+      "type": "range",
+      "id": "horizontal_item_padding",
+      "min": 0,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "label": "Desktop items padding",
+      "default": 21,
+      "visible_if": "{{ section.settings.timeline_direction == 'horizontal' }}"
+    },
+    {
+      "type": "range",
+      "id": "horizontal_item_padding_mobile",
+      "min": 0,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "label": "Mobile items padding",
+      "default": 30,
+      "visible_if": "{{ section.settings.timeline_direction == 'horizontal' }}"
+    },
+    {
+      "type": "range",
+      "id": "header_body_spacing",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Items header & body spacing",
+      "default": 10
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_align",
+      "label": "Auto align Heading & Text blocks",
+      "default": true,
+      "info": "If enabled, the Heading & Text blocks will be automatically aligned towards the line, and their block settings for alignment won't apply."
+    },
+    {
+      "type": "header",
+      "content": "Slider & arrows",
+      "info": "Used with the Horizontal timeline style",
+      "visible_if": "{{ section.settings.timeline_direction == 'horizontal' }}"
+    },
+    {
+      "type": "select",
+      "id": "arrows_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "inverse",
+      "label": "Arrows color scheme",
+      "visible_if": "{{ section.settings.timeline_direction == 'horizontal' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_arrows",
+      "label": "Transparent arrows",
+      "default": false,
+      "visible_if": "{{ section.settings.timeline_direction == 'horizontal' }}"
+    },
+    {
+      "type": "select",
+      "id": "desktop_arrows_position",
+      "options": [
+        {
+          "value": "hidden",
+          "label": "Hidden"
+        },
+        {
+          "value": "above",
+          "label": "Above the timeline"
+        },
+        {
+          "value": "sides",
+          "label": "On sides of the timeline"
+        },
+        {
+          "value": "under",
+          "label": "Under the timeline"
+        }
+      ],
+      "default": "sides",
+      "label": "Desktop arrows position",
+      "visible_if": "{{ section.settings.timeline_direction == 'horizontal' }}"
+    },
+    {
+      "type": "range",
+      "id": "desktop_max_horizontal_points",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Maximum number of items to show on desktop",
+      "default": 2,
+      "info": "If the number of added Timeline items is greater than this number, a slider will also be displayed on desktop devices.",
+      "visible_if": "{{ section.settings.timeline_direction == 'horizontal' }}"
+    },
+    {
+      "type": "select",
+      "id": "mobile_arrows_position",
+      "options": [
+        {
+          "value": "hidden",
+          "label": "Hidden"
+        },
+        {
+          "value": "above",
+          "label": "Above the timeline"
+        },
+        {
+          "value": "sides",
+          "label": "On sides of the timeline"
+        },
+        {
+          "value": "under",
+          "label": "Under the timeline"
+        }
+      ],
+      "default": "under",
+      "label": "Mobile arrows position",
+      "visible_if": "{{ section.settings.timeline_direction == 'horizontal' }}"
+    },
+    {
+      "type": "header",
+      "content": "Timeline line",
+      "info": "Controls the line that connects the points"
+    },
+    {
+      "type": "range",
+      "id": "line_thickness",
+      "min": 1,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "label": "Thickness",
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "line_color_type",
+      "label": "Color type",
+      "options": [
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "text", "label": "Text" },
+        { "value": "color", "label": "Custom" },
+        { "value": "gradient", "label": "Gradient" }
+      ],
+      "default": "accent-1"
+    },
+    {
+      "type": "color",
+      "id": "line_color_solid",
+      "label": "Color",
+      "default": "#000000",
+      "visible_if": "{{ section.settings.line_color_type == 'color' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "line_color_gradient",
+      "label": "Gradient",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ section.settings.line_color_type == 'gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "line_point_spacing",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Spacing between the line & points",
+      "default": 4,
+      "visible_if": "{{ section.settings.timeline_direction == 'vertical' }}"
+    },
+    {
+      "type": "range",
+      "id": "line_point_spacing_horizontal",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Spacing between the line & points",
+      "default": 8,
+      "visible_if": "{{ section.settings.timeline_direction == 'horizontal' }}"
+    },
+    {
+      "type": "header",
+      "content": "Timeline points",
+      "info": "Controls the points that each timeline item has"
+    },
+    {
+      "type": "range",
+      "id": "point_size_desktop",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Desktop size",
+      "default": 48,
+      "visible_if": "{{ section.settings.timeline_direction == 'vertical' }}"
+    },
+    {
+      "type": "range",
+      "id": "point_size_mobile",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile size",
+      "default": 40,
+      "visible_if": "{{ section.settings.timeline_direction == 'vertical' }}"
+    },
+    {
+      "type": "range",
+      "id": "horizontal_point_size_desktop",
+      "min": 30,
+      "max": 90,
+      "step": 2,
+      "unit": "px",
+      "label": "Desktop size",
+      "default": 54,
+      "visible_if": "{{ section.settings.timeline_direction == 'horizontal' }}"
+    },
+    {
+      "type": "range",
+      "id": "horizontal_point_size_mobile",
+      "min": 30,
+      "max": 90,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile size",
+      "default": 54,
+      "visible_if": "{{ section.settings.timeline_direction == 'horizontal' }}"
+    },
+    {
+      "type": "select",
+      "id": "point_background_type",
+      "label": "Background color",
+      "options": [
+        { "value": "none", "label": "Transparent" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "text", "label": "Text" },
+        { "value": "color", "label": "Custom" },
+        { "value": "gradient", "label": "Gradient" }
+      ],
+      "default": "accent-1"
+    },
+    {
+      "type": "color",
+      "id": "point_background_solid",
+      "label": "Background",
+      "default": "#000",
+      "visible_if": "{{ section.settings.point_background_type == 'color' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "point_background_gradient",
+      "label": "Background",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ section.settings.point_background_type == 'gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "point_border_thickness",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "point_border_color_type",
+      "label": "Border color type",
+      "options": [
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "text", "label": "Text" },
+        { "value": "color", "label": "Custom" }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ section.settings.point_border_thickness > 0 }}"
+    },
+    {
+      "type": "color",
+      "id": "point_border_color_solid",
+      "label": "Border color",
+      "default": "#000",
+      "visible_if": "{{ section.settings.point_border_thickness > 0 and section.settings.point_border_color_type == 'color' }}"
+    },
+    {
+      "type": "range",
+      "id": "point_corner_radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Corner radius",
+      "default": 100,
+      "visible_if": "{{ section.settings.point_border_thickness > 0 or section.settings.point_background_type != 'none' }}"
+    },
+    {
+      "type": "header",
+      "content": "Timeline point icons & text",
+      "info": "Controls the icon or text displayed in the points"
+    },
+    {
+      "type": "select",
+      "id": "point_icon_color_type",
+      "label": "Color type",
+      "options": [
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "text", "label": "Text" },
+        { "value": "color", "label": "Custom" }
+      ],
+      "default": "background-1"
+    },
+    {
+      "type": "color",
+      "id": "point_icon_color_solid",
+      "label": "Custom color",
+      "default": "#fff",
+      "visible_if": "{{ section.settings.point_icon_color_type == 'color' }}"
+    },
+    {
+      "type": "range",
+      "id": "point_icon_scale",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Icons scale",
+      "default": 60,
+      "info": "Relative to the point size."
+    },
+    {
+      "type": "range",
+      "id": "point_dot_scale",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Dots scale",
+      "default": 40,
+      "info": "Relative to the point size."
+    },
+    {
+      "type": "range",
+      "id": "point_text_scale",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Text scale",
+      "default": 60,
+      "info": "Relative to the point size."
+    },
+    {
+      "type": "header",
+      "content": "Inactive timeline items",
+      "info": "Applied to non-active / non-loaded items in the timeline"
+    },
+    {
+      "type": "range",
+      "id": "inactive_item_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Inactive item content opacity",
+      "default": 70
+    },
+    {
+      "type": "select",
+      "id": "inactive_line_color_type",
+      "label": "Inactive line color type",
+      "options": [
+        { "value": "none", "label": "Transparent" },
+        { "value": "color", "label": "Color" },
+        { "value": "gradient", "label": "Gradient" }
+      ],
+      "default": "color"
+    },
+    {
+      "type": "color",
+      "id": "inactive_line_color_solid",
+      "label": "Inactive line color",
+      "default": "#d0d0d0",
+      "visible_if": "{{ section.settings.inactive_line_color_type == 'color' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "inactive_line_color_gradient",
+      "label": "Inactive line gradient",
+      "visible_if": "{{ section.settings.inactive_line_color_type == 'gradient' }}"
+    },
+    {
+      "type": "select",
+      "id": "inactive_point_border_color_type",
+      "label": "Inactive point border color type",
+      "options": [
+        { "value": "none", "label": "Transparent" },
+        { "value": "color", "label": "Solid color" }
+      ],
+      "default": "color"
+    },
+    {
+      "type": "color",
+      "id": "inactive_point_border_color_solid",
+      "label": "Inactive point border color",
+      "default": "#d0d0d0",
+      "visible_if": "{{ section.settings.inactive_point_border_color_type == 'color' }}"
+    },
+    {
+      "type": "select",
+      "id": "inactive_point_background_type",
+      "label": "Inactive point background type",
+      "options": [
+        { "value": "none", "label": "Transparent" },
+        { "value": "color", "label": "Color" },
+        { "value": "gradient", "label": "Gradient" }
+      ],
+      "default": "color"
+    },
+    {
+      "type": "color",
+      "id": "inactive_point_background_solid",
+      "label": "Inactive point background color",
+      "default": "#fafafa",
+      "visible_if": "{{ section.settings.inactive_point_background_type == 'color' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "inactive_point_background_gradient",
+      "label": "Inactive point background gradient",
+      "visible_if": "{{ section.settings.inactive_point_background_type == 'gradient' }}"
+    },
+    {
+      "type": "select",
+      "id": "inactive_point_icon_color_type",
+      "label": "Inactive point icon & text color type",
+      "options": [
+        { "value": "none", "label": "Transparent" },
+        { "value": "color", "label": "Custom color" }
+      ],
+      "default": "color"
+    },
+    {
+      "type": "color",
+      "id": "inactive_point_icon_color_solid",
+      "label": "Inactive point icon & text color",
+      "default": "#d0d0d0",
+      "visible_if": "{{ section.settings.inactive_point_background_type == 'color' }}"
+    },
+
+    {
+      "type": "header",
+      "content": "Animations"
+    },
+    {
+      "type": "range",
+      "id": "point_animation_duration",
+      "min": 0.1,
+      "max": 1,
+      "step": 0.1,
+      "unit": "s",
+      "label": "Point animation duration",
+      "default": 0.5
+    },
+    {
+      "type": "range",
+      "id": "line_animation_duration",
+      "min": 0.1,
+      "max": 1,
+      "step": 0.1,
+      "unit": "s",
+      "label": "Line animation duration",
+      "default": 0.4
+    },
+    {
+      "type": "checkbox",
+      "id": "animate_loading_vertical",
+      "label": "Animate items on scroll-in",
+      "default": true,
+      "visible_if": "{{ section.settings.timeline_direction == 'vertical' and section.settings.style_vertical == 'classic' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "animate_loading_horizontal",
+      "label": "Animate items on scroll-in",
+      "default": true,
+      "visible_if": "{{ section.settings.timeline_direction == 'horizontal' and section.settings.style_horizontal == 'classic' }}"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "timeline-content"
+    },
+    {
+      "type": "timeline"
+    }
+  ],
+  "max_blocks": 2,
+  "presets": [
+    {
+      "name": "Timeline",
+      "blocks": [
+        {
+          "type": "timeline-content",
+          "blocks": [
+            {
+              "type": "heading",
+              "settings": {
+                "title": "Timeline"
+              }
+            },
+            {
+              "type": "timeline_active-content-container"
+            }
+          ]
+        },
+        {
+          "type": "timeline",
+          "blocks": [
+            {
+              "type": "timeline-item",
+              "blocks": [
+                {
+                  "type": "timeline-item_header",
+                  "name": "Header",
+                  "blocks": [
+                    {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>WEEK 1</p>",
+                        "margin_bottom": 0
+                      }
+                    },
+                    {
+                      "type": "heading",
+                      "settings": {
+                        "title": "Point heading",
+                        "margin_top": 0,
+                        "heading_size": "h3"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "timeline-item_content",
+                  "name": "Content",
+                  "blocks": [
+                    {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Use this stage to outline the key goals or tasks for this step. Add details that help clarify what happens during this part of the process.</p>"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Include any useful details that help guide the visitor forward.</p>"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "timeline-item_active-content",
+                  "name": "Active content",
+                  "blocks": [
+                    {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>WEEK 1 active content</p>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "timeline-item",
+              "blocks": [
+                {
+                  "type": "timeline-item_header",
+                  "name": "Header",
+                  "blocks": [
+                    {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>WEEK 2</p>",
+                        "margin_bottom": 0
+                      }
+                    },
+                    {
+                      "type": "heading",
+                      "settings": {
+                        "title": "Point heading",
+                        "margin_top": 0,
+                        "heading_size": "h3"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "timeline-item_content",
+                  "name": "Content",
+                  "blocks": [
+                    {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Use this stage to outline the key goals or tasks for this step. Add details that help clarify what happens during this part of the process.</p>"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Include any useful details that help guide the visitor forward.</p>"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "timeline-item_active-content",
+                  "name": "Active content",
+                  "blocks": [
+                    {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>WEEK 2 active content</p>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "timeline-item",
+              "blocks": [
+                {
+                  "type": "timeline-item_header",
+                  "name": "Header",
+                  "blocks": [
+                    {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>WEEK 3</p>",
+                        "margin_bottom": 0
+                      }
+                    },
+                    {
+                      "type": "heading",
+                      "settings": {
+                        "title": "Point heading",
+                        "margin_top": 0,
+                        "heading_size": "h3"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "timeline-item_content",
+                  "name": "Content",
+                  "blocks": [
+                    {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Use this stage to outline the key goals or tasks for this step. Add details that help clarify what happens during this part of the process.</p>"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Include any useful details that help guide the visitor forward.</p>"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "timeline-item_active-content",
+                  "name": "Active content",
+                  "blocks": [
+                    {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>WEEK 3 active content</p>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "timeline-item",
+              "blocks": [
+                {
+                  "type": "timeline-item_header",
+                  "name": "Header",
+                  "blocks": [
+                    {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>WEEK 4</p>",
+                        "margin_bottom": 0
+                      }
+                    },
+                    {
+                      "type": "heading",
+                      "settings": {
+                        "title": "Point heading",
+                        "margin_top": 0,
+                        "heading_size": "h3"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "timeline-item_content",
+                  "name": "Content",
+                  "blocks": [
+                    {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Use this stage to outline the key goals or tasks for this step. Add details that help clarify what happens during this part of the process.</p>"
+                      }
+                    },
+                    {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Include any useful details that help guide the visitor forward.</p>"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "timeline-item_active-content",
+                  "name": "Active content",
+                  "blocks": [
+                    {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>WEEK 4 active content</p>"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header"]
+  }
+}
+{% endschema %}

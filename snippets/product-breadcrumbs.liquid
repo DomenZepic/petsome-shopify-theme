@@ -1,0 +1,221 @@
+{% comment %}
+  Product Breadcrumbs Snippet
+
+  Required params:
+  - product: The product object
+  - section: The section object (for settings)
+{% endcomment %}
+
+{% liquid
+  assign breadcrumb_collections = ''
+  assign has_metafield_breadcrumbs = false
+
+  # Check for metafield breadcrumbs (manual/hybrid mode)
+  if section.settings.breadcrumbs_mode == 'manual' or section.settings.breadcrumbs_mode == 'hybrid'
+    if product.metafields.custom.breadcrumb_1.value != blank
+      assign has_metafield_breadcrumbs = true
+    endif
+  endif
+
+  # Assign metafield collections
+  if has_metafield_breadcrumbs
+    assign bc_1 = product.metafields.custom.breadcrumb_1.value
+    assign bc_2 = product.metafields.custom.breadcrumb_2.value
+    assign bc_3 = product.metafields.custom.breadcrumb_3.value
+    assign bc_4 = product.metafields.custom.breadcrumb_4.value
+    assign bc_5 = product.metafields.custom.breadcrumb_5.value
+    assign bc_6 = product.metafields.custom.breadcrumb_6.value
+  endif
+
+  # Auto or hybrid fallback - use first collection
+  if has_metafield_breadcrumbs == false and section.settings.breadcrumbs_mode != 'manual'
+    # Auto or hybrid fallback - use first collection
+    if product.collections.size > 0
+      assign excluded_handles = 'all,frontpage,new-arrivals,sale,featured,homepage' | split: ','
+      for col in product.collections
+        unless excluded_handles contains col.handle
+          assign breadcrumb_collections = col
+          break
+        endunless
+      endfor
+      if breadcrumb_collections == blank
+        assign breadcrumb_collections = product.collections.first
+      endif
+    endif
+  endif
+
+  # Determine text color value
+  case section.settings.breadcrumbs_text_color
+    when 'text'
+      assign text_color = 'rgb(var(--color-foreground))'
+    when 'text-subdued'
+      assign text_color = 'rgba(var(--color-foreground), 0.7)'
+    when 'accent-1'
+      assign text_color = 'rgb(var(--color-base-accent-1))'
+    when 'accent-2'
+      assign text_color = 'rgb(var(--color-base-accent-2))'
+    when 'background-1'
+      assign text_color = 'rgb(var(--color-base-background-1))'
+    when 'background-2'
+      assign text_color = 'rgb(var(--color-base-background-2))'
+    when 'custom'
+      assign text_color = section.settings.breadcrumbs_custom_color
+  endcase
+
+  # Don't render in manual mode if no metafields configured
+  assign render_breadcrumbs = true
+  if section.settings.breadcrumbs_mode == 'manual' and has_metafield_breadcrumbs == false
+    assign render_breadcrumbs = false
+  endif
+%}
+
+{% if render_breadcrumbs %}
+<nav
+  class="product-breadcrumbs breadcrumbs--align-{{ section.settings.breadcrumbs_alignment }}{% if section.settings.breadcrumbs_font == 'heading' %} heading-font{% endif %}{% if section.settings.breadcrumbs_font == 'body_bold' %} breadcrumbs--bold{% endif %}"
+  aria-label="Breadcrumb"
+  style="
+    --breadcrumbs-desktop-size: {{ section.settings.breadcrumbs_desktop_text_size }}px;
+    --breadcrumbs-mobile-size: {{ section.settings.breadcrumbs_mobile_text_size }}px;
+    --breadcrumbs-bottom-margin: {{ section.settings.breadcrumbs_bottom_margin }}px;
+    --text-color: {{ text_color }};
+  "
+>
+  <ol class="product-breadcrumbs__list">
+    {% if section.settings.breadcrumbs_show_home %}
+      <li class="product-breadcrumbs__item">
+        <a href="{{ routes.root_url }}" class="product-breadcrumbs__link">{{ section.settings.breadcrumbs_home_label }}</a>
+        <span class="product-breadcrumbs__separator" aria-hidden="true">{{ section.settings.breadcrumbs_separator }}</span>
+      </li>
+    {% endif %}
+
+    {% if has_metafield_breadcrumbs %}
+      {% if bc_1 != blank %}
+        <li class="product-breadcrumbs__item">
+          <a href="{{ bc_1.url }}" class="product-breadcrumbs__link">{{ bc_1.title }}</a>
+          {% if bc_2 != blank or section.settings.breadcrumbs_show_product %}
+            <span class="product-breadcrumbs__separator" aria-hidden="true">{{ section.settings.breadcrumbs_separator }}</span>
+          {% endif %}
+        </li>
+      {% endif %}
+      {% if bc_2 != blank %}
+        <li class="product-breadcrumbs__item">
+          <a href="{{ bc_2.url }}" class="product-breadcrumbs__link">{{ bc_2.title }}</a>
+          {% if bc_3 != blank or section.settings.breadcrumbs_show_product %}
+            <span class="product-breadcrumbs__separator" aria-hidden="true">{{ section.settings.breadcrumbs_separator }}</span>
+          {% endif %}
+        </li>
+      {% endif %}
+      {% if bc_3 != blank %}
+        <li class="product-breadcrumbs__item">
+          <a href="{{ bc_3.url }}" class="product-breadcrumbs__link">{{ bc_3.title }}</a>
+          {% if bc_4 != blank or section.settings.breadcrumbs_show_product %}
+            <span class="product-breadcrumbs__separator" aria-hidden="true">{{ section.settings.breadcrumbs_separator }}</span>
+          {% endif %}
+        </li>
+      {% endif %}
+      {% if bc_4 != blank %}
+        <li class="product-breadcrumbs__item">
+          <a href="{{ bc_4.url }}" class="product-breadcrumbs__link">{{ bc_4.title }}</a>
+          {% if bc_5 != blank or section.settings.breadcrumbs_show_product %}
+            <span class="product-breadcrumbs__separator" aria-hidden="true">{{ section.settings.breadcrumbs_separator }}</span>
+          {% endif %}
+        </li>
+      {% endif %}
+      {% if bc_5 != blank %}
+        <li class="product-breadcrumbs__item">
+          <a href="{{ bc_5.url }}" class="product-breadcrumbs__link">{{ bc_5.title }}</a>
+          {% if bc_6 != blank or section.settings.breadcrumbs_show_product %}
+            <span class="product-breadcrumbs__separator" aria-hidden="true">{{ section.settings.breadcrumbs_separator }}</span>
+          {% endif %}
+        </li>
+      {% endif %}
+      {% if bc_6 != blank %}
+        <li class="product-breadcrumbs__item">
+          <a href="{{ bc_6.url }}" class="product-breadcrumbs__link">{{ bc_6.title }}</a>
+          {% if section.settings.breadcrumbs_show_product %}
+            <span class="product-breadcrumbs__separator" aria-hidden="true">{{ section.settings.breadcrumbs_separator }}</span>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% elsif breadcrumb_collections != blank %}
+      <li class="product-breadcrumbs__item">
+        <a href="{{ breadcrumb_collections.url }}" class="product-breadcrumbs__link">{{ breadcrumb_collections.title }}</a>
+        {% if section.settings.breadcrumbs_show_product %}
+          <span class="product-breadcrumbs__separator" aria-hidden="true">{{ section.settings.breadcrumbs_separator }}</span>
+        {% endif %}
+      </li>
+    {% endif %}
+
+    {% if section.settings.breadcrumbs_show_product %}
+      <li class="product-breadcrumbs__item">
+        <span class="product-breadcrumbs__current" aria-current="page">{{ product.title }}</span>
+      </li>
+    {% endif %}
+  </ol>
+</nav>
+
+<!-- Breadcrumbs JSON-LD for SEO -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {% assign position = 1 %}
+      {% if section.settings.breadcrumbs_show_home %}
+      {
+        "@type": "ListItem",
+        "position": {{ position }},
+        "name": {{ section.settings.breadcrumbs_home_label | json }},
+        "item": "{{ shop.url }}"
+      }{% assign position = position | plus: 1 %}{% endif %}{% if has_metafield_breadcrumbs %}{% if bc_1 != blank %},
+      {
+        "@type": "ListItem",
+        "position": {{ position }},
+        "name": {{ bc_1.title | json }},
+        "item": "{{ shop.url }}{{ bc_1.url }}"
+      }{% assign position = position | plus: 1 %}{% endif %}{% if bc_2 != blank %},
+      {
+        "@type": "ListItem",
+        "position": {{ position }},
+        "name": {{ bc_2.title | json }},
+        "item": "{{ shop.url }}{{ bc_2.url }}"
+      }{% assign position = position | plus: 1 %}{% endif %}{% if bc_3 != blank %},
+      {
+        "@type": "ListItem",
+        "position": {{ position }},
+        "name": {{ bc_3.title | json }},
+        "item": "{{ shop.url }}{{ bc_3.url }}"
+      }{% assign position = position | plus: 1 %}{% endif %}{% if bc_4 != blank %},
+      {
+        "@type": "ListItem",
+        "position": {{ position }},
+        "name": {{ bc_4.title | json }},
+        "item": "{{ shop.url }}{{ bc_4.url }}"
+      }{% assign position = position | plus: 1 %}{% endif %}{% if bc_5 != blank %},
+      {
+        "@type": "ListItem",
+        "position": {{ position }},
+        "name": {{ bc_5.title | json }},
+        "item": "{{ shop.url }}{{ bc_5.url }}"
+      }{% assign position = position | plus: 1 %}{% endif %}{% if bc_6 != blank %},
+      {
+        "@type": "ListItem",
+        "position": {{ position }},
+        "name": {{ bc_6.title | json }},
+        "item": "{{ shop.url }}{{ bc_6.url }}"
+      }{% assign position = position | plus: 1 %}{% endif %}{% elsif breadcrumb_collections != blank %},
+      {
+        "@type": "ListItem",
+        "position": {{ position }},
+        "name": {{ breadcrumb_collections.title | json }},
+        "item": "{{ shop.url }}{{ breadcrumb_collections.url }}"
+      }{% assign position = position | plus: 1 %}{% endif %}{% if section.settings.breadcrumbs_show_product %},
+      {
+        "@type": "ListItem",
+        "position": {{ position }},
+        "name": {{ product.title | json }}
+      }{% endif %}
+    ]
+  }
+</script>
+{% endif %}

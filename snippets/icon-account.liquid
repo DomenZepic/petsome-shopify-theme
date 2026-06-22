@@ -1,0 +1,51 @@
+{% liquid
+  assign icon = section.settings.account_icon
+  if always_icon
+    assign icon = 'style_1'
+  endif
+  if icon == 'style_2'
+    assign icon_thickness = section.settings.icons_thickness | times: 11 | plus: 10
+  else
+    assign icon_thickness = section.settings.icons_thickness | times: 13 | plus: 12
+  endif
+%}
+{% case icon %}
+  {% when 'text' %}
+    <span class="header__text-icon icon icon-account">
+      {{ section.settings.account_icon_text }}
+    </span>
+  {% when 'style_2' %}
+    <svg
+      class="icon icon-account"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      focusable="false"
+      fill="none"
+      viewBox="0 0 500 500"
+      stroke="currentColor"
+      stroke-width="{{ icon_thickness }}"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      style="transform:scale(1.06)"
+    >
+      <g transform="translate(250 250) scale(1.3) translate(-250 -250)">
+        <path d="M333.333 166.667A83.333 83.333 0 0 1 250 250A83.333 83.333 0 0 1 166.667 166.667A83.333 83.333 0 0 1 333.333 166.667z"/>
+        <path d="M83.333 416.667c0 -83.333 83.333 -125 166.667 -125s166.667 41.667 166.667 125"/>
+      </g>
+    </svg>
+  {% else %}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      focusable="false"
+      class="icon icon-account"
+      viewBox="0 0 446.39 472"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="{{ icon_thickness }}"
+    >
+      <circle cx="224.54" cy="104.61" r="92.11"/>
+      <path d="M39.77,473.68H458.12c2.49-19.77,7.92-83.12-32.66-131.67C379.69,287.25,307,287.43,250,287.68c-56.42.25-131.08.57-177.28,57.17C33.34,393.08,37.58,454.06,39.77,473.68Z" transform="translate(-25.95 -14.18)"/>
+      <path d="M116.87,354.32" transform="translate(-25.95 -14.18)"/>
+    </svg>
+{% endcase %}

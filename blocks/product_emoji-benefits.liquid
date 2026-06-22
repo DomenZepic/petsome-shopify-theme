@@ -1,0 +1,55 @@
+<div
+  class='emoji-benefits-container'
+  {{ block.shopify_attributes }} 
+  style="
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  "
+>
+  {{ block.settings.benefits }}
+</div>
+
+{% schema %}
+{
+  "name": "Emoji benefits",
+  "tag": null,
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "benefits",
+      "label": "Benefits",
+      "default": "<p>🙌 Benefit</p><p>🐀𐀀𺠠𠡥nefit</p><p>🌟 Benefit</p>"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Emoji benefits",
+      "category": "Information display"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,612 @@
+{% liquid
+  if section.settings.product_images == 'all' or section.settings.product_images == 'one'
+    assign product = section.settings.product
+  endif
+%}
+{%- assign align = block.settings.text_align | default: 'left' -%}
+{%- assign container_width = block.settings.container_width | default: 'full_width' -%}
+{%- assign font_family = block.settings.font_family | default: 'body' -%}
+
+{%- if font_family == 'heading' -%}
+  {%- assign font_css_var = 'var(--font-heading-family)' -%}
+{%- else -%}
+  {%- assign font_css_var = 'var(--font-body-family)' -%}
+{%- endif -%}
+
+{%- case align -%}
+  {%- when 'center' -%}
+    {% assign justify_val = 'center' %}
+  {%- when 'right' -%}
+    {% assign justify_val = 'flex-end' %}
+  {%- else -%}
+    {% assign justify_val = 'flex-start' %}
+{%- endcase -%}
+
+{%- assign quantity = product.selected_or_first_available_variant.inventory_quantity -%}
+{%- assign show_low_stock_when = block.settings.show_low_stock_when -%}
+{%- assign threshold = block.settings.inventory_threshold | default: 10 -%}
+
+{%- if quantity > 0 -%}
+  {%- if show_low_stock_when == 'all_the_time' or quantity <= threshold -%}
+    {%- assign inv_state = 'low' -%}
+  {%- else -%}
+    {%- assign inv_state = 'in' -%}
+  {%- endif -%}
+{%- else -%}
+  {%- assign inv_state = 'out' -%}
+{%- endif -%}
+
+{%- if inv_state == 'in' -%}
+  {%- assign text_color = block.settings.in_text_color | default: '#166534' -%}
+  {%- assign icon_color = block.settings.in_icon_color | default: '#16a34a' -%}
+  {%- assign bg_type = block.settings.in_bg_type | default: 'none' -%}
+  {%- assign bg_color = block.settings.in_bg_color | default: '#e6f7ec' -%}
+  {%- assign bg_gradient = block.settings.in_bg_gradient | default: 'linear-gradient(90deg, #e6f7ec, #ffffff)' -%}
+  {%- assign b_thick = block.settings.in_border_thickness | default: 0 -%}
+  {%- assign b_style = block.settings.in_border_style | default: 'solid' -%}
+  {%- assign b_color = block.settings.in_border_color | default: '#cdecdc' -%}
+  {%- assign radius = block.settings.in_radius | default: 8 -%}
+{%- elsif inv_state == 'low' -%}
+  {%- assign text_color = block.settings.low_text_color | default: '#9a3412' -%}
+  {%- assign icon_color = block.settings.low_icon_color | default: '#ea580c' -%}
+  {%- assign bg_type = block.settings.low_bg_type | default: 'none' -%}
+  {%- assign bg_color = block.settings.low_bg_color | default: '#fff1e6' -%}
+  {%- assign bg_gradient = block.settings.low_bg_gradient | default: 'linear-gradient(90deg, #fff1e6, #ffffff)' -%}
+  {%- assign b_thick = block.settings.low_border_thickness | default: 0 -%}
+  {%- assign b_style = block.settings.low_border_style | default: 'solid' -%}
+  {%- assign b_color = block.settings.low_border_color | default: '#ffd7b3' -%}
+  {%- assign radius = block.settings.low_radius | default: 8 -%}
+{%- else -%}
+  {%- assign text_color = block.settings.out_text_color | default: '#991b1b' -%}
+  {%- assign icon_color = block.settings.out_icon_color | default: '#dc2626' -%}
+  {%- assign bg_type = block.settings.out_bg_type | default: 'none' -%}
+  {%- assign bg_color = block.settings.out_bg_color | default: '#ffe6e6' -%}
+  {%- assign bg_gradient = block.settings.out_bg_gradient | default: 'linear-gradient(90deg, #ffe6e6, #ffffff)' -%}
+  {%- assign b_thick = block.settings.out_border_thickness | default: 0 -%}
+  {%- assign b_style = block.settings.out_border_style | default: 'solid' -%}
+  {%- assign b_color = block.settings.out_border_color | default: '#ffc8c8' -%}
+  {%- assign radius = block.settings.out_radius | default: 8 -%}
+{%- endif -%}
+
+{%- capture bg_css -%}
+  {%- if bg_type == 'color' -%}
+    background: {{ bg_color }};
+  {%- elsif bg_type == 'gradient' -%}
+    background: {{ bg_gradient }};
+  {%- else -%}
+    background: transparent;
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture border_css -%}
+  {%- if b_thick > 0 -%}
+    border: {{ b_thick }}px {{ b_style }} {{ b_color }};
+  {%- else -%}
+    border: none;
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- assign icon_size = block.settings.icon_size | default: 15 -%}
+{%- assign icon_anim = block.settings.icon_animation | default: 'none' -%}
+{%- assign anim_speed = block.settings.icon_animation_speed | default: 800 -%}
+
+{%- assign anim_scale = block.settings.animation_scale | default: 180 -%}
+{%- assign blink_outer = block.settings.blink_show_outer | default: false -%}
+{%- assign blink_opacity = block.settings.blink_lowest_opacity | default: 20 -%}
+
+{%- capture outer_style -%}
+  {%- if container_width == 'fit_content' -%}
+    text-align: {{ align }};
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture inner_style -%}
+  {{ bg_css | strip }}{{ border_css | strip }}
+  {%- if bg_type != 'none' or b_thick > 0 -%}
+    border-radius: {{ radius }}px;
+    padding: 0.5rem 0.75rem;
+  {%- endif -%}
+  {%- if container_width == 'full_width' -%}
+    width: 100%;
+  {%- else -%}
+    display:inline-block;
+  {%- endif -%}
+{%- endcapture -%}
+
+<div
+  id="Inventory-{{ section.id }}"
+  class="product__inventory-outer {{ block.settings.visibility }}"
+  style="
+    {{ outer_style | strip }}
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  "
+>
+  <style>
+    #Inventory-{{ section.id }} .inv__dot {
+      position: relative;
+      display: inline-flex;
+      width: {{ icon_size }}px;
+      height: {{ icon_size }}px;
+      color: {{ icon_color }};
+      flex: 0 0 auto;
+    }
+    #Inventory-{{ section.id }} .inv__dot > svg { width: 100%; height: 100%; display: block; overflow: visible; }
+    #Inventory-{{ section.id }} .inv__text { color: {{ text_color }}; }
+
+    /* SVG parts */
+    #Inventory-{{ section.id }} .inv__outer { transform-origin: 7.5px 7.5px; }
+    #Inventory-{{ section.id }} .inv__dot.inv__dot--no-outer .inv__outer { display: none; }
+
+    {%- if icon_anim == 'blink' -%}
+      @keyframes invBlink-{{ section.id }}-{{ block.id }} {
+        0%, 100% { opacity: 1; }
+        50% { opacity: {{ blink_opacity | divided_by: 100.0 }}; }
+      }
+      #Inventory-{{ section.id }} .inv__dot--blink {
+        animation: invBlink-{{ section.id }}-{{ block.id }} {{ anim_speed }}ms linear infinite;
+      }
+    {%- elsif icon_anim == 'ripple' -%}
+      @keyframes invRipple-{{ section.id }}-{{ block.id }} {
+        0%   { transform: scale(1); opacity: .45; }
+        70%  { transform: scale({{ anim_scale | divided_by: 100.0 }}); opacity: 0; }
+        100% { transform: scale(1); opacity: 0; }
+      }
+      #Inventory-{{ section.id }} .inv__dot--ripple .inv__outer {
+        animation: invRipple-{{ section.id }}-{{ block.id }} {{ anim_speed }}ms ease-out infinite;
+      }
+    {%- endif -%}
+  </style>
+  <div class="product__inventory-inner" style="{{ inner_style | strip }}">
+    <p
+      class="product__inventory no-js-hidden"
+      {{ block.shopify_attributes }}
+      role="status"
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: {{ justify_val }};
+        gap: 0.5em;
+        margin: 0;
+        line-height: 1.5;
+        font-family: {{ font_css_var }};
+        font-size: {{ block.settings.text_size | default: 16 | divided_by: 10.0 }}rem;
+      "
+    >
+      {%- assign icon_anim_class = '' -%}
+      {%- if icon_anim == 'blink' -%}
+        {%- assign icon_anim_class = 'inv__dot--blink' -%}
+      {%- elsif icon_anim == 'ripple' -%}
+        {%- assign icon_anim_class = 'inv__dot--ripple' -%}
+      {%- endif -%}
+
+      {%- assign hide_outer = false -%}
+      {%- if icon_anim == 'blink' and blink_outer == false -%}{%- assign hide_outer = true -%}{%- endif -%}
+
+      <span class="inv__dot {{ icon_anim_class }}{% if hide_outer %} inv__dot--no-outer{% endif %}">
+        <svg aria-hidden="true" viewBox="0 0 15 15" focusable="false">
+          <!-- Outer circle (animated on ripple; optional on blink) -->
+          <circle class="inv__outer" cx="7.5" cy="7.5" r="{% if icon_anim == 'ripple' %}6{% else %}7.5{% endif %}" fill="none" stroke="currentColor" stroke-width="2" opacity="{% if icon_anim == 'ripple' %}0.5{% else %}0.2{% endif %}" />
+          <!-- Inner circle -->
+          <circle class="inv__inner" cx="7.5" cy="7.5" r="5" fill="currentColor" stroke="#ffffff" stroke-width="{% if icon_anim == 'ripple' %}0{% else %}1{% endif %}" />
+        </svg>
+      </span>
+
+      <span class="inv__text">
+        {%- if inv_state == 'in' -%}
+          {%- if block.settings.show_inventory_quantity -%}
+            {{ 'products.product.inventory_in_stock_show_count' | t: quantity: quantity }}
+          {%- else -%}
+            {{ 'products.product.inventory_in_stock' | t }}
+          {%- endif -%}
+        {%- elsif inv_state == 'low' -%}
+          {%- if block.settings.show_inventory_quantity -%}
+            {{ 'products.product.inventory_low_stock_show_count' | t: quantity: quantity }}
+          {%- else -%}
+            {{ 'products.product.inventory_low_stock' | t }}
+          {%- endif -%}
+        {%- else -%}
+          {%- if product.selected_or_first_available_variant.inventory_policy == 'continue' -%}
+            {{ 'products.product.inventory_out_of_stock_continue_selling' | t }}
+          {%- else -%}
+            {{ 'products.product.inventory_out_of_stock' | t }}
+          {%- endif -%}
+        {%- endif -%}
+      </span>
+    </p>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Inventory status",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    { "type": "header", "content": "Inventory" },
+    {
+      "type": "select",
+      "id": "show_low_stock_when",
+      "label": "Show low stock when",
+      "default": "under_threshold",
+      "options": [
+        { "value": "under_threshold", "label": "Under certain amount" },
+        { "value": "all_the_time", "label": "All the time" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "inventory_threshold",
+      "label": "Low stock threshold",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 10,
+      "info": "Low stock UI shows if inventory ≤ this value. Ignored when 'All the time' is selected above.",
+      "visible_if": "{{ block.settings.show_low_stock_when == 'under_threshold' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_inventory_quantity",
+      "label": "Show inventory count",
+      "default": false
+    },
+    { "type": "header", "content": "Text & styling" },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size",
+      "min": 10,
+      "max": 26,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Font",
+      "default": "body",
+      "options": [
+        { "value": "body", "label": "Body" },
+        { "value": "heading", "label": "Heading" }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Alignment",
+      "default": "left",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ]
+    },
+
+    { "type": "header", "content": "Container" },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "default": "full_width",
+      "options": [
+        { "value": "full_width", "label": "Full width" },
+        { "value": "fit_content", "label": "Fit content" }
+      ],
+      "info": "This setting is applied if a background or a border is added"
+    },
+
+    { "type": "header", "content": "Icon" },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "label": "Icon size",
+      "min": 8,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "icon_animation",
+      "label": "Icon animation",
+      "default": "none",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "ripple", "label": "Ripple" },
+        { "value": "blink", "label": "Blink" }
+      ]
+    },
+    {
+      "type": "range",
+      "id": "icon_animation_speed",
+      "label": "Animation speed (ms)",
+      "min": 100,
+      "max": 3000,
+      "step": 100,
+      "default": 1500,
+      "info": "Used when Icon animation is not set to None",
+      "visible_if": "{{ block.settings.icon_animation != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "animation_scale",
+      "label": "Animation scale (%)",
+      "min": 130,
+      "max": 250,
+      "step": 5,
+      "default": 160,
+      "info": "How far the ripple expands",
+      "visible_if": "{{ block.settings.icon_animation == 'ripple' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "blink_show_outer",
+      "label": "Display outer circle",
+      "default": false,
+      "visible_if": "{{ block.settings.icon_animation == 'blink' }}"
+    },
+    {
+      "type": "range",
+      "id": "blink_lowest_opacity",
+      "label": "Lowest opacity (%)",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "default": 20,
+      "info": "Controls the dip in opacity at the middle of the blink animation",
+      "visible_if": "{{ block.settings.icon_animation == 'blink' }}"
+    },
+
+    { "type": "header", "content": "In stock" },
+    { "type": "color", "id": "in_text_color", "label": "Text color", "default": "#166534" },
+    { "type": "color", "id": "in_icon_color", "label": "Icon color", "default": "#16a34a" },
+    {
+      "type": "select",
+      "id": "in_bg_type",
+      "label": "Background",
+      "default": "none",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "color", "label": "Color" },
+        { "value": "gradient", "label": "Gradient" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "in_bg_color",
+      "label": "Background color",
+      "default": "#e6f7ec",
+      "visible_if": "{{ block.settings.in_bg_type == 'color' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "in_bg_gradient",
+      "label": "Background gradient",
+      "default": "linear-gradient(90deg,#e6f7ec,#ffffff)",
+      "visible_if": "{{ block.settings.in_bg_type == 'gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "in_border_thickness",
+      "label": "Border thickness",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "in_border_style",
+      "label": "Border style",
+      "default": "solid",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "dashed", "label": "Dashed" }
+      ],
+      "visible_if": "{{ block.settings.in_border_thickness > 0 }}"
+    },
+    {
+      "type": "color",
+      "id": "in_border_color",
+      "label": "Border color",
+      "default": "#cdecdc",
+      "visible_if": "{{ block.settings.in_border_thickness > 0 }}"
+    },
+    {
+      "type": "range",
+      "id": "in_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8,
+      "visible_if": "{{ block.settings.in_bg_type != 'none' or block.settings.in_border_thickness > 0 }}"
+    },
+
+    { "type": "header", "content": "Low stock" },
+    { "type": "color", "id": "low_text_color", "label": "Text color", "default": "#9a3412" },
+    { "type": "color", "id": "low_icon_color", "label": "Icon color", "default": "#ea580c" },
+    {
+      "type": "select",
+      "id": "low_bg_type",
+      "label": "Background",
+      "default": "none",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "color", "label": "Color" },
+        { "value": "gradient", "label": "Gradient" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "low_bg_color",
+      "label": "Background color",
+      "default": "#fff1e6",
+      "visible_if": "{{ block.settings.low_bg_type == 'color' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "low_bg_gradient",
+      "label": "Background gradient",
+      "default": "linear-gradient(90deg,#fff1e6,#ffffff)",
+      "visible_if": "{{ block.settings.low_bg_type == 'gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "low_border_thickness",
+      "label": "Border thickness",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "low_border_style",
+      "label": "Border style",
+      "default": "solid",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "dashed", "label": "Dashed" }
+      ],
+      "visible_if": "{{ block.settings.low_border_thickness > 0 }}"
+    },
+    {
+      "type": "color",
+      "id": "low_border_color",
+      "label": "Border color",
+      "default": "#ffd7b3",
+      "visible_if": "{{ block.settings.low_border_thickness > 0 }}"
+    },
+    {
+      "type": "range",
+      "id": "low_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8,
+      "visible_if": "{{ block.settings.low_bg_type != 'none' or block.settings.low_border_thickness > 0 }}"
+    },
+
+    { "type": "header", "content": "Out of stock" },
+    { "type": "color", "id": "out_text_color", "label": "Text color", "default": "#991b1b" },
+    { "type": "color", "id": "out_icon_color", "label": "Icon color", "default": "#dc2626" },
+    {
+      "type": "select",
+      "id": "out_bg_type",
+      "label": "Background",
+      "default": "none",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "color", "label": "Color" },
+        { "value": "gradient", "label": "Gradient" }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "out_bg_color",
+      "label": "Background color",
+      "default": "#ffe6e6",
+      "visible_if": "{{ block.settings.out_bg_type == 'color' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "out_bg_gradient",
+      "label": "Background gradient",
+      "default": "linear-gradient(90deg,#ffe6e6,#ffffff)",
+      "visible_if": "{{ block.settings.out_bg_type == 'gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "out_border_thickness",
+      "label": "Border thickness",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "out_border_style",
+      "label": "Border style",
+      "default": "solid",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "dashed", "label": "Dashed" }
+      ],
+      "visible_if": "{{ block.settings.out_border_thickness > 0 }}"
+    },
+    {
+      "type": "color",
+      "id": "out_border_color",
+      "label": "Border color",
+      "default": "#ffc8c8",
+      "visible_if": "{{ block.settings.out_border_thickness > 0 }}"
+    },
+    {
+      "type": "range",
+      "id": "out_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8,
+      "visible_if": "{{ block.settings.out_bg_type != 'none' or block.settings.out_border_thickness > 0 }}"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [{ "name": "Inventory status", "category": "Urgency" }]
+}
+{% endschema %}

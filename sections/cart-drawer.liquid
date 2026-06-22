@@ -1,0 +1,539 @@
+{% liquid
+  assign close_btn_offset = section.settings.close_btn_offset | divided_by: 10.0
+  assign close_btn_size = section.settings.close_btn_size | divided_by: 10.0
+  assign x_icon_scale = section.settings.close_btn_x_size | divided_by: 100.0
+  assign x_icon_thickness = section.settings.close_btn_x_thickness
+  assign heading_size = section.settings.heading_size | divided_by: 10.0
+  assign bubble_size = section.settings.count_bubble_size | divided_by: 10.0
+  assign bubble_radius = section.settings.count_bubble_radius | divided_by: 2.0
+  assign number_size = section.settings.count_number_size | divided_by: 100.0
+%}
+<style>
+  .drawer {
+    visibility: hidden;
+  }
+  {% if section.settings.header_bg_type == 'color' %}
+    .cart-drawer .drawer__header {
+      background: {{ section.settings.header_bg_color }};
+    }
+  {% elsif section.settings.header_bg_type == 'gradient' %}
+    .cart-drawer .drawer__header {
+      background: {{ section.settings.header_bg_gradient }};
+    }
+  {% endif %}
+  {% if section.settings.body_bg_type == 'color' %}
+    .cart-drawer__body, .cart-drawer-item {
+      background: {{ section.settings.body_bg_color }};
+    }
+  {% elsif section.settings.body_bg_type == 'gradient' %}
+    .cart-drawer__body, .cart-drawer-item {
+      background: {{ section.settings.body_bg_gradient }};
+    }
+  {% endif %}
+  {% if section.settings.footer_bg_type == 'color' %}
+    .cart-drawer .drawer__footer {
+      background: {{ section.settings.footer_bg_color }};
+    }
+  {% elsif section.settings.footer_bg_type == 'gradient' %}
+    .cart-drawer .drawer__footer {
+      background: {{ section.settings.footer_bg_gradient }};
+    }
+  {% endif %}
+  .cart-drawer .drawer__close {
+    --btn-size: {{ close_btn_size }}rem;
+    --btn-offset: {{ close_btn_offset }}rem;
+    --x-scale: {{ x_icon_scale }};
+    --x-stroke: {{ x_icon_thickness }}px;
+  }
+  .cart-drawer .drawer__heading {
+    font-size: {{ heading_size }}rem;
+  }
+  {% if section.settings.display_count_bubble %}
+    .cart-drawer .drawer__heading-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      {% if section.settings.count_bubble_position == 'before' %}
+        flex-direction: row-reverse;
+      {% endif %}
+    }
+    .cart-drawer .cart-drawer__count-bubble {
+      width: {{ bubble_size }}rem;
+      height: {{ bubble_size }}rem;
+      background: {{ section.settings.count_bubble_bg_color }};
+      border-radius: {{ bubble_radius }}%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .cart-drawer .cart-drawer__count-bubble__number {
+      font-size: calc({{ bubble_size }}rem * {{ number_size }});
+      color: {{ section.settings.count_number_color }};
+      line-height: 1;
+    }
+  {% endif %}
+  .cart-drawer .drawer__close {
+    background: {{ section.settings.close_btn_bg_color }};
+    color: {{ section.settings.close_btn_x_color }};
+  }
+</style>
+
+<cart-drawer class="drawer{% if cart == empty %} is-empty{% endif %}{% if section.settings.test_mode %} active{% endif %} cart-drawer--desktop-width-{{ section.settings.desktop_width }} cart-drawer--mobile-width-{{ section.settings.mobile_width }}" data-type='modal'>
+  <div id="CartDrawer" class="cart-drawer">
+    <div id="CartDrawer-Overlay" class="cart-drawer__overlay"></div>
+    <div
+      class="drawer__inner"
+      role="dialog"
+      aria-modal="true"
+      aria-label="{{ 'sections.cart.title' | t }}"
+      tabindex="-1"
+    >
+      {%- if cart == empty -%}
+        <div class="drawer__inner-empty">
+          <div class="cart-drawer__warnings center{% if settings.cart_drawer_collection != blank %} cart-drawer__warnings--has-collection{% endif %}">
+            <div class="cart-drawer__empty-content">
+              <h2 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h2>
+              <button
+                class="drawer__close header__icon header__icon--menu header__icon--summary link focus-inset flex-center"
+                type="button"
+                onclick="this.closest('cart-drawer').close()"
+                aria-label="{{ 'accessibility.close' | t }}"
+              >
+                <svg class="x-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                </svg>
+              </button>
+              {% if settings.display_continue_shopping %}
+                <a href="{% if settings.continue_shopping_url == blank %}{{ routes.all_products_collection_url }}{% else %}{{ settings.continue_shopping_url }}{% endif %}" class="button">
+                  {{ 'general.continue_shopping' | t }}
+                </a>
+              {% endif %}
+
+              {%- if shop.customer_accounts_enabled and customer == null -%}
+                <p class="cart__login-title h3">{{ 'sections.cart.login.title' | t }}</p>
+                <p class="cart__login-paragraph">
+                  {{ 'sections.cart.login.paragraph_html' | t: link: routes.account_login_url }}
+                </p>
+              {%- endif -%}
+            </div>
+          </div>
+          {%- if settings.cart_drawer_collection != blank -%}
+            <div class="cart-drawer__collection">
+              {% render 'card-collection', card_collection: settings.cart_drawer_collection, columns: 1 %}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      <div class="drawer__header" style='--alignment:{{ section.settings.heading_alignment }}'>
+        {% liquid
+          assign non_upsell_count = cart.item_count
+          for item in cart.items
+            if item.product.tags contains 'cart-hidden'
+              assign non_upsell_count = non_upsell_count | minus: item.quantity
+            endif
+          endfor
+        %}
+        {% if section.settings.display_count_bubble %}
+          <div class="drawer__heading-wrapper">
+            <h2 class="drawer__heading">
+              {{ section.settings.heading_text | replace: '[count]', non_upsell_count }}
+            </h2>
+            <div class="cart-drawer__count-bubble">
+              <span class="cart-drawer__count-bubble__number font-{{ section.settings.count_number_font }}">{{ non_upsell_count }}</span>
+            </div>
+          </div>
+        {% else %}
+          <h2 class="drawer__heading">
+            {{ section.settings.heading_text | replace: '[count]', non_upsell_count }}
+          </h2>
+        {% endif %}
+        <button
+          class="drawer__close header__icon header__icon--menu header__icon--summary link focus-inset flex-center"
+          type="button"
+          onclick="this.closest('cart-drawer').close()"
+          aria-label="{{ 'accessibility.close' | t }}"
+        >
+          <svg class="x-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      {% content_for 'block', type: 'cart-drawer_body', id: 'Body' %}
+      {% content_for 'block', type: 'cart-drawer_footer', id: 'Footer' %}
+    </div>
+  </div>
+</cart-drawer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    function isIE() {
+      const ua = window.navigator.userAgent;
+      const msie = ua.indexOf('MSIE ');
+      const trident = ua.indexOf('Trident/');
+
+      return msie > 0 || trident > 0;
+    }
+
+    if (!isIE()) return;
+    const cartSubmitInput = document.createElement('input');
+    cartSubmitInput.setAttribute('name', 'checkout');
+    cartSubmitInput.setAttribute('type', 'hidden');
+    document.querySelector('#cart').appendChild(cartSubmitInput);
+    document.querySelector('#checkout').addEventListener('click', function (event) {
+      document.querySelector('#cart').submit();
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "limit": 1,
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "Test mode"
+    },
+    {
+      "type": "paragraph",
+      "content": "This option keeps the drawer opened by default for faster customization."
+    },
+    {
+      "type": "checkbox",
+      "id": "test_mode",
+      "label": "Enable test mode",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading_text",
+      "label": "Text",
+      "default": "Cart • [count] items",
+      "info": "Use [count] to display total amount of items in the cart."
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 16,
+      "max": 36,
+      "step": 1,
+      "label": "Size",
+      "default": 26,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Items count"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_count_bubble",
+      "label": "Display cart items count bubble",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "count_bubble_position",
+      "label": "Position",
+      "options": [
+        {
+          "value": "before",
+          "label": "Before heading"
+        },
+        {
+          "value": "after",
+          "label": "After heading"
+        }
+      ],
+      "default": "after",
+      "visible_if": "{{ section.settings.display_count_bubble }}"
+    },
+    {
+      "type": "range",
+      "id": "count_bubble_size",
+      "min": 16,
+      "max": 50,
+      "step": 2,
+      "label": "Size",
+      "default": 24,
+      "unit": "px",
+      "visible_if": "{{ section.settings.display_count_bubble }}"
+    },
+    {
+      "type": "color",
+      "id": "count_bubble_bg_color",
+      "label": "Background color",
+      "default": "#2E2A39",
+      "visible_if": "{{ section.settings.display_count_bubble }}"
+    },
+    {
+      "type": "range",
+      "id": "count_bubble_radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Corner radius",
+      "default": 100,
+      "unit": "%",
+      "visible_if": "{{ section.settings.display_count_bubble }}"
+    },
+    {
+      "type": "range",
+      "id": "count_number_size",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "label": "Number size",
+      "default": 60,
+      "unit": "%",
+      "info": "Relative to bubble size",
+      "visible_if": "{{ section.settings.display_count_bubble }}"
+    },
+    {
+      "type": "color",
+      "id": "count_number_color",
+      "label": "Number color",
+      "default": "#FFFFFF",
+      "visible_if": "{{ section.settings.display_count_bubble }}"
+    },
+    {
+      "type": "select",
+      "id": "count_number_font",
+      "label": "Number font",
+      "options": [
+        { "value": "body", "label": "Body" },
+        { "value": "body-bold", "label": "Body - bold" },
+        { "value": "headings", "label": "Headings" }
+      ],
+      "default": "body-bold",
+      "visible_if": "{{ section.settings.display_count_bubble }}"
+    },
+    {
+      "type": "header",
+      "content": "Close button"
+    },
+    {
+      "type": "range",
+      "id": "close_btn_offset",
+      "min": 5,
+      "max": 20,
+      "step": 1,
+      "label": "Offset from the side",
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "close_btn_size",
+      "min": 20,
+      "max": 50,
+      "step": 2,
+      "label": "Button size",
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "close_btn_bg_color",
+      "label": "Button background color",
+      "default": "#EBEBEB"
+    },
+    {
+      "type": "color",
+      "id": "close_btn_x_color",
+      "label": "X icon color",
+      "default": "#2E2A39"
+    },
+    {
+      "type": "range",
+      "id": "close_btn_x_size",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "label": "X icon size",
+      "default": 65,
+      "unit": "%",
+      "info": "Relative to the button size"
+    },
+    {
+      "type": "range",
+      "id": "close_btn_x_thickness",
+      "min": 0.3,
+      "max": 3,
+      "step": 0.3,
+      "label": "X icon thickness",
+      "default": 1.5,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Width"
+    },
+    {
+      "type": "select",
+      "id": "desktop_width",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "normal",
+      "label": "Desktop width"
+    },
+    {
+      "type": "select",
+      "id": "mobile_width",
+      "options": [
+        {
+          "value": "partial",
+          "label": "Partial screen width"
+        },
+        {
+          "value": "full",
+          "label": "Full screen width"
+        }
+      ],
+      "default": "partial",
+      "label": "Mobile width"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "select",
+      "id": "header_bg_type",
+      "label": "Header background",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "color",
+          "label": "Color"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "header_bg_color",
+      "label": "Header background color",
+      "default": "#F3F3F3",
+      "visible_if": "{{ section.settings.header_bg_type == 'color' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "header_bg_gradient",
+      "label": "Header background gradient",
+      "default": "linear-gradient(#ffffff, #000000)",
+      "visible_if": "{{ section.settings.header_bg_type == 'gradient' }}"
+    },
+    {
+      "type": "select",
+      "id": "body_bg_type",
+      "label": "Body background",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "color",
+          "label": "Color"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "body_bg_color",
+      "label": "Body background color",
+      "default": "#F3F3F3",
+      "visible_if": "{{ section.settings.body_bg_type == 'color' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "body_bg_gradient",
+      "label": "Body background gradient",
+      "default": "linear-gradient(#ffffff, #000000)",
+      "visible_if": "{{ section.settings.body_bg_type == 'gradient' }}"
+    },
+    {
+      "type": "select",
+      "id": "footer_bg_type",
+      "label": "Footer background",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "color",
+          "label": "Color"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "footer_bg_color",
+      "label": "Footer background color",
+      "default": "#F3F3F3",
+      "visible_if": "{{ section.settings.footer_bg_type == 'color' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "footer_bg_gradient",
+      "label": "Footer background gradient",
+      "default": "linear-gradient(#ffffff, #000000)",
+      "visible_if": "{{ section.settings.footer_bg_type == 'gradient' }}"
+    }
+  ],
+  "blocks": []
+}
+{% endschema %}

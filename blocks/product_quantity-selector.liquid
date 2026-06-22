@@ -1,0 +1,2136 @@
+{% liquid
+  if section.settings.product_images == 'all' or section.settings.product_images == 'one'
+    assign product = section.settings.product
+  endif
+  assign product_form_id = 'product-form-' | append: section.id
+%}
+
+{%- if block.settings.enable_quantity_discounts -%}
+  {% render 'quantity-breaks', block: block, product: product, product_form_id: product_form_id %}
+{%- else -%}
+  <div
+    id="Quantity-Form-{{ section.id }}"
+    class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
+    {{ block.shopify_attributes }}
+    style="
+      margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+      margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+    "
+  >
+    {% comment %} TODO: enable theme-check once `item_count_for_variant` is accepted as valid filter {% endcomment %}
+    {% # theme-check-disable %}
+    {%- assign cart_qty = cart | item_count_for_variant: product.selected_or_first_available_variant.id -%}
+    {% # theme-check-enable %}
+    <label class="quantity__label form__label font-body-bold" for="Quantity-{{ section.id }}">
+      {{ 'products.product.quantity.label' | t }}
+      <span class="quantity__rules-cart no-js-hidden{% if cart_qty == 0 %} hidden{% endif %}">
+        <span class="loading-overlay hidden">
+          <span class="loading-overlay__spinner">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              class="spinner"
+              viewBox="0 0 66 66"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+            </svg>
+          </span>
+        </span>
+        <span
+          >(
+          {{- 'products.product.quantity.in_cart_html' | t: quantity: cart_qty -}}
+          )</span
+        >
+      </span>
+    </label>
+    <quantity-input
+      class="quantity main-quantity{% if block.settings.full_width_classic %} quantity--full{% endif %} no-background color-{{ settings.quantity_color_scheme }} accent-color-{{ settings.quantity_overlay_color }} accent-2-color-{{ settings.quantity_text_color }}"
+      data-section="{{ section.id }}"
+    >
+      <button class="quantity__button no-js-hidden" name="minus" type="button">
+        <span class="visually-hidden">
+          {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
+        </span>
+        {% render 'icon-minus' %}
+      </button>
+      <input
+        class="quantity__input"
+        type="number"
+        name="quantity"
+        id="Quantity-{{ section.id }}"
+        data-cart-quantity="{{ cart_qty }}"
+        data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+        min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+        {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+          data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+          max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+        {% endif %}
+        step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+        value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+        form="{{ product_form_id }}"
+      >
+      <button class="quantity__button no-js-hidden" name="plus" type="button">
+        <span class="visually-hidden">
+          {{- 'products.product.quantity.increase' | t: product: product.title | escape -}}
+        </span>
+        {% render 'icon-plus' %}
+      </button>
+    </quantity-input>
+    <div class="quantity__rules caption no-js-hidden">
+      {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
+        <span class="divider">
+          {{-
+            'products.product.quantity.multiples_of'
+            | t: quantity: product.selected_or_first_available_variant.quantity_rule.increment
+          -}}
+        </span>
+      {%- endif -%}
+      {%- if product.selected_or_first_available_variant.quantity_rule.min > 1 -%}
+        <span class="divider">
+          {{-
+            'products.product.quantity.minimum_of'
+            | t: quantity: product.selected_or_first_available_variant.quantity_rule.min
+          -}}
+        </span>
+      {%- endif -%}
+      {%- if product.selected_or_first_available_variant.quantity_rule.max != null -%}
+        <span class="divider">
+          {{-
+            'products.product.quantity.maximum_of'
+            | t: quantity: product.selected_or_first_available_variant.quantity_rule.max
+          -}}
+        </span>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Quantity selector",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Classic quantity selector"
+    },
+    {
+      "type": "paragraph",
+      "content": "To customize the colors of the classic quantity selector (not quantity breaks), navigate to Theme settings > Quantity selector."
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width_classic",
+      "label": "Full width"
+    },
+    {
+      "type": "paragraph",
+      "content": "To display a quantity selector next to the Add to Cart button, delete this block & add it into the Buy buttons block."
+    },
+    {
+      "type": "header",
+      "content": "Quantity Discounts"
+    },
+    {
+      "type": "paragraph",
+      "content": "IMPORTANT: You MUST set up [automatic discounts](https://help.shopify.com/en/manual/discounts/automatic-discounts) in Shopify admin > Discounts to allow items to be discounted at certain quantity levels."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_quantity_discounts",
+      "label": "Enable Quantity Discounts"
+    },
+    {
+      "type": "paragraph",
+      "content": "[Tutorial on how to set up](https://dashboard.shrinesolutions.com/customer/help-center?category=Blocks&element=Quantity+Breaks)"
+    },
+    {
+      "type": "paragraph",
+      "content": "All settings below are related to quantity discounts (quantity breaks)."
+    },
+    {
+      "type": "header",
+      "content": "General & styling"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Heading",
+      "default": "BUNDLE & SAVE"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Classic"
+        },
+        {
+          "value": "compact",
+          "label": "Compact"
+        },
+        {
+          "value": "vertical",
+          "label": "Vertical"
+        }
+      ],
+      "label": "Style",
+      "default": "normal"
+    },
+    {
+      "type": "select",
+      "id": "preselected",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "option_1",
+          "label": "Option #1"
+        },
+        {
+          "value": "option_2",
+          "label": "Option #2"
+        },
+        {
+          "value": "option_3",
+          "label": "Option #3"
+        },
+        {
+          "value": "option_4",
+          "label": "Option #4"
+        }
+      ],
+      "default": "option_1",
+      "label": "Preselected option"
+    },
+    {
+      "type": "checkbox",
+      "id": "update_pdp_prices",
+      "label": "Update displayed product page prices",
+      "default": false,
+      "info": "This option updates the displayed price in the Price block, Sticky Add to Cart block & add to cart button to the selected offer price. This option might NOT work with certain currency converter apps. Test before publishing."
+    },
+    {
+      "type": "select",
+      "id": "prices_layout",
+      "label": "Prices layout",
+      "options": [
+        { "value": "price-first-horizontal", "label": "Price first - horizontal" },
+        { "value": "price-first-vertical", "label": "Price first - vertical" },
+        { "value": "compare-price-first-horizontal", "label": "Compare price first - horizontal" },
+        { "value": "compare-price-first-vertical", "label": "Compare price first - vertical" }
+      ],
+      "default": "price-first-vertical"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_selected_indicator",
+      "label": "Display selected indicator in normal & compact style",
+      "default": true,
+      "visible_if": "{{ block.settings.style != 'vertical' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 2
+    },
+    {
+      "type": "header",
+      "content": "Colors selection"
+    },
+    {
+      "type": "select",
+      "id": "colors",
+      "label": "Colors",
+      "options": [
+        {
+          "value": "theme",
+          "label": "Theme colors"
+        },
+        {
+          "value": "custom",
+          "label": "Custom colors"
+        }
+      ],
+      "default": "theme"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ block.settings.colors == 'theme' }}"
+    },
+    {
+      "type": "select",
+      "id": "accent_color",
+      "label": "Text accent color",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1",
+      "info": "Put words in italic to make them be in this color.",
+      "visible_if": "{{ block.settings.colors == 'theme' }}"
+    },
+
+    {
+      "type": "header",
+      "content": "Non-selected options colors",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "non_selected_border_style",
+      "label": "Border style",
+      "options": [
+        { "label": "Solid", "value": "solid" },
+        { "label": "Dashed", "value": "dashed" }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.border_width > 0 and block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "non_selected_border_color",
+      "label": "Border color",
+      "default": "#D9D9D9",
+      "visible_if": "{{ block.settings.border_width > 0 and block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "non_selected_background_type",
+      "label": "Background",
+      "options": [
+        { "label": "None", "value": "none" },
+        { "label": "Color", "value": "color" },
+        { "label": "Gradient", "value": "gradient" }
+      ],
+      "default": "color",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "non_selected_background_color",
+      "label": "Background color",
+      "default": "#FBFBFB",
+      "visible_if": "{{ block.settings.non_selected_background_type == 'color' and block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "non_selected_background_gradient",
+      "label": "Background gradient",
+      "default": "linear-gradient(#ffffff, #f5f5f5)",
+      "visible_if": "{{ block.settings.non_selected_background_type == 'gradient' and block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "non_selected_text_color",
+      "label": "Text color",
+      "default": "#565656",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "non_selected_accent_color",
+      "label": "Text accent color",
+      "default": "#A16AC0",
+      "info": "Put words in italic to make them be in this color.",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "non_selected_badge_text_color",
+      "label": "Badge text color",
+      "default": "#FFF",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "non_selected_badge_bg_color",
+      "label": "Badge background color",
+      "default": "#A16AC0",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "non_selected_benefit_text_color",
+      "label": "Benefit text color",
+      "default": "#A16AC0",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "non_selected_benefit_bg_color",
+      "label": "Benefit background color",
+      "default": "#FFF",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "non_selected_benefit_border_color",
+      "label": "Benefit border color",
+      "default": "#A16AC0",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "Selected option colors",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "selected_border_style",
+      "label": "Border style",
+      "options": [
+        { "label": "Solid", "value": "solid" },
+        { "label": "Dashed", "value": "dashed" }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.border_width > 0 and block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_border_color",
+      "label": "Border color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.border_width > 0 and block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "selected_background_type",
+      "label": "Background",
+      "options": [
+        { "label": "None", "value": "none" },
+        { "label": "Color", "value": "color" },
+        { "label": "Gradient", "value": "gradient" }
+      ],
+      "default": "color",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_background_color",
+      "label": "Background color",
+      "default": "#F2EAF6",
+      "visible_if": "{{ block.settings.selected_background_type == 'color' and block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "selected_background_gradient",
+      "label": "Background gradient",
+      "default": "linear-gradient(#FBF4FF, #E6D5F1)",
+      "visible_if": "{{ block.settings.selected_background_type == 'gradient' and block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_text_color",
+      "label": "Text color",
+      "default": "#121212",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_accent_color",
+      "label": "Text accent color",
+      "default": "#6D388B",
+      "info": "Put words in italic to make them be in this color.",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_badge_text_color",
+      "label": "Badge text color",
+      "default": "#FFF",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_badge_bg_color",
+      "label": "Badge background color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_benefit_text_color",
+      "label": "Benefit text color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_benefit_bg_color",
+      "label": "Benefit background color",
+      "default": "#FFF",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_benefit_border_color",
+      "label": "Benefit border color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+
+    {
+      "type": "header",
+      "content": "Non-selected options gifts & upsells colors",
+      "visible_if": "{{ block.settings.hide_upsells_on_non_selected == false and block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "upsells_primary_style_bg_color",
+      "label": "Primary style background color",
+      "default": "#D9D9D9",
+      "visible_if": "{{ block.settings.hide_upsells_on_non_selected == false and block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "upsells_primary_style_text_color",
+      "label": "Primary style text color",
+      "default": "#FFF",
+      "visible_if": "{{ block.settings.hide_upsells_on_non_selected == false and block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "upsells_primary_style_badge_bg",
+      "label": "Primary style badge background color",
+      "default": "#121212",
+      "visible_if": "{{ block.settings.hide_upsells_on_non_selected == false and block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "upsells_primary_style_badge_text_color",
+      "label": "Primary style badge text color",
+      "default": "#FFF",
+      "visible_if": "{{ block.settings.hide_upsells_on_non_selected == false and block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "upsells_secondary_style_bg_color",
+      "label": "Secondary style background color",
+      "default": "#F0F0F0",
+      "visible_if": "{{ block.settings.hide_upsells_on_non_selected == false and block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "upsells_secondary_style_text_color",
+      "label": "Secondary style text color",
+      "default": "#121212",
+      "visible_if": "{{ block.settings.hide_upsells_on_non_selected == false and block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "upsells_secondary_style_badge_bg",
+      "label": "Secondary style badge background color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.hide_upsells_on_non_selected == false and block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "upsells_secondary_style_badge_text_color",
+      "label": "Secondary style badge text color",
+      "default": "#FFF",
+      "visible_if": "{{ block.settings.hide_upsells_on_non_selected == false and block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+
+    {
+      "type": "header",
+      "content": "Selected option gifts & upsells colors",
+      "visible_if": "{{ block.settings.hide_upsells_on_non_selected == false and block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Gifts & upsells colors",
+      "visible_if": "{{ block.settings.hide_upsells_on_non_selected == true and block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_upsells_primary_style_bg_color",
+      "label": "Primary style background color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_upsells_primary_style_text_color",
+      "label": "Primary style text color",
+      "default": "#FFF",
+      "visible_if": "{{ block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_upsells_primary_style_badge_bg",
+      "label": "Primary style badge background color",
+      "default": "#121212",
+      "visible_if": "{{ block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_upsells_primary_style_badge_text_color",
+      "label": "Primary style badge text color",
+      "default": "#FFF",
+      "visible_if": "{{ block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_upsells_secondary_style_bg_color",
+      "label": "Secondary style background color",
+      "default": "#E6DCF0",
+      "visible_if": "{{ block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_upsells_secondary_style_text_color",
+      "label": "Secondary style text color",
+      "default": "#121212",
+      "visible_if": "{{ block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_upsells_secondary_style_badge_bg",
+      "label": "Secondary style badge background color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_upsells_secondary_style_badge_text_color",
+      "label": "Secondary style badge text color",
+      "default": "#FFF",
+      "visible_if": "{{ block.settings.colors == 'custom' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+
+    {
+      "type": "header",
+      "content": "Variant selectors"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_variant_selectors",
+      "label": "Enable variant selectors",
+      "default": true,
+      "info": "If the product has multiple variants, a variant selector will be displayed for each quantity."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "pickers_label",
+      "label": "Variant selectors label",
+      "info": "Displayed above the variant selectors.",
+      "visible_if": "{{ block.settings.enable_variant_selectors }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_variant_selectors_on_quantity_of_1",
+      "label": "Enable variant selectors on single quantity",
+      "default": false,
+      "visible_if": "{{ block.settings.enable_variant_selectors }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "update_prices",
+      "label": "Enable variant price updates",
+      "default": false,
+      "info": "This option is used when variants have different prices, and it will dynamically change the displayed bundle prices based on the selected variants. ATTENTION: This option might NOT work with currency converters.",
+      "visible_if": "{{ block.settings.enable_variant_selectors }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "pickers_number_text",
+      "label": "Variant selectors number text",
+      "info": "Displayed before variant selectors. Use [index] to display the index of the selectors.",
+      "default": "<strong>#[index]</strong>",
+      "visible_if": "{{ block.settings.enable_variant_selectors }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_selected_variant_images",
+      "label": "Show images of selected variants",
+      "default": false,
+      "info": "Shows little image of the selected variant next to each variant selector.",
+      "visible_if": "{{ block.settings.enable_variant_selectors }}"
+    },
+    {
+      "type": "select",
+      "id": "variant_images_position",
+      "label": "Selected variant images position",
+      "options": [
+        { "value": "start", "label": "Before number text" },
+        { "value": "middle", "label": "Between number text & variant selectors" },
+        { "value": "end", "label": "After variant selectors" }
+      ],
+      "default": "middle",
+      "visible_if": "{{ block.settings.enable_variant_selectors and block.settings.show_selected_variant_images }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "skip_unavailable",
+      "label": "Hide & automatically skip sold out variants",
+      "default": false,
+      "visible_if": "{{ block.settings.enable_variant_selectors }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width_pickers",
+      "label": "Make variant selectors full width",
+      "default": false,
+      "visible_if": "{{ block.settings.enable_variant_selectors }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_pickers_overlay",
+      "label": "Disable variant selectors color overlay",
+      "default": true,
+      "visible_if": "{{ block.settings.enable_variant_selectors }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "indicator_top",
+      "label": "Only display the indicator in the top area",
+      "default": true,
+      "info": "If active, pushes the variant selectors to the left, and only displays the indicator next to the content area at the top.",
+      "visible_if": "{{ block.settings.enable_variant_selectors }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "scroll_media_gallery",
+      "label": "Scroll to the selected variant image in product images gallery",
+      "default": true,
+      "visible_if": "{{ block.settings.enable_variant_selectors }}"
+    },
+    {
+      "type": "header",
+      "content": "Images",
+      "info": "Only available in classic & vertical style",
+      "visible_if": "{{ block.settings.style != 'compact' }}"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Images width",
+      "default": 70,
+      "visible_if": "{{ block.settings.style != 'compact' }}"
+    },
+    {
+      "type": "header",
+      "content": "Vertical style settings",
+      "visible_if": "{{ block.settings.style == 'vertical' }}"
+    },
+    {
+      "type": "select",
+      "id": "vertical_items_align",
+      "label": "Offers vertical alignment",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Bottom" },
+        { "value": "stretch", "label": "Make all offers same height" }
+      ],
+      "default": "flex-start",
+      "visible_if": "{{ block.settings.style == 'vertical' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "space_images",
+      "label": "Space images from top in vertical style",
+      "default": true,
+      "info": "Applied if style is set to Vertical and the option below is set to Top.",
+      "visible_if": "{{ block.settings.style == 'vertical' }}"
+    },
+    {
+      "type": "select",
+      "id": "vertical_images_position",
+      "label": "Image position in vertical style",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "top",
+      "visible_if": "{{ block.settings.style == 'vertical' }}"
+    },
+    {
+      "type": "header",
+      "content": "Upsells & Gifts",
+      "info": "ONLY available in Classic style."
+    },
+    {
+      "type": "paragraph",
+      "content": "IMPORTANT: All upsell/gift products MUST BE UNIQUE. Main product from the product page, products from other gifts, bundles or other upsells WON'T WORK."
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_upsells_on_non_selected",
+      "label": "Hide upsells/gifts in non-selected offers",
+      "default": true,
+      "visible_if": "{{ block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "upsells_primary_style_badge_color_scheme",
+      "label": "Primary style badge color scheme",
+      "options": [
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ],
+      "default": "inverse",
+      "visible_if": "{{ block.settings.colors == 'theme' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "upsells_secondary_style_badge_color_scheme",
+      "label": "Secondary style badge color scheme",
+      "options": [
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ block.settings.colors == 'theme' and block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "upsells_image_size",
+      "min": 20,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Image size",
+      "default": 27,
+      "visible_if": "{{ block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "upsells_text_size",
+      "min": 8,
+      "max": 26,
+      "step": 1,
+      "unit": "px",
+      "label": "Text size",
+      "default": 11,
+      "visible_if": "{{ block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "upsells_badge_radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Badges corner radius",
+      "default": 45,
+      "visible_if": "{{ block.settings.upsell_1_product != blank or block.settings.upsell_2_product != blank or block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Upsell/Gift #1"
+    },
+    {
+      "type": "product",
+      "id": "upsell_1_product",
+      "label": "Upsell/Gift #1 – Product"
+    },
+    {
+      "type": "select",
+      "id": "upsell_1_min_offer",
+      "label": "Upsell/Gift #1 – Minimum offer required",
+      "options": [
+        { "value": "1", "label": "Offer #1" },
+        { "value": "2", "label": "Offer #2" },
+        { "value": "3", "label": "Offer #3" },
+        { "value": "4", "label": "Offer #4" }
+      ],
+      "default": "2",
+      "visible_if": "{{ block.settings.upsell_1_product != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "upsell_1_type",
+      "label": "Upsell/Gift #1 – Type",
+      "options": [
+        { "value": "gift", "label": "Gift (auto-added)" },
+        { "value": "checkbox", "label": "Checkbox" },
+        { "value": "checkbox_preselected", "label": "Checkbox – preselected" }
+      ],
+      "default": "checkbox_preselected",
+      "visible_if": "{{ block.settings.upsell_1_product != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "upsell_1_design",
+      "label": "Upsell/Gift #1 – Design",
+      "options": [
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" }
+      ],
+      "default": "primary",
+      "visible_if": "{{ block.settings.upsell_1_product != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "upsell_1_badge_position",
+      "label": "Upsell/Gift #1 – Badge position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left",
+      "visible_if": "{{ block.settings.upsell_1_product != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "upsell_1_image",
+      "label": "Upsell/Gift #1 – Image",
+      "visible_if": "{{ block.settings.upsell_1_product != blank }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "In text & badge text settings, you can use certain keywords (words in square brackets) that are automatically replaced by their corresponding values. Following keywords are available: [title], [price], [compare_price], [amount_saved], [amount_saved_rounded]",
+      "visible_if": "{{ block.settings.upsell_1_product != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "upsell_1_text_left",
+      "label": "Upsell/Gift #1 – Left text",
+      "default": "Add [title]",
+      "visible_if": "{{ block.settings.upsell_1_product != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "upsell_1_text_right",
+      "label": "Upsell/Gift #1 – Right text",
+      "default": "<strong>[price]</strong>",
+      "visible_if": "{{ block.settings.upsell_1_product != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "upsell_1_badge_text",
+      "label": "Upsell/Gift #1 – Badge text",
+      "visible_if": "{{ block.settings.upsell_1_product != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Upsell/Gift #2"
+    },
+    {
+      "type": "product",
+      "id": "upsell_2_product",
+      "label": "Upsell/Gift #2 – Product"
+    },
+    {
+      "type": "select",
+      "id": "upsell_2_min_offer",
+      "label": "Upsell/Gift #2 – Minimum offer required",
+      "options": [
+        { "value": "1", "label": "Offer #1" },
+        { "value": "2", "label": "Offer #2" },
+        { "value": "3", "label": "Offer #3" },
+        { "value": "4", "label": "Offer #4" }
+      ],
+      "default": "2",
+      "visible_if": "{{ block.settings.upsell_2_product != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "upsell_2_type",
+      "label": "Upsell/Gift #2 – Type",
+      "options": [
+        { "value": "gift", "label": "Gift (auto-added)" },
+        { "value": "checkbox", "label": "Checkbox" },
+        { "value": "checkbox_preselected", "label": "Checkbox – preselected" }
+      ],
+      "default": "checkbox_preselected",
+      "visible_if": "{{ block.settings.upsell_2_product != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "upsell_2_design",
+      "label": "Upsell/Gift #2 – Design",
+      "options": [
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" }
+      ],
+      "default": "primary",
+      "visible_if": "{{ block.settings.upsell_2_product != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "upsell_2_badge_position",
+      "label": "Upsell/Gift #2 – Badge position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left",
+      "visible_if": "{{ block.settings.upsell_2_product != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "upsell_2_image",
+      "label": "Upsell/Gift #2 – Image",
+      "visible_if": "{{ block.settings.upsell_2_product != blank }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "In text & badge text settings, you can use certain keywords (words in square brackets) that are automatically replaced by their corresponding values. Following keywords are available: [title], [price], [compare_price], [amount_saved], [amount_saved_rounded]",
+      "visible_if": "{{ block.settings.upsell_2_product != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "upsell_2_text_left",
+      "label": "Upsell/Gift #2 – Left text",
+      "default": "Add [title]",
+      "visible_if": "{{ block.settings.upsell_2_product != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "upsell_2_text_right",
+      "label": "Upsell/Gift #2 – Right text",
+      "default": "<strong>[price]</strong>",
+      "visible_if": "{{ block.settings.upsell_2_product != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "upsell_2_badge_text",
+      "label": "Upsell/Gift #2 – Badge text",
+      "visible_if": "{{ block.settings.upsell_2_product != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Upsell/Gift #3"
+    },
+    {
+      "type": "product",
+      "id": "upsell_3_product",
+      "label": "Upsell/Gift #3 – Product"
+    },
+    {
+      "type": "select",
+      "id": "upsell_3_min_offer",
+      "label": "Upsell/Gift #3 – Minimum offer required",
+      "options": [
+        { "value": "1", "label": "Offer #1" },
+        { "value": "2", "label": "Offer #2" },
+        { "value": "3", "label": "Offer #3" },
+        { "value": "4", "label": "Offer #4" }
+      ],
+      "default": "2",
+      "visible_if": "{{ block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "upsell_3_type",
+      "label": "Upsell/Gift #3 – Type",
+      "options": [
+        { "value": "gift", "label": "Gift (auto-added)" },
+        { "value": "checkbox", "label": "Checkbox" },
+        { "value": "checkbox_preselected", "label": "Checkbox – preselected" }
+      ],
+      "default": "checkbox_preselected",
+      "visible_if": "{{ block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "upsell_3_design",
+      "label": "Upsell/Gift #3 – Design",
+      "options": [
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" }
+      ],
+      "default": "primary",
+      "visible_if": "{{ block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "upsell_3_badge_position",
+      "label": "Upsell/Gift #3 – Badge position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left",
+      "visible_if": "{{ block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "upsell_3_image",
+      "label": "Upsell/Gift #3 – Image",
+      "visible_if": "{{ block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "In text & badge text settings, you can use certain keywords (words in square brackets) that are automatically replaced by their corresponding values. Following keywords are available: [title], [price], [compare_price], [amount_saved], [amount_saved_rounded]",
+      "visible_if": "{{ block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "upsell_3_text_left",
+      "label": "Upsell/Gift #3 – Left text",
+      "default": "Add [title]",
+      "visible_if": "{{ block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "upsell_3_text_right",
+      "label": "Upsell/Gift #3 – Right text",
+      "default": "<strong>[price]</strong>",
+      "visible_if": "{{ block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "upsell_3_badge_text",
+      "label": "Upsell/Gift #3 – Badge text",
+      "visible_if": "{{ block.settings.upsell_3_product != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "How to use text content settings",
+      "info": "In all settings under the \"Quantity option #x Text content\" categories, you can use all keywords (words in square brackets) listed below, and they are going to get automatically replaced into their corresponding values."
+    },
+    {
+      "type": "paragraph",
+      "content": "[quantity] - displays bundle quantity"
+    },
+    {
+      "type": "paragraph",
+      "content": "[price] - displays total bundle price"
+    },
+    {
+      "type": "paragraph",
+      "content": "[compare_price] - displays total bundle compare price"
+    },
+    {
+      "type": "paragraph",
+      "content": "[price_each] - displays average price of 1 bundle item"
+    },
+    {
+      "type": "paragraph",
+      "content": "[compare_price_each] - displays average compare price of 1 bundle item"
+    },
+    {
+      "type": "paragraph",
+      "content": "[amount_saved] - displays the difference between the bundle price & compare price"
+    },
+    {
+      "type": "paragraph",
+      "content": "[amount_saved_rounded] - displays the same difference as [amount_saved], but rounded up. For example. 20 instead of 19.95."
+    },
+    {
+      "type": "header",
+      "content": "Text accent color"
+    },
+    {
+      "type": "paragraph",
+      "content": "To put certain words in texts in a different color, make them italic. Choose this color by changing the \"Text accent color\" setting above."
+    },
+    {
+      "type": "header",
+      "content": "Quantity option #1 Amount & pricing"
+    },
+    {
+      "type": "range",
+      "id": "option_1_quantity",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "qty",
+      "label": "Option #1 Quantity",
+      "default": 1,
+      "info": "Set to 0 to disable this option"
+    },
+    {
+      "type": "text",
+      "id": "option_1_percentage_off_text",
+      "default": "0",
+      "label": "Option #1 Percentage off",
+      "info": "A percentage that will be discounted from the quantity's total price",
+      "visible_if": "{{ block.settings.option_1_quantity > 0 }}"
+    },
+    {
+      "type": "text",
+      "id": "option_1_fixed_amount_off",
+      "label": "Option #1 Fixed amount off",
+      "default": "0",
+      "info": "A fixed amount of money (WITHOUT the currency symbol/code) that will be subtracted from the quantity's total price",
+      "visible_if": "{{ block.settings.option_1_quantity > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "option_1_compare_price",
+      "options": [
+        {
+          "value": "price",
+          "label": "Regular price"
+        },
+        {
+          "value": "compare_price",
+          "label": "Compare price"
+        }
+      ],
+      "default": "compare_price",
+      "label": "Option #1 Compare price based on",
+      "info": "Choose if you want bundle compare price to be calculated based on product price or compare price (selected value multiplied by quantity)",
+      "visible_if": "{{ block.settings.option_1_quantity > 0 }}"
+    },
+    {
+      "type": "header",
+      "content": "Quantity option #1 Text content",
+      "visible_if": "{{ block.settings.option_1_quantity > 0 }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "option_1_image",
+      "label": "Option #1 Image",
+      "info": "Not displayed if Style is set to Compact.",
+      "visible_if": "{{ block.settings.option_1_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_1_badge",
+      "label": "Option #1 Badge text",
+      "visible_if": "{{ block.settings.option_1_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_1_label",
+      "label": "Option #1 Label",
+      "default": "<strong>Buy [quantity]</strong>",
+      "visible_if": "{{ block.settings.option_1_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_1_benefit",
+      "label": "Option #1 Benefit",
+      "info": "Display an additional benefit of the bundle",
+      "visible_if": "{{ block.settings.option_1_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_1_caption",
+      "label": "Option #1 Caption",
+      "default": "You save [amount_saved]",
+      "visible_if": "{{ block.settings.option_1_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_1_price_text",
+      "label": "Option #1 Price text",
+      "default": "<strong><em>[price]</em></strong>",
+      "visible_if": "{{ block.settings.option_1_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_1_compare_price_text",
+      "label": "Option #1 Compare price text",
+      "default": "[compare_price]",
+      "visible_if": "{{ block.settings.option_1_quantity > 0 }}"
+    },
+    {
+      "type": "header",
+      "content": "Quantity option #1 Styling",
+      "visible_if": "{{ block.settings.option_1_quantity > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "option_1_badge_style",
+      "label": "Option #1 Badge style",
+      "options": [
+        {
+          "value": "1",
+          "label": "Style 1"
+        },
+        {
+          "value": "2",
+          "label": "Style 2"
+        },
+        {
+          "value": "3",
+          "label": "Style 3"
+        }
+      ],
+      "default": "1",
+      "visible_if": "{{ block.settings.option_1_quantity > 0 and block.settings.style != 'compact' }}"
+    },
+    {
+      "type": "select",
+      "id": "option_1_badge_color",
+      "label": "Option #1 Badge color scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ block.settings.option_1_quantity > 0 and block.settings.colors == 'theme' }}"
+    },
+    {
+      "type": "select",
+      "id": "option_1_benefit_position",
+      "label": "Option #1 Benefit position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "top",
+      "visible_if": "{{ block.settings.option_1_quantity > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "option_1_benefit_style",
+      "label": "Option #1 Benefit style",
+      "options": [
+        {
+          "value": "outlined",
+          "label": "Outlined"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        }
+      ],
+      "default": "outlined",
+      "visible_if": "{{ block.settings.option_1_quantity > 0 }}"
+    },
+    {
+      "type": "range",
+      "id": "option_1_benefit_radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Option #1 Benefit corner radius",
+      "default": 45,
+      "visible_if": "{{ block.settings.option_1_quantity > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "option_1_benefit_color",
+      "label": "Option #1 Benefit color",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ block.settings.option_1_quantity > 0 and block.settings.colors == 'theme' }}"
+    },
+    {
+      "type": "header",
+      "content": "Quantity option #2 Amount & pricing"
+    },
+    {
+      "type": "range",
+      "id": "option_2_quantity",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "qty",
+      "label": "Option #2 Quantity",
+      "default": 2,
+      "info": "Set to 0 to disable this option"
+    },
+    {
+      "type": "text",
+      "id": "option_2_percentage_off_text",
+      "default": "0",
+      "label": "Option #2 Percentage off",
+      "info": "A percentage that will be discounted from the quantity's total price",
+      "visible_if": "{{ block.settings.option_2_quantity > 0 }}"
+    },
+    {
+      "type": "text",
+      "id": "option_2_fixed_amount_off",
+      "label": "Option #2 Fixed amount off",
+      "default": "0",
+      "info": "A fixed amount of money (WITHOUT the currency symbol/code) that will be subtracted from the quantity's total price",
+      "visible_if": "{{ block.settings.option_2_quantity > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "option_2_compare_price",
+      "options": [
+        {
+          "value": "price",
+          "label": "Regular price"
+        },
+        {
+          "value": "compare_price",
+          "label": "Compare price"
+        }
+      ],
+      "default": "compare_price",
+      "label": "Option #2 Compare price based on",
+      "info": "Choose if you want bundle compare price to be calculated based on product price or compare price (selected value multiplied by quantity)",
+      "visible_if": "{{ block.settings.option_2_quantity > 0 }}"
+    },
+    {
+      "type": "header",
+      "content": "Quantity option #2 Text content",
+      "visible_if": "{{ block.settings.option_2_quantity > 0 }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "option_2_image",
+      "label": "Option #2 Image",
+      "info": "Not displayed if Style is set to Compact.",
+      "visible_if": "{{ block.settings.option_2_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_2_badge",
+      "label": "Option #2 Badge text",
+      "visible_if": "{{ block.settings.option_2_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_2_label",
+      "label": "Option #2 Label",
+      "default": "<strong>Buy [quantity]</strong>",
+      "visible_if": "{{ block.settings.option_2_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_2_benefit",
+      "label": "Option #2 Benefit",
+      "info": "Display an additional benefit of the bundle",
+      "visible_if": "{{ block.settings.option_2_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_2_caption",
+      "label": "Option #2 Caption",
+      "default": "You save [amount_saved]",
+      "visible_if": "{{ block.settings.option_2_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_2_price_text",
+      "label": "Option #2 Price text",
+      "default": "<strong><em>[price]</em></strong>",
+      "visible_if": "{{ block.settings.option_2_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_2_compare_price_text",
+      "label": "Option #2 Compare price text",
+      "default": "[compare_price]",
+      "visible_if": "{{ block.settings.option_2_quantity > 0 }}"
+    },
+    {
+      "type": "header",
+      "content": "Quantity option #2 Styling",
+      "visible_if": "{{ block.settings.option_2_quantity > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "option_2_badge_style",
+      "label": "Option #2 Badge style",
+      "options": [
+        {
+          "value": "1",
+          "label": "Style 1"
+        },
+        {
+          "value": "2",
+          "label": "Style 2"
+        },
+        {
+          "value": "3",
+          "label": "Style 3"
+        }
+      ],
+      "default": "1",
+      "visible_if": "{{ block.settings.option_2_quantity > 0 and block.settings.style != 'compact' }}"
+    },
+    {
+      "type": "select",
+      "id": "option_2_badge_color",
+      "label": "Option #2 Badge color scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ block.settings.option_2_quantity > 0 and block.settings.colors == 'theme' }}"
+    },
+    {
+      "type": "select",
+      "id": "option_2_benefit_position",
+      "label": "Option #2 Benefit position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "top",
+      "visible_if": "{{ block.settings.option_2_quantity > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "option_2_benefit_style",
+      "label": "Option #2 Benefit style",
+      "options": [
+        {
+          "value": "outlined",
+          "label": "Outlined"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        }
+      ],
+      "default": "outlined",
+      "visible_if": "{{ block.settings.option_2_quantity > 0 }}"
+    },
+    {
+      "type": "range",
+      "id": "option_2_benefit_radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Option #2 Benefit corner radius",
+      "default": 45,
+      "visible_if": "{{ block.settings.option_2_quantity > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "option_2_benefit_color",
+      "label": "Option #2 Benefit color",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ block.settings.option_2_quantity > 0 and block.settings.colors == 'theme' }}"
+    },
+    {
+      "type": "header",
+      "content": "Quantity option #3 Amount & pricing"
+    },
+    {
+      "type": "range",
+      "id": "option_3_quantity",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "qty",
+      "label": "Option #3 Quantity",
+      "default": 3,
+      "info": "Set to 0 to disable this option"
+    },
+    {
+      "type": "text",
+      "id": "option_3_percentage_off_text",
+      "default": "0",
+      "label": "Option #3 Percentage off",
+      "info": "A percentage that will be discounted from the quantity's total price",
+      "visible_if": "{{ block.settings.option_3_quantity > 0 }}"
+    },
+    {
+      "type": "text",
+      "id": "option_3_fixed_amount_off",
+      "label": "Option #3 Fixed amount off",
+      "default": "0",
+      "info": "A fixed amount of money (WITHOUT the currency symbol/code) that will be subtracted from the quantity's total price",
+      "visible_if": "{{ block.settings.option_3_quantity > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "option_3_compare_price",
+      "options": [
+        {
+          "value": "price",
+          "label": "Regular price"
+        },
+        {
+          "value": "compare_price",
+          "label": "Compare price"
+        }
+      ],
+      "default": "compare_price",
+      "label": "Option #3 Compare price based on",
+      "info": "Choose if you want bundle compare price to be calculated based on product price or compare price (selected value multiplied by quantity)",
+      "visible_if": "{{ block.settings.option_3_quantity > 0 }}"
+    },
+    {
+      "type": "header",
+      "content": "Quantity option #3 Text content",
+      "visible_if": "{{ block.settings.option_3_quantity > 0 }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "option_3_image",
+      "label": "Option #3 Image",
+      "info": "Not displayed if Style is set to Compact.",
+      "visible_if": "{{ block.settings.option_3_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_3_badge",
+      "label": "Option #3 Badge text",
+      "visible_if": "{{ block.settings.option_3_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_3_label",
+      "label": "Option #3 Label",
+      "default": "<strong>Buy [quantity]</strong>",
+      "visible_if": "{{ block.settings.option_3_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_3_benefit",
+      "label": "Option #3 Benefit",
+      "info": "Display an additional benefit of the bundle",
+      "visible_if": "{{ block.settings.option_3_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_3_caption",
+      "label": "Option #3 Caption",
+      "default": "You save [amount_saved]",
+      "visible_if": "{{ block.settings.option_3_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_3_price_text",
+      "label": "Option #3 Price text",
+      "default": "<strong><em>[price]</em></strong>",
+      "visible_if": "{{ block.settings.option_3_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_3_compare_price_text",
+      "label": "Option #3 Compare price text",
+      "default": "[compare_price]",
+      "visible_if": "{{ block.settings.option_3_quantity > 0 }}"
+    },
+    {
+      "type": "header",
+      "content": "Quantity option #3 Styling",
+      "visible_if": "{{ block.settings.option_3_quantity > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "option_3_badge_style",
+      "label": "Option #3 Badge style",
+      "options": [
+        {
+          "value": "1",
+          "label": "Style 1"
+        },
+        {
+          "value": "2",
+          "label": "Style 2"
+        },
+        {
+          "value": "3",
+          "label": "Style 3"
+        }
+      ],
+      "default": "1",
+      "visible_if": "{{ block.settings.option_3_quantity > 0 and block.settings.style != 'compact' }}"
+    },
+    {
+      "type": "select",
+      "id": "option_3_badge_color",
+      "label": "Option #3 Badge color scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ block.settings.option_3_quantity > 0 and block.settings.colors == 'theme' }}"
+    },
+    {
+      "type": "select",
+      "id": "option_3_benefit_position",
+      "label": "Option #3 Benefit position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "top",
+      "visible_if": "{{ block.settings.option_3_quantity > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "option_3_benefit_style",
+      "label": "Option #3 Benefit style",
+      "options": [
+        {
+          "value": "outlined",
+          "label": "Outlined"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        }
+      ],
+      "default": "outlined",
+      "visible_if": "{{ block.settings.option_3_quantity > 0 }}"
+    },
+    {
+      "type": "range",
+      "id": "option_3_benefit_radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Option #3 Benefit corner radius",
+      "default": 45,
+      "visible_if": "{{ block.settings.option_3_quantity > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "option_3_benefit_color",
+      "label": "Option #3 Benefit color",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ block.settings.option_3_quantity > 0 and block.settings.colors == 'theme' }}"
+    },
+    {
+      "type": "header",
+      "content": "Quantity Option #4 Amount & pricing"
+    },
+    {
+      "type": "range",
+      "id": "option_4_quantity",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "qty",
+      "label": "Option #4 Quantity",
+      "default": 4,
+      "info": "Set to 0 to disable this option"
+    },
+    {
+      "type": "text",
+      "id": "option_4_percentage_off_text",
+      "default": "0",
+      "label": "Option #4 Percentage off",
+      "info": "A percentage that will be discounted from the quantity's total price",
+      "visible_if": "{{ block.settings.option_4_quantity > 0 }}"
+    },
+    {
+      "type": "text",
+      "id": "option_4_fixed_amount_off",
+      "label": "Option #4 Fixed amount off",
+      "default": "0",
+      "info": "A fixed amount of money (WITHOUT the currency symbol/code) that will be subtracted from the quantity's total price",
+      "visible_if": "{{ block.settings.option_4_quantity > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "option_4_compare_price",
+      "options": [
+        {
+          "value": "price",
+          "label": "Regular price"
+        },
+        {
+          "value": "compare_price",
+          "label": "Compare price"
+        }
+      ],
+      "default": "compare_price",
+      "label": "Option #4 Compare price based on",
+      "info": "Choose if you want bundle compare price to be calculated based on product price or compare price (selected value multiplied by quantity)",
+      "visible_if": "{{ block.settings.option_4_quantity > 0 }}"
+    },
+    {
+      "type": "header",
+      "content": "Quantity Option #4 Text content",
+      "visible_if": "{{ block.settings.option_4_quantity > 0 }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "option_4_image",
+      "label": "Option #4 Image",
+      "info": "Not displayed if Style is set to Compact.",
+      "visible_if": "{{ block.settings.option_4_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_4_badge",
+      "label": "Option #4 Badge text",
+      "visible_if": "{{ block.settings.option_4_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_4_label",
+      "label": "Option #4 Label",
+      "default": "<strong>Buy [quantity]</strong>",
+      "visible_if": "{{ block.settings.option_4_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_4_benefit",
+      "label": "Option #4 Benefit",
+      "info": "Display an additional benefit of the bundle",
+      "visible_if": "{{ block.settings.option_4_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_4_caption",
+      "label": "Option #4 Caption",
+      "default": "You save [amount_saved]",
+      "visible_if": "{{ block.settings.option_4_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_4_price_text",
+      "label": "Option #4 Price text",
+      "default": "<strong><em>[price]</em></strong>",
+      "visible_if": "{{ block.settings.option_4_quantity > 0 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "option_4_compare_price_text",
+      "label": "Option #4 Compare price text",
+      "default": "[compare_price]",
+      "visible_if": "{{ block.settings.option_4_quantity > 0 }}"
+    },
+    {
+      "type": "header",
+      "content": "Quantity Option #4 Styling",
+      "visible_if": "{{ block.settings.option_4_quantity > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "option_4_badge_style",
+      "label": "Option #4 Badge style",
+      "options": [
+        {
+          "value": "1",
+          "label": "Style 1"
+        },
+        {
+          "value": "2",
+          "label": "Style 2"
+        },
+        {
+          "value": "3",
+          "label": "Style 3"
+        }
+      ],
+      "default": "1",
+      "visible_if": "{{ block.settings.option_4_quantity > 0 and block.settings.style != 'compact' }}"
+    },
+    {
+      "type": "select",
+      "id": "option_4_badge_color",
+      "label": "Option #4 Badge color scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ block.settings.option_4_quantity > 0 and block.settings.colors == 'theme' }}"
+    },
+    {
+      "type": "select",
+      "id": "option_4_benefit_position",
+      "label": "Option #4 Benefit position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "top",
+      "visible_if": "{{ block.settings.option_4_quantity > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "option_4_benefit_style",
+      "label": "Option #4 Benefit style",
+      "options": [
+        {
+          "value": "outlined",
+          "label": "Outlined"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        }
+      ],
+      "default": "outlined",
+      "visible_if": "{{ block.settings.option_4_quantity > 0 }}"
+    },
+    {
+      "type": "range",
+      "id": "option_4_benefit_radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Option #4 Benefit corner radius",
+      "default": 45,
+      "visible_if": "{{ block.settings.option_4_quantity > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "option_4_benefit_color",
+      "label": "Option #4 Benefit color",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ block.settings.option_4_quantity > 0 and block.settings.colors == 'theme' }}"
+    },
+    {
+      "type": "header",
+      "content": "Block margin"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quantity selector",
+      "category": "Product basics"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,99 @@
+{% liquid
+  assign position_horizontal = block.settings.position_horizontal
+  assign vertical_alignment = block.settings.vertical_alignment_writing_horizontal
+  assign horizontal_alignment = block.settings.horizontal_alignment_writing_horizontal
+%}
+
+{%- capture anchor_css -%}
+  {%- if position_horizontal == 'top' -%}
+    top: 0;
+  {%- else -%}
+    bottom: 0;
+  {%- endif -%}
+{%- endcapture -%}
+
+{% liquid
+  assign is_outside_edge_inner = false
+  if position_horizontal == 'top' and vertical_alignment == 'bottom_outside_border'
+    assign is_outside_edge_inner = true
+  elsif position_horizontal == 'bottom' and vertical_alignment == 'top_outside_border'
+    assign is_outside_edge_inner = true
+  endif
+%}
+
+{%- capture side_css -%}
+  {%- if horizontal_alignment == 'left' -%}
+    {%- if is_outside_edge_inner -%}
+      /* Inside the border: start after the rounded corner */
+      left: var(--border-radius, 0px);
+    {%- else -%}
+      /* Over the border: still honor the corner radius, then subtract border width */
+      left: calc(var(--border-radius, 0px) + (var(--border-width) * -1));
+    {%- endif -%}
+  {%- elsif horizontal_alignment == 'center' -%}
+    left: 50%;
+  {%- else -%}
+    {%- if is_outside_edge_inner -%}
+      right: var(--border-radius, 0px);
+    {%- else -%}
+      right: calc(var(--border-radius, 0px) + (var(--border-width) * -1));
+    {%- endif -%}
+  {%- endif -%}
+{%- endcapture -%}
+
+
+{% liquid
+  assign translate_y = ''
+  if position_horizontal == 'top'
+    case vertical_alignment
+      when 'top'
+        assign translate_y = '-100%'
+      when 'top_outside_border'
+        assign translate_y = 'calc(-100% - var(--border-width))'
+      when 'middle'
+        assign translate_y = '-50%'
+      when 'bottom'
+        assign translate_y = 'calc(var(--border-width) * -1)'
+      when 'bottom_outside_border'
+        assign translate_y = ''
+    endcase
+  else
+    case vertical_alignment
+      when 'top'
+        assign translate_y = 'var(--border-width)'
+      when 'top_outside_border'
+        assign translate_y = ''
+      when 'middle'
+        assign translate_y = '50%'
+      when 'bottom'
+        assign translate_y = '100%'
+      when 'bottom_outside_border'
+        assign translate_y = 'calc(100% + var(--border-width))'
+    endcase
+  endif
+
+  assign translate_x = ''
+  if horizontal_alignment == 'center'
+    assign translate_x = '-50%'
+  endif
+%}
+
+{%- capture transform_css -%}
+  {%- if translate_x != '' and translate_y != '' -%}
+    transform: translate({{ translate_x }}, {{ translate_y }});
+  {%- elsif translate_x != '' -%}
+    transform: translateX({{ translate_x }});
+  {%- elsif translate_y != '' -%}
+    transform: translateY({{ translate_y }});
+  {%- endif -%}
+{%- endcapture -%}
+
+{%- capture border_radius_css -%}
+  {%- if vertical_alignment == 'top' or vertical_alignment == 'top_outside_border' -%}
+    border-bottom-right-radius: 0; border-bottom-left-radius: 0;
+  {%- elsif vertical_alignment == 'bottom' or vertical_alignment == 'bottom_outside_border' -%}
+    border-top-right-radius: 0; border-top-left-radius: 0;
+  {%- endif -%}
+{%- endcapture -%}
+
+{{- anchor_css -}} {{- side_css -}} {{- transform_css -}} {{- border_radius_css -}}

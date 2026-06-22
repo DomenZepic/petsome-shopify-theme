@@ -1,0 +1,820 @@
+{% render 'text-block', block: block %}
+
+{% schema %}
+{
+  "name": "Text",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "default": "<p>Use the flexible grid system to create any layout. Each block can be placed in any of the columns.</p>",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left",
+      "label": "Desktop alignment",
+      "visible_if": "{{ section.settings.desktop_content_alignment != 'left' and section.settings.desktop_content_alignment != 'center' and section.settings.desktop_content_alignment != 'right' }}"
+    },
+    {
+      "type": "select",
+      "id": "mobile_alignment",
+      "options": [
+        {
+          "value": "mobile-left",
+          "label": "Left"
+        },
+        {
+          "value": "mobile-center",
+          "label": "Center"
+        },
+        {
+          "value": "mobile-right",
+          "label": "Right"
+        }
+      ],
+      "default": "mobile-center",
+      "label": "Mobile alignment",
+      "visible_if": "{{ section.settings.mobile_content_alignment != 'left' and section.settings.mobile_content_alignment != 'center' and section.settings.mobile_content_alignment != 'right' }}"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14,
+      "label": "Text size"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_custom_color",
+      "default": false,
+      "label": "Enable custom text color"
+    },
+    {
+      "type": "color",
+      "id": "custom_text_color",
+      "label": "Custom text color",
+      "default": "#FF0000",
+      "visible_if": "{{ block.settings.enable_custom_color }}"
+    },
+    {
+      "type": "header",
+      "content": "Highlight 1",
+      "info": "Put words in BOLD to highlight them with this style. Keep it as 'None' if you want to use default bold style."
+    },
+    {
+      "type": "select",
+      "id": "bold_text_style",
+      "label": "Bold text style",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid-color",
+          "label": "Solid color"
+        },
+        {
+          "value": "gradient-color",
+          "label": "Gradient color"
+        },
+        {
+          "value": "bg-color",
+          "label": "Background color"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "bold_solid_color",
+      "label": "Text color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.bold_text_style != 'none' and block.settings.bold_text_style == 'solid-color' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "bold_gradient_color",
+      "label": "Text gradient",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ block.settings.bold_text_style != 'none' and block.settings.bold_text_style == 'gradient-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "bold_bg_color",
+      "label": "Background color",
+      "default": "#FFD700",
+      "visible_if": "{{ block.settings.bold_text_style != 'none' and block.settings.bold_text_style == 'bg-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "bold_bg_text_color",
+      "label": "Text color",
+      "default": "#000000",
+      "visible_if": "{{ block.settings.bold_text_style != 'none' and block.settings.bold_text_style == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "bold_bg_padding_inline",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.7,
+      "unit": "em",
+      "visible_if": "{{ block.settings.bold_text_style != 'none' and block.settings.bold_text_style == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "bold_bg_padding_block",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.2,
+      "unit": "em",
+      "visible_if": "{{ block.settings.bold_text_style != 'none' and block.settings.bold_text_style == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "bold_bg_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8,
+      "visible_if": "{{ block.settings.bold_text_style != 'none' and block.settings.bold_text_style == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "bold_bg_border_width",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0,
+      "visible_if": "{{ block.settings.bold_text_style != 'none' and block.settings.bold_text_style == 'bg-color' }}"
+    },
+    {
+      "type": "select",
+      "id": "bold_bg_border_style",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.bold_text_style != 'none' and block.settings.bold_text_style == 'bg-color' and block.settings.bold_bg_border_width > 0 }}"
+    },
+    {
+      "type": "color",
+      "id": "bold_bg_border_color",
+      "label": "Border color",
+      "default": "#121212",
+      "visible_if": "{{ block.settings.bold_text_style != 'none' and block.settings.bold_text_style == 'bg-color' and block.settings.bold_bg_border_width > 0 }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "bold_remove_weight",
+      "label": "Remove bold font weight",
+      "info": "Removes the bold styling but keeps the custom color/background.",
+      "default": false,
+      "visible_if": "{{ block.settings.bold_text_style != 'none' }}"
+    },
+    {
+      "type": "header",
+      "content": "Highlight 2",
+      "info": "Put words in ITALIC to highlight them with this style. Keep it as 'None' if you want to use default italic style."
+    },
+    {
+      "type": "select",
+      "id": "italic_text_style",
+      "label": "Italic text style",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid-color",
+          "label": "Solid color"
+        },
+        {
+          "value": "gradient-color",
+          "label": "Gradient color"
+        },
+        {
+          "value": "bg-color",
+          "label": "Background color"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "italic_solid_color",
+      "label": "Text color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.italic_text_style != 'none' and block.settings.italic_text_style == 'solid-color' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "italic_gradient_color",
+      "label": "Text gradient",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ block.settings.italic_text_style != 'none' and block.settings.italic_text_style == 'gradient-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "italic_bg_color",
+      "label": "Background color",
+      "default": "#FFD700",
+      "visible_if": "{{ block.settings.italic_text_style != 'none' and block.settings.italic_text_style == 'bg-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "italic_bg_text_color",
+      "label": "Text color",
+      "default": "#121212",
+      "visible_if": "{{ block.settings.italic_text_style != 'none' and block.settings.italic_text_style == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "italic_bg_padding_inline",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.7,
+      "unit": "em",
+      "visible_if": "{{ block.settings.italic_text_style != 'none' and block.settings.italic_text_style == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "italic_bg_padding_block",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.2,
+      "unit": "em",
+      "visible_if": "{{ block.settings.italic_text_style != 'none' and block.settings.italic_text_style == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "italic_bg_border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8,
+      "visible_if": "{{ block.settings.italic_text_style != 'none' and block.settings.italic_text_style == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "italic_bg_border_width",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0,
+      "visible_if": "{{ block.settings.italic_text_style != 'none' and block.settings.italic_text_style == 'bg-color' }}"
+    },
+    {
+      "type": "select",
+      "id": "italic_bg_border_style",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.italic_text_style != 'none' and block.settings.italic_text_style == 'bg-color' and block.settings.italic_bg_border_width > 0 }}"
+    },
+    {
+      "type": "color",
+      "id": "italic_bg_border_color",
+      "label": "Border color",
+      "default": "#121212",
+      "visible_if": "{{ block.settings.italic_text_style != 'none' and block.settings.italic_text_style == 'bg-color' and block.settings.italic_bg_border_width > 0 }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "italic_remove_style",
+      "label": "Remove italic font style",
+      "info": "Removes the italic styling but keeps the custom color/background.",
+      "default": false,
+      "visible_if": "{{ block.settings.italic_text_style != 'none' }}"
+    },
+    {
+      "type": "header",
+      "content": "Animations"
+    },
+    {
+      "type": "select",
+      "id": "text_animation",
+      "label": "Animation type",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "split",
+          "label": "Split Text"
+        },
+        {
+          "value": "shiny",
+          "label": "Shiny Text"
+        },
+        {
+          "value": "blur",
+          "label": "Blur Text"
+        },
+        {
+          "value": "typing",
+          "label": "Typing Effect"
+        }
+      ],
+      "default": "none",
+      "info": "Choose an animation effect for the text"
+    },
+    {
+      "type": "select",
+      "id": "split_type",
+      "label": "Split type",
+      "options": [
+        {
+          "value": "chars",
+          "label": "Characters"
+        },
+        {
+          "value": "words",
+          "label": "Words"
+        }
+      ],
+      "default": "chars",
+      "visible_if": "{{ block.settings.text_animation == 'split' }}"
+    },
+    {
+      "type": "range",
+      "id": "split_delay",
+      "label": "Stagger delay",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "ms",
+      "default": 30,
+      "info": "Delay between each character/word",
+      "visible_if": "{{ block.settings.text_animation == 'split' }}"
+    },
+    {
+      "type": "range",
+      "id": "split_duration",
+      "label": "Animation duration",
+      "min": 200,
+      "max": 1500,
+      "step": 50,
+      "unit": "ms",
+      "default": 600,
+      "visible_if": "{{ block.settings.text_animation == 'split' }}"
+    },
+    {
+      "type": "range",
+      "id": "split_y_offset",
+      "label": "Y movement",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40,
+      "info": "How far elements move up",
+      "visible_if": "{{ block.settings.text_animation == 'split' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "split_animate_on_scroll",
+      "label": "Animate on scroll into view",
+      "default": true,
+      "info": "Animation starts when text scrolls into view",
+      "visible_if": "{{ block.settings.text_animation == 'split' }}"
+    },
+    {
+      "type": "range",
+      "id": "shiny_speed",
+      "label": "Animation speed",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "unit": "s",
+      "default": 5,
+      "info": "Duration of one shimmer cycle",
+      "visible_if": "{{ block.settings.text_animation == 'shiny' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "shiny_on_scroll",
+      "label": "Trigger on scroll",
+      "default": false,
+      "info": "Start animation when text scrolls into view",
+      "visible_if": "{{ block.settings.text_animation == 'shiny' }}"
+    },
+    {
+      "type": "select",
+      "id": "blur_type",
+      "label": "Blur split type",
+      "options": [
+        {
+          "value": "chars",
+          "label": "Characters"
+        },
+        {
+          "value": "words",
+          "label": "Words"
+        }
+      ],
+      "default": "words",
+      "visible_if": "{{ block.settings.text_animation == 'blur' }}"
+    },
+    {
+      "type": "select",
+      "id": "blur_direction",
+      "label": "Blur direction",
+      "options": [
+        {
+          "value": "top",
+          "label": "From top"
+        },
+        {
+          "value": "bottom",
+          "label": "From bottom"
+        }
+      ],
+      "default": "top",
+      "visible_if": "{{ block.settings.text_animation == 'blur' }}"
+    },
+    {
+      "type": "range",
+      "id": "blur_delay",
+      "label": "Stagger delay",
+      "min": 0,
+      "max": 500,
+      "step": 10,
+      "unit": "ms",
+      "default": 200,
+      "info": "Delay between each character/word",
+      "visible_if": "{{ block.settings.text_animation == 'blur' }}"
+    },
+    {
+      "type": "range",
+      "id": "blur_duration",
+      "label": "Step duration",
+      "min": 100,
+      "max": 1000,
+      "step": 50,
+      "unit": "ms",
+      "default": 350,
+      "info": "Duration of each animation step",
+      "visible_if": "{{ block.settings.text_animation == 'blur' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "blur_animate_on_scroll",
+      "label": "Animate on scroll into view",
+      "default": true,
+      "info": "Animation starts when text scrolls into view",
+      "visible_if": "{{ block.settings.text_animation == 'blur' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "highlight_bold_only",
+      "label": "Only highlight bold words",
+      "info": "When enabled, only words you make BOLD will be highlighted. Otherwise, all text will be highlighted.",
+      "default": false,
+      "visible_if": "{{ block.settings.text_animation == 'highlight-swipe' or block.settings.text_animation == 'highlight-fade-up' or block.settings.text_animation == 'highlight-underline' or block.settings.text_animation == 'highlight-strike' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "remove_bold_weight",
+      "label": "Remove bold font weight",
+      "info": "Removes the bold styling from text while keeping the highlight animation.",
+      "default": false,
+      "visible_if": "{{ block.settings.text_animation == 'highlight-swipe' or block.settings.text_animation == 'highlight-fade-up' or block.settings.text_animation == 'highlight-underline' or block.settings.text_animation == 'highlight-strike' }}"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Highlight color",
+      "default": "#ffd1dc",
+      "visible_if": "{{ block.settings.text_animation == 'highlight-swipe' or block.settings.text_animation == 'highlight-fade-up' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlight_height",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Highlight height",
+      "default": 40,
+      "visible_if": "{{ block.settings.text_animation == 'highlight-swipe' or block.settings.text_animation == 'highlight-fade-up' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlight_position",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "%",
+      "label": "Highlight vertical position",
+      "default": 10,
+      "visible_if": "{{ block.settings.text_animation == 'highlight-swipe' or block.settings.text_animation == 'highlight-fade-up' }}"
+    },
+    {
+      "type": "color",
+      "id": "highlighter_underline_color",
+      "label": "Underline color",
+      "default": "#000000",
+      "visible_if": "{{ block.settings.text_animation == 'highlight-underline' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighter_underline_thickness",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Underline thickness",
+      "default": 2,
+      "visible_if": "{{ block.settings.text_animation == 'highlight-underline' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighter_underline_offset",
+      "min": -10,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Underline offset",
+      "info": "Distance from the text baseline (negative moves up)",
+      "default": 0,
+      "visible_if": "{{ block.settings.text_animation == 'highlight-underline' }}"
+    },
+    {
+      "type": "color",
+      "id": "highlighter_strike_color",
+      "label": "Strike-through color",
+      "default": "#FF0000",
+      "visible_if": "{{ block.settings.text_animation == 'highlight-strike' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighter_strike_thickness",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Strike-through thickness",
+      "default": 2,
+      "visible_if": "{{ block.settings.text_animation == 'highlight-strike' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighter_strike_offset",
+      "min": -20,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Strike-through offset",
+      "info": "Vertical position (0 = center of text)",
+      "default": 0,
+      "visible_if": "{{ block.settings.text_animation == 'highlight-strike' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighter_animation_duration",
+      "min": 300,
+      "max": 2000,
+      "step": 100,
+      "unit": "ms",
+      "label": "Animation duration",
+      "default": 800,
+      "visible_if": "{{ block.settings.text_animation == 'highlight-swipe' or block.settings.text_animation == 'highlight-fade-up' or block.settings.text_animation == 'highlight-underline' or block.settings.text_animation == 'highlight-strike' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighter_animation_delay",
+      "min": 0,
+      "max": 2000,
+      "step": 100,
+      "unit": "ms",
+      "label": "Animation delay",
+      "default": 200,
+      "visible_if": "{{ block.settings.text_animation == 'highlight-swipe' or block.settings.text_animation == 'highlight-fade-up' or block.settings.text_animation == 'highlight-underline' or block.settings.text_animation == 'highlight-strike' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "highlighter_animate_on_scroll",
+      "label": "Animate on scroll",
+      "info": "Animation will start when element scrolls into view",
+      "default": false,
+      "visible_if": "{{ block.settings.text_animation == 'highlight-swipe' or block.settings.text_animation == 'highlight-fade-up' or block.settings.text_animation == 'highlight-underline' or block.settings.text_animation == 'highlight-strike' }}"
+    },
+    {
+      "type": "range",
+      "id": "typing_speed",
+      "label": "Typing speed",
+      "min": 10,
+      "max": 200,
+      "step": 10,
+      "unit": "ms",
+      "default": 50,
+      "info": "Speed of typing each character",
+      "visible_if": "{{ block.settings.text_animation == 'typing' }}"
+    },
+    {
+      "type": "range",
+      "id": "typing_initial_delay",
+      "label": "Initial delay",
+      "min": 0,
+      "max": 5000,
+      "step": 100,
+      "unit": "ms",
+      "default": 0,
+      "info": "Delay before typing starts",
+      "visible_if": "{{ block.settings.text_animation == 'typing' }}"
+    },
+    {
+      "type": "range",
+      "id": "typing_pause_duration",
+      "label": "Pause at end",
+      "min": 0,
+      "max": 5000,
+      "step": 100,
+      "unit": "ms",
+      "default": 2000,
+      "info": "Pause before deleting (if loop enabled)",
+      "visible_if": "{{ block.settings.text_animation == 'typing' }}"
+    },
+    {
+      "type": "range",
+      "id": "typing_deleting_speed",
+      "label": "Deleting speed",
+      "min": 10,
+      "max": 200,
+      "step": 10,
+      "unit": "ms",
+      "default": 30,
+      "info": "Speed of deleting each character",
+      "visible_if": "{{ block.settings.text_animation == 'typing' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "typing_loop",
+      "label": "Loop animation",
+      "default": true,
+      "info": "Continuously type and delete text",
+      "visible_if": "{{ block.settings.text_animation == 'typing' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "typing_show_cursor",
+      "label": "Show cursor",
+      "default": true,
+      "info": "Display blinking cursor",
+      "visible_if": "{{ block.settings.text_animation == 'typing' }}"
+    },
+    {
+      "type": "text",
+      "id": "typing_cursor_character",
+      "label": "Cursor character",
+      "default": "|",
+      "info": "Character to use for cursor",
+      "visible_if": "{{ block.settings.text_animation == 'typing' and block.settings.typing_show_cursor }}"
+    },
+    {
+      "type": "range",
+      "id": "typing_cursor_blink_duration",
+      "label": "Cursor blink speed",
+      "min": 100,
+      "max": 1000,
+      "step": 50,
+      "unit": "ms",
+      "default": 500,
+      "info": "Duration of cursor blink",
+      "visible_if": "{{ block.settings.text_animation == 'typing' and block.settings.typing_show_cursor }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "typing_hide_cursor_while_typing",
+      "label": "Hide cursor while typing",
+      "default": false,
+      "info": "Only show cursor when paused",
+      "visible_if": "{{ block.settings.text_animation == 'typing' and block.settings.typing_show_cursor }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "typing_start_on_visible",
+      "label": "Start on scroll into view",
+      "default": false,
+      "info": "Animation starts when text scrolls into view",
+      "visible_if": "{{ block.settings.text_animation == 'typing' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "typing_reverse_mode",
+      "label": "Reverse typing",
+      "default": false,
+      "info": "Type text in reverse order",
+      "visible_if": "{{ block.settings.text_animation == 'typing' }}"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15,
+      "visible_if": "{{ section.settings.image_1_visibility != 'mobile-hidden' and section.settings.image_1_visibility != 'always-display' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,354 @@
+{% comment %}
+  Universal facet block (refactored to share wrappers)
+  Params:
+  - filter
+  - index
+  - section_id
+  - mode: 'desktop-horizontal' | 'desktop-vertical' | 'mobile'
+  - uses_comma_decimals (only passed from mobile/drawer)
+  Notes:
+  - Only place where inputs are output (via facet-value-row / facets-price-range)
+  - Wrappers (mobile/desktop) are shared; inner content branches by filter.type
+{% endcomment %}
+
+{%- liquid
+  assign filter_type = filter.type
+
+  assign is_mobile = false
+  if mode == 'mobile'
+    assign is_mobile = true
+  endif
+
+  assign is_accordion = false
+  if is_mobile and section.settings.facets_drawer_open_mode == 'accordion'
+    assign is_accordion = true
+  endif
+
+  assign is_desktop_vertical = false
+  if mode == 'desktop-vertical'
+    assign is_desktop_vertical = true
+    assign is_accordion = true
+  endif
+
+  assign is_desktop_horizontal = false
+  if mode == 'desktop-horizontal'
+    assign is_desktop_horizontal = true
+  endif
+
+  assign open_mobile = false
+  if is_mobile and is_accordion
+    if section.settings.facets_drawer_open_rows == 'all'
+      assign open_mobile = true
+    elsif section.settings.facets_drawer_open_rows == 'first' and index == 1
+      assign open_mobile = true
+    endif
+  endif
+-%}
+
+{%- if is_mobile -%}
+  {%- comment -%} ------------------ MOBILE WRAPPER (shared) ------------------ {%- endcomment -%}
+  <div class="mobile-facets__item-wrapper js-filter" data-index="mobile-{{ index }}">
+    <details
+      id="Details-Mobile-{{ index }}-{{ section_id }}"
+      class="mobile-facets__details"
+      {% if open_mobile %}open{% endif %}
+    >
+      <summary class="mobile-facets__summary focus-inset">
+        <div>
+          <span>{{ filter.label | escape }}</span>
+          {% if section.settings.facets_drawer_open_mode == 'slide' %}
+            <span class="mobile-facets__arrow no-js-hidden">{% render 'icon-arrow' %}</span>
+          {% else %}
+            {% render 'icon-caret' %}
+          {% endif %}
+          <noscript>{% render 'icon-caret' %}</noscript>
+        </div>
+      </summary>
+      <div class="hidden"></div>
+    </details>
+
+    {% if is_accordion %}
+      <div class="drawer__submenu-content-wrapper">
+    {% endif %}
+
+      <div id="FacetMobile-{{ index }}-{{ section_id }}" class="mobile-facets__submenu gradient">
+        {% if section.settings.facets_drawer_open_mode == 'slide' %}
+          <button
+            class="mobile-facets__close-button link link--text focus-inset"
+            data-details="Details-Mobile-{{ index }}-{{ section_id }}"
+            aria-expanded="true"
+            type="button"
+          >
+            {% render 'icon-arrow' %} {{ filter.label | escape }}
+          </button>
+        {% endif %}
+
+        {%- case filter_type -%}
+
+          {%- when 'boolean', 'list' -%}
+            {% liquid
+              assign type = 'checkbox'
+
+              if filter.presentation == 'swatch'
+                assign type = 'swatch'
+              endif
+
+              # 2) Manually forced swatch filters via section setting
+              if type != 'swatch' and section.settings.facets_swatches_options != blank
+                assign wanted = section.settings.facets_swatches_options | downcase | split: ','
+                assign filter_name = filter.label | downcase | strip
+                for name in wanted
+                  assign name_clean = name | downcase | strip
+                  if name_clean != '' and name_clean == filter_name
+                    assign type = 'swatch'
+                    break
+                  endif
+                endfor
+              endif
+
+              # 3) Pills via section setting
+              if type == 'checkbox' and section.settings.facets_pills_options != blank
+                assign wanted_pills = section.settings.facets_pills_options | downcase | split: ','
+                assign filter_name = filter.label | downcase | strip
+                for name in wanted_pills
+                  assign name_clean = name | downcase | strip
+                  if name_clean != '' and name_clean == filter_name
+                    assign type = 'pill'
+                    break
+                  endif
+                endfor
+              endif
+            %}
+            <ul class="mobile-facets__list list-unstyled facets-list--{{ type }}" role="list">
+              {%- for value in filter.values -%}
+                {% liquid
+                  assign input_id = 'Filter-' | append: filter.param_name | escape | append: '-mobile-' | append: forloop.index
+                %}
+                {% render 'facet-value-row',
+                  li_class: 'mobile-facets__item list-menu__item',
+                  mobile: true,
+                  input_id: input_id,
+                  value: value,
+                  type: type
+                %}
+              {%- endfor -%}
+            </ul>
+
+          {%- when 'price_range' -%}
+            {% render 'facets-price-range',
+              filter: filter,
+              id_prefix: 'Mobile-Filter-',
+              show_second_currency: true,
+              inputmode: 'decimal'
+            %}
+
+        {%- endcase -%}
+
+        {% if section.settings.facets_drawer_open_mode == 'slide' %}
+          <div class="no-js-hidden mobile-facets__footer gradient">
+            <facet-remove class="mobile-facets__clear-wrapper">
+              <a href="{{ filter.url_to_remove }}" class="mobile-facets__clear underlined-link center flex-center">
+                {{- 'products.facets.clear' | t -}}
+              </a>
+            </facet-remove>
+            <button
+              type="button"
+              class="no-js-hidden button button--primary"
+              onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()"
+            >
+              {{ 'products.facets.apply' | t }}
+            </button>
+            <noscript><button class="button button--primary">{{ 'products.facets.apply' | t }}</button></noscript>
+          </div>
+        {% endif %}
+      </div>
+
+    {% if is_accordion %}
+      </div>
+    {% endif %}
+
+    <div class="mobile-facets__item-divider">&nbsp</div>
+  </div>
+
+{%- else -%}
+  {%- comment -%} ------------------ DESKTOP WRAPPER (shared) ------------------ {%- endcomment -%}
+  {% liquid
+    assign open = false
+    if is_desktop_vertical
+      if section.settings.facets_vertical_open_rows == 'all'
+        assign open = true
+      elsif section.settings.facets_vertical_open_rows == 'first' and index == 1
+        assign open = true
+      endif
+    endif
+  %}
+  <div class="js-filter" data-index="{{ index }}">
+    <details
+      id="Details-{{ index }}-{{ section_id }}"
+      class="{% if is_desktop_horizontal %}disclosure-has-popup facets__disclosure{% else %}facets__disclosure-vertical{% endif %}"
+      {% if open %}open{% endif %}
+    >
+      <summary class="facets__summary caption-large focus-offset">
+        <div>
+          <span>
+            {{- filter.label | escape -}}
+            {% if is_desktop_vertical and filter_type != 'price_range' %}
+              <span class="facets__selected no-js-hidden{% if filter.active_values.size == 0 %} hidden{% endif %}">
+                ({{ filter.active_values.size }})
+              </span>
+            {% endif %}
+          </span>
+          {% render 'icon-caret' %}
+        </div>
+      </summary>
+    {% if is_accordion %}
+        <div class="hidden"></div>
+      </details>
+      <div class="drawer__submenu-content-wrapper">
+    {% endif %}
+      <div
+        id="Facet-{{ index }}-{{ section_id }}"
+        class="{% if is_desktop_horizontal %}facets__display{% else %}facets__display-vertical{% endif %} parent-display"
+      >
+        {%- case filter_type -%}
+
+          {%- when 'boolean', 'list' -%}
+            {% if is_desktop_horizontal %}
+              <div class="facets__header">
+                <span class="facets__selected no-js-hidden">
+                  {{ 'products.facets.filters_selected' | t: count: filter.active_values.size }}
+                </span>
+                <facet-remove>
+                  <a href="{{ filter.url_to_remove }}" class="facets__reset link underlined-link">
+                    {{ 'products.facets.reset' | t }}
+                  </a>
+                </facet-remove>
+              </div>
+            {% endif %}
+
+            <fieldset class="facets-wrap parent-wrap{% if is_desktop_vertical %} facets-wrap-vertical{% endif %}">
+              <legend class="visually-hidden">{{ filter.label | escape }}</legend>
+
+              {% liquid
+                assign type = 'checkbox'
+                
+                if filter.presentation == 'swatch'
+                  assign type = 'swatch'
+                endif
+
+                # 2) Manually forced swatch filters via section setting
+                if type != 'swatch' and section.settings.facets_swatches_options != blank
+                  assign wanted = section.settings.facets_swatches_options | downcase | split: ','
+                  assign filter_name = filter.label | downcase | strip
+                  for name in wanted
+                    assign name_clean = name | downcase | strip
+                    if name_clean != '' and name_clean == filter_name
+                      assign type = 'swatch'
+                      break
+                    endif
+                  endfor
+                endif
+
+                # 3) Pills via section setting
+                if type == 'checkbox' and section.settings.facets_pills_options != blank
+                  assign wanted_pills = section.settings.facets_pills_options | downcase | split: ','
+                  assign filter_name = filter.label | downcase | strip
+                  for name in wanted_pills
+                    assign name_clean = name | downcase | strip
+                    if name_clean != '' and name_clean == filter_name
+                      assign type = 'pill'
+                      break
+                    endif
+                  endfor
+                endif
+              %}
+              <ul class="{% unless is_desktop_vertical %}facets__list{% endunless %} list-unstyled no-js-hidden facets-list--{{ type }}" role="list">
+                {%- for value in filter.values -%}
+                  {% liquid
+                    assign li_classes = 'list-menu__item facets__item'
+                    if is_desktop_vertical and forloop.index > 10
+                      assign li_classes = li_classes | append: ' show-more-item hidden'
+                    endif
+                    assign input_id = 'Filter-' | append: filter.param_name | escape | append: '-' | append: forloop.index
+                  %}
+                  {% render 'facet-value-row',
+                    li_class: li_classes,
+                    input_id: input_id,
+                    value: value,
+                    type: type
+                  %}
+                {%- endfor -%}
+              </ul>
+
+              <ul class="{% unless is_desktop_vertical %}facets__list{% endunless %} no-js-list list-unstyled no-js" role="list">
+                {%- for value in filter.values -%}
+                  {% liquid
+                    assign input_id = 'Filter-' | append: filter.param_name | escape | append: '-' | append: forloop.index | append: '-no-js'
+                  %}
+                  {% render 'facet-value-row',
+                    li_class: 'list-menu__item facets__item',
+                    input_id: input_id,
+                    value: value
+                  %}
+                {%- endfor -%}
+              </ul>
+            </fieldset>
+
+            {%- if is_desktop_vertical and filter.values.size > 10 -%}
+              <show-more-button>
+                <button
+                  class="button-show-more link underlined-link no-js-hidden"
+                  id="Show-More-{{ index }}-{{ section_id }}"
+                  type="button"
+                >
+                  <span class="label-show-more label-text">
+                    <span aria-hidden="true">+ </span>{{ 'products.facets.show_more' | t }}
+                  </span>
+                  <span class="label-show-less label-text hidden">
+                    <span aria-hidden="true">- </span>{{ 'products.facets.show_less' | t }}
+                  </span>
+                </button>
+              </show-more-button>
+            {%- endif -%}
+
+          {%- when 'price_range' -%}
+            {% if is_desktop_horizontal %}
+              <div class="{% if is_desktop_horizontal %}facets__header{% else %}facets__header-vertical{% endif %}">
+                <span class="facets__selected">
+                  {%- if filter.min_value.value -%}
+                    {{ filter.min_value.value | money }}
+                  {%- else -%}
+                    {{ 0 | money }}
+                  {%- endif -%}
+                  -&nbsp
+                  {%- if filter.max_value.value -%}
+                    {{ filter.max_value.value | money }}
+                  {%- else -%}
+                    {{ filter.range_max | money }}
+                  {%- endif -%}
+                </span>
+                {%- unless is_desktop_vertical -%}
+                  <facet-remove>
+                    <a href="{{ filter.url_to_remove }}" class="facets__reset link underlined-link">
+                      {{ 'products.facets.reset' | t }}
+                    </a>
+                  </facet-remove>
+                {%- endunless -%}
+              </div>
+            {% endif %}
+
+            {% render 'facets-price-range',
+              filter: filter,
+              id_prefix: 'Filter-',
+              show_second_currency: true
+            %}
+
+        {%- endcase -%}
+      </div>
+    {% if is_accordion %}
+      </div>
+    {% else %}
+      </details>
+    {%- endif -%}
+  </div>
+{%- endif -%}

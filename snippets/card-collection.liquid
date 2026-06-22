@@ -1,0 +1,209 @@
+{% comment %}
+  Renders a collection card
+
+  Accepts:
+  - card_collection: {Object} Collection Liquid object
+  - media_aspect_ratio: {String} Size of the product image card. Values are "square" and "portrait". Default is "square" (optional)
+  - columns: {Number}
+  - extend_height: {Boolean} Card height extends to available container space. Default: false (optional)
+  - wrapper_class: {String} Wrapper class for card (optional)
+
+  Usage:
+  {% render 'card-collection' %}
+{% endcomment %}
+
+{%- liquid
+  assign featured_image = card_collection.featured_image
+  if custom_image and custom_image != blank
+    assign featured_image = custom_image
+  endif
+  assign ratio = 1
+  if featured_image and media_aspect_ratio == 'portrait'
+    assign ratio = 0.8
+  elsif featured_image and media_aspect_ratio == 'adapt'
+    assign ratio = featured_image.aspect_ratio
+  endif
+  if ratio == 0 or ratio == null
+    assign ratio = 1
+  endif
+  assign card_color_scheme = settings.card_color_scheme
+  assign card_style = settings.card_style
+  assign show_arrow = true
+  assign title_position = 'under'
+  if wrapper_class == null or wrapper_class == 'none'
+    assign card_color_scheme = settings.collection_card_color_scheme
+    assign card_style = settings.collection_card_style
+    if custom_section_styling
+      assign card_color_scheme = section.settings.cards_color_scheme
+      assign card_style = section.settings.card_style
+      assign show_arrow = section.settings.cards_show_arrow
+      assign title_position = section.settings.card_title_position
+      assign title_bg_color = section.settings.cards_title_overlay_color
+      assign title_bg_opacity = section.settings.cards_title_overlay_opacity | divided_by: 100.0
+      if title_position != 'under'
+        assign card_style = 'standard'
+      endif
+    endif
+  endif
+
+  if featured_image and media_aspect_ratio == 'circle' and card_style == 'standard' and title_position == 'under'
+    assign is_circle_media = true
+  endif
+   
+  assign is_custom_description = false
+  assign description = card_collection.description
+  if custom_description and custom_description != blank
+    assign description = custom_description
+    assign is_custom_description = true
+  endif
+-%}
+
+<div class="card-wrapper animate-arrow {% if wrapper_class and wrapper_class != 'none' %}{{ wrapper_class }}{% else %}collection-card-wrapper{% endif %}">
+  <div
+    class="
+      card
+      card--{{ card_style }}
+      {% if featured_image %} card--media{% else %} card--text{% endif %}
+      {% if card_style == 'card' %} color-{{ card_color_scheme }} gradient{% endif %}
+      {% if extend_height %} card--extend-height{% endif %}
+      {% if featured_image == nil and card_style == 'card' %} ratio{% endif %}
+      {% if section.settings.card_title_limited_lines and section.settings.card_title_limited_lines != 'unlimited' %} card--limited-title{% endif %}
+      {% if custom_section_styling %}
+        card--title-position-{{ title_position }}{% if title_position != 'under' %} card--title-position-over{% endif %}
+      {% endif %}
+    "
+    style="
+      --ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;
+      {% if custom_section_styling %}
+        --collection-card-text-alignment: {{ section.settings.card_text_alignment }};
+        {% if section.settings.card_title_limited_lines != 'unlimited' %}--title-lines:{{ section.settings.card_title_limited_lines }};{% endif %}
+        --title-bg-color: {{ title_bg_color.red }}, {{ title_bg_color.green }}, {{ title_bg_color.blue }};
+        --title-bg-opacity: {{ title_bg_opacity }};
+      {% endif %}"
+  >
+    <div
+      class="card__inner {% if card_style == 'standard' %}color-{{ card_color_scheme }} gradient{% endif %}{% if featured_image or card_style == 'standard' %} ratio{% endif %}"
+      style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;{% if is_circle_media %}--border-radius: 50%;{% endif %}"
+    >
+      {%- if featured_image -%}
+        <div class="card__media{% if is_circle_media %} card__media--circle{% endif %}">
+          <div class="media media--transparent media--hover-effect">
+            <img
+              srcset="
+                {%- if featured_image.width >= 165 -%}{{ featured_image | image_url: width: 165 }} 165w,{%- endif -%}
+                {%- if featured_image.width >= 330 -%}{{ featured_image | image_url: width: 330 }} 330w,{%- endif -%}
+                {%- if featured_image.width >= 535 -%}{{ featured_image | image_url: width: 535 }} 535w,{%- endif -%}
+                {%- if featured_image.width >= 750 -%}{{ featured_image | image_url: width: 750 }} 750w,{%- endif -%}
+                {%- if featured_image.width >= 1000 -%}{{ featured_image | image_url: width: 1000 }} 1000w,{%- endif -%}
+                {%- if featured_image.width >= 1500 -%}{{ featured_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                {%- if featured_image.width >= 3000 -%}{{ featured_image | image_url: width: 3000 }} 3000w,{%- endif -%}
+                {{ featured_image | image_url }} {{ featured_image.width }}w
+              "
+              src="{{ featured_image | image_url: width: 1500 }}"
+              sizes="
+                (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: columns }}px,
+                (min-width: 750px) {% if columns > 1 %}calc((100vw - 10rem) / 2){% else %}calc(100vw - 10rem){% endif %},
+                calc(100vw - 3rem)
+              "
+              alt=""
+              height="{{ featured_image.height }}"
+              width="{{ featured_image.width }}"
+              loading="lazy"
+              class="motion-reduce"
+            >
+          </div>
+        </div>
+      {%- endif -%}
+      <div class="card__content">
+        <div class="card__information">
+          <h3 class="card__heading">
+            <a
+              {% if card_collection == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ card_collection.url }}"
+              {% endif %}
+              class="full-unstyled-link"
+            >
+              {% if custom_title and custom_title != blank %}
+                {{ custom_title }}
+              {%- elsif card_collection.title != blank -%}
+                {{- card_collection.title | escape -}}
+              {%- else -%}
+                {{ 'onboarding.collection_title' | t }}
+              {%- endif -%}
+              {%- if description == blank and show_arrow -%}
+                <span class="icon-wrap">{% render 'icon-arrow' %}</span>
+              {%- endif %}
+            </a>
+          </h3>
+          {%- if description != blank -%}
+            <p class="card__caption">
+              {% if is_custom_description %}
+                {{ description }}
+              {% else %}
+                {{- card_collection.description | strip_html | truncatewords: 12 -}}
+              {% endif %}
+              {% if show_arrow %}
+                <span class="icon-wrap">&nbsp;{% render 'icon-arrow' %}</span>
+              {% endif %}
+            </p>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+    {% if card_style == 'card' or featured_image %}
+      <div class="card__content card__content--main">
+        <div class="card__information">
+          <h3 class="card__heading">
+            <a
+              {% if card_collection == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ card_collection.url }}"
+              {% endif %}
+              class="full-unstyled-link"
+            >
+              {% if custom_title and custom_title != blank %}
+                {{ custom_title }}
+              {%- elsif card_collection.title != blank -%}
+                {{- card_collection.title | escape -}}
+              {%- else -%}
+                {{ 'onboarding.collection_title' | t }}
+              {%- endif -%}
+              {%- if featured_image or description == blank -%}
+                {% if show_arrow %}
+                  <span class="icon-wrap">{% render 'icon-arrow' %}</span>
+                {%- endif %}
+              {%- endif %}
+            </a>
+          </h3>
+          {%- if featured_image == null and description != blank -%}
+            <p class="card__caption">
+              {% if is_custom_description %}
+                {{ description }}
+              {% else %}
+                {{- card_collection.description | strip_html | truncatewords: 12 -}}
+              {% endif %}
+              {% if show_arrow %}
+                <span class="icon-wrap">&nbsp;{% render 'icon-arrow' %}</span>
+              {% endif %}
+            </p>
+          {%- endif -%}
+          {% if section.settings.cards_cta_label != blank %}
+            <a
+              {% if card_collection == blank %}
+                role="link" aria-disabled="true"
+              {% else %}
+                href="{{ card_collection.url }}"
+              {% endif %}
+              class="collection-card__cta button button--{{ section.settings.cards_cta_style }}{% if section.settings.cards_cta_full_width %} button--full-width{% endif %}"
+            >
+              {{ section.settings.cards_cta_label }}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>

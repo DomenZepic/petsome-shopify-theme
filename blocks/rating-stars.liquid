@@ -1,0 +1,284 @@
+{% render 'rating-stars-block', block: block, margins: true, block_attributes: true %}
+
+{% schema %}
+{
+  "name": "Rating stars",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "range",
+      "id": "rating",
+      "label": "Rating",
+      "min": 1,
+      "max": 5,
+      "step": 0.1,
+      "default": 4.8
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "default": "#ffcc00",
+      "label": "Stars color"
+    },
+    {
+      "type": "select",
+      "id": "bg_stars_style",
+      "options": [
+        {
+          "value": "outlined",
+          "label": "Outlined"
+        },
+        {
+          "value": "full",
+          "label": "Full"
+        }
+      ],
+      "label": "Background stars style",
+      "default": "full"
+    },
+    {
+      "type": "color",
+      "id": "bg_star_color",
+      "default": "#ececec",
+      "label": "Background stars color"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "label",
+      "label": "Text",
+      "default": "(xxxx Reviews)"
+    },
+    {
+      "type": "range",
+      "id": "size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16,
+      "label": "Text size"
+    },
+    {
+      "type": "text",
+      "id": "scroll_id",
+      "label": "ID of the section to scroll to"
+    },
+    {
+      "type": "header",
+      "content": "Styling"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Width",
+      "options": [
+        { "value": "fit_content", "label": "Fit content" },
+        { "value": "full", "label": "Full" }
+      ],
+      "default": "fit_content",
+      "info": "Determines what the background, border and shadow are applied to."
+    },
+    {
+      "type": "select",
+      "id": "bg_type",
+      "label": "Background",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "solid", "label": "Solid color" },
+        { "value": "gradient", "label": "Gradient color" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#F4E1FF",
+      "visible_if": "{{ block.settings.bg_type == 'solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_gradient",
+      "label": "Background gradient",
+      "default": "linear-gradient(135deg, rgba(232, 220, 255, 1) 0%, rgba(255, 220, 232, 1) 100%)",
+      "visible_if": "{{ block.settings.bg_type == 'gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "bg_opacity",
+      "label": "Background opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.bg_type != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_thickness",
+      "label": "Border thickness",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#000000",
+      "visible_if": "{{ block.settings.border_thickness > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "border_style",
+      "label": "Border style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "dashed", "label": "Dashed" }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.border_thickness > 0 }}"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 30,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_thickness > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_shadow",
+      "label": "Enable drop shadow",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "shadow_color",
+      "label": "Shadow color",
+      "default": "#000000",
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "label": "Shadow opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 15,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_horizontal_offset",
+      "label": "Shadow horizontal offset (px)",
+      "min": -50,
+      "max": 50,
+      "step": 2,
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical_offset",
+      "label": "Shadow vertical offset (px)",
+      "min": -50,
+      "max": 50,
+      "step": 2,
+      "default": 10,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "label": "Shadow blur (px)",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_spread",
+      "label": "Shadow spread (px)",
+      "min": -50,
+      "max": 50,
+      "step": 2,
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15,
+      "visible_if": "{{ section.settings.image_1_visibility != 'mobile-hidden' and section.settings.image_1_visibility != 'always-display' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rating stars",
+      "category": "Reviews & ratings"
+    }
+  ]
+}
+{% endschema %}

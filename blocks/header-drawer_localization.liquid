@@ -1,0 +1,324 @@
+{% liquid
+  assign has_country_selector = false
+  if block.settings.enable_country_selector and localization.available_countries.size > 1
+    assign has_country_selector = true
+  endif
+  
+  assign has_language_selector = false
+  if block.settings.enable_language_selector and localization.available_languages.size > 1
+    assign has_language_selector = true
+  endif
+%}
+
+{% if has_country_selector or has_language_selector %}
+  <style>
+    #HeaderDrawer_Localization-{{ block.id }} {
+      margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+      margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+      {% if has_country_selector == false or has_language_selector == false %}
+        grid-template-columns: repeat(1, 1fr);
+      {% endif %}
+    }
+  </style>
+  <div id="HeaderDrawer_Localization-{{ block.id }}" class="header-drawer-v2__localization">
+    {%- if has_country_selector -%}
+      {% assign selected_country = localization.country %}
+      <localization-form class="localization-form-v2 localization-form-v2--images-{{ block.settings.country_images_ratio }}">
+        {%- form 'localization', id: 'HeaderDrawerCountryForm', class: 'localization-form' -%}
+          <div class="no-js-hidden">
+            <style>
+              {% if block.settings.country_selector_selected_text_desktop == blank %}
+                #DrawerCountrySelectorButton-{{ block.id }} {
+                  gap: 5px;
+                }
+              {% endif %}
+            </style>
+            <div class="disclosure localization-v2">
+              <button
+                type="button"
+                class="localization-v2__button"
+                id="DrawerCountrySelectorButton-{{ block.id }}"
+                aria-expanded="false"
+                aria-controls="HeaderCountryList"
+                aria-describedby="HeaderCountryLabel"
+              >
+                {% liquid
+                  assign desktop_image = block.settings.country_selector_selected_flags_desktop
+                  assign desktop_text = block.settings.country_selector_selected_text_desktop
+                %}
+                {% if desktop_image %}
+                  <img
+                    src="https://flagcdn.com/w80/{{ selected_country.iso_code | downcase }}.png"
+                    width="20"
+                    height="15"
+                    alt="{{ selected_country.name }}"
+                    class="localization-form-v2__image"
+                  >
+                {% endif %}
+                <span>
+                  {{ desktop_text
+                    | replace: '[country_name]', selected_country.name
+                    | replace: '[country_code]', selected_country.iso_code
+                    | replace: '[currency_code]', selected_country.currency.iso_code
+                    | replace: '[currency_symbol]', selected_country.currency.symbol
+                  }}
+                </span>
+                {% render 'icon-caret' %}
+              </button>
+              <div class="disclosure__list-wrapper" hidden>
+                <ul id="HeaderCountryList" role="list" class="disclosure__list list-unstyled">
+                  {%- for country in localization.available_countries -%}
+                    <li class="disclosure__item" tabindex="-1">
+                      <a
+                        class="disclosure__link caption-large{% if country.iso_code == selected_country.iso_code %} disclosure__link--active{% endif %}"
+                        href="#"
+                        {% if country.iso_code == selected_country.iso_code %}
+                          aria-current="true"
+                        {% endif %}
+                        data-value="{{ country.iso_code }}"
+                      >
+                        {% if block.settings.country_selector_options_flags %}
+                          <img
+                            src="https://flagcdn.com/w80/{{ country.iso_code | downcase }}.png"
+                            width="20"
+                            height="15"
+                            alt="{{ country.name }}"
+                            class="localization-form-v2__image"
+                          >
+                        {% endif %}
+                        {{ block.settings.country_selector_options_text
+                          | replace: '[country_name]', country.name
+                          | replace: '[country_code]', country.iso_code
+                          | replace: '[currency_code]', country.currency.iso_code
+                          | replace: '[currency_symbol]', country.currency.symbol
+                        }}
+                      </a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            </div>
+            <input type="hidden" name="country_code" value="{{ selected_country.iso_code }}">
+          </div>
+        {%- endform -%}
+      </localization-form>
+    {% endif %}
+    {%- if has_language_selector-%}
+      <localization-form class="localization-form-v2">
+        {%- form 'localization', id: 'HeaderDrawerLanguageForm', class: 'localization-form' -%}
+          <div class="no-js-hidden">
+            <div class="disclosure localization-v2">
+              <button
+                type="button"
+                class="localization-v2__button"
+                aria-expanded="false"
+                aria-controls="HeaderDrawerLanguageList"
+                aria-describedby="HeaderDrawerLanguageLabel"
+              >
+                {% liquid
+                  assign name = localization.language.name | capitalize
+                  assign local_name = localization.language.endonym_name | capitalize
+                  assign code = localization.language.iso_code | capitalize
+                %}
+                <span>
+                  {{ block.settings.language_selector_selected_text_desktop
+                    | replace: '[name]', name
+                    | replace: '[local_name]', local_name
+                    | replace: '[code]', code
+                  }}
+                </span>
+                {% render 'icon-caret' %}
+              </button>
+              <div class="disclosure__list-wrapper disclosure__list-wrapper--language" hidden>
+                <ul id="HeaderDrawerLanguageList" role="list" class="disclosure__list list-unstyled">
+                  {%- for language in localization.available_languages -%}
+                    <li class="disclosure__item" tabindex="-1">
+                      <a
+                        class="disclosure__link caption-large{% if language.iso_code == localization.language.iso_code %} disclosure__link--active{% endif %}"
+                        href="#"
+                        hreflang="{{ language.iso_code }}"
+                        lang="{{ language.iso_code }}"
+                        {% if language.iso_code == localization.language.iso_code %}
+                          aria-current="true"
+                        {% endif %}
+                        data-value="{{ language.iso_code }}"
+                      >
+                        {% liquid
+                          assign name = language.name | capitalize
+                          assign local_name = language.endonym_name | capitalize
+                          assign code = language.iso_code | capitalize
+                        %}
+                        {{ block.settings.language_selector_options_text
+                          | replace: '[name]', name
+                          | replace: '[local_name]', local_name
+                          | replace: '[code]', code
+                        }}
+                      </a>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              </div>
+            </div>
+            <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}">
+          </div>
+        {%- endform -%}
+      </localization-form>
+    {% endif %}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Country/currency selector"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "label": "Display country/currency selector",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "HOW TO USE: In each text setting, you can use the following keywords (words in square brackets) to display their corresponding values:"
+    },
+    {
+      "type": "paragraph",
+      "content": "[country_name] - displays the country name"
+    },
+    {
+      "type": "paragraph",
+      "content": "[country_code] - displays the ISO country code"
+    },
+    {
+      "type": "paragraph",
+      "content": "[currency_symbol] - displays the currency symbol"
+    },
+    {
+      "type": "paragraph",
+      "content": "[currency_code] - displays the currency ISO code"
+    },
+    {
+      "type": "select",
+      "id": "country_images_ratio",
+      "options": [
+        {
+          "value": "original",
+          "label": "Original (rectangle)"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+      ],
+      "default": "circle",
+      "label": "Country flags aspect ratio"
+    },
+    {
+      "type": "checkbox",
+      "id": "country_selector_selected_flags_desktop",
+      "label": "Selected button - display country flag",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "country_selector_selected_text_desktop",
+      "label": "Selected button - text",
+      "default": "[country_name] | [currency_code] [currency_symbol]"
+    },
+    {
+      "type": "checkbox",
+      "id": "country_selector_options_flags",
+      "label": "Dropdown options - display country flags",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "country_selector_options_text",
+      "label": "Dropdown options - text",
+      "default": "[country_name] | [currency_code] [currency_symbol]"
+    },
+    {
+      "type": "header",
+      "content": "Language selector"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "label": "Display language selector",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "HOW TO USE: In each text setting, you can use the following keywords (words in square brackets) to display their corresponding values:"
+    },
+    {
+      "type": "paragraph",
+      "content": "[name] - displays the language name"
+    },
+    {
+      "type": "paragraph",
+      "content": "[local_name] - displays the local name of the language"
+    },
+    {
+      "type": "paragraph",
+      "content": "[code] - displays the language ISO code"
+    },
+    {
+      "type": "text",
+      "id": "language_selector_selected_text_desktop",
+      "label": "Selected button - text",
+      "default": "[local_name]"
+    },
+    {
+      "type": "text",
+      "id": "language_selector_selected_text_mobile",
+      "label": "Selected button - text",
+      "default": "[code]"
+    },
+    {
+      "type": "text",
+      "id": "language_selector_options_text",
+      "label": "Dropdown options - text",
+      "default": "[name] ([local_name])"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 21
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 21
+    }
+  ],
+  "presets": [
+    {
+      "name": "Country & language selectors"
+    }
+  ]
+}
+{% endschema %}

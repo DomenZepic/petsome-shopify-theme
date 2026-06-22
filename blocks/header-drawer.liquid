@@ -1,0 +1,59 @@
+{% liquid
+  assign text_menu_icon = false
+  if section.settings.menu_icon == 'text'
+    assign text_menu_icon = true
+  endif
+
+  assign test_mode = false
+  if block.settings.test_mode
+    assign test_mode = true
+  endif
+%}
+
+<header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}"{% if text_menu_icon %} class="header-drawer--text-icon"{% endif %} data-desktop-type="{{ section.settings.menu_type_desktop }}" data-drawer="{{ settings.animations_type }}">
+  <details id="Details-menu-drawer-container" class="menu-drawer-container{% if test_mode %} menu-opening{% endif %}"{% if test_mode %} open{% endif %}>
+    <summary class="header__icon{% if text_menu_icon %} header__icon--text{% endif %} header__icon--menu header__icon--summary link focus-inset" aria-label="{{ 'sections.header.menu' | t }}">
+      <span>
+        {% render 'icon-hamburger' %}
+        {% render 'icon-close' %}
+      </span>
+    </summary>
+    <div id="menu-drawer" class="gradient menu-drawer motion-reduce{% if block.settings.sticky_header_footer %} is-body-scroll{% endif %}" tabindex="-1"{% if block.settings.test_mode %} {% endif %}>
+      <div class="menu-drawer__container">
+        {% content_for 'block', type: 'header-drawer_header', id: 'Header' %}
+        {% content_for 'block', type: 'header-drawer_body', id: 'Body' %}
+        {% content_for 'block', type: 'header-drawer_footer', id: 'Footer' %}
+      </div>
+    </div>
+  </details>
+</header-drawer>
+
+{% schema %}
+{
+  "name": "Drawer (mobile) menu",
+  "tag": null,
+  "blocks": [
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "test_mode",
+      "label": "Test mode",
+      "default": false,
+      "info": "Keeps the drawer open for faster customization. IMPORTANT: disable this option after finishing making the changes."
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_header_footer",
+      "label": "Sticky header & footer",
+      "default": true,
+      "info": "Keeps the header & footer displayed if the menu is scrollable."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Drawer (mobile) menu"
+    }
+  ]
+}
+{% endschema %}

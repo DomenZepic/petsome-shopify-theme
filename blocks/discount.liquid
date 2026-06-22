@@ -1,0 +1,129 @@
+<li class="splide__slide">
+  <div class="splide__slide__container">
+    <div
+      class="announcement-bar__item announcement-bar__item-{{ block.settings.text_alignment }}{% if section.settings.show_separator %} announcement-bar__separator{% endif %}"
+      style="
+        --mobile-text-size: {{ block.settings.mobile_text_size | divided_by: 10.0 }}rem;
+        --desktop-text-size: {{ block.settings.desktop_text_size | divided_by: 10.0 }}rem;
+        --mobile-icon-size: {{ block.settings.mobile_icon_size | divided_by: 10.0 }}rem;
+        --desktop-icon-size: {{ block.settings.desktop_icon_size | divided_by: 10.0 }}rem;
+      "
+      {{ block.shopify_attributes }}
+    >
+      <button
+        class="announcement-bar__discount announcement-bar__message"
+        onclick="copyCode(event)"
+        data-code="{{ block.settings.code }}"
+        style="--border-radius:{{ block.settings.border_radius | divided_by: 10.0 }}rem;--mobile-icon-size:1.2em;--desktop-icon-size:1.2em;"
+      >
+        <p class="announcement-bar__discount__left">{{ block.settings.code_text }}</p>
+        <p class="announcement-bar__discount__right">
+          {{ block.settings.button_label }}
+          {% if block.settings.display_btn_icon %}
+            {% render 'material-icon', icon: 'content_copy' %}
+          {% endif %}
+        </p>
+        <p class="announcement-bar__discount__success">
+          {% render 'material-icon', icon: 'check_circle' %}
+          {{ block.settings.success_msg }}
+        </p>
+      </button>
+    </div>
+  </div>
+</li>
+
+{% schema %}
+{
+  "name": "Discount code",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "code",
+      "default": "EXAMPLE10",
+      "label": "Discount code"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "code_text",
+      "default": "<strong>EXAMPLE10</strong>",
+      "label": "Discount code text",
+      "info": "Text to be displayed inside the container"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "button_label",
+      "default": "Copy code",
+      "label": "Copy button label"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_btn_icon",
+      "default": true,
+      "label": "Display button icon"
+    },
+    {
+      "type": "text",
+      "id": "success_msg",
+      "default": "Code copied!",
+      "label": "Success message"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 40
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "label": "Alignment"
+    },
+    {
+      "type": "range",
+      "id": "mobile_text_size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12,
+      "label": "Mobile text size"
+    },
+    {
+      "type": "range",
+      "id": "desktop_text_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 14,
+      "label": "Desktop text size"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Discount code",
+      "category": "Promotions"
+    }
+  ]
+}
+{% endschema %}

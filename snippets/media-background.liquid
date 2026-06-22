@@ -1,0 +1,89 @@
+{% liquid
+  assign vertical_align = block.settings.media_background_vertical_align
+  assign horizontal_align = block.settings.media_background_horizontal_align
+%}
+<style>
+  {% if block.settings.media_background == 'image' %}
+    #MediaBg-{{ section.id }}-{{ block.id }} {
+      background-image: url('{{ block.settings.image_background | image_url }}');
+      background-repeat: no-repeat;
+      background-position: {{ vertical_align }} {{ horizontal_align }};
+      {% if block.settings.media_background_fit != 'custom' %}
+        background-size: {{ block.settings.media_background_fit }};
+      {% else %}
+        background-size: {{ block.settings.background_desktop_width }}px;
+      {% endif %}
+      opacity: {{ block.settings.media_bg_opacity }}%;
+    }
+    {% if block.settings.media_background_fit == 'custom' %}
+      @media screen and (max-width: 749px) {
+        #MediaBg-{{ section.id }}-{{ block.id }} {
+          background-size: {{ block.settings.background_mobile_width }}px;
+        }
+      }
+    {% endif %}
+  {% else %}
+    #MediaBg-{{ section.id }}-{{ block.id }} video {
+      {% if block.settings.media_background_fit != 'custom' %}
+        object-position: {{ vertical_align }} {{ horizontal_align }};
+        object-fit: {{ block.settings.media_background_fit }};
+      {% else %}
+        position: absolute;
+        object-fit: initial;
+        object-position: initial;
+        width: {{ block.settings.background_desktop_width }}px;
+        height: auto;
+        --tx: 0%;
+        --ty: 0%;
+        transform: translate(var(--tx), var(--ty));
+        {% case horizontal_align %}
+          {% when 'left' %}
+            left: 0; right: auto;
+          {% when 'center' %}
+            left: 50%; right: auto; --tx: -50%;
+          {% when 'right' %}
+            right: 0; left: auto;
+        {% endcase %}
+        {% case vertical_align %}
+          {% when 'top' %}
+            top: 0; bottom: auto;
+          {% when 'center' %}
+            top: 50%; bottom: auto; --ty: -50%;
+          {% when 'bottom' %}
+            bottom: 0; top: auto;
+        {% endcase %}
+      {% endif %}
+      opacity: {{ block.settings.media_bg_opacity }}%;
+    }
+    {% if block.settings.media_background_fit == 'custom' %}
+      @media screen and (max-width: 749px) {
+        #MediaBg-{{ section.id }}-{{ block.id }} video {
+          width: {{ block.settings.background_mobile_width }}px;
+        }
+      }
+    {% endif %}
+  {% endif %}
+</style>
+{% if block.settings.media_background == 'image' %}
+  <div id="MediaBg-{{ section.id }}-{{ block.id }}" class="media-background">&nbsp</div>
+{% else %}
+  <div id="MediaBg-{{ section.id }}-{{ block.id }}" class="media-background media media--transparent">
+    {% assign video = block.settings.video_background %}
+    {% if video != blank %}
+      <internal-video
+        class="internal-video internal-video--playing internal-video--muted"
+        data-autoplay="true"
+      >
+        <video
+          width="100%" height="auto" preload="metadata"
+          poster="{{ video.preview_image | image_url }}"
+          loop muted playsinline disablepictureinpicture
+        >
+          {% for source in video.sources %}
+            <source data-src="{{ source.url }}" type="{{ source.mime_type }}">
+          {% endfor %}
+        </video>
+      </internal-video>
+    {% endif %}
+  </div>
+{% endif %}

@@ -1,0 +1,1673 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .color-scheme-{{ section.id }}.color-custom {
+    --color-background: {{ section.settings.custom_colors_background.red }}, {{ section.settings.custom_colors_background.green }}, {{ section.settings.custom_colors_background.blue }};
+    --gradient-background: {% if section.settings.custom_gradient_background != blank %}{{ section.settings.custom_gradient_background }}{% else %}{{ section.settings.custom_colors_background }}{% endif %};
+    {% if section.settings.custom_image_background != blank %}
+      {% # theme-check-disable %}
+      --gradient-background: url('{{ section.settings.custom_image_background | img_url: 'master' }}') center center / cover no-repeat;
+      {% # theme-check-enable %}
+    {% endif %}
+    --color-foreground: {{ section.settings.custom_colors_text.red }}, {{ section.settings.custom_colors_text.green }}, {{ section.settings.custom_colors_text.blue }};
+  }
+  {% if section.settings.custom_mobile_image_background != blank %}
+    @media screen and (max-width: 740px) {
+      .color-scheme-{{ section.id }}.color-custom {
+        {% # theme-check-disable %}
+        --gradient-background: url('{{ section.settings.custom_mobile_image_background | img_url: 'master' }}') center center / cover no-repeat;
+        {% # theme-check-enable %}
+      }
+    }
+  {% endif %}
+  {% if section.settings.pattern_bg != 'none' %}
+    {% render 'pattern-background' %}
+  {% endif %}
+
+  .facebook-testimonials-{{ section.id }} .fb-post {
+    --color-background: {{ section.settings.post_bg_color.red }}, {{ section.settings.post_bg_color.green }}, {{ section.settings.post_bg_color.blue }};
+    --color-foreground: {{ section.settings.post_text_color.red }}, {{ section.settings.post_text_color.green }}, {{ section.settings.post_text_color.blue }};
+    --comment-bg-color: {{ section.settings.comments_bg_color }};
+    --separator-color: {{ section.settings.separators_color }};
+    --border-color: {{ section.settings.post_border_color }};
+    --border-thickness: {{ section.settings.border_width }}px;
+    --border-opacity: 1;
+  }
+{%- endstyle -%}
+
+<div class="color-scheme-{{ section.id }} color-{{ section.settings.color_scheme }} gradient{% if section.settings.title == blank %} no-heading{% endif %} content-for-grouping animate-section animate--hidden {{ section.settings.visibility }}">
+  {% if section.settings.display_id %}
+    <copy-button class="section-id-btn button" data-content="#shopify-section-{{ section.id }}" data-success="false">
+      <span class="copy-text">Click to copy section ID</span>
+      <span class="copy-success">ID copied successfully!</span>
+    </copy-button>
+  {% endif %}
+  {%- liquid
+    assign has_mobile_slider = false
+    assign has_desktop_slider = false
+    if section.settings.slider_mobile
+      assign has_mobile_slider = true
+    endif
+    if section.settings.slider_desktop
+      assign has_desktop_slider = true
+    endif
+  -%}
+  <div
+    class="facebook-testimonials facebook-testimonials-{{ section.id }} page-width{% if section.settings.desktop_full_page %} desktop-full-page{% endif %}{% if has_mobile_slider %} mobile-full-page{% endif %} section-{{ section.id }}-padding isolate"
+    style="--columns-desktop: {{ section.settings.columns_desktop }};--columns-mobile:1;--gap-desktop:{{ section.settings.desktop_spacing | divided_by: 10.0 }}rem;--gap-mobile:1.5rem;"
+  >
+    <div class="animate-item animate-item--child index-0">
+      {% assign content_index = 0 %}
+      {%- unless section.settings.title == blank -%}
+        {% assign content_index = 1 %}
+        <div class="title-wrapper-with-link title-wrapper--self-padded-mobile title-wrapper--no-top-margin{% if section.settings.text != blank %} multicolumn-title-with-text{% endif %}">
+          {% render 'section-title', className: 'title' %}
+        </div>
+      {%- endunless -%}
+      {% if section.settings.text != blank %}
+        {% assign content_index = 1 %}
+        <div class="multicolumn-text">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+    </div>
+    {% if has_mobile_slider or has_desktop_slider %}
+      <splide-component
+        data-type="{{ section.settings.type }}"
+        data-autoplay="{{ section.settings.autoplay }}"
+        data-autoplay-speed="{{ section.settings.autoplay_speed }}"
+        data-arrows-color="{{ section.settings.arrows_color_scheme }}"
+        data-dots-color="{{ section.settings.dots_color_scheme }}"
+        data-slides-desktop="{{ section.settings.columns_desktop }}"
+        data-per-move-desktop="{{ section.settings.per_move_desktop }}"
+        data-gap-desktop="{{ section.settings.desktop_spacing }}"
+        data-side-padding-desktop="{{ section.settings.desktop_side_padding }}"
+        data-padding-calc-desktop="{{ section.settings.desktop_padding_calc }}"
+        data-slides-mobile="1"
+        data-gap-mobile="15"
+        {% if section.settings.enable_mobile_preview %}
+          data-side-padding-mobile="24"
+        {% else %}
+          data-side-padding-mobile="15"
+        {% endif %}
+        {% if has_desktop_slider == false %}
+          data-destroy-desktop="true"
+        {% elsif has_mobile_slider == false %}
+          data-destroy-mobile="true"
+        {% endif %}
+        data-pause-videos="true"
+      >
+    {% endif %}
+    <div
+      class="splide splide--desktop-dots-{{ section.settings.desktop_dots_position }} splide--mobile-dots-{{ section.settings.mobile_dots_position }} splide--desktop-arrows-{{ section.settings.desktop_arrows_position }} splide--desktop-arrows-outside splide--mobile-arrows-{{ section.settings.mobile_arrows_position }}{% if section.settings.transparent_arrows %} splide--transparent-arrows{% endif %}{% if section.settings.vertical-alignment == 'center' %} splide--vertically-centered{% endif %}{% if has_desktop_slider == false %} splide--destroy-desktop{% endif %}{% if has_mobile_slider == false %} splide--destroy-mobile{% endif %}"
+      style="--columns-desktop: {{ section.settings.columns_desktop }};--columns-mobile:1;--gap-desktop:{{ section.settings.desktop_spacing | divided_by: 10.0 }}rem;--gap-mobile:1.5rem;"
+      {% if section.settings.desktop_adaptive_height and section.settings.slides_desktop == 1 and has_desktop_slider %}
+        data-desktop-adaptive-height="true"
+      {% endif %}
+      {% if section.settings.mobile_adaptive_height and has_mobile_slider %}
+        data-mobile-adaptive-height="true"
+      {% endif %}
+    >
+      <div class="splide__track">
+        <ul class="splide__list">
+          {%- for block in section.blocks -%}
+            <li class="splide__slide">
+              <div
+                class="splide__slide__container"
+                style="--index:{{ forloop.index0 | plus: content_index }};"
+                {{ block.shopify_attributes }}
+              >
+                <div class="fb-post custom-border-hex">
+                  <div class="fb-post__top flex">
+                    <div class="fb-post__profile-picture media media--transparent circle flex-shrink-0">
+                      {% if block.settings.post_author_avatar != blank %}
+                        {{
+                          block.settings.post_author_avatar
+                          | image_url: width: 200
+                          | image_tag: loading: 'lazy', width: 100
+                        }}
+                      {% else %}
+                        <svg
+                          width="50"
+                          height="50"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 41.67 41.67"
+                          fill="none"
+                        >
+                          <path class="cls-1" d="M21,41.84A20.83,20.83,0,1,0,.16,21,20.82,20.82,0,0,0,21,41.84Z" transform="translate(-0.16 -0.18)" fill="#C9CCD1"/>
+                          <path class="cls-2" d="M21,10.45a7.8,7.8,0,0,0-.1,15.6h.37A7.8,7.8,0,0,0,21,10.45Z" transform="translate(-0.16 -0.18)" fill="#FDFDFE"/>
+                          <path class="cls-2" d="M35.12,36.32a20.83,20.83,0,0,1-28.25,0,8.94,8.94,0,0,1,3.83-5c5.69-3.79,14.94-3.79,20.58,0A8.87,8.87,0,0,1,35.12,36.32Z" transform="translate(-0.16 -0.18)" fill="#FDFDFE"/>
+                        </svg>
+                      {% endif %}
+                    </div>
+                    <div class="fb-post__top__info flex-grow">
+                      <p class="fb-post__author text--bold flex flex-align-center">
+                        {{ block.settings.post_author }}
+                        {% if block.settings.post_author_verified %}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            class="verified-icon"
+                            viewBox="0 0 122.88 116.87"
+                          >
+                            <polygon fill='#0866FF' fill-rule="evenodd" points="61.37 8.24 80.43 0 90.88 17.79 111.15 22.32 109.15 42.85 122.88 58.43 109.2 73.87 111.15 94.55 91 99 80.43 116.87 61.51 108.62 42.45 116.87 32 99.08 11.73 94.55 13.73 74.01 0 58.43 13.68 42.99 11.73 22.32 31.88 17.87 42.45 0 61.37 8.24 61.37 8.24"/>
+                            <path fill='#fff' d="M37.92,65c-6.07-6.53,3.25-16.26,10-10.1,2.38,2.17,5.84,5.34,8.24,7.49L74.66,39.66C81.1,33,91.27,42.78,84.91,49.48L61.67,77.2a7.13,7.13,0,0,1-9.9.44C47.83,73.89,42.05,68.5,37.92,65Z"/>
+                          </svg>
+                        {% endif %}
+                      </p>
+                      {% if block.settings.post_time != blank %}
+                        <p class="fb-post__time">
+                          {{ block.settings.post_time }}
+                        </p>
+                      {% endif %}
+                    </div>
+                    <div class="fb-post__top__optionsflex-shrink-0">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        height="16"
+                        width="14"
+                        viewBox="0 0 448 512"
+                        fill="currentColor"
+                      >
+                        <path d="M8 256a56 56 0 1 1 112 0A56 56 0 1 1 8 256zm160 0a56 56 0 1 1 112 0 56 56 0 1 1 -112 0zm216-56a56 56 0 1 1 0 112 56 56 0 1 1 0-112z"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="fb-post__content">
+                    {% if block.settings.post_text != blank %}
+                      <div class="fb-post__content__text">
+                        {{ block.settings.post_text }}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.post_image != blank %}
+                      {%- capture sizes -%}
+                        (min-width: 990px) {% if section.blocks.size <= 2 %}710px{% else %}550px{% endif %}, (min-width:
+                        750px) {% if section.blocks.size == 1 %}710px{% else %}550px{% endif %}, calc(100vw - 30px)
+                      {%- endcapture -%}
+                      <div
+                        class="media media--transparent ratio"
+                        style="--ratio-percent: {{ 1 | divided_by: block.settings.post_image.aspect_ratio | times: 100 }}%"
+                      >
+                        {{
+                          block.settings.post_image
+                          | image_url: width: 1420
+                          | image_tag:
+                            loading: 'lazy',
+                            sizes: sizes,
+                            widths: '275, 550, 710, 1420',
+                            class: 'fb-post__content__image'
+                        }}
+                      </div>
+                    {% elsif block.settings.post_video != blank %}
+                      <div
+                        class="media media--transparent ratio"
+                        style="--ratio-percent: {{ 1 | divided_by: block.settings.post_video.aspect_ratio | times: 100 }}%"
+                      >
+                        <internal-video class="internal-video" data-action-on-inactive="pause">
+                          {% liquid
+                            if block.settings.post_video_thumbnail != blank
+                              assign thumbnail = block.settings.post_video_thumbnail
+                            else
+                              assign thumbnail = block.settings.post_video.preview_image
+                            endif
+                          %}
+                          <video
+                            width="100%"
+                            height="auto"
+                            preload="metadata"
+                            poster="{{ thumbnail | image_url }}"
+                            playsinline
+                            disablepictureinpicture
+                          >
+                            {% for source in block.settings.post_video.sources %}
+                              <source
+                                src="{{ source.url }}"
+                                type="{{ source.mime_type }}"
+                              >
+                            {% endfor %}
+                          </video>
+                          <button class="internal-video__play">
+                            <div class="play-button color-accent-1">
+                              {%- render 'icon-play' -%}
+                            </div>
+                          </button>
+                          <div class="internal-video__timeline">&nbsp</div>
+                        </internal-video>
+                      </div>
+                    {% endif %}
+                  </div>
+                  <div class="fb-post__reactions flex overflow-hidden">
+                    {% if block.settings.post_reactions != blank %}
+                      {% assign reactions_arr = block.settings.post_reactions | split: ',' %}
+                      <div class="fb-post__reactions__icons flex flex-shrink-0">
+                        {% for reaction in reactions_arr %}
+                          {% assign id = block.id | append: forloop.index0 %}
+                          {% assign reaction_strip = reaction | strip %}
+                          {% render 'fb-reaction-icon', icon: reaction_strip, id: id %}
+                        {% endfor %}
+                      </div>
+                    {% endif %}
+                    {% if block.settings.post_reactions_text != blank %}
+                      <p class="fb-post__reactions__text flex-grow">
+                        {{ block.settings.post_reactions_text }}
+                      </p>
+                    {% endif %}
+                    {% if block.settings.post_comments_text != blank %}
+                      <p class="fb-post__reactions__comments-text flex-shrink-0">
+                        {{ block.settings.post_comments_text }}
+                      </p>
+                    {% endif %}
+                  </div>
+                  <div class="fb-post__ctas overflow-hidden">
+                    <div class="fb-post__ctas__btn flex-center">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 10V20M8 10L4 9.99998V20L8 20M8 10L13.1956 3.93847C13.6886 3.3633 14.4642 3.11604 15.1992 3.29977L15.2467 3.31166C16.5885 3.64711 17.1929 5.21057 16.4258 6.36135L14 9.99998H18.5604C19.8225 9.99998 20.7691 11.1546 20.5216 12.3922L19.3216 18.3922C19.1346 19.3271 18.3138 20 17.3604 20L8 20" stroke="currentColor" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                      {{ section.settings.like_label }}
+                    </div>
+                    <div class="fb-post__ctas__btn flex-center">
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="-3.2 -3.2 38.40 38.40"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                      >
+                        <g stroke-width="1.92" fill="none" fill-rule="evenodd">
+                          <g transform="translate(-100.000000, -255.000000)" fill="currentColor">
+                            <path d="M116,281 C114.832,281 113.704,280.864 112.62,280.633 L107.912,283.463 L107.975,278.824 C104.366,276.654 102,273.066 102,269 C102,262.373 108.268,257 116,257 C123.732,257 130,262.373 130,269 C130,275.628 123.732,281 116,281 L116,281 Z M116,255 C107.164,255 100,261.269 100,269 C100,273.419 102.345,277.354 106,279.919 L106,287 L113.009,282.747 C113.979,282.907 114.977,283 116,283 C124.836,283 132,276.732 132,269 C132,261.269 124.836,255 116,255 L116,255 Z" sketch:type="MSShapeGroup"></path>
+                          </g>
+                        </g>
+                      </svg>
+                      {{ section.settings.comment_label }}
+                    </div>
+                    <div class="fb-post__ctas__btn flex-center">
+                      <svg
+                        fill="currentColor"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 32 32"
+                        xmlns="http://www.w3.org/2000/svg"
+                        stroke="currentColor"
+                        stroke-width="0.00032"
+                      >
+                        <path d="M29.28,12.47,18.6,3.62a2,2,0,0,0-2.17-.27,2,2,0,0,0-1.15,1.81v2A19.82,19.82,0,0,0,2,25.94a19.18,19.18,0,0,0,.25,3.11,1,1,0,0,0,.82.83h.17a1,1,0,0,0,.88-.53,17.29,17.29,0,0,1,11.16-8.68v2.16a2,2,0,0,0,1.15,1.81,2.09,2.09,0,0,0,.88.2,2,2,0,0,0,1.29-.48l4.86-4,.09-.07,5.73-4.75a2,2,0,0,0,0-3.06Zm-6.93,6.2-.09.07-5,4.1V19.42a.19.19,0,0,0,0-.08s0-.06,0-.09,0-.07-.05-.11a1.34,1.34,0,0,0-.07-.18A.57.57,0,0,0,17,18.8a.49.49,0,0,0-.12-.13,1,1,0,0,0-.17-.12l-.15-.07-.22,0-.1,0-.08,0h-.09A19.19,19.19,0,0,0,4,25.85a17.81,17.81,0,0,1,12.56-17l.05,0a1.11,1.11,0,0,0,.19-.09A1.43,1.43,0,0,0,17,8.63l.12-.14a.54.54,0,0,0,.1-.16.85.85,0,0,0,.06-.17,1.3,1.3,0,0,0,0-.21.43.43,0,0,0,0,0l0-2.74L28,14Z"/>
+                      </svg>
+                      {{ section.settings.share_label }}
+                    </div>
+                  </div>
+                  {% if block.settings.comment_1_text != blank %}
+                    <div class="fb-post__comment flex">
+                      <div class="fb-post__comment__avatar media media--transparent circle flex-shrink-0">
+                        {% if block.settings.comment_1_author_avatar != blank %}
+                          {{
+                            block.settings.comment_1_author_avatar
+                            | image_url: width: 200
+                            | image_tag: loading: 'lazy', width: 100
+                          }}
+                        {% else %}
+                          <svg
+                            width="50"
+                            height="50"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 41.67 41.67"
+                            fill="none"
+                          >
+                            <path class="cls-1" d="M21,41.84A20.83,20.83,0,1,0,.16,21,20.82,20.82,0,0,0,21,41.84Z" transform="translate(-0.16 -0.18)" fill="#C9CCD1"/>
+                            <path class="cls-2" d="M21,10.45a7.8,7.8,0,0,0-.1,15.6h.37A7.8,7.8,0,0,0,21,10.45Z" transform="translate(-0.16 -0.18)" fill="#FDFDFE"/>
+                            <path class="cls-2" d="M35.12,36.32a20.83,20.83,0,0,1-28.25,0,8.94,8.94,0,0,1,3.83-5c5.69-3.79,14.94-3.79,20.58,0A8.87,8.87,0,0,1,35.12,36.32Z" transform="translate(-0.16 -0.18)" fill="#FDFDFE"/>
+                          </svg>
+                        {% endif %}
+                      </div>
+                      <div class="fb-post__comment__right">
+                        <div class="fb-post__comment__box">
+                          <p class="fb-post__comment__author text--bold flex flex-align-center">
+                            {{ block.settings.comment_1_author }}
+                            {% if block.settings.comment_1_author_verified %}
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                class="verified-icon"
+                                viewBox="0 0 122.88 116.87"
+                              >
+                                <polygon fill='#0866FF' fill-rule="evenodd" points="61.37 8.24 80.43 0 90.88 17.79 111.15 22.32 109.15 42.85 122.88 58.43 109.2 73.87 111.15 94.55 91 99 80.43 116.87 61.51 108.62 42.45 116.87 32 99.08 11.73 94.55 13.73 74.01 0 58.43 13.68 42.99 11.73 22.32 31.88 17.87 42.45 0 61.37 8.24 61.37 8.24"/>
+                                <path fill='#fff' d="M37.92,65c-6.07-6.53,3.25-16.26,10-10.1,2.38,2.17,5.84,5.34,8.24,7.49L74.66,39.66C81.1,33,91.27,42.78,84.91,49.48L61.67,77.2a7.13,7.13,0,0,1-9.9.44C47.83,73.89,42.05,68.5,37.92,65Z"/>
+                              </svg>
+                            {% endif %}
+                          </p>
+                          <div class="fb-post__comment__text">
+                            {{ block.settings.comment_1_text }}
+                          </div>
+                        </div>
+                        <div class="fb-post__comment__ctas">
+                          <span class="fb-post__comment__ctas__time">{{ block.settings.comment_1_time }}</span>
+                          <span class="fb-post__comment__ctas__cta">{{ section.settings.like_label }}</span>
+                          <span class="fb-post__comment__ctas__cta">{{ section.settings.reply_label }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  {% endif %}
+                  {% if block.settings.comment_2_text != blank %}
+                    <div class="fb-post__comment flex">
+                      <div class="fb-post__comment__avatar media media--transparent circle flex-shrink-0">
+                        {% if block.settings.comment_2_author_avatar != blank %}
+                          {{
+                            block.settings.comment_2_author_avatar
+                            | image_url: width: 200
+                            | image_tag: loading: 'lazy', width: 100
+                          }}
+                        {% else %}
+                          <svg
+                            width="50"
+                            height="50"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 41.67 41.67"
+                            fill="none"
+                          >
+                            <path class="cls-1" d="M21,41.84A20.83,20.83,0,1,0,.16,21,20.82,20.82,0,0,0,21,41.84Z" transform="translate(-0.16 -0.18)" fill="#C9CCD1"/>
+                            <path class="cls-2" d="M21,10.45a7.8,7.8,0,0,0-.1,15.6h.37A7.8,7.8,0,0,0,21,10.45Z" transform="translate(-0.16 -0.18)" fill="#FDFDFE"/>
+                            <path class="cls-2" d="M35.12,36.32a20.83,20.83,0,0,1-28.25,0,8.94,8.94,0,0,1,3.83-5c5.69-3.79,14.94-3.79,20.58,0A8.87,8.87,0,0,1,35.12,36.32Z" transform="translate(-0.16 -0.18)" fill="#FDFDFE"/>
+                          </svg>
+                        {% endif %}
+                      </div>
+                      <div class="fb-post__comment__right">
+                        <div class="fb-post__comment__box">
+                          <p class="fb-post__comment__author text--bold flex flex-align-center">
+                            {{ block.settings.comment_2_author }}
+                            {% if block.settings.comment_2_author_verified %}
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="16"
+                                height="16"
+                                class="verified-icon"
+                                viewBox="0 0 122.88 116.87"
+                              >
+                                <polygon fill='#0866FF' fill-rule="evenodd" points="61.37 8.24 80.43 0 90.88 17.79 111.15 22.32 109.15 42.85 122.88 58.43 109.2 73.87 111.15 94.55 91 99 80.43 116.87 61.51 108.62 42.45 116.87 32 99.08 11.73 94.55 13.73 74.01 0 58.43 13.68 42.99 11.73 22.32 31.88 17.87 42.45 0 61.37 8.24 61.37 8.24"/>
+                                <path fill='#fff' d="M37.92,65c-6.07-6.53,3.25-16.26,10-10.1,2.38,2.17,5.84,5.34,8.24,7.49L74.66,39.66C81.1,33,91.27,42.78,84.91,49.48L61.67,77.2a7.13,7.13,0,0,1-9.9.44C47.83,73.89,42.05,68.5,37.92,65Z"/>
+                              </svg>
+                            {% endif %}
+                          </p>
+                          <div class="fb-post__comment__text">
+                            {{ block.settings.comment_2_text }}
+                          </div>
+                        </div>
+                        <p class="fb-post__comment__ctas">
+                          <span class="fb-post__comment__ctas__time">{{ block.settings.comment_2_time }}</span>
+                          <span class="fb-post__comment__ctas__cta">{{ section.settings.like_label }}</span>
+                          <span class="fb-post__comment__ctas__cta">{{ section.settings.reply_label }}</span>
+                        </p>
+                      </div>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+      <div class="splide__dots-and-arrows">
+        <ul class="splide__pagination"></ul>
+        <div class="splide__arrows"></div>
+      </div>
+    </div>
+    {% if has_mobile_slider or has_desktop_slider %}
+      </splide-component>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Facebook testimonials",
+  "class": "section",
+  "tag": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "display_id",
+      "label": "Display section ID",
+      "info": "ID is used in the Sections group section to merge 2 sections. ID can also be put inside any button link and the button will scroll to this section.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "header",
+      "content": "General"
+    },
+
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Facebook testimonials",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "title_highlight_1",
+      "label": "Heading words highlight 1",
+      "info": "Put words in BOLD to highlight them with this style.",
+      "options": [
+        {
+          "value": "solid-color",
+          "label": "Color"
+        },
+        {
+          "value": "gradient-color",
+          "label": "Gradient"
+        },
+        {
+          "value": "bg-color",
+          "label": "Background"
+        },
+        {
+          "value": "underline-solid",
+          "label": "Underline"
+        },
+        {
+          "value": "underline-gradient",
+          "label": "Gradient underline"
+        },
+        {
+          "value": "line-1",
+          "label": "Line 1"
+        },
+        {
+          "value": "line-2",
+          "label": "Line 2"
+        },
+        {
+          "value": "line-3",
+          "label": "Line 3"
+        }
+      ],
+      "default": "solid-color"
+    },
+    {
+      "type": "color_background",
+      "id": "title_highlight_1_gradient",
+      "label": "Text gradient",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'gradient-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_1_bg-color",
+      "label": "Text background color",
+      "default": "#F9EFFF",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_1_color",
+      "label": "Text color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'solid-color' or section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-1_border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-1_border_width",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "select",
+      "id": "highlighted-1_border",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ section.settings.highlighted-1_border_width > 0 and section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "highlighted-1_border_color",
+      "label": "Border color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.highlighted-1_border_width > 0 and section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-1_padding-block",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.3,
+      "unit": "%",
+      "info": "Relative to font size",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-1_padding-inline",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "unit": "%",
+      "default": 0.3,
+      "info": "Relative to font size",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_1_underline-thickness",
+      "label": "Underline thickness",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "default": 2,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'underline-solid' or section.settings.title_highlight_1 == 'underline-gradient' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_1_underline-color",
+      "label": "Underline color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'underline-solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "title_highlight_1_underline-color--gradient",
+      "label": "Underline gradient color",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'underline-gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_1_underline-color-position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Vertical position",
+      "unit": "%",
+      "default": 25,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'underline-solid' or section.settings.title_highlight_1 == 'underline-gradient' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_1_handwritten-color",
+      "label": "Stroke color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'line-1' or section.settings.title_highlight_1 == 'line-2' or section.settings.title_highlight_1 == 'line-3' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_1_handwritten-stroke-width",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Stroke thickness",
+      "unit": "px",
+      "default": 3,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'line-1' or section.settings.title_highlight_1 == 'line-2' or section.settings.title_highlight_1 == 'line-3' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_1_handwritten-position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Vertical position",
+      "unit": "%",
+      "default": 60,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'line-1' or section.settings.title_highlight_1 == 'line-2' or section.settings.title_highlight_1 == 'line-3' }}"
+    },
+    {
+      "type": "select",
+      "id": "title_highlight_2",
+      "label": "Heading words highlight 2",
+      "info": "Put words in ITALIC to highlight them with this style (keep it 'None' if you want to use default italic style).",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid-color",
+          "label": "Color"
+        },
+        {
+          "value": "gradient-color",
+          "label": "Gradient"
+        },
+        {
+          "value": "bg-color",
+          "label": "Background"
+        },
+        {
+          "value": "underline-solid",
+          "label": "Underline"
+        },
+        {
+          "value": "underline-gradient",
+          "label": "Gradient underline"
+        },
+        {
+          "value": "line-1",
+          "label": "Line 1"
+        },
+        {
+          "value": "line-2",
+          "label": "Line 2"
+        },
+        {
+          "value": "line-3",
+          "label": "Line 3"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color_background",
+      "id": "title_highlight_2_gradient",
+      "label": "Text gradient",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'gradient-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_2_bg-color",
+      "label": "Text background color",
+      "default": "#F9EFFF",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_2_color",
+      "label": "Text color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'solid-color' or section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-2_border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-2_border_width",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0,
+      "visible_if": "{{  section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "select",
+      "id": "highlighted-2_border",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ section.settings.highlighted-2_border_width > 0 and section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "highlighted-2_border_color",
+      "label": "Border color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.highlighted-2_border_width > 0 and section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-2_padding-block",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.3,
+      "unit": "%",
+      "info": "Relative to font size",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-2_padding-inline",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "unit": "%",
+      "default": 0.3,
+      "info": "Relative to font size",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_2_underline-thickness",
+      "label": "Underline thickness",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "default": 2,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'underline-solid' or section.settings.title_highlight_2 == 'underline-gradient' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_2_underline-color",
+      "label": "Underline color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'underline-solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "title_highlight_2_underline-color--gradient",
+      "label": "Underline gradient color",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'underline-gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_2_underline-color-position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Vertical position",
+      "unit": "%",
+      "default": 25,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'underline-solid' or section.settings.title_highlight_2 == 'underline-gradient' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_2_handwritten-color",
+      "label": "Stroke color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'line-1' or section.settings.title_highlight_2 == 'line-2' or section.settings.title_highlight_2 == 'line-3' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_2_handwritten-stroke-width",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Stroke thickness",
+      "unit": "px",
+      "default": 3,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'line-1' or section.settings.title_highlight_2 == 'line-2' or section.settings.title_highlight_2 == 'line-3' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_2_handwritten-position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Vertical position",
+      "unit": "%",
+      "default": 60,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'line-1' or section.settings.title_highlight_2 == 'line-2' or section.settings.title_highlight_2 == 'line-3' }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h3",
+          "label": "Extra small"
+        },
+        {
+          "value": "h2",
+          "label": "Small"
+        },
+        {
+          "value": "h1",
+          "label": "Medium"
+        },
+        {
+          "value": "h0",
+          "label": "Large"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "h1",
+      "label": "Heading size"
+    },
+    {
+      "type": "range",
+      "id": "custom_desktop_size",
+      "min": 24,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "default": 39,
+      "label": "Custom desktop size",
+      "visible_if": "{{ section.settings.heading_size == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "custom_mobile_size",
+      "min": 20,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 28,
+      "label": "Custom mobile size",
+      "visible_if": "{{ section.settings.heading_size == 'custom' }}"
+    },
+
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "background-2",
+      "label": "Color scheme"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_background",
+      "default": "#F3F3F3",
+      "label": "Custom background color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "custom_gradient_background",
+      "label": "Custom gradient background",
+      "info": "If added, replaces Background color when applicable.",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_image_background",
+      "label": "Custom image background",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_mobile_image_background",
+      "label": "Custom mobile image background",
+      "info": "If empty, the Custom image background will also be applied to mobile devices",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' and section.settings.custom_image_background != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_text",
+      "default": "#2E2A39",
+      "label": "Custom text color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "pattern_bg",
+      "label": "Background pattern",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "dotted",
+          "label": "Dots"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "curved-grid",
+          "label": "Curved grid"
+        },
+        {
+          "value": "diagonal-stripes",
+          "label": "Stripes"
+        },
+        {
+          "value": "zigzag",
+          "label": "ZigZag"
+        },
+        {
+          "value": "arrow-pattern",
+          "label": "3D Boxes"
+        },
+        {
+          "value": "radial-rings",
+          "label": "Rings"
+        },
+        {
+          "value": "diamond-grid-1",
+          "label": "Diamond grid 1"
+        },
+        {
+          "value": "diamond-grid-2",
+          "label": "Diamond grid 2"
+        },
+        {
+          "value": "quatrefoils",
+          "label": "Quatrefoils"
+        },
+        {
+          "value": "ovals",
+          "label": "Ovals"
+        },
+        {
+          "value": "hexagons",
+          "label": "Hexagons"
+        },
+        {
+          "value": "curvy",
+          "label": "Curvy"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "pattern_color",
+      "label": "Pattern color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_size",
+      "min": 4,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Pattern size / spacing",
+      "default": 20,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_thickness",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Line / dot thickness",
+      "default": 2,
+      "visible_if": "{{ section.settings.pattern_bg == 'dotted' or section.settings.pattern_bg == 'grid' or section.settings.pattern_bg == 'diagonal-stripes' or section.settings.pattern_bg == 'radial-rings' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_angle",
+      "min": 0,
+      "max": 180,
+      "step": 15,
+      "unit": "deg",
+      "label": "Stripe angle",
+      "default": 45,
+      "visible_if": "{{ section.settings.pattern_bg == 'diagonal-stripes' }}"
+    },
+    {
+      "type": "select",
+      "id": "pattern_opacity_mode",
+      "label": "Opacity type",
+      "default": "low",
+      "options": [
+        {
+          "value": "low",
+          "label": "Low"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity_low",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 7,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' and section.settings.pattern_opacity_mode == 'low' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity_normal",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 80,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' and section.settings.pattern_opacity_mode == 'normal' }}"
+    },
+    {
+      "type": "header",
+      "content": "Slider"
+    },
+    {
+      "type": "paragraph",
+      "content": "ATTENTION: ONLY in the theme editor, pagination dots might duplicate after changing section settings. To overcome this, simply click Save. This has NO EFFECT on the published website."
+    },
+    {
+      "type": "select",
+      "id": "type",
+      "options": [
+        {
+          "value": "slide",
+          "label": "Classic"
+        },
+        {
+          "value": "loop",
+          "label": "Infinite"
+        }
+      ],
+      "default": "slide",
+      "label": "Type"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 1,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "sec",
+      "label": "Autoplay speed"
+    },
+    {
+      "type": "select",
+      "id": "arrows_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "inverse",
+      "label": "Arrows color scheme"
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_arrows",
+      "label": "Transparent arrows",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "dots_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "inverse",
+      "label": "Dots color scheme"
+    },
+    {
+      "type": "header",
+      "content": "Desktop"
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_full_page",
+      "label": "Full page width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 3,
+      "label": "Slides per page"
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_desktop",
+      "label": "Enable desktop slider",
+      "default": false,
+      "info": "The settings bellow are applied if this option is checked"
+    },
+    {
+      "type": "range",
+      "id": "per_move_desktop",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1,
+      "label": "Slides to scroll on one move"
+    },
+    {
+      "type": "range",
+      "id": "desktop_spacing",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Spacing",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "desktop_side_padding",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Preview of prev & next slide",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_padding_calc",
+      "label": "Disable empty preview on first & last slide",
+      "default": true,
+      "info": "Moves the first slide to the left edge adn last one to the right if Preview value is enabled. Visible if type is set to Slider."
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_adaptive_height",
+      "label": "Adaptive height",
+      "default": false,
+      "info": "Only available if Slides per page is set to 1."
+    },
+    {
+      "type": "select",
+      "id": "desktop_dots_position",
+      "options": [
+        {
+          "value": "hidden",
+          "label": "Hidden"
+        },
+        {
+          "value": "under",
+          "label": "Under the slider"
+        }
+      ],
+      "default": "under",
+      "label": "Dots position"
+    },
+    {
+      "type": "select",
+      "id": "desktop_arrows_position",
+      "options": [
+        {
+          "value": "hidden",
+          "label": "Hidden"
+        },
+        {
+          "value": "under",
+          "label": "Under the slider"
+        },
+        {
+          "value": "sides",
+          "label": "On sides of the slider"
+        }
+      ],
+      "default": "sides",
+      "label": "Arrows position"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "slider_mobile",
+      "label": "Enable mobile slider",
+      "default": true,
+      "info": "The settings bellow are applied if this option is checked"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_preview",
+      "label": "Preview of prev & next slides",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_adaptive_height",
+      "label": "Adaptive height",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "mobile_dots_position",
+      "options": [
+        {
+          "value": "hidden",
+          "label": "Hidden"
+        },
+        {
+          "value": "under",
+          "label": "Under the slider"
+        }
+      ],
+      "default": "under",
+      "label": "Dots position"
+    },
+    {
+      "type": "select",
+      "id": "mobile_arrows_position",
+      "options": [
+        {
+          "value": "hidden",
+          "label": "Hidden"
+        },
+        {
+          "value": "under",
+          "label": "Under the slider"
+        },
+        {
+          "value": "sides",
+          "label": "On sides of the slider"
+        }
+      ],
+      "default": "under",
+      "label": "Arrows position"
+    },
+    {
+      "type": "header",
+      "content": "Posts layout"
+    },
+    {
+      "type": "color",
+      "id": "post_bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "post_text_color",
+      "label": "Text color",
+      "default": "#101010"
+    },
+    {
+      "type": "color",
+      "id": "comments_bg_color",
+      "label": "Comments background color",
+      "default": "#F0F2F5"
+    },
+    {
+      "type": "color",
+      "id": "separators_color",
+      "label": "Separators color",
+      "default": "#a4b0be"
+    },
+    {
+      "type": "color",
+      "id": "post_border_color",
+      "label": "Post container border color",
+      "default": "#DFDFDF"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "label": "Post container border thickness",
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Labels"
+    },
+    {
+      "type": "text",
+      "id": "like_label",
+      "label": "Like label",
+      "default": "Like"
+    },
+    {
+      "type": "text",
+      "id": "comment_label",
+      "label": "Comment label",
+      "default": "Comment"
+    },
+    {
+      "type": "text",
+      "id": "reply_label",
+      "label": "Reply label",
+      "default": "Reply"
+    },
+    {
+      "type": "text",
+      "id": "share_label",
+      "label": "Share label",
+      "default": "Share"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Post author"
+        },
+        {
+          "type": "text",
+          "id": "post_author",
+          "default": "Author name",
+          "label": "Author"
+        },
+        {
+          "type": "image_picker",
+          "id": "post_author_avatar",
+          "label": "Author profile picture"
+        },
+        {
+          "type": "checkbox",
+          "id": "post_author_verified",
+          "default": false,
+          "label": "Author verified"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "post_time",
+          "default": "2h ago",
+          "label": "Time posted"
+        },
+        {
+          "type": "header",
+          "content": "Post content"
+        },
+        {
+          "type": "richtext",
+          "id": "post_text",
+          "default": "<p>Shrine theme has made a huge impact on my store's CVR!</p>",
+          "label": "Text"
+        },
+        {
+          "type": "image_picker",
+          "id": "post_image",
+          "label": "Image"
+        },
+        {
+          "type": "paragraph",
+          "content": "or"
+        },
+        {
+          "type": "video",
+          "id": "post_video",
+          "label": "Video"
+        },
+        {
+          "type": "image_picker",
+          "id": "post_video_thumbnail",
+          "label": "Video thumbnail",
+          "info": "If empty, the first frame of the video will be displayed."
+        },
+        {
+          "type": "header",
+          "content": "Post reactions"
+        },
+        {
+          "type": "text",
+          "id": "post_reactions",
+          "default": "like, love, care",
+          "label": "Displayed rections",
+          "info": "Split reactions whose icons you want to display with a comma. Available options: like, love, care, haha, wow, sad, angry."
+        },
+        {
+          "type": "inline_richtext",
+          "id": "post_reactions_text",
+          "default": "1.1k",
+          "label": "Reactions text"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "post_comments_text",
+          "default": "26 Comments",
+          "label": "Comments text"
+        },
+        {
+          "type": "header",
+          "content": "Comment #1"
+        },
+        {
+          "type": "text",
+          "id": "comment_1_author",
+          "default": "Comment author",
+          "label": "Author name"
+        },
+        {
+          "type": "image_picker",
+          "id": "comment_1_author_avatar",
+          "label": "Author profile picture"
+        },
+        {
+          "type": "checkbox",
+          "id": "comment_1_author_verified",
+          "default": false,
+          "label": "Author verified"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "comment_1_time",
+          "default": "2h ago",
+          "label": "Time posted"
+        },
+        {
+          "type": "richtext",
+          "id": "comment_1_text",
+          "label": "Text"
+        },
+        {
+          "type": "header",
+          "content": "Comment #2"
+        },
+        {
+          "type": "text",
+          "id": "comment_2_author",
+          "default": "Comment author",
+          "label": "Author name"
+        },
+        {
+          "type": "image_picker",
+          "id": "comment_2_author_avatar",
+          "label": "Author profile picture"
+        },
+        {
+          "type": "checkbox",
+          "id": "comment_2_author_verified",
+          "default": false,
+          "label": "Author verified"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "comment_2_time",
+          "default": "3h ago",
+          "label": "Time posted"
+        },
+        {
+          "type": "richtext",
+          "id": "comment_2_text",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Facebook testimonials",
+      "blocks": [
+        {
+          "type": "column"
+        },
+        {
+          "type": "column"
+        },
+        {
+          "type": "column"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

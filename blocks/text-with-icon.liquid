@@ -1,0 +1,642 @@
+{% render 'text-with-icon-block-new', block: block, mobile_align: true, block_attributes: true, margins: true %}
+
+{% schema %}
+{
+  "name": "Text with icon",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "header",
+      "content": "Text settings"
+    },
+    {
+      "type": "range",
+      "id": "mobile_text_size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14,
+      "label": "Mobile text size"
+    },
+    {
+      "type": "range",
+      "id": "desktop_text_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 16,
+      "label": "Desktop text size"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "mobile_alignment",
+      "label": "Mobile text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "text_color_type",
+      "label": "Text color type",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "default": "#121212",
+      "label": "Text color",
+      "visible_if": "{{ block.settings.text_color_type == 'solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "text_color_gradient",
+      "label": "Text gradient",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ block.settings.text_color_type == 'gradient' }}"
+    },
+    {
+      "type": "select",
+      "id": "font_family",
+      "label": "Font",
+      "options": [
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "heading",
+          "label": "Heading"
+        }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "header",
+      "content": "Icon settings"
+    },
+    {
+      "type": "range",
+      "id": "icon_scale",
+      "min": 100,
+      "max": 200,
+      "step": 5,
+      "default": 120,
+      "unit": "%",
+      "label": "Icon scale",
+      "info": "Relative to text size"
+    },
+
+    {
+      "type": "select",
+      "id": "icon_color_type",
+      "label": "Icon color type",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "default": "#121212",
+      "label": "Icon color",
+      "visible_if": "{{ block.settings.icon_color_type == 'solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "icon_color_gradient",
+      "label": "Icon gradient",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ block.settings.icon_color_type == 'gradient' }}"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "Fit text"
+        },
+        {
+          "value": "100%",
+          "label": "Full"
+        }
+      ],
+      "default": "100%",
+      "label": "Width"
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "options": [
+        {
+          "value": "horizontal",
+          "label": "Horizontal"
+        },
+        {
+          "value": "vertical",
+          "label": "Vertical"
+        }
+      ],
+      "default": "horizontal",
+      "label": "Stacking direction",
+      "info": "Applied when multiple texts are added."
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "min": 0,
+      "max": 6,
+      "step": 0.5,
+      "label": "Stacking spacing",
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Styling"
+    },
+    {
+      "type": "select",
+      "id": "styling_container",
+      "options": [
+        {
+          "value": "container",
+          "label": "Whole block container"
+        },
+        {
+          "value": "text",
+          "label": "Each text item"
+        }
+      ],
+      "default": "container",
+      "label": "Apply background, padding, border & shadow to:"
+    },
+    {
+      "type": "select",
+      "id": "bg_type",
+      "label": "Background",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid",
+          "label": "Solid color"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient color"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#F4E1FF",
+      "visible_if": "{{ block.settings.bg_type == 'solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_gradient",
+      "label": "Background gradient color",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ block.settings.bg_type == 'gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "bg_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Background opacity",
+      "default": 100,
+      "visible_if": "{{ block.settings.bg_type != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.border_width > 0 and block.settings.border_color_type != 'gradient' }}"
+    },
+    {
+      "type": "select",
+      "id": "border_color_type",
+      "label": "Border color type",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.border_width > 0 and block.settings.border_color_type == 'solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "border_gradient",
+      "label": "Border gradient color",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ block.settings.border_width > 0 and block.settings.border_color_type == 'gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Border opacity",
+      "default": 100,
+      "visible_if": "{{ block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_shadow",
+      "label": "Enable drop shadow",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "shadow_color",
+      "label": "Shadow color",
+      "default": "#000000",
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "label": "Shadow opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 15,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_horizontal_offset",
+      "label": "Shadow horizontal offset (px)",
+      "min": -50,
+      "max": 50,
+      "step": 2,
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical_offset",
+      "label": "Shadow vertical offset (px)",
+      "min": -50,
+      "max": 50,
+      "step": 2,
+      "default": 10,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_spread",
+      "label": "Shadow spread (px)",
+      "min": -50,
+      "max": 50,
+      "step": 2,
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "label": "Shadow blur (px)",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 50,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "header",
+      "content": "Padding",
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "vertical_desktop_padding",
+      "label": "Vertical desktop padding",
+      "min": 0,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "default": 15,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "horizontal_desktop_padding",
+      "label": "Horizontal desktop padding",
+      "min": 0,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "default": 15,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "vertical_mobile_padding",
+      "label": "Vertical mobile padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "horizontal_mobile_padding",
+      "label": "Horizontal mobile padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "header",
+      "content": "Text & icon #1"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text_1",
+      "default": "Text with icon",
+      "label": "Text #1"
+    },
+    {
+      "type": "text",
+      "id": "icon_1",
+      "default": "check_circle",
+      "label": "Icon #1",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web).",
+      "visible_if": "{{ block.settings.text_1 != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "filled_icon_1",
+      "default": false,
+      "label": "Filled icon #1",
+      "visible_if": "{{ block.settings.text_1 != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_icon_1",
+      "label": "Custom icon #1",
+      "visible_if": "{{ block.settings.text_1 != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Text & icon #2"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text_2",
+      "label": "Text #2"
+    },
+    {
+      "type": "text",
+      "id": "icon_2",
+      "default": "check_circle",
+      "label": "Icon #2",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web).",
+      "visible_if": "{{ block.settings.text_2 != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "filled_icon_2",
+      "default": false,
+      "label": "Filled icon #2",
+      "visible_if": "{{ block.settings.text_2 != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_icon_2",
+      "label": "Custom icon #2",
+      "visible_if": "{{ block.settings.text_2 != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Text & icon #3"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text_3",
+      "label": "Text #3"
+    },
+    {
+      "type": "text",
+      "id": "icon_3",
+      "default": "check_circle",
+      "label": "Icon #3",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web).",
+      "visible_if": "{{ block.settings.text_3 != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "filled_icon_3",
+      "default": false,
+      "label": "Filled icon #3",
+      "visible_if": "{{ block.settings.text_3 != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_icon_3",
+      "label": "Custom icon #3",
+      "visible_if": "{{ block.settings.text_3 != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Text & icon #4"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text_4",
+      "label": "Text #4"
+    },
+    {
+      "type": "text",
+      "id": "icon_4",
+      "default": "check_circle",
+      "label": "Icon #4",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web).",
+      "visible_if": "{{ block.settings.text_4 != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "filled_icon_4",
+      "default": false,
+      "label": "Filled icon #4",
+      "visible_if": "{{ block.settings.text_4 != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_icon_4",
+      "label": "Custom icon #4",
+      "visible_if": "{{ block.settings.text_4 != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15,
+      "visible_if": "{{ section.settings.image_1_visibility != 'mobile-hidden' and section.settings.image_1_visibility != 'always-display' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text with icon",
+      "category": "Icons"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,1678 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  #ContactForm-{{ section.id }} .contact-from__errors-container,
+  #ContactForm-{{ section.id }} .contact__field-error {
+    --color-foreground: {{ section.settings.errors_text_color.red }}, {{ section.settings.errors_text_color.green }}, {{ section.settings.errors_text_color.blue }};
+    color: rgb(var(--color-foreground));
+  }
+  #ContactForm-{{ section.id }} .contact-from__success-container {
+    --color-foreground: {{ section.settings.success_text_color.red }}, {{ section.settings.success_text_color.green }}, {{ section.settings.success_text_color.blue }};
+    color: rgb(var(--color-foreground));
+  }
+
+  .color-scheme-{{ section.id }}.color-custom {
+    --color-background: {{ section.settings.custom_colors_background.red }}, {{ section.settings.custom_colors_background.green }}, {{ section.settings.custom_colors_background.blue }};
+    --gradient-background: {% if section.settings.custom_gradient_background != blank %}{{ section.settings.custom_gradient_background }}{% else %}{{ section.settings.custom_colors_background }}{% endif %};
+    {% if section.settings.custom_image_background != blank %}
+      {% # theme-check-disable %}
+      --gradient-background: url('{{ section.settings.custom_image_background | img_url: 'master' }}') center center / cover no-repeat;
+      {% # theme-check-enable %}
+    {% endif %}
+    --color-foreground: {{ section.settings.custom_colors_text.red }}, {{ section.settings.custom_colors_text.green }}, {{ section.settings.custom_colors_text.blue }};
+    --color-button: {{ section.settings.custom_colors_solid_button_background.red }}, {{ section.settings.custom_colors_solid_button_background.green }}, {{ section.settings.custom_colors_solid_button_background.blue }};
+    --color-button-text: {{ section.settings.custom_colors_solid_button_text.red }}, {{ section.settings.custom_colors_solid_button_text.green }}, {{ section.settings.custom_colors_solid_button_text.blue }};
+  }
+  {% if section.settings.custom_mobile_image_background != blank %}
+    @media screen and (max-width: 740px) {
+      .color-scheme-{{ section.id }}.color-custom {
+        {% # theme-check-disable %}
+        --gradient-background: url('{{ section.settings.custom_mobile_image_background | img_url: 'master' }}') center center / cover no-repeat;
+        {% # theme-check-enable %}
+      }
+    }
+  {% endif %}
+  {% if section.settings.pattern_bg != 'none' %}
+    {% render 'pattern-background' %}
+  {% endif %}
+{%- endstyle -%}
+
+<div class="color-scheme-{{ section.id }} color-{{ section.settings.color_scheme }} gradient content-for-grouping animate-section animate--hidden {{ section.settings.visibility }}">
+  {% if section.settings.display_id %}
+    <copy-button class="section-id-btn button" data-content="#shopify-section-{{ section.id }}" data-success="false">
+      <span class="copy-text">Click to copy section ID</span>
+      <span class="copy-success">ID copied successfully!</span>
+    </copy-button>
+  {% endif %}
+  <contact-form
+    class="contact page-width page-width--narrow section-{{ section.id }}-padding display-block"
+    id="ContactForm-{{ section.id }}"
+  >
+    {%- if section.settings.title != blank -%}
+      {% render 'section-title', className: 'title title-wrapper--no-top-margin', animate: true %}
+    {%- else -%}
+      <h2 class="visually-hidden">{{ 'templates.contact.form.title' | t }}</h2>
+    {%- endif -%}
+    {% form 'contact', id: 'ContactForm', novalidate: true, class: 'isolate animate-item animate-item--child index-1' %}
+      {%- if form.posted_successfully? -%}
+        <div
+          class="contact-from__message-container contact-from__success-container flex flex-align-center custom-border-hex custom-border-radius custom-bg"
+          style="--bg-color: {{ section.settings.success_bg_color }};--border-radius: {{ section.settings.success_border_radius }}px;--border-color: {{ section.settings.success_border_color }};--border-thickness:{{ section.settings.success_border_width }}px;"
+        >
+          {% if section.settings.success_custom_icon != blank %}
+            <img
+              src="{{ section.settings.success_custom_icon | image_url }}"
+              {% if section.settings.success_custom_icon.alt != blank %}
+                alt="{{ section.settings.success_custom_icon.alt }}"
+              {% endif %}
+              width="auto"
+              height="auto"
+              loading="lazy"
+            >
+          {% elsif section.settings.success_icon != blank %}
+            {% render 'material-icon',
+              icon: section.settings.success_icon,
+              filled: section.settings.success_icon_filled
+            %}
+          {% endif %}
+          <div class="contact-from__message__content">
+            <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
+              {{ 'templates.contact.form.post_success' | t }}
+            </h2>
+          </div>
+        </div>
+      {%- elsif form.errors -%}
+        <div
+          class="contact-from__message-container contact-from__errors-container flex flex-align-center custom-border-hex custom-border-radius custom-bg"
+          style="--bg-color: {{ section.settings.errors_bg_color }};--border-radius: {{ section.settings.errors_border_radius }}px;--border-color: {{ section.settings.errors_border_color }};--border-thickness:{{ section.settings.errors_border_width }}px;"
+        >
+          {% if section.settings.errors_custom_icon != blank %}
+            <img
+              src="{{ section.settings.errors_custom_icon | image_url }}"
+              {% if section.settings.errors_custom_icon.alt != blank %}
+                alt="{{ section.settings.errors_custom_icon.alt }}"
+              {% endif %}
+              width="auto"
+              height="auto"
+              loading="lazy"
+            >
+          {% elsif section.settings.errors_icon != blank %}
+            {% render 'material-icon',
+              icon: section.settings.errors_icon,
+              filled: section.settings.errors_icon_filled
+            %}
+          {% endif %}
+          <div class="contact-from__message__content">
+            <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
+              {{ 'templates.contact.form.error_heading' | t }}
+            </h2>
+            <ul class="caption-large" role="list">
+              <li>
+                {{ form.errors.translated_fields.email | capitalize }}
+                {{ form.errors.messages.email }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      {%- endif -%}
+
+      {% if section.blocks.size > 0 %}
+        {%- for block in section.blocks -%}
+          {% case block.type %}
+            {% when 'field_row' %}
+              {% if block.settings.input_1_enabled and block.settings.input_2_enabled %}
+                <div class="contact__fields">
+              {% endif %}
+
+              {%- if block.settings.input_1_enabled -%}
+                {% liquid
+                  case block.settings.input_1_type
+                    when 'name'
+                      assign field_1_name = 'templates.contact.form.name' | t
+                    when 'email'
+                      assign field_1_name = 'templates.contact.form.email' | t
+                    when 'phone'
+                      assign field_1_name = 'templates.contact.form.phone' | t
+                    else
+                      assign field_1_name = block.settings.input_1_custom_name | escape
+                  endcase
+                  assign required = false
+                  if block.settings.input_1_required or block.settings.input_1_type == 'email'
+                    assign required = true
+                  endif
+                %}
+                <div class="field-wrapper" data-required="{{ required }}">
+                  <div class="field">
+                    <input
+                      class="field__input"
+                      type="{% if block.settings.input_1_type == 'email' %}email{% elsif block.settings.input_1_type == 'phone' %}tel{% else %}text{% endif %}"
+                      id="ContactForm-{{ block.id }}-input1"
+                      {% if block.settings.input_1_type == 'email' %}
+                        name="contact[email]"
+                      {% else %}
+                        name="contact[{{ field_1_name }}]"
+                      {% endif %}
+                      {% if block.settings.input_1_type == 'email' %}
+                        autocomplete="email"
+                        autocapitalize="off"
+                        spellcheck="false"
+                      {% elsif block.settings.input_1_type == 'phone' %}
+                        autocomplete="tel"
+                        pattern="[0-9\-]*"
+                      {% elsif block.settings.input_1_type == 'name' %}
+                        autocomplete="name"
+                      {% endif %}
+                      {% if required %}
+                        aria-required="true"
+                      {% endif %}
+                      placeholder="{{ field_1_name }}"
+                      {%- if form.errors contains 'email' and block.settings.input_1_type == 'email' -%}
+                        aria-invalid="true"
+                        aria-describedby="ContactForm-email1-{{ block.id }}-error"
+                      {% endif %}
+                    >
+                    <label class="field__label" for="ContactForm-{{ block.id }}-input1">{{ field_1_name }}</label>
+                  </div>
+                  <small class="contact__field-error field-wrapper__error-msg hidden">
+                    <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+                    <span class="form__message">
+                      {{ block.settings.input_1_error_message }}
+                    </span>
+                  </small>
+                </div>
+              {%- endif -%}
+
+              {%- if block.settings.input_2_enabled -%}
+                {% liquid
+                  case block.settings.input_2_type
+                    when 'name'
+                      assign field_2_name = 'templates.contact.form.name' | t
+                    when 'email'
+                      assign field_2_name = 'templates.contact.form.email' | t
+                    when 'phone'
+                      assign field_2_name = 'templates.contact.form.phone' | t
+                    else
+                      assign field_2_name = block.settings.input_2_custom_name | escape
+                  endcase
+                  assign required = false
+                  if block.settings.input_2_required or block.settings.input_2_type == 'email'
+                    assign required = true
+                  endif
+                %}
+                <div class="field-wrapper" data-required="{{ required }}">
+                  <div class="field">
+                    <input
+                      class="field__input"
+                      type="{% if block.settings.input_2_type == 'email' %}email{% elsif block.settings.input_2_type == 'phone' %}tel{% else %}text{% endif %}"
+                      id="ContactForm-{{ block.id }}-input2"
+                      {% if block.settings.input_2_type == 'email' %}
+                        name="contact[email]"
+                      {% else %}
+                        name="contact[{{ field_2_name }}]"
+                      {% endif %}
+                      {% if block.settings.input_2_type == 'email' %}
+                        autocomplete="email"
+                        autocapitalize="off"
+                        spellcheck="false"
+                      {% elsif block.settings.input_2_type == 'phone' %}
+                        autocomplete="tel"
+                        pattern="[0-9\-]*"
+                      {% elsif block.settings.input_2_type == 'name' %}
+                        autocomplete="name"
+                      {% endif %}
+                      {% if required %}
+                        aria-required="true"
+                      {% endif %}
+                      placeholder="{{ field_2_name }}"
+                      {%- if form.errors contains 'email' and block.settings.input_2_type == 'email' -%}
+                        aria-invalid="true"
+                        aria-describedby="ContactForm-email2-{{ block.id }}-error"
+                      {% endif %}
+                    >
+                    <label class="field__label" for="ContactForm-{{ block.id }}-input2">{{ field_2_name }}</label>
+                  </div>
+                  <small class="contact__field-error field-wrapper__error-msg hidden">
+                    <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+                    <span class="form__message">
+                      {{ block.settings.input_2_error_message }}
+                    </span>
+                  </small>
+                </div>
+              {%- endif -%}
+              {% if block.settings.input_1_enabled and block.settings.input_2_enabled %}
+                </div>
+              {% endif %}
+
+            {% when 'textarea' %}
+              <div
+                class="field-wrapper"
+                {% if block.settings.input_2_required %}
+                  data-required="true"
+                {% endif %}
+              >
+                <div class="field">
+                  {% liquid
+                    if block.settings.input_type == 'comment'
+                      assign textarea_name = 'templates.contact.form.comment' | t
+                    else
+                      assign textarea_name = block.settings.input_custom_name | escape
+                    endif
+                  %}
+                  <textarea
+                    rows="10"
+                    id="ContactForm-{{ block.id }}-textarea"
+                    class="text-area field__input"
+                    name="contact[{{ textarea_name }}]"
+                    {% if block.settings.input_required %}
+                      aria-required="true"
+                    {% endif %}
+                    placeholder="{{ textarea_name }}"
+                    {% if block.settings.max_characters != blank and block.settings.max_characters > 0 %}
+                      maxlength="{{ block.settings.max_characters }}"
+                    {% endif %}
+                  >{% if block.settings.input_type == 'comment' %}{{ form.body }}{% endif %}</textarea>
+                  <label class="form__label field__label" for="ContactForm-{{ block.id }}-textarea">
+                    {{ textarea_name }}
+                  </label>
+                </div>
+                <small class="contact__field-error field-wrapper__error-msg hidden">
+                  <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
+                  <span class="form__message">
+                    {{ block.settings.input_error_message }}
+                  </span>
+                </small>
+              </div>
+            {%- when 'tnc_checkbox' -%}
+              <div class="tnc-checkbox-container" style="margin-bottom: 6px;" {{ block.shopify_attributes }}>
+                <style>
+                  #TNC-Checkbox-{{ section.id }} {
+                    font-size: {{ block.settings.checkbox_text_size | divided_by: 10.0 }}rem;
+                  }
+                  .tnc-checkbox-warning-{{ section.id }} {
+                    font-size: {{ block.settings.warning_text_size | divided_by: 10.0 }}rem;
+                    text-align: {{ block.settings.warning_alignment }};
+                    color: {{ block.settings.warning_text_color }};
+                  }
+                  #TNC-Checkbox-{{ section.id }} svg {
+                    color: rgb(var(--color-base-{{ block.settings.checkbox_color }}));
+                  }
+                </style>
+                <tnc-chekcbox
+                  id="TNC-Checkbox-{{ section.id }}"
+                  class="tnc-chekcbox flex flex-align-center{% if block.settings.checkbox_alignment == 'center' %} center flex-justify-center{% endif %}"
+                  data-checked="false"
+                  data-disable-button="{{ block.settings.disable_submit_button }}"
+                  data-warning-text="{{ block.settings.warning_text }}"
+                  data-warning-position="{{ block.settings.warning_position }}"
+                  data-target="#SubmitBtn-{{ section.id }}"
+                  data-section="{{ section.id }}"
+                >
+                  {% render 'checkbox-icons' %}
+                  <p class="tnc-checkbox__text margin-0">
+                    {{ block.settings.checkbox_text }}
+                  </p>
+                </tnc-chekcbox>
+                <div
+                  class="tnc-checkbox-warning tnc-checkbox-warning-{{ section.id }} tnc-checkbox-warning--under-checkbox-{{ section.id }} hidden"
+                  style="margin-top: 0.4em;"
+                ></div>
+              </div>
+          {% endcase %}
+        {%- endfor -%}
+      {% else %}
+        <div class="contact__fields">
+          <div class="field-wrapper">
+            <div class="field">
+              <input
+                class="field__input"
+                autocomplete="name"
+                type="text"
+                id="ContactForm-name"
+                name="contact[{{ 'templates.contact.form.name' | t }}]"
+                value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                placeholder="{{ 'templates.contact.form.name' | t }}"
+              >
+              <label class="field__label" for="ContactForm-name">{{ 'templates.contact.form.name' | t }}</label>
+            </div>
+          </div>
+          <div class="field-wrapper">
+            <div class="field">
+              <input
+                autocomplete="email"
+                type="email"
+                id="ContactForm-email"
+                class="field__input"
+                name="contact[email]"
+                spellcheck="false"
+                autocapitalize="off"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                aria-required="true"
+                {% if form.errors contains 'email' %}
+                  aria-invalid="true"
+                  aria-describedby="ContactForm-email-error"
+                {% endif %}
+                placeholder="{{ 'templates.contact.form.email' | t }}"
+              >
+              <label class="field__label" for="ContactForm-email">
+                {{- 'templates.contact.form.email' | t }}
+                <span aria-hidden="true">*</span></label
+              >
+            </div>
+          </div>
+        </div>
+        <div class="field-wrapper">
+          <div class="field">
+            <input
+              type="tel"
+              id="ContactForm-phone"
+              class="field__input"
+              autocomplete="tel"
+              name="contact[{{ 'templates.contact.form.phone' | t }}]"
+              pattern="[0-9\-]*"
+              value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+              placeholder="{{ 'templates.contact.form.phone' | t }}"
+            >
+            <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
+          </div>
+        </div>
+        <div class="field-wrapper">
+          <div class="field">
+            <textarea
+              rows="10"
+              id="ContactForm-body"
+              class="text-area field__input"
+              name="contact[{{ 'templates.contact.form.comment' | t }}]"
+              placeholder="{{ 'templates.contact.form.comment' | t }}"
+            >
+              {{- form.body -}}
+            </textarea>
+            <label class="form__label field__label" for="ContactForm-body">
+              {{- 'templates.contact.form.comment' | t -}}
+            </label>
+          </div>
+        </div>
+      {% endif %}
+
+      <div
+        class="tnc-checkbox-warning tnc-checkbox-warning-{{ section.id }} tnc-checkbox-warning--above-button-{{ section.id }} hidden"
+        style="margin-bottom: 0.6em;"
+      ></div>
+      <div class="contact__button">
+        <button
+          id="SubmitBtn-{{ section.id }}"
+          type="submit"
+          class="button{% if section.settings.button_full_width %} button--full-width{% endif %}"
+        >
+          {{ 'templates.contact.form.send' | t }}
+          <div class="loading-overlay__spinner hidden">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              class="spinner"
+              viewBox="0 0 66 66"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+            </svg>
+          </div>
+        </button>
+      </div>
+      <div
+        class="tnc-checkbox-warning tnc-checkbox-warning-{{ section.id }} tnc-checkbox-warning--under-button-{{ section.id }} hidden"
+        style="margin-top: 0.6em;"
+      ></div>
+    {%- endform -%}
+  </contact-form>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.contact-form.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "display_id",
+      "label": "Display section ID",
+      "info": "ID is used in the Sections group section to merge 2 sections. ID can also be put inside any button link and the button will scroll to this section.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "header",
+      "content": "General"
+    },
+
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Contact form",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "title_highlight_1",
+      "label": "Heading words highlight 1",
+      "info": "Put words in BOLD to highlight them with this style.",
+      "options": [
+        {
+          "value": "solid-color",
+          "label": "Color"
+        },
+        {
+          "value": "gradient-color",
+          "label": "Gradient"
+        },
+        {
+          "value": "bg-color",
+          "label": "Background"
+        },
+        {
+          "value": "underline-solid",
+          "label": "Underline"
+        },
+        {
+          "value": "underline-gradient",
+          "label": "Gradient underline"
+        },
+        {
+          "value": "line-1",
+          "label": "Line 1"
+        },
+        {
+          "value": "line-2",
+          "label": "Line 2"
+        },
+        {
+          "value": "line-3",
+          "label": "Line 3"
+        }
+      ],
+      "default": "solid-color"
+    },
+    {
+      "type": "color_background",
+      "id": "title_highlight_1_gradient",
+      "label": "Text gradient",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'gradient-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_1_bg-color",
+      "label": "Text background color",
+      "default": "#F9EFFF",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_1_color",
+      "label": "Text color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'solid-color' or section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-1_border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-1_border_width",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "select",
+      "id": "highlighted-1_border",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ section.settings.highlighted-1_border_width > 0 and section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "highlighted-1_border_color",
+      "label": "Border color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.highlighted-1_border_width > 0 and section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-1_padding-block",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.3,
+      "unit": "%",
+      "info": "Relative to font size",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-1_padding-inline",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "unit": "%",
+      "default": 0.3,
+      "info": "Relative to font size",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_1_underline-thickness",
+      "label": "Underline thickness",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "default": 2,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'underline-solid' or section.settings.title_highlight_1 == 'underline-gradient' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_1_underline-color",
+      "label": "Underline color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'underline-solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "title_highlight_1_underline-color--gradient",
+      "label": "Underline gradient color",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'underline-gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_1_underline-color-position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Vertical position",
+      "unit": "%",
+      "default": 25,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'underline-solid' or section.settings.title_highlight_1 == 'underline-gradient' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_1_handwritten-color",
+      "label": "Stroke color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'line-1' or section.settings.title_highlight_1 == 'line-2' or section.settings.title_highlight_1 == 'line-3' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_1_handwritten-stroke-width",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Stroke thickness",
+      "unit": "px",
+      "default": 3,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'line-1' or section.settings.title_highlight_1 == 'line-2' or section.settings.title_highlight_1 == 'line-3' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_1_handwritten-position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Vertical position",
+      "unit": "%",
+      "default": 60,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'line-1' or section.settings.title_highlight_1 == 'line-2' or section.settings.title_highlight_1 == 'line-3' }}"
+    },
+    {
+      "type": "select",
+      "id": "title_highlight_2",
+      "label": "Heading words highlight 2",
+      "info": "Put words in ITALIC to highlight them with this style (keep it 'None' if you want to use default italic style).",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid-color",
+          "label": "Color"
+        },
+        {
+          "value": "gradient-color",
+          "label": "Gradient"
+        },
+        {
+          "value": "bg-color",
+          "label": "Background"
+        },
+        {
+          "value": "underline-solid",
+          "label": "Underline"
+        },
+        {
+          "value": "underline-gradient",
+          "label": "Gradient underline"
+        },
+        {
+          "value": "line-1",
+          "label": "Line 1"
+        },
+        {
+          "value": "line-2",
+          "label": "Line 2"
+        },
+        {
+          "value": "line-3",
+          "label": "Line 3"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color_background",
+      "id": "title_highlight_2_gradient",
+      "label": "Text gradient",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'gradient-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_2_bg-color",
+      "label": "Text background color",
+      "default": "#F9EFFF",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_2_color",
+      "label": "Text color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'solid-color' or section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-2_border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-2_border_width",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0,
+      "visible_if": "{{  section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "select",
+      "id": "highlighted-2_border",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ section.settings.highlighted-2_border_width > 0 and section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "highlighted-2_border_color",
+      "label": "Border color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.highlighted-2_border_width > 0 and section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-2_padding-block",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.3,
+      "unit": "%",
+      "info": "Relative to font size",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-2_padding-inline",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "unit": "%",
+      "default": 0.3,
+      "info": "Relative to font size",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_2_underline-thickness",
+      "label": "Underline thickness",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "default": 2,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'underline-solid' or section.settings.title_highlight_2 == 'underline-gradient' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_2_underline-color",
+      "label": "Underline color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'underline-solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "title_highlight_2_underline-color--gradient",
+      "label": "Underline gradient color",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'underline-gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_2_underline-color-position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Vertical position",
+      "unit": "%",
+      "default": 25,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'underline-solid' or section.settings.title_highlight_2 == 'underline-gradient' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_2_handwritten-color",
+      "label": "Stroke color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'line-1' or section.settings.title_highlight_2 == 'line-2' or section.settings.title_highlight_2 == 'line-3' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_2_handwritten-stroke-width",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Stroke thickness",
+      "unit": "px",
+      "default": 3,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'line-1' or section.settings.title_highlight_2 == 'line-2' or section.settings.title_highlight_2 == 'line-3' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_2_handwritten-position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Vertical position",
+      "unit": "%",
+      "default": 60,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'line-1' or section.settings.title_highlight_2 == 'line-2' or section.settings.title_highlight_2 == 'line-3' }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h3",
+          "label": "Extra small"
+        },
+        {
+          "value": "h2",
+          "label": "Small"
+        },
+        {
+          "value": "h1",
+          "label": "Medium"
+        },
+        {
+          "value": "h0",
+          "label": "Large"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "h1",
+      "label": "Heading size"
+    },
+    {
+      "type": "range",
+      "id": "custom_desktop_size",
+      "min": 24,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "default": 39,
+      "label": "Custom desktop size",
+      "visible_if": "{{ section.settings.heading_size == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "custom_mobile_size",
+      "min": 20,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 28,
+      "label": "Custom mobile size",
+      "visible_if": "{{ section.settings.heading_size == 'custom' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_full_width",
+      "label": "Use full width button style",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_background",
+      "default": "#FFFFFF",
+      "label": "Custom background color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "custom_gradient_background",
+      "label": "Custom gradient background",
+      "info": "If added, replaces Background color when applicable.",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_image_background",
+      "label": "Custom image background",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_mobile_image_background",
+      "label": "Custom mobile image background",
+      "info": "If empty, the Custom image background will also be applied to mobile devices",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' and section.settings.custom_image_background != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_text",
+      "default": "#2E2A39",
+      "label": "Custom text color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_solid_button_background",
+      "default": "#dd1d1d",
+      "label": "Custom solid button background",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_solid_button_text",
+      "default": "#ffffff",
+      "label": "Custom solid button label color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "pattern_bg",
+      "label": "Background pattern",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "dotted",
+          "label": "Dots"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "curved-grid",
+          "label": "Curved grid"
+        },
+        {
+          "value": "diagonal-stripes",
+          "label": "Stripes"
+        },
+        {
+          "value": "zigzag",
+          "label": "ZigZag"
+        },
+        {
+          "value": "arrow-pattern",
+          "label": "3D Boxes"
+        },
+        {
+          "value": "radial-rings",
+          "label": "Rings"
+        },
+        {
+          "value": "diamond-grid-1",
+          "label": "Diamond grid 1"
+        },
+        {
+          "value": "diamond-grid-2",
+          "label": "Diamond grid 2"
+        },
+        {
+          "value": "quatrefoils",
+          "label": "Quatrefoils"
+        },
+        {
+          "value": "ovals",
+          "label": "Ovals"
+        },
+        {
+          "value": "hexagons",
+          "label": "Hexagons"
+        },
+        {
+          "value": "curvy",
+          "label": "Curvy"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "pattern_color",
+      "label": "Pattern color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_size",
+      "min": 4,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Pattern size / spacing",
+      "default": 20,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_thickness",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Line / dot thickness",
+      "default": 2,
+      "visible_if": "{{ section.settings.pattern_bg == 'dotted' or section.settings.pattern_bg == 'grid' or section.settings.pattern_bg == 'diagonal-stripes' or section.settings.pattern_bg == 'radial-rings' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_angle",
+      "min": 0,
+      "max": 180,
+      "step": 15,
+      "unit": "deg",
+      "label": "Stripe angle",
+      "default": 45,
+      "visible_if": "{{ section.settings.pattern_bg == 'diagonal-stripes' }}"
+    },
+    {
+      "type": "select",
+      "id": "pattern_opacity_mode",
+      "label": "Opacity type",
+      "default": "low",
+      "options": [
+        {
+          "value": "low",
+          "label": "Low"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity_low",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 7,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' and section.settings.pattern_opacity_mode == 'low' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity_normal",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 80,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' and section.settings.pattern_opacity_mode == 'normal' }}"
+    },
+    {
+      "type": "header",
+      "content": "Form content"
+    },
+    {
+      "type": "paragraph",
+      "content": "Use section blocks to create customized form inputs. If the section doesn't have any blocks added, the default layout will be displayed."
+    },
+    {
+      "type": "header",
+      "content": "Success message"
+    },
+    {
+      "type": "text",
+      "id": "success_icon",
+      "default": "check_circle",
+      "label": "Icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+    },
+    {
+      "type": "checkbox",
+      "id": "success_icon_filled",
+      "default": false,
+      "label": "Filled icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "success_custom_icon",
+      "label": "Custom icon"
+    },
+    {
+      "type": "color",
+      "id": "success_text_color",
+      "default": "#28C100",
+      "label": "Text & icon color"
+    },
+    {
+      "type": "color",
+      "id": "success_bg_color",
+      "label": "Background color",
+      "default": "#F2FFED"
+    },
+    {
+      "type": "range",
+      "id": "success_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "success_border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "label": "Border thickness",
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "success_border_color",
+      "label": "Border color",
+      "default": "#28C100"
+    },
+    {
+      "type": "header",
+      "content": "Error messages"
+    },
+    {
+      "type": "text",
+      "id": "errors_icon",
+      "default": "error",
+      "label": "Icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+    },
+    {
+      "type": "checkbox",
+      "id": "errors_icon_filled",
+      "default": false,
+      "label": "Filled icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "errors_custom_icon",
+      "label": "Custom icon"
+    },
+    {
+      "type": "color",
+      "id": "errors_text_color",
+      "default": "#FF0000",
+      "label": "Text & icon color"
+    },
+    {
+      "type": "color",
+      "id": "errors_bg_color",
+      "label": "Background color",
+      "default": "#fff5f5"
+    },
+    {
+      "type": "range",
+      "id": "errors_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "errors_border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "label": "Border thickness",
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "errors_border_color",
+      "label": "Border color",
+      "default": "#FF0000"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "field_row",
+      "name": "Input row",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Input #1"
+        },
+        {
+          "type": "checkbox",
+          "id": "input_1_enabled",
+          "label": "Input #1 Enabled",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "input_1_type",
+          "label": "Input #1 Type",
+          "options": [
+            {
+              "value": "name",
+              "label": "Name"
+            },
+            {
+              "value": "email",
+              "label": "Email"
+            },
+            {
+              "value": "phone",
+              "label": "Phone number"
+            },
+            {
+              "value": "custom",
+              "label": "Custom"
+            }
+          ],
+          "default": "custom"
+        },
+        {
+          "type": "checkbox",
+          "id": "input_1_required",
+          "label": "Input #1 Required",
+          "default": false,
+          "info": "Automatically enabled if type is set to email."
+        },
+        {
+          "type": "inline_richtext",
+          "id": "input_1_error_message",
+          "label": "Input #1 Error message",
+          "default": "This field is required",
+          "info": "Displayed if the send button is clicked, but a required input is not filled."
+        },
+        {
+          "type": "text",
+          "id": "input_1_custom_name",
+          "label": "Input #1 Custom name",
+          "default": "Custom input name"
+        },
+        {
+          "type": "header",
+          "content": "Input #2"
+        },
+        {
+          "type": "checkbox",
+          "id": "input_2_enabled",
+          "label": "Input #2 Enabled",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "input_2_type",
+          "label": "Input #2 Type",
+          "options": [
+            {
+              "value": "name",
+              "label": "Name"
+            },
+            {
+              "value": "email",
+              "label": "Email"
+            },
+            {
+              "value": "phone",
+              "label": "Phone number"
+            },
+            {
+              "value": "custom",
+              "label": "Custom"
+            }
+          ],
+          "default": "custom"
+        },
+        {
+          "type": "checkbox",
+          "id": "input_2_required",
+          "label": "Input #2 Required",
+          "default": false,
+          "info": "Automatically enabled if type is set to email."
+        },
+        {
+          "type": "inline_richtext",
+          "id": "input_2_error_message",
+          "label": "Input #2 Error message",
+          "default": "This field is required",
+          "info": "Displayed if the send button is clicked, but a required input is not filled."
+        },
+        {
+          "type": "text",
+          "id": "input_2_custom_name",
+          "label": "Input #2 Custom name",
+          "default": "Custom input name"
+        }
+      ]
+    },
+    {
+      "type": "textarea",
+      "name": "Text box",
+      "settings": [
+        {
+          "type": "select",
+          "id": "input_type",
+          "label": "Input type",
+          "options": [
+            {
+              "value": "comment",
+              "label": "Comment"
+            },
+            {
+              "value": "custom",
+              "label": "Custom"
+            }
+          ],
+          "default": "custom"
+        },
+        {
+          "type": "number",
+          "id": "max_characters",
+          "label": "Maximum characters"
+        },
+        {
+          "type": "checkbox",
+          "id": "input_required",
+          "label": "Input required",
+          "default": false
+        },
+        {
+          "type": "inline_richtext",
+          "id": "input_error_message",
+          "label": "Input Error message",
+          "default": "This field is required",
+          "info": "Displayed if the send button is clicked, but a required input is not filled."
+        },
+        {
+          "type": "text",
+          "id": "input_custom_name",
+          "label": "Input custom name",
+          "default": "Custom name"
+        }
+      ]
+    },
+    {
+      "type": "tnc_checkbox",
+      "name": "Policies checkbox",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "header",
+          "content": "Checkbox & text"
+        },
+        {
+          "type": "select",
+          "id": "checkbox_color",
+          "label": "Checkbox color",
+          "options": [
+            {
+              "value": "accent-1",
+              "label": "Accent 1"
+            },
+            {
+              "value": "accent-2",
+              "label": "Accent 2"
+            },
+            {
+              "value": "background-1",
+              "label": "Background 1"
+            },
+            {
+              "value": "background-2",
+              "label": "Background 2"
+            },
+            {
+              "value": "outline-button",
+              "label": "Outline button"
+            },
+            {
+              "value": "text",
+              "label": "Text"
+            }
+          ],
+          "default": "text"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "checkbox_text",
+          "label": "Text",
+          "default": "I agree to the terms & conditions."
+        },
+        {
+          "type": "range",
+          "id": "checkbox_text_size",
+          "min": 12,
+          "max": 22,
+          "step": 1,
+          "unit": "px",
+          "default": 17,
+          "label": "Text size"
+        },
+        {
+          "type": "select",
+          "id": "checkbox_alignment",
+          "label": "Text alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "header",
+          "content": "Warning message",
+          "info": "Displayed when the user clicks on the submit button, but the checkbox hasn't been checked."
+        },
+        {
+          "type": "select",
+          "id": "warning_position",
+          "label": "Position",
+          "options": [
+            {
+              "value": "under-checkbox",
+              "label": "Under the checkbox"
+            },
+            {
+              "value": "above-button",
+              "label": "Above the submit button"
+            },
+            {
+              "value": "under-button",
+              "label": "Under the submit button"
+            }
+          ],
+          "default": "under-button"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "warning_text",
+          "label": "Text",
+          "default": "You must agree to terms & conditions."
+        },
+        {
+          "type": "range",
+          "id": "warning_text_size",
+          "min": 12,
+          "max": 22,
+          "step": 1,
+          "unit": "px",
+          "default": 14,
+          "label": "Text size"
+        },
+        {
+          "type": "select",
+          "id": "warning_alignment",
+          "label": "Text alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "color",
+          "id": "warning_text_color",
+          "label": "Text color",
+          "default": "#ff0000"
+        },
+        {
+          "type": "checkbox",
+          "id": "disable_submit_button",
+          "label": "Visually disable the submit button",
+          "default": false,
+          "info": "Lowers the opacity of the submit button if the checkbox is not checked."
+        },
+        {
+          "type": "header",
+          "content": "Block margin"
+        },
+        {
+          "type": "range",
+          "id": "margin_top",
+          "min": 0,
+          "max": 45,
+          "step": 3,
+          "unit": "px",
+          "label": "Top margin",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "margin_bottom",
+          "min": 0,
+          "max": 45,
+          "step": 3,
+          "unit": "px",
+          "label": "Bottom margin",
+          "default": 15
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.contact-form.presets.name",
+      "blocks": [
+        {
+          "type": "field_row",
+          "settings": {
+            "input_1_type": "name",
+            "input_2_enabled": true,
+            "input_2_type": "email"
+          }
+        },
+        {
+          "type": "field_row",
+          "settings": {
+            "input_1_type": "phone"
+          }
+        },
+        {
+          "type": "textarea",
+          "settings": {
+            "input_type": "comment"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

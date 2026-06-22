@@ -1,0 +1,95 @@
+{% capture timer %}
+  <countdown-timer data-duration="{{ block.settings.timer_duration }}"></countdown-timer>
+{% endcapture %}
+<div class='cart-timer color-{{ block.settings.color_scheme }}' style="--font-size:{{ block.settings.font_size }}rem;margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;" {{ block.shopify_attributes }}>
+  {{ block.settings.timer_text | replace: '[timer]', timer }}
+</div>
+
+{% schema %}
+{
+  "name": "Countdown timer",
+  "tag": null,
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "timer_text",
+      "label": "Text",
+      "default": "<strong>Cart reserved for [timer] more minutes!</strong>",
+      "info": "Use [timer] to display the timer."
+    },
+    {
+      "type": "number",
+      "id": "timer_duration",
+      "label": "Timer duration (in seconds)",
+      "default": 300
+    },
+    {
+      "type": "select",
+      "id": "font_size",
+      "options": [
+        { "value": "1", "label": "Extra small" },
+        { "value": "1.2", "label": "Small" },
+        { "value": "1.4", "label": "Medium" },
+        { "value": "1.6", "label": "Large" },
+        { "value": "1.8", "label": "Extra large" }
+      ],
+      "default": "1.4",
+      "label": "Text size"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        { "value": "inverse", "label": "t:sections.all.colors.inverse.label" }
+      ],
+      "default": "inverse",
+      "label": "Color scheme"
+    },
+    {
+      "type": "header",
+      "content": "Block margin"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "label": "Top margin",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "label": "Bottom margin",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Countdown Timer"
+    }
+  ]
+}
+{% endschema %}

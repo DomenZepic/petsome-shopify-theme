@@ -1,0 +1,90 @@
+{%- if request.page_type == 'index' -%}
+    <h1 class="header__heading">
+{%- endif -%}
+    {% liquid
+      assign logo_link = section.settings.logo_link
+      if logo_link == '/'
+        assign logo_link = request.locale.root_url
+      endif
+    %}
+    <{% if section.settings.logo_link != blank %}a href="{{ logo_link }}"{% else %}div{% endif %}
+        class="header__heading-link{% if section.settings.logo_link != blank %} link link--text focus-inset{% endif %}{% if settings.logo != blank %} media media--transparent ratio{% endif %}"
+        {%- if settings.logo != blank -%}
+            style="--ratio-percent: {{ 1 | divided_by: settings.logo.aspect_ratio | times: 100 }}%"
+        {% endif %}
+    >
+        {%- if settings.logo != blank -%}
+            {% liquid
+                assign logo_alt = settings.logo.alt | default: shop.name | escape
+                assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio
+                assign mobile_logo_height = settings.mobile_logo_width | divided_by: settings.logo_mobile.aspect_ratio
+            %}
+            
+            {{ settings.logo | image_url: width: 500 | image_tag:
+                class: 'header__heading-logo header__heading-logo--main header__heading-logo--main-desktop',
+                widths: '50, 100, 150, 200, 250, 300, 400, 500',
+                height: logo_height,
+                width: settings.logo_width,
+                alt: logo_alt
+            }}
+            {% if settings.logo_mobile != blank %}
+                <style style="display:none;">
+                    @media screen and (max-width: 749px) {
+                        .header__heading-logo--main-desktop {
+                            display: none !important;
+                        }
+                        .header__heading-link {
+                            --ratio-percent: {{ 1 | divided_by: settings.logo_mobile.aspect_ratio | times: 100 }}% !important;
+                        }
+                    }
+                </style>
+                {{ settings.logo_mobile | image_url: width: 500 | image_tag:
+                    class: 'header__heading-logo header__heading-logo--main desktop-hidden',
+                    widths: '50, 100, 150, 200, 250, 300, 400, 500',
+                    height: logo_height,
+                    width: settings.logo_width,
+                    alt: logo_alt
+                }}
+            {% endif %}
+
+            {%- if settings.secondary_logo != blank -%}
+                {%- assign secondary_logo_height = settings.logo_width | divided_by: settings.secondary_logo.aspect_ratio -%}
+                {{ settings.secondary_logo | image_url: width: 500 | image_tag:
+                    id: 'HeaderSecondaryDesktopLogo',
+                    class: 'header__heading-logo header__heading-logo--secondary header__heading-logo--secondary-desktop',
+                    widths: '50, 100, 150, 200, 250, 300, 400, 500',
+                    height: secondary_logo_height,
+                    width: settings.logo_width,
+                    alt: logo_alt
+                }}
+
+                {% if settings.secondary_logo_mobile != blank %}
+                    <style style="display:none;">
+                        @media screen and (max-width: 749px) {
+                            #HeaderSecondaryDesktopLogo {
+                                display: none !important;
+                            }
+                        }
+                        @media screen and (min-width: 749px) {
+                            #HeaderSecondaryMobileLogo {
+                                display: none !important;
+                            }
+                        }
+                    </style>
+                    {{ settings.secondary_logo_mobile | image_url: width: 500 | image_tag:
+                        id: 'HeaderSecondaryMobileLogo',
+                        class: 'header__heading-logo header__heading-logo--secondary desktop-hidden',
+                        widths: '50, 100, 150, 200, 250, 300, 400, 500',
+                        height: logo_height,
+                        width: settings.logo_width,
+                        alt: logo_alt
+                    }}
+                {% endif %}
+            {%- endif -%}
+        {%- else -%}
+            <span class="h2">{{ shop.name }}</span>
+        {%- endif -%}
+    </{% if section.settings.logo_link != blank %}a{% else %}div{% endif %}>
+{%- if request.page_type == 'index' -%}
+    </h1>
+{%- endif -%}

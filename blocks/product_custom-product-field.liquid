@@ -1,0 +1,281 @@
+{% liquid
+  assign not_main = false
+  if section.settings.product_images == 'all' or section.settings.product_images == 'one'
+    assign not_main = true
+  endif
+%}
+{% render 'custom-product-field', block: block, not_main: not_main %}
+
+{% schema %}
+{
+  "name": "Custom product field",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "select",
+      "id": "type",
+      "options": [
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "number",
+          "label": "Number"
+        },
+        {
+          "value": "textarea",
+          "label": "Textarea"
+        },
+        {
+          "value": "pills",
+          "label": "Pills"
+        },
+        {
+          "value": "swatches",
+          "label": "Color swatches"
+        },
+        {
+          "value": "select",
+          "label": "Dropdown"
+        }
+      ],
+      "default": "text",
+      "label": "Field type"
+    },
+    {
+      "type": "text",
+      "id": "field_name",
+      "label": "Field name",
+      "default": "Name",
+      "info": "Custom property name that's sent to order information."
+    },
+    {
+      "type": "text",
+      "id": "field_label",
+      "label": "Field label",
+      "default": "Your name"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width input & dropdown",
+      "default": false,
+      "visible_if": "{{ block.settings.type != 'pills' and block.settings.type != 'swatches' }}"
+    },
+    {
+      "type": "header",
+      "content": "Validation"
+    },
+    {
+      "type": "checkbox",
+      "id": "required",
+      "default": false,
+      "label": "Required field",
+      "info": "Disables all Add to Cart buttons unless all required fields are filled out & displays an error message."
+    },
+    {
+      "type": "text",
+      "id": "atc_error_message",
+      "default": "Please enter your name",
+      "label": "ATC button error message",
+      "info": "Displayed inside the Add to Cart button if a required field is empty. If multiple required fields exist, the message from the last one will be applied.",
+      "visible_if": "{{ block.settings.required }}"
+    },
+    {
+      "type": "text",
+      "id": "field_error_message",
+      "default": "This field is required!",
+      "label": "Field error message",
+      "info": "Displayed if a required field value is changed to empty.",
+      "visible_if": "{{ block.settings.required }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_atc_error_msg",
+      "default": false,
+      "label": "Apply error message to Sticky ATC",
+      "info": "Displays ATC button error message in the Sticky Add to Cart as well.",
+      "visible_if": "{{ block.settings.required }}"
+    },
+    {
+      "type": "header",
+      "content": "Text input",
+      "visible_if": "{{ block.settings.type == 'text' }}"
+    },
+    {
+      "type": "text",
+      "id": "text_placeholder",
+      "label": "Placeholder",
+      "default": "Your name",
+      "visible_if": "{{ block.settings.type == 'text' }}"
+    },
+    {
+      "type": "number",
+      "id": "text_max_characters",
+      "label": "Maximum characters",
+      "visible_if": "{{block.settings.type == 'text' }}"
+    },
+    {
+      "type": "header",
+      "content": "Number input",
+      "visible_if": "{{ block.settings.type == 'number' }}"
+    },
+    {
+      "type": "text",
+      "id": "number_placeholder",
+      "label": "Placeholder",
+      "visible_if": "{{ block.settings.type == 'number' }}"
+    },
+    {
+      "type": "number",
+      "id": "number_min",
+      "label": "Minimum value",
+      "visible_if": "{{ block.settings.type == 'number' }}"
+    },
+    {
+      "type": "number",
+      "id": "number_max",
+      "label": "Maximum value",
+      "visible_if": "{{ block.settings.type == 'number' }}"
+    },
+    {
+      "type": "header",
+      "content": "Textarea input",
+      "visible_if": "{{ block.settings.type == 'textarea' }}"
+    },
+    {
+      "type": "text",
+      "id": "textarea_placeholder",
+      "label": "Placeholder",
+      "visible_if": "{{ block.settings.type == 'textarea' }}"
+    },
+    {
+      "type": "select",
+      "id": "textarea_height",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium",
+      "label": "Height",
+      "visible_if": "{{ block.settings.type == 'textarea' }}"
+    },
+    {
+      "type": "header",
+      "content": "Pills & Dropdown input",
+      "visible_if": "{{ block.settings.type == 'pills' or block.settings.type == 'select' }}"
+    },
+    {
+      "type": "text",
+      "id": "select_options",
+      "label": "Options separated by comma",
+      "default": "Option 1,Option 2,Option 3",
+      "visible_if": "{{ block.settings.type == 'pills' or block.settings.type == 'select' }}"
+    },
+    {
+      "type": "header",
+      "content": "Swatches",
+      "visible_if": "{{ block.settings.type == 'swatches' }}"
+    },
+    {
+      "type": "text",
+      "id": "swatch_options",
+      "label": "Colors separated by comma",
+      "default": "Red,Blue,Orange",
+      "visible_if": "{{ block.settings.type == 'swatches' }}"
+    },
+    {
+      "type": "select",
+      "id": "swatches_size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "label": "Swatch size",
+      "default": "medium",
+      "visible_if": "{{ block.settings.type == 'swatches' }}"
+    },
+    {
+      "type": "select",
+      "id": "swatches_custom_colors",
+      "options": [
+        {
+          "value": "custom",
+          "label": "Custom colors list"
+        },
+        {
+          "value": "predefined",
+          "label": "Global predefined colors list"
+        }
+      ],
+      "label": "Displayed colors",
+      "default": "custom",
+      "info": "Custom colors list takes the list of the custom CSS values from the setting bellow. Watch the tutorial for CSS values [here](https:\/\/youtu.be\/Xo_ZFzRCk3o). Global predefined custom list displays the color from the list in Theme settings > Color swatches.",
+      "visible_if": "{{ block.settings.type == 'swatches' }}"
+    },
+    {
+      "type": "text",
+      "id": "swatches_custom_colors_list",
+      "label": "Custom colors list",
+      "info": "CSS values (hex/gradient) split by a comma. Example: \"#FF0000, #0000FF, #FFA500\"",
+      "default": "#FF0000, #0000FF, #FFA500",
+      "visible_if": "{{ block.settings.type == 'swatches' }}"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom product field",
+      "category": "Product basics"
+    }
+  ]
+}
+{% endschema %}

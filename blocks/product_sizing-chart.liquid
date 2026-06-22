@@ -1,0 +1,311 @@
+{% render 'sizing-chart', block: block %}
+
+{% schema %}
+{
+  "name": "Sizing chart",
+  "tag": null,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "test_mode",
+      "label": "Test mode",
+      "info": "Keeps the popup open for faster customization.",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Open button"
+    },
+    {
+      "type": "paragraph",
+      "content": "NOTE: To display the sizing chart inside a varinat picker, add this block directly into the Variant picker block."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Sizing chart"
+    },
+    {
+      "type": "text",
+      "id": "button_icon",
+      "default": "straighten",
+      "label": "Button icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+    },
+    {
+      "type": "checkbox",
+      "id": "button_filled_icon",
+      "default": false,
+      "label": "Button filled icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "button_custom_icon",
+      "label": "Button custom icon"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 17,
+      "label": "Button text size"
+    },
+    {
+      "type": "select",
+      "id": "button_alignment",
+      "options": [
+        {
+          "value": "start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "end",
+          "label": "Right"
+        }
+      ],
+      "default": "start",
+      "label": "Button alignment"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_underline",
+      "default": false,
+      "label": "Button underlined text"
+    },
+    {
+      "type": "header",
+      "content": "Popup"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "default": "Sizing Chart",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h4",
+          "label": "Small"
+        },
+        {
+          "value": "h3",
+          "label": "Medium"
+        },
+        {
+          "value": "h2",
+          "label": "Large"
+        }
+      ],
+      "default": "h3",
+      "label": "Heading size",
+      "visible_if": "{{ block.settings.headline != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "close_button_style",
+      "options": [
+        {
+          "value": "outlined",
+          "label": "Outlined"
+        },
+        {
+          "value": "minimalistic",
+          "label": "Minimalistic"
+        }
+      ],
+      "default": "minimalistic",
+      "label": "Close button style"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "header",
+      "content": "Table"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "table_header_content",
+      "label": "Header content",
+      "default": "Size, Chest, Length, Shoulder",
+      "info": "Split the words with a comma to create columns. If you wish to leave a cell empty, use [empty]. Avoid styling the comma with bold,italic etc. to avoid unexpected content styling."
+    },
+    {
+      "type": "select",
+      "id": "table_header_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "inverse",
+      "label": "Header color scheme"
+    },
+    {
+      "type": "richtext",
+      "id": "table_content",
+      "label": "Body content",
+      "default": "<p>S, 95cm, 61cm, 44cm</p><p>M, 102cm, 66cm, 46cm</p><p>L, 106cm, 71cm, 48cm</p><p>XL, 111cm, 74cm, 51cm</p>",
+      "info": "Go into a new line to create rows. Split the words with a comma to create columns. If you wish to leave a cell empty, use [empty]. Avoid styling the comma with bold,italic etc. to avoid unexpected content styling."
+    },
+    {
+      "type": "header",
+      "content": "Caption"
+    },
+    {
+      "type": "richtext",
+      "id": "caption_text",
+      "label": "Caption",
+      "default": "<p>Give your customers further information about choosing the correct size.</p>"
+    },
+    {
+      "type": "select",
+      "id": "caption_size",
+      "options": [
+        {
+          "value": "1.2rem",
+          "label": "Small"
+        },
+        {
+          "value": "1.45rem",
+          "label": "Medium"
+        },
+        {
+          "value": "1.7rem",
+          "label": "Large"
+        }
+      ],
+      "default": "1.45rem",
+      "label": "Caption size",
+      "visible_if": "{{ block.settings.caption_text != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "caption_color",
+      "label": "Caption color",
+      "default": "#121212",
+      "visible_if": "{{ block.settings.caption_text != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "caption_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left",
+      "label": "Caption alignment",
+      "visible_if": "{{ block.settings.caption_text != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "top_image",
+      "label": "Top image",
+      "info": "Displayed above the table."
+    },
+    {
+      "type": "image_picker",
+      "id": "bottom_image",
+      "label": "Bottom image",
+      "info": "Displayed bellow the table and the caption."
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sizing chart",
+      "category": "Information display"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,727 @@
+
+{% render 'upsell-block', block: block, type: 'product-info' %}
+
+{% schema %}
+{
+  "name": "Product upsells",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "options": [
+        {
+          "value": "toggle_switch",
+          "label": "Toggle switch"
+        },
+        {
+          "value": "checkbox_1",
+          "label": "Checkbox style 1"
+        },
+        {
+          "value": "checkbox_2",
+          "label": "Checkbox style 2"
+        },
+        {
+          "value": "plus_button",
+          "label": "Plus button"
+        },
+        {
+          "value": "add_button",
+          "label": "Classic add button"
+        }
+      ],
+      "default": "toggle_switch",
+      "label": "Toggle button style"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "add_btn_label",
+      "label": "Classic add button label",
+      "default": "<strong>Add</strong>",
+      "visible_if": "{{ block.settings.style == 'add_button' }}"
+    },
+    {
+      "type": "select",
+      "id": "btn_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "under",
+          "label": "Under product information"
+        }
+      ],
+      "default": "right",
+      "label": "Toggle button position",
+      "info": "\"Under product information\" is only applied if Toggle button style is set to \"Classic add button\"."
+    },
+    {
+      "type": "select",
+      "id": "toggle_element",
+      "options": [
+        {
+          "value": "button",
+          "label": "Toggle button"
+        },
+        {
+          "value": "container",
+          "label": "Whole container"
+        }
+      ],
+      "default": "button",
+      "label": "Toggle product selection by clicking on:"
+    },
+    {
+      "type": "select",
+      "id": "stacking",
+      "options": [
+        {
+          "value": "row",
+          "label": "Under each other"
+        },
+        {
+          "value": "column",
+          "label": "Next to each other"
+        },
+        {
+          "value": "slider",
+          "label": "Slider"
+        }
+      ],
+      "default": "row",
+      "label": "Multiple products stacking",
+      "info": "If Next to each other is selected, featured images with transparent backgrounds are recommended."
+    },
+    {
+      "type": "select",
+      "id": "accent_color",
+      "label": "Accent color",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "header",
+      "content": "Products"
+    },
+    {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "Products",
+      "limit": 50
+    },
+    {
+      "type": "paragraph",
+      "content": "Or"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_dynamic_recommendations",
+      "label": "Enable dynamic product recommendations",
+      "default": false,
+      "info": "If this option is enabled & recommendations are available, dynamic recommendations created by Shopify will be displayed inside the upsell block."
+    },
+    {
+      "type": "paragraph",
+      "content": "Or"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection of products to display"
+    },
+    {
+      "type": "header",
+      "content": "Product #1"
+    },
+    {
+      "type": "checkbox",
+      "id": "prdouct_1_preselected",
+      "label": "Product #1 Preselected",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "product_1_image",
+      "label": "Product #1 Featured image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "product_1_desc",
+      "label": "Product #1 Description"
+    },
+    {
+      "type": "text",
+      "id": "product_1_percentage_discount",
+      "label": "Product #1 Percentage discount",
+      "default": "0",
+      "info": "Percentae to be discounted from the product price, WITHOUT the % symbol."
+    },
+    {
+      "type": "text",
+      "id": "product_1_fixed_amount_discount",
+      "label": "Product #1 Fixed amount discount",
+      "default": "0",
+      "info": "Fixed amount of money to be discounted from the product price, WITHOUT the currency symbol."
+    },
+    {
+      "type": "header",
+      "content": "Product #2"
+    },
+    {
+      "type": "checkbox",
+      "id": "prdouct_2_preselected",
+      "label": "Product #2 Preselected",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "product_2_image",
+      "label": "Product #2 Featured image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "product_2_desc",
+      "label": "Product #2 Description"
+    },
+    {
+      "type": "text",
+      "id": "product_2_percentage_discount",
+      "label": "Product #2 Percentage discount",
+      "default": "0",
+      "info": "Percentae to be discounted from the product price, WITHOUT the % symbol."
+    },
+    {
+      "type": "text",
+      "id": "product_2_fixed_amount_discount",
+      "label": "Product #2 Fixed amount discount",
+      "default": "0",
+      "info": "Fixed amount of money to be discounted from the product price, WITHOUT the currency symbol."
+    },
+    {
+      "type": "header",
+      "content": "Product #3"
+    },
+    {
+      "type": "checkbox",
+      "id": "prdouct_3_preselected",
+      "label": "Product #3 Preselected",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "product_3_image",
+      "label": "Product #3 Featured image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "product_3_desc",
+      "label": "Product #3 Description"
+    },
+    {
+      "type": "text",
+      "id": "product_3_percentage_discount",
+      "label": "Product #3 Percentage discount",
+      "default": "0",
+      "info": "Percentae to be discounted from the product price, WITHOUT the % symbol."
+    },
+    {
+      "type": "text",
+      "id": "product_3_fixed_amount_discount",
+      "label": "Product #3 Fixed amount discount",
+      "default": "0",
+      "info": "Fixed amount of money to be discounted from the product price, WITHOUT the currency symbol."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_images",
+      "label": "Show product images",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "images_size",
+      "options": [
+        {
+          "value": "3.5",
+          "label": "Extra small"
+        },
+        {
+          "value": "4.25",
+          "label": "Small"
+        },
+        {
+          "value": "5",
+          "label": "Medium"
+        },
+        {
+          "value": "5.75",
+          "label": "Large"
+        },
+        {
+          "value": "6.5",
+          "label": "Extra large"
+        }
+      ],
+      "default": "5",
+      "label": "Images size",
+      "visible_if": "{{ block.settings.show_images }}"
+    },
+    {
+      "type": "range",
+      "id": "images_corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Images corner radius",
+      "default": 0,
+      "visible_if": "{{ block.settings.show_images }}"
+    },
+    {
+      "type": "select",
+      "id": "title_size",
+      "options": [
+        {
+          "value": "1",
+          "label": "Extra small"
+        },
+        {
+          "value": "1.2",
+          "label": "Small"
+        },
+        {
+          "value": "1.4",
+          "label": "Medium"
+        },
+        {
+          "value": "1.6",
+          "label": "Large"
+        },
+        {
+          "value": "1.8",
+          "label": "Extra large"
+        }
+      ],
+      "default": "1.4",
+      "label": "Product title font size"
+    },
+    {
+      "type": "checkbox",
+      "id": "title_link",
+      "label": "Make title a product page link",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "desc_size",
+      "options": [
+        {
+          "value": "0.9",
+          "label": "Extra small"
+        },
+        {
+          "value": "1.05",
+          "label": "Small"
+        },
+        {
+          "value": "1.2",
+          "label": "Medium"
+        },
+        {
+          "value": "1.35",
+          "label": "Large"
+        },
+        {
+          "value": "1.5",
+          "label": "Extra large"
+        }
+      ],
+      "default": "1.2",
+      "label": "Description font size"
+    },
+    {
+      "type": "select",
+      "id": "price_position",
+      "options": [
+        {
+          "value": "next_to_title",
+          "label": "Next to title"
+        },
+        {
+          "value": "separate",
+          "label": "Separate"
+        },
+        {
+          "value": "hidden",
+          "label": "Hidden"
+        }
+      ],
+      "default": "next_to_title",
+      "label": "Price position"
+    },
+    {
+      "type": "select",
+      "id": "price_size",
+      "options": [
+        {
+          "value": "1",
+          "label": "Extra small"
+        },
+        {
+          "value": "1.2",
+          "label": "Small"
+        },
+        {
+          "value": "1.4",
+          "label": "Medium"
+        },
+        {
+          "value": "1.6",
+          "label": "Large"
+        },
+        {
+          "value": "1.8",
+          "label": "Extra large"
+        }
+      ],
+      "default": "1.4",
+      "label": "Price font size",
+      "visible_if": "{{ block.settings.price_position != 'hidden' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_compare_price",
+      "label": "Hide compare price",
+      "default": false,
+      "visible_if": "{{ block.settings.price_position != 'hidden' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variant_picker",
+      "label": "Show variant picker",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "update_prices",
+      "label": "Enable variant price updates",
+      "default": false,
+      "info": "This option will dynamically change the displayed price based on the selected variant. ATTENTION: This option might NOT work with currency converters.",
+      "visible_if": "{{ block.settings.show_variant_picker }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "skip_unavailable",
+      "label": "Hide & automatically skip sold out variants",
+      "default": false,
+      "visible_if": "{{ block.settings.show_variant_picker }}"
+    },
+    {
+      "type": "header",
+      "content": "Container title"
+    },
+    {
+      "type": "text",
+      "id": "container_title",
+      "label": "Title"
+    },
+    {
+      "type": "select",
+      "id": "container_title_position",
+      "label": "Position",
+      "options": [
+        {
+          "value": "outside",
+          "label": "Outside the container"
+        },
+        {
+          "value": "inside",
+          "label": "Inside the container"
+        }
+      ],
+      "default": "outside",
+      "info": "Difference is visible if drop shadow, border or background is active.",
+      "visible_if": "{{ block.settings.container_title != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "container_title_mobile_text_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "label": "Mobile title text size",
+      "visible_if": "{{ block.settings.container_title != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "container_title_desktop_text_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "label": "Desktop title text size",
+      "visible_if": "{{ block.settings.container_title != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Container"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "show_box_shadow",
+      "label": "Show drop shadow",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border",
+      "label": "Show border",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "regular_border_color",
+      "label": "Border color",
+      "default": "#E6E6E6",
+      "visible_if": "{{ block.settings.show_border }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_border_color",
+      "label": "Selected border color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.show_border }}"
+    },
+    {
+      "type": "select",
+      "id": "border_width",
+      "options": [
+        {
+          "value": "0.1",
+          "label": "Thin"
+        },
+        {
+          "value": "0.2",
+          "label": "Normal"
+        }
+      ],
+      "default": "0.2",
+      "label": "Border thickness",
+      "visible_if": "{{ block.settings.show_border }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_custom_bg",
+      "label": "Show custom background",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "regular_bg_color",
+      "label": "Background color",
+      "default": "#F2F2F2",
+      "visible_if": "{{ block.settings.show_custom_bg }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_bg_color",
+      "label": "Selected background color",
+      "default": "#F2F2F2",
+      "visible_if": "{{ block.settings.show_custom_bg }}"
+    },
+    {
+      "type": "header",
+      "content": "Slider layout"
+    },
+    {
+      "type": "paragraph",
+      "content": "Set \"Multiple products stacking\" to \"Slider\" to activate the slider.",
+      "visible_if": "{{ block.settings.stacking != 'slider' }}"
+    },
+    {
+      "type": "select",
+      "id": "slider_type",
+      "options": [
+        {
+          "value": "slide",
+          "label": "Classic"
+        },
+        {
+          "value": "fade",
+          "label": "Fade"
+        }
+      ],
+      "default": "slide",
+      "label": "Type",
+      "visible_if": "{{ block.settings.stacking == 'slider' }}"
+    },
+    {
+      "type": "select",
+      "id": "arrows_position",
+      "options": [
+        {
+          "value": "hidden",
+          "label": "Hidden"
+        },
+        {
+          "value": "under",
+          "label": "Under the slider"
+        },
+        {
+          "value": "sides",
+          "label": "On sides of the slider"
+        }
+      ],
+      "default": "hidden",
+      "label": "Arrows position",
+      "visible_if": "{{ block.settings.stacking == 'slider' }}"
+    },
+    {
+      "type": "select",
+      "id": "arrows_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "inverse",
+      "label": "Arrows color scheme",
+      "visible_if": "{{ block.settings.arrows_position != 'hidden' and block.settings.stacking == 'slider' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_arrows",
+      "label": "Transparent arrows",
+      "default": true,
+      "visible_if": "{{ block.settings.arrows_position != 'hidden' and block.settings.stacking == 'slider' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_dots",
+      "label": "Display dots",
+      "default": true,
+      "visible_if": "{{ block.settings.stacking == 'slider' }}"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product upsells",
+      "category": "Upsells, offers & gifts"
+    }
+  ]
+}
+{% endschema %}

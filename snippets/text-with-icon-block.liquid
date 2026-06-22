@@ -1,0 +1,136 @@
+{% comment %}
+  block, margins (boolean), block_attributes (boolean)
+{% endcomment %}
+
+{% liquid
+  assign nowrap = false
+  assign item_count = 0
+  if block.settings.text_1 != blank
+    assign item_count = item_count | plus: 1
+  endif
+  if block.settings.text_2 != blank
+    assign item_count = item_count | plus: 1
+  endif
+  if block.settings.text_3 != blank
+    assign item_count = item_count | plus: 1
+  endif
+  if block.settings.text_4 != blank
+    assign item_count = item_count | plus: 1
+  endif
+  if block.settings.text_5 != blank
+    assign item_count = item_count | plus: 1
+  endif
+  if block.settings.text_6 != blank
+    assign item_count = item_count | plus: 1
+  endif
+  if item_count > 3
+    assign item_count = 2
+  endif
+%}
+{% if block.settings.block_width == 'fixed' %}
+  <style>
+    .product__text-container-{{ block.id }} {
+      width: {{ block.settings.block_mobile_width }}px;
+      flex-shrink: 0;
+    }
+    @media screen and (min-width: 750px) {
+      .product__text-container-{{ block.id }} {
+        width: {{ block.settings.block_desktop_width }}px;
+      }
+    }
+  </style>
+{% elsif block.settings.block_width == 'unlimited' %}
+  {% assign nowrap = true %}
+{% endif %}
+<div
+  class="
+    product__text-container product__text-container-{{ block.id }} {{ block.settings.visibility }}
+    product__text-container--{{ block.settings.alignment }}
+    product__text-container--{{ block.settings.direction }}
+    product__text-container--{{ block.settings.width }}
+    product__text-container--styling-{{ block.settings.styling_container }}
+    {% if mobile_align %} product__text-container--mobile-{{ block.settings.mobile_alignment }}{% endif %}
+    {% if block.settings.enable_bg %} product__text-container--background{% endif %}
+    {% if block.settings.border_size > 0 %} product__text-container--border{% endif %}
+    {% if item_count > 1 %} product__text-container--multiple{% endif %}
+    {% if block.settings.width == 'full_negative' %} side-margins-negative{% endif %}
+    {% if block.settings.font_family == 'heading' %} heading-font{% endif %}
+  "
+  style="
+    --item-count:{{ item_count }};
+    --mobile-text-size: {{ block.settings.mobile_text_size | divided_by: 10.0 }}rem;
+    --desktop-text-size: {{ block.settings.desktop_text_size | divided_by: 10.0 }}rem;
+    --icon-scale:{{ block.settings.icon_scale | divided_by: 100.0 }};
+    --column-gap:{{ block.settings.column_gap | divided_by: 2.0 }}em;
+    --row-gap:{{ block.settings.column_gap | divided_by: 5.0 }}em;
+    --padding:{{ block.settings.padding | divided_by: 7.0 }}em;
+    --bg-color:{{ block.settings.bg_color }};
+    --corner-radius:{{ block.settings.corner_radius | divided_by: 100.0 }}em;
+    --border-size:{{ block.settings.border_size }}px;
+    --border-style:{{ block.settings.border_style }};
+    --border-color:{{ block.settings.border_color }};
+    {% if margins %}
+      margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+      margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+    {% endif %}
+  "
+  {% if block_attributes %}
+    {{- block.shopify_attributes -}}
+  {% endif %}
+>
+  {% for i in (1..6) %}
+    {% liquid
+      case i
+        when 1
+          assign text = block.settings.text_1
+          assign icon = block.settings.icon_1
+          assign custom_icon = block.settings.custom_icon_1
+          assign filled_icon = block.settings.filled_icon_1
+        when 2
+          assign text = block.settings.text_2
+          assign icon = block.settings.icon_2
+          assign custom_icon = block.settings.custom_icon_2
+          assign filled_icon = block.settings.filled_icon_2
+        when 3
+          assign text = block.settings.text_3
+          assign icon = block.settings.icon_3
+          assign custom_icon = block.settings.custom_icon_3
+          assign filled_icon = block.settings.filled_icon_3
+        when 4
+          assign text = block.settings.text_4
+          assign icon = block.settings.icon_4
+          assign custom_icon = block.settings.custom_icon_4
+          assign filled_icon = block.settings.filled_icon_4
+        when 5
+          assign text = block.settings.text_5
+          assign icon = block.settings.icon_5
+          assign custom_icon = block.settings.custom_icon_5
+          assign filled_icon = block.settings.filled_icon_5
+        when 6
+          assign text = block.settings.text_6
+          assign icon = block.settings.icon_6
+          assign custom_icon = block.settings.custom_icon_6
+          assign filled_icon = block.settings.filled_icon_6
+      endcase
+    %}
+    {% if text != blank %}
+      <p
+        class="product__text product__text-{{ block.settings.alignment }}{% if mobile_align %} product__text-mobile-{{ block.settings.mobile_alignment }}{% endif %}"
+        style="--text-color:{{ block.settings.text_color }};--icon-color:{{ block.settings.icon_color }};"
+      >
+        {% if custom_icon != blank %}
+          <img
+            src="{{ custom_icon | image_url }}"
+            alt="{{ custom_icon.alt }}"
+            width="auto"
+            height="auto"
+            loading="lazy"
+          >
+        {% elsif icon != blank %}
+          {% render 'material-icon', icon: icon, filled: filled_icon %}
+        {% endif %}
+        <span{% if nowrap %} class="nowrap"{% endif %}>{{- text -}}</span>
+      </p>
+    {% endif %}
+  {% endfor %}
+</div>

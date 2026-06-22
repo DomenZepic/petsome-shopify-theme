@@ -1,0 +1,77 @@
+{% liquid
+  assign has_active = true
+  if section.settings.timeline_direction == 'vertical' and section.settings.style_vertical == 'classic'
+    assign has_active = false
+  elsif section.settings.timeline_direction == 'horizontal' and section.settings.style_horizontal == 'classic'
+    assign has_active = false
+  endif
+%}
+{% if has_active %}
+  <div id="Timeline-{{ section.id }}__active" class="timeline-active-content-container {{ block.settings.visibility }}" data-active-outlet></div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Active content container",
+  "tag": null,
+  "blocks": [
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "header",
+      "content": "IMPORTANT WARNING",
+      "visible_if": "{{ section.settings.timeline_direction == 'vertical' and section.settings.style_vertical == 'classic' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "To use this feature, you must set 'Style' to 'Scroll / click activated' OR 'Accordion' in section settings.",
+      "visible_if": "{{ section.settings.timeline_direction == 'vertical' and section.settings.style_vertical == 'classic' }}"
+    },
+    {
+      "type": "header",
+      "content": "IMPORTANT WARNING",
+      "visible_if": "{{ section.settings.timeline_direction == 'horizontal' and section.settings.style_horizontal == 'classic' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "To use this feature, you must set 'Style' to 'Arrows / click activated' in section settings.",
+      "visible_if": "{{ section.settings.timeline_direction == 'horizontal' and section.settings.style_horizontal == 'classic' }}"
+    },
+    {
+      "type": "header",
+      "content": "HOW TO USE?"
+    },
+    {
+      "type": "paragraph",
+      "content": "When a timeline item is active (scroll activated / clicked on / switched to with an arrow), the content from the 'Acive content' block of that item will be displayed here"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Active content container",
+      "blocks": [
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,652 @@
+{% liquid
+  assign product_form_id = 'product-form-' | append: section.id
+
+  assign main_product = true
+  if section.settings.product_images == 'all' or section.settings.product_images == 'one'
+    assign main_product = false
+    assign product = section.settings.product
+  endif
+
+  if block.settings.title != blank
+    assign sticky_title = block.settings.title | replace: '[product_title]', product.title
+  else
+    assign sticky_title = product.title
+  endif
+
+  assign display_mode = block.settings.display_when
+  assign display_threshold = 0
+  if display_mode == 'after_pixels'
+    assign display_threshold = block.settings.display_pixels
+  elsif display_mode == 'after_percent'
+    assign display_threshold = block.settings.display_percent
+  endif
+
+  assign desktop_floating = false
+  if block.settings.desktop_layout == 'floating'
+    assign desktop_floating = true
+  endif
+  assign mobile_floating = false
+  if block.settings.mobile_layout == 'floating'
+    assign mobile_floating = true
+  endif
+
+  assign show_subtitle = false
+  if block.settings.subtitle != blank
+    if block.settings.desktop_show_subtitle or block.settings.mobile_show_subtitle
+      assign show_subtitle = true
+    endif
+  endif
+%}
+{% if block.settings.enable_custom_btn_color %}
+  {% style %}
+    #sticky-atc-{{ section.id }} .button {
+      --color-button: {{ block.settings.custom_btn_color.red }}, {{ block.settings.custom_btn_color.green }}, {{ block.settings.custom_btn_color.blue }};
+    }
+  {% endstyle %}
+{% endif %}
+
+<sticky-atc
+  id="sticky-atc-{{ section.id }}"
+  class="sticky-atc color-{{ block.settings.color_scheme }}{% unless block.settings.mobile_show_sale_badge %} sticky-atc--mobile-no-badge{% endunless %}{% unless block.settings.desktop_show_sale_badge %} sticky-atc--desktop-no-badge{% endunless %}{% if block.settings.mobile_transparent_bg %} sticky-atc--mobile-transparent{% endif %}{% if block.settings.desktop_transparent_bg %} sticky-atc--desktop-transparent{% endif %}{% if block.settings.mobile_show_title or block.settings.mobile_show_price %} sticky-atc--small-mobile-select{% endif %}{% if desktop_floating %} sticky-atc--floating-desktop{% endif %}{% if mobile_floating %} sticky-atc--floating-mobile{% endif %}"
+  data-section="{{ section.id }}"
+  data-display-mode="{{ display_mode }}"
+  data-display-threshold="{{ display_threshold }}"
+  style="--sticky-atc-floating-max-width: {{ block.settings.desktop_max_width | default: 800 | divided_by: 10.0 }}rem;"
+  {%- if block.settings.function != 'add_to_cart' -%}
+    data-scroll-btn="true"
+    data-scroll-destination="{{ block.settings.function | remove: 'scroll_' }}"
+  {%- endif -%}
+  {{ block.shopify_attributes }}
+>
+  <div class='sticky-atc-container page-width{% if block.settings.desktop_full_button_width %} sticky-atc--desktop-btn-full{% endif %}{% if block.settings.mobile_full_button_width %} sticky-atc--mobile-btn-full{% endif %}'>
+    {%- if block.settings.mobile_show_image or block.settings.desktop_show_image -%}
+      <div class='sticky-atc__image{% unless block.settings.mobile_show_image %} mobile-hidden{% endunless %}{% unless block.settings.desktop_show_image %} desktop-hidden{% endunless %}'>
+        <img
+          id="sticky-atc-image-{{ section.id }}"
+          src="{{ product.featured_image | image_url: width: 500 }}"
+          alt="{{ product.featured_image.alt | escape }}"
+          loading="lazy"
+          width="auto"
+          height="auto"
+        >
+      </div>
+    {%- endif -%}
+    <div class='sticky-atc__left'>
+      <div class='sticky-atc__left__content'>
+        {% if block.settings.mobile_show_title or block.settings.desktop_show_title %}
+          <h4 class='sticky-atc__title{% unless block.settings.mobile_show_title %} mobile-hidden{% endunless %}{% unless block.settings.desktop_show_title %} desktop-hidden{% endunless %}'>
+            {{ sticky_title }}
+          </h4>
+        {% endif %}
+        {%- if show_subtitle -%}
+          <p class='sticky-atc__subtitle{% unless block.settings.mobile_show_subtitle %} mobile-hidden{% endunless %}{% unless block.settings.desktop_show_subtitle %} desktop-hidden{% endunless %}'>
+            {{ block.settings.subtitle }}
+          </p>
+        {%- endif -%}
+        {% if block.settings.mobile_rating_stars or block.settings.desktop_rating_stars %}
+          <div class='rating-stars-and-text font-size--desktop-auto flex-center{% unless block.settings.mobile_rating_stars %} mobile-hidden{% endunless %}{% unless block.settings.desktop_rating_stars %} desktop-hidden{% endunless %}' style='--bg-star-color:{{ block.settings.star_color }};--font-size:1.3rem;--alignment:flex-start;'>
+            <div class='rating-stars__container rating-stars__container--underlay'>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='currentColor'>
+                <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='currentColor'>
+                <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='currentColor'>
+                <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='currentColor'>
+                <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+              </svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='currentColor'>
+                <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+              </svg>
+            </div>
+            <span class="rating-stars__label">&nbsp;{{ block.settings.stars_label }}</span>
+          </div>
+        {% endif %}
+        {%- if block.settings.mobile_show_price or block.settings.desktop_show_price -%}
+          <div class='sticky-atc__price{% unless block.settings.mobile_show_price %} mobile-hidden{% endunless %}{% unless block.settings.desktop_show_price %} desktop-hidden{% endunless %}' id="sticky-atc-separate-price-{{ section.id }}">
+            {%- render 'price',
+              product: product,
+              use_variant: true,
+              show_badges: true,
+              price_class: '',
+              hide_currency_code: true
+            -%}
+          </div>
+        {%- endif -%}
+        </div>
+        {%- if block.settings.mobile_variant_picker or block.settings.desktop_variant_picker -%}
+          {% unless product.has_only_default_variant %}
+            <secondary-variant-select{% if block.settings.picker_type == 'separate' %}-separate{% endif %}
+              id="StickyAtcVariantPicker-{{ section.id }}"
+              class="sticky-atc__picker--{{ block.settings.picker_type }} no-js-hidden{% unless block.settings.mobile_variant_picker %} mobile-hidden{% endunless %}{% unless block.settings.desktop_variant_picker %} desktop-hidden{% endunless %}"
+              data-section="{{ section.id }}"
+              data-url="{{ product.url }}"
+              data-update-url="true"
+              style='--options-count: {{ product.options.size }}'
+            >
+            {% if block.settings.picker_type == 'combined' %}
+              <div class="product-form__input">
+                <div class="select no-background color-{{ settings.pickers_color_scheme }} accent-color-{{ settings.pickers_overlay_color }} accent-2-color-{{ settings.pickers_text_color }}">
+                  <select class="sticky-atc__variant-select select__select variant-dropdown">
+                    {% for variant in product.variants %}
+                        <option
+                        value='{{ variant.options | join: ',' | escape }}'
+                        data-options='{{ variant.options | join: ',' }}'
+                        {% if product.selected_or_first_available_variant.id == variant.id %}
+                            selected
+                        {% endif %}
+                        {% unless variant.available %}
+                            disabled
+                        {% endunless %}
+                        data-variant-id='{{ variant.id }}'
+                        >
+                        {{ variant.title }}
+                        </option>
+                    {% endfor %}
+                  </select>
+                  {% render 'icon-caret' %}
+                </div>
+              </div>
+            {% else %}
+              {%- for option in product.options_with_values -%}
+                <div
+                  class="product-form__input product-form__input--dropdown"
+                >
+                  <div class="visually-hidden product-form__input__type" data-type="dropdown">&nbsp</div>
+                  <div class="select no-background color-{{ settings.pickers_color_scheme }} accent-color-{{ settings.pickers_overlay_color }} accent-2-color-{{ settings.pickers_text_color }}">
+                    <select
+                      id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                      class="select__select"
+                      name="options[{{ option.name | escape }}]"
+                      form="{{ product_form_id }}"
+                    >
+                        {%- liquid
+                          assign variants_available_arr = product.variants | map: 'available'
+                          assign variants_option1_arr = product.variants | map: 'option1'
+                          assign variants_option2_arr = product.variants | map: 'option2'
+                          assign variants_option3_arr = product.variants | map: 'option3'
+                        -%}
+                        {%- for value in option.values -%}
+                          {%- liquid
+                            assign option_disabled = true
+                            assign currentVariant = nil
+                        
+                            for variant in product.variants
+                            case option.position
+                              when 1
+                                if variant.option1 == value
+                                  assign currentVariant = variant
+                                  if variant.available
+                                  assign option_disabled = false
+                                  endif
+                                  break
+                                endif
+                              when 2
+                                if variant.option1 == product.selected_or_first_available_variant.option1 and variant.option2 == value
+                                  assign currentVariant = variant
+                                  if variant.available
+                                  assign option_disabled = false
+                                  endif
+                                  break
+                                endif
+                              when 3
+                                if variant.option1 == product.selected_or_first_available_variant.option1 and variant.option2 == product.selected_or_first_available_variant.option2 and variant.option3 == value
+                                  assign currentVariant = variant
+                                  if variant.available
+                                  assign option_disabled = false
+                                  endif
+                                  break
+                                endif
+                            endcase
+                          endfor
+                        -%}
+                        <option
+                          value="{{ value | escape }}"
+                          {% if option.selected_value == value %}
+                            selected="selected"
+                          {% endif %}
+                        >
+                          {% if option_disabled -%}
+                            {{- 'products.product.value_unavailable' | t: option_value: value -}}
+                          {%- else -%}
+                            {{- value -}}
+                          {%- endif %}
+                        </option>
+                      {%- endfor -%}
+                    </select>
+                    {% render 'icon-caret' %}
+                  </div>
+                </div>
+              {%- endfor -%}
+            {% endif %}
+            <script type="application/json">
+                {{ product.variants | json }}
+            </script>
+          </secondary-variant-select{% if block.settings.picker_type == 'separate' %}-separate{% endif %}>
+        {% endunless %}
+      {%- endif -%}
+    </div>
+    <div class='sticky-atc__button'>
+      {%- if block.settings.function == 'add_to_cart' -%}
+        {%- liquid
+          assign check_against_inventory = true
+          if product.selected_or_first_available_variant.inventory_management != 'shopify' or  product.selected_or_first_available_variant.inventory_policy == 'continue'
+            assign check_against_inventory = false
+          endif
+          if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
+            assign quantity_rule_soldout = true
+          endif
+        -%}
+        <button
+          {% if main_product %}
+            id='SectionAtcBtn-{{ section.id }}'
+            type="button"
+          {% else %}
+            type="submit"
+            name="add"
+          {% endif %}
+          class="sticky-atc__add_button button main-product-atc button--has-spinner"
+          form="{{ product_form_id }}"
+          data-label="{{ block.settings.button_label }}"
+          style="--icon-scale: {{ block.settings.icon_scale | default: 120 | divided_by: 100.0 }}em;"
+          {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
+            disabled
+          {% endif %}
+        >
+          <span class="sticky-atc__error" style="display:none;"></span>
+          <span class="sticky-atc__label">
+            {%- if block.settings.prefix_icon != blank -%}
+              <span class="sticky-atc__label__icon">
+                {{ block.settings.prefix_icon | image_url: width: 200 | image_tag: loading: 'lazy', widths: '50, 100, 150, 200', alt: '' }}
+              </span>
+            {%- endif -%}
+            {% if block.settings.mobile_show_price_in_button or block.settings.desktop_show_price_in_button %}
+              <span id="sticky-atc-price-{{ section.id }}" class="sticky-atc__button-price{% unless block.settings.mobile_show_price_in_button %} mobile-hidden{% endunless %}{% unless block.settings.desktop_show_price_in_button %} desktop-hidden{% endunless %}{% if product.selected_or_first_available_variant.available == false %} hidden{% endif %}">
+              <span class='main-atc-price-span-{{ section.id }}'>{{ product.selected_or_first_available_variant.price | money }}</span> •
+              </span>
+            {% endif %}
+            <span class="sticky-atc__label__text">
+              {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- else -%}
+                {{ block.settings.button_label }}
+              {%- endif -%}
+            </span>
+            {%- if block.settings.suffix_icon != blank -%}
+              <span class="sticky-atc__label__icon">
+                {{ block.settings.suffix_icon | image_url: width: 200 | image_tag: loading: 'lazy', widths: '50, 100, 150, 200', alt: '' }}
+              </span>
+            {%- endif -%}
+          </span>
+          <div class="loading-overlay__spinner">
+            <svg
+              aria-hidden="true"
+              focusable="false"
+              class="spinner"
+              viewBox="0 0 66 66"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+            </svg>
+          </div>
+        </button>
+      {% else %}
+        <button class='button sticky-atc__scroll-btn' style="--icon-scale: {{ block.settings.icon_scale | default: 120 | divided_by: 100.0 }}em;">
+          <span class="sticky-atc__label">
+            {%- if block.settings.prefix_icon != blank -%}
+              <span class="sticky-atc__label__icon">
+                {{ block.settings.prefix_icon | image_url: width: 200 | image_tag: loading: 'lazy', widths: '50, 100, 150, 200', alt: '' }}
+              </span>
+            {%- endif -%}
+            {% if block.settings.mobile_show_price_in_button or block.settings.desktop_show_price_in_button %}
+              <span id="sticky-atc-price-{{ section.id }}" class="{% unless block.settings.mobile_show_price_in_button %} mobile-hidden{% endunless %}{% unless block.settings.desktop_show_price_in_button %} desktop-hidden{% endunless %}">
+                {{ product.selected_or_first_available_variant.price | money }} •
+              </span>
+            {% endif %}
+            <span class="sticky-atc__label__text">{{ block.settings.button_label }}</span>
+            {%- if block.settings.suffix_icon != blank -%}
+              <span class="sticky-atc__label__icon">
+                {{ block.settings.suffix_icon | image_url: width: 200 | image_tag: loading: 'lazy', widths: '50, 100, 150, 200', alt: '' }}
+              </span>
+            {%- endif -%}
+          </span>
+        </button>
+      {% endif %}
+    </div>
+  </div>
+</sticky-atc>
+
+{% schema %}
+{
+  "name": "Sticky Add To Cart",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "select",
+      "id": "display_when",
+      "label": "Display",
+      "options": [
+        { "value": "always", "label": "Always" },
+        { "value": "after_scroll", "label": "After scrolling past regular ATC button" },
+        { "value": "after_pixels", "label": "After scrolling X pixels" },
+        { "value": "after_percent", "label": "After scrolling X% of the page" }
+      ],
+      "default": "after_scroll"
+    },
+    {
+      "type": "range",
+      "id": "display_pixels",
+      "label": "Display after X pixels",
+      "min": 50,
+      "max": 2000,
+      "step": 50,
+      "unit": "px",
+      "default": 500,
+      "visible_if": "{{ block.settings.display_when == 'after_pixels' }}"
+    },
+    {
+      "type": "range",
+      "id": "display_percent",
+      "label": "Display after X% of the page",
+      "min": 5,
+      "max": 95,
+      "step": 5,
+      "unit": "%",
+      "default": 50,
+      "visible_if": "{{ block.settings.display_when == 'after_percent' }}"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ],
+      "default": "background-1"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Custom title",
+      "info": "Use [product_title] to insert the product's title. Leave empty to use the product title as-is."
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "info": "Optional second line of text below the title. Leave empty to disable."
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "select",
+      "id": "function",
+      "label": "Button function",
+      "options": [
+        { "value": "add_to_cart", "label": "Add to Cart" },
+        { "value": "scroll_#ProductInfo-id", "label": "Scroll to Product information" },
+        { "value": "scroll_#variant-selects-id", "label": "Scroll to Variant picker" },
+        { "value": "scroll_#quantity-breaks-id", "label": "Scroll to Quantity breaks" },
+        { "value": "scroll_.pricing-table", "label": "Scroll to Pricing table" }
+      ],
+      "default": "add_to_cart"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_custom_btn_color",
+      "label": "Enable custom button color",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "custom_btn_color",
+      "label": "Button custom color",
+      "default": "#dd1d1d",
+      "info": "Applied when Enable custom button color is checked.",
+      "visible_if": "{{ block.settings.enable_custom_btn_color }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "prefix_icon",
+      "label": "Icon #1"
+    },
+    {
+      "type": "image_picker",
+      "id": "suffix_icon",
+      "label": "Icon #2"
+    },
+    {
+      "type": "range",
+      "id": "icon_scale",
+      "label": "Icons scale",
+      "min": 80,
+      "max": 180,
+      "step": 5,
+      "unit": "%",
+      "default": 120,
+      "info": "Relative to button label font size.",
+      "visible_if": "{{ block.settings.prefix_icon != blank or block.settings.suffix_icon != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Rating stars"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "default": "#ffcc00",
+      "label": "Rating stars color"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "stars_label",
+      "label": "Rating stars text",
+      "default": "(xxxx Reviews)"
+    },
+    {
+      "type": "header",
+      "content": "Variants"
+    },
+    {
+      "type": "select",
+      "id": "picker_type",
+      "label": "Variant picker options",
+      "options": [
+        { "value": "combined", "label": "Combined" },
+        { "value": "separate", "label": "Separate" }
+      ],
+      "default": "combined",
+      "info": "Combined combines all options into one dropdown (eg. Black/S), Separate displays a separate dropdown for each option."
+    },
+    {
+      "type": "header",
+      "content": "Desktop layout"
+    },
+    {
+      "type": "select",
+      "id": "desktop_layout",
+      "label": "Layout",
+      "options": [
+        { "value": "full", "label": "Full width" },
+        { "value": "floating", "label": "Floating" }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "range",
+      "id": "desktop_max_width",
+      "label": "Floating max width",
+      "min": 400,
+      "max": 1400,
+      "step": 50,
+      "unit": "px",
+      "default": 850,
+      "visible_if": "{{ block.settings.desktop_layout == 'floating' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_show_image",
+      "default": false,
+      "label": "Show product image"
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_show_title",
+      "default": true,
+      "label": "Show product title"
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_show_subtitle",
+      "default": true,
+      "label": "Show subtitle",
+      "visible_if": "{{ block.settings.subtitle != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_rating_stars",
+      "default": false,
+      "label": "Show rating stars"
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_show_price",
+      "default": true,
+      "label": "Show product price"
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_show_sale_badge",
+      "default": true,
+      "label": "Show price sale badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_variant_picker",
+      "default": false,
+      "label": "Show variant picker"
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_full_button_width",
+      "default": false,
+      "label": "Button full width"
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_show_price_in_button",
+      "default": false,
+      "label": "Show price inside the button"
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_transparent_bg",
+      "default": false,
+      "label": "Use transparent background style.",
+      "info": "This option automatically makes the button full width and hides all other elements."
+    },
+    {
+      "type": "header",
+      "content": "Mobile layout"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Layout",
+      "options": [
+        { "value": "full", "label": "Full width" },
+        { "value": "floating", "label": "Floating" }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_show_image",
+      "default": false,
+      "label": "Show product image"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_show_title",
+      "default": true,
+      "label": "Show product title"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_show_subtitle",
+      "default": true,
+      "label": "Show subtitle",
+      "visible_if": "{{ block.settings.subtitle != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_rating_stars",
+      "default": false,
+      "label": "Show rating stars"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_show_price",
+      "default": true,
+      "label": "Show product price"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_show_sale_badge",
+      "default": true,
+      "label": "Show price sale badge"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_variant_picker",
+      "default": false,
+      "label": "Show variant picker"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_full_button_width",
+      "default": false,
+      "label": "Button full width",
+      "info": "This option is only recommended if title, price and variant picker ara disabled."
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_show_price_in_button",
+      "default": false,
+      "label": "Show price inside the button"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_transparent_bg",
+      "default": false,
+      "label": "Use transparent background style.",
+      "info": "This option automatically makes the button full width and hides all other elements."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sticky Add To Cart",
+      "category": "Product basics"
+    }
+  ]
+}
+{% endschema %}

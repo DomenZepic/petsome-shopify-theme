@@ -1,0 +1,316 @@
+{%- render 'reviews', block: block -%}
+
+{% schema %}
+{
+  "name": "Reviews",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "header",
+      "content": "Container"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_custom_bg",
+      "label": "Show custom background",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "custom_bg_color",
+      "label": "Custom background color",
+      "default": "#F2F2F2",
+      "visible_if": "{{ block.settings.show_custom_bg }}"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "label": "Border thickness",
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#B7B7B7",
+      "visible_if": "{{ block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "avatar_alignment",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "middle",
+          "label": "Middle"
+        }
+      ],
+      "label": "Avatar alignment",
+      "default": "top"
+    },
+    {
+      "type": "range",
+      "id": "avatar_corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Avatar corner radius",
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "default": "#ffcc00",
+      "label": "Stars color"
+    },
+    {
+      "type": "range",
+      "id": "stars_translate",
+      "min": -10,
+      "max": 20,
+      "step": 1,
+      "unit": "%",
+      "default": 0,
+      "label": "Stars vertical position adjustment",
+      "info": "Move the stars up/down to adjust them to different fonts. Negative values move the stars up."
+    },
+    {
+      "type": "color",
+      "id": "checkmark_color",
+      "default": "#6D388B",
+      "label": "Checkmark background color"
+    },
+    {
+      "type": "color",
+      "id": "checkmark_icon_color",
+      "default": "#FFFFFF",
+      "label": "Checkmark icon color"
+    },
+    {
+      "type": "header",
+      "content": "Slider"
+    },
+    {
+      "type": "select",
+      "id": "slider_type",
+      "options": [
+        {
+          "value": "slide",
+          "label": "Classic"
+        },
+        {
+          "value": "loop",
+          "label": "Infinite"
+        },
+        {
+          "value": "fade",
+          "label": "Fade"
+        }
+      ],
+      "default": "slide",
+      "label": "Type"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 1,
+      "max": 15,
+      "step": 0.5,
+      "default": 5,
+      "unit": "sec",
+      "label": "Autoplay speed"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_arrows",
+      "label": "Display arrows",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "display_dots",
+      "label": "Display dots",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Review #1"
+    },
+    {
+      "type": "richtext",
+      "id": "text_1",
+      "label": "Review #1 Text",
+      "default": "<p>Share positive thoughts and feedback from your customer.</p>"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "author_1",
+      "label": "Review #1 Author name",
+      "default": "<em>Author</em> [stars]",
+      "info": "Use [stars] to display review stars and [checkmark] to display the verified checkmark icon.",
+      "visible_if": "{{ block.settings.text_1 != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Review #1 Author image",
+      "visible_if": "{{ block.settings.text_1 != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Review #2"
+    },
+    {
+      "type": "richtext",
+      "id": "text_2",
+      "label": "Review #2 Text",
+      "default": "<p>Share positive thoughts and feedback from your customer.</p>"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "author_2",
+      "label": "Review #2 Author name",
+      "default": "<em>Author</em> [stars]",
+      "info": "Use [stars] to display review stars and [checkmark] to display the verified checkmark icon.",
+      "visible_if": "{{ block.settings.text_2 != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Review #2 Author image",
+      "visible_if": "{{ block.settings.text_2 != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Review #3"
+    },
+    {
+      "type": "richtext",
+      "id": "text_3",
+      "label": "Review #3 Text",
+      "default": "<p>Share positive thoughts and feedback from your customer.</p>"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "author_3",
+      "label": "Review #3 Author name",
+      "default": "<em>Author</em> [stars]",
+      "info": "Use [stars] to display review stars and [checkmark] to display the verified checkmark icon.",
+      "visible_if": "{{ block.settings.text_2 != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Review #3 Author image",
+      "visible_if": "{{ block.settings.text_2 != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 21
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 21,
+      "visible_if": "{{ section.settings.image_1_visibility != 'mobile-hidden' and section.settings.image_1_visibility != 'always-display' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews",
+      "category": "Reviews & ratings"
+    }
+  ]
+}
+{% endschema %}

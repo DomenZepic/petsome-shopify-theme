@@ -1,0 +1,726 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .color-scheme-{{ section.id }}.color-custom {
+    --color-background: {{ section.settings.custom_colors_background.red }}, {{ section.settings.custom_colors_background.green }}, {{ section.settings.custom_colors_background.blue }};
+    --gradient-background: {% if section.settings.custom_gradient_background != blank %}{{ section.settings.custom_gradient_background }}{% else %}{{ section.settings.custom_colors_background }}{% endif %};
+    {% if section.settings.custom_image_background != blank %}
+      {% # theme-check-disable %}
+      --gradient-background: url('{{ section.settings.custom_image_background | img_url: 'master' }}') center center / cover no-repeat;
+      {% # theme-check-enable %}
+    {% endif %}
+  }
+  {% if section.settings.custom_mobile_image_background != blank %}
+    @media screen and (max-width: 740px) {
+      .color-scheme-{{ section.id }}.color-custom {
+        {% # theme-check-disable %}
+        --gradient-background: url('{{ section.settings.custom_mobile_image_background | img_url: 'master' }}') center center / cover no-repeat;
+        {% # theme-check-enable %}
+      }
+    }
+  {% endif %}
+  {% if section.settings.pattern_bg != 'none' %}
+    {% render 'pattern-background' %}
+  {% endif %}
+
+  {% if section.settings.desktop_page_width == 'custom' %}
+    #PageWidth-{{ section.id }} {
+      max-width: {{ section.settings.custom_page_width | divided_by: 10.0 }}rem;
+    }
+  {% endif %}
+
+  .json-animation__wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  {% if section.settings.desktop_json_width != 'full' %}
+    @media screen and (min-width: 750px) {
+      .json-animation-{{ section.id }} .json-animation__wrapper {
+        align-items: {{ section.settings.alignment }};
+      }
+      .json-animation-{{ section.id }} .json-animation__canvas {
+        {% if section.settings.desktop_json_width == 'pixels' %}
+          max-width: {{ section.settings.pixels_width_desktop | divided_by: 10.0 }}rem;
+          width: 100%;
+        {% else %}
+          width: {{ section.settings.percentage_width_desktop }}%
+        {% endif %}
+      }
+    }
+  {% endif %}
+  {% if section.settings.mobile_width < 100 %}
+    @media screen and (max-width: 749px) {
+      .json-animation-{{ section.id }} .json-animation__wrapper {
+        align-items: {{ section.settings.mobile_alignment }};
+      }
+      .json-animation-{{ section.id }} .json-animation__canvas {
+        width: {{ section.settings.mobile_width }}%;
+      }
+    }
+  {% endif %}
+{%- endstyle -%}
+
+<div class="json-animation json-animation-{{ section.id }} color-{{ section.settings.color_scheme }} color-scheme-{{ section.id }} gradient">
+  <div
+    id="PageWidth-{{ section.id }}"
+    class="
+      json-animation__wrapper
+      page-width
+      section-{{ section.id }}-padding
+      {% if section.settings.mobile_full_page %} mobile-full-page{% endif %}
+      {% if section.settings.desktop_page_width != 'normal' %} {{ section.settings.desktop_page_width }}{% endif %}
+    "
+  >
+    {% if section.settings.animation_json_url != blank %}
+      {% comment %} <div class="json-animation__canvas json-animation__canvas-{{ section.id }}"
+        id="json-animation-{{ section.id }}"
+        data-animation-url="{{ section.settings.animation_json_url }}"
+        data-animation-url-mobile="{{ section.settings.animation_json_url_mobile }}"
+        data-loop="{{ section.settings.loop }}"
+        data-autoplay="{{ section.settings.autoplay }}"
+        data-speed="{{ section.settings.animation_speed | divided_by: 100.0 }}"
+      >
+        {% if section.settings.fallback_image != blank %}
+          <img
+            src="{{ section.settings.fallback_image | image_url: width: 1200 }}"
+            alt="{{ section.settings.fallback_image.alt | escape }}"
+            loading="lazy"
+            width="{{ section.settings.fallback_image.width }}"
+            height="{{ section.settings.fallback_image.height }}"
+          >
+        {% endif %}
+      </div> {% endcomment %}
+      <json-animation
+        class="json-animation__canvas json-animation__canvas-{{ section.id }}"
+        animation-url="{{ section.settings.animation_json_url }}"
+        animation-url-mobile="{{ section.settings.animation_json_url_mobile }}"
+        loop="{{ section.settings.loop }}"
+        autoplay="{{ section.settings.autoplay }}"
+        speed="{{ section.settings.animation_speed | divided_by: 100.0 }}"
+        {% if section.settings.click_to_play %}click-to-play="true"{% endif %}
+      >
+        {% if section.settings.fallback_image != blank %}
+          <img
+            src="{{ section.settings.fallback_image | image_url: width: 1200 }}"
+            alt="{{ section.settings.fallback_image.alt | escape }}"
+            loading="lazy"
+            width="{{ section.settings.fallback_image.width }}"
+            height="{{ section.settings.fallback_image.height }}"
+          >
+        {% endif %}
+      </json-animation>
+    {% else %}
+      <div class="json-animation__placeholder flex-center center">
+        <p>Add your animation file URL</p>
+        <p>Detailed nstructions are provided in section settings</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+{% comment %} <script>
+  (function() {
+    const animationContainer = document.getElementById('json-animation-{{ section.id }}');
+    if (!animationContainer) return;
+
+    const animationUrlDesktop = animationContainer.dataset.animationUrl;
+    const animationUrlMobile = animationContainer.dataset.animationUrlMobile;
+    if (!animationUrlDesktop) return;
+
+    const loop = animationContainer.dataset.loop === 'true';
+    const autoplay = animationContainer.dataset.autoplay === 'true';
+    const speed = parseFloat(animationContainer.dataset.speed) || 1;
+
+    let animation = null;
+    let currentUrl = null;
+
+    // Function to get the appropriate animation URL based on screen size
+    function getAnimationUrl() {
+      const isMobile = window.innerWidth < 750;
+      // Use mobile URL if provided and on mobile, otherwise use desktop URL
+      return (isMobile && animationUrlMobile) ? animationUrlMobile : animationUrlDesktop;
+    }
+
+    // Function to load animation
+    function loadAnimation() {
+      const url = getAnimationUrl();
+
+      // Don't reload if URL hasn't changed
+      if (currentUrl === url && animation) return;
+
+      currentUrl = url;
+
+      // Destroy existing animation if any
+      if (animation) {
+        animation.destroy();
+      }
+
+      // Clear placeholder/fallback content
+      animationContainer.innerHTML = '';
+
+      // Initialize Lottie animation
+      animation = lottie.loadAnimation({
+        container: animationContainer,
+        renderer: 'svg',
+        loop: loop,
+        autoplay: autoplay,
+        path: url
+      });
+
+      // Set playback speed
+      animation.setSpeed(speed);
+
+      // Play on scroll into view if not autoplay
+      if (!autoplay) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              animation.play();
+              if (!loop) {
+                observer.unobserve(animationContainer);
+              }
+            } else if (loop) {
+              animation.pause();
+            }
+          });
+        }, { threshold: 0.3 });
+
+        observer.observe(animationContainer);
+      }
+
+      // Pause/play on click if enabled
+      {% if section.settings.click_to_play %}
+        animationContainer.style.cursor = 'pointer';
+        animationContainer.addEventListener('click', () => {
+          if (animation.isPaused) {
+            animation.play();
+          } else {
+            animation.pause();
+          }
+        });
+      {% endif %}
+    }
+
+    // Load initial animation
+    loadAnimation();
+
+    // Handle window resize to switch between mobile and desktop animations
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        loadAnimation();
+      }, 250);
+    });
+
+    // Handle theme editor events
+    {% comment %} if (window.Shopify && window.Shopify.designMode) {
+      document.addEventListener('shopify:section:load', (event) => {
+        if (event.detail.sectionId === '{{ section.id }}') {
+          if (animation) animation.destroy();
+          location.reload();
+        }
+      });
+    } {% endcomment %}
+  })();
+</script> {% endcomment %}
+
+{% schema %}
+{
+  "name": "JSON (Lottie) Animation",
+  "tag": "section",
+  "class": "section section-json-animation",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "display_id",
+      "label": "Display section ID",
+      "info": "ID is used in the Sections group section to merge 2 sections. ID can also be put inside any button link and the button will scroll to this section.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "background-1",
+      "label": "Background"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_background",
+      "default": "#FFFFFF",
+      "label": "Custom background color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "custom_gradient_background",
+      "label": "Custom gradient background",
+      "info": "If added, replaces Background color when applicable.",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_image_background",
+      "label": "Custom image background",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_mobile_image_background",
+      "label": "Custom mobile image background",
+      "info": "If empty, the Custom image background will also be applied to mobile devices",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' and section.settings.custom_image_background != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "pattern_bg",
+      "label": "Background pattern",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "dotted",
+          "label": "Dots"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "curved-grid",
+          "label": "Curved grid"
+        },
+        {
+          "value": "diagonal-stripes",
+          "label": "Stripes"
+        },
+        {
+          "value": "zigzag",
+          "label": "ZigZag"
+        },
+        {
+          "value": "arrow-pattern",
+          "label": "3D Boxes"
+        },
+        {
+          "value": "radial-rings",
+          "label": "Rings"
+        },
+        {
+          "value": "diamond-grid-1",
+          "label": "Diamond grid 1"
+        },
+        {
+          "value": "diamond-grid-2",
+          "label": "Diamond grid 2"
+        },
+        {
+          "value": "quatrefoils",
+          "label": "Quatrefoils"
+        },
+        {
+          "value": "ovals",
+          "label": "Ovals"
+        },
+        {
+          "value": "hexagons",
+          "label": "Hexagons"
+        },
+        {
+          "value": "curvy",
+          "label": "Curvy"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "pattern_color",
+      "label": "Pattern color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_size",
+      "min": 4,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Pattern size / spacing",
+      "default": 20,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_thickness",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Line / dot thickness",
+      "default": 2,
+      "visible_if": "{{ section.settings.pattern_bg == 'dotted' or section.settings.pattern_bg == 'grid' or section.settings.pattern_bg == 'diagonal-stripes' or section.settings.pattern_bg == 'radial-rings' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_angle",
+      "min": 0,
+      "max": 180,
+      "step": 15,
+      "unit": "deg",
+      "label": "Stripe angle",
+      "default": 45,
+      "visible_if": "{{ section.settings.pattern_bg == 'diagonal-stripes' }}"
+    },
+    {
+      "type": "select",
+      "id": "pattern_opacity_mode",
+      "label": "Opacity type",
+      "default": "low",
+      "options": [
+        {
+          "value": "low",
+          "label": "Low"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity_low",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 7,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' and section.settings.pattern_opacity_mode == 'low' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity_normal",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 80,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' and section.settings.pattern_opacity_mode == 'normal' }}"
+    },
+    {
+      "type": "header",
+      "content": "HOW TO USE?"
+    },
+    {
+      "type": "paragraph",
+      "content": "1) Find and configure your animation on [LottieFiles](https://lottiefiles.com/)"
+    },
+    {
+      "type": "paragraph",
+      "content": "2) Download your animation in .json format (NOT in .lottie format)"
+    },
+    {
+      "type": "paragraph",
+      "content": "3) Go to Shopify admin > Content > Files and upload the .json file you downloaded"
+    },
+    {
+      "type": "paragraph",
+      "content": "4) From there, copy the URL of the file"
+    },
+    {
+      "type": "paragraph",
+      "content": "4) In the theme editor, paste the copied URL into the 'Animation file URL' setting"
+    },
+    {
+      "type": "paragraph",
+      "content": "5) OPTIONAL: If you want a separate animation for mobile devices, repeat the same steps and paste the 2nd file URL into the 'Mobile animation file URL' setting"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "text",
+      "id": "animation_json_url",
+      "label": "Animation file URL"
+    },
+    {
+      "type": "text",
+      "id": "animation_json_url_mobile",
+      "label": "Mobile animation file URL",
+      "info": "OPTIONAL: Use a different animation for mobile. If left blank, desktop animation will be used"
+    },
+    {
+      "type": "image_picker",
+      "id": "fallback_image",
+      "label": "Fallback Image",
+      "info": "Shown while the animation loads, or if the animation fails to load"
+    },
+    {
+      "type": "checkbox",
+      "id": "loop",
+      "label": "Loop animation",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "default": true,
+      "info": "If disabled, animation plays when scrolled into view"
+    },
+    {
+      "type": "checkbox",
+      "id": "click_to_play",
+      "label": "Click to play/pause",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "min": 10,
+      "max": 300,
+      "step": 10,
+      "unit": "%",
+      "label": "Animation Speed",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Desktop layout"
+    },
+    {
+      "type": "select",
+      "id": "desktop_page_width",
+      "options": [
+        {
+          "value": "page-width--narrow",
+          "label": "Narrow"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "desktop-full-page",
+          "label": "Full width"
+        },
+        {
+          "value": "desktop-full-page-no-padding",
+          "label": "Full width without side spacing"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "normal",
+      "label": "Page width"
+    },
+    {
+      "type": "number",
+      "id": "custom_page_width",
+      "label": "Custom page width",
+      "default": 900,
+      "visible_if": "{{ section.settings.desktop_page_width == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "desktop_json_width",
+      "label": "Animation width",
+      "options": [
+        {
+          "value": "full",
+          "label": "Full"
+        },
+        {
+          "value": "pixels",
+          "label": "Fixed width in pixels"
+        },
+        {
+          "value": "percentage",
+          "label": "Width in percentage"
+        }
+      ],
+      "default": "pixels"
+    },
+    {
+      "type": "range",
+      "id": "pixels_width_desktop",
+      "min": 300,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Animation width",
+      "default": 500,
+      "visible_if": "{{ section.settings.desktop_json_width == 'pixels' }}"
+    },
+    {
+      "type": "range",
+      "id": "percentage_width_desktop",
+      "min": 10,
+      "max": 95,
+      "step": 5,
+      "unit": "%",
+      "label": "Animation width",
+      "default": 40,
+      "visible_if": "{{ section.settings.desktop_json_width == 'percentage' }}"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "visible_if": "{{ section.settings.desktop_json_width != 'full' }}"
+    },
+    {
+      "type": "header",
+      "content": "Mobile layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_full_page",
+      "label": "Full page width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile_width",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Animation width",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "mobile_alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "visible_if": "{{ section.settings.mobile_width < 100 }}"
+    },
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "JSON (Lottie) Animation"
+    }
+  ]
+}
+{% endschema %}

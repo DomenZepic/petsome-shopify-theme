@@ -1,0 +1,97 @@
+{% comment %}
+  Renders the redesigned product image lightbox (replaces product-media-modal).
+
+  Accepts:
+  - product: {Object} Product liquid object (optional, defaults to current product)
+  - variant_images: {Array} Product images associated with a variant (used for hide_variants)
+{% endcomment %}
+
+{%- liquid
+  assign lightbox_product = product
+  assign hide_variants_enabled = false
+  if section.settings.hide_variants
+    assign hide_variants_enabled = true
+  endif
+-%}
+
+<product-lightbox
+  id="ProductLightbox-{{ section.id }}"
+  class="product-lightbox"
+  data-section="{{ section.id }}"
+  hidden
+>
+  <div class="product-lightbox__backdrop" aria-hidden="true" style="display:block;"></div>
+  <div class="product-lightbox__dialog" role="dialog" aria-modal="true" aria-label="{{ 'products.modal.label' | t }}">
+    <button
+      type="button"
+      class="product-lightbox__close"
+      aria-label="{{ 'accessibility.close' | t }}"
+    >
+      {% render 'icon-close' %}
+    </button>
+    <div class="product-lightbox__splide splide" aria-roledescription="carousel">
+      <div class="splide__track">
+        <ul class="splide__list">
+          {%- for media in lightbox_product.media -%}
+            {%- liquid
+              assign is_variant_image = false
+              if hide_variants_enabled and variant_images contains media.src
+                assign is_variant_image = true
+              endif
+            -%}
+            <li
+              class="splide__slide product-lightbox__slide{% if is_variant_image %} product-lightbox__slide--variant{% endif %}"
+              data-media-id="{{ section.id }}-{{ media.id }}"
+            >
+              {%- if media.media_type == 'image' -%}
+                <div class="product-lightbox__zoom-wrap" data-zoomable>
+                  {{
+                    media
+                    | image_url: width: 2048
+                    | image_tag:
+                      loading: 'lazy',
+                      class: 'product-lightbox__image',
+                      widths: '600, 900, 1200, 1600, 2048',
+                      sizes: '100vw',
+                      alt: media.alt
+                  }}
+                </div>
+              {%- elsif media.media_type == 'video' -%}
+                <div class="product-lightbox__media-non-image">
+                  {% render 'product-internal-video', media: media %}
+                </div>
+              {%- else -%}
+                <div class="product-lightbox__media-non-image">
+                  {%- render 'product-media',
+                    media: media,
+                    loop: section.settings.enable_video_looping,
+                    variant_image: is_variant_image
+                  -%}
+                </div>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+      <button
+        type="button"
+        class="product-lightbox__arrow product-lightbox__arrow--prev"
+        aria-label="{{ 'general.slider.previous_slide' | t }}"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false">
+          <path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path>
+        </svg>
+      </button>
+      <button
+        type="button"
+        class="product-lightbox__arrow product-lightbox__arrow--next"
+        aria-label="{{ 'general.slider.next_slide' | t }}"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false">
+          <path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="product-lightbox__dots" aria-hidden="true"></div>
+  </div>
+</product-lightbox>

@@ -1,0 +1,95 @@
+{% render 'cart-discount-field', block: block %}
+
+{% schema %}
+{
+  "name": "Discount field",
+  "tag": null,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "bottom_separator",
+      "label": "Enable bottom line separator",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Input placeholder",
+      "default": "Enter discount code"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button label",
+      "default": "ADD"
+    },
+    {
+      "type": "text",
+      "id": "error_msg",
+      "label": "Empty input error message",
+      "default": "Please enter a discount code!",
+      "info": "Displayed if add button is clicked while the input is empty."
+    },
+    {
+      "type": "text",
+      "id": "error_not_applicable_msg",
+      "label": "Invalid code error message",
+      "default": "This code isn't valid or doesn't apply to your cart.",
+      "info": "Displayed when the entered code is rejected by Shopify or doesn't apply to the current cart contents."
+    },
+    {
+      "type": "text",
+      "id": "error_already_applied_msg",
+      "label": "Already applied error message",
+      "default": "This code is already applied to your order.",
+      "info": "Displayed when a code that's already active is submitted again."
+    },
+    {
+      "type": "text",
+      "id": "success_msg",
+      "label": "Success message",
+      "info": "Optional message shown briefly after a discount is successfully applied. Leave empty to disable."
+    },
+    {
+      "type": "range",
+      "id": "success_msg_duration",
+      "label": "Success message duration",
+      "min": 500,
+      "max": 8000,
+      "step": 250,
+      "unit": "ms",
+      "default": 3000,
+      "visible_if": "{{ block.settings.success_msg != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Block margin"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "label": "Top margin",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "label": "Bottom margin",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Discount Field"
+    }
+  ]
+}
+{% endschema %}

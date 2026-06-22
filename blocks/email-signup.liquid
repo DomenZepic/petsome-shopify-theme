@@ -1,0 +1,157 @@
+<div>
+  <div class="footer-block__details-content footer-block__details-content-mb rte">
+    {{ block.settings.subtext }}
+  </div>
+  {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+    <div class="newsletter-form__field-wrapper">
+      <div class="field">
+        <input
+          id="NewsletterForm--{{ section.id }}"
+          type="email"
+          name="contact[email]"
+          class="field__input"
+          value="{{ form.email }}"
+          aria-required="true"
+          autocorrect="off"
+          autocapitalize="off"
+          autocomplete="email"
+          {% if form.errors %}
+            autofocus
+            aria-invalid="true"
+            aria-describedby="ContactFooter-error"
+          {% elsif form.posted_successfully? %}
+            aria-describedby="ContactFooter-success"
+          {% endif %}
+          placeholder="{{ 'newsletter.label' | t }}"
+          required
+        >
+        <label class="field__label" for="NewsletterForm--{{ section.id }}">
+          {{ 'newsletter.label' | t }}
+        </label>
+        {% if block.settings.button_type == 'arrow' %}
+          <button
+            type="submit"
+            class="newsletter-form__button field__button"
+            name="commit"
+            id="Subscribe"
+            aria-label="{{ 'newsletter.button_label' | t }}"
+          >
+            {% render 'icon-arrow' %}
+          </button>
+        {% endif %}
+      </div>
+      {%- if form.errors -%}
+        <small class="newsletter-form__message form__message" id="ContactFooter-error">
+          {%- render 'icon-error' -%}
+          {{- form.errors.translated_fields.email | capitalize }}
+          {{ form.errors.messages.email -}}
+        </small>
+      {%- endif -%}
+    </div>
+    {% if block.settings.button_type == 'solid' %}
+      <button
+        type="submit"
+        class="button newsletter__solid-btn button--full-width{% if block.settings.button_style_secondary %} button--secondary{% endif %}"
+        name="commit"
+        id="Subscribe"
+        aria-label="{{ 'newsletter.button_label' | t }}"
+      >
+        {{ block.settings.button_label }}
+      </button>
+    {% endif %}
+    {%- if form.posted_successfully? -%}
+      <h3
+        class="newsletter-form__message newsletter-form__message--success form__message"
+        id="ContactFooter-success"
+        tabindex="-1"
+        autofocus
+      >
+        {% render 'icon-success' -%}
+        {{- 'newsletter.success' | t }}
+      </h3>
+    {%- endif -%}
+  {%- endform -%}
+</div>
+
+{% schema %}
+{
+  "name": "Email signup",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.footer.settings.header__1.info"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Subscribe to our emails",
+      "label": "t:sections.footer.blocks.link_list.settings.heading.label"
+    },
+    {
+      "type": "richtext",
+      "id": "subtext",
+      "default": "<p>A short sentence encouraging customers to subscribe to your newsletter.</p>",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "button_type",
+      "options": [
+        {
+          "value": "arrow",
+          "label": "Arrow button"
+        },
+        {
+          "value": "solid",
+          "label": "Solid button"
+        }
+      ],
+      "default": "solid",
+      "label": "Submit button type"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Solid button label",
+      "default": "Sign up"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_style_secondary",
+      "label": "t:sections.slideshow.blocks.slide.settings.secondary_style.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Email signup"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,508 @@
+{% liquid
+  assign non_upsell_count = cart.item_count
+  for item in cart.items
+    if item.product.tags contains 'cart-hidden'
+      assign non_upsell_count = non_upsell_count | minus: item.quantity
+    endif
+  endfor
+%}
+
+{% render 'cart-checkpoints-bar', block: block, items_count: non_upsell_count %}
+
+{% schema %}
+{
+  "name": "Checkpoints bar",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Similar to the Progress bar block, but used to display multiple promotions. If needed, make sure to set up [automatic discounts](https://help.shopify.com/en/manual/discounts/automatic-discounts) and/or gift blocks."
+    },
+    {
+      "type": "select",
+      "id": "goal_type",
+      "options": [
+        {
+          "value": "subtotal",
+          "label": "Cart subtotal price"
+        },
+        {
+          "value": "quantity",
+          "label": "Quantity of added cart items"
+        }
+      ],
+      "label": "Base the goal on",
+      "default": "subtotal",
+      "info": "Determines if the goal will be based on the total cart subtotal price, or the total quantity of items added to cart (excluding the items with the \"cart-hidden\" tag)."
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "progress_message",
+      "label": "Progress message",
+      "default": "You're [amount] away from [next_goal_lowercase]!",
+      "info": "Use [amount] to display amount/quantity needed to reach the next goal and [next_goal] to display \"Progress message text\" of the next goal."
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Congrats! You've unlocked all prizes!🎉",
+      "info": "Displayed after all promotions are unlocked."
+    },
+    {
+      "type": "range",
+      "id": "labels_mobile_text_size",
+      "min": 6,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 10,
+      "label": "Mobile labels text size",
+      "info": "Mobile font size of goal names under icons"
+    },
+    {
+      "type": "range",
+      "id": "labels_desktop_text_size",
+      "min": 6,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12,
+      "label": "Desktop labels text size",
+      "info": "Desktop font size of goal names under icons"
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 16,
+      "max": 50,
+      "step": 2,
+      "label": "Size",
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "icon_scale",
+      "min": 30,
+      "max": 90,
+      "step": 5,
+      "label": "Icon scale",
+      "default": 60,
+      "unit": "%"
+    },
+    {
+      "type": "select",
+      "id": "icon_color",
+      "label": "Icon color",
+      "options": [
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "outline-button", "label": "Outline button" },
+        { "value": "text", "label": "Text" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "accent-1"
+    },
+    {
+      "type": "color",
+      "id": "icon_custom_color",
+      "label": "Icon color",
+      "default": "#DD1D1D",
+      "visible_if": "{{ block.settings.icon_color == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "icon_bg",
+      "label": "Background color",
+      "options": [
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "text", "label": "Text" },
+        { "value": "custom_color", "label": "Custom color" },
+        { "value": "gradient", "label": "Gradient" }
+      ],
+      "default": "background-1"
+    },
+    {
+      "type": "color",
+      "id": "icon_bg_color",
+      "label": "Background color",
+      "default": "#ececec",
+      "visible_if": "{{ block.settings.icon_bg == 'custom_color' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "icon_bg_gradient",
+      "label": "Background gradient",
+      "default": "linear-gradient(89deg, rgba(249, 234, 255, 1) 7%, rgba(218, 197, 255, 1) 94%)",
+      "visible_if": "{{ block.settings.icon_bg == 'gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_thickness",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "label": "Border thickness",
+      "default": 2,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "border_style",
+      "label": "Border style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "dashed", "label": "Dashed" }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.border_thickness > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "border_color",
+      "label": "Border color",
+      "options": [
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "outline-button", "label": "Outline button" },
+        { "value": "text", "label": "Text" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ block.settings.border_thickness > 0 }}"
+    },
+    {
+      "type": "color",
+      "id": "border_custom_color",
+      "label": "Border color",
+      "default": "#DD1D1D",
+      "visible_if": "{{ block.settings.border_thickness > 0 and block.settings.border_color == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "icon_corner_radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Corner radius",
+      "default": 100,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Line"
+    },
+    {
+      "type": "range",
+      "id": "line_height",
+      "min": 2,
+      "max": 15,
+      "step": 1,
+      "label": "Line height",
+      "default": 7,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_stripes",
+      "label": "Display stripes animation",
+      "default": true,
+      "visible_if": "{{ block.settings.line_color != 'gradient' }}"
+    },
+    {
+      "type": "select",
+      "id": "line_color",
+      "label": "Line color",
+      "options": [
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "outline-button", "label": "Outline button" },
+        { "value": "text", "label": "Text" },
+        { "value": "custom_color", "label": "Custom color" },
+        { "value": "gradient", "label": "Gradient" }
+      ],
+      "default": "accent-1"
+    },
+    {
+      "type": "color",
+      "id": "line_custom_color",
+      "label": "Line color",
+      "default": "#DD1D1D",
+      "visible_if": "{{ block.settings.line_color == 'custom_color' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "line_gradient",
+      "label": "Line gradient",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ block.settings.line_color == 'gradient' }}"
+    },
+    {
+      "type": "header",
+      "content": "Goal #1"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_goal_1",
+      "default": true,
+      "label": "Enable goal #1"
+    },
+    {
+      "type": "select",
+      "id": "goal_1_icon_type",
+      "label": "Icon type",
+      "options": [
+        { "value": "icon", "label": "Icon" },
+        { "value": "custom_icon", "label": "Custom icon" },
+        { "value": "dot", "label": "Dot" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "icon",
+      "visible_if": "{{ block.settings.enable_goal_1 }}"
+    },
+    {
+      "type": "text",
+      "id": "goal_1_icon",
+      "default": "local_shipping",
+      "label": "Icon",
+      "info": "[View all available icons](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.platform=web).",
+      "visible_if": "{{ block.settings.enable_goal_1 and block.settings.goal_1_icon_type == 'icon' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "goal_1_icon_filled",
+      "default": false,
+      "label": "Filled icon",
+      "visible_if": "{{ block.settings.enable_goal_1 and block.settings.goal_1_icon_type == 'icon' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "goal_1_custom_icon",
+      "label": "Custom icon",
+      "visible_if": "{{ block.settings.enable_goal_1 and block.settings.goal_1_icon_type == 'custom_icon' }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "goal_1_label",
+      "label": "Label - line #1",
+      "default": "Free Shipping",
+      "info": "Displayed under the icon.",
+      "visible_if": "{{ block.settings.enable_goal_1 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "goal_1_label_2",
+      "label": "Label - line #2",
+      "info": "Displayed under the line #1. Use this if the text is too long to fit in one line.",
+      "visible_if": "{{ block.settings.enable_goal_1 }}"
+    },
+    {
+      "type": "text",
+      "id": "goal_1_text",
+      "label": "Progress message text",
+      "default": "FREE shipping",
+      "info": "Replaces [next_goal] in the progress message.",
+      "visible_if": "{{ block.settings.enable_goal_1 }}"
+    },
+    {
+      "type": "number",
+      "id": "goal_1_amount",
+      "label": "Amount",
+      "info": "Required cart subtotal/quantity for the promotion.",
+      "default": 30,
+      "visible_if": "{{ block.settings.enable_goal_1 }}"
+    },
+    {
+      "type": "header",
+      "content": "Goal #2"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_goal_2",
+      "default": true,
+      "label": "Enable goal #2"
+    },
+    {
+      "type": "select",
+      "id": "goal_2_icon_type",
+      "label": "Icon type",
+      "options": [
+        { "value": "icon", "label": "Icon" },
+        { "value": "custom_icon", "label": "Custom icon" },
+        { "value": "dot", "label": "Dot" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "icon",
+      "visible_if": "{{ block.settings.enable_goal_2 }}"
+    },
+    {
+      "type": "text",
+      "id": "goal_2_icon",
+      "default": "sell",
+      "label": "Icon",
+      "info": "[View all available icons](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.platform=web).",
+      "visible_if": "{{ block.settings.enable_goal_2 and block.settings.goal_2_icon_type == 'icon' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "goal_2_icon_filled",
+      "default": false,
+      "label": "Filled icon",
+      "visible_if": "{{ block.settings.enable_goal_2 and block.settings.goal_2_icon_type == 'icon' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "goal_2_custom_icon",
+      "label": "Custom icon",
+      "visible_if": "{{ block.settings.enable_goal_2 and block.settings.goal_2_icon_type == 'custom_icon' }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "goal_2_label",
+      "label": "Label - line #1",
+      "default": "20% OFF",
+      "info": "Displayed under the icon.",
+      "visible_if": "{{ block.settings.enable_goal_2 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "goal_2_label_2",
+      "label": "Label - line #2",
+      "info": "Displayed under the line #1. Use this if the text is too long to fit in one line.",
+      "visible_if": "{{ block.settings.enable_goal_2 }}"
+    },
+    {
+      "type": "text",
+      "id": "goal_2_text",
+      "label": "Progress message text",
+      "default": "a 20% discount",
+      "info": "Replaces [next_goal] in the progress message.",
+      "visible_if": "{{ block.settings.enable_goal_2 }}"
+    },
+    {
+      "type": "number",
+      "id": "goal_2_amount",
+      "label": "Amount",
+      "info": "Required cart subtotal/quantity for the promotion.",
+      "default": 50,
+      "visible_if": "{{ block.settings.enable_goal_2 }}"
+    },
+    {
+      "type": "header",
+      "content": "Goal #3"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_goal_3",
+      "default": false,
+      "label": "Enable goal #3"
+    },
+    {
+      "type": "select",
+      "id": "goal_3_icon_type",
+      "label": "Icon type",
+      "options": [
+        { "value": "icon", "label": "Icon" },
+        { "value": "custom_icon", "label": "Custom icon" },
+        { "value": "dot", "label": "Dot" },
+        { "value": "none", "label": "None" }
+      ],
+      "default": "icon",
+      "visible_if": "{{ block.settings.enable_goal_3 }}"
+    },
+    {
+      "type": "text",
+      "id": "goal_3_icon",
+      "label": "Icon",
+      "default": "redeem",
+      "info": "[View all available icons](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.platform=web).",
+      "visible_if": "{{ block.settings.enable_goal_3 and block.settings.goal_3_icon_type == 'icon' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "goal_3_icon_filled",
+      "default": false,
+      "label": "Filled icon",
+      "visible_if": "{{ block.settings.enable_goal_3 and block.settings.goal_3_icon_type == 'icon' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "goal_3_custom_icon",
+      "label": "Custom icon",
+      "visible_if": "{{ block.settings.enable_goal_3 and block.settings.goal_3_icon_type == 'custom_icon' }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "goal_3_label",
+      "label": "Label - line #1",
+      "default": "Free Gift",
+      "info": "Displayed under the icon.",
+      "visible_if": "{{ block.settings.enable_goal_3 }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "goal_3_label_2",
+      "label": "Label - line #2",
+      "info": "Displayed under the line #1. Use this if the text is too long to fit in one line.",
+      "visible_if": "{{ block.settings.enable_goal_3 }}"
+    },
+    {
+      "type": "text",
+      "id": "goal_3_text",
+      "label": "Progress message text",
+      "default": "a FREE GIFT",
+      "info": "Replaces [next_goal] in the progress message.",
+      "visible_if": "{{ block.settings.enable_goal_3 }}"
+    },
+    {
+      "type": "number",
+      "id": "goal_3_amount",
+      "label": "Amount",
+      "info": "Required cart subtotal/quantity for the promotion.",
+      "default": 100,
+      "visible_if": "{{ block.settings.enable_goal_3 }}"
+    },
+    {
+      "type": "header",
+      "content": "Block margin"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "label": "Top margin",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "label": "Bottom margin",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Checkpoints bar"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,204 @@
+<splide-component
+  data-type="{{ block.settings.type }}"
+  data-autoplay="{{ block.settings.autoplay }}"
+  data-autoplay-speed="{{ block.settings.autoplay_speed }}"
+  data-arrows-color="{{ block.settings.arrows_color_scheme }}"
+  data-dots-color="{{ block.settings.dots_color_scheme }}"
+  data-slides-desktop="{{ block.settings.slides_desktop }}"
+  data-per-move-desktop="{{ block.settings.per_move_desktop }}"
+  data-gap-desktop="{{ block.settings.desktop_spacing }}"
+  data-side-padding-desktop="{{ block.settings.desktop_side_padding }}"
+  data-padding-calc-desktop="{{ block.settings.desktop_padding_calc }}"
+  data-slides-mobile="{{ block.settings.slides_mobile }}"
+  data-per-move-mobile="{{ block.settings.per_move_mobile }}"
+  data-gap-mobile="{{ block.settings.mobile_spacing }}"
+  data-side-padding-mobile="{{ block.settings.mobile_side_padding }}"
+  data-padding-calc-mobile="{{ block.settings.mobile_padding_calc }}"
+  {% if block.settings.desktop_adaptive_height and block.settings.slides_desktop == 1 %}
+    data-desktop-adaptive-height="true"
+  {% endif %}
+  {% if block.settings.mobile_adaptive_height and block.settings.slides_mobile == 1 %}
+    data-mobile-adaptive-height="true"
+  {% endif %}
+  data-image-slider="true"
+  data-pause-videos="true"
+  style="
+    --columns-desktop:{{ block.settings.slides_desktop }};
+    --columns-mobile:{{ block.settings.slides_mobile }};
+    --gap-desktop:{{ block.settings.desktop_spacing }}px;
+    --gap-mobile:{{ block.settings.mobile_spacing }}px;
+    {% if margins %}--margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;--margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;{% endif %}
+  "
+  {% if block.settings.mobile_full_page %}
+    class="mobile-side-margins-negative"
+  {% endif %}
+  {% if block_attributes %}
+    {{- block.shopify_attributes -}}
+  {% endif %}
+>
+  <div class="splide splide--precalc-width
+    splide--desktop-dots-{{ block.settings.desktop_dots_position }}
+    splide--mobile-dots-{{ block.settings.mobile_dots_position }}
+    splide--desktop-arrows-{{ block.settings.desktop_arrows_position }}
+    splide--mobile-arrows-{{ block.settings.mobile_arrows_position }}
+    {% if block.settings.transparent_arrows %} splide--transparent-arrows{% endif %}
+  ">
+    <div class="splide__track">
+      <ul class="splide__list">
+        {% assign no_media = true %}
+        {% for i in (1..10) %}
+          {% liquid
+            case i
+              when 1
+                assign image = block.settings.image_1
+                assign image_desc = block.settings.image_desc_1
+              when 2
+                assign image = block.settings.image_2
+                assign image_desc = block.settings.image_desc_2
+              when 3
+                assign image = block.settings.image_3
+                assign image_desc = block.settings.image_desc_3
+              when 4
+                assign image = block.settings.image_4
+                assign image_desc = block.settings.image_desc_4
+              when 5
+                assign image = block.settings.image_5
+                assign image_desc = block.settings.image_desc_5
+              when 6
+                assign image = block.settings.image_6
+                assign image_desc = block.settings.image_desc_6
+              when 7
+                assign image = block.settings.image_7
+                assign image_desc = block.settings.image_desc_7
+              when 8
+                assign image = block.settings.image_8
+                assign image_desc = block.settings.image_desc_8
+              when 9
+                assign image = block.settings.image_9
+                assign image_desc = block.settings.image_desc_9
+              when 10
+                assign image = block.settings.image_10
+                assign image_desc = block.settings.image_desc_10
+            endcase
+          %}
+
+          {% if image != blank %}
+            {% assign no_media = false %}
+            <li class="splide__slide">
+              <div class="splide__slide__container">
+                <div class="image-slide">
+                  <div class="image-slide__image media media--transparent ratio" style="--ratio-percent: {{ 1 | divided_by: image.aspect_ratio | times: 100 }}%;">
+                    {{ image | image_url: width: 2000 | image_tag: loading: 'lazy' }}
+                  </div>
+                  {% if image_desc != blank %}
+                    <div class="image-slide__desc {{ block.settings.desc_alignment }} color-{{ block.settings.desc_color_scheme }}">
+                      {{ image_desc }}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </li>
+          {% endif %}
+        {% endfor %}
+
+        {%- comment -%} Videos {%- endcomment -%}
+        {% for i in (1..10) %}
+          {% liquid
+            case i
+              when 1
+                assign video = block.settings.video_1
+                assign video_thumb = block.settings.video_thumb_1
+                assign video_desc = block.settings.video_desc_1
+              when 2
+                assign video = block.settings.video_2
+                assign video_thumb = block.settings.video_thumb_2
+                assign video_desc = block.settings.video_desc_2
+              when 3
+                assign video = block.settings.video_3
+                assign video_thumb = block.settings.video_thumb_3
+                assign video_desc = block.settings.video_desc_3
+              when 4
+                assign video = block.settings.video_4
+                assign video_thumb = block.settings.video_thumb_4
+                assign video_desc = block.settings.video_desc_4
+              when 5
+                assign video = block.settings.video_5
+                assign video_thumb = block.settings.video_thumb_5
+                assign video_desc = block.settings.video_desc_5
+              when 6
+                assign video = block.settings.video_6
+                assign video_thumb = block.settings.video_thumb_6
+                assign video_desc = block.settings.video_desc_6
+              when 7
+                assign video = block.settings.video_7
+                assign video_thumb = block.settings.video_thumb_7
+                assign video_desc = block.settings.video_desc_7
+              when 8
+                assign video = block.settings.video_8
+                assign video_thumb = block.settings.video_thumb_8
+                assign video_desc = block.settings.video_desc_8
+              when 9
+                assign video = block.settings.video_9
+                assign video_thumb = block.settings.video_thumb_9
+                assign video_desc = block.settings.video_desc_9
+              when 10
+                assign video = block.settings.video_10
+                assign video_thumb = block.settings.video_thumb_10
+                assign video_desc = block.settings.video_desc_10
+            endcase
+             
+            assign action_on_inactive = "none"
+            if block.settings.muted_autoplay == false
+              assign action_on_inactive = "pause"
+            elsif block.settings.muted_autoplay and block.settings.display_sound_btn and block.settings.display_play_btn
+              assign action_on_inactive = "pause"
+            elsif block.settings.muted_autoplay and block.settings.display_sound_btn and block.settings.display_play_btn == false
+              assign action_on_inactive = "mute"
+            endif
+          %}
+
+          {% if video != blank %}
+            {% assign no_media = false %}
+            <li class="splide__slide">
+              <div class="splide__slide__container">
+                <div class="image-slide">
+                  <div class="image-slide__image media media--transparent ratio" style="--ratio-percent: {{ 1 | divided_by: video.aspect_ratio | times: 100 }}%;">
+                    {% render 'video-player',
+                      block: block,
+                      custom_video: video,
+                      custom_thumbnail: video_thumb,
+                      action_on_inactive: action_on_inactive
+                    %}
+                  </div>
+                  {% if video_desc != blank %}
+                    <div class="image-slide__desc {{ block.settings.desc_alignment }} color-{{ block.settings.desc_color_scheme }}">
+                      {{ video_desc }}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </li>
+          {% endif %}
+        {% endfor %}
+
+        {% if no_media %}
+          {% for i in (1..5) %}
+            <li class="splide__slide">
+              <div class="splide__slide__container">
+                <div class="image-slide">
+                  <div class="image-slide__image">
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                  </div>
+                </div>
+              </div>
+            </li>
+          {% endfor %}
+        {% endif %}
+      </ul>
+    </div>
+    <div class='splide__dots-and-arrows'>
+      <ul class="splide__pagination"></ul>
+      <div class="splide__arrows"></div>
+    </div>
+  </div>
+</splide-component>

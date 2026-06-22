@@ -1,0 +1,735 @@
+{% liquid
+  assign product_form_id = 'product-form-' | append: section.id
+
+  assign sizing_chart_append = 'none'
+  if block.blocks.size > 0
+    assign sizing_chart_append = block.settings.append
+  endif
+
+  if section.settings.product_images == 'all' or section.settings.product_images == 'one'
+    assign product = section.settings.product
+  endif
+%}
+
+{% capture sizing_chart_html %}
+  {% content_for 'blocks' %}
+{% endcapture %}
+
+{% render 'product-variant-picker', 
+  product: product, 
+  block: block, 
+  product_form_id: product_form_id, 
+  sizing_chart_append: sizing_chart_append, 
+  sizing_chart_html: sizing_chart_html
+%}
+
+{% schema %}
+{
+  "name": "Variant picker",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "product_sizing-chart"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "text",
+      "id": "picker_types",
+      "label": "Type for each option",
+      "default": "pills, pills, pills",
+      "info": "Choose picker type for each option individually by splitting them with a comma. Available options are \"pills\", \"dropdown\", \"swatches\", \"quantity breaks\" and \"hidden\". Example: \"swatches, dropdown, quantity breaks\"."
+    },
+    {
+      "type": "checkbox",
+      "id": "skip_unavailable",
+      "label": "Hide & automatically skip sold out variants",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Labels"
+    },
+    {
+      "type": "text",
+      "id": "custom_labels",
+      "label": "Custom labels",
+      "info": "If empty, the option name will be displayed. Available dynamic values: [count] - option index, [name] - option name, [name_lowercase] - option name in lowercase, [name_uppercase] - option name in uppercase, [selected] - selected option. Not applied to \"Quantity breaks\" picker heading."
+    },
+    {
+      "type": "range",
+      "id": "labels_size",
+      "label": "Labels size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "select",
+      "id": "labels_font",
+      "label": "Labels font",
+      "options": [
+        { "value": "body", "label": "Body" },
+        { "value": "body-bold", "label": "Body - bold" },
+        { "value": "headings", "label": "Heading" }
+      ],
+      "default": "body-bold"
+    },
+    {
+      "type": "select",
+      "id": "labels_color",
+      "label": "Labels color",
+      "options": [
+        { "value": "text", "label": "Text" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "text"
+    },
+    {
+      "type": "color",
+      "id": "labels_custom_color",
+      "label": "Labels custom color",
+      "default": "#dd1d1d",
+      "visible_if": "{{ block.settings.labels_color == 'custom' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_label_lines",
+      "label": "Display side lines",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "labels_alignment",
+      "label": "Labels alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "flex-start",
+      "visible_if": "{{ block.settings.show_label_lines == false }}"
+    },
+    {
+      "type": "select",
+      "id": "labels_line_color",
+      "label": "Line color",
+      "options": [
+        { "value": "text", "label": "Text" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "text",
+      "visible_if": "{{ block.settings.show_label_lines }}"
+    },
+    {
+      "type": "color",
+      "id": "labels_line_custom_color",
+      "label": "Line custom color",
+      "default": "#dd1d1d",
+      "visible_if": "{{ block.settings.show_label_lines and block.settings.labels_line_color == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "labels_line_thickness",
+      "label": "Line thickness",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "default": 2,
+      "visible_if": "{{ block.settings.show_label_lines }}"
+    },
+    {
+      "type": "header",
+      "content": "Step indicator",
+      "info": "Optional numbered badge displayed before each label (e.g. \"1 Select your scent\")."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_step_indicator",
+      "label": "Show step indicator",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "step_indicator_size",
+      "label": "Size",
+      "min": 14,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 22,
+      "visible_if": "{{ block.settings.show_step_indicator }}"
+    },
+    {
+      "type": "color",
+      "id": "step_indicator_bg_color",
+      "label": "Background color",
+      "default": "#000000",
+      "visible_if": "{{ block.settings.show_step_indicator }}"
+    },
+    {
+      "type": "color",
+      "id": "step_indicator_text_color",
+      "label": "Number color",
+      "default": "#ffffff",
+      "visible_if": "{{ block.settings.show_step_indicator }}"
+    },
+    {
+      "type": "range",
+      "id": "step_indicator_corner_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 60,
+      "visible_if": "{{ block.settings.show_step_indicator }}"
+    },
+    {
+      "type": "header",
+      "content": "Sizing chart",
+      "info": "To display a sizing chart inside the variant picker, add the Sizing chart block inside this Variant picker block."
+    },
+    {
+      "type": "select",
+      "id": "append",
+      "options": [
+        {
+          "value": "option_1_label_container",
+          "label": "Option #1 label"
+        },
+        {
+          "value": "option_1_under_container",
+          "label": "Under option #1 picker"
+        },
+        {
+          "value": "option_2_label_container",
+          "label": "Option #2 label"
+        },
+        {
+          "value": "option_2_under_container",
+          "label": "Under option #2 picker"
+        },
+        {
+          "value": "option_3_label_container",
+          "label": "Option #3 label"
+        },
+        {
+          "value": "option_3_under_container",
+          "label": "Under option #3 picker"
+        }
+      ],
+      "default": "option_1_label_container",
+      "label": "Sizing chart position"
+    },
+    {
+      "type": "header",
+      "content": "Color swatches",
+      "info": "Activate the color swatches in the Type for each option setting."
+    },
+    {
+      "type": "select",
+      "id": "swatches_size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        },
+        {
+          "value": "extra-large",
+          "label": "Extra large"
+        }
+      ],
+      "label": "Swatches size",
+      "default": "medium",
+      "visible_if": "{{ block.settings.picker_types contains 'swatches' }}"
+    },
+    {
+      "type": "select",
+      "id": "swatches_custom_colors",
+      "options": [
+        {
+          "value": "disabled",
+          "label": "Disabled"
+        },
+        {
+          "value": "image_alt",
+          "label": "Variant images alt text"
+        },
+        {
+          "value": "custom",
+          "label": "Custom colors list"
+        },
+        {
+          "value": "predefined",
+          "label": "Global predefined colors list"
+        },
+        {
+          "value": "metafield",
+          "label": "Category color metafields"
+        }
+      ],
+      "label": "Swatches custom colors",
+      "default": "disabled",
+      "visible_if": "{{ block.settings.picker_types contains 'swatches' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Disabled displays the variant images in swatches.",
+      "visible_if": "{{ block.settings.picker_types contains 'swatches' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Varaint images alt text displays CSS values from each image's alt text.",
+      "visible_if": "{{ block.settings.picker_types contains 'swatches' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Custom colors list takes the list of the custom CSS values from the setting bellow. Watch the tutorial for CSS values [here](https:\/\/youtu.be\/Xo_ZFzRCk3o)",
+      "visible_if": "{{ block.settings.picker_types contains 'swatches' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Global predefined colors list takes the list of the custom CSS values from the theme settings > Color swatches .",
+      "visible_if": "{{ block.settings.picker_types contains 'swatches' }}"
+    },
+    {
+      "type": "text",
+      "id": "swatches_custom_colors_list",
+      "label": "Custom colors list",
+      "info": "CSS values (hex/gradient) split by a comma. Example: \"#000000, #FFFFFF\"",
+      "default": "#000000, #FFFFFF",
+      "visible_if": "{{ block.settings.picker_types contains 'swatches' and block.settings.swatches_custom_colors == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "Dropdowns",
+      "info": "Activate the dropdown in the Type for each option setting."
+    },
+    {
+      "type": "paragraph",
+      "content": "Customize dropdown colors, borders and shadows in Theme settings > Variant dropdowns."
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width_dropdowns",
+      "label": "Full width dropdowns",
+      "default": false,
+      "visible_if": "{{ block.settings.picker_types contains 'dropdown' }}"
+    },
+    {
+      "type": "header",
+      "content": "Quantity breaks",
+      "info": "Activate the quantity break style picker in the Type for each option setting."
+    },
+    {
+      "type": "paragraph",
+      "content": "In all text content settings below, you can use all keywords (words in square brackets) listed below, and they are going to get automatically replaced into their corresponding values.",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "[name] - displays option name",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "[price] - displays option price",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "[compare_price] - displays option compare price",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "[amount_saved] - displays the difference between the option price & compare price",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "[amount_saved_rounded] - displays the same difference as [amount_saved], but rounded up. For example. 20 instead of 19.95.",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "select",
+      "id": "breaks_style",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Classic"
+        },
+        {
+          "value": "compact",
+          "label": "Compact"
+        },
+        {
+          "value": "vertical",
+          "label": "Vertical"
+        }
+      ],
+      "label": "Style",
+      "default": "normal",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "text",
+      "id": "breaks_headline",
+      "label": "Heading",
+      "default": "BUNDLE & SAVE",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "select",
+      "id": "breaks_prices_layout",
+      "label": "Prices layout",
+      "options": [
+        { "value": "price-first-horizontal", "label": "Price first - horizontal" },
+        { "value": "price-first-vertical", "label": "Price first - vertical" },
+        { "value": "compare-price-first-horizontal", "label": "Compare price first - horizontal" },
+        { "value": "compare-price-first-vertical", "label": "Compare price first - vertical" }
+      ],
+      "default": "price-first-vertical",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "breaks_display_selected_indicator",
+      "label": "Display selected indicator",
+      "default": true,
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' and block.settings.breaks_style != 'vertical' }}"
+    },
+    {
+      "type": "range",
+      "id": "breaks_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 10,
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "range",
+      "id": "breaks_border_width",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 2,
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "select",
+      "id": "breaks_color_scheme",
+      "label": "Color scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "HOW TO CUSTOMIZE TEXT: Every text field bellow is used to configure text of all options together. Split the texts for each option WITH A COMMA. Use [empty] to skip an option. Example: \"Caption 1, [empty], Caption 3\". All keywords are available.",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "select",
+      "id": "breaks_vertical_items_align",
+      "label": "Vertical style offers vertical alignment",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Bottom" },
+        { "value": "stretch", "label": "Make all offers same height" }
+      ],
+      "default": "flex-start",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' and block.settings.breaks_style == 'vertical' }}"
+    },
+    {
+      "type": "text",
+      "id": "breaks_badges",
+      "label": "Badges",
+      "default": "[empty], Most popular, [empty]",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "select",
+      "id": "breaks_badge_style",
+      "label": "Badges style",
+      "options": [
+        {
+          "value": "1",
+          "label": "Style 1"
+        },
+        {
+          "value": "2",
+          "label": "Style 2"
+        },
+        {
+          "value": "3",
+          "label": "Style 3"
+        }
+      ],
+      "default": "1",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' and block.settings.breaks_style != 'compact' }}"
+    },
+    {
+      "type": "select",
+      "id": "breaks_badge_color",
+      "label": "Badges color scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "select",
+      "id": "breaks_displayed_images",
+      "label": "Displayed images",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "variant_images",
+          "label": "Variant images"
+        },
+        {
+          "value": "custom",
+          "label": "Custom images"
+        }
+      ],
+      "default": "none",
+      "info": "Choose which images you want to display when the Style is set to Classic or Vertical",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' and block.settings.breaks_style != 'compact' }}"
+    },
+    {
+      "type": "text",
+      "id": "breaks_custom_images",
+      "label": "Custom image URLs",
+      "info": "To upload images, go to your Shopify admin > Content > Files > Upload an image > copy its link",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' and block.settings.breaks_style != 'compact' and block.settings.breaks_displayed_images == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "breaks_image_width",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Images width",
+      "default": 70,
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' and block.settings.breaks_style != 'compact' and block.settings.breaks_displayed_images != 'none' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "breaks_space_images",
+      "label": "Space images from top",
+      "default": true,
+      "info": "Applied if the option below is set to Top.",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' and block.settings.breaks_style == 'vertical' and block.settings.breaks_vertical_images_position == 'top' and block.settings.breaks_displayed_images != 'none' }}"
+    },
+    {
+      "type": "select",
+      "id": "breaks_vertical_images_position",
+      "label": "Image position in vertical style",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "top",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' and block.settings.breaks_style == 'vertical' and block.settings.breaks_displayed_images != 'none' }}"
+    },
+    {
+      "type": "text",
+      "id": "breaks_labels",
+      "label": "Labels",
+      "default": "[name], [name], [name]",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "text",
+      "id": "breaks_benefits",
+      "label": "Benefits",
+      "default": "[empty], Free Shipping, Free Shipping",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "select",
+      "id": "breaks_benefit_position",
+      "label": "Benefits position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "top",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "select",
+      "id": "breaks_benefit_style",
+      "label": "Benefits style",
+      "options": [
+        {
+          "value": "outlined",
+          "label": "Outlined"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        }
+      ],
+      "default": "outlined",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "select",
+      "id": "breaks_benefit_color",
+      "label": "Benefits color",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "text",
+      "id": "breaks_captions",
+      "label": "Captions",
+      "default": "Variant 1 caption, Variant 2 caption, Variant 3 caption",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "text",
+      "id": "breaks_price_texts",
+      "label": "Price texts",
+      "default": "[price], [price], [price]",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "text",
+      "id": "breaks_compare_price_texts",
+      "label": "Compare price texts",
+      "default": "[compare_price], [compare_price], [compare_price]",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Variant picker",
+      "category": "Product basics"
+    }
+  ]
+}
+{% endschema %}

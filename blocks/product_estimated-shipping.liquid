@@ -1,0 +1,760 @@
+{%- liquid
+  assign es_width = block.settings.width | default: 'full'
+  assign es_alignment = block.settings.alignment | default: 'flex-start'
+  assign es_bg_type = block.settings.bg_type | default: 'none'
+  assign es_border_thickness = block.settings.border_thickness | default: 0
+  assign es_enable_shadow = block.settings.enable_shadow | default: false
+  assign es_has_styling = false
+  if es_bg_type != 'none' or es_border_thickness > 0 or es_enable_shadow
+    assign es_has_styling = true
+  endif
+
+  assign es_width_css = '100%'
+  assign es_ml = '0'
+  assign es_mr = '0'
+  if es_width == 'fit_content'
+    assign es_width_css = 'fit-content'
+    case es_alignment
+      when 'flex-start'
+        assign es_ml = '0'
+        assign es_mr = 'auto'
+      when 'center'
+        assign es_ml = 'auto'
+        assign es_mr = 'auto'
+      when 'flex-end'
+        assign es_ml = 'auto'
+        assign es_mr = '0'
+    endcase
+  endif
+
+  assign es_bg_css = 'none'
+  if es_bg_type == 'solid'
+    assign es_red = block.settings.bg_color | color_extract: 'red'
+    assign es_green = block.settings.bg_color | color_extract: 'green'
+    assign es_blue = block.settings.bg_color | color_extract: 'blue'
+    assign es_bg_alpha = block.settings.bg_opacity | divided_by: 100.0
+    assign es_bg_css = 'rgba(' | append: es_red | append: ',' | append: es_green | append: ',' | append: es_blue | append: ',' | append: es_bg_alpha | append: ')'
+  elsif es_bg_type == 'gradient'
+    assign es_bg_css = block.settings.bg_gradient
+  endif
+
+  assign es_box_shadow_css = 'none'
+  if es_enable_shadow
+    assign es_shadow_alpha = block.settings.shadow_opacity | divided_by: 100.0
+    assign es_shadow_color = block.settings.shadow_color | color_modify: 'alpha', es_shadow_alpha
+    assign es_shadow_h = block.settings.shadow_horizontal_offset | divided_by: 10.0
+    assign es_shadow_v = block.settings.shadow_vertical_offset | divided_by: 10.0
+    assign es_shadow_b = block.settings.shadow_blur | divided_by: 10.0
+    assign es_shadow_s = block.settings.shadow_spread | divided_by: 10.0
+    assign es_box_shadow_css = es_shadow_h | append: 'rem ' | append: es_shadow_v | append: 'rem ' | append: es_shadow_b | append: 'rem ' | append: es_shadow_s | append: 'rem ' | append: es_shadow_color
+  endif
+
+  assign es_padding_css = '0'
+  if es_has_styling
+    assign es_padding_y = block.settings.padding_y | default: 10 | divided_by: 10.0
+    assign es_padding_x = block.settings.padding_x | default: 12 | divided_by: 10.0
+    assign es_padding_css = es_padding_y | append: 'rem ' | append: es_padding_x | append: 'rem'
+  endif
+
+  assign es_radius_px = block.settings.corner_radius | default: 0
+
+  case block.settings.line1_color
+    when 'accent-1'
+      assign line1_color_value = 'rgb(var(--color-base-accent-1))'
+    when 'accent-2'
+      assign line1_color_value = 'rgb(var(--color-base-accent-2))'
+    when 'custom'
+      assign line1_color_value = block.settings.line1_custom_color
+    else
+      assign line1_color_value = ''
+  endcase
+
+  case block.settings.line2_color
+    when 'accent-1'
+      assign line2_color_value = 'rgb(var(--color-base-accent-1))'
+    when 'accent-2'
+      assign line2_color_value = 'rgb(var(--color-base-accent-2))'
+    when 'custom'
+      assign line2_color_value = block.settings.line2_custom_color
+    else
+      assign line2_color_value = ''
+  endcase
+
+  assign line1_message = block.settings.message
+  if block.settings.line1_start_highlight == 'color'
+    assign wrap_start = '<span class="es-date-highlight es-date-highlight--color" style="color:' | append: block.settings.line1_start_text_color | append: ';">[start_date]</span>'
+    assign line1_message = line1_message | replace: '[start_date]', wrap_start
+  elsif block.settings.line1_start_highlight == 'background'
+    assign wrap_start = '<span class="es-date-highlight es-date-highlight--bg" style="color:' | append: block.settings.line1_start_bg_text_color | append: ';background-color:' | append: block.settings.line1_start_bg_color | append: ';">[start_date]</span>'
+    assign line1_message = line1_message | replace: '[start_date]', wrap_start
+  endif
+  if block.settings.line1_end_highlight == 'color'
+    assign wrap_end = '<span class="es-date-highlight es-date-highlight--color" style="color:' | append: block.settings.line1_end_text_color | append: ';">[end_date]</span>'
+    assign line1_message = line1_message | replace: '[end_date]', wrap_end
+  elsif block.settings.line1_end_highlight == 'background'
+    assign wrap_end = '<span class="es-date-highlight es-date-highlight--bg" style="color:' | append: block.settings.line1_end_bg_text_color | append: ';background-color:' | append: block.settings.line1_end_bg_color | append: ';">[end_date]</span>'
+    assign line1_message = line1_message | replace: '[end_date]', wrap_end
+  endif
+
+  assign line2_message = block.settings.line2_text
+  if block.settings.line2_start_highlight == 'color'
+    assign wrap_start2 = '<span class="es-date-highlight es-date-highlight--color" style="color:' | append: block.settings.line2_start_text_color | append: ';">[start_date]</span>'
+    assign line2_message = line2_message | replace: '[start_date]', wrap_start2
+  elsif block.settings.line2_start_highlight == 'background'
+    assign wrap_start2 = '<span class="es-date-highlight es-date-highlight--bg" style="color:' | append: block.settings.line2_start_bg_text_color | append: ';background-color:' | append: block.settings.line2_start_bg_color | append: ';">[start_date]</span>'
+    assign line2_message = line2_message | replace: '[start_date]', wrap_start2
+  endif
+  if block.settings.line2_end_highlight == 'color'
+    assign wrap_end2 = '<span class="es-date-highlight es-date-highlight--color" style="color:' | append: block.settings.line2_end_text_color | append: ';">[end_date]</span>'
+    assign line2_message = line2_message | replace: '[end_date]', wrap_end2
+  elsif block.settings.line2_end_highlight == 'background'
+    assign wrap_end2 = '<span class="es-date-highlight es-date-highlight--bg" style="color:' | append: block.settings.line2_end_bg_text_color | append: ';background-color:' | append: block.settings.line2_end_bg_color | append: ';">[end_date]</span>'
+    assign line2_message = line2_message | replace: '[end_date]', wrap_end2
+  endif
+-%}
+
+<div
+  class="estimated-shipping {{ block.settings.visibility }}{% if es_has_styling %} estimated-shipping--has-styling{% endif %}"
+  style="
+    --icon-size: {{ block.settings.icon_size_px | default: 28 | divided_by: 10.0 }}rem;
+    width: {{ es_width_css }};
+    margin-left: {{ es_ml }};
+    margin-right: {{ es_mr }};
+    justify-content: {{ es_alignment }};
+    background: {{ es_bg_css }};
+    {% if es_border_thickness > 0 %}
+      border: {{ es_border_thickness }}px {{ block.settings.border_style | default: 'solid' }} {{ block.settings.border_color }};
+    {% endif %}
+    box-shadow: {{ es_box_shadow_css }};
+    border-radius: {{ es_radius_px | divided_by: 10.0 }}rem;
+    padding: {{ es_padding_css }};
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  "
+  {{ block.shopify_attributes }}
+>
+  <div class="estimated-shipping__layout{% if block.settings.icon_alignment == 'middle' %} estimated-shipping--align-center{% endif %}">
+    {% unless block.settings.custom_icon == blank and block.settings.icon == blank %}
+      <div class="estimated-shipping__icon">
+        {% if block.settings.custom_icon != blank %}
+          <img
+            src="{{ block.settings.custom_icon | image_url: width: 150 }}"
+            width="auto"
+            height="auto"
+            loading="lazy"
+          >
+        {% else %}
+          {% render 'material-icon', icon: block.settings.icon, filled: block.settings.filled_icon %}
+        {% endif %}
+      </div>
+    {% endunless %}
+    <div class="estimated-shipping__content">
+      <dynamic-dates
+        data-date-format="{{ block.settings.date_format }}"
+        data-day-labels="{{ block.settings.days_labels }}"
+        data-month-labels="{{ block.settings.months_labels }}"
+        data-days-to-skip="{{ block.settings.days_to_skip | replace: ' ', '' | downcase }}"
+        data-dates-to-skip="{{ block.settings.dates_to_skip | replace: ' ', '' | downcase }}"
+        role="status"
+        aria-live="polite"
+      >
+        <div
+          class="estimated-shipping__text estimated-shipping__line-1"
+          data-dynamic-date="true"
+          data-text="{{ line1_message | escape }}"
+          data-min-days="{{ block.settings.min_shipping_days }}"
+          data-max-days="{{ block.settings.max_shipping_days }}"
+          style="font-size: {{ block.settings.line1_size | default: 14 | divided_by: 10.0 }}rem;{% if line1_color_value != '' %} color: {{ line1_color_value }};{% endif %}"
+        >
+          {{ line1_message | replace: '[start_date]', '-' | replace: '[end_date]', '-' }}
+        </div>
+      </dynamic-dates>
+      {% if block.settings.line2_text != blank %}
+        <dynamic-dates
+          data-date-format="{{ block.settings.date_format }}"
+          data-day-labels="{{ block.settings.days_labels }}"
+          data-month-labels="{{ block.settings.months_labels }}"
+          data-days-to-skip="{{ block.settings.days_to_skip | replace: ' ', '' | downcase }}"
+          data-dates-to-skip="{{ block.settings.dates_to_skip | replace: ' ', '' | downcase }}"
+          role="status"
+          aria-live="polite"
+        >
+          <div
+            class="estimated-shipping__text estimated-shipping__line-2"
+            data-dynamic-date="true"
+            data-text="{{ line2_message | escape }}"
+            data-min-days="{{ block.settings.line2_min_shipping_days }}"
+            data-max-days="{{ block.settings.line2_max_shipping_days }}"
+            style="font-size: {{ block.settings.line2_size | default: 12 | divided_by: 10.0 }}rem;{% if line2_color_value != '' %} color: {{ line2_color_value }};{% endif %}"
+          >
+            {{ line2_message | replace: '[start_date]', '-' | replace: '[end_date]', '-' }}
+          </div>
+        </dynamic-dates>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Estimated shipping",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        { "value": "desktop-hidden", "label": "Mobile only" },
+        { "value": "mobile-hidden", "label": "Desktop only" },
+        { "value": "always-display", "label": "All devices" }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "icon",
+      "default": "local_shipping",
+      "label": "Icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+    },
+    {
+      "type": "checkbox",
+      "id": "filled_icon",
+      "default": false,
+      "label": "Filled icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_icon",
+      "label": "Custom icon"
+    },
+    {
+      "type": "range",
+      "id": "icon_size_px",
+      "label": "Icon size",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "select",
+      "id": "icon_alignment",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "middle", "label": "Middle" }
+      ],
+      "default": "top",
+      "label": "Icon alignment"
+    },
+    {
+      "type": "header",
+      "content": "Text line #1"
+    },
+    {
+      "type": "richtext",
+      "id": "message",
+      "label": "Text",
+      "default": "<p>Get it between <strong>[start_date]</strong> and <strong>[end_date]</strong>.</p>",
+      "info": "Use [start_date] to display the earliest date the package can arrive and [end_date] to display the latest date the package can arrive."
+    },
+    {
+      "type": "range",
+      "id": "line1_size",
+      "label": "Text size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "select",
+      "id": "line1_color",
+      "label": "Text color",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "default"
+    },
+    {
+      "type": "color",
+      "id": "line1_custom_color",
+      "label": "Custom text color",
+      "default": "#dd1d1d",
+      "visible_if": "{{ block.settings.line1_color == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "line1_start_highlight",
+      "label": "Start date highlight",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "color", "label": "Color" },
+        { "value": "background", "label": "Background" }
+      ],
+      "default": "none",
+      "visible_if": "{{ block.settings.message contains '[start_date]' }}"
+    },
+    {
+      "type": "color",
+      "id": "line1_start_text_color",
+      "label": "Start date highlight color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.line1_start_highlight == 'color' and block.settings.message contains '[start_date]' }}"
+    },
+    {
+      "type": "color",
+      "id": "line1_start_bg_color",
+      "label": "Start date background color",
+      "default": "#0CB137",
+      "visible_if": "{{ block.settings.line1_start_highlight == 'background' and block.settings.message contains '[start_date]' }}"
+    },
+    {
+      "type": "color",
+      "id": "line1_start_bg_text_color",
+      "label": "Start date text color",
+      "default": "#ffffff",
+      "visible_if": "{{ block.settings.line1_start_highlight == 'background' and block.settings.message contains '[start_date]' }}"
+    },
+    {
+      "type": "select",
+      "id": "line1_end_highlight",
+      "label": "End date highlight",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "color", "label": "Color" },
+        { "value": "background", "label": "Background" }
+      ],
+      "default": "none",
+      "visible_if": "{{ block.settings.message contains '[end_date]' }}"
+    },
+    {
+      "type": "color",
+      "id": "line1_end_text_color",
+      "label": "End date highlight color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.line1_end_highlight == 'color' and block.settings.message contains '[end_date]' }}"
+    },
+    {
+      "type": "color",
+      "id": "line1_end_bg_color",
+      "label": "End date background color",
+      "default": "#0CB137",
+      "visible_if": "{{ block.settings.line1_end_highlight == 'background' and block.settings.message contains '[end_date]' }}"
+    },
+    {
+      "type": "color",
+      "id": "line1_end_bg_text_color",
+      "label": "End date text color",
+      "default": "#ffffff",
+      "visible_if": "{{ block.settings.line1_end_highlight == 'background' and block.settings.message contains '[end_date]' }}"
+    },
+    {
+      "type": "header",
+      "content": "Text line #2"
+    },
+    {
+      "type": "richtext",
+      "id": "line2_text",
+      "label": "Text",
+      "info": "Use [start_date] and [end_date]. Leave empty to hide line 2."
+    },
+    {
+      "type": "range",
+      "id": "line2_size",
+      "label": "Text size",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12,
+      "visible_if": "{{ block.settings.line2_text != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "line2_color",
+      "label": "Text color",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "default",
+      "visible_if": "{{ block.settings.line2_text != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "line2_custom_color",
+      "label": "Custom text color",
+      "default": "#dd1d1d",
+      "visible_if": "{{ block.settings.line2_text != blank and block.settings.line2_color == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "line2_start_highlight",
+      "label": "Start date highlight",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "color", "label": "Color" },
+        { "value": "background", "label": "Background" }
+      ],
+      "default": "none",
+      "visible_if": "{{ block.settings.line2_text contains '[start_date]' }}"
+    },
+    {
+      "type": "color",
+      "id": "line2_start_text_color",
+      "label": "Start date highlight color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.line2_start_highlight == 'color' and block.settings.line2_text contains '[start_date]' }}"
+    },
+    {
+      "type": "color",
+      "id": "line2_start_bg_color",
+      "label": "Start date background color",
+      "default": "#0CB137",
+      "visible_if": "{{ block.settings.line2_start_highlight == 'background' and block.settings.line2_text contains '[start_date]' }}"
+    },
+    {
+      "type": "color",
+      "id": "line2_start_bg_text_color",
+      "label": "Start date text color",
+      "default": "#ffffff",
+      "visible_if": "{{ block.settings.line2_start_highlight == 'background' and block.settings.line2_text contains '[start_date]' }}"
+    },
+    {
+      "type": "select",
+      "id": "line2_end_highlight",
+      "label": "End date highlight",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "color", "label": "Color" },
+        { "value": "background", "label": "Background" }
+      ],
+      "default": "none",
+      "visible_if": "{{ block.settings.line2_text contains '[end_date]' }}"
+    },
+    {
+      "type": "color",
+      "id": "line2_end_text_color",
+      "label": "End date highlight color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.line2_end_highlight == 'color' and block.settings.line2_text contains '[end_date]' }}"
+    },
+    {
+      "type": "color",
+      "id": "line2_end_bg_color",
+      "label": "End date background color",
+      "default": "#0CB137",
+      "visible_if": "{{ block.settings.line2_end_highlight == 'background' and block.settings.line2_text contains '[end_date]' }}"
+    },
+    {
+      "type": "color",
+      "id": "line2_end_bg_text_color",
+      "label": "End date text color",
+      "default": "#ffffff",
+      "visible_if": "{{ block.settings.line2_end_highlight == 'background' and block.settings.line2_text contains '[end_date]' }}"
+    },
+    {
+      "type": "header",
+      "content": "Styling"
+    },
+    {
+      "type": "select",
+      "id": "bg_type",
+      "label": "Background",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "solid", "label": "Solid color" },
+        { "value": "gradient", "label": "Gradient color" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#F4E1FF",
+      "visible_if": "{{ block.settings.bg_type == 'solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_gradient",
+      "label": "Background gradient",
+      "default": "linear-gradient(135deg, rgba(232, 220, 255, 1) 0%, rgba(255, 220, 232, 1) 100%)",
+      "visible_if": "{{ block.settings.bg_type == 'gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "bg_opacity",
+      "label": "Background opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100,
+      "info": "Opacity for gradient backgrounds is controlled by the gradient's color stops.",
+      "visible_if": "{{ block.settings.bg_type == 'solid' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_thickness",
+      "label": "Border thickness",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#000000",
+      "visible_if": "{{ block.settings.border_thickness > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "border_style",
+      "label": "Border style",
+      "options": [
+        { "value": "solid", "label": "Solid" },
+        { "value": "dashed", "label": "Dashed" }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.border_thickness > 0 }}"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 10,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_thickness > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "padding_y",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 10,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_thickness > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "padding_x",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_thickness > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_shadow",
+      "label": "Enable drop shadow",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "shadow_color",
+      "label": "Shadow color",
+      "default": "#000000",
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "label": "Shadow opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 15,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_horizontal_offset",
+      "label": "Shadow horizontal offset (px)",
+      "min": -50,
+      "max": 50,
+      "step": 2,
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical_offset",
+      "label": "Shadow vertical offset (px)",
+      "min": -50,
+      "max": 50,
+      "step": 2,
+      "default": 10,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "label": "Shadow blur (px)",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 20,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_spread",
+      "label": "Shadow spread (px)",
+      "min": -50,
+      "max": 50,
+      "step": 2,
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Width",
+      "options": [
+        { "value": "fit_content", "label": "Fit content" },
+        { "value": "full", "label": "Full" }
+      ],
+      "default": "full",
+      "info": "Determines what the background, border and shadow are applied to.",
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_thickness > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "flex-start",
+      "visible_if": "{{ block.settings.width == 'fit_content' and block.settings.bg_type != 'none' or block.settings.border_thickness > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "header",
+      "content": "Shipping"
+    },
+    {
+      "type": "number",
+      "id": "min_shipping_days",
+      "label": "Line 1 minimum shipping days",
+      "default": 7
+    },
+    {
+      "type": "number",
+      "id": "max_shipping_days",
+      "label": "Line 1 maximum shipping days",
+      "default": 15
+    },
+    {
+      "type": "number",
+      "id": "line2_min_shipping_days",
+      "label": "Line 2 minimum shipping days",
+      "default": 7,
+      "visible_if": "{{ block.settings.line2_text != blank }}"
+    },
+    {
+      "type": "number",
+      "id": "line2_max_shipping_days",
+      "label": "Line 2 maximum shipping days",
+      "default": 15,
+      "visible_if": "{{ block.settings.line2_text != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "date_format",
+      "label": "Date format",
+      "options": [
+        { "value": "day_mm_dd", "label": "Monday, February 1st" },
+        { "value": "day_dd_mm", "label": "Monday, 1. February" },
+        { "value": "mm_dd", "label": "February 1st" },
+        { "value": "dd_mm", "label": "1. February" },
+        { "value": "dd_mm_no_dot", "label": "1 February" },
+        { "value": "day_dd_mm_numeric", "label": "Monday, 01. 02." },
+        { "value": "dd_mm_numeric", "label": "01. 02." }
+      ],
+      "default": "day_mm_dd"
+    },
+    {
+      "type": "text",
+      "id": "days_labels",
+      "label": "Day labels",
+      "default": "Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday"
+    },
+    {
+      "type": "text",
+      "id": "months_labels",
+      "label": "Month labels",
+      "default": "January, February, March, April, May, June, July, August, September, October, November, December"
+    },
+    {
+      "type": "text",
+      "id": "days_to_skip",
+      "label": "Week days to skip",
+      "info": "Enter the names of days to skip. If there are multiple days to skip, separate them with commas. Available days to use: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. Example usage if you want to skip weekends: \"Saturday, Sunday\"."
+    },
+    {
+      "type": "text",
+      "id": "dates_to_skip",
+      "label": "Specific dates to skip",
+      "info": "Enter the exact dates to skip. If there are multiple dates to skip, separate them with commas. The date has to be in this format: MM-DD. Example usage if you want to skip Christmass & New Years: \"12-25, 12-31, 01-01\"."
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Estimated shipping",
+      "category": "Shipping information"
+    }
+  ]
+}
+{% endschema %}

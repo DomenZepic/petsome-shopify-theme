@@ -1,0 +1,302 @@
+{%- liquid
+  assign pattern_opacity = section.settings.pattern_opacity_low | default: 7
+
+  if section.settings.pattern_opacity_mode == 'normal'
+    assign pattern_opacity = section.settings.pattern_opacity_normal | default: 80
+  endif
+-%}
+
+.color-scheme-{{ section.id }}.gradient {
+  position: relative;
+  isolation: isolate;
+}
+
+.color-scheme-{{ section.id }}.gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-repeat: repeat;
+  background-position: 0 0;
+  opacity: {{ pattern_opacity | divided_by: 100.0 }};
+  pointer-events: none;
+  z-index: 0;
+
+  {%- case section.settings.pattern_bg -%}
+    {%- when 'dotted' -%}
+      background-image: radial-gradient(
+        {{ section.settings.pattern_color }}
+        {{ section.settings.pattern_thickness }}px,
+        transparent
+        {{ section.settings.pattern_thickness }}px
+      );
+      background-size: {{ section.settings.pattern_size }}px {{ section.settings.pattern_size }}px;
+
+    {%- when 'grid' -%}
+      background-image:
+        linear-gradient(
+          to right,
+          {{ section.settings.pattern_color }}
+          {{ section.settings.pattern_thickness }}px,
+          transparent
+          {{ section.settings.pattern_thickness }}px
+        ),
+        linear-gradient(
+          to bottom,
+          {{ section.settings.pattern_color }}
+          {{ section.settings.pattern_thickness }}px,
+          transparent
+          {{ section.settings.pattern_thickness }}px
+        );
+      background-size: {{ section.settings.pattern_size }}px {{ section.settings.pattern_size }}px;
+
+    {%- when 'curved-grid' -%}
+      --cg-size: {{ section.settings.pattern_size | times: 5 }}px;
+      --cg-color: {{ section.settings.pattern_color }};
+      --cg-shape: transparent 52%, var(--cg-color) 54% 57%, transparent 59%;
+
+      background:
+        radial-gradient(farthest-side at -33.33% 50%, var(--cg-shape)) 0 calc(var(--cg-size) / 2),
+        radial-gradient(farthest-side at 50% 133.33%, var(--cg-shape)) calc(var(--cg-size) / 2) 0,
+        radial-gradient(farthest-side at 133.33% 50%, var(--cg-shape)),
+        radial-gradient(farthest-side at 50% -33.33%, var(--cg-shape));
+
+      background-size:
+        calc(var(--cg-size) / 4.667) var(--cg-size),
+        var(--cg-size) calc(var(--cg-size) / 4.667);
+      background-repeat: repeat;
+
+    {%- when 'diagonal-stripes' -%}
+      /* Diagonal stripes */
+      background-image: repeating-linear-gradient(
+        {{ section.settings.pattern_angle }}deg,
+        {{ section.settings.pattern_color }} 0,
+        {{ section.settings.pattern_color }}
+        {{ section.settings.pattern_thickness }}px,
+        transparent
+        {{ section.settings.pattern_thickness }}px,
+        transparent
+        {{ section.settings.pattern_size }}px
+      );
+
+    {%- when 'zigzag' -%}
+      background-image:
+        linear-gradient(
+          135deg,
+          {{ section.settings.pattern_color }} 25%,
+          transparent 25%
+        ),
+        linear-gradient(
+          225deg,
+          {{ section.settings.pattern_color }} 25%,
+          transparent 25%
+        ),
+        linear-gradient(
+          45deg,
+          {{ section.settings.pattern_color }} 25%,
+          transparent 25%
+        ),
+        linear-gradient(
+          315deg,
+          {{ section.settings.pattern_color }} 25%,
+          transparent 25%
+        );
+      background-position:
+        {{ section.settings.pattern_size | divided_by: 2 }}px 0,
+        {{ section.settings.pattern_size | divided_by: 2 }}px 0,
+        0 0,
+        0 0;
+      background-size: {{ section.settings.pattern_size }}px {{ section.settings.pattern_size }}px;
+
+    {%- when 'arrow-pattern' -%}
+      background-image:
+        linear-gradient(
+          135deg,
+          {{ section.settings.pattern_color | color_modify: 'alpha', 0.33 }} 25%,
+          transparent 25%
+        ),
+        linear-gradient(
+          225deg,
+          {{ section.settings.pattern_color }} 25%,
+          transparent 25%
+        ),
+        linear-gradient(
+          315deg,
+          {{ section.settings.pattern_color | color_modify: 'alpha', 0.33 }} 25%,
+          transparent 25%
+        ),
+        linear-gradient(
+          45deg,
+          {{ section.settings.pattern_color }} 25%,
+          transparent 25%
+        );
+      background-position:
+        {{ section.settings.pattern_size | times: -0.5 }}px 0,
+        {{ section.settings.pattern_size | times: -0.5 }}px 0,
+        0 0,
+        0 0;
+      background-size: {{ section.settings.pattern_size }}px {{ section.settings.pattern_size }}px;
+
+    {%- when 'radial-rings' -%}
+      background-image: repeating-radial-gradient(
+        circle at center,
+        {{ section.settings.pattern_color }} 0,
+        {{ section.settings.pattern_color }}
+        {{ section.settings.pattern_thickness }}px,
+        transparent
+        {{ section.settings.pattern_thickness }}px,
+        transparent
+        {{ section.settings.pattern_size }}px
+      );
+
+    {%- when 'diamond-grid-1' -%}
+      background-image:
+        linear-gradient(
+          135deg,
+          {{ section.settings.pattern_color }} 25%,
+          transparent 25%
+        ),
+        linear-gradient(
+          225deg,
+          {{ section.settings.pattern_color }} 25%,
+          transparent 25%
+        ),
+        linear-gradient(
+          45deg,
+          {{ section.settings.pattern_color }} 25%,
+          transparent 25%
+        ),
+        linear-gradient(
+          315deg,
+          {{ section.settings.pattern_color }} 25%,
+          transparent 25%
+        );
+      background-position:
+        {{ section.settings.pattern_size }}px 0,
+        {{ section.settings.pattern_size }}px 0,
+        0 0,
+        0 0;
+      background-size: {{ section.settings.pattern_size }}px {{ section.settings.pattern_size }}px;
+
+    {%- when 'diamond-grid-2' -%}
+      background-image:
+        linear-gradient(
+          135deg,
+          transparent 25%,
+          {{ section.settings.pattern_color }} 25%,
+          {{ section.settings.pattern_color }} 50%,
+          transparent 50%,
+          transparent 75%,
+          {{ section.settings.pattern_color }} 75%,
+          {{ section.settings.pattern_color }} 100%
+        ),
+        linear-gradient(
+          225deg,
+          transparent 25%,
+          {{ section.settings.pattern_color }} 25%,
+          {{ section.settings.pattern_color }} 50%,
+          transparent 50%,
+          transparent 75%,
+          {{ section.settings.pattern_color }} 75%,
+          {{ section.settings.pattern_color }} 100%
+        );
+      background-size: {{ section.settings.pattern_size }}px {{ section.settings.pattern_size }}px;
+      background-position:
+        0 0,
+        {{ section.settings.pattern_size | divided_by: 2 }}px
+        {{ section.settings.pattern_size | divided_by: 2 }}px;
+
+    {%- when 'quatrefoils' -%}
+      --qf-size: {{ section.settings.pattern_size | times: 1.2 }}px;
+      --qf-color: {{ section.settings.pattern_color }};
+
+      --qf-shape:
+        transparent 83%,
+        var(--qf-color) 85% 99%,
+        transparent 101%;
+
+      background:
+        radial-gradient(27% 29% at right ,  var(--qf-shape)) calc(var(--qf-size) /  2)  var(--qf-size),
+        radial-gradient(27% 29% at left  ,  var(--qf-shape)) calc(var(--qf-size) / -2)  var(--qf-size),
+        radial-gradient(29% 27% at top   ,  var(--qf-shape)) 0                       calc(var(--qf-size) /  2),
+        radial-gradient(29% 27% at bottom,  var(--qf-shape)) 0                       calc(var(--qf-size) / -2);
+
+      background-size: calc(2 * var(--qf-size)) calc(2 * var(--qf-size));
+      background-repeat: repeat;
+
+    {%- when 'ovals' -%}
+      --ov-size: {{ section.settings.pattern_size | times: 0.5 }}px;
+      --ov-color: {{ section.settings.pattern_color }};
+
+      --ov-g:
+        transparent calc(100% - var(--ov-size) / 3 - 1px),
+        var(--ov-color) calc(100% - var(--ov-size) / 3) calc(100% - 1px),
+        transparent;
+
+      --ov-r: calc(2.414 * var(--ov-size));
+      --ov-p: calc(1.414 * var(--ov-size));
+
+      background:
+        radial-gradient(var(--ov-r) at 0    0   , var(--ov-g)) var(--ov-r) var(--ov-r),
+        radial-gradient(var(--ov-size) at 0 0   , var(--ov-g)) var(--ov-p) var(--ov-p),
+        radial-gradient(var(--ov-r) at 0    100%, var(--ov-g)) 0           var(--ov-p),
+        radial-gradient(var(--ov-size) at 0 100%, var(--ov-g)) calc(-1 * var(--ov-size)) var(--ov-r),
+        radial-gradient(var(--ov-r) at 100% 0   , var(--ov-g)) var(--ov-p) 0,
+        radial-gradient(var(--ov-size) at 100% 0, var(--ov-g)) var(--ov-r) calc(-1 * var(--ov-size)),
+        radial-gradient(var(--ov-r) at 100% 100%, var(--ov-g)) calc(-1 * var(--ov-size)) calc(-1 * var(--ov-size)),
+        radial-gradient(var(--ov-size) at 100% 100%, var(--ov-g));
+
+      /* same tiling size, no solid background color */
+      background-size: calc(2 * var(--ov-r)) calc(2 * var(--ov-r));
+      background-repeat: repeat;
+      
+    {%- when 'hexagons' -%}
+      --hx-size: {{ section.settings.pattern_size }}px;
+      --hx-color: {{ section.settings.pattern_color }};
+
+      --hx-c: transparent,
+              var(--hx-color) .5deg 119.5deg,
+              transparent 120deg;
+
+      --hx-g1: conic-gradient(from  60deg at 56.25% calc(425% / 6), var(--hx-c));
+      --hx-g2: conic-gradient(from 180deg at 43.75% calc(425% / 6), var(--hx-c));
+      --hx-g3: conic-gradient(from -60deg at 50%   calc(175% / 12), var(--hx-c));
+
+      background:
+        var(--hx-g1),
+        var(--hx-g1) var(--hx-size) calc(1.73 * var(--hx-size)),
+        var(--hx-g2),
+        var(--hx-g2) var(--hx-size) calc(1.73 * var(--hx-size)),
+        var(--hx-g3) var(--hx-size) 0,
+        var(--hx-g3) 0 calc(1.73 * var(--hx-size));
+
+      background-size: calc(2 * var(--hx-size)) calc(3.46 * var(--hx-size));
+      background-repeat: repeat;
+
+    {%- when 'curvy' -%}
+      --curvy-size: {{ section.settings.pattern_size | default: 20 }}px;
+      --curvy-color: {{ section.settings.pattern_color }};
+
+      --curvy-s: var(--curvy-size);
+      --curvy-space: calc(2 * var(--curvy-s));
+      --curvy-g: 35.36% 35.36% at;
+      --curvy-shape: #0000 66%, var(--curvy-color) 68% 70%, #0000 72%;
+
+      background:
+        radial-gradient(var(--curvy-g) 100% 25%, var(--curvy-shape))
+          var(--curvy-s) var(--curvy-s) / var(--curvy-space) var(--curvy-space),
+        radial-gradient(var(--curvy-g) 0    75%, var(--curvy-shape))
+          var(--curvy-s) var(--curvy-s) / var(--curvy-space) var(--curvy-space),
+        radial-gradient(var(--curvy-g) 100% 25%, var(--curvy-shape))
+          0 0 / var(--curvy-space) var(--curvy-space),
+        radial-gradient(var(--curvy-g) 0    75%, var(--curvy-shape))
+          0 0 / var(--curvy-space) var(--curvy-space);
+
+      background-repeat: repeat;
+
+  {%- endcase -%}
+}
+
+.color-scheme-{{ section.id }}.gradient > * {
+  position: relative;
+  z-index: 1;
+}

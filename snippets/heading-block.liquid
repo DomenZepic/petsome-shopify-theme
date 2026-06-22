@@ -1,0 +1,1169 @@
+{% liquid
+  assign title = block.settings.title
+  assign highlight_style_1 = block.settings.title_highlight_1
+  assign highlight_style_2 = block.settings.title_highlight_2
+
+  assign has_desktop_align = true
+  if section.settings.desktop_content_alignment == 'left' or section.settings.desktop_content_alignment == 'center' or section.settings.desktop_content_alignment == 'right'
+    assign has_desktop_align = false
+  endif
+
+  assign has_mobile_align = true
+  if section.settings.mobile_content_alignment == 'left' or section.settings.mobile_content_alignment == 'center' or section.settings.mobile_content_alignment == 'right'
+    assign has_mobile_align = false
+  endif
+%}
+
+<style>
+  {% if block.settings.heading_size == 'custom' %}
+    .heading-{{ block.id }} {
+      font-size: {{ block.settings.custom_desktop_size | divided_by: 1.3 | times: settings.heading_scale  | divided_by: 1000.0  }}rem;
+    }
+    @media screen and (max-width: 749px) {
+      .heading-{{ block.id }} {
+        font-size: {{ block.settings.custom_mobile_size | divided_by: 1.3 | times: settings.heading_scale  | divided_by: 1000.0 }}rem;
+      }
+    }
+  {% endif %}
+
+  {% assign is_highlight_animation = false %}
+  {% if block.settings.text_animation == 'highlight-swipe' or block.settings.text_animation == 'highlight-fade-up' or block.settings.text_animation == 'highlight-underline' or block.settings.text_animation == 'highlight-strike' %}
+    {% assign is_highlight_animation = true %}
+  {% endif %}
+
+  {% if is_highlight_animation %}
+    @keyframes heading-highlighter-swipe-{{ block.id }} {
+      0% {
+        width: 0%;
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        width: 100%;
+        opacity: 1;
+      }
+    }
+
+    @keyframes heading-highlighter-fade-up-{{ block.id }} {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes heading-highlighter-underline-{{ block.id }} {
+      0% {
+        width: 0%;
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        width: 100%;
+        opacity: 1;
+      }
+    }
+
+    @keyframes heading-highlighter-strike-through-{{ block.id }} {
+      0% {
+        width: 0%;
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        width: 100%;
+        opacity: 1;
+      }
+    }
+
+    {% if block.settings.highlight_bold_only %}
+      /* Only highlight bold/strong elements */
+      .heading-{{ block.id }} strong,
+      .heading-{{ block.id }} b {
+        display: inline;
+        position: relative;
+        z-index: 1;
+      }
+
+      {% if block.settings.highlighter_animate_on_scroll %}
+        /* Paused state - waits for scroll trigger */
+        .heading-{{ block.id }} strong::before,
+        .heading-{{ block.id }} b::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          {% case block.settings.text_animation %}
+            {% when 'highlight-underline' %}
+              bottom: {{ block.settings.highlighter_underline_offset }}px;
+              width: 0%;
+              height: {{ block.settings.highlighter_underline_thickness }}px;
+              background-color: {{ block.settings.highlighter_underline_color }};
+              z-index: -1;
+            {% when 'highlight-strike' %}
+              top: calc(50% + {{ block.settings.highlighter_strike_offset }}px);
+              width: 0%;
+              height: {{ block.settings.highlighter_strike_thickness }}px;
+              background-color: {{ block.settings.highlighter_strike_color }};
+              z-index: 1;
+            {% else %}
+              bottom: {{ block.settings.highlight_position }}%;
+              width: {% if block.settings.text_animation == 'highlight-swipe' %}0%{% else %}100%{% endif %};
+              opacity: {% if block.settings.text_animation == 'highlight-fade-up' %}0{% else %}1{% endif %};
+              height: {{ block.settings.highlight_height }}%;
+              background-color: {{ block.settings.highlight_color }};
+              z-index: -1;
+          {% endcase %}
+          animation-play-state: paused;
+          {% case block.settings.text_animation %}
+            {% when 'highlight-swipe' %}
+              animation: heading-highlighter-swipe-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-fade-up' %}
+              animation: heading-highlighter-fade-up-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-underline' %}
+              animation: heading-highlighter-underline-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-strike' %}
+              animation: heading-highlighter-strike-through-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+          {% endcase %}
+          animation-delay: {{ block.settings.highlighter_animation_delay | divided_by: 1000.0 }}s;
+        }
+
+        /* Triggered state - plays animation when parent section is visible */
+        .animate-section.animate--shown .heading-{{ block.id }} strong::before,
+        .animate-section.animate--shown .heading-{{ block.id }} b::before {
+          animation-play-state: running;
+        }
+      {% else %}
+        /* Immediate animation - no scroll trigger */
+        .heading-{{ block.id }} strong::before,
+        .heading-{{ block.id }} b::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          {% case block.settings.text_animation %}
+            {% when 'highlight-underline' %}
+              bottom: {{ block.settings.highlighter_underline_offset }}px;
+              width: 0%;
+              height: {{ block.settings.highlighter_underline_thickness }}px;
+              background-color: {{ block.settings.highlighter_underline_color }};
+              z-index: -1;
+            {% when 'highlight-strike' %}
+              top: calc(50% + {{ block.settings.highlighter_strike_offset }}px);
+              width: 0%;
+              height: {{ block.settings.highlighter_strike_thickness }}px;
+              background-color: {{ block.settings.highlighter_strike_color }};
+              z-index: 1;
+            {% else %}
+              bottom: {{ block.settings.highlight_position }}%;
+              width: {% if block.settings.text_animation == 'highlight-swipe' %}0%{% else %}100%{% endif %};
+              opacity: {% if block.settings.text_animation == 'highlight-fade-up' %}0{% else %}1{% endif %};
+              height: {{ block.settings.highlight_height }}%;
+              background-color: {{ block.settings.highlight_color }};
+              z-index: -1;
+          {% endcase %}
+          {% case block.settings.text_animation %}
+            {% when 'highlight-swipe' %}
+              animation: heading-highlighter-swipe-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-fade-up' %}
+              animation: heading-highlighter-fade-up-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-underline' %}
+              animation: heading-highlighter-underline-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-strike' %}
+              animation: heading-highlighter-strike-through-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+          {% endcase %}
+          animation-delay: {{ block.settings.highlighter_animation_delay | divided_by: 1000.0 }}s;
+        }
+      {% endif %}
+    {% else %}
+      /* Highlight all text */
+      .heading-{{ block.id }}.heading-highlighter-active {
+        display: inline;
+        position: relative;
+        z-index: 1;
+      }
+
+      {% if block.settings.highlighter_animate_on_scroll %}
+        /* Paused state - waits for scroll trigger */
+        .heading-{{ block.id }}.heading-highlighter-active::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          {% case block.settings.text_animation %}
+            {% when 'highlight-underline' %}
+              bottom: {{ block.settings.highlighter_underline_offset }}px;
+              width: 0%;
+              height: {{ block.settings.highlighter_underline_thickness }}px;
+              background-color: {{ block.settings.highlighter_underline_color }};
+              z-index: -1;
+            {% when 'highlight-strike' %}
+              top: calc(50% + {{ block.settings.highlighter_strike_offset }}px);
+              width: 0%;
+              height: {{ block.settings.highlighter_strike_thickness }}px;
+              background-color: {{ block.settings.highlighter_strike_color }};
+              z-index: 1;
+            {% else %}
+              bottom: {{ block.settings.highlight_position }}%;
+              width: {% if block.settings.text_animation == 'highlight-swipe' %}0%{% else %}100%{% endif %};
+              opacity: {% if block.settings.text_animation == 'highlight-fade-up' %}0{% else %}1{% endif %};
+              height: {{ block.settings.highlight_height }}%;
+              background-color: {{ block.settings.highlight_color }};
+              z-index: -1;
+          {% endcase %}
+          animation-play-state: paused;
+          {% case block.settings.text_animation %}
+            {% when 'highlight-swipe' %}
+              animation: heading-highlighter-swipe-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-fade-up' %}
+              animation: heading-highlighter-fade-up-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-underline' %}
+              animation: heading-highlighter-underline-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-strike' %}
+              animation: heading-highlighter-strike-through-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+          {% endcase %}
+          animation-delay: {{ block.settings.highlighter_animation_delay | divided_by: 1000.0 }}s;
+        }
+
+        /* Triggered state - plays animation when parent section is visible */
+        .animate-section.animate--shown .heading-{{ block.id }}.heading-highlighter-active::before {
+          animation-play-state: running;
+        }
+      {% else %}
+        /* Immediate animation - no scroll trigger */
+        .heading-{{ block.id }}.heading-highlighter-active::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          {% case block.settings.text_animation %}
+            {% when 'highlight-underline' %}
+              bottom: {{ block.settings.highlighter_underline_offset }}px;
+              width: 0%;
+              height: {{ block.settings.highlighter_underline_thickness }}px;
+              background-color: {{ block.settings.highlighter_underline_color }};
+              z-index: -1;
+            {% when 'highlight-strike' %}
+              top: calc(50% + {{ block.settings.highlighter_strike_offset }}px);
+              width: 0%;
+              height: {{ block.settings.highlighter_strike_thickness }}px;
+              background-color: {{ block.settings.highlighter_strike_color }};
+              z-index: 1;
+            {% else %}
+              bottom: {{ block.settings.highlight_position }}%;
+              width: {% if block.settings.text_animation == 'highlight-swipe' %}0%{% else %}100%{% endif %};
+              opacity: {% if block.settings.text_animation == 'highlight-fade-up' %}0{% else %}1{% endif %};
+              height: {{ block.settings.highlight_height }}%;
+              background-color: {{ block.settings.highlight_color }};
+              z-index: -1;
+          {% endcase %}
+          {% case block.settings.text_animation %}
+            {% when 'highlight-swipe' %}
+              animation: heading-highlighter-swipe-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-fade-up' %}
+              animation: heading-highlighter-fade-up-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-underline' %}
+              animation: heading-highlighter-underline-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+            {% when 'highlight-strike' %}
+              animation: heading-highlighter-strike-through-{{ block.id }} {{ block.settings.highlighter_animation_duration | divided_by: 1000.0 }}s ease-out forwards;
+          {% endcase %}
+          animation-delay: {{ block.settings.highlighter_animation_delay | divided_by: 1000.0 }}s;
+        }
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+  {% if block.settings.text_animation == 'split' %}
+    .heading-{{ block.id }}.split-text-parent {
+      overflow: visible;
+    }
+
+    .heading-{{ block.id }} .split-char,
+    .heading-{{ block.id }} .split-word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY({{ block.settings.split_y_offset }}px);
+      transition: opacity {{ block.settings.split_duration | divided_by: 1000.0 }}s ease-out,
+                  transform {{ block.settings.split_duration | divided_by: 1000.0 }}s ease-out;
+      will-change: opacity, transform;
+    }
+
+    .heading-{{ block.id }}.split-text-visible .split-char,
+    .heading-{{ block.id }}.split-text-visible .split-word {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: calc(var(--split-index, 0) * {{ block.settings.split_delay | divided_by: 1000.0 }}s);
+    }
+
+    /* Preserve gradient on split text */
+    .heading-{{ block.id }}.split-text-parent.title-with-highlight-1--color-gradient strong .split-char,
+    .heading-{{ block.id }}.split-text-parent.title-with-highlight-1--color-gradient strong .split-word {
+      background: inherit;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .heading-{{ block.id }}.split-text-parent.title-with-highlight-2--color-gradient em .split-char,
+    .heading-{{ block.id }}.split-text-parent.title-with-highlight-2--color-gradient em .split-word {
+      background: inherit;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  {% endif %}
+
+  {% if block.settings.text_animation == 'shiny' %}
+    @keyframes shiny-text-{{ block.id }} {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 200% 50%;
+      }
+    }
+
+    .heading-{{ block.id }}.shiny-text-active {
+      background: linear-gradient(
+        110deg,
+        currentColor 45%,
+        rgba(255, 255, 255, 0.8) 50%,
+        currentColor 55%
+      );
+      background-size: 200% 100%;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shiny-text-{{ block.id }} {{ block.settings.shiny_speed }}s linear infinite;
+      animation-play-state: paused;
+    }
+
+    .heading-{{ block.id }}.shiny-text-active.shiny-text-visible {
+      animation-play-state: running;
+    }
+
+    .heading-{{ block.id }}.shiny-text-active.disabled {
+      animation: none;
+      background: none;
+      -webkit-text-fill-color: inherit;
+    }
+  {% endif %}
+
+  {% if block.settings.text_animation == 'typing' %}
+    .heading-{{ block.id }}.typing-text {
+      display: inline-block;
+    }
+
+    .heading-{{ block.id }} .typing-cursor {
+      display: inline-block;
+      {% if block.settings.typing_show_cursor %}
+        opacity: 1;
+        animation: cursor-blink-{{ block.id }} {{ block.settings.typing_cursor_blink_duration | divided_by: 1000.0 }}s ease-in-out infinite;
+      {% else %}
+        display: none;
+      {% endif %}
+    }
+
+    .heading-{{ block.id }} .typing-cursor.cursor-hidden {
+      opacity: 0 !important;
+    }
+
+    @keyframes cursor-blink-{{ block.id }} {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  {% endif %}
+
+  {% if block.settings.text_animation == 'blur' %}
+    .heading-{{ block.id }}.blur-text-parent {
+      overflow: visible;
+    }
+
+    .heading-{{ block.id }} .blur-char,
+    .heading-{{ block.id }} .blur-word {
+      display: inline-block;
+      white-space: pre-wrap;
+      will-change: transform, filter, opacity;
+      {% if block.settings.blur_direction == 'top' %}
+        filter: blur(10px);
+        opacity: 0;
+        transform: translateY(-50px);
+      {% else %}
+        filter: blur(10px);
+        opacity: 0;
+        transform: translateY(50px);
+      {% endif %}
+    }
+
+    .heading-{{ block.id }}.blur-text-visible .blur-char,
+    .heading-{{ block.id }}.blur-text-visible .blur-word {
+      filter: blur(0px);
+      opacity: 1;
+      transform: translateY(0);
+      transition:
+        filter {{ block.settings.blur_duration | times: 2 | divided_by: 1000.0 }}s ease-out,
+        opacity {{ block.settings.blur_duration | times: 2 | divided_by: 1000.0 }}s ease-out,
+        transform {{ block.settings.blur_duration | times: 2 | divided_by: 1000.0 }}s ease-out;
+      transition-delay: calc(var(--blur-index, 0) * {{ block.settings.blur_delay | divided_by: 1000.0 }}s);
+    }
+
+    /* Preserve gradient on blur text */
+    .heading-{{ block.id }}.blur-text-parent.title-with-highlight-1--color-gradient strong .blur-char,
+    .heading-{{ block.id }}.blur-text-parent.title-with-highlight-1--color-gradient strong .blur-word {
+      background: inherit;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .heading-{{ block.id }}.blur-text-parent.title-with-highlight-2--color-gradient em .blur-char,
+    .heading-{{ block.id }}.blur-text-parent.title-with-highlight-2--color-gradient em .blur-word {
+      background: inherit;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  {% endif %}
+</style>
+<h2
+  class="
+    heading heading-{{ block.id }}{{class }}
+    {{ block.settings.heading_size }}{% if has_desktop_align %} {{ block.settings.alignment }}{% endif %}{% if has_mobile_align %} {{ block.settings.mobile_alignment }}{% endif %}
+    {% if block.settings.text_animation == 'split' %} split-text-parent{% endif %}
+    {% if block.settings.text_animation == 'shiny' %} shiny-text-active{% endif %}
+    {% if block.settings.text_animation == 'blur' %} blur-text-parent{% endif %}
+    {% if block.settings.text_animation == 'typing' %} typing-text{% endif %}
+    {% if is_highlight_animation and block.settings.highlight_bold_only == false %} heading-highlighter-active{% endif %}
+    {% if block.settings.title_highlight_1 == 'gradient-color' %}
+      title-with-highlight-1--color-gradient
+    {% endif %}
+    {% if block.settings.title_highlight_1 == 'solid-color' or block.settings.title_highlight_1 == 'bg-color' %}
+      title-with-highlight-1--color
+    {% endif %}
+    {% if block.settings.title_highlight_1 == 'bg-color' %}
+      title-with-highlight-1--color
+      title-with-highlight-1--border
+      title-with-highlight-1--bg-color
+    {% endif %}
+    {% if block.settings.title_highlight_1 == 'underline-solid' or block.settings.title_highlight_1 == 'underline-gradient' %}
+      title-with-highlight-1--underline
+    {% endif %}
+    {% if block.settings.title_highlight_1 == 'line-1' or block.settings.title_highlight_1 == 'line-2' or block.settings.title_highlight_1 == 'line-3'%}
+      title-with-highlight-1--handwritten-underline
+    {% endif %}
+    {% if block.settings.title_highlight_2 == 'none' or block.settings.highlight_2_keep_italic == true %}
+      title-with-highlight-2--italic
+    {% endif %}
+    {% if block.settings.title_highlight_2 == 'gradient-color' %}
+      title-with-highlight-2--color-gradient
+    {% endif %}
+    {% if block.settings.title_highlight_2 == 'solid-color' or block.settings.title_highlight_2 == 'bg-color' %}
+      title-with-highlight-2--color
+    {% endif %}
+    {% if block.settings.title_highlight_2 == 'bg-color' %}
+      title-with-highlight-2--color
+      title-with-highlight-2--border
+      title-with-highlight-2--bg-color
+    {% endif %}
+    {% if block.settings.title_highlight_2 == 'underline-solid' or block.settings.title_highlight_2 == 'underline-gradient' %}
+      title-with-highlight-2--underline
+    {% endif %}
+    {% if block.settings.title_highlight_2 == 'line-1' or block.settings.title_highlight_2 == 'line-2' or block.settings.title_highlight_2 == 'line-3'%}
+      title-with-highlight-2--handwritten-underline
+    {% endif %}
+    {{ block.settings.visibility }}
+  "
+  style="
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+    {% if block.settings.enable_custom_color %}
+      color: {{ block.settings.custom_color }};
+    {% endif %}
+    {% if block.settings.title_highlight_1 == 'solid-color' or block.settings.title_highlight_1 == 'bg-color' %}
+      --hightlight-1--color:{{ block.settings.title_highlight_1_color }};
+    {% endif %}
+    {% if block.settings.title_highlight_1 == 'gradient-color' %}
+      --hightlight-1--color:{{ block.settings.title_highlight_1_gradient }};
+    {% endif %}
+    {% if block.settings.title_highlight_1 == 'bg-color' %}
+      --hightlight-1--bg-color:{{ block.settings.title_highlight_1_bg-color }};
+
+      --hightlight-1--padding-inline: {{ block.settings.highlighted-1_padding-inline }}em;
+      --hightlight-1--padding-block: {{ block.settings.highlighted-1_padding-block }}em;
+
+      --hightlight-1--border-style: {{ block.settings.highlighted-1_border }};
+      --hightlight-1--color-border: {{ block.settings.highlighted-1_border_color }};
+      --hightlight-1--border-width: {{ block.settings.highlighted-1_border_width }}px;
+      --hightlight-1--border-radius: {{ block.settings.highlighted-1_border_radius }}px;
+      --hightlight-1--border-color: var(--hightlight-1--color-border);
+    {% endif %}
+    {% if block.settings.title_highlight_1 == 'underline-solid' or block.settings.title_highlight_1 == 'underline-gradient' %}
+      --hightlight-1--underline-color:{{ block.settings.title_highlight_1_underline-color }};
+      --highlight-1--underline-color-position:{{ block.settings.title_highlight_1_underline-color-position | times: 4 }}%;
+    {% endif %}
+    {% if block.settings.title_highlight_1 == 'underline-gradient' %}
+      --hightlight-1--underline-color:{{ block.settings.title_highlight_1_underline-color--gradient }};
+    {% endif %}
+    --hightlight-1--underline-thickness:{{ block.settings.title_highlight_1_underline-thickness }}px;
+    {% if block.settings.title_highlight_1 == 'line-1' or block.settings.title_highlight_1 == 'line-2' or block.settings.title_highlight_1 == 'line-3'%}
+      --highlight-1--handwritten-underline-color: {{ block.settings.title_highlight_1_handwritten-color }};
+      {% liquid
+        assign stroke_multiplier = 6
+        if block.settings.title_highlight_1 == 'line-2'
+          assign stroke_multiplier = 10
+          elsif block.settings.title_highlight_1 == 'line-3'
+          assign stroke_multiplier = 3.5
+        endif
+      %}
+      --highlight-1--handwritten-underline-stroke-width: {{ block.settings.title_highlight_1_handwritten-stroke-width | times: stroke_multiplier }};
+      --highlight-1--handwritten-underline-stroke-position: {{ block.settings.title_highlight_1_handwritten-position }}%;
+    {% endif %}
+
+    {% if block.settings.title_highlight_2 == 'solid-color' or block.settings.title_highlight_2 == 'bg-color' %}
+      --hightlight-2--color:{{ block.settings.title_highlight_2_color }};
+    {% endif %}
+    {% if block.settings.title_highlight_2 == 'gradient-color' %}
+      --hightlight-2--color:{{ block.settings.title_highlight_2_gradient }};
+    {% endif %}
+    {% if block.settings.title_highlight_2 == 'bg-color' %}
+      --hightlight-2--bg-color:{{ block.settings.title_highlight_2_bg-color }};
+
+      --hightlight-2--padding-inline: {{ block.settings.highlighted-2_padding-inline }}em;
+      --hightlight-2--padding-block: {{ block.settings.highlighted-2_padding-block }}em;
+
+      --hightlight-2--border-style: {{ block.settings.highlighted-2_border }};
+      --hightlight-2--color-border: {{ block.settings.highlighted-2_border_color }};
+      --hightlight-2--border-width: {{ block.settings.highlighted-2_border_width }}px;
+      --hightlight-2--border-radius: {{ block.settings.highlighted-2_border_radius }}px;
+      --hightlight-2--border-color: var(--hightlight-2--color-border);
+    {% endif %}
+    {% if block.settings.title_highlight_2 == 'underline-solid' or block.settings.title_highlight_2 == 'underline-gradient' %}
+      --hightlight-2--underline-color:{{ block.settings.title_highlight_2_underline-color }};
+      --highlight-2--underline-color-position:{{ block.settings.title_highlight_2_underline-color-position | times: 4 }}%;
+    {% endif %}
+    {% if block.settings.title_highlight_2 == 'underline-gradient' %}
+      --hightlight-2--underline-color:{{ block.settings.title_highlight_2_underline-color--gradient }};
+    {% endif %}
+    --hightlight-2--underline-thickness:{{ block.settings.title_highlight_2_underline-thickness }}px;
+    {% if block.settings.title_highlight_2 == 'line-1' or block.settings.title_highlight_2 == 'line-2' or block.settings.title_highlight_2 == 'line-3'%}
+      --highlight-2--handwritten-underline-color: {{ block.settings.title_highlight_2_handwritten-color }};
+      {% liquid
+        assign stroke_multiplier = 6
+        if block.settings.title_highlight_2 == 'line-2'
+          assign stroke_multiplier = 10
+          elsif block.settings.title_highlight_2 == 'line-3'
+          assign stroke_multiplier = 3.5
+        endif
+      %}
+      --highlight-2--handwritten-underline-stroke-width: {{ block.settings.title_highlight_2_handwritten-stroke-width | times: stroke_multiplier }};
+      --highlight-2--handwritten-underline-stroke-position: {{ block.settings.title_highlight_2_handwritten-position }}%;
+    {% endif %}
+  "
+  role="region"
+  aria-label="{{ block.settings.title | escape }}"
+  {{ block.shopify_attributes }}
+>
+  {% assign parts = title | split: '<strong>' %}
+  {% assign first_part = parts[0] | split: '<em>' %}
+  {{ first_part[0] }}
+  {% for e_part in first_part offset: 1 %}
+    {% assign inner_em = e_part | split: '</em>' %}
+    <em class="{{ highlight_style_2 }}">
+      {{ inner_em[0] }}
+      {% case highlight_style_2 %}
+        {% when 'line-1' %}
+          {% render 'icon-underline-1' %}
+        {% when 'line-2' %}
+          {% render 'icon-underline-2' %}
+        {% when 'line-3' %}
+          {% render 'icon-underline-3' %}
+      {% endcase %}
+    </em>
+    {{ inner_em[1] }}
+  {% endfor %}
+
+  {% for part in parts offset: 1 %}
+    {% assign inner_parts = part | split: '</strong>' %}
+    <strong class="{{ highlight_style_1 }}">
+      {% assign strong_content = inner_parts[0] %}
+      {% assign strong_em_parts = strong_content | split: '<em>' %}
+      {{ strong_em_parts[0] }}
+
+      {% for e_part in strong_em_parts offset: 1 %}
+        {% assign inner_em = e_part | split: '</em>' %}
+        <em class="{{ highlight_style_2 }}">
+          {{ inner_em[0] }}
+          {% case highlight_style_2 %}
+            {% when 'line-1' %}
+              {% render 'icon-underline-1' %}
+            {% when 'line-2' %}
+              {% render 'icon-underline-2' %}
+            {% when 'line-3' %}
+              {% render 'icon-underline-3' %}
+          {% endcase %}
+        </em>
+        {{ inner_em[1] }}
+      {% endfor %}
+
+      {% case highlight_style_1 %}
+        {% when 'line-1' %}
+          {% render 'icon-underline-1' %}
+        {% when 'line-2' %}
+          {% render 'icon-underline-2' %}
+        {% when 'line-3' %}
+          {% render 'icon-underline-3' %}
+      {% endcase %}
+    </strong>
+
+    {% assign after_strong = inner_parts[1] | split: '<em>' %}
+    {{ after_strong[0] }}
+    {% for e_part in after_strong offset: 1 %}
+      {% assign inner_em = e_part | split: '</em>' %}
+      <em class="{{ highlight_style_2 }}">
+        {{ inner_em[0] }}
+        {% case highlight_style_2 %}
+          {% when 'line-1' %}
+            {% render 'icon-underline-1' %}
+          {% when 'line-2' %}
+            {% render 'icon-underline-2' %}
+          {% when 'line-3' %}
+            {% render 'icon-underline-3' %}
+        {% endcase %}
+      </em>
+      {{ inner_em[1] }}
+    {% endfor %}
+  {% endfor %}
+</h2>
+
+{% if block.settings.text_animation == 'split' %}
+<script>
+(function() {
+  const heading = document.querySelector('.heading-{{ block.id }}.split-text-parent');
+  if (!heading) return;
+
+  // Wait for fonts to load
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => initSplitText());
+  } else {
+    initSplitText();
+  }
+
+  function initSplitText() {
+    const splitType = '{{ block.settings.split_type }}';
+
+    // Function to split text nodes while preserving HTML structure
+    function splitTextNodes(element, type) {
+      const walker = document.createTreeWalker(
+        element,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+      );
+
+      const textNodes = [];
+      let node;
+      while (node = walker.nextNode()) {
+        // Only process nodes with non-whitespace content
+        if (node.textContent.trim().length > 0) {
+          textNodes.push(node);
+        }
+      }
+
+      let globalIndex = 0;
+      textNodes.forEach(textNode => {
+        const text = textNode.textContent;
+        const fragment = document.createDocumentFragment();
+
+        // Preserve leading/trailing spaces
+        const leadingSpaces = text.match(/^\s*/)[0];
+        const trailingSpaces = text.match(/\s*$/)[0];
+        const trimmedText = text.trim();
+
+        if (!trimmedText) return; // Skip if only whitespace
+
+        if (type === 'chars') {
+          // Add leading spaces
+          if (leadingSpaces) {
+            fragment.appendChild(document.createTextNode(leadingSpaces));
+          }
+
+          // Split by characters
+          const chars = trimmedText.split('');
+          chars.forEach((char) => {
+            if (char === ' ') {
+              fragment.appendChild(document.createTextNode(' '));
+            } else {
+              const span = document.createElement('span');
+              span.className = 'split-char';
+              span.style.setProperty('--split-index', globalIndex);
+              span.textContent = char;
+              fragment.appendChild(span);
+              globalIndex++;
+            }
+          });
+
+          // Add trailing spaces
+          if (trailingSpaces) {
+            fragment.appendChild(document.createTextNode(trailingSpaces));
+          }
+        } else {
+          // Add leading spaces
+          if (leadingSpaces) {
+            fragment.appendChild(document.createTextNode(leadingSpaces));
+          }
+
+          // Split by words
+          const words = trimmedText.split(/\s+/);
+          words.forEach((word, index) => {
+            if (word) {
+              const span = document.createElement('span');
+              span.className = 'split-word';
+              span.style.setProperty('--split-index', globalIndex);
+              span.textContent = word;
+              fragment.appendChild(span);
+              globalIndex++;
+            }
+            if (index < words.length - 1) {
+              fragment.appendChild(document.createTextNode(' '));
+            }
+          });
+
+          // Add trailing spaces
+          if (trailingSpaces) {
+            fragment.appendChild(document.createTextNode(trailingSpaces));
+          }
+        }
+
+        textNode.parentNode.replaceChild(fragment, textNode);
+      });
+    }
+
+    splitTextNodes(heading, splitType);
+
+    {% if block.settings.split_animate_on_scroll %}
+      // Hook into Shrine's animation system
+      const parentSection = heading.closest('.animate-section');
+
+      if (parentSection && window.shrineAnimationsObserver) {
+        // Use Shrine's existing observer
+        const mutationObserver = new MutationObserver((mutations) => {
+          mutations.forEach(mutation => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+              if (parentSection.classList.contains('animate--shown')) {
+                heading.classList.add('split-text-visible');
+                mutationObserver.disconnect();
+              }
+            }
+          });
+        });
+
+        mutationObserver.observe(parentSection, { attributes: true });
+
+        // If already shown (e.g., in theme editor), trigger immediately
+        if (parentSection.classList.contains('animate--shown')) {
+          heading.classList.add('split-text-visible');
+        }
+      } else {
+        // Fallback to custom intersection observer
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              heading.classList.add('split-text-visible');
+              observer.unobserve(heading);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: '-100px 0px'
+        });
+
+        observer.observe(heading);
+      }
+    {% else %}
+      // Animate immediately without scroll trigger
+      requestAnimationFrame(() => {
+        heading.classList.add('split-text-visible');
+      });
+    {% endif %}
+  }
+})();
+</script>
+{% endif %}
+
+{% if block.settings.text_animation == 'shiny' %}
+<script>
+(function() {
+  const heading = document.querySelector('.heading-{{ block.id }}.shiny-text-active');
+  if (!heading) return;
+
+  {% if block.settings.shiny_on_scroll %}
+    // Hook into Shrine's animation system
+    const parentSection = heading.closest('.animate-section');
+
+    if (parentSection && window.shrineAnimationsObserver) {
+      // Use Shrine's existing observer
+      const mutationObserver = new MutationObserver((mutations) => {
+        mutations.forEach(mutation => {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            if (parentSection.classList.contains('animate--shown')) {
+              heading.classList.add('shiny-text-visible');
+              mutationObserver.disconnect();
+            }
+          }
+        });
+      });
+
+      mutationObserver.observe(parentSection, { attributes: true });
+
+      // If already shown (e.g., in theme editor), trigger immediately
+      if (parentSection.classList.contains('animate--shown')) {
+        heading.classList.add('shiny-text-visible');
+      }
+    } else {
+      // Fallback to custom intersection observer
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            heading.classList.add('shiny-text-visible');
+            observer.unobserve(heading);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '-100px 0px'
+      });
+
+      observer.observe(heading);
+    }
+  {% else %}
+    // Start animation immediately without scroll trigger
+    requestAnimationFrame(() => {
+      heading.classList.add('shiny-text-visible');
+    });
+  {% endif %}
+})();
+</script>
+{% endif %}
+
+{% if block.settings.text_animation == 'blur' %}
+<script>
+(function() {
+  const heading = document.querySelector('.heading-{{ block.id }}.blur-text-parent');
+  if (!heading) return;
+
+  // Wait for fonts to load
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => initBlurText());
+  } else {
+    initBlurText();
+  }
+
+  function initBlurText() {
+    const blurType = '{{ block.settings.blur_type }}';
+
+    // Function to split text nodes while preserving HTML structure
+    function splitTextNodes(element, type) {
+      const walker = document.createTreeWalker(
+        element,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+      );
+
+      const textNodes = [];
+      let node;
+      while (node = walker.nextNode()) {
+        // Only process nodes with non-whitespace content
+        if (node.textContent.trim().length > 0) {
+          textNodes.push(node);
+        }
+      }
+
+      let globalIndex = 0;
+      textNodes.forEach(textNode => {
+        const text = textNode.textContent;
+        const fragment = document.createDocumentFragment();
+
+        // Preserve leading/trailing spaces
+        const leadingSpaces = text.match(/^\s*/)[0];
+        const trailingSpaces = text.match(/\s*$/)[0];
+        const trimmedText = text.trim();
+
+        if (!trimmedText) return; // Skip if only whitespace
+
+        if (type === 'chars') {
+          // Add leading spaces
+          if (leadingSpaces) {
+            fragment.appendChild(document.createTextNode(leadingSpaces));
+          }
+
+          // Split by characters
+          const chars = trimmedText.split('');
+          chars.forEach((char) => {
+            if (char === ' ') {
+              fragment.appendChild(document.createTextNode(' '));
+            } else {
+              const span = document.createElement('span');
+              span.className = 'blur-char';
+              span.style.setProperty('--blur-index', globalIndex);
+              span.textContent = char;
+              fragment.appendChild(span);
+              globalIndex++;
+            }
+          });
+
+          // Add trailing spaces
+          if (trailingSpaces) {
+            fragment.appendChild(document.createTextNode(trailingSpaces));
+          }
+        } else {
+          // Add leading spaces
+          if (leadingSpaces) {
+            fragment.appendChild(document.createTextNode(leadingSpaces));
+          }
+
+          // Split by words
+          const words = trimmedText.split(/\s+/);
+          words.forEach((word, index) => {
+            if (word) {
+              const span = document.createElement('span');
+              span.className = 'blur-word';
+              span.style.setProperty('--blur-index', globalIndex);
+              span.textContent = word;
+              fragment.appendChild(span);
+              globalIndex++;
+            }
+            if (index < words.length - 1) {
+              fragment.appendChild(document.createTextNode(' '));
+            }
+          });
+
+          // Add trailing spaces
+          if (trailingSpaces) {
+            fragment.appendChild(document.createTextNode(trailingSpaces));
+          }
+        }
+
+        textNode.parentNode.replaceChild(fragment, textNode);
+      });
+    }
+
+    splitTextNodes(heading, blurType);
+
+    {% if block.settings.blur_animate_on_scroll %}
+      // Hook into Shrine's animation system
+      const parentSection = heading.closest('.animate-section');
+
+      if (parentSection && window.shrineAnimationsObserver) {
+        // Use Shrine's existing observer
+        const mutationObserver = new MutationObserver((mutations) => {
+          mutations.forEach(mutation => {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+              if (parentSection.classList.contains('animate--shown')) {
+                heading.classList.add('blur-text-visible');
+                mutationObserver.disconnect();
+              }
+            }
+          });
+        });
+
+        mutationObserver.observe(parentSection, { attributes: true });
+
+        // If already shown (e.g., in theme editor), trigger immediately
+        if (parentSection.classList.contains('animate--shown')) {
+          heading.classList.add('blur-text-visible');
+        }
+      } else {
+        // Fallback to custom intersection observer
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              heading.classList.add('blur-text-visible');
+              observer.unobserve(heading);
+            }
+          });
+        }, {
+          threshold: 0.1,
+          rootMargin: '-100px 0px'
+        });
+
+        observer.observe(heading);
+      }
+    {% else %}
+      // Animate immediately without scroll trigger
+      requestAnimationFrame(() => {
+        heading.classList.add('blur-text-visible');
+      });
+    {% endif %}
+  }
+})();
+</script>
+{% endif %}
+
+{% if is_highlight_animation and block.settings.highlighter_animate_on_scroll %}
+<script>
+(function() {
+  // Fallback observer in case global animations are disabled
+  const element = document.querySelector('.heading-{{ block.id }}');
+  if (!element) return;
+
+  // Check if the parent section already has animate--shown (global animations enabled)
+  const checkForGlobalAnimation = () => {
+    const parentSection = element.closest('.animate-section');
+    if (parentSection && parentSection.classList.contains('animate--shown')) {
+      // Global animations are working, no need for fallback
+      return;
+    }
+
+    // Global animations might be disabled, create our own observer
+    setTimeout(() => {
+      const parentSection = element.closest('.animate-section');
+      if (!parentSection || !parentSection.classList.contains('animate--shown')) {
+        // Still not animated after delay, use fallback
+        initFallbackObserver();
+      }
+    }, 100);
+  };
+
+  const initFallbackObserver = () => {
+    const parentSection = element.closest('.animate-section');
+    if (!parentSection) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          parentSection.classList.add('animate--shown');
+          observer.unobserve(parentSection);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    observer.observe(parentSection);
+  };
+
+  // Wait for DOM and check
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', checkForGlobalAnimation);
+  } else {
+    checkForGlobalAnimation();
+  }
+})();
+</script>
+{% endif %}
+
+{% if block.settings.text_animation == 'typing' %}
+<script>
+(function() {
+  const heading = document.querySelector('.heading-{{ block.id }}.typing-text');
+  if (!heading) return;
+
+  const typingSpeed = {{ block.settings.typing_speed }};
+  const initialDelay = {{ block.settings.typing_initial_delay }};
+  const pauseDuration = {{ block.settings.typing_pause_duration }};
+  const deletingSpeed = {{ block.settings.typing_deleting_speed }};
+  const loop = {{ block.settings.typing_loop | json }};
+  const showCursor = {{ block.settings.typing_show_cursor | json }};
+  const hideCursorWhileTyping = {{ block.settings.typing_hide_cursor_while_typing | json }};
+  const cursorCharacter = {{ block.settings.typing_cursor_character | json }};
+  const startOnVisible = {{ block.settings.typing_start_on_visible | json }};
+  const reverseMode = {{ block.settings.typing_reverse_mode | json }};
+
+  const originalText = heading.textContent.trim();
+  let displayedText = '';
+  let currentCharIndex = 0;
+  let isDeleting = false;
+  let isVisible = !startOnVisible;
+  let timeout;
+
+  // Create content span and cursor
+  const contentSpan = document.createElement('span');
+  contentSpan.className = 'typing-content';
+
+  const cursorSpan = document.createElement('span');
+  cursorSpan.className = 'typing-cursor';
+  if (showCursor) {
+    cursorSpan.textContent = cursorCharacter;
+  }
+
+  heading.textContent = '';
+  heading.appendChild(contentSpan);
+  if (showCursor) {
+    heading.appendChild(cursorSpan);
+  }
+
+  // Intersection observer for start on visible
+  if (startOnVisible) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          isVisible = true;
+          executeTypingAnimation();
+          observer.unobserve(heading);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    observer.observe(heading);
+  }
+
+  function executeTypingAnimation() {
+    if (!isVisible) return;
+
+    const processedText = reverseMode ? originalText.split('').reverse().join('') : originalText;
+
+    if (isDeleting) {
+      if (displayedText === '') {
+        isDeleting = false;
+        if (!loop) {
+          return;
+        }
+        currentCharIndex = 0;
+        timeout = setTimeout(executeTypingAnimation, pauseDuration);
+      } else {
+        displayedText = displayedText.slice(0, -1);
+        contentSpan.textContent = displayedText;
+        timeout = setTimeout(executeTypingAnimation, deletingSpeed);
+      }
+    } else {
+      if (currentCharIndex < processedText.length) {
+        displayedText += processedText[currentCharIndex];
+        contentSpan.textContent = displayedText;
+        currentCharIndex++;
+
+        // Update cursor visibility
+        if (hideCursorWhileTyping && showCursor) {
+          cursorSpan.classList.add('cursor-hidden');
+        }
+
+        timeout = setTimeout(executeTypingAnimation, typingSpeed);
+      } else {
+        // Finished typing
+        if (hideCursorWhileTyping && showCursor) {
+          cursorSpan.classList.remove('cursor-hidden');
+        }
+
+        if (loop) {
+          timeout = setTimeout(() => {
+            isDeleting = true;
+            executeTypingAnimation();
+          }, pauseDuration);
+        }
+      }
+    }
+  }
+
+  // Start animation
+  if (!startOnVisible) {
+    setTimeout(executeTypingAnimation, initialDelay);
+  }
+})();
+</script>
+{% endif %}

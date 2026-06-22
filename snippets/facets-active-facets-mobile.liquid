@@ -1,0 +1,30 @@
+{%- comment -%}
+  Active pills under the drawer (mobile only)
+{%- endcomment -%}
+
+<div class="active-facets active-facets-mobile medium-hide large-up-hide">
+  {%- for filter in results.filters -%}
+    {%- for value in filter.active_values -%}
+      <facet-remove>
+        <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light">
+          <span class="active-facets__button-inner button button--tertiary">
+            {{ filter.label }}: {{ value.label | escape }}
+            {% render 'icon-close-small' %}
+            <span class="visually-hidden">{{ 'products.facets.clear_filter' | t }}</span>
+          </span>
+        </a>
+      </facet-remove>
+    {%- endfor -%}
+
+    {%- if filter.type == 'price_range' -%}
+      {%- if filter.min_value.value != null or filter.max_value.value != null -%}
+        {% render 'facet-price-active-button', filter: filter %}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+  <facet-remove class="active-facets__button-wrapper">
+    <a href="{{ results_url }}" class="active-facets__button-remove underlined-link">
+      <span>{{ 'products.facets.clear_all' | t }}</span>
+    </a>
+  </facet-remove>
+</div>

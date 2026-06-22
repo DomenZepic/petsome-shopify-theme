@@ -1,0 +1,66 @@
+<page-scroll-progress
+  class="page-progress page-progress--{{ section.settings.position }} floating-btn"
+  data-show-percentage="{{ section.settings.show_percentage }}"
+  style="--bar-height:{{ section.settings.bar_height }}px;--corner-radius:{{ section.settings.corner_radius }}px;"
+>
+  <div class="page-progress__track">
+    <div class="page-progress__fill" style="background:{{ section.settings.filled_color }};">&nbsp</div>
+  </div>
+</page-scroll-progress>
+
+{% schema %}
+{
+  "name": "Page scroll progress",
+  "limit": 1,
+  "disabled_on": {
+    "groups": ["footer"]
+  },
+  "class": "section-page-progress",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "If you want to add the scroll progress bar to the ENTIRE store, add this section just below the Header section."
+    },
+    {
+      "type": "range",
+      "id": "bar_height",
+      "label": "Bar height (px)",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 5
+    },
+    {
+      "type": "color",
+      "id": "filled_color",
+      "label": "Bar color",
+      "default": "#6D388B"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Corner radius",
+      "unit": "px",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Position",
+      "options": [
+        { "value": "top",    "label": "Top" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "top"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page scroll progress",
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,185 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "page_scroll_progress_frxPeK": {
+      "type": "page-scroll-progress",
+      "name": "Scroll progress bar",
+      "settings": {
+        "bar_height": 4,
+        "corner_radius": 3,
+        "position": "top"
+      }
+    },
+    "main": {
+      "type": "main-article",
+      "blocks": {
+        "featured_image": {
+          "type": "featured_image",
+          "settings": {
+            "image_height": "adapt",
+            "full_width": false
+          }
+        },
+        "navigation_JTtDyK": {
+          "type": "navigation",
+          "settings": {
+            "alignment": "center",
+            "color_scheme": "background-1",
+            "text_color": "accent-1",
+            "padding_top": 10,
+            "padding_bottom": 10
+          }
+        },
+        "table_of_contents_Bc9ymt": {
+          "type": "table_of_contents",
+          "settings": {
+            "color_scheme": "background-1",
+            "table_color_scheme": "background-1",
+            "heading_text": "Table of contents:",
+            "width": "unlimited",
+            "max_width": 500,
+            "corner_radius": 6,
+            "disable_numbers": false,
+            "body_scale": 100,
+            "padding_top": 20,
+            "padding_bottom": 20
+          }
+        },
+        "sticky_promotion_LiwxVa": {
+          "type": "sticky_promotion",
+          "settings": {
+            "color_scheme": "accent-1",
+            "corner_radius": 8,
+            "desktop_width": 320,
+            "desktop_position": "right",
+            "mobile_position": "bottom",
+            "logo_alignment": "center",
+            "logo_width": 80,
+            "line_divider_opacity": 0,
+            "content": "<p>Bake the best cakes without the cakes.</p><p>Super amazing nice</p>",
+            "content_alignment": "left",
+            "content_spacing": 0,
+            "cta_label": "Learn more",
+            "cta_function": "link",
+            "cta_link": "",
+            "cta_product": ""
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {
+            "show_excerpt": true,
+            "color_scheme": "background-1",
+            "blog_show_date": true,
+            "custom_date_text": "",
+            "date_size": 10,
+            "date_uppercase": true,
+            "date_position": "top",
+            "blog_show_author": false,
+            "custom_author_text": "",
+            "author_size": 16,
+            "author_uppercase": false,
+            "avatar_size": 25,
+            "avatar_corner_radius": 100,
+            "image_radius": 0,
+            "desktop_image": "hidden",
+            "desktop_image_alignment": "top",
+            "desktop_image_width": 30,
+            "mobile_image": "hidden",
+            "mobile_image_full_width": false,
+            "padding_top": 30,
+            "padding_bottom": 30
+          }
+        },
+        "content": {
+          "type": "content",
+          "settings": {
+            "image_radius": 0,
+            "body_scale": 100,
+            "color_scheme": "background-1",
+            "padding_top": 20,
+            "padding_bottom": 20
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share",
+            "color_scheme": "background-1",
+            "padding_top": 10,
+            "padding_bottom": 10
+          }
+        }
+      },
+      "block_order": [
+        "featured_image",
+        "navigation_JTtDyK",
+        "table_of_contents_Bc9ymt",
+        "sticky_promotion_LiwxVa",
+        "title",
+        "content",
+        "share"
+      ],
+      "settings": {
+        "page_width": "normal"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "title": "Subscribe to our emails",
+            "title_highlight_color": "#6d388b",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Join our email list for exclusive offers and the latest news. </p>"
+          }
+        },
+        "email-form": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "paragraph",
+        "email-form"
+      ],
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "button_type": "solid",
+        "button_label": "Sign up",
+        "button_style_secondary": false,
+        "color_scheme": "background-2",
+        "full_width": true,
+        "padding_top": 68,
+        "padding_bottom": 52,
+        "custom_colors_background": "#ffffff",
+        "custom_gradient_background": "",
+        "custom_colors_text": "#2e2a39",
+        "custom_colors_solid_button_background": "#dd1d1d",
+        "custom_colors_solid_button_text": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "page_scroll_progress_frxPeK",
+    "main",
+    "newsletter"
+  ]
+}

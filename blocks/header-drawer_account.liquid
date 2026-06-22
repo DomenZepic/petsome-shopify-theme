@@ -1,0 +1,165 @@
+{% liquid
+  assign margin_top = block.settings.margin_top | divided_by: 10.0
+  assign margin_bottom = block.settings.margin_bottom | divided_by: 10.0
+%}
+<style>
+  #HeaderDrawer_Account-{{ block.id }} {
+    font-size: {{ block.settings.font_size | divided_by: 10.0 }}rem;
+    gap: {{ block.settings.icon_spacing | divided_by: 100.0 }}em;
+    margin-top: {{ margin_top }}rem;
+    margin-bottom: {{ margin_bottom }}rem;
+  }
+  #HeaderDrawer_Account-{{ block.id }} .material-icon {
+    font-size: {{ block.settings.icon_scale | divided_by: 100.0 }}em;
+  }
+  #HeaderDrawer_Account-{{ block.id }} svg,
+  #HeaderDrawer_Account-{{ block.id }} img {
+    height: {{ block.settings.icon_scale | divided_by: 100.0 }}em;
+    width: {{ block.settings.icon_scale | divided_by: 100.0 }}em;
+  }
+  #HeaderDrawer_Account-{{ block.id }} img {
+    height: {{ block.settings.icon_scale | divided_by: 100.0 }}em;
+    width: auto;
+  }
+</style>
+{%- if shop.customer_accounts_enabled -%}
+  <a id="HeaderDrawer_Account-{{ block.id }}" href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="menu-drawer__account font-{{ block.settings.font }}">
+    {% if block.settings.icon == 'svg' %}
+      {% render 'icon-account', always_icon: true %}
+    {% elsif block.settings.icon == 'custom' and block.settings.custom_icon != blank %}
+      <img
+        src="{{ block.settings.custom_icon | image_url }}"
+        {% if block.settings.custom_icon.alt != blank %}
+          alt="{{ block.settings.custom_icon.alt | escape }}"
+        {% else %}
+          role="presentation"
+        {% endif %}
+        height="auto"
+        width="auto"
+        loading="lazy"
+      >
+    {% endif %}
+    {%- liquid
+      if customer
+        echo 'customer.account_fallback' | t
+      else
+        echo 'customer.log_in' | t
+      endif
+    -%}
+  </a>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Account / Log in",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 12,
+      "max": 26,
+      "step": 1,
+      "label": "Font size",
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "font",
+      "label": "Font",
+      "options": [
+        { "value": "body", "label": "Body" },
+        { "value": "body-bold", "label": "Body - bold" },
+        { "value": "headings", "label": "Headings" }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "Icon type",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "svg", "label": "Classic" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "svg"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_icon",
+      "label": "Custom icon",
+      "visible_if": "{{ block.settings.icon == 'custom' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Both settings below are relative to item font size",
+      "visible_if": "{{ block.settings.icon != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "icon_scale",
+      "min": 100,
+      "max": 250,
+      "step": 5,
+      "label": "Icon sclae",
+      "default": 150,
+      "unit": "%",
+      "visible_if": "{{ block.settings.icon != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "icon_spacing",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Icon spacing",
+      "default": 70,
+      "unit": "%",
+      "visible_if": "{{ block.settings.icon != 'none' }}"
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": "Account / Log in"
+    }
+  ]
+}
+{% endschema %}

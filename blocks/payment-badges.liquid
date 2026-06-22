@@ -1,0 +1,115 @@
+<div
+  class="payment-badges-block {{ block.settings.visibility }}"
+  style="
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+    --icon-width-desktop: {{ block.settings.width_desktop }}px;
+    --icon-width-mobile: {{ block.settings.width_mobile }}px;
+  "
+  role="region"
+>
+  <ul class="payment-badges" role="list">
+    {% assign enabled_payment_types = shop.enabled_payment_types %}
+    {% if block.settings.enabled_payment_types != blank %}
+      {% assign enabled_payment_types = block.settings.enabled_payment_types | remove: ' ' | split: ',' %}
+    {% endif %}
+
+    {%- for type in enabled_payment_types -%}
+      {% assign payment_type = type | strip %}
+      <li class="list-payment__item">
+        <span class="visually-hidden">{{ payment_type | replace: '_', ' ' | capitalize }} payment method</span>
+        {{ payment_type | payment_type_svg_tag: class: 'icon icon--full-color' }}
+      </li>
+    {%- endfor -%}
+  </ul>
+</div>
+
+{% schema %}
+{
+  "name": "Payment badges",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "text",
+      "id": "enabled_payment_types",
+      "label": "Custom payment icons to show",
+      "info": "List of payments you want to show, split with a comma. View all available icons [here](https://shopify.dev/docs/api/checkout-ui-extensions/latest/components/media/paymenticon#paymentmethod). Example usage: \"american_express, apple_pay, google_pay\"."
+    },
+    {
+      "type": "header",
+      "content": "Badges size"
+    },
+    {
+      "type": "range",
+      "id": "width_desktop",
+      "label": "Desktop size",
+      "min": 26,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 38
+    },
+    {
+      "type": "range",
+      "id": "width_mobile",
+      "label": "Mobile size",
+      "min": 20,
+      "max": 44,
+      "step": 2,
+      "unit": "px",
+      "default": 38
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15,
+      "visible_if": "{{ section.settings.image_1_visibility != 'mobile-hidden' and section.settings.image_1_visibility != 'always-display' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Payment badges",
+      "category": "Information display"
+    }
+  ]
+}
+{% endschema %}

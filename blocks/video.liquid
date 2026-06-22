@@ -1,0 +1,403 @@
+<div
+  class="product-info__image-block{% if block.settings.Full_mobile_width %} product-info__image-block--mobile-full{% endif %} {{ block.settings.visibility }}"
+  style="
+    --image-width:{{ block.settings.width }}%;
+    --image-alignment:{{ block.settings.alignment }};
+    --border-radius:{{ block.settings.border_radius | divided_by: 10.0 }}rem;
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  "
+  {{ block.shopify_attributes }}
+>
+  {% if block.settings.video != blank %}
+    <div
+      class="media media--transparent ratio"
+      style="--ratio-percent: {{ 1 | divided_by: block.settings.video.aspect_ratio | times: 100 }}%"
+    >
+      {% render 'video-player', block: block %}
+    </div>
+  {% else %}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Video",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "header",
+      "content": "Video"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video"
+    },
+    {
+      "type": "image_picker",
+      "id": "thumbnail",
+      "label": "Thumbnail",
+      "info": "If empty, the first frame of the video will be displayed",
+      "visible_if": "{{ block.settings.video != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "loop",
+      "label": "Video looping",
+      "default": true,
+      "visible_if": "{{ block.settings.video != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "muted_autoplay",
+      "label": "Muted autoplay",
+      "default": true,
+      "info": "Use this instead of GIFs & animated WEBPs.",
+      "visible_if": "{{ block.settings.video != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_play_btn",
+      "label": "Enable play & pause on click",
+      "default": false,
+      "visible_if": "{{ block.settings.video != blank and block.settings.muted_autoplay }}"
+    },
+    {
+      "type": "header",
+      "content": "Buttons",
+      "visible_if": "{{ block.settings.video != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "play_btn_position",
+      "options": [
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "top-left",
+          "label": "Top left"
+        },
+        {
+          "value": "top-right",
+          "label": "Top right"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom left"
+        }
+      ],
+      "default": "center",
+      "label": "Play button position",
+      "visible_if": "{{ block.settings.video != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "btn_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "accent-1",
+      "label": "Play button color scheme",
+      "visible_if": "{{ block.settings.video != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "play_btn_style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Filled"
+        },
+        {
+          "value": "outline",
+          "label": "Outlined"
+        }
+      ],
+      "default": "solid",
+      "label": "Play button style",
+      "visible_if": "{{ block.settings.video != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "play_btn_size_desktop",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Play button desktop size",
+      "default": 50,
+      "visible_if": "{{ block.settings.video != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "play_btn_size_mobile",
+      "min": 25,
+      "max": 75,
+      "step": 5,
+      "unit": "px",
+      "label": "Play button mobile size",
+      "default": 50,
+      "visible_if": "{{ block.settings.video != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "btn_animation",
+      "label": "Play button ripple animation",
+      "default": false,
+      "visible_if": "{{ block.settings.video != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "play_btn_corner_radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Play button corner radius",
+      "default": 100,
+      "visible_if": "{{ block.settings.video != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_sound_btn",
+      "label": "Display mute/unmute button",
+      "default": false,
+      "visible_if": "{{ block.settings.video != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "sound_btn_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "inverse",
+      "label": "Sound button color scheme",
+      "visible_if": "{{ block.settings.video != blank and block.settings.display_sound_btn }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_fullscreen_btn",
+      "label": "Display fullscreen button",
+      "default": false,
+      "visible_if": "{{ block.settings.video != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "fullscreen_btn_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "inverse",
+      "label": "Fullscreen button color scheme",
+      "visible_if": "{{ block.settings.video != blank and block.settings.display_fullscreen_btn }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_timeline",
+      "label": "Display timeline",
+      "default": false,
+      "visible_if": "{{ block.settings.video != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "timeline_color",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1",
+      "label": "Timeline color",
+      "visible_if": "{{ block.settings.video != blank and block.settings.display_timeline }}"
+    },
+    {
+      "type": "header",
+      "content": "Layout",
+      "visible_if": "{{ block.settings.video != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "width",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Video width",
+      "default": 100,
+      "visible_if": "{{ block.settings.video != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "Full_mobile_width",
+      "label": "Full container width on mobile",
+      "default": false,
+      "info": "If enabled & Width is set to 100%, the video will be edge-to-edge on mobile.",
+      "visible_if": "{{ block.settings.video != blank and block.settings.width == 100 }}"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Video alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "visible_if": "{{ block.settings.video != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 0,
+      "visible_if": "{{ block.settings.video != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Video",
+      "category": "Media"
+    }
+  ]
+}
+{% endschema %}

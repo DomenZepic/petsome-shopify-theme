@@ -1,0 +1,122 @@
+<div
+  class="timeline-item__header block-margins"
+  data-role="header"
+  {% if section.settings.timeline_direction == 'vertical' and section.settings.style_vertical == 'accordion' %}
+    type="button" aria-expanded="false" aria-controls="Body-{{ block.id }}"
+  {% else %}
+    type="button" aria-disabled="true"
+  {% endif %}
+>
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "custom-liquid"
+    },
+    {
+      "type": "image"
+    },
+    {
+      "type": "json-animation"
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "button"
+    },
+    {
+      "type": "atc-button"
+    },
+    {
+      "type": "heading"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "rating-stars"
+    },
+    {
+      "type": "countdown-timer"
+    },
+    {
+      "type": "collapsible-row"
+    },
+    {
+      "type": "video"
+    },
+    {
+      "type": "slider"
+    },
+    {
+      "type": "container"
+    },
+    {
+      "type": "media-slider"
+    },
+    {
+      "type": "trustpilot-stars"
+    },
+    {
+      "type": "product_popup"
+    },
+    {
+      "type": "payment-badges"
+    },
+    {
+      "type": "product_urgency"
+    },
+    {
+      "type": "review-avatars"
+    },
+    {
+      "type": "icon-with-content"
+    },
+    {
+      "type": "text-with-icon"
+    },
+    {
+      "type": "text-with-icon-new"
+    },
+    {
+      "type": "icon-with-text"
+    },
+    {
+      "type": "reviews"
+    }
+  ],
+  "settings": [
+  ],
+  "presets": [
+    {
+      "name": "Header",
+      "blocks": [
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>WEEK 1</p>",
+            "margin_bottom": 0
+          }
+        },
+        {
+          "type": "heading",
+          "settings": {
+            "title": "Point heading",
+            "margin_top": 0,
+            "heading_size": "h3"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

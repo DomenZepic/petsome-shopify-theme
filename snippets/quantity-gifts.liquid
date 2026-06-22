@@ -1,0 +1,192 @@
+{% liquid
+  assign item_count = 0
+  if block.settings.gift_1 != blank and block.settings.gift_1.available
+    assign item_count = item_count | plus: 1
+  endif
+  if block.settings.gift_2 != blank and block.settings.gift_2.available
+    assign item_count = item_count | plus: 1
+  endif
+  if block.settings.gift_3 != blank and block.settings.gift_3.available
+    assign item_count = item_count | plus: 1
+  endif
+  if block.settings.gift_4 != blank and block.settings.gift_4.available
+    assign item_count = item_count | plus: 1
+  endif
+
+  if section.settings.product_images == 'all' or section.settings.product_images == 'one'
+    assign product = section.settings.product
+  endif
+%}
+<style>
+  #quantity-gifts-{{ section.id }} .quantity-gift__container {
+    border-style: {{ block.settings.border_style }};
+    border-radius: {{ block.settings.corner_radius }}px;
+  }
+  #quantity-gifts-{{ section.id }} {
+    --locked-image-opacity: {{ block.settings.locked_image_opacity | divided_by: 100.0 }};
+    --locked-image-blur: {{ block.settings.locked_image_blur | divided_by: 3.0 }}px;
+  }
+  {% if block.settings.locked_badge_colors == 'custom' %}
+    #quantity-gifts-{{ section.id }} .quantity-gift:not(.quantity-gift--unlocked) .quantity-gift__badge {
+      background: {{ block.settings.locked_badge_bg_color }};
+      color: {{ block.settings.locked_badge_text_color }};
+    }
+  {% endif %}
+  #quantity-gifts-{{ section.id }} .quantity-gift__badge {
+    background: {{ block.settings.badge_bg_color }};
+    color: {{ block.settings.badge_text_color }};
+    --badge-radius: {{ 0.95 | times: block.settings.badge_radius | divided_by: 100.0 }}em;
+    --container-radius: {{ block.settings.corner_radius }}px;
+  }
+</style>
+<div
+  class="quantity-gifts-container"
+  style="
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  "
+  {{ block.shopify_attributes }}
+>
+  <quantity-gifts
+    class="quantity-gifts quantity-gifts-{{ item_count }}"
+    id="quantity-gifts-{{ section.id }}"
+    data-section="{{ section.id }}"
+    data-main-product="{{ product.handle }}"
+    data-save-local-storage="true"
+    style="
+      --item-count: {{ item_count }};
+      --border-width: {{ block.settings.border_thickness }}px;
+      --unlocked-bg-color:{{ block.settings.unlocked_bg_color }};
+      --unlocked-border-color:{{ block.settings.unlocked_border_color }};
+      --gift-box-tie-color:{{ block.settings.gift_box_tie_color }};
+    "
+  >
+    {% for i in (1..4) %}
+      {% liquid
+        case i
+          when 1
+            assign gift_product = block.settings.gift_1
+            assign required_quantity = block.settings.gift_1_quantity
+            assign badge_text = block.settings.gift_1_badge_text
+            assign cross_out_compare = block.settings.gift_1_cross_out_compare
+            assign compare_price_based_on = block.settings.gift_1_compare_price_based_on
+            assign top_text = block.settings.gift_1_top_text
+            assign bottom_text = block.settings.gift_1_bottom_text
+            assign custom_image = block.settings.gift_1_image
+          when 2
+            assign gift_product = block.settings.gift_2
+            assign required_quantity = block.settings.gift_2_quantity
+            assign badge_text = block.settings.gift_2_badge_text
+            assign cross_out_compare = block.settings.gift_2_cross_out_compare
+            assign compare_price_based_on = block.settings.gift_2_compare_price_based_on
+            assign top_text = block.settings.gift_2_top_text
+            assign bottom_text = block.settings.gift_2_bottom_text
+            assign custom_image = block.settings.gift_2_image
+          when 3
+            assign gift_product = block.settings.gift_3
+            assign required_quantity = block.settings.gift_3_quantity
+            assign badge_text = block.settings.gift_3_badge_text
+            assign cross_out_compare = block.settings.gift_3_cross_out_compare
+            assign compare_price_based_on = block.settings.gift_3_compare_price_based_on
+            assign top_text = block.settings.gift_3_top_text
+            assign bottom_text = block.settings.gift_3_bottom_text
+            assign custom_image = block.settings.gift_3_image
+          when 4
+            assign gift_product = block.settings.gift_4
+            assign required_quantity = block.settings.gift_4_quantity
+            assign badge_text = block.settings.gift_4_badge_text
+            assign cross_out_compare = block.settings.gift_4_cross_out_compare
+            assign compare_price_based_on = block.settings.gift_4_compare_price_based_on
+            assign top_text = block.settings.gift_4_top_text
+            assign bottom_text = block.settings.gift_4_bottom_text
+            assign custom_image = block.settings.gift_4_image
+        endcase
+      %}
+      {% if gift_product != blank and gift_product.available %}
+        <style>
+          .cart-item--product-{{ gift_product.handle }} .quantity,
+          .cart-item--product-{{ gift_product.handle }} cart-remove-button {
+            display: none;
+          }
+        </style>
+        <div
+          class="quantity-gift{% if block.settings.gift_box_animation == false %} quantity-gift--no-animation{% else %} quantity-gift--animation{% endif %} quantity-gift--product-{{ gift_product.handle }} gift--product-{{ gift_product.handle }}"
+          data-quantity="{{ required_quantity }}"
+          data-unlocked="false"
+          data-product="{{ gift_product.first_available_variant.id }}"
+          data-handle="{{ gift_product.handle }}"
+        >
+          <div class="quantity-gift__container quantity-gift__container--locked-bg-{{ block.settings.locked_background }}">
+            {% if badge_text != blank %}
+              {% liquid
+                assign compare_price = gift_product.first_available_variant.price
+                if compare_price_based_on == 'compare_price' and gift_product.first_available_variant.compare_at_price > compare_price
+                  assign compare_price = gift_product.first_available_variant.compare_at_price
+                endif
+              %}
+              {% capture compare_price_span %}
+                <span{% if cross_out_compare %} style="text-decoration: line-through;"{% endif %}>{{ compare_price | money_without_trailing_zeros }}</span>
+              {% endcapture %}
+              <span class="quantity-gift__badge quantity-gift__badge--style-{{ block.settings.badge_style }} quantity-gift__badge--width-{{ block.settings.badge_width }} flex-center nowrap center">
+                <span>{{ badge_text | replace: '[compare_price]', compare_price_span }}</span>
+              </span>
+              <style>
+                #quantity-gifts-{{ section.id }} {
+                  padding-top: {{ block.settings.badge_style | times: 0.9 }}rem;
+                }
+              </style>
+            {% endif %}
+            <div class="quantity-gift__lock">
+              <span class="quantity-gift__lock__top">{{ top_text }}</span>
+              <span class="lock"></span>
+              <span class="quantity-gift__lock__bottom">{{ bottom_text }}</span>
+            </div>
+            <div class="quantity-gift__image">
+              {% liquid
+                assign image = gift_product.featured_image
+                if custom_image != blank
+                  assign image = custom_image
+                endif
+              %}
+              {% if image != blank %}
+                <img
+                  src="{{ image | image_url: width: 500 }}"
+                  {% if image.alt != blank %}
+                    alt="{{ image.alt }}"
+                  {% endif %}
+                  width="auto"
+                  height="auto"
+                  loading="lazy"
+                >
+              {% endif %}
+            </div>
+            <div class="gift-box">
+              <div class="gift-box-body color-{{ block.settings.gift_box_color }}">
+                <div class="gift-box-lid">
+                  <div class="gift-box-bowtie">&nbsp</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3 class="quantity-gift__title">{{ gift_product.title }}</h3>
+          {% assign product_form_id = 'gift-form-' | append: section.id | append: block.id | append: forloop.index %}
+          <product-form class='hidden' data-is-cart-upsell='true' data-section="{{ section.id }}-{{ block.id }}-{{ forloop.index0 }}">
+            {%- form 'product',
+              gift_product,
+              id: product_form_id,
+              class: 'form',
+              novalidate: 'novalidate',
+              data-type: 'add-to-cart-form'
+            -%}
+              <input type="hidden" name="id" value="{{ gift_product.first_available_variant.id }}">
+              <button type='submit'>+</button>
+            {%- endform -%}
+          </product-form>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </quantity-gifts>
+  {% if item_count == 0 %}
+    <p class="title h2 center">Select your gift product(s)</p>
+  {% endif %}
+</div>

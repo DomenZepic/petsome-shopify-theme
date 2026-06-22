@@ -1,0 +1,20 @@
+{% capture price %}{{ price | money_without_trailing_zeros }}{% endcapture %}
+{% capture compare_price %}{{ compare_price | money_without_trailing_zeros }}{% endcapture %}
+{% capture amount_saved %}{{ amount_saved | money_without_trailing_zeros }}{% endcapture %}
+{% capture amount_saved_rounded %}{{ amount_saved_rounded | money_without_trailing_zeros }}{% endcapture %}
+{% capture price_each %}{{ price_each | money_without_trailing_zeros }}{% endcapture %}
+{% capture compare_price_each %}{{ compare_price_each | money_without_trailing_zeros }}{% endcapture %}
+{% capture percentage_saved %}{{ percentage_saved }}%{% endcapture %}
+
+{{ text
+  | replace: '[quantity]', quantity
+  | replace: '[name]', name
+  | replace: '[subscription_name]', subscription_name
+  | replace: '[price]', price
+  | replace: '[compare_price]', compare_price
+  | replace: '[amount_saved]', amount_saved
+  | replace: '[amount_saved_rounded]', amount_saved_rounded
+  | replace: '[price_each]', price_each
+  | replace: '[compare_price_each]', compare_price_each
+  | replace: '[percentage_saved]', percentage_saved
+}}

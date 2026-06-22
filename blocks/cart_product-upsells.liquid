@@ -1,0 +1,865 @@
+{% liquid
+  assign display = false
+  case block.settings.display
+    when 'globally'
+      assign display = true
+    when 'specific_products'
+      assign target_handles = block.settings.display_product_list | map: 'handle'
+      if target_handles contains product.handle
+        assign display = true
+      endif
+    when 'products_in_cart'
+      assign target_handles = block.settings.display_product_list | map: 'handle'
+      for item in cart.items
+        if target_handles contains item.product.handle
+          assign display = true
+          break
+        endif
+      endfor
+    when 'products_not_in_cart'
+      assign display = true
+      assign target_handles = block.settings.display_product_list | map: 'handle'
+      for item in cart.items
+        if target_handles contains item.product.handle
+          assign display = false
+          break
+        endif
+      endfor
+    when 'subtotal_less_than'
+      assign threshold = block.settings.display_subtotal_amount | times: 100
+      if cart.total_price < threshold
+        assign display = true
+      endif
+    when 'subtotal_more_than'
+      assign threshold = block.settings.display_subtotal_amount | times: 100
+      if cart.total_price > threshold
+        assign display = true
+      endif
+    when 'specific_page'
+      if block.settings.display_page_link != blank and request.path == block.settings.display_page_link
+        assign display = true
+      endif
+  endcase
+%}
+{% if display %}
+  {% render 'upsell-block', block: block, type: 'cart-drawer' %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Product upsells",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "IMPORTANT NOTES"
+    },
+    {
+      "type": "paragraph",
+      "content": "For toggle upsells, add a \"cart-hidden\" tag to the product if you don't want to count it in the cart icon bubble (number of items in the cart)."
+    },
+    {
+      "type": "paragraph",
+      "content": "All toggle upsell products MUST BE UNIQUE. Main product from the product page, products from gifts, bundles and other upsells WON'T WORK."
+    },
+    {
+      "type": "paragraph",
+      "content": "Upsells with the Classic add button do NOT have this limitation."
+    },
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "options": [
+        {
+          "value": "body",
+          "label": "Cart body"
+        },
+        {
+          "value": "footer",
+          "label": "Cart footer"
+        }
+      ],
+      "default": "body",
+      "label": "Position"
+    },
+    {
+      "type": "select",
+      "id": "display",
+      "options": [
+        {
+          "value": "globally",
+          "label": "Globally"
+        },
+        {
+          "value": "specific_products",
+          "label": "On certain product page(s)"
+        },
+        {
+          "value": "products_in_cart",
+          "label": "Product(s) in cart"
+        },
+        {
+          "value": "products_not_in_cart",
+          "label": "Product(s) NOT in cart"
+        },
+        {
+          "value": "subtotal_less_than",
+          "label": "Subtotal less than"
+        },
+        {
+          "value": "subtotal_more_than",
+          "label": "Subtotal more than"
+        },
+        {
+          "value": "specific_page",
+          "label": "On specific page"
+        }
+      ],
+      "default": "globally",
+      "label": "Display"
+    },
+    {
+      "type": "paragraph",
+      "content": "Block is displayed across all pages in the store.",
+      "visible_if": "{{ block.settings.display == 'globally' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Block is displayed only on the product pages of the selected products below.",
+      "visible_if": "{{ block.settings.display == 'specific_products' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Block is displayed only when at least one of the selected products below is in the cart.",
+      "visible_if": "{{ block.settings.display == 'products_in_cart' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Block is displayed only when none of the selected products below are in the cart.",
+      "visible_if": "{{ block.settings.display == 'products_not_in_cart' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Block is displayed only when the cart subtotal is less than the amount configured below.",
+      "visible_if": "{{ block.settings.display == 'subtotal_less_than' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Block is displayed only when the cart subtotal is greater than the amount configured below.",
+      "visible_if": "{{ block.settings.display == 'subtotal_more_than' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Block is displayed only on the page selected below.",
+      "visible_if": "{{ block.settings.display == 'specific_page' }}"
+    },
+    {
+      "type": "product_list",
+      "id": "display_product_list",
+      "label": "Products (for Display setting)",
+      "limit": 50,
+      "info": "Used by the Display options: On certain product page(s), Product(s) in cart, Product(s) NOT in cart. Ignored for the other Display options."
+    },
+    {
+      "type": "number",
+      "id": "display_subtotal_amount",
+      "label": "Subtotal amount",
+      "default": 50,
+      "info": "Enter the amount in your shop's currency, without the currency symbol. Example: 50 for $50.",
+      "visible_if": "{{ block.settings.display == 'subtotal_less_than' or block.settings.display == 'subtotal_more_than' }}"
+    },
+    {
+      "type": "url",
+      "id": "display_page_link",
+      "label": "Page",
+      "visible_if": "{{ block.settings.display == 'specific_page' }}"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "options": [
+        {
+          "value": "toggle_switch",
+          "label": "Toggle switch"
+        },
+        {
+          "value": "checkbox_1",
+          "label": "Checkbox style 1"
+        },
+        {
+          "value": "checkbox_2",
+          "label": "Checkbox style 2"
+        },
+        {
+          "value": "plus_button",
+          "label": "Plus button"
+        },
+        {
+          "value": "add_button",
+          "label": "Classic add button"
+        }
+      ],
+      "default": "toggle_switch",
+      "label": "Toggle button style"
+    },
+    {
+      "type": "select",
+      "id": "btn_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "under",
+          "label": "Under product information"
+        }
+      ],
+      "default": "right",
+      "label": "Toggle button position",
+      "info": "\"Under product information\" is only applied if Toggle button style is set to \"Classic add button\"."
+    },
+    {
+      "type": "select",
+      "id": "toggle_element",
+      "options": [
+        {
+          "value": "button",
+          "label": "Toggle button"
+        },
+        {
+          "value": "container",
+          "label": "Whole container"
+        }
+      ],
+      "default": "button",
+      "label": "Toggle product selection by clicking on:"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "add_btn_label",
+      "label": "Classic add button label",
+      "default":  "<strong>Add</strong>"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_in_cart_items",
+      "label": "Hide the upsell if the product is already in cart",
+      "default": true,
+      "info": "Applied if Toggle button style is set to Classic add button"
+    },
+    {
+      "type": "select",
+      "id": "stacking",
+      "options": [
+        {
+          "value": "row",
+          "label": "Under each other"
+        },
+        {
+          "value": "column",
+          "label": "Next to each other"
+        },
+        {
+          "value": "slider",
+          "label": "Slider"
+        }
+      ],
+      "default": "row",
+      "label": "Multiple products stacking",
+      "info": "If Next to each other is selected, featured images with transparent backgrounds are recommended."
+    },
+    {
+      "type": "select",
+      "id": "accent_color",
+      "label": "Accent color",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "header",
+      "content": "Products"
+    },
+    {
+      "type": "product_list",
+      "id": "product_list",
+      "label": "Products",
+      "limit": 50
+    },
+    {
+      "type": "paragraph",
+      "content": "Or"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection of products to display"
+    },
+    {
+      "type": "header",
+      "content": "Product #1"
+    },
+    {
+      "type": "checkbox",
+      "id": "prdouct_1_preselected",
+      "label": "Product #1 Preselected",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "product_1_image",
+      "label": "Product #1 Featured image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "product_1_desc",
+      "label": "Product #1 Description"
+    },
+    {
+      "type": "text",
+      "id": "product_1_percentage_discount",
+      "label": "Product #1 Percentage discount",
+      "default": "0",
+      "info": "Percentae to be discounted from the product price, WITHOUT the % symbol."
+    },
+    {
+      "type": "text",
+      "id": "product_1_fixed_amount_discount",
+      "label": "Product #1 Fixed amount discount",
+      "default": "0",
+      "info": "Fixed amount of money to be discounted from the product price, WITHOUT the currency symbol."
+    },
+    {
+      "type": "header",
+      "content": "Product #2"
+    },
+    {
+      "type": "checkbox",
+      "id": "prdouct_2_preselected",
+      "label": "Product #2 Preselected",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "product_2_image",
+      "label": "Product #2 Featured image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "product_2_desc",
+      "label": "Product #2 Description"
+    },
+    {
+      "type": "text",
+      "id": "product_2_percentage_discount",
+      "label": "Product #2 Percentage discount",
+      "default": "0",
+      "info": "Percentae to be discounted from the product price, WITHOUT the % symbol."
+    },
+    {
+      "type": "text",
+      "id": "product_2_fixed_amount_discount",
+      "label": "Product #2 Fixed amount discount",
+      "default": "0",
+      "info": "Fixed amount of money to be discounted from the product price, WITHOUT the currency symbol."
+    },
+    {
+      "type": "header",
+      "content": "Product #3"
+    },
+    {
+      "type": "checkbox",
+      "id": "prdouct_3_preselected",
+      "label": "Product #3 Preselected",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "product_3_image",
+      "label": "Product #3 Featured image"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "product_3_desc",
+      "label": "Product #3 Description"
+    },
+    {
+      "type": "text",
+      "id": "product_3_percentage_discount",
+      "label": "Product #3 Percentage discount",
+      "default": "0",
+      "info": "Percentae to be discounted from the product price, WITHOUT the % symbol."
+    },
+    {
+      "type": "text",
+      "id": "product_3_fixed_amount_discount",
+      "label": "Product #3 Fixed amount discount",
+      "default": "0",
+      "info": "Fixed amount of money to be discounted from the product price, WITHOUT the currency symbol."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_images",
+      "label": "Show product images",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "images_size",
+      "options": [
+        {
+          "value": "3.5",
+          "label": "Extra small"
+        },
+        {
+          "value": "4.25",
+          "label": "Small"
+        },
+        {
+          "value": "5",
+          "label": "Medium"
+        },
+        {
+          "value": "5.75",
+          "label": "Large"
+        },
+        {
+          "value": "6.5",
+          "label": "Extra large"
+        }
+      ],
+      "default": "5",
+      "label": "Images size"
+    },
+    {
+      "type": "range",
+      "id": "images_corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Images corner radius",
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "title_size",
+      "options": [
+        {
+          "value": "1",
+          "label": "Extra small"
+        },
+        {
+          "value": "1.2",
+          "label": "Small"
+        },
+        {
+          "value": "1.4",
+          "label": "Medium"
+        },
+        {
+          "value": "1.6",
+          "label": "Large"
+        },
+        {
+          "value": "1.8",
+          "label": "Extra large"
+        }
+      ],
+      "default": "1.4",
+      "label": "Product title font size"
+    },
+    {
+      "type": "checkbox",
+      "id": "title_link",
+      "label": "Display titles as product page links",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "desc_size",
+      "options": [
+        {
+          "value": "0.9",
+          "label": "Extra small"
+        },
+        {
+          "value": "1.05",
+          "label": "Small"
+        },
+        {
+          "value": "1.2",
+          "label": "Medium"
+        },
+        {
+          "value": "1.35",
+          "label": "Large"
+        },
+        {
+          "value": "1.5",
+          "label": "Extra large"
+        }
+      ],
+      "default": "1.2",
+      "label": "Description font size"
+    },
+    {
+      "type": "select",
+      "id": "price_position",
+      "options": [
+        {
+          "value": "next_to_title",
+          "label": "Next to title"
+        },
+        {
+          "value": "separate",
+          "label": "Separate"
+        },
+        {
+          "value": "hidden",
+          "label": "Hidden"
+        }
+      ],
+      "default": "next_to_title",
+      "label": "Price position"
+    },
+    {
+      "type": "select",
+      "id": "price_size",
+      "options": [
+        {
+          "value": "1",
+          "label": "Extra small"
+        },
+        {
+          "value": "1.2",
+          "label": "Small"
+        },
+        {
+          "value": "1.4",
+          "label": "Medium"
+        },
+        {
+          "value": "1.6",
+          "label": "Large"
+        },
+        {
+          "value": "1.8",
+          "label": "Extra large"
+        }
+      ],
+      "default": "1.4",
+      "label": "Price font size"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_compare_price",
+      "label": "Hide compare price",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variant_picker",
+      "label": "Show variant picker",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "update_prices",
+      "label": "Enable variant price updates",
+      "default": false,
+      "info": "This option will dynamically change the displayed price based on the selected variant. ATTENTION: This option might NOT work with currency converters."
+    },
+    {
+      "type": "checkbox",
+      "id": "skip_unavailable",
+      "label": "Hide & automatically skip sold out variants",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Container title"
+    },
+    {
+      "type": "text",
+      "id": "container_title",
+      "label": "Title"
+    },
+    {
+      "type": "select",
+      "id": "container_title_position",
+      "label": "Position",
+      "options": [
+        {
+          "value": "outside",
+          "label": "Outside the container"
+        },
+        {
+          "value": "inside",
+          "label": "Inside the container"
+        }
+      ],
+      "default": "outside",
+      "info": "Difference is visible if drop shadow, border or background is active."
+    },
+    {
+      "type": "range",
+      "id": "container_title_mobile_text_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "label": "Mobile title text size"
+    },
+    {
+      "type": "range",
+      "id": "container_title_desktop_text_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "label": "Desktop title text size"
+    },
+    {
+      "type": "header",
+      "content": "Container"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "t:settings_schema.global.settings.corner_radius.label",
+      "default": 10
+    },
+    {
+      "type": "checkbox",
+      "id": "show_box_shadow",
+      "label": "Show drop shadow",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border",
+      "label": "Show border",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "regular_border_color",
+      "label": "Border color",
+      "default": "#E6E6E6"
+    },
+    {
+      "type": "color",
+      "id": "selected_border_color",
+      "label": "Selected border color",
+      "default": "#DD1D1D"
+    },
+    {
+      "type": "select",
+      "id": "border_width",
+      "options": [
+        {
+          "value": "0.1",
+          "label": "Thin"
+        },
+        {
+          "value": "0.2",
+          "label": "Normal"
+        }
+      ],
+      "default": "0.2",
+      "label": "Border thickness"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_custom_bg",
+      "label": "Show custom background",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "regular_bg_color",
+      "label": "Background color",
+      "default": "#F2F2F2"
+    },
+    {
+      "type": "color",
+      "id": "selected_bg_color",
+      "label": "Selected background color",
+      "default": "#F2F2F2"
+    },
+    {
+      "type": "header",
+      "content": "Slider layout"
+    },
+    {
+      "type": "select",
+      "id": "slider_type",
+      "options": [
+        {
+          "value": "slide",
+          "label": "Classic"
+        },
+        {
+          "value": "fade",
+          "label": "Fade"
+        }
+      ],
+      "default": "slide",
+      "label": "Type"
+    },
+    {
+      "type": "select",
+      "id": "arrows_position",
+      "options": [
+        {
+          "value": "hidden",
+          "label": "Hidden"
+        },
+        {
+          "value": "under",
+          "label": "Under the slider"
+        },
+        {
+          "value": "sides",
+          "label": "On sides of the slider"
+        }
+      ],
+      "default": "hidden",
+      "label": "Arrows position"
+    },
+    {
+      "type": "select",
+      "id": "arrows_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "inverse",
+      "label": "Arrows color scheme"
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_arrows",
+      "label": "Transparent arrows",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "display_dots",
+      "label": "Display dots",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Block margin"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "label": "Top margin",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "label": "Bottom margin",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product upsells"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,425 @@
+{% liquid
+  if section.settings.product_images == 'all' or section.settings.product_images == 'one'
+    assign product = section.settings.product
+  endif
+%}
+{% assign visible_tabs = 0 %}
+{% for i in (1..3) %}
+  {% capture tab_title %}tab_{{ i }}_title{% endcapture %}
+  {% capture tab_content %}tab_{{ i }}_content{% endcapture %}
+  {% capture tab_page %}tab_{{ i }}_page{% endcapture %}
+
+  {% assign has_title = block.settings[tab_title] %}
+  {% assign has_content = block.settings[tab_content] %}
+  {% assign has_page = block.settings[tab_page] %}
+
+  {% if has_title != blank %}
+    {% if has_content != blank or has_page != blank %}
+      {% assign visible_tabs = visible_tabs | plus: 1 %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% style %}
+  #ProductTabs-{{ block.id }} .tabs-header {
+    grid-template-columns: repeat({{ visible_tabs }}, 1fr);
+    border-bottom: {{ block.settings.divider_thickness }}px solid {{ block.settings.divider_color }};
+  }
+  #ProductTabs-{{ block.id }} .tab-button {
+    font-size: {{ block.settings.tab_text_size | divided_by: 10.0 }}rem;
+    color: {{ block.settings.tab_text_color }};
+  }
+  #ProductTabs-{{ block.id }} .tab__content {
+    color: {{ block.settings.content_text_color }};
+  }
+  #ProductTabs-{{ block.id }} .tab-button.active {
+    color: {{ block.settings.active_tab_color }};
+  }
+  #ProductTabs-{{ block.id }} .tab-button::after {
+    bottom: -{{ block.settings.divider_thickness }}px;
+    height: {{ block.settings.active_indicator_thickness }}px;
+    background: {{ block.settings.active_indicator_color }};
+  }
+  #ProductTabs-{{ block.id }} .tab-button .material-icon {
+    font-size: {{ block.settings.tab_text_icon_scale | divided_by: 100.0 }}em;
+  }
+  #ProductTabs-{{ block.id }} .tab-button img {
+    height: {{ block.settings.tab_text_icon_scale | divided_by: 100.0 }}em;
+    width: {{ block.settings.tab_text_icon_scale | divided_by: 100.0 }}em;
+  }
+  @media screen and (max-width: 749px) {
+    #ProductTabs-{{ block.id }} .tab-button {
+      font-size: {{ block.settings.tab_text_size_mobile | divided_by: 10.0 }}rem;
+    }
+  }
+  #ProductTabs-{{ block.id }} .tab__content p {
+    font-size: {{ block.settings.content_size | divided_by: 10.0 }}rem;
+  }
+{% endstyle %}
+
+<content-tabs
+  id="ProductTabs-{{ block.id }}"
+  class="product-tabs display-block {{ block.settings.visibility }}"
+  data-product-tabs="true"
+  style="
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  "
+  {{ block.shopify_attributes }}
+>
+  <div class="tabs-header">
+    {% for i in (1..3) %}
+      {%- capture tab_title -%}tab_{{ i }}_title{%- endcapture -%}
+      {%- capture tab_icon -%}tab_{{ i }}_icon{%- endcapture -%}
+      {%- capture tab_custom_icon -%}tab_{{ i }}_custom_icon{%- endcapture -%}
+      {%- capture tab_filled_icon -%}tab_{{ i }}_filled_icon{%- endcapture -%}
+      {%- capture tab_content -%}tab_{{ i }}_content{%- endcapture -%}
+      {%- capture tab_page -%}tab_{{ i }}_page{%- endcapture -%}
+
+      {% assign has_title = block.settings[tab_title] %}
+      {% assign has_content = block.settings[tab_content] %}
+      {% assign has_page = block.settings[tab_page] %}
+      {% if has_title != blank %}
+        {% if has_content != blank or has_page != blank %}
+          <button
+            class="tab-button content-tab-button-js{% if forloop.first %} active{% endif %}{% if block.settings.button_alignment == 'center' %} flex-center{% endif %}"
+            data-index="{{ i }}"
+          >
+            {% if block.settings[tab_custom_icon] != blank %}
+              <img
+                src="{{ block.settings[tab_custom_icon] | image_url }}"
+                {% if block.settings[tab_custom_icon].alt != blank %}
+                  alt="{{ block.settings[tab_custom_icon].alt | escape }}"
+                {% else %}
+                  role="presentation"
+                {% endif %}
+                height="auto"
+                width="auto"
+                loading="lazy"
+              >
+            {% elsif block.settings[tab_icon] != blank %}
+              {% render 'material-icon', icon: block.settings[tab_icon], filled: block.settings[tab_filled_icon] %}
+            {% endif %}
+            <span>{{ block.settings[tab_title] }}</span>
+          </button>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div class="tabs-content content-tabs__tabs-js">
+    {% for i in (1..3) %}
+      {%- capture tab_content -%}tab_{{ i }}_content{%- endcapture -%}
+      {%- capture tab_page -%}tab_{{ i }}_page{%- endcapture -%}
+      {% assign has_content = block.settings[tab_content] %}
+      {% assign has_page = block.settings[tab_page] %}
+      {% if has_content != blank or has_page != blank %}
+        <div
+          class="content-tab tab__content{% if forloop.first %} content-tab--active{% endif %} rte"
+          data-index="{{ i }}"
+        >
+          {% assign processed_content = block.settings[tab_content] %}
+          {% if processed_content contains '[description]' %}
+            {% assign processed_content = processed_content | replace: '[description]', product.description %}
+          {% endif %}
+          {{ processed_content }}
+          {{ block.settings[tab_page].content }}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</content-tabs>
+
+{% schema %}
+{
+  "name": "Content tabs",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "tab_text_size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop tab button size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "tab_text_size_mobile",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile tab button size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "tab_text_icon_scale",
+      "min": 100,
+      "max": 200,
+      "step": 10,
+      "unit": "%",
+      "label": "Tab button icon scale",
+      "info": "Relative to buttons text size.",
+      "default": 130
+    },
+    {
+      "type": "select",
+      "id": "button_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "center",
+      "label": "Tab button alignment"
+    },
+    {
+      "type": "range",
+      "id": "divider_thickness",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "label": "Divider thickness",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "active_indicator_thickness",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "unit": "px",
+      "label": "Active indicator thickness",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "content_size",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Tab button mobile size",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "tab_text_color",
+      "label": "Tab button color",
+      "default": "#595959"
+    },
+    {
+      "type": "color",
+      "id": "active_tab_color",
+      "label": "Active tab button color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider color",
+      "default": "#E5E5E5"
+    },
+    {
+      "type": "color",
+      "id": "active_indicator_color",
+      "label": "Active indicator color",
+      "default": "#121212"
+    },
+    {
+      "type": "color",
+      "id": "content_text_color",
+      "label": "Content text color",
+      "default": "#121212"
+    },
+    {
+      "type": "header",
+      "content": "Tab #1"
+    },
+    {
+      "type": "text",
+      "id": "tab_1_title",
+      "label": "Title",
+      "default": "Description"
+    },
+    {
+      "type": "text",
+      "id": "tab_1_icon",
+      "label": "Icon",
+      "default": "description",
+      "info": "[View all available icons](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.platform=web)"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_1_filled_icon",
+      "label": "Filled icon",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_1_custom_icon",
+      "label": "Custom icon"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_1_content",
+      "label": "Content",
+      "info": "Use [description] to automatically display product description.",
+      "default": "<p>Share info about your product</p>"
+    },
+    {
+      "type": "page",
+      "id": "tab_1_page",
+      "label": "Content from page"
+    },
+    {
+      "type": "header",
+      "content": "Tab #2"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_title",
+      "label": "Title",
+      "default": "Shipping"
+    },
+    {
+      "type": "text",
+      "id": "tab_2_icon",
+      "label": "Icon",
+      "default": "local_shipping",
+      "info": "[View all available icons](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.platform=web)"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_2_filled_icon",
+      "label": "Filled icon",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_2_custom_icon",
+      "label": "Custom icon"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_2_content",
+      "label": "Content",
+      "info": "Use [description] to automatically display product description.",
+      "default": "<p>Share shipping information</p>"
+    },
+    {
+      "type": "page",
+      "id": "tab_2_page",
+      "label": "Content from page"
+    },
+    {
+      "type": "header",
+      "content": "Tab #3"
+    },
+    {
+      "type": "text",
+      "id": "tab_3_title",
+      "label": "Title",
+      "default": "Material"
+    },
+    {
+      "type": "text",
+      "id": "tab_3_icon",
+      "label": "Icon",
+      "default": "construction",
+      "info": "[View all available icons](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.platform=web)"
+    },
+    {
+      "type": "checkbox",
+      "id": "tab_3_filled_icon",
+      "label": "Filled icon",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "tab_3_custom_icon",
+      "label": "Custom icon"
+    },
+    {
+      "type": "richtext",
+      "id": "tab_3_content",
+      "label": "Content",
+      "info": "Use [description] to automatically display product description.",
+      "default": "<p>Share material information</p>"
+    },
+    {
+      "type": "page",
+      "id": "tab_3_page",
+      "label": "Content from page"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content tabs",
+      "category": "Information display"
+    }
+  ]
+}
+{% endschema %}

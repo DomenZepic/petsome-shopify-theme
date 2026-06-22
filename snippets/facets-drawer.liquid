@@ -1,0 +1,156 @@
+{% comment %}
+  Drawer + mobile facets
+  NOTE: this is intentionally NOT oversplit because you said 360 lines is fine
+{% endcomment %}
+
+<menu-drawer
+  class="mobile-facets__wrapper{% if filter_type == 'horizontal' or filter_type == 'vertical' %} medium-hide large-up-hide{% endif %} drawer--open-{{ section.settings.facets_drawer_open_mode }}"
+  data-breakpoint="mobile"
+>
+  <details class="mobile-facets__disclosure disclosure-has-popup">
+    <summary class="mobile-facets__open-wrapper focus-offset drawer__main-open">
+      <span class="mobile-facets__open{% if filter_type == 'drawer' and enable_filtering == false %} medium-hide large-up-hide{% endif %}">
+        {% render 'icon-filter' %}
+        <span class="mobile-facets__open-label">
+          {%- if enable_filtering and enable_sorting -%}
+            {{ 'products.facets.filter_and_sort' | t }}
+          {%- elsif enable_filtering -%}
+            {{ 'products.facets.filter_button' | t }}
+          {%- elsif enable_sorting -%}
+            {{ 'products.facets.sort_button' | t }}
+          {%- endif -%}
+        </span>
+        <span class="mobile-facets__open-label hidden">
+          {%- if enable_filtering -%}
+            {{ 'products.facets.filter_button' | t }}
+          {%- endif -%}
+        </span>
+      </span>
+      <span tabindex="0" class="mobile-facets__close mobile-facets__close--no-js">{%- render 'icon-close' -%}</span>
+    </summary>
+    <facet-filters-form>
+      <form id="FacetFiltersFormMobile" class="mobile-facets">
+        <div class="mobile-facets__inner gradient">
+          <div class="mobile-facets__header">
+            <div class="mobile-facets__header-inner">
+              <h2 class="mobile-facets__heading">
+                {%- if enable_filtering and enable_sorting -%}
+                  {{ 'products.facets.filter_and_sort' | t }}
+                {%- elsif enable_filtering -%}
+                  {{ 'products.facets.filter_button' | t }}
+                {%- elsif enable_sorting -%}
+                  {{ 'products.facets.sort_button' | t }}
+                {%- endif -%}
+              </h2>
+              <h2 class="mobile-facets__heading hidden">
+                {%- if enable_filtering -%}
+                  {{ 'products.facets.filter_button' | t }}
+                {%- endif -%}
+              </h2>
+              <p class="mobile-facets__count">
+                {%- if results.results_count -%}
+                  {{ 'templates.search.results_with_count' | t: terms: results.terms, count: results.results_count }}
+                {%- elsif results.products_count == results.all_products_count -%}
+                  {{ 'products.facets.product_count_simple' | t: count: results.products_count }}
+                {%- else -%}
+                  {{
+                    'products.facets.product_count'
+                    | t: product_count: results.products_count, count: results.all_products_count
+                  }}
+                {%- endif -%}
+              </p>
+            </div>
+          </div>
+          <div class="mobile-facets__main has-submenu gradient">
+            {%- if enable_filtering -%}
+              {%- for filter in results.filters -%}
+                {%- render 'facet-block',
+                  filter: filter,
+                  index: forloop.index,
+                  section_id: section.id,
+                  mode: 'mobile',
+                  uses_comma_decimals: uses_comma_decimals
+                -%}
+              {%- endfor -%}
+            {%- endif -%}
+
+            {%- if enable_sorting -%}
+              <div
+                class="mobile-facets__details js-filter"
+                data-index="mobile-sort"
+              >
+                <div class="mobile-facets__summary">
+                  <div class="mobile-facets__sort">
+                    <label for="SortBy-mobile">{{ 'products.facets.sort_by_label' | t }}</label>
+                    <div class="select">
+                      <select
+                        name="sort_by"
+                        class="select__select"
+                        id="SortBy-mobile"
+                        aria-describedby="a11y-refresh-page-message"
+                      >
+                        {%- assign sort_by = results.sort_by | default: results.default_sort_by -%}
+                        {%- for option in results.sort_options -%}
+                          <option
+                            value="{{ option.value | escape }}"
+                            {% if option.value == sort_by %}selected="selected"{% endif %}
+                          >
+                            {{ option.name | escape }}
+                          </option>
+                        {%- endfor -%}
+                      </select>
+                      {% render 'icon-caret' %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {%- endif -%}
+
+            <div class="mobile-facets__footer">
+              <facet-remove class="mobile-facets__clear-wrapper">
+                <a href="{{ results_url }}" class="mobile-facets__clear underlined-link center flex-center">
+                  {{- 'products.facets.clear_all' | t -}}
+                </a>
+              </facet-remove>
+              <button
+                type="button"
+                class="no-js-hidden button button--primary"
+                onclick="this.closest('.mobile-facets__wrapper').querySelector('summary').click()"
+              >
+                {{ 'products.facets.apply' | t }}
+              </button>
+              <noscript><button class="button button--primary">{{ 'products.facets.apply' | t }}</button></noscript>
+            </div>
+          </div>
+
+          {% if results.current_vendor or results.current_type %}
+            <input type="hidden" name="q" value="{{ results.current_vendor }}{{ results.current_type }}">
+          {% endif %}
+
+          {%- if results.terms -%}
+            <input type="hidden" name="q" value="{{ results.terms | escape }}">
+            <input name="options[prefix]" type="hidden" value="last">
+          {%- endif -%}
+        </div>
+      </form>
+    </facet-filters-form>
+  </details>
+  {% assign sticky_btn_display = section.settings.facets_drawer_sticky_button %}
+  {% if sticky_btn_display != 'dont' %}
+    <button
+      class="drawer__sticky-open color-{{ section.settings.facets_drawer_sticky_button_color }} flex-center center nowrap{% if sticky_btn_display == 'after_scrolling' %} hidden{% endif %}"
+      data-display="{{ sticky_btn_display }}"
+    >
+      {% render 'icon-filter' %}
+      <span class="mobile-facets__open-label button-label desktop-hidden">
+        {%- if enable_filtering and enable_sorting -%}
+          {{ 'products.facets.filter_and_sort' | t }}
+        {%- elsif enable_filtering -%}
+          {{ 'products.facets.filter_button' | t }}
+        {%- elsif enable_sorting -%}
+          {{ 'products.facets.sort_button' | t }}
+        {%- endif -%}
+      </span>
+    </button>
+  {% endif %}
+</menu-drawer>

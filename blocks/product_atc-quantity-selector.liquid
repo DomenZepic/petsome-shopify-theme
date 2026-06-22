@@ -1,0 +1,96 @@
+{% liquid
+  if section.settings.product_images == 'all' or section.settings.product_images == 'one'
+    assign product = section.settings.product
+  endif
+  assign product_form_id = 'product-form-' | append: section.id
+%}
+<div
+  id="Quantity-Form-{{ section.id }}"
+  class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
+  {{ block.shopify_attributes }}
+>
+  {%- assign cart_qty = cart | item_count_for_variant: product.selected_or_first_available_variant.id -%}
+  <label class="quantity__label form__label font-body-bold" for="Quantity-{{ section.id }}">
+    {{ 'products.product.quantity.label' | t }}
+    <span class="quantity__rules-cart no-js-hidden{% if cart_qty == 0 %} hidden{% endif %}">
+      <span class="loading-overlay hidden">
+        <span class="loading-overlay__spinner">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            class="spinner"
+            viewBox="0 0 66 66"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+          </svg>
+        </span>
+      </span>
+      <span
+        >(
+        {{- 'products.product.quantity.in_cart_html' | t: quantity: cart_qty -}}
+        )</span
+      >
+    </span>
+  </label>
+  <quantity-input
+    class="quantity main-quantity no-background color-{{ settings.quantity_color_scheme }} accent-color-{{ settings.quantity_overlay_color }} accent-2-color-{{ settings.quantity_text_color }}"
+    data-section="{{ section.id }}"
+  >
+    <button class="quantity__button no-js-hidden" name="minus" type="button">
+      <span class="visually-hidden">
+        {{- 'products.product.quantity.decrease' | t: product: product.title | escape -}}
+      </span>
+      {% render 'icon-minus' %}
+    </button>
+    <input
+      class="quantity__input"
+      type="number"
+      name="quantity"
+      id="Quantity-{{ section.id }}"
+      data-cart-quantity="{{ cart_qty }}"
+      data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+      min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+      {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+        data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+        max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+      {% endif %}
+      step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+      value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+      form="{{ product_form_id }}"
+    >
+    <button class="quantity__button no-js-hidden" name="plus" type="button">
+      <span class="visually-hidden">
+        {{- 'products.product.quantity.increase' | t: product: product.title | escape -}}
+      </span>
+      {% render 'icon-plus' %}
+    </button>
+  </quantity-input>
+</div>
+
+{% schema %}
+{
+  "name": "Quantity selector",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "IMPORTANT: If using this block, the other Quantity selector block MUST BE REMOVED."
+    },
+    {
+      "type": "paragraph",
+      "content": "To customize the position & size, navigate to Buy buttons block settings."
+    },
+    {
+      "type": "paragraph",
+      "content": "To customize the colors of this quantity selector, navigate to Theme settings > Quantity selector."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quantity selector",
+      "category": "Product basics"
+    }
+  ]
+}
+{% endschema %}

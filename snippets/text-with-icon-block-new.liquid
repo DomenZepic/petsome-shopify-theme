@@ -1,0 +1,392 @@
+{% liquid
+  assign nowrap = false
+  assign item_count = 0
+  if block.settings.text_1 != blank
+    assign item_count = item_count | plus: 1
+  endif
+  if block.settings.text_2 != blank
+    assign item_count = item_count | plus: 1
+  endif
+  if block.settings.text_3 != blank
+    assign item_count = item_count | plus: 1
+  endif
+  if block.settings.text_4 != blank
+    assign item_count = item_count | plus: 1
+  endif
+  if block.settings.text_5 != blank
+    assign item_count = item_count | plus: 1
+  endif
+  if block.settings.text_6 != blank
+    assign item_count = item_count | plus: 1
+  endif
+  if item_count > 3
+    assign item_count = 2
+  endif
+%}
+{% if block.settings.block_width == 'fixed' %}
+  <style>
+    .product__text-container-{{ block.id }} {
+      width: {{ block.settings.block_mobile_width }}px;
+      flex-shrink: 0;
+    }
+    @media screen and (min-width: 750px) {
+      .product__text-container-{{ block.id }} {
+        width: {{ block.settings.block_desktop_width }}px;
+      }
+    }
+  </style>
+{% elsif block.settings.block_width == 'unlimited' %}
+  {% assign nowrap = true %}
+{% endif %}
+
+<div
+  class="
+    product__text-container product__text-container-{{ block.id }}  {{ block.settings.visibility }}
+    product__text-container--{{ block.settings.alignment }}
+    product__text-container--{{ block.settings.direction }}
+    product__text-container--{{ block.settings.width }}
+    product__text-container--styling-{{ block.settings.styling_container }}
+    product__text-container--mobile-{{ block.settings.mobile_alignment }}
+    text-with-icon-block
+    {% if block.settings.border_width > 0 %}has-border{% endif %}
+    {% if block.settings.border_color_type == 'gradient' %}text-with-icon-block--border-gradient{% endif %}
+    {% if block.settings.bg_type == 'gradient' %}text-with-icon-block--bg-gradient{% endif %}
+    {% if block.settings.enable_shadow %}text-with-icon-block--block-shadow{% endif %}
+    {% if item_count > 1 %} product__text-container--multiple{% endif %}
+    {% if block.settings.width == 'full_negative' %} side-margins-negative{% endif %}
+    {% if block.settings.font_family == 'heading' %} heading-font{% endif %}
+    {% if block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow %}has-border-radius{% endif %}
+  "
+  style="
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+    --item-count: {{ item_count }};
+    --mobile-text-size: {{ block.settings.mobile_text_size | divided_by: 10.0 }}rem;
+    --desktop-text-size: {{ block.settings.desktop_text_size | divided_by: 10.0 }}rem;
+    --icon-scale: {{ block.settings.icon_scale | divided_by: 100.0 }};
+    --column-gap: {{ block.settings.column_gap | divided_by: 2.0 }}em;
+    --row-gap: {{ block.settings.column_gap | divided_by: 5.0 }}em;
+    --mobile-width: {{ block.settings.mobile_width }};
+    --desktop-width: {{ block.settings.desktop_width }};
+
+
+    {% if block.settings.styling_container == 'container' %}
+      {% if block.settings.bg_type == 'solid' %}
+        {% assign red = block.settings.bg_color | color_extract: 'red' %}
+        {% assign green = block.settings.bg_color | color_extract: 'green' %}
+        {% assign blue = block.settings.bg_color | color_extract: 'blue' %}
+        background: rgba({{ red }}, {{ green }}, {{ blue }}, {{ block.settings.bg_opacity | divided_by: 100.0 }});
+      {% elsif block.settings.bg_type == 'gradient' %}
+        {% assign opacity_value = block.settings.bg_opacity | divided_by: 100.0 %}
+
+        {% if block.settings.bg_gradient contains 'rgb(' %}
+        {% if block.settings.bg_gradient contains 'rgba(' %}
+            {% assign gradient_raw = block.settings.bg_gradient %}
+        {% else %}
+            {% assign gradient_raw = block.settings.bg_gradient | replace: 'rgb(', 'rgba(' | replace: ')', ', 1)' %}
+        {% endif %}
+        {% else %}
+        {% assign gradient_raw = block.settings.bg_gradient %}
+        {% endif %}
+
+        {% assign rgba_parts = gradient_raw | split: 'rgba(' %}
+        {% assign gradient_modified = rgba_parts[0] %}
+
+        {% for part in rgba_parts offset:1 %}
+        {% assign subparts = part | split: ')' %}
+        {% assign inner = subparts[0] | strip %}
+        {% assign rest = subparts[1] %}
+        {% assign comps = inner | split: ',' %}
+        {% assign r = comps[0] | strip %}
+        {% assign g = comps[1] | strip %}
+        {% assign b = comps[2] | strip %}
+        {% assign gradient_modified = gradient_modified
+            | append: 'rgba('
+            | append: r | append: ',' | append: g | append: ',' | append: b | append: ',' | append: opacity_value | append: ')' | append: rest %}
+        {% endfor %}
+        background: {{ gradient_modified }});
+    {% else %}
+        background: none;
+    {% endif %}
+
+    {% if block.settings.enable_shadow %}
+        {% assign shadow_alpha = block.settings.shadow_opacity | divided_by: 100.0 %}
+        --shadow-color: {{ block.settings.shadow_color | color_modify: 'alpha', shadow_alpha }};
+        --shadow-offset-x: {{ block.settings.shadow_horizontal_offset }}px;
+        --shadow-offset-y: {{ block.settings.shadow_vertical_offset }}px;
+        --shadow-blur: {{ block.settings.shadow_blur }}px;
+        --shadow-spread: {{ block.settings.shadow_spread }}px;
+            box-shadow: var(--shadow-offset-x) var(--shadow-offset-y) var(--shadow-blur) var(--shadow-spread) var(--shadow-color);
+    {% else %}
+        --shadow-color: transparent;
+        --shadow-offset-x: 0px;
+        --shadow-offset-y: 0px;
+        --shadow-blur: 0px;
+        --shadow-spread: 0px;
+        box-shadow: none;
+    {% endif %}
+
+
+    {% if block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow %}
+      {% assign font_size_desktop = block.settings.desktop_text_size %}
+      {% assign padding_y_desktop = block.settings.vertical_desktop_padding %}
+      {% assign border_size = block.settings.border_width %}
+      {% assign total_height_desktop = font_size_desktop | plus: padding_y_desktop | plus: border_size %}
+      {% assign border_radius_percent = block.settings.border_radius %}
+      {% assign border_radius_calc_desktop = total_height_desktop | times: border_radius_percent | divided_by: 100.0 %}
+
+      {% assign font_size_mobile = block.settings.mobile_text_size %}
+      {% assign padding_y_mobile = block.settings.vertical_mobile_padding %}
+      {% assign total_height_mobile = font_size_mobile | plus: padding_y_mobile | plus: border_size %}
+      {% assign border_radius_calc_mobile = total_height_mobile | times: border_radius_percent | divided_by: 100.0 %}
+
+      --border-radius: {{ border_radius_calc_desktop }}px;
+      --border-radius-desktop: {{ border_radius_calc_desktop }}px;
+      --border-radius-mobile: {{ border_radius_calc_mobile }}px;
+    {% else %}
+        --border-radius: 0;
+    {% endif %}
+
+    --border-width: {{ block.settings.border_width }}px;
+    --border-style: {{ block.settings.border }};
+
+    {% if block.settings.border_color_type == 'solid' %}
+      {% assign red = block.settings.border_color | color_extract: 'red' %}
+      {% assign green = block.settings.border_color | color_extract: 'green' %}
+      {% assign blue = block.settings.border_color | color_extract: 'blue' %}
+      {% assign alpha = block.settings.border_opacity | divided_by: 100.0 %}
+      --border-color: rgba({{ red }}, {{ green }}, {{ blue }}, {{ alpha }});
+      border: var(--border-width) var(--border-style) var(--border-color);
+    {% elsif block.settings.border_color_type == 'gradient' %}
+      {% assign opacity_value = block.settings.border_opacity | divided_by: 100.0 %}
+      {% assign gradient_raw = block.settings.border_gradient %}
+      {% if gradient_raw contains 'rgb(' %}
+        {% unless gradient_raw contains 'rgba(' %}
+            {% assign gradient_raw = gradient_raw | replace: 'rgb(', 'rgba(' | replace: ')', ', 1)' %}
+        {% endunless %}
+    {% endif %}
+      {% assign rgba_parts = gradient_raw | split: 'rgba(' %}
+      {% assign gradient_modified = rgba_parts[0] %}
+      {% for part in rgba_parts offset:1 %}
+        {% assign subparts = part | split: ')' %}
+        {% assign inner = subparts[0] | strip %}
+        {% assign rest = subparts[1] %}
+        {% assign comps = inner | split: ',' %}
+        {% assign r = comps[0] | strip %}
+        {% assign g = comps[1] | strip %}
+        {% assign b = comps[2] | strip %}
+        {% assign gradient_modified = gradient_modified
+          | append: 'rgba('
+          | append: r | append: ',' | append: g | append: ',' | append: b | append: ',' | append: opacity_value | append: ')' | append: rest %}
+      {% endfor %}
+      --border-gradient: {{ gradient_modified }});
+    {% else %}
+      --border-gradient: transparent;
+    {% endif %}
+
+    {% endif %}
+
+    {% if block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow %}
+      --padding-y--mobile: {{ block.settings.vertical_mobile_padding | divided_by: 10.0 }}rem;
+      --padding-x--mobile: {{ block.settings.horizontal_mobile_padding | divided_by: 10.0 }}rem;
+      --padding-y--desktop: {{ block.settings.vertical_desktop_padding | divided_by: 10.0 }}rem;
+      --padding-x--desktop: {{ block.settings.horizontal_desktop_padding | divided_by: 10.0 }}rem;
+    {% else %}
+      --padding-y--mobile: 0;--padding-x--mobile: 0;--padding-y--desktop: 0; --padding-x--desktop: 0;
+    {% endif %}
+
+    {% if block.settings.styling_container != 'container' %}
+      --border-width: 0px;
+    {% endif %}
+  "
+  {{- block.shopify_attributes -}}
+>
+  {% for i in (1..6) %}
+    {% liquid
+      case i
+        when 1
+          assign text = block.settings.text_1
+          assign icon = block.settings.icon_1
+          assign custom_icon = block.settings.custom_icon_1
+          assign filled_icon = block.settings.filled_icon_1
+        when 2
+          assign text = block.settings.text_2
+          assign icon = block.settings.icon_2
+          assign custom_icon = block.settings.custom_icon_2
+          assign filled_icon = block.settings.filled_icon_2
+        when 3
+          assign text = block.settings.text_3
+          assign icon = block.settings.icon_3
+          assign custom_icon = block.settings.custom_icon_3
+          assign filled_icon = block.settings.filled_icon_3
+        when 4
+          assign text = block.settings.text_4
+          assign icon = block.settings.icon_4
+          assign custom_icon = block.settings.custom_icon_4
+          assign filled_icon = block.settings.filled_icon_4
+        when 5
+          assign text = block.settings.text_5
+          assign icon = block.settings.icon_5
+          assign custom_icon = block.settings.custom_icon_5
+          assign filled_icon = block.settings.filled_icon_5
+        when 6
+          assign text = block.settings.text_6
+          assign icon = block.settings.icon_6
+          assign custom_icon = block.settings.custom_icon_6
+          assign filled_icon = block.settings.filled_icon_6
+      endcase
+    %}
+    {% if text != blank %}
+      <p
+        class="
+          product__text product__text-{{ block.settings.alignment }}
+          product__text-mobile-{{ block.settings.mobile_alignment }}
+          product__text--{{ block.settings.text_color_type }}
+          product__text-icon--{{ block.settings.icon_color_type }}
+          {% if block.settings.border_color_type == 'gradient' %}product__text--border-gradient{% endif %}
+        "
+        style="
+            {% if block.settings.text_color_type == 'solid' %}
+                --text-color:{{ block.settings.text_color }};
+            {% elsif block.settings.text_color_type == 'gradient' %}
+                --background-text:{{ block.settings.text_color_gradient }};
+            {%endif %}
+            {% if block.settings.icon_color_type == 'solid' %}
+                --icon-color:{{ block.settings.icon_color }};
+            {% elsif block.settings.icon_color_type == 'gradient' %}
+                --background-icon:{{ block.settings.icon_color_gradient }};
+            {%endif %}
+
+
+            {% if block.settings.styling_container == 'text' %}
+                {% if block.settings.bg_type == 'solid' %}
+                    {% assign red = block.settings.bg_color | color_extract: 'red' %}
+                    {% assign green = block.settings.bg_color | color_extract: 'green' %}
+                    {% assign blue = block.settings.bg_color | color_extract: 'blue' %}
+                    background: rgba({{ red }}, {{ green }}, {{ blue }}, {{ block.settings.bg_opacity | divided_by: 100.0 }});
+                {% elsif block.settings.bg_type == 'gradient' %}
+                    {% assign opacity_value = block.settings.bg_opacity | divided_by: 100.0 %}
+
+                    {% if block.settings.bg_gradient contains 'rgb(' %}
+                    {% if block.settings.bg_gradient contains 'rgba(' %}
+                        {% assign gradient_raw = block.settings.bg_gradient %}
+                    {% else %}
+                        {% assign gradient_raw = block.settings.bg_gradient | replace: 'rgb(', 'rgba(' | replace: ')', ', 1)' %}
+                    {% endif %}
+                    {% else %}
+                    {% assign gradient_raw = block.settings.bg_gradient %}
+                    {% endif %}
+
+                    {% assign rgba_parts = gradient_raw | split: 'rgba(' %}
+                    {% assign gradient_modified = rgba_parts[0] %}
+
+                    {% for part in rgba_parts offset:1 %}
+                    {% assign subparts = part | split: ')' %}
+                    {% assign inner = subparts[0] | strip %}
+                    {% assign rest = subparts[1] %}
+                    {% assign comps = inner | split: ',' %}
+                    {% assign r = comps[0] | strip %}
+                    {% assign g = comps[1] | strip %}
+                    {% assign b = comps[2] | strip %}
+                    {% assign gradient_modified = gradient_modified
+                        | append: 'rgba('
+                        | append: r | append: ',' | append: g | append: ',' | append: b | append: ',' | append: opacity_value | append: ')' | append: rest %}
+                    {% endfor %}
+                    background: {{ gradient_modified }});
+                {% else %}
+                    background: none;
+                {% endif %}
+
+                {% if block.settings.enable_shadow %}
+                    {% assign shadow_alpha = block.settings.shadow_opacity | divided_by: 100.0 %}
+                    --shadow-color: {{ block.settings.shadow_color | color_modify: 'alpha', shadow_alpha }};
+                    --shadow-offset-x: {{ block.settings.shadow_horizontal_offset }}px;
+                    --shadow-offset-y: {{ block.settings.shadow_vertical_offset }}px;
+                    --shadow-blur: {{ block.settings.shadow_blur }}px;
+                    --shadow-spread: {{ block.settings.shadow_spread }}px;
+                        box-shadow: var(--shadow-offset-x) var(--shadow-offset-y) var(--shadow-blur) var(--shadow-spread) var(--shadow-color);
+                {% else %}
+                    --shadow-color: transparent;
+                    --shadow-offset-x: 0px;
+                    --shadow-offset-y: 0px;
+                    --shadow-blur: 0px;
+                    --shadow-spread: 0px;
+                    box-shadow: none;
+                {% endif %}
+
+
+                {% if block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow %}
+                    {% assign font_size = block.settings.desktop_text_size %}
+                    {% assign padding_y = block.settings.vertical_desktop_padding %}
+                    {% assign border_size = block.settings.border_width %}
+                    {% assign total_height = font_size | plus: padding_y | plus: border_size %}
+                    {% assign border_radius_percent = block.settings.border_radius %}
+                    {% assign border_radius_calc = total_height | times: border_radius_percent | divided_by: 100.0 %}
+                    --border-radius: {{ border_radius_calc }}px;
+                {% else %}
+                    --border-radius: 0;
+                {% endif %}
+
+                --border-width: {{ block.settings.border_width }}px;
+                --border-style: {{ block.settings.border }};
+
+                {% if block.settings.border_color_type == 'solid' %}
+                    {% assign red = block.settings.border_color | color_extract: 'red' %}
+                    {% assign green = block.settings.border_color | color_extract: 'green' %}
+                    {% assign blue = block.settings.border_color | color_extract: 'blue' %}
+                    {% assign alpha = block.settings.border_opacity | divided_by: 100.0 %}
+                    --border-color: rgba({{ red }}, {{ green }}, {{ blue }}, {{ alpha }});
+                    border: var(--border-width) var(--border-style) var(--border-color);
+                {% elsif block.settings.border_color_type == 'gradient' %}
+                    {% assign opacity_value = block.settings.border_opacity | divided_by: 100.0 %}
+                    {% assign gradient_raw = block.settings.border_gradient %}
+                    {% if gradient_raw contains 'rgb(' %}
+                    {% unless gradient_raw contains 'rgba(' %}
+                        {% assign gradient_raw = gradient_raw | replace: 'rgb(', 'rgba(' | replace: ')', ', 1)' %}
+                    {% endunless %}
+                {% endif %}
+                    {% assign rgba_parts = gradient_raw | split: 'rgba(' %}
+                    {% assign gradient_modified = rgba_parts[0] %}
+                    {% for part in rgba_parts offset:1 %}
+                    {% assign subparts = part | split: ')' %}
+                    {% assign inner = subparts[0] | strip %}
+                    {% assign rest = subparts[1] %}
+                    {% assign comps = inner | split: ',' %}
+                    {% assign r = comps[0] | strip %}
+                    {% assign g = comps[1] | strip %}
+                    {% assign b = comps[2] | strip %}
+                    {% assign gradient_modified = gradient_modified
+                        | append: 'rgba('
+                        | append: r | append: ',' | append: g | append: ',' | append: b | append: ',' | append: opacity_value | append: ')' | append: rest %}
+                    {% endfor %}
+                    --border-gradient: {{ gradient_modified }});
+                {% else %}
+                    --border-gradient: transparent;
+                {% endif %}
+
+          {% endif %}
+        "
+      >
+        {% if custom_icon != blank %}
+          <img
+            src="{{ custom_icon | image_url }}"
+            alt="{{ custom_icon.alt }}"
+            width="auto"
+            height="auto"
+            loading="lazy"
+          >
+        {% elsif icon != blank %}
+          {% render 'material-icon', icon: icon, filled: filled_icon %}
+        {% endif %}
+        <span
+          class="text"
+          {% if nowrap %}
+            class="nowrap"
+          {% endif %}
+        >
+          {{- text -}}
+        </span>
+      </p>
+    {% endif %}
+  {% endfor %}
+</div>

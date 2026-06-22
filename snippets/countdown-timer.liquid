@@ -1,0 +1,197 @@
+<div
+  class="
+    countdown-wrapper
+    countdown-wrapper--desktop-{{ block.settings.layout_desktop }}
+    countdown-wrapper--mobile-{{ block.settings.layout_mobile }}
+    {% if has_label %} countdown-wrapper--has-label{% endif %}
+    countdown-wrapper--style-{{ block.settings.timer_style }}
+    color-{{ block.settings.bg_color_scheme }} gradient color-scheme-{{ section.id }} animate-section animate--hidden {{ block.settings.visibility }}
+  "
+  data-end-time="{{ block.settings.end_time }}"
+  data-timezone="{{ block.settings.timezone }}"
+  data-utc-offset="{{ block.settings.utc_offset }}"
+  data-end-behavior="{{ block.settings.end_behavior }}"
+  data-repeat-hours="{{ block.settings.repeat_hours }}"
+  data-show-days="{{ block.settings.show_days }}"
+  data-show-hours="{{ block.settings.show_hours }}"
+  data-show-minutes="{{ block.settings.show_minutes }}"
+  data-show-seconds="{{ block.settings.show_seconds }}"
+  data-label-days="{{ block.settings.label_days }}"
+  data-label-hours="{{ block.settings.label_hours }}"
+  data-label-minutes="{{ block.settings.label_minutes }}"
+  data-label-seconds="{{ block.settings.label_seconds }}"
+  data-colons="{{ block.settings.enable_colons }}"
+  style="
+    --vertical-heading-alignment: {{ block.settings.vertical_heading_alignment }};
+    {% if block.settings.bg_color_scheme == 'custom-gradient' %}
+      background: {{ block.settings.background_gradient }};
+    {% endif %}
+    {% if block.settings.bg_color_scheme == 'custom-solid' %}
+      background: {{ block.settings.background_solid }};
+    {% endif %}
+    border: {{ block.settings.border_width }}px {{ block.settings.border }} {% if block.settings.border_color_scheme == 'custom' %} {{ block.settings.border_color }}; {% else %}rgb(var(--color-base-{{ block.settings.border_color_scheme }}));{% endif %}
+    border-radius: {{ block.settings.border_radius }}px;
+    --numbers-size: {{ block.settings.timer_number_size | divided_by: 10.0 }}rem;
+    --label-size: {{ block.settings.timer_label_size | divided_by: 10.0 }}rem;
+    --label-margin: {{ block.settings.timer_label_margin | divided_by: 10.0 }}rem;
+    {% if has_margins %}
+      margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+      margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+    {% endif %}
+    --padding-x: {{ block.settings.padding_x | divided_by: 10.0 }}rem;
+    --padding-y: {{ block.settings.padding_y | divided_by: 10.0 }}rem;
+    {% if block.settings.width == 'full' %}
+      width: 100%;
+    {% else %}
+      {% if block.settings.alignment == 'center' %}
+        margin-left: auto; margin-right: auto;
+      {% elsif block.settings.alignment == 'right' %}
+        margin-left: auto;
+      {% else %}
+        margin-right: auto;
+      {% endif %}
+    {% endif %}
+  "
+  {{- block.shopify_attributes -}}
+>
+  {% if block.settings.heading != blank %}
+    <p
+      class="countdown-heading font-size--responsive margin-0"
+      style="
+        --font-size:{{ block.settings.heading_size_desktop | divided_by: 10.0 }}rem;
+        --mobile-font-size: {{ block.settings.heading_size_mobile | divided_by: 10.0 }}rem;
+        {% if block.settings.heading_color_scheme == 'custom' %}
+          color: {{ block.settings.heading_color }};
+        {% else %}
+          color: rgb(var(--color-base-{{ block.settings.heading_color_scheme }}));
+        {% endif %}
+      "
+    >
+      {{ block.settings.heading }}
+    </p>
+  {% endif %}
+
+  <date-countdown-timer
+    class="countdown countdown--style-{{ block.settings.timer_style }}{% if block.settings.enable_colons == true %} countdown--colons{% endif %}"
+    data-style="{{ block.settings.timer_style }}"
+    style="
+      --padding-x: {{ block.settings.timer_padding_x | divided_by: 10.0 }}rem;
+      --padding-y: {{ block.settings.timer_padding_y | divided_by: 10.0 }}rem;
+      --item-spacing: {{ block.settings.timer_spacing | divided_by: 10.0 }}rem;
+      {% if block.settings.timer_colon_color_scheme == 'custom' %}
+        --colon-color: {{ block.settings.timer_colon_color }};
+      {% else %}
+        --colon-color: rgb(var(--color-base-{{ block.settings.timer_colon_color_scheme }}));
+      {% endif %}
+      {% if block.settings.timer_text_color_scheme == 'custom' %}
+        --timer-color: {{ block.settings.timer_text_color }};
+      {% else %}
+        --timer-color: rgb(var(--color-base-{{ block.settings.timer_text_color_scheme }}));
+      {% endif %}
+      {% if block.settings.timer_label_color_scheme == 'custom' %}
+        --label-color: {{ block.settings.timer_label_color }};
+      {% else %}
+        --label-color: rgb(var(--color-base-{{ block.settings.timer_label_color_scheme }}));
+      {% endif %}
+      --border-width: {{ block.settings.border_width--timer }}px;
+      --border-style: {{ block.settings.border--timer }};
+      {% if block.settings.timer_border_color_scheme == 'custom' %}
+        --border-color: {{ block.settings.border_color--timer }};
+        {% else %}
+        --border-color: rgb(var(--color-base-{{ block.settings.timer_border_color_scheme }}));
+      {% endif %}
+      --border-radius: {{ block.settings.border_radius--timer }}px;
+      {% if block.settings.timer_bg_color_scheme == 'custom-gradient' %}
+        --digit-bg: {{ block.settings.timer_bg_gradient }};
+      {% elsif block.settings.timer_bg_color_scheme == 'custom-solid'%}
+        --digit-bg: {{ block.settings.timer_bg_solid }};
+      {% else %}
+        {% liquid
+          assign color_name = block.settings.timer_bg_color_scheme
+          if color_name == 'inverse'
+            assign color_name = 'text'
+          endif
+        %}
+        --digit-bg: rgb(var(--color-base-{{ color_name }}));
+      {% endif %}
+    "
+    role="timer"
+    aria-live="polite"
+    aria-atomic="true"
+    aria-label="{{ block.settings.heading | default: 'event' }}"
+  >
+    {% assign parts = '' %}
+    {% if block.settings.show_days %}{% assign parts = parts | append: 'day,' %}{% endif %}
+    {% if block.settings.show_hours %}{% assign parts = parts | append: 'hour,' %}{% endif %}
+    {% if block.settings.show_minutes %}{% assign parts = parts | append: 'minute,' %}{% endif %}
+    {% if block.settings.show_seconds %}{% assign parts = parts | append: 'second,' %}{% endif %}
+
+    {% assign parts_array = parts | split: ',' %}
+
+    {% for part in parts_array %}
+      {% if part != '' %}
+        <div
+          class="countdown-timer__block {% if block.settings.timer_style == '2'%} color-{{ block.settings.timer_bg_color_scheme }} gradient{% endif %}"
+          role="group"
+          aria-label="{{ part | capitalize }}"
+          style="
+            {% if block.settings.timer_bg_color_scheme == 'custom-gradient' and block.settings.timer_style == '2' %}
+              background: {{ block.settings.timer_bg_gradient }};
+            {% endif %}
+            {% if block.settings.timer_bg_color_scheme == 'custom-solid' and block.settings.timer_style == '2' %}
+              background: {{ block.settings.timer_bg_solid }};
+            {% endif %}
+          "
+        >
+          <div
+            class="countdown-timer__number color-{{ block.settings.timer_bg_color_scheme }} gradient"
+            aria-label="
+              {% if part == 'day' %}
+                0 {{ block.settings.label_days }}
+              {% elsif part == 'hour' %}
+                0 {{ block.settings.label_hours }}
+              {% elsif part == 'minute' %}
+                0 {{ block.settings.label_minutes }}
+              {% elsif part == 'second' %}
+                0 {{ block.settings.label_seconds }}
+              {% endif %}
+            "
+            style="
+              {% if block.settings.timer_style == '1' or block.settings.timer_style == '2' or block.settings.timer_style == '4'%}
+                background: transparent;
+              {% endif %}
+              {% if block.settings.timer_style == '3' and block.settings.timer_bg_color_scheme == 'custom-gradient' %}
+                background: {{ block.settings.timer_bg_gradient }};
+              {% endif %}
+              {% if block.settings.timer_style == '3' and block.settings.timer_bg_color_scheme == 'custom-solid' %}
+                background: {{ block.settings.timer_bg_solid }};
+              {% endif %}
+            "
+          >
+            {% if block.settings.timer_style == '4' %}
+              <span class="countdown-timer__digit" aria-hidden="true">0</span>
+              <span class="countdown-timer__digit" aria-hidden="true">0</span>
+            {% else %}
+              00
+            {% endif %}
+          </div>
+          {% if part == 'day' -%}
+            {% assign label = block.settings.label_days %}
+          {% elsif part == 'hour' -%}
+            {% assign label = block.settings.label_hours %}
+          {% elsif part == 'minute' -%}
+            {% assign label = block.settings.label_minutes %}
+          {% elsif part == 'second' -%}
+            {% assign label = block.settings.label_seconds %}
+          {% endif %}
+          <span class="countdown-timer__label{% if label == blank %} hidden{% endif %}" aria-hidden="true">
+            {{ label }}
+          </span>
+        </div>
+        {% if block.settings.enable_colons and forloop.last == false %}
+          <span class="countdown-timer__colon" aria-hidden="true">:</span>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </date-countdown-timer>
+</div>

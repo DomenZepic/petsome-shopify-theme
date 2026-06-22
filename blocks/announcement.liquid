@@ -1,0 +1,183 @@
+<li class="splide__slide">
+  <div class="splide__slide__container">
+    <div
+      class="announcement-bar__item announcement-bar__item-{{ block.settings.text_alignment }}{% if section.settings.show_separator %} announcement-bar__separator{% endif %}"
+      style="
+        --mobile-text-size: {{ block.settings.mobile_text_size | divided_by: 10.0 }}rem;
+        --desktop-text-size: {{ block.settings.desktop_text_size | divided_by: 10.0 }}rem;
+        --mobile-icon-size: {{ block.settings.mobile_icon_size | divided_by: 10.0 }}rem;
+        --desktop-icon-size: {{ block.settings.desktop_icon_size | divided_by: 10.0 }}rem;
+      "
+      {{ block.shopify_attributes }}
+    >
+      {% liquid
+        if block.settings.icon != blank or block.settings.custom_icon != blank
+          assign has_icon = true
+        endif
+      %}
+      {%- if block.settings.text != blank -%}
+        <p class="announcement-bar__message{% if has_icon %} announcement-bar__message--mobile-{{ block.settings.mobile_layout }} announcement-bar__message--desktop-{{ block.settings.desktop_layout }}{% endif %}">
+          {% if block.settings.custom_icon != blank %}
+            <img
+              src="{{ block.settings.custom_icon | image_url }}"
+              {% if block.settings.custom_icon.alt != blank %}
+                alt="{{ block.settings.custom_icon.alt | escape }}"
+              {% else %}
+                role="presentation"
+              {% endif %}
+              class="announcement-bar__message__custom-icon"
+              height="auto"
+              width="auto"
+              loading="lazy"
+            >
+          {% elsif block.settings.icon != blank %}
+            {% render 'material-icon',
+              icon: block.settings.icon,
+              filled: block.settings.filled_icon
+            %}
+          {% endif %}
+          <span>{{ block.settings.text }}</span>
+        </p>
+      {%- endif -%}
+    </div>
+  </div>
+</li>
+
+{% schema %}
+{
+  "name": "Announcement",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "default": "Welcome to our store",
+      "label": "Text"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "label": "Alignment"
+    },
+    {
+      "type": "range",
+      "id": "mobile_text_size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16,
+      "label": "Mobile text size"
+    },
+    {
+      "type": "range",
+      "id": "desktop_text_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "label": "Desktop text size"
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "icon",
+      "default": "storefront",
+      "label": "Icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+    },
+    {
+      "type": "checkbox",
+      "id": "filled_icon",
+      "default": false,
+      "label": "Filled icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_icon",
+      "label": "Custom icon"
+    },
+    {
+      "type": "range",
+      "id": "mobile_icon_size",
+      "min": 10,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "label": "Mobile icon size"
+    },
+    {
+      "type": "range",
+      "id": "desktop_icon_size",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 26,
+      "label": "Desktop icon size"
+    },
+    {
+      "type": "select",
+      "id": "desktop_layout",
+      "label": "Desktop layout",
+      "options": [
+        {
+          "value": "horizontal",
+          "label": "Horizontal"
+        },
+        {
+          "value": "vertical",
+          "label": "Vertical"
+        }
+      ],
+      "default": "horizontal"
+    },
+    {
+      "type": "select",
+      "id": "mobile_layout",
+      "label": "Mobile layout",
+      "options": [
+        {
+          "value": "horizontal",
+          "label": "Horizontal"
+        },
+        {
+          "value": "vertical",
+          "label": "Vertical"
+        }
+      ],
+      "default": "horizontal"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement",
+      "category": "Announcement"
+    }
+  ]
+}
+{% endschema %}

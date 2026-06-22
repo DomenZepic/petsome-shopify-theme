@@ -1,0 +1,334 @@
+{% liquid
+  assign has_desktop_align = true
+  if section.settings.desktop_content_alignment == 'left' or section.settings.desktop_content_alignment == 'center' or section.settings.desktop_content_alignment == 'right'
+    assign has_desktop_align = false
+  endif
+
+  assign has_mobile_align = true
+  if section.settings.mobile_content_alignment == 'left' or section.settings.mobile_content_alignment == 'center' or section.settings.mobile_content_alignment == 'right'
+    assign has_mobile_align = false
+  endif
+
+  assign is_richtext_section = false
+  assign is_image_with_text_section = false
+  if has_desktop_align == false and has_mobile_align == false
+    assign desktop_content_position = section.settings.desktop_content_position
+    if desktop_content_position == 'left' or desktop_content_position == 'center' or desktop_content_position == 'right'
+      assign is_richtext_section = true
+    else
+      assign is_image_with_text_section = true
+    endif
+  endif
+%}
+{% unless is_image_with_text_section %}
+  <div
+    class="{% if is_richtext_section %}rich-text__buttons{% else %}buttons-container{% endif %} {{ block.settings.visibility }}"
+    style="
+      margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+      margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+      --alignment:{{ block.settings.alignment }};
+      --mobile-alignment:{{ block.settings.mobile_alignment }};
+    "
+  >
+{% endunless %}
+  <style>
+    #SectionAtcBtn-{{ section.id }}-{{ block.id }},
+    #Button-{{ block.id }} {
+      --icon-scale: {{ block.settings.icon_scale | divided_by: 100.0 }}em;
+      --icon-spacing: {{ block.settings.icon_spacing }}px;
+    }
+    {% if block.settings.enable_custom_color %}
+      #SectionAtcBtn-{{ section.id }}-{{ block.id }},
+      #Button-{{ block.id }} {
+        {% if block.settings.button_style_secondary %}
+          --color-base-outline-button-labels: {{ block.settings.custom_color.red }}, {{ block.settings.custom_color.green }}, {{ block.settings.custom_color.blue }};
+        {% else %}
+          --color-button: {{ block.settings.custom_color.red }}, {{ block.settings.custom_color.green }}, {{ block.settings.custom_color.blue }};
+          --color-button-text: {{ block.settings.custom_text_color.red }}, {{ block.settings.custom_text_color.green }}, {{ block.settings.custom_text_color.blue }};
+        {% endif %}
+      }
+    {% endif %}
+    {% if block.settings.enable_custom_color == true and block.settings.button_style_secondary and settings.action_btn_hover == 'center' or settings.action_btn_hover == 'left' %}
+      #SectionAtcBtn-{{ section.id }}-{{ block.id }}:hover,
+      #Button-{{ block.id }}:hover {
+        color: rgb({{ block.settings.custom_outline_hover_text_color.red }}, {{ block.settings.custom_outline_hover_text_color.green }}, {{ block.settings.custom_outline_hover_text_color.blue }});
+      }
+    {% endif %}
+    {% if block.settings.prefix_icon != blank %}
+      #SectionAtcBtn-{{ section.id }}-{{ block.id }} .button__label::before,
+      #Button-{{ block.id }} .button__label::before {
+        background-image: url('{{ block.settings.prefix_icon | image_url }}');
+      }
+    {% endif %}
+    {% if block.settings.suffix_icon != blank %}
+      #SectionAtcBtn-{{ section.id }}-{{ block.id }} .button__label::after,
+      #Button-{{ block.id }} .button__label::after {
+        background-image: url('{{ block.settings.suffix_icon | image_url }}');
+      }
+    {% endif %}
+  </style>
+  {% liquid
+    assign btn_class = ''
+    if block.settings.full_width
+      assign btn_class = btn_class | append: ' button--full-width'
+    endif
+    if block.settings.button_style_secondary
+      assign btn_class = btn_class | append: ' button--secondary'
+    endif
+    if block.settings.large_font_size
+      assign btn_class = btn_class | append: ' button--large-text'
+    endif
+    if block.settings.prefix_icon != blank
+      assign btn_class = btn_class | append: ' button--prefix-icon'
+    endif
+    if block.settings.suffix_icon != blank
+      assign btn_class = btn_class | append: ' button--suffix-icon'
+    endif
+  %}
+  {% if block.settings.atc_product == blank %}
+    <button
+      id="SectionAtcBtn-{{ section.id }}-{{ block.id }}"
+      type="button"
+      class="button main-product-atc {{ btn_class }} button--has-spinner"
+      {% if product.selected_or_first_available_variant.available == false %}
+        disabled
+      {% endif %}
+    >
+      <span class='button__label'>
+        {{ block.settings.button_label }}
+      </span>
+      <div class="loading-overlay__spinner">
+        <svg
+          aria-hidden="true"
+          focusable="false"
+          class="spinner"
+          viewBox="0 0 66 66"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+        </svg>
+      </div>
+    </button>
+  {% else %}
+    {% assign product_form_id = 'section-product-form-' | append: section.id | append: block.id %}
+    {% render 'separate-atc-btn',
+      product: block.settings.atc_product,
+      product_form_id: product_form_id,
+      class: btn_class,
+      label: block.settings.button_label,
+      skip_cart: block.settings.atc_skip_cart
+    %}
+  {% endif %}
+{% unless is_image_with_text_section %}
+  </div>
+{% endunless %}
+
+{% schema %}
+{
+  "name": "Add to Cart button",
+  "tag": null, 
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "product",
+      "id": "atc_product",
+      "label": "ATC Custom product",
+      "info": "IMPORTANT: If empty, the button will add the main product FROM THE PRODUCT PAGE to cart (INCLUDING the selected variant, quantity, upsells etc.)"
+    },
+    {
+      "type": "checkbox",
+      "id": "atc_skip_cart",
+      "label": "ATC Custom product skip cart",
+      "visible_if": "{{ block.settings.atc_product != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Styling"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_style_secondary",
+      "default": false,
+      "label": "Use outline button style"
+    },
+    {
+      "type": "checkbox",
+      "id": "large_font_size",
+      "default": false,
+      "label": "Use larger font size"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_custom_color",
+      "label": "Enable custom button colors",
+      "default": false,
+      "info": "The two color selections below are applied if this setting is enabled."
+    },
+    {
+      "type": "color",
+      "id": "custom_color",
+      "default": "#dd1d1d",
+      "label": "Button custom color",
+      "visible_if": "{{ block.settings.enable_custom_color == true }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_text_color",
+      "default": "#fff",
+      "label": "Button custom text color",
+      "visible_if": "{{ block.settings.enable_custom_color == true and block.settings.button_style_secondary == false }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_outline_hover_text_color",
+      "default": "#fff",
+      "label": "Button custom hover text color",
+      "visible_if": "{{ block.settings.enable_custom_color == true and block.settings.button_style_secondary and settings.action_btn_hover == 'center' or settings.action_btn_hover == 'left' }}"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "default": false,
+      "label": "Full button width"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "label": "Desktop alignment",
+      "visible_if": "{{ section.settings.desktop_content_alignment != 'left' and section.settings.desktop_content_alignment != 'center' and section.settings.desktop_content_alignment != 'right' }}"
+    },
+    {
+      "type": "select",
+      "id": "mobile_alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "flex-start",
+      "label": "Mobile alignment",
+      "visible_if": "{{ section.settings.mobile_content_alignment != 'left' and section.settings.mobile_content_alignment != 'center' and section.settings.mobile_content_alignment != 'right' }}"
+    },
+    {
+      "type": "header",
+      "content": "Icons"
+    },
+    {
+      "type": "range",
+      "id": "icon_scale",
+      "min": 80,
+      "max": 180,
+      "step": 5,
+      "unit": "%",
+      "label": "Icons scale",
+      "default": 120,
+      "info": "Related to button label font size"
+    },
+    {
+      "type": "range",
+      "id": "icon_spacing",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Icons spacing",
+      "default": 10,
+      "info": "Empty space between the button label & the icons"
+    },
+    {
+      "type": "image_picker",
+      "id": "prefix_icon",
+      "label": "Label prefix icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "suffix_icon",
+      "label": "Label suffix icon"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15,
+      "visible_if": "{{ section.settings.image_1_visibility != 'mobile-hidden' and section.settings.image_1_visibility != 'always-display' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Add to Cart button",
+      "category": "Buttons"
+    }
+  ]
+}
+{% endschema %}

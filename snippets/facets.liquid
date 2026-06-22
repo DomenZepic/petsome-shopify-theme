@@ -1,0 +1,59 @@
+{% comment %}
+  Renders facets (filtering and sorting)
+
+  Accepts:
+  - results: {Object} Collection or Search object
+  - enable_filtering: {Boolean} Show filtering when true
+  - enable_sorting: {Boolean} Show sorting when true
+  - filter_type: {String} 'vertical', 'horizontal', 'drawer'
+{% endcomment %}
+
+{%- liquid
+  assign sort_by = results.sort_by | default: results.default_sort_by
+  if results.url
+    assign results_url = results.url
+  else
+    assign terms = results.terms | escape
+    assign results_url = '?q=' | append: terms | append: '&options%5Bprefix%5D=last&sort_by=' | append: sort_by
+  endif
+-%}
+
+<div class="facets-container{% if filter_type == 'drawer' %} facets-container-drawer{% endif %}">
+  {%- if filter_type == 'vertical' or filter_type == 'horizontal' -%}
+    {%- render 'facets-desktop',
+      results: results,
+      enable_filtering: enable_filtering,
+      enable_sorting: enable_sorting,
+      filter_type: filter_type,
+      results_url: results_url,
+      sort_by: sort_by
+    -%}
+  {%- endif -%}
+
+  {%- render 'facets-drawer',
+    results: results,
+    enable_filtering: enable_filtering,
+    enable_sorting: enable_sorting,
+    filter_type: filter_type,
+    results_url: results_url,
+    sort_by: sort_by
+  -%}
+
+  {%- render 'facets-active-facets',
+    results: results,
+    results_url: results_url,
+    mobile: true
+  -%}
+
+  {%- render 'facets-product-count',
+    results: results,
+    filter_type: filter_type
+  -%}
+
+  {%- if filter_type == 'drawer' -%}
+    {%- render 'facets-drawer-pills',
+      results: results,
+      results_url: results_url
+    -%}
+  {%- endif -%}
+</div>

@@ -1,0 +1,735 @@
+{% liquid
+  assign nested_open_mode = block.settings.nested_open_mode
+  assign padding_y = block.settings.padding_y | divided_by: 10.0
+  assign padding_x = block.settings.padding_x | divided_by: 10.0
+  assign nested_padding_y = block.settings.nested_padding_y | divided_by: 10.0
+  assign nested_padding_x = block.settings.nested_padding_x | divided_by: 10.0
+  assign nested_padding_x_diff = nested_padding_x | minus: padding_x
+  assign margin_top = block.settings.margin_top | divided_by: 10.0
+  assign margin_bottom = block.settings.margin_bottom | divided_by: 10.0
+%}
+<style>
+  #HeaderDrawer_Menu-{{ block.id }} {
+    margin-top: {{ margin_top }}rem;
+    margin-bottom: {{ margin_bottom }}rem;
+  }
+  #HeaderDrawer_Menu-{{ block.id }} .menu-drawer__menu-item {
+    font-size: {{ block.settings.font_size | divided_by: 10.0 }}rem;
+    padding: {{ padding_y }}rem {{ padding_x }}rem;
+    gap: {{ block.settings.item_icon_spacing | divided_by: 100.0 }}em;
+  }
+  {% if nested_open_mode == 'accordion' %}
+    #HeaderDrawer_Menu-{{ block.id }} .menu-drawer__submenu .menu-drawer__menu-item {
+      font-size: {{ block.settings.nested_font_size | divided_by: 10.0 }}rem;
+      padding: {{ nested_padding_y }}rem {{ nested_padding_x }}rem;
+    }
+    #HeaderDrawer_Menu-{{ block.id }} .menu-drawer__submenu .menu-drawer__submenu .menu-drawer__menu-item {
+      padding-left: {{ nested_padding_x | plus: nested_padding_x_diff }}rem;
+    }
+  {% endif %}
+  #HeaderDrawer_Menu-{{ block.id }} .menu-drawer__navigation__separator {
+    opacity: {{ block.settings.separator_opacity }}%;
+    margin: 0 {{ padding_x }}rem;
+  }
+  #HeaderDrawer_Menu-{{ block.id }} summary .icon-caret,
+  #HeaderDrawer_Menu-{{ block.id }} summary .icon-plus {
+    right: {{ padding_x }}rem;
+  }
+  [data-rtl="true"] #HeaderDrawer_Menu-{{ block.id }} summary .icon-caret,
+  [data-rtl="true"] #HeaderDrawer_Menu-{{ block.id }} summary .icon-plus {
+    right: unset;
+    left: {{ padding_x }}rem;
+  }
+  #HeaderDrawer_Menu-{{ block.id }} .menu-drawer__menu-item .material-icon {
+    font-size: {{ block.settings.item_icon_scale | divided_by: 100.0 }}em;
+  }
+  #HeaderDrawer_Menu-{{ block.id }} .menu-drawer__menu-item img {
+    height: {{ block.settings.item_icon_scale | divided_by: 100.0 }}em;
+    width: auto;
+  }
+</style>
+
+<nav class="menu-drawer__navigation" id="HeaderDrawer_Menu-{{ block.id }}">
+  <ul class="menu-drawer__menu menu-drawer__menu--{{ nested_open_mode }} menu-drawer__menu--icon-{{ block.settings.nested_accordion_icon }} menu-drawer__menu--highlight-{{ block.settings.active_highlight }} has-submenu list-menu" role="list">
+    {%- for link in block.settings.menu.links -%}
+      {% liquid
+        assign icon_type = 'item_' | append: forloop.index | append: '_icon_type'
+        assign icon = 'item_' | append: forloop.index | append: '_icon'
+        assign filled_icon = 'item_' | append: forloop.index | append: '_filled_icon'
+        assign image_icon = 'item_' | append: forloop.index | append: '_image_icon'
+      %}
+      {% capture item_icon %}
+        {% if block.settings[icon_type] == 'icon' %}
+          {% render 'material-icon', icon: block.settings[icon], filled: block.settings[filled_icon] %}
+        {% elsif block.settings[icon_type] == 'image' and block.settings[image_icon] != blank %}
+          <img
+            src="{{ block.settings[image_icon] | image_url }}"
+            {% if block.settings[image_icon].alt != blank %}
+              alt="{{ block.settings[image_icon].alt | escape }}"
+            {% else %}
+              role="presentation"
+            {% endif %}
+            height="auto"
+            width="auto"
+            loading="lazy"
+          >
+        {% endif %}
+      {% endcapture %}
+      <li>
+        {%- if link.links != blank -%}
+          <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
+            <summary class="menu-drawer__menu-item font-{{ block.settings.font }} list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
+              {{ item_icon }}
+              {{ link.title | escape }}
+              {% render 'icon-arrow' %}
+              {% render 'icon-caret' %}
+              {% if nested_open_mode == 'accordion' and block.settings.nested_accordion_icon == 'plus' %}
+                {% render 'icon-plus' %}
+              {% endif %}
+            </summary>
+          </details>
+          <div id="link-{{ link.handle | escape }}" class="menu-drawer__submenu has-submenu gradient motion-reduce" tabindex="-1">
+            <div class="menu-drawer__inner-submenu">
+              {% if nested_open_mode == 'slide' %}
+                <button class="menu-drawer__close-button link link--text focus-inset" data-details="Details-menu-drawer-menu-item-{{ forloop.index }}" aria-expanded="true">
+                  {% render 'icon-arrow' %}
+                  {{ link.title | escape }}
+                </button>
+              {% endif %}
+              <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                {%- for childlink in link.links -%}
+                  <li>
+                    {%- if childlink.links != blank or block.settings.products_mega_menu_links contains link.title and block.settings.products_mega_menu_display_collection_products -%}
+                      <details id="Details-menu-drawer-submenu-{{ forloop.index }}">
+                        <summary class="menu-drawer__menu-item font-{{ block.settings.font }} link link--text list-menu__item focus-inset">
+                          {% if block.settings.products_mega_menu_links contains link.title and childlink.url contains 'collections' and block.settings.products_mega_menu_display_collection_images_on_mobile %}
+                            {% assign link_collection_handle = childlink.url | remove: '/collections/' %}
+                            {% assign link_current_collection = collections[link_collection_handle] %}
+                            {% if link_current_collection.featured_image != blank %}
+                              <div class="header__menu-item__preview-image header__menu-item__preview-image--mobile">
+                                <img
+                                  src="{{ link_current_collection.featured_image | image_url: width: 150 }}"
+                                  alt=""
+                                  width="auto"
+                                  height="auto"
+                                >
+                              </div>
+                            {% endif %}
+                          {% endif %}
+                          {{ childlink.title | escape }}
+                          {% render 'icon-arrow' %}
+                          {% render 'icon-caret' %}
+                          {% if nested_open_mode == 'accordion' and block.settings.nested_accordion_icon == 'plus' %}
+                            {% render 'icon-plus' %}
+                          {% endif %}
+                        </summary>
+                      </details>
+                      <div id="childlink-{{ childlink.handle | escape }}" class="menu-drawer__submenu has-submenu gradient motion-reduce">
+                        {% if nested_open_mode == 'slide' %}
+                          <button class="menu-drawer__close-button link link--text focus-inset" data-details="Details-menu-drawer-submenu-{{ forloop.index }}" aria-expanded="true">
+                            {% render 'icon-arrow' %}
+                            {{ childlink.title | escape }}
+                          </button>
+                        {% endif %}
+                        {% if block.settings.products_mega_menu_links contains link.title %}
+                          <ul class="products-mega-menu__cards products-mega-menu__cards--mobile">
+                            {% if block.settings.products_mega_menu_display_collection_products %}
+                              {% assign link_collection_handle = childlink.url | remove: '/collections/' %}
+                              {% assign link_current_collection = collections[link_collection_handle] %}
+                              {% for product in link_current_collection.products %}
+                                <li>
+                                  {% render 'card-product',
+                                    card_product: product,
+                                    media_aspect_ratio: 'square',
+                                    show_secondary_image: true,
+                                    extend_height: false,
+                                    custom_color_scheme: 'background-1'
+                                  %}
+                                </li>
+                              {% endfor %}
+                            {% endif %}
+                            {%- for grandchildlink in childlink.links -%}
+                              <li>
+                                {% if grandchildlink.url contains 'products' %}
+                                  {% assign product_handle = grandchildlink.url | remove: '/products/' %}
+                                  {% assign current_product = all_products[product_handle] %}
+                                  {% render 'card-product',
+                                    card_product: current_product,
+                                    media_aspect_ratio: 'square',
+                                    show_secondary_image: true,
+                                    extend_height: false,
+                                    custom_color_scheme: 'background-1'
+                                  %}
+                                {% elsif grandchildlink.url contains 'collections' %}
+                                  {% assign collection_handle = grandchildlink.url | remove: '/collections/' %}
+                                  {% assign current_collection = collections[collection_handle] %}
+                                  {% render 'card-collection',
+                                    card_collection: current_collection,
+                                    media_aspect_ratio: 'square',
+                                    extend_height: false,
+                                    columns: 1,
+                                    custom_color_scheme: 'background-1'
+                                  %}
+                                {% endif %}
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        {% else %}
+                          <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                            {%- for grandchildlink in childlink.links -%}
+                              <li>
+                                <a href="{{ grandchildlink.url }}" class="menu-drawer__menu-item font-{{ block.settings.font }} link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"{% if grandchildlink.current %} aria-current="page"{% endif %}>
+                                  {{ grandchildlink.title | escape }}
+                                </a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        {% endif %}
+                      </div>
+                    {%- else -%}
+                      <a href="{{ childlink.url }}" class="menu-drawer__menu-item font-{{ block.settings.font }} link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                        {{ childlink.title | escape }}
+                      </a>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          </div>
+        {%- else -%}
+          <a href="{{ link.url }}" class="menu-drawer__menu-item font-{{ block.settings.font }} list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"{% if link.current %} aria-current="page"{% endif %}>
+            {{ item_icon }}
+            {{ link.title | escape }}
+          </a>
+        {%- endif -%}
+        <div class="menu-drawer__navigation__separator">&nbsp</div>
+      </li>
+    {%- endfor -%}
+  </ul>
+</nav>
+
+{% schema %}
+{
+  "name": "Menu",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Menu"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Menu"
+    },
+    {
+      "type": "header",
+      "content": "Menu items"
+    },
+    {
+      "type": "select",
+      "id": "font",
+      "label": "Font",
+      "options": [
+        { "value": "body", "label": "Body" },
+        { "value": "body-bold", "label": "Body - bold" },
+        { "value": "headings", "label": "Headings" }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "select",
+      "id": "active_highlight",
+      "label": "Active link highlight",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "background", "label": "Background" },
+        { "value": "text_accent", "label": "Text accent color" },
+        { "value": "underline", "label": "Underline" },
+        { "value": "bold", "label": "Bold" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 12,
+      "max": 26,
+      "step": 1,
+      "label": "Font size",
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_y",
+      "min": 2,
+      "max": 25,
+      "step": 1,
+      "label": "Items vertical padding",
+      "default": 12,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_x",
+      "min": 10,
+      "max": 30,
+      "step": 2,
+      "label": "Items horizontal padding",
+      "default": 18,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "separator_opacity",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "label": "Items separator opacity",
+      "default": 3,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Nested menus"
+    },
+    {
+      "type": "select",
+      "id": "nested_open_mode",
+      "label": "Opening style",
+      "options": [
+        { "value": "accordion", "label": "Collapse" },
+        { "value": "slide", "label": "Slide" }
+      ],
+      "default": "accordion"
+    },
+    {
+      "type": "select",
+      "id": "nested_accordion_icon",
+      "label": "Collapse icon",
+      "options": [
+        { "value": "caret", "label": "Caret" },
+        { "value": "plus", "label": "Plus" }
+      ],
+      "default": "caret",
+      "visible_if": "{{ block.settings.nested_open_mode == 'accordion' }}"
+    },
+    {
+      "type": "range",
+      "id": "nested_font_size",
+      "min": 12,
+      "max": 26,
+      "step": 1,
+      "label": "Font size",
+      "default": 15,
+      "unit": "px",
+      "visible_if": "{{ block.settings.nested_open_mode == 'accordion' }}"
+    },
+    {
+      "type": "range",
+      "id": "nested_padding_y",
+      "min": 2,
+      "max": 25,
+      "step": 1,
+      "label": "Items vertical padding",
+      "default": 8,
+      "unit": "px",
+      "visible_if": "{{ block.settings.nested_open_mode == 'accordion' }}"
+    },
+    {
+      "type": "range",
+      "id": "nested_padding_x",
+      "min": 10,
+      "max": 40,
+      "step": 2,
+      "label": "Items horizontal padding",
+      "default": 28,
+      "unit": "px",
+      "visible_if": "{{ block.settings.nested_open_mode == 'accordion' }}"
+    },
+    {
+      "type": "header",
+      "content": "Products & Collections menu"
+    },
+    {
+      "type": "text",
+      "id": "products_mega_menu_links",
+      "label": "Links to display products & collections mega menu",
+      "info": "Labels of links separated by comma."
+    },
+    {
+      "type": "checkbox",
+      "id": "products_mega_menu_display_collection_products",
+      "label": "Display products that the collection contains",
+      "default": false,
+      "info": "If checked, every product from the sub-link collection will be displayed. Otherwise, add each individual product/collection as a nested link."
+    },
+    {
+      "type": "checkbox",
+      "id": "products_mega_menu_display_collection_images_on_mobile",
+      "label": "Display collection images",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Menu item icons",
+      "info": "Both settings are relative to item font size"
+    },
+    {
+      "type": "range",
+      "id": "item_icon_scale",
+      "min": 100,
+      "max": 250,
+      "step": 5,
+      "label": "Icon sclae",
+      "default": 135,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "item_icon_spacing",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Icon spacing",
+      "default": 50,
+      "unit": "%"
+    },
+    {
+      "type": "header",
+      "content": "Menu item #1",
+      "visible_if": "{{ block.settings.menu != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "item_1_icon_type",
+      "label": "Icon type",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "icon", "label": "Icon" },
+        { "value": "image", "label": "Image" }
+      ],
+      "default": "none",
+      "visible_if": "{{ block.settings.menu != blank }}"
+    },
+    {
+      "type": "text",
+      "id": "item_1_icon",
+      "default": "home",
+      "label": "Icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web).",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_1_icon_type == 'icon' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_1_filled_icon",
+      "default": false,
+      "label": "Filled icon",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_1_icon_type == 'icon' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "item_1_image_icon",
+      "label": "Image",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_1_icon_type == 'image' }}"
+    },
+
+    {
+      "type": "header",
+      "content": "Menu item 2"
+    },
+    {
+      "type": "select",
+      "id": "item_2_icon_type",
+      "label": "Icon type",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "icon", "label": "Icon" },
+        { "value": "image", "label": "Image" }
+      ],
+      "default": "none",
+      "visible_if": "{{ block.settings.menu != blank }}"
+    },
+    {
+      "type": "text",
+      "id": "item_2_icon",
+      "default": "storefront",
+      "label": "Icon",
+      "info": "[View all available icons](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.platform=web)",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_2_icon_type == 'icon' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_2_filled_icon",
+      "default": false,
+      "label": "Filled icon",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_2_icon_type == 'icon' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "item_2_image_icon",
+      "label": "Image",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_2_icon_type == 'image' }}"
+    },
+
+    {
+      "type": "header",
+      "content": "Menu item 3"
+    },
+    {
+      "type": "select",
+      "id": "item_3_icon_type",
+      "label": "Icon type",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "icon", "label": "Icon" },
+        { "value": "image", "label": "Image" }
+      ],
+      "default": "none",
+      "visible_if": "{{ block.settings.menu != blank }}"
+    },
+    {
+      "type": "text",
+      "id": "item_3_icon",
+      "default": "mail",
+      "label": "Icon",
+      "info": "[View all available icons](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.platform=web)",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_3_icon_type == 'icon' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_3_filled_icon",
+      "default": false,
+      "label": "Filled icon",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_3_icon_type == 'icon' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "item_3_image_icon",
+      "label": "Image",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_3_icon_type == 'image' }}"
+    },
+
+    {
+      "type": "header",
+      "content": "Menu item 4"
+    },
+    {
+      "type": "select",
+      "id": "item_4_icon_type",
+      "label": "Icon type",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "icon", "label": "Icon" },
+        { "value": "image", "label": "Image" }
+      ],
+      "default": "none",
+      "visible_if": "{{ block.settings.menu != blank }}"
+    },
+    {
+      "type": "text",
+      "id": "item_4_icon",
+      "default": "search",
+      "label": "Icon",
+      "info": "[View all available icons](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.platform=web)",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_4_icon_type == 'icon' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_4_filled_icon",
+      "default": false,
+      "label": "Filled icon",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_4_icon_type == 'icon' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "item_4_image_icon",
+      "label": "Image",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_4_icon_type == 'image' }}"
+    },
+
+    {
+      "type": "header",
+      "content": "Menu item 5"
+    },
+    {
+      "type": "select",
+      "id": "item_5_icon_type",
+      "label": "Icon type",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "icon", "label": "Icon" },
+        { "value": "image", "label": "Image" }
+      ],
+      "default": "none",
+      "visible_if": "{{ block.settings.menu != blank }}"
+    },
+    {
+      "type": "text",
+      "id": "item_5_icon",
+      "default": "favorite",
+      "label": "Icon",
+      "info": "[View all available icons](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.platform=web)",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_5_icon_type == 'icon' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_5_filled_icon",
+      "default": false,
+      "label": "Filled icon",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_5_icon_type == 'icon' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "item_5_image_icon",
+      "label": "Image",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_5_icon_type == 'image' }}"
+    },
+
+    {
+      "type": "header",
+      "content": "Menu item 6"
+    },
+    {
+      "type": "select",
+      "id": "item_6_icon_type",
+      "label": "Icon type",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "icon", "label": "Icon" },
+        { "value": "image", "label": "Image" }
+      ],
+      "default": "none",
+      "visible_if": "{{ block.settings.menu != blank }}"
+    },
+    {
+      "type": "text",
+      "id": "item_6_icon",
+      "default": "settings",
+      "label": "Icon",
+      "info": "[View all available icons](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.platform=web)",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_6_icon_type == 'icon' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_6_filled_icon",
+      "default": false,
+      "label": "Filled icon",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_6_icon_type == 'icon' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "item_6_image_icon",
+      "label": "Image",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_6_icon_type == 'image' }}"
+    },
+
+    {
+      "type": "header",
+      "content": "Menu item 7"
+    },
+    {
+      "type": "select",
+      "id": "item_7_icon_type",
+      "label": "Icon type",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "icon", "label": "Icon" },
+        { "value": "image", "label": "Image" }
+      ],
+      "default": "none",
+      "visible_if": "{{ block.settings.menu != blank }}"
+    },
+    {
+      "type": "text",
+      "id": "item_7_icon",
+      "default": "select_check_box",
+      "label": "Icon",
+      "info": "[View all available icons](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.platform=web)",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_7_icon_type == 'icon' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_7_filled_icon",
+      "default": false,
+      "label": "Filled icon",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_7_icon_type == 'icon' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "item_7_image_icon",
+      "label": "Image",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_7_icon_type == 'image' }}"
+    },
+
+    {
+      "type": "header",
+      "content": "Menu item 8"
+    },
+    {
+      "type": "select",
+      "id": "item_8_icon_type",
+      "label": "Icon type",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "icon", "label": "Icon" },
+        { "value": "image", "label": "Image" }
+      ],
+      "default": "none",
+      "visible_if": "{{ block.settings.menu != blank }}"
+    },
+    {
+      "type": "text",
+      "id": "item_8_icon",
+      "default": "select_check_box",
+      "label": "Icon",
+      "info": "[View all available icons](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.platform=web)",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_8_icon_type == 'icon' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "item_8_filled_icon",
+      "default": false,
+      "label": "Filled icon",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_8_icon_type == 'icon' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "item_8_image_icon",
+      "label": "Image",
+      "visible_if": "{{ block.settings.menu != blank and block.settings.item_8_icon_type == 'image' }}"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": "Menu"
+    }
+  ]
+}
+{% endschema %}

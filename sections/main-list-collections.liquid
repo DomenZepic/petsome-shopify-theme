@@ -1,0 +1,558 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  #collection-list-{{ section.id }} {
+    --grid-desktop-vertical-spacing: {{ section.settings.desktop_spacing }}px;
+    --grid-desktop-horizontal-spacing: {{ section.settings.desktop_spacing }}px;
+    --grid-mobile-vertical-spacing: {{ section.settings.mobile_spacing }}px;
+    --grid-mobile-horizontal-spacing: {{ section.settings.mobile_spacing }}px;
+  }
+  {% if section.settings.custon_styling %}
+    #collection-list-{{ section.id }} .collection-card-wrapper {
+      --collection-card-corner-radius: {{ section.settings.cards_corner_radius | divided_by: 10.0 }}rem;
+    }
+    #collection-list-{{ section.id }} .card__heading {
+      font-size: {{ section.settings.cards_mobile_title_size | divided_by: 10.0 }}rem;
+    }
+    @media screen and (min-width: 750px) {
+      #collection-list-{{ section.id }} .card__heading {
+        font-size: {{ section.settings.cards_desktop_title_size | divided_by: 10.0 }}rem;
+      }
+    }
+    {% assign title_over_color = section.settings.cards_title_over_color %}
+    #collection-list-{{ section.id }} .card--title-position-over .card__content--main {
+      --color-foreground: {{ title_over_color.red }}, {{ title_over_color.green }}, {{ title_over_color.blue }};
+    }
+  {% endif %}
+  {% assign cta_color = section.settings.cards_cta_color %}
+  #collection-list-{{ section.id }} .collection-card__cta {
+    --color-base-accent-1: {{ cta_color.red }}, {{ cta_color.green }}, {{ cta_color.blue }};
+    --color-base-outline-button-labels: {{ cta_color.red }}, {{ cta_color.green }}, {{ cta_color.blue }};
+    font-size: {{ section.settings.cards_mobile_cta_size | divided_by: 10.0 }}rem;
+    min-height: calc({{ section.settings.cards_cta_height | divided_by: 100.0 }}em + var(--buttons-border-width)* 2);
+    min-width: auto;
+    padding: 0 {{ section.settings.cards_cta_padding | divided_by: 100.0 }}em;
+    margin-top: {{ section.settings.cards_cta_top_margin | divided_by: 100.0 }}em;
+  }
+  @media screen and (min-width: 750px) {
+    #collection-list-{{ section.id }} .collection-card__cta {
+      font-size: {{ section.settings.cards_desktop_cta_size | divided_by: 10.0 }}rem;
+    }
+  }
+{%- endstyle -%}
+
+<div class="page-width{% if section.settings.desktop_page_width != 'normal' %} {{ section.settings.desktop_page_width }}{% endif %}{% if  section.settings.mobile_full_page %} mobile-full-page{% endif %} section-{{ section.id }}-padding">
+  {% if section.settings.title != blank %}
+    <h1
+      class="title title--primary title-wrapper--no-top-margin title-with-highlight"
+      style="--hightlight-color:{{ section.settings.title_highlight_color }}"
+    >
+      {{ section.settings.title }}
+    </h1>
+  {% endif %}
+  {%- liquid
+    case section.settings.sort
+      when 'products_high', 'products_low'
+        assign collections = collections | sort: 'all_products_count'
+      when 'date', 'date_reversed'
+        assign collections = collections | sort: 'published_at'
+    endcase
+
+    if section.settings.sort == 'products_high' or section.settings.sort == 'date_reversed' or section.settings.sort == 'alphabetical_reversed'
+      assign collections = collections | reverse
+    endif
+
+    assign moduloResult = 28 | modulo: section.settings.columns_desktop
+    assign paginate_by = 30
+    if moduloResult == 0
+      assign paginate_by = 28
+    endif
+  -%}
+  {%- paginate collections by paginate_by -%}
+    <ul
+      id="collection-list-{{ section.id }}"
+      class="collection-list main-collection-list grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
+      role="list"
+    >
+      {%- for collection in collections -%}
+        <li class="collection-list__item grid__item" data-mobile-columns="{{ section.settings.columns_mobile }}">
+          {% render 'card-collection',
+            card_collection: collection,
+            media_aspect_ratio: section.settings.image_ratio,
+            columns: 3,
+            custom_section_styling: section.settings.custon_styling
+          %}
+        </li>
+      {%- endfor -%}
+    </ul>
+    {% render 'pagination', paginate: paginate %}
+  {%- endpaginate -%}
+</div>
+{% schema %}
+{
+  "name": "t:sections.main-list-collections.name",
+  "class": "section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Collections",
+      "label": "Heading",
+      "info": "Bold certain words to highlight them with a different color."
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_color",
+      "label": "Heading highlight color",
+      "default": "#6D388B"
+    },
+    {
+      "type": "select",
+      "id": "sort",
+      "options": [
+        {
+          "value": "alphabetical",
+          "label": "Alphabetically, A-Z"
+        },
+        {
+          "value": "alphabetical_reversed",
+          "label": "Alphabetically, Z-A"
+        },
+        {
+          "value": "date_reversed",
+          "label": "Date, new to old"
+        },
+        {
+          "value": "date",
+          "label": "Date, old to new"
+        },
+        {
+          "value": "products_high",
+          "label": "Product count, high to low"
+        },
+        {
+          "value": "products_low",
+          "label": "Product count, low to high"
+        }
+      ],
+      "default": "alphabetical",
+      "label": "Sort collections by:"
+    },
+    {
+      "type": "header",
+      "content": "Cards"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Adapt to image"
+        },
+        {
+          "value": "portrait",
+          "label": "Portrait"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        }
+      ],
+      "default": "square",
+      "label": "Image ratio",
+      "info": "\"Circle\" only works with the Standard style & Title position set to Under the image."
+    },
+    {
+      "type": "checkbox",
+      "id": "custon_styling",
+      "default": false,
+      "label": "Enable custom section styling",
+      "info": "All the settings below will only be applied if this setting is checked."
+    },
+    {
+      "type": "select",
+      "id": "card_style",
+      "options": [
+        {
+          "value": "standard",
+          "label": "Standard"
+        },
+        {
+          "value": "card",
+          "label": "Card"
+        }
+      ],
+      "default": "standard",
+      "label": "Style",
+      "info": "Not applied of Title position is set to anything other than \"Under the image\"."
+    },
+    {
+      "type": "select",
+      "id": "cards_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "select",
+      "id": "card_text_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left",
+      "label": "Text alignment"
+    },
+    {
+      "type": "range",
+      "id": "cards_corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 10
+    },
+    {
+      "type": "select",
+      "id": "card_title_limited_lines",
+      "options": [
+        {
+          "value": "unlimited",
+          "label": "Don't limit"
+        },
+        {
+          "value": "1",
+          "label": "1 line"
+        },
+        {
+          "value": "2",
+          "label": "2 lines"
+        },
+        {
+          "value": "3",
+          "label": "3 lines"
+        }
+      ],
+      "default": "unlimited",
+      "label": "Limit long titles"
+    },
+    {
+      "type": "select",
+      "id": "card_title_position",
+      "options": [
+        {
+          "value": "over-top",
+          "label": "Over the image - top"
+        },
+        {
+          "value": "over-center",
+          "label": "Over the image - center"
+        },
+        {
+          "value": "over-bottom",
+          "label": "Over the image - bottom"
+        },
+        {
+          "value": "under",
+          "label": "Under the image"
+        }
+      ],
+      "default": "over-bottom",
+      "label": "Title position"
+    },
+    {
+      "type": "color",
+      "id": "cards_title_overlay_color",
+      "default": "#000000",
+      "label": "Title background color when over the image",
+      "info": "Displayed if Title position is set to one of the \"Over the image\" options"
+    },
+    {
+      "type": "range",
+      "id": "cards_title_overlay_opacity",
+      "label": "Title background color opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 40
+    },
+    {
+      "type": "color",
+      "id": "cards_title_over_color",
+      "default": "#ffffff",
+      "label": "Title text color when over the image",
+      "info": "Applied if Title position is set to one of the \"Over the image\" options"
+    },
+    {
+      "type": "range",
+      "id": "cards_desktop_title_size",
+      "min": 14,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "default": 24,
+      "label": "Desktop title size"
+    },
+    {
+      "type": "range",
+      "id": "cards_mobile_title_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "label": "Mobile title size"
+    },
+    {
+      "type": "checkbox",
+      "id": "cards_show_arrow",
+      "default": true,
+      "label": "Show link arrow next to the title/description"
+    },
+    {
+      "type": "header",
+      "content": "Cards CTA button"
+    },
+    {
+      "type": "text",
+      "id": "cards_cta_label",
+      "label": "CTA button label"
+    },
+    {
+      "type": "select",
+      "id": "cards_cta_style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Solid"
+        },
+        {
+          "value": "secondary",
+          "label": "Outline"
+        },
+        {
+          "value": "tertiary",
+          "label": "Text"
+        }
+      ],
+      "default": "secondary",
+      "label": "CTA button style"
+    },
+    {
+      "type": "checkbox",
+      "id": "cards_cta_full_width",
+      "default": false,
+      "label": "CTA button full width"
+    },
+    {
+      "type": "color",
+      "id": "cards_cta_color",
+      "label": "CTA button color",
+      "default": "#6D388B"
+    },
+    {
+      "type": "range",
+      "id": "cards_desktop_cta_size",
+      "min": 10,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 16,
+      "label": "CTA button desktop size"
+    },
+    {
+      "type": "range",
+      "id": "cards_mobile_cta_size",
+      "min": 8,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 14,
+      "label": "CTA button mobile size"
+    },
+    {
+      "type": "range",
+      "id": "cards_cta_height",
+      "min": 100,
+      "max": 300,
+      "step": 20,
+      "unit": "%",
+      "default": 220,
+      "label": "CTA button height",
+      "info": "Relative to font size"
+    },
+    {
+      "type": "range",
+      "id": "cards_cta_padding",
+      "min": 0,
+      "max": 400,
+      "step": 40,
+      "unit": "%",
+      "default": 200,
+      "label": "CTA button horizontal padding",
+      "info": "Relative to font size"
+    },
+    {
+      "type": "range",
+      "id": "cards_cta_top_margin",
+      "min": 0,
+      "max": 200,
+      "step": 20,
+      "unit": "%",
+      "default": 100,
+      "label": "CTA button top spacing",
+      "info": "Relative to font size"
+    },
+    {
+      "type": "header",
+      "content": "Desktop"
+    },
+    {
+      "type": "select",
+      "id": "desktop_page_width",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "desktop-full-page",
+          "label": "Full width"
+        },
+        {
+          "value": "desktop-full-page-no-padding",
+          "label": "Full width without side spacing"
+        }
+      ],
+      "default": "normal",
+      "label": "Page width"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 3,
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "desktop_spacing",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Spacing",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_full_page",
+      "label": "Full page width",
+      "default": false,
+      "info": "Recommended for layouts without any spacing between cards."
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "1 column"
+        },
+        {
+          "value": "2",
+          "label": "2 columns"
+        }
+      ],
+      "default": "2",
+      "label": "Number of columns"
+    },
+    {
+      "type": "range",
+      "id": "mobile_spacing",
+      "min": 0,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "label": "Spacing",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ]
+}
+{% endschema %}

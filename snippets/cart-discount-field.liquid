@@ -1,0 +1,55 @@
+{%- liquid
+  assign applied_codes_arr = ''
+  for app in cart.discount_applications
+    if app.type == 'discount_code'
+      if applied_codes_arr == ''
+        assign applied_codes_arr = app.title
+      else
+        assign applied_codes_arr = applied_codes_arr | append: ',' | append: app.title
+      endif
+    endif
+  endfor
+-%}
+<cart-discount-block
+  class="cart-discount display-block{% if block.settings.bottom_separator %} cart-discount--bottom-separator{% endif %}"
+  style="margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;"
+  data-applied-codes="{{ applied_codes_arr }}"
+  data-success-duration="{{ block.settings.success_msg_duration }}"
+  {%- if block.settings.success_msg != blank %} data-success-enabled="true"{% endif -%}
+  {{ block.shopify_attributes }}
+>
+  <form class="cart-discount-form">
+    <div class="cart-discount-form__row">
+      <div class="field">
+        <input
+          class="field__input"
+          autocomplete="off"
+          type="text"
+          name="cart-discount-field"
+          placeholder="{{ block.settings.placeholder }}"
+        >
+        <label class="field__label" for="cart-discount-field">{{ block.settings.placeholder }}</label>
+      </div>
+      <button class="button button--has-spinner cart-discount-form__submit" type="submit">
+        <span class="cart-discount-form__submit-label">{{ block.settings.btn_label }}</span>
+        <div class="loading-overlay__spinner hidden">
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            class="spinner"
+            viewBox="0 0 66 66"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+          </svg>
+        </div>
+      </button>
+    </div>
+    <p class="cart-discount-form__error cart-discount-form__error--empty">{{ block.settings.error_msg }}</p>
+    <p class="cart-discount-form__error cart-discount-form__error--invalid">{{ block.settings.error_not_applicable_msg }}</p>
+    <p class="cart-discount-form__error cart-discount-form__error--duplicate">{{ block.settings.error_already_applied_msg }}</p>
+    {%- if block.settings.success_msg != blank -%}
+      <p class="cart-discount-form__success" style="display:none;margin:0;font-size:1.4rem;color:#108a30;">{{ block.settings.success_msg }}</p>
+    {%- endif -%}
+  </form>
+</cart-discount-block>

@@ -1,0 +1,198 @@
+<div style="margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;" {{ block.shopify_attributes }}>
+  <style>
+    #TNC-Checkbox-{{ section.id }} {
+      font-size: {{ block.settings.checkbox_text_size | divided_by: 10.0 }}rem;
+    }
+   .tnc-checkbox-warning-{{ section.id }} {
+      font-size: {{ block.settings.warning_text_size | divided_by: 10.0 }}rem;
+      text-align: {{ block.settings.warning_alignment }};
+      color: {{ block.settings.warning_text_color }};
+    }
+    #TNC-Checkbox-{{ section.id }} svg {
+      color: rgb(var(--color-base-{{ block.settings.checkbox_color }}));
+    }
+  </style>
+  <tnc-chekcbox
+    id="TNC-Checkbox-{{ section.id }}"
+    class='tnc-chekcbox flex flex-align-center{% if block.settings.checkbox_alignment == 'center' %} center flex-justify-center{% endif %}'
+    data-checked="false"
+    data-disable-button="{{ block.settings.disable_checkout_button }}"
+    data-warning-text='{{ block.settings.warning_text }}'
+    data-warning-position='{{ block.settings.warning_position }}'
+    data-section="{{ section.id }}"
+  >
+    {% render 'checkbox-icons' %}
+    <p class="tnc-checkbox__text margin-0">
+      {{ block.settings.checkbox_text }}
+    </p>
+  </tnc-chekcbox>
+  <div class='tnc-checkbox-warning tnc-checkbox-warning-{{ section.id }} tnc-checkbox-warning--under-checkbox-{{ section.id }} hidden' style='margin-top: 0.4em;'></div>
+</div>
+
+{% schema %}
+{
+  "name": "Policies Checkbox",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Checkbox & text"
+    },
+    {
+      "type": "select",
+      "id": "checkbox_color",
+      "label": "Checkbox color",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "text"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "checkbox_text",
+      "label": "Text",
+      "default": "I agree to the terms & conditions."
+    },
+    {
+      "type": "range",
+      "id": "checkbox_text_size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 17,
+      "label": "Text size"
+    },
+    {
+      "type": "select",
+      "id": "checkbox_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Warning message",
+      "info": "Displayed when the user clicks on the checkout button, but the checkbox hasn't been checked."
+    },
+    {
+      "type": "select",
+      "id": "warning_position",
+      "label": "Position",
+      "options": [
+        {
+          "value": "under-checkbox",
+          "label": "Under the checkbox"
+        },
+        {
+          "value": "above-button",
+          "label": "Above the checkout button"
+        },
+        {
+          "value": "under-button",
+          "label": "Under the checkout button"
+        }
+      ],
+      "default": "under-button"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "warning_text",
+      "label": "Text",
+      "default": "You must agree to terms & conditions."
+    },
+    {
+      "type": "range",
+      "id": "warning_text_size",
+      "min": 12,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "default": 14,
+      "label": "Text size"
+    },
+    {
+      "type": "select",
+      "id": "warning_alignment",
+      "label": "Text alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "color",
+      "id": "warning_text_color",
+      "label": "Text color",
+      "default": "#ff0000"
+    },
+    {
+      "type": "checkbox",
+      "id": "disable_checkout_button",
+      "label": "Visually disable the checkout button",
+      "default": false,
+      "info": "Lowers the opacity of the checkout button if the checkbox is not checked."
+    },
+    {
+      "type": "header",
+      "content": "Block margin"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "label": "Top margin",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "label": "Bottom margin",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Terms & conditions"
+    }
+  ]
+}
+{% endschema %}

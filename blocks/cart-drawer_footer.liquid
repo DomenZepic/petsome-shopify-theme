@@ -1,0 +1,81 @@
+<div class="drawer__footer">
+  {% if block.blocks.size == 0 %}
+    <h3 class='h3 center'>To customize the cart footer, add blocks to the Cart Footer block</h3>
+  {% endif %}
+
+  {% content_for 'blocks' %}
+  <!-- end footer -->
+</div>
+
+{% schema %}
+{
+  "name": "Cart Footer",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "cart_discount-field"
+    },
+    {
+      "type": "cart_note"
+    },
+    {
+      "type": "cart_subtotals"
+    },
+    {
+      "type": "cart_checkout-btn"
+    },
+    {
+      "type": "cart_tnc-checkbox"
+    },
+    {
+      "type": "cart_product-upsells"
+    },
+    {
+      "type": "cart_gift"
+    },
+    {
+      "type": "text-with-icon"
+    },
+    {
+      "type": "image"
+    },
+    {
+      "type": "icon-with-text"
+    },
+    {
+      "type": "payment-badges"
+    },
+    {
+      "type": "custom-liquid"
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "heading"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "rating-stars"
+    },
+    {
+      "type": "trustpilot-stars"
+    },
+    {
+      "type": "review-avatars"
+    },
+    {
+      "type": "icon-with-content"
+    },
+    {
+      "type": "reviews"
+    },
+    {
+      "type": "container--cart"
+    }
+  ],
+  "settings": []
+}
+{% endschema %}

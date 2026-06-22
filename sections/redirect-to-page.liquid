@@ -1,0 +1,87 @@
+<style>
+  .redirect-wrapper {
+    max-width: 700px;
+    margin: 80px auto;
+    padding: 60px 40px;
+    text-align: center;
+    border: 2px dashed rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background: rgba(245, 245, 245, 0.6);
+  }
+  .redirect-wrapper h3 {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 500;
+  }
+  .redirect-wrapper span {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 1.25rem;
+    color: #006eff;
+    font-weight: 600;
+    word-break: break-all;
+  }
+  @media (max-width: 749px) {
+    .redirect-wrapper {
+      margin: 40px auto;
+      padding: 40px 20px;
+    }
+    .redirect-wrapper h3 {
+      font-size: 1.25rem;
+    }
+  }
+</style>
+
+{% if request.design_mode %}
+  <div class="redirect-wrapper">
+    {% if section.settings.link != blank %}
+      <h3>
+        In live website, this page will be redirected to:
+        <br>
+        <span>{{ section.settings.link }}</span>
+        <br>
+        <br>
+        <strong>NOTE:</strong> We recommend placing this section at the top of the page to minimize the redirection delay.
+      </h3>
+    {% else %}
+      <h3>
+        Select a page to automatically redirect to <strong>IN LIVE WEBSITE ONLY.</strong>
+        <br>
+        The redirection is not done in the theme editor.
+      </h3>
+    {% endif %}
+  </div>
+{% else %}
+  {% if section.settings.link != blank %}
+    <script>
+      window.location.href = '{{ section.settings.link }}';
+    </script>
+  {% else %}
+    <div class="redirect-wrapper">
+      <h3>
+        Select a page to automatically redirect to <strong>IN LIVE WEBSITE ONLY.</strong>
+        <br>
+        The redirection is not done in the theme editor.
+      </h3>
+    </div>
+  {% endif %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Redirect to page",
+  "settings": [
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Page to redirect to"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Redirect to page"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,706 @@
+{% liquid
+  assign item_count = 0
+  if block.settings.option_1_quantity != 0
+    assign item_count = item_count | plus: 1
+    assign last_offer_index = 1
+  endif
+  if block.settings.option_2_quantity != 0
+    assign item_count = item_count | plus: 1
+    assign last_offer_index = 2
+  endif
+  if block.settings.option_3_quantity != 0
+    assign item_count = item_count | plus: 1
+    assign last_offer_index = 3
+  endif
+  if block.settings.option_4_quantity != 0
+    assign item_count = item_count | plus: 1
+    assign last_offer_index = 4
+  endif
+
+  assign has_second_option = false
+  if product.options.size >= 2
+    assign has_second_option = true
+  endif
+
+  assign has_badge = false
+  if block.settings.option_1_badge != blank or block.settings.option_2_badge != blank or block.settings.option_3_badge != blank or block.settings.option_4_badge != blank
+    assign has_badge = true
+  endif
+
+  assign variants_available_arr = product.variants | map: 'available'
+  assign variants_option1_arr = product.variants | map: 'option1'
+  assign variants_option2_arr = product.variants | map: 'option2'
+  assign variants_option3_arr = product.variants | map: 'option3'
+
+  assign has_variants = false
+  assign base_price = product.selected_or_first_available_variant.price
+
+  assign product_form_id = 'product-form-' | append: section.id
+%}
+
+<style>
+  #quantity-breaks-{{ section.id }} .quantity-break__upsell {
+    --image-size: {{ block.settings.upsells_image_size | divided_by: 10.0 }}rem;
+    --text-size: {{ block.settings.upsells_text_size | divided_by: 10.0 }}rem;
+    --checkbox-size: {{ block.settings.upsells_text_size | times: 1.37 | divided_by: 10.0 }}rem;
+  }
+  {% if block.settings.colors == 'custom' %}
+    #quantity-breaks-{{ section.id }} .quantity-break {
+      border-style: {{ block.settings.non_selected_border_style }};
+      border-color: {{ block.settings.non_selected_border_color }};
+      background: {% if block.settings.non_selected_background_type == 'color' %}{{ block.settings.non_selected_background_color }}{% elsif block.settings.non_selected_background_type == 'gradient' %}{{ block.settings.non_selected_background_gradient }}{% else %}transparent{% endif %};
+      color: {{ block.settings.non_selected_text_color }};
+      --text-accent-color: {{ block.settings.non_selected_accent_color.red }}, {{ block.settings.non_selected_accent_color.green }}, {{ block.settings.non_selected_accent_color.blue }};
+    }
+    #quantity-breaks-{{ section.id }} .quantity-break__badge {
+      background: {{ block.settings.non_selected_badge_bg_color }};
+      color: {{ block.settings.non_selected_badge_text_color }};
+    }
+    #quantity-breaks-{{ section.id }} .quantity-break__benefit {
+      color: {{ block.settings.non_selected_benefit_text_color }};
+      background: {{ block.settings.non_selected_benefit_bg_color }};
+      border: solid 1px {{ block.settings.non_selected_benefit_border_color }};
+    }
+    #quantity-breaks-{{ section.id }} input:checked + .quantity-break {
+      border-style: {{ block.settings.selected_border_style }};
+      border-color: {{ block.settings.selected_border_color }};
+      background: {% if block.settings.selected_background_type == 'color' %}{{ block.settings.selected_background_color }}{% elsif block.settings.selected_background_type == 'gradient' %}{{ block.settings.selected_background_gradient }}{% else %}transparent{% endif %};
+      color: {{ block.settings.selected_text_color }};
+      --text-accent-color: {{ block.settings.selected_accent_color.red }}, {{ block.settings.selected_accent_color.green }}, {{ block.settings.selected_accent_color.blue }};
+    }
+    #quantity-breaks-{{ section.id }} input:checked + .quantity-break .quantity-break__badge {
+      background: {{ block.settings.selected_badge_bg_color }};
+      color: {{ block.settings.selected_badge_text_color }};
+    }
+    #quantity-breaks-{{ section.id }} input:checked + .quantity-break .quantity-break__benefit {
+      color: {{ block.settings.selected_benefit_text_color }};
+      background: {{ block.settings.selected_benefit_bg_color }};
+      border: solid 1px {{ block.settings.selected_benefit_border_color }};
+    }
+    #quantity-breaks-{{ section.id }} .quantity-break__upsell--style-primary {
+      background: {{ block.settings.upsells_primary_style_bg_color }};
+      color: {{ block.settings.upsells_primary_style_text_color }};
+    }
+    #quantity-breaks-{{ section.id }} .quantity-break__upsell--style-secondary {
+      background: {{ block.settings.upsells_secondary_style_bg_color }};
+      color: {{ block.settings.upsells_secondary_style_text_color }};
+    }
+    #quantity-breaks-{{ section.id }} .quantity-break__upsell--style-primary .quantity-break__upsell-badge {
+      background: {{ block.settings.upsells_primary_style_badge_bg }};
+      color: {{ block.settings.upsells_primary_style_badge_text_color }};
+    }
+    #quantity-breaks-{{ section.id }} .quantity-break__upsell--style-secondary .quantity-break__upsell-badge {
+      background: {{ block.settings.upsells_secondary_style_badge_bg }};
+      color: {{ block.settings.upsells_secondary_style_badge_text_color }};
+    }
+    #quantity-breaks-{{ section.id }} input:checked + .quantity-break .quantity-break__upsell--style-primary {
+      background: {{ block.settings.selected_upsells_primary_style_bg_color }};
+      color: {{ block.settings.selected_upsells_primary_style_text_color }};
+    }
+    #quantity-breaks-{{ section.id }} input:checked + .quantity-break .quantity-break__upsell--style-secondary {
+      background: {{ block.settings.selected_upsells_secondary_style_bg_color }};
+      color: {{ block.settings.selected_upsells_secondary_style_text_color }};
+    }
+    #quantity-breaks-{{ section.id }} input:checked + .quantity-break .quantity-break__upsell--style-primary .quantity-break__upsell-badge {
+      background: {{ block.settings.selected_upsells_primary_style_badge_bg }};
+      color: {{ block.settings.selected_upsells_primary_style_badge_text_color }};
+    }
+    #quantity-breaks-{{ section.id }} input:checked + .quantity-break .quantity-break__upsell--style-secondary .quantity-break__upsell-badge {
+      background: {{ block.settings.selected_upsells_secondary_style_badge_bg }};
+      color: {{ block.settings.selected_upsells_secondary_style_badge_text_color }};
+    }
+  {% endif %}
+</style>
+<quantity-breaks
+  class="quantity-breaks quantity-breaks--{{ block.settings.style }} accent-color-{{ block.settings.color_scheme }}{% if block.settings.space_images %} quantity-breaks--space-images{% endif %}{% if has_badge %} quantity-breaks--has-badge{% endif %}{% if block.settings.full_width_pickers %} quantity-breaks-full-width-pickers{% endif %} quantity-breaks--vertical-image-{{ block.settings.vertical_images_position }}{% if block.settings.display_selected_indicator %} quantity-breaks--show-indicator{% endif %}{% if block.settings.indicator_top == false %} quantity-breaks--indicator-bottom{% endif %}{% if block.settings.image_width == 100 %} quantity-breaks--max-width-images{% endif %}"
+  id="quantity-breaks-{{ section.id }}"
+  data-section="{{ section.id }}"
+  data-items="{{ item_count }}"
+  {% if has_second_option %}
+    data-update-unavailable="true"
+  {% endif %}
+  data-update-prices="{{ block.settings.update_prices }}"
+  data-update-pdp-prices="{{ block.settings.update_pdp_prices }}"
+  data-money-format="{{ shop.money_format | escape }}"
+  data-base-price="{{ product.selected_or_first_available_variant.price }}"
+  data-skip-non-existent="true"
+  data-skip-unavailable="{{ block.settings.skip_unavailable }}"
+  {% if block.settings.scroll_media_gallery == false %}
+    data-prevent-gallery-scroll="true"
+  {% endif %}
+  style="
+    --items-count:{{ item_count }};
+    --image-width:{{ block.settings.image_width }}%;
+    --border-radius:{{ block.settings.border_radius | divided_by: 10.0 }}rem;
+    --border-width:{{ block.settings.border_width | divided_by: 10.0 }}rem;
+    --text-accent-color:var(--color-base-{{ block.settings.accent_color }});
+    --vertical-items-align:{{ block.settings.vertical_items_align }};
+    {% if block.settings.hide_pickers_overlay %}--pickers-overlay-opacity:0;--pickers-hover-overlay-opacity:0;{% endif %}
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  "
+  {{ block.shopify_attributes }}
+>
+  {% if block.settings.headline != blank %}
+    <h3 class="quantity-breaks__title flex-center center">
+      <span></span>
+      <span>{{ block.settings.headline }}</span>
+      <span></span>
+    </h3>
+  {% endif %}
+  <div class="quantity-breaks-container">
+    {% for i in (1..4) %}
+      {% liquid
+        assign preselected = false
+        assign offer_index = forloop.index
+        case i
+          when 1
+            assign qty = block.settings.option_1_quantity
+            assign badge = block.settings.option_1_badge
+            assign badge_style = block.settings.option_1_badge_style
+            assign badge_color = block.settings.option_1_badge_color
+            assign image = block.settings.option_1_image
+            assign label = block.settings.option_1_label
+            assign benefit = block.settings.option_1_benefit
+            assign benefit_position = block.settings.option_1_benefit_position
+            assign benefit_style = block.settings.option_1_benefit_style
+            assign benefit_radius = block.settings.option_1_benefit_radius | divided_by: 100.0 | times: 1.33
+            assign benefit_color = block.settings.option_1_benefit_color
+            assign caption = block.settings.option_1_caption
+            assign percentage_off = block.settings.option_1_percentage_off_text
+            assign fixed_off = block.settings.option_1_fixed_amount_off
+            assign price_text = block.settings.option_1_price_text
+            assign compare_mode = block.settings.option_1_compare_price
+            assign compare_text = block.settings.option_1_compare_price_text
+            if block.settings.preselected == 'option_1'
+              assign preselected = true
+            endif
+          when 2
+            assign qty = block.settings.option_2_quantity
+            assign badge = block.settings.option_2_badge
+            assign badge_style = block.settings.option_2_badge_style
+            assign badge_color = block.settings.option_2_badge_color
+            assign image = block.settings.option_2_image
+            assign label = block.settings.option_2_label
+            assign benefit = block.settings.option_2_benefit
+            assign benefit_position = block.settings.option_2_benefit_position
+            assign benefit_style = block.settings.option_2_benefit_style
+            assign benefit_radius = block.settings.option_3_benefit_radius | divided_by: 100.0 | times: 1.33
+            assign benefit_color = block.settings.option_2_benefit_color
+            assign caption = block.settings.option_2_caption
+            assign percentage_off = block.settings.option_2_percentage_off_text
+            assign fixed_off = block.settings.option_2_fixed_amount_off
+            assign price_text = block.settings.option_2_price_text
+            assign compare_mode = block.settings.option_2_compare_price
+            assign compare_text = block.settings.option_2_compare_price_text
+            if block.settings.preselected == 'option_2'
+              assign preselected = true
+            endif
+          when 3
+            assign qty = block.settings.option_3_quantity
+            assign badge = block.settings.option_3_badge
+            assign badge_style = block.settings.option_3_badge_style
+            assign badge_color = block.settings.option_3_badge_color
+            assign image = block.settings.option_3_image
+            assign label = block.settings.option_3_label
+            assign benefit = block.settings.option_3_benefit
+            assign benefit_position = block.settings.option_3_benefit_position
+            assign benefit_style = block.settings.option_3_benefit_style
+            assign benefit_radius = block.settings.option_3_benefit_radius | divided_by: 100.0 | times: 1.33
+            assign benefit_color = block.settings.option_3_benefit_color
+            assign caption = block.settings.option_3_caption
+            assign percentage_off = block.settings.option_3_percentage_off_text
+            assign fixed_off = block.settings.option_3_fixed_amount_off
+            assign price_text = block.settings.option_3_price_text
+            assign compare_mode = block.settings.option_3_compare_price
+            assign compare_text = block.settings.option_3_compare_price_text
+            if block.settings.preselected == 'option_3'
+              assign preselected = true
+            endif
+          when 4
+            assign qty = block.settings.option_4_quantity
+            assign badge = block.settings.option_4_badge
+            assign badge_style = block.settings.option_4_badge_style
+            assign badge_color = block.settings.option_4_badge_color
+            assign image = block.settings.option_4_image
+            assign label = block.settings.option_4_label
+            assign benefit = block.settings.option_4_benefit
+            assign benefit_position = block.settings.option_4_benefit_position
+            assign benefit_style = block.settings.option_4_benefit_style
+            assign benefit_radius = block.settings.option_4_benefit_radius | divided_by: 100.0 | times: 1.33
+            assign benefit_color = block.settings.option_4_benefit_color
+            assign caption = block.settings.option_4_caption
+            assign percentage_off = block.settings.option_4_percentage_off_text
+            assign fixed_off = block.settings.option_4_fixed_amount_off
+            assign price_text = block.settings.option_4_price_text
+            assign compare_mode = block.settings.option_4_compare_price
+            assign compare_text = block.settings.option_4_compare_price_text
+            if block.settings.preselected == 'option_4'
+              assign preselected = true
+            endif
+        endcase
+
+        if qty > 0
+          assign percentage = percentage_off | plus: 0
+          assign percentage_left = 100 | minus: percentage | divided_by: 100.0
+          assign fixed_discount = fixed_off | times: 100
+
+          assign price = base_price | times: qty | times: percentage_left | minus: fixed_discount
+
+          assign compare_price = base_price
+          if compare_mode == 'compare_price' and product.selected_or_first_available_variant.compare_at_price > base_price
+            assign compare_price = product.selected_or_first_available_variant.compare_at_price
+          endif
+          assign compare_total = compare_price | times: qty
+          assign amount_saved = compare_total | minus: price
+          assign amount_saved_rounded = amount_saved | divided_by: 100.0 | round | times: 100
+          assign price_each = price | divided_by: qty
+          assign compare_each = compare_total | divided_by: qty
+        endif
+      %}
+      {% if qty > 0 %}
+        <input
+          id="quantity{{ i }}-{{ section.id }}"
+          aria-label="Quantity"
+          type="radio"
+          name="quantity"
+          value="{{ qty }}"
+          form="{{ product_form_id }}"
+          {% if preselected %}
+            checked
+          {% endif %}
+          data-input="input_{{ i }}"
+        >
+        <label
+          for="quantity{{ i }}-{{ section.id }}"
+          class="quantity-break{% if badge != blank %} quantity-break--badge{% else %} quantity-break--no-badge{% endif %} quantity-break--badge-style-{{ badge_style }} quantity-break--benefit-{{ benefit_position }}"
+          data-quantity="{{ qty }}"
+          data-input="input_{{ i }}"
+          data-base-compare-price="{{ compare_price }}"
+          data-percentage-left="{{ percentage_left }}"
+          data-fixed-discount="{{ fixed_discount }}"
+          data-compare-mode="{{ compare_mode }}"
+        >
+          <div class="quantity-break__wrapper">
+            {% if badge != blank %}
+              <p
+                class="quantity-break__badge dynamic-price variant-price-update color-{{ badge_color }}"
+                data-text="{{ badge }}"
+              >
+                {% render 'text-with-price',
+                  text: badge,
+                  quantity: qty,
+                  price: price,
+                  compare_price: compare_total,
+                  amount_saved: amount_saved,
+                  amount_saved_rounded: amount_saved_rounded,
+                  price_each: price_each,
+                  compare_price_each: compare_each
+                %}
+              </p>
+            {% endif %}
+
+            <div class="quantity-break__image-and-content">
+              {% if image != blank %}
+                <div class="quantity-break__image">
+                  <img
+                    src="{{ image | image_url }}"
+                    alt="{{ image.alt }}"
+                    width="auto"
+                    height="auto"
+                    loading="lazy"
+                  >
+                </div>
+              {% endif %}
+
+              <div class="quantity-break__content">
+                <div class="quantity-break__left">
+                  <span class="quantity-break__label">
+                    {% if label != blank %}
+                      <span
+                        class="quantity-break__label-text dynamic-price variant-price-update"
+                        data-text="{{ label }}"
+                      >
+                        {% render 'text-with-price',
+                          text: label,
+                          quantity: qty,
+                          price: price,
+                          compare_price: compare_total,
+                          amount_saved: amount_saved,
+                          amount_saved_rounded: amount_saved_rounded,
+                          price_each: price_each,
+                          compare_price_each: compare_each
+                        %}
+                      </span>
+                    {% endif %}
+                    {% if benefit != blank %}
+                      <span
+                        class="quantity-break__benefit quantity-break__benefit--{{ benefit_style }} accent-color-{{ benefit_color }} dynamic-price variant-price-update"
+                        data-text="{{ benefit }}"
+                        style="--benefit-border-radius:{{ benefit_radius }}em;"
+                      >
+                        {% render 'text-with-price',
+                          text: benefit,
+                          quantity: qty,
+                          price: price,
+                          compare_price: compare_total,
+                          amount_saved: amount_saved,
+                          amount_saved_rounded: amount_saved_rounded,
+                          price_each: price_each,
+                          compare_price_each: compare_each
+                        %}
+                      </span>
+                    {% endif %}
+                  </span>
+
+                  {% if caption != blank %}
+                    <span class="quantity-break__caption dynamic-price variant-price-update" data-text="{{ caption }}">
+                      {% render 'text-with-price',
+                        text: caption,
+                        quantity: qty,
+                        price: price,
+                        compare_price: compare_total,
+                        amount_saved: amount_saved,
+                        amount_saved_rounded: amount_saved_rounded,
+                        price_each: price_each,
+                        compare_price_each: compare_each
+                      %}
+                    </span>
+                  {% endif %}
+                </div>
+
+                <div class="quantity-break__right quantity-break__right--{{ block.settings.prices_layout }} dynamic-price">
+                  {% if price_text != blank %}
+                    <span class="quantity-break__price variant-price-update" data-text="{{ price_text }}">
+                      {% render 'text-with-price',
+                        text: price_text,
+                        quantity: qty,
+                        price: price,
+                        compare_price: compare_total,
+                        amount_saved: amount_saved,
+                        amount_saved_rounded: amount_saved_rounded,
+                        price_each: price_each,
+                        compare_price_each: compare_each
+                      %}
+                    </span>
+                  {% endif %}
+                  {% if compare_text != blank %}
+                    <span
+                      class="quantity-break__compare-price variant-price-update{% if compare_total <= price %} hidden{% endif %}"
+                      data-text="{{ compare_text }}"
+                    >
+                      {% render 'text-with-price',
+                        text: compare_text,
+                        quantity: qty,
+                        price: price,
+                        compare_price: compare_total,
+                        amount_saved: amount_saved,
+                        amount_saved_rounded: amount_saved_rounded,
+                        price_each: price_each,
+                        compare_price_each: compare_each
+                      %}
+                    </span>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            {% if product.has_only_default_variant == false and block.settings.enable_variant_selectors %}
+              {% if qty != 1 or block.settings.enable_variant_selectors_on_quantity_of_1 %}
+                <div class="quantity-break__variants">
+                  {% assign has_variants = true %}
+                  {% if block.settings.pickers_label != blank %}
+                    <span class="quantity-break__variants__label">
+                      {{ block.settings.pickers_label }}
+                    </span>
+                  {% endif %}
+                  {% for selectorItem in (1..qty) %}
+                    <div
+                      class="quantity-break__selector-item quantity-break__selector-item--variant-images-{{ block.settings.variant_images_position }}"
+                      data-select-index="{{ forloop.index0 }}"
+                      data-selected-id="{{ product.selected_or_first_available_variant.id }}"
+                    >
+                      <span class="quantity-break__selector-item__number">
+                        {{- block.settings.pickers_number_text | replace: '[index]', selectorItem -}}
+                      </span>
+                      {% for option in product.options_with_values %}
+                        <div class="select select--small no-background color-{{ settings.pickers_color_scheme }} accent-color-{{ settings.pickers_overlay_color }} accent-2-color-{{ settings.pickers_text_color }}">
+                          <select
+                            class="quantity-break__variant-select select__select variant-dropdown"
+                            name="options[{{ option.name | escape }}]"
+                            data-product-id="{{ product.selected_or_first_available_variant.id }}"
+                          >
+                            {% for value in option.values %}
+                              {% liquid
+                                assign option_class = ''
+                                assign option_disabled = true
+                                assign option_exists = false
+
+                                for option1_name in variants_option1_arr
+                                  case option.position
+                                    when 1
+                                      if variants_option1_arr[forloop.index0] == value
+                                        assign option_exists = true
+                                        if variants_available_arr[forloop.index0]
+                                          assign option_disabled = false
+                                        endif
+                                      endif
+                                    when 2
+                                      if option1_name == product.selected_or_first_available_variant.option1 and variants_option2_arr[forloop.index0] == value
+                                        assign option_exists = true
+                                        if variants_available_arr[forloop.index0]
+                                          assign option_disabled = false
+                                        endif
+                                      endif
+                                    when 3
+                                      if option1_name == product.selected_or_first_available_variant.option1 and variants_option2_arr[forloop.index0] == product.selected_or_first_available_variant.option2 and variants_option3_arr[forloop.index0] == value
+                                        assign option_exists = true
+                                        if variants_available_arr[forloop.index0]
+                                          assign option_disabled = false
+                                        endif
+                                      endif
+                                  endcase
+                                endfor
+
+                                assign hidden = false
+                                if option_exists == false
+                                  assign option_class = 'non-existent'
+                                  assign hidden = true
+                                elsif option_disabled == true
+                                  assign option_class = 'unavailable'
+                                  if block.settings.skip_unavailable
+                                    assign hidden = true
+                                  endif
+                                endif
+                              %}
+                              <option
+                                value="{{ value | escape }}"
+                                {% if option.selected_value == value %}
+                                  selected="selected"
+                                {% endif %}
+                                class="{{ option_class }}"
+                                {% if hidden %}
+                                  disabled hidden
+                                {% endif %}
+                              >
+                                {% if option_disabled %}
+                                  {{ 'products.product.value_unavailable' | t: option_value: value }}
+                                {% else %}
+                                  {{ value }}
+                                {% endif %}
+                              </option>
+                            {% endfor %}
+                          </select>
+                          {% render 'icon-caret' %}
+                        </div>
+                      {% endfor %}
+                      {% if block.settings.show_selected_variant_images %}
+                        <div class="quantity-break__selector-item__image media media--transparent">
+                          <img
+                            src="{{ product.selected_or_first_available_variant.featured_image | image_url: width: 600 }}"
+                            alt="{{ product.selected_or_first_available_variant.featured_image.alt }}"
+                            width="auto"
+                            height="auto"
+                            loading="lazy"
+                          >
+                        </div>
+                      {% endif %}
+                    </div>
+                  {% endfor %}
+                </div>
+              {% endif %}
+            {% endif %}
+          </div>
+
+          {% if block.settings.style == 'normal' %}
+            <quantity-break-upsells
+              class="quantity-break__upsells-container"
+              data-offer="{{ offer_index }}"
+              data-last-offer="{{ last_offer_index }}"
+              data-main-product="{{ product.handle }}"
+              data-save-local-storage="true"
+              data-section="{{ section.id }}"
+            >
+              {% for i in (1..3) %}
+                {% liquid
+                  case i
+                    when 1
+                      assign upsell_product = block.settings.upsell_1_product
+                      assign upsell_min_offer = block.settings.upsell_1_min_offer | plus: 0
+                      assign upsell_type = block.settings.upsell_1_type
+                      assign upsell_design = block.settings.upsell_1_design
+                      assign upsell_image = block.settings.upsell_1_image
+                      assign upsell_text_left = block.settings.upsell_1_text_left
+                      assign upsell_text_right = block.settings.upsell_1_text_right
+                      assign upsell_badge_text = block.settings.upsell_1_badge_text
+                      assign upsell_badge_color_scheme = block.settings.upsells_primary_style_badge_color_scheme
+                      if upsell_design == 'secondary'
+                        assign upsell_badge_color_scheme = block.settings.upsells_secondary_style_badge_color_scheme
+                      endif
+                      assign badge_position = block.settings.upsell_1_badge_position
+                    when 2
+                      assign upsell_product = block.settings.upsell_2_product
+                      assign upsell_min_offer = block.settings.upsell_2_min_offer | plus: 0
+                      assign upsell_type = block.settings.upsell_2_type
+                      assign upsell_design = block.settings.upsell_2_design
+                      assign upsell_image = block.settings.upsell_2_image
+                      assign upsell_text_left = block.settings.upsell_2_text_left
+                      assign upsell_text_right = block.settings.upsell_2_text_right
+                      assign upsell_badge_text = block.settings.upsell_2_badge_text
+                      assign upsell_badge_color_scheme = block.settings.upsells_primary_style_badge_color_scheme
+                      if upsell_design == 'secondary'
+                        assign upsell_badge_color_scheme = block.settings.upsells_secondary_style_badge_color_scheme
+                      endif
+                      assign badge_position = block.settings.upsell_2_badge_position
+                    when 3
+                      assign upsell_product = block.settings.upsell_3_product
+                      assign upsell_min_offer = block.settings.upsell_3_min_offer | plus: 0
+                      assign upsell_type = block.settings.upsell_3_type
+                      assign upsell_design = block.settings.upsell_3_design
+                      assign upsell_image = block.settings.upsell_3_image
+                      assign upsell_text_left = block.settings.upsell_3_text_left
+                      assign upsell_text_right = block.settings.upsell_3_text_right
+                      assign upsell_badge_text = block.settings.upsell_3_badge_text
+                      assign upsell_badge_color_scheme = block.settings.upsells_primary_style_badge_color_scheme
+                      if upsell_design == 'secondary'
+                        assign upsell_badge_color_scheme = block.settings.upsells_secondary_style_badge_color_scheme
+                      endif
+                      assign badge_position = block.settings.upsell_3_badge_position
+                  endcase
+
+                  case upsell_min_offer
+                    when 1
+                      assign upsell_min_quantity = block.settings.option_1_quantity
+                    when 2
+                      assign upsell_min_quantity = block.settings.option_2_quantity
+                    when 3
+                      assign upsell_min_quantity = block.settings.option_3_quantity
+                    when 4
+                      assign upsell_min_quantity = block.settings.option_4_quantity
+                    else
+                      assign upsell_min_quantity = 1
+                  endcase
+                %}
+                {% if upsell_product != blank and offer_index >= upsell_min_offer and upsell_product.available %}
+                  {% liquid
+                    assign is_checkbox = false
+                    if upsell_type contains 'checkbox'
+                      assign is_checkbox = true
+                    endif
+                    assign selected = true
+                    if upsell_type == 'checkbox'
+                      assign selected = false
+                    endif
+                  %}
+                  {% capture price %}{{ upsell_product.price | money }}{% endcapture %}
+                  {% capture compare_price %}<span style="text-decoration:line-through;">{{ upsell_product.compare_at_price | money }}</span>{% endcapture %}
+                  {% capture amount_saved %}{{ upsell_product.compare_at_price | minus: upsell_product.price | money }}{% endcapture %}
+                  {% capture amount_saved_rounded %}{{ upsell_product.compare_at_price | minus: upsell_product.price | divided_by: 100.0 | round | times: 100 | money }}{% endcapture %}
+                  {% capture rendered_text_left %}
+                    {{ upsell_text_left
+                      | replace: '[title]', upsell_product.title
+                      | replace: '[price]', price
+                      | replace: '[compare_price]', compare_price
+                      | replace: '[amount_saved]', amount_saved
+                      | replace: '[amount_saved_rounded]', amount_saved_rounded
+                    }}
+                  {% endcapture %}
+                  {% capture rendered_text_right %}
+                    {{ upsell_text_right
+                      | replace: '[title]', upsell_product.title
+                      | replace: '[price]', price
+                      | replace: '[compare_price]', compare_price
+                      | replace: '[amount_saved]', amount_saved
+                      | replace: '[amount_saved_rounded]', amount_saved_rounded
+                    }}
+                  {% endcapture %}
+                  {% capture rendered_badge_text %}
+                    {{ upsell_badge_text
+                      | replace: '[title]', upsell_product.title
+                      | replace: '[price]', price
+                      | replace: '[compare_price]', compare_price
+                      | replace: '[amount_saved]', amount_saved
+                      | replace: '[amount_saved_rounded]', amount_saved_rounded
+                    }}
+                  {% endcapture %}
+
+                  <div
+                    class="quantity-break__upsell quantity-break__upsell--{{ upsell_type }} quantity-break__upsell--style-{{ upsell_design }}{% if block.settings.hide_upsells_on_non_selected %} quantity-break__upsell--hide-inactive{% endif %} gift--product-{{ upsell_product.handle }}"
+                    data-toggle="{{ is_checkbox }}"
+                    data-min-offer="{{ upsell_min_offer }}"
+                    data-min-quantity="{{ upsell_min_quantity }}"
+                    data-selected="{{ selected }}"
+                    data-product="{{ upsell_product.first_available_variant.id }}"
+                    data-handle="{{ upsell_product.handle }}"
+                    data-type="{% if is_checkbox %}upsell{% else %}gift{% endif %}"
+                    style="
+                                            --badge-radius: {{ block.settings.upsells_badge_radius | divided_by: 100.0 | times: 1.33 }}em;
+                    "
+                  >
+                    <style>
+                      .cart-item--product-{{ upsell_product.handle }} .quantity{% unless is_checkbox %}, .cart-item--product-{{ upsell_product.handle }} cart-remove-button{% endunless %} {
+                        display: none;
+                      }
+                    </style>
+                    {% if is_checkbox %}
+                      {% render 'checkbox-icons' %}
+                    {% endif %}
+                    {% if upsell_image %}
+                      <div class="quantity-break__upsell-image media media--transparent flex-shrink-0">
+                        <img
+                          src="{{ upsell_image | image_url }}"
+                          loading="lazy"
+                          width="auto"
+                          height="auto"
+                          alt="{{ upsell_product.title | escape }}"
+                        >
+                      </div>
+                    {% endif %}
+                    <div class="quantity-break__upsell-content">
+                      {% if rendered_text_left != blank %}
+                        <div class="quantity-break__upsell-text">
+                          {{ rendered_text_left }}
+                        </div>
+                      {% endif %}
+                      {% if rendered_badge_text != blank %}
+                        <div class="quantity-break__upsell-badge quantity-break__upsell-badge--{{ badge_position }} color-{{ upsell_badge_color_scheme }}">
+                          {{ rendered_badge_text }}
+                        </div>
+                      {% endif %}
+                      {% if rendered_text_right != blank %}
+                        <div class="quantity-break__upsell-text quantity-break__upsell-text-right">
+                          {{ rendered_text_right }}
+                        </div>
+                      {% endif %}
+                    </div>
+                    <product-form class="hidden" data-is-cart-upsell="true">
+                      {% assign upsell_product_form_id = 'GiftUpsellForm-'
+                        | append: section.id
+                        | append: block.id
+                        | append: offer_index
+                        | append: forloop.index
+                      %}
+                      {%- form 'product',
+                        upsell_product,
+                        id: upsell_product_form_id,
+                        class: 'form',
+                        novalidate: 'novalidate',
+                        data-type: 'add-to-cart-form'
+                      -%}
+                        <input type="hidden" name="id" value="{{ upsell_product.first_available_variant.id }}">
+                        <button type="submit">+</button>
+                      {%- endform -%}
+                    </product-form>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </quantity-break-upsells>
+          {% endif %}
+        </label>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <script data-has-variants="{{ has_variants }}" type="application/json">
+    {{ product.variants | json }}
+  </script>
+</quantity-breaks>

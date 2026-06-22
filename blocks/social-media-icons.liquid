@@ -1,0 +1,276 @@
+{% liquid
+  assign gap = block.settings.gap | divided_by: 10.0
+  assign icon_size = block.settings.icon_size | divided_by: 10.0
+  assign radius = block.settings.radius | divided_by: 2.0
+  assign padding = block.settings.padding | divided_by: 100.0
+
+  assign background = 'rgb(var(--color-base-' | append: block.settings.background | append: '))'
+  assign bg_opacity = block.settings.bg_opacity | divided_by: 100.0
+  if block.settings.background == 'overlay'
+    assign background = 'rgba(var(--color-foreground), ' | append: bg_opacity | append: ')'
+  elsif block.settings.background == 'custom'
+    assign background = block.settings.bg_color
+  elsif block.settings.background == 'gradient'
+    assign background = block.settings.bg_gradient
+  endif
+
+  assign border_color = 'rgb(var(--color-base-' | append: block.settings.border_color | append: '))'
+  if block.settings.border_color == 'custom'
+    assign border_color = block.settings.custom_border_color
+  endif
+%}
+
+<style>
+  #Socials-{{ block.id }} {
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  }
+  #Socials-{{ block.id }} ul {
+    justify-content: {{ block.settings.alignment }};
+    gap: {{ gap }}rem;
+  }
+  #Socials-{{ block.id }} .link {
+    font-size: {{ icon_size }}rem;
+    border-radius: {{ radius }}%;
+    padding: {{ padding }}em;
+    background: {{ background }};
+    {% if block.settings.icons_color != 'none' %}
+      {% if block.settings.icons_color == 'custom' %}
+        --color-foreground: {{ block.settings.custom_icon_color.red }}, {{ block.settings.custom_icon_color.green }}, {{ block.settings.custom_icon_color.blue }};
+      {% else %}
+        --color-foreground: var(--color-base-{{ block.settings.icons_color }});
+      {% endif %}
+      color: rgb(var(--color-foreground));
+    {% endif %}
+    border: {{ block.settings.border_width }}px {{ block.settings.border }} {{ border_color }};
+  }
+</style>
+<div id="Socials-{{ block.id }}" class="socials-v2">
+  {% render 'social-icons' %}
+</div>
+
+{% schema %}
+{
+  "name": "Social media icons",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.footer.settings.header__2.info"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        },
+        {
+          "value": "space-evenly",
+          "label": "Spread out evenly"
+        }
+      ],
+      "default": "center",
+      "label": "Alignment"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 10,
+      "label": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 12,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "label": "Icons size"
+    },
+    {
+      "type": "range",
+      "id": "radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100,
+      "label": "Icons corner radius"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "min": 20,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 65,
+      "label": "Icons padding"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "select",
+      "id": "icons_color",
+      "label": "Icons color",
+      "options": [
+        { "value": "none", "label": "Same as container text" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "text", "label": "Text" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "custom_icon_color",
+      "label": "Custom icons color",
+      "default": "#FF0000",
+      "visible_if": "{{ block.settings.icons_color == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "overlay", "label": "Low opacity icon color" },
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "text", "label": "Text" },
+        { "value": "custom", "label": "Custom" },
+        { "value": "gradient", "label": "Gradient" }
+      ],
+      "default": "overlay"
+    },
+    {
+      "type": "range",
+      "id": "bg_opacity",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "%",
+      "label": "Background opacity",
+      "default": 8,
+      "visible_if": "{{ block.settings.background == 'overlay' }}"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#F4E1FF",
+      "visible_if": "{{ block.settings.background == 'custom' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_gradient",
+      "label": "Background gradient color",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ block.settings.background == 'gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "border_color",
+      "label": "Border color",
+      "options": [
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "text", "label": "Text" },
+        { "value": "custom", "label": "Custom" }
+      ],
+      "default": "text",
+      "visible_if": "{{ block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_border_color",
+      "label": "Custom border color",
+      "default": "#FF0000",
+      "visible_if": "{{ block.settings.border_color == 'custom' and block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 21
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 21
+    }
+  ],
+  "presets": [
+    {
+      "name": "Social media icons"
+    }
+  ]
+}
+{% endschema %}

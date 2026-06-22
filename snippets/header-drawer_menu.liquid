@@ -1,0 +1,159 @@
+{% assign nested_open_mode = 'slide' %}
+
+<nav class="menu-drawer__navigation">
+  <ul class="menu-drawer__menu menu-drawer__menu--{{ nested_open_mode }} menu-drawer__menu--icon-{{ section.settings.nested_accordion_icon }} menu-drawer__menu--highlight-{{ section.settings.active_highlight }} has-submenu list-menu" role="list">
+    {%- for link in section.settings.menu.links -%}
+      {% liquid
+        assign icon_type = 'item_' | append: forloop.index | append: '_icon_type'
+        assign icon = 'item_' | append: forloop.index | append: '_icon'
+        assign filled_icon = 'item_' | append: forloop.index | append: '_filled_icon'
+        assign image_icon = 'item_' | append: forloop.index | append: '_image_icon'
+      %}
+      {% capture item_icon %}
+        {% if section.settings[icon_type] == 'icon' %}
+          {% render 'material-icon', icon: section.settings[icon], filled: section.settings[filled_icon] %}
+        {% elsif section.settings[icon_type] == 'image' and section.settings[image_icon] != blank %}
+          <img
+            src="{{ section.settings[image_icon] | image_url }}"
+            {% if section.settings[image_icon].alt != blank %}
+              alt="{{ section.settings[image_icon].alt | escape }}"
+            {% else %}
+              role="presentation"
+            {% endif %}
+            height="auto"
+            width="auto"
+            loading="lazy"
+          >
+        {% endif %}
+      {% endcapture %}
+      <li>
+        {%- if link.links != blank -%}
+          <details id="Details-menu-drawer-menu-item-{{ forloop.index }}">
+            <summary class="menu-drawer__menu-item font-{{ section.settings.font }} list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}">
+              {{ item_icon }}
+              {{ link.title | escape }}
+              {% render 'icon-arrow' %}
+              {% render 'icon-caret' %}
+              {% if nested_open_mode == 'accordion' and section.settings.nested_accordion_icon == 'plus' %}
+                {% render 'icon-plus' %}
+              {% endif %}
+            </summary>
+          </details>
+          <div id="link-{{ link.handle | escape }}" class="menu-drawer__submenu has-submenu gradient motion-reduce" tabindex="-1">
+            <div class="menu-drawer__inner-submenu">
+              {% if nested_open_mode == 'slide' %}
+                <button class="menu-drawer__close-button link link--text focus-inset" data-details="Details-menu-drawer-menu-item-{{ forloop.index }}" aria-expanded="true">
+                  {% render 'icon-arrow' %}
+                  {{ link.title | escape }}
+                </button>
+              {% endif %}
+              <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                {%- for childlink in link.links -%}
+                  <li>
+                    {%- if childlink.links != blank or section.settings.products_mega_menu_links contains link.title and section.settings.products_mega_menu_display_collection_products -%}
+                      <details id="Details-menu-drawer-submenu-{{ forloop.index }}">
+                        <summary class="menu-drawer__menu-item font-{{ section.settings.font }} link link--text list-menu__item focus-inset">
+                          {% if section.settings.products_mega_menu_links contains link.title and childlink.url contains 'collections' and section.settings.products_mega_menu_display_collection_images_on_mobile %}
+                            {% assign link_collection_handle = childlink.url | remove: '/collections/' %}
+                            {% assign link_current_collection = collections[link_collection_handle] %}
+                            {% if link_current_collection.featured_image != blank %}
+                              <div class="header__menu-item__preview-image header__menu-item__preview-image--mobile">
+                                <img
+                                  src="{{ link_current_collection.featured_image | image_url: width: 150 }}"
+                                  alt=""
+                                  width="auto"
+                                  height="auto"
+                                >
+                              </div>
+                            {% endif %}
+                          {% endif %}
+                          {{ childlink.title | escape }}
+                          {% render 'icon-arrow' %}
+                          {% render 'icon-caret' %}
+                          {% if nested_open_mode == 'accordion' and section.settings.nested_accordion_icon == 'plus' %}
+                            {% render 'icon-plus' %}
+                          {% endif %}
+                        </summary>
+                      </details>
+                      <div id="childlink-{{ childlink.handle | escape }}" class="menu-drawer__submenu has-submenu gradient motion-reduce">
+                        {% if nested_open_mode == 'slide' %}
+                          <button class="menu-drawer__close-button link link--text focus-inset" data-details="Details-menu-drawer-submenu-{{ forloop.index }}" aria-expanded="true">
+                            {% render 'icon-arrow' %}
+                            {{ childlink.title | escape }}
+                          </button>
+                        {% endif %}
+                        {% if section.settings.products_mega_menu_links contains link.title %}
+                          <ul class="products-mega-menu__cards products-mega-menu__cards--mobile">
+                            {% if section.settings.products_mega_menu_display_collection_products %}
+                              {% assign link_collection_handle = childlink.url | remove: '/collections/' %}
+                              {% assign link_current_collection = collections[link_collection_handle] %}
+                              {% for product in link_current_collection.products %}
+                                <li>
+                                  {% render 'card-product',
+                                    card_product: product,
+                                    media_aspect_ratio: 'square',
+                                    show_secondary_image: true,
+                                    extend_height: false,
+                                    custom_color_scheme: 'background-1'
+                                  %}
+                                </li>
+                              {% endfor %}
+                            {% endif %}
+                            {%- for grandchildlink in childlink.links -%}
+                              <li>
+                                {% if grandchildlink.url contains 'products' %}
+                                  {% assign product_handle = grandchildlink.url | remove: '/products/' %}
+                                  {% assign current_product = all_products[product_handle] %}
+                                  {% render 'card-product',
+                                    card_product: current_product,
+                                    media_aspect_ratio: 'square',
+                                    show_secondary_image: true,
+                                    extend_height: false,
+                                    custom_color_scheme: 'background-1'
+                                  %}
+                                {% elsif grandchildlink.url contains 'collections' %}
+                                  {% assign collection_handle = grandchildlink.url | remove: '/collections/' %}
+                                  {% assign current_collection = collections[collection_handle] %}
+                                  {% render 'card-collection',
+                                    card_collection: current_collection,
+                                    media_aspect_ratio: 'square',
+                                    extend_height: false,
+                                    columns: 1,
+                                    custom_color_scheme: 'background-1'
+                                  %}
+                                {% endif %}
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        {% else %}
+                          <ul class="menu-drawer__menu list-menu" role="list" tabindex="-1">
+                            {%- for grandchildlink in childlink.links -%}
+                              <li>
+                                <a href="{{ grandchildlink.url }}" class="menu-drawer__menu-item font-{{ section.settings.font }} link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}"{% if grandchildlink.current %} aria-current="page"{% endif %}>
+                                  {{ grandchildlink.title | escape }}
+                                </a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        {% endif %}
+                      </div>
+                    {%- else -%}
+                      <a href="{{ childlink.url }}" class="menu-drawer__menu-item font-{{ section.settings.font }} link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                        {{ childlink.title | escape }}
+                      </a>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </div>
+          </div>
+        {%- else -%}
+          <a href="{{ link.url }}" class="menu-drawer__menu-item font-{{ section.settings.font }} list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}"{% if link.current %} aria-current="page"{% endif %}>
+            {{ item_icon }}
+            {{ link.title | escape }}
+          </a>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+  </ul>
+</nav>

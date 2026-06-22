@@ -1,0 +1,218 @@
+{% liquid
+  assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src'
+
+  assign has_filtering = false
+  if section.settings.variant_image_filtering != 'none'
+    assign has_filtering = true
+  endif
+
+  assign hide_variants_enabled = false
+  if section.settings.hide_variants and has_filtering != true
+    assign hide_variants_enabled = true
+  endif
+
+  if hide_variants_enabled and variant_images.size == product.media.size
+    assign single_media_visible = true
+  endif
+
+  assign media_count = product.media.size
+  if hide_variants_enabled and media_count > 1 and variant_images.size > 0
+    assign media_count = media_count | minus: variant_images.size | plus: 1
+  endif
+
+  if media_count == 1 or single_media_visible
+    assign single_media_visible_mobile = true
+  endif
+
+  assign hide_mobile_slider = false
+  if media_count == 0 or single_media_visible_mobile or section.settings.mobile_thumbnails_position != 'hidden' and media_count < 3
+    assign hide_mobile_slider = true
+  endif
+
+  assign has_mobile_thumbnails = false
+  if hide_mobile_slider == false and section.settings.mobile_thumbnails_position == 'bottom'
+    assign has_mobile_thumbnails = true
+  endif
+%}
+
+<div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}{% if section.settings.mobile_pagination == 'dots_overlay' or section.settings.mobile_pagination == 'hidden' or hide_mobile_slider %} product__info-wrapper--top-padding{% endif %}{% if has_mobile_thumbnails %} product__info-wrapper--top-padding-small{% endif %}">
+  <product-info
+    id="ProductInfo-{{ section.id }}"
+    data-section="{{ section.id }}"
+    data-url="{{ product.url }}"
+    class="product__info-container main-product__info-container block-margins"
+  >
+    {%- assign product_form_id = 'product-form-' | append: section.id -%}
+
+    {% if section.settings.enable_breadcrumbs and section.settings.breadcrumbs_position == 'above_first_block' %}
+      {% render 'product-breadcrumbs', product: product, section: section %}
+    {% endif %}
+
+    {% content_for 'blocks' %}
+
+    <a href="{{ product.url }}" class="link product__view-details animate-arrow">
+      {{ 'products.product.view_full_details' | t }}
+      {% render 'icon-arrow' %}
+    </a>
+  </product-info>
+</div>
+
+{% schema %}
+{
+  "name": "Details",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "custom-liquid"
+    },
+    {
+      "type": "image"
+    },
+    {
+      "type": "json-animation"
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "button"
+    },
+    {
+      "type": "atc-button"
+    },
+    {
+      "type": "heading"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "product_title"
+    },
+    {
+      "type": "rating-stars"
+    },
+    {
+      "type": "product_clickable-discount"
+    },
+    {
+      "type": "product_price"
+    },
+    {
+      "type": "product_subscription"
+    },
+    {
+      "type": "product_quantity-selector"
+    },
+    {
+      "type": "product_buy-buttons"
+    },
+    {
+      "type": "product_product-variant-picker-block"
+    },
+    {
+      "type": "product_sticky-atc"
+    },
+    {
+      "type": "product_description"
+    },
+    {
+      "type": "product_tabs"
+    },
+    {
+      "type": "product_estimated-shipping"
+    },
+    {
+      "type": "product_shipping-checkpoints"
+    },
+    {
+      "type": "countdown-timer"
+    },
+    {
+      "type": "product_inventory"
+    },
+    {
+      "type": "collapsible-row"
+    },
+    {
+      "type": "video"
+    },
+    {
+      "type": "slider"
+    },
+    {
+      "type": "container--product"
+    },
+    {
+      "type": "media-slider"
+    },
+    {
+      "type": "trustpilot-stars"
+    },
+    {
+      "type": "product_sku"
+    },
+    {
+      "type": "product_share-button"
+    },
+    {
+      "type": "product_popup"
+    },
+    {
+      "type": "product_sizing-chart"
+    },
+    {
+      "type": "product_upsell-block--product-info"
+    },
+    {
+      "type": "payment-badges"
+    },
+    {
+      "type": "product_urgency"
+    },
+    {
+      "type": "product_emoji-benefits"
+    },
+    {
+      "type": "product_bundle-offer"
+    },
+    {
+      "type": "product_quantity-gifts"
+    },
+    {
+      "type": "product_scroll-buttons"
+    },
+    {
+      "type": "review-avatars"
+    },
+    {
+      "type": "icon-with-content"
+    },
+    {
+      "type": "text-with-icon"
+    },
+    {
+      "type": "icon-with-text"
+    },
+    {
+      "type": "product_complementary"
+    },
+    {
+      "type": "reviews"
+    },
+    {
+      "type": "product-rating"
+    },
+    {
+      "type": "product_custom-product-field"
+    },
+    {
+      "type": "bestseller-badge"
+    }
+  ],
+  "settings": []
+}
+{% endschema %}

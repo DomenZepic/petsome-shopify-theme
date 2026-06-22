@@ -1,0 +1,145 @@
+{% liquid
+  assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src'
+
+  assign has_filtering = false
+  if section.settings.variant_image_filtering != 'none'
+    assign has_filtering = true
+  endif
+
+  assign hide_variants_enabled = false
+  if section.settings.hide_variants and has_filtering != true
+    assign hide_variants_enabled = true
+  endif
+
+  if hide_variants_enabled and variant_images.size == product.media.size
+    assign single_media_visible = true
+  endif
+
+  assign media_count = product.media.size
+  if hide_variants_enabled and media_count > 1 and variant_images.size > 0
+    assign media_count = media_count | minus: variant_images.size | plus: 1
+  endif
+
+  if media_count == 1 or single_media_visible
+    assign single_media_visible_mobile = true
+  endif
+
+  assign hide_mobile_slider = false
+  if media_count == 0 or single_media_visible_mobile or section.settings.mobile_thumbnails_position != 'hidden' and media_count < 3
+    assign hide_mobile_slider = true
+  endif
+
+  assign has_mobile_thumbnails = false
+  if hide_mobile_slider == false and section.settings.mobile_thumbnails_position == 'bottom'
+    assign has_mobile_thumbnails = true
+  endif
+%}
+
+<div class="grid__item product__media-wrapper{% if section.settings.media_position == 'right' %} medium-hide large-up-hide{% endif %}{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}">
+  {% content_for 'blocks' %}
+</div>
+
+{%- if section.settings.media_position == 'right' -%}
+  {% comment %} Duplicate gallery to display after product content on tablet/desktop breakpoint {% endcomment %}
+  <div class="grid__item product__media-wrapper small-hide">
+    {% for block in block.blocks %}
+      {% if block.type == 'main-product_media-gallery' %}
+        {% render 'product-media-gallery', variant_images: variant_images, is_duplicate: true, has_filtering: has_filtering %}
+      {% endif %}
+    {% endfor %}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Gallery",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "main-product_media-gallery"
+    },
+    {
+      "type": "main-product_title-decorative"
+    },
+    {
+      "type": "custom-liquid"
+    },
+    {
+      "type": "image"
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "heading"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "button"
+    },
+    {
+      "type": "atc-button"
+    },
+    {
+      "type": "rating-stars"
+    },
+    {
+      "type": "trustpilot-stars"
+    },
+    {
+      "type": "review-avatars"
+    },
+    {
+      "type": "icon-with-content"
+    },
+    {
+      "type": "text-with-icon"
+    },
+    {
+      "type": "icon-with-text"
+    },
+    {
+      "type": "payment-badges"
+    },
+    {
+      "type": "reviews"
+    },
+    {
+      "type": "product_scroll-buttons"
+    },
+    {
+      "type": "product_urgency"
+    },
+    {
+      "type": "product_estimated-shipping"
+    },
+    {
+      "type": "product_shipping-checkpoints"
+    },
+    {
+      "type": "collapsible-row"
+    },
+    {
+      "type": "video"
+    },
+    {
+      "type": "slider"
+    },
+    {
+      "type": "media-slider"
+    },
+    {
+      "type": "json-animation"
+    },
+    {
+      "type": "container--product"
+    },
+    {
+      "type": "bestseller-badge"
+    }
+  ],
+  "settings": []
+}
+{% endschema %}

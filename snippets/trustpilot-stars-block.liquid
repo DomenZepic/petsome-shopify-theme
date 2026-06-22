@@ -1,0 +1,104 @@
+{%- liquid
+  assign tp_width = block.settings.width | default: 'full'
+  assign tp_alignment = block.settings.alignment | default: 'flex-start'
+  assign tp_bg_type = block.settings.bg_type | default: 'none'
+  assign tp_border_thickness = block.settings.border_thickness | default: 0
+  assign tp_enable_shadow = block.settings.enable_shadow | default: false
+  assign tp_has_styling = false
+  if tp_bg_type != 'none' or tp_border_thickness > 0 or tp_enable_shadow
+    assign tp_has_styling = true
+  endif
+
+  assign tp_width_css = '100%'
+  assign tp_ml = '0'
+  assign tp_mr = '0'
+  if tp_width == 'fit_content'
+    assign tp_width_css = 'fit-content'
+    case tp_alignment
+      when 'flex-start'
+        assign tp_ml = '0'
+        assign tp_mr = 'auto'
+      when 'center'
+        assign tp_ml = 'auto'
+        assign tp_mr = 'auto'
+      when 'flex-end'
+        assign tp_ml = 'auto'
+        assign tp_mr = '0'
+    endcase
+  endif
+
+  assign tp_bg_css = 'none'
+  if tp_bg_type == 'solid'
+    assign tp_red = block.settings.bg_color | color_extract: 'red'
+    assign tp_green = block.settings.bg_color | color_extract: 'green'
+    assign tp_blue = block.settings.bg_color | color_extract: 'blue'
+    assign tp_bg_alpha = block.settings.bg_opacity | divided_by: 100.0
+    assign tp_bg_css = 'rgba(' | append: tp_red | append: ',' | append: tp_green | append: ',' | append: tp_blue | append: ',' | append: tp_bg_alpha | append: ')'
+  elsif tp_bg_type == 'gradient'
+    assign tp_bg_css = block.settings.bg_gradient
+  endif
+
+  assign tp_box_shadow_css = 'none'
+  if tp_enable_shadow
+    assign tp_shadow_alpha = block.settings.shadow_opacity | divided_by: 100.0
+    assign tp_shadow_color = block.settings.shadow_color | color_modify: 'alpha', tp_shadow_alpha
+    assign tp_box_shadow_css = block.settings.shadow_horizontal_offset | append: 'px ' | append: block.settings.shadow_vertical_offset | append: 'px ' | append: block.settings.shadow_blur | append: 'px ' | append: block.settings.shadow_spread | append: 'px ' | append: tp_shadow_color
+  endif
+
+  assign tp_padding_css = '0'
+  assign tp_padding_y_px = 0
+  if tp_has_styling
+    assign tp_padding_css = '0.6rem 1.1rem'
+    assign tp_padding_y_px = 6
+  endif
+
+  assign tp_font_size_px = block.settings.size | default: 16
+  assign tp_total_height_px = tp_font_size_px | plus: tp_padding_y_px | plus: tp_border_thickness
+  assign tp_corner_radius_pct = block.settings.corner_radius | default: 0
+  assign tp_radius_rem = tp_total_height_px | times: tp_corner_radius_pct | divided_by: 1000.0
+-%}
+<div
+  class="trustpilot-stars {{ block.settings.visibility }}"
+  style='
+    --rating:{{ block.settings.rating }};
+    --star-color:{{ block.settings.star_color }};
+    --bg-star-color:{{ block.settings.bg_star_color }};
+    --font-size:{{ block.settings.size | divided_by: 10.0 }}rem;
+    --alignment:{{ tp_alignment }};
+    width: {{ tp_width_css }};
+    margin-left: {{ tp_ml }};
+    margin-right: {{ tp_mr }};
+    background: {{ tp_bg_css }};
+    {% if tp_border_thickness > 0 %}
+      border: {{ tp_border_thickness }}px {{ block.settings.border_style | default: 'solid' }} {{ block.settings.border_color }};
+    {% endif %}
+    box-shadow: {{ tp_box_shadow_css }};
+    border-radius: {{ tp_radius_rem }}rem;
+    padding: {{ tp_padding_css }};
+    {% if margins %}
+      margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+      margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+    {% endif %}
+  '
+  {% if block_attributes %}
+    {{ block.shopify_attributes }}
+  {% endif %}
+>
+  {% if block.settings.scroll_id != blank %}<a href="{{ block.settings.scroll_id }}">{% endif %}
+    <div class='rating-stars-and-text font-size--desktop-auto flex-center'>
+      <div class='rating-stars__container rating-stars__container--underlay'>
+        <svg height="469" width="2500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 96" class='trustpilot-stars-svg'>
+          <path fill="{{ block.settings.bg_star_color }}" d="M0 0h96v96H0zM104 0h96v96h-96zM208 0h96v96h-96zM312 0h96v96h-96zM416 0h96v96h-96z"/>
+          <path fill="{{ block.settings.star_symbol_color }}" d="M48 64.7L62.6 61l6.1 18.8zm33.6-24.3H55.9L48 16.2l-7.9 24.2H14.4l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM152 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L152 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM256 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L256 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM360 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L360 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM464 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L464 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2z" />
+        </svg>
+        <div class='rating-stars__container rating-stars__container--overlay trustpilot-stars__container--overlay'>
+          <svg height="469" width="2500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 96" class='trustpilot-stars-svg'>
+            <path fill="{{ block.settings.star_color }}" d="M0 0h96v96H0zM104 0h96v96h-96zM208 0h96v96h-96zM312 0h96v96h-96zM416 0h96v96h-96z"/>
+            <path fill="{{ block.settings.star_symbol_color }}" d="M48 64.7L62.6 61l6.1 18.8zm33.6-24.3H55.9L48 16.2l-7.9 24.2H14.4l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM152 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L152 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM256 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L256 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM360 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L360 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2zM464 64.7l14.6-3.7 6.1 18.8zm33.6-24.3h-25.7L464 16.2l-7.9 24.2h-25.7l20.8 15-7.9 24.2 20.8-15 12.8-9.2z" />
+          </svg>
+        </div>
+      </div>
+      <span class="rating-stars__label">&nbsp;{{ block.settings.label }}</span>
+    </div>
+  {% if block.settings.scroll_id != blank %}</a>{% endif %}
+</div>

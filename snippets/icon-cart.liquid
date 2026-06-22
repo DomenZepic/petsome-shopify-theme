@@ -1,0 +1,125 @@
+{% liquid
+  assign icon_thickness = section.settings.icons_thickness | times: 13 | plus: 12
+%}
+
+{% case section.settings.cart_icon %}
+  {% when 'text' %}
+    <span class="header__text-icon icon icon-cart">
+      {{ section.settings.cart_icon_text }}
+    </span>
+  {% when 'cart_1' %}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 500 418.951"
+      class="icon icon-cart"
+      aria-hidden="true"
+      focusable="false"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="{{ icon_thickness }}"
+      width="500"
+      height="418.951"
+    >
+      <path points="1.5 1.5 10.04 2.06 15.09 27.94 45.39 27.94 52.48 6.79 18.25 6.65" d="M13.894 13.894L92.997 19.081L139.774 258.8L420.433 258.8L486.106 62.894L169.044 61.597"/><path cx="20.58" cy="39.74" r="3.99" d="M227.584 368.099A36.958 36.958 0 0 1 190.626 405.057A36.958 36.958 0 0 1 153.668 368.099A36.958 36.958 0 0 1 227.584 368.099z"/><path cx="40.02" cy="39.74" r="3.99" d="M407.651 368.099A36.958 36.958 0 0 1 370.693 405.057A36.958 36.958 0 0 1 333.735 368.099A36.958 36.958 0 0 1 407.651 368.099z"/><path points="45.42 35.75 14.49 35.75 17.21 27.94" d="M420.711 331.141L134.216 331.141L159.411 258.8"/>
+    </svg>
+  {% when 'cart_2' %}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 500 418.951"
+      class="icon icon-cart"
+      aria-hidden="true"
+      focusable="false"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="{{ icon_thickness }}"
+    >
+      <path points="1.5 1.5 10.04 2.06 15.09 27.94 45.39 27.94 52.48 6.79 10.97 6.84" d="M13.894 13.894L92.997 19.081L139.774 258.8L420.433 258.8L486.106 62.894L101.612 63.357"/><path cx="20.58" cy="39.74" r="3.99" d="M227.584 368.099A36.958 36.958 0 0 1 190.626 405.057A36.958 36.958 0 0 1 153.668 368.099A36.958 36.958 0 0 1 227.584 368.099z"/><path cx="40.02" cy="39.74" r="3.99" d="M407.651 368.099A36.958 36.958 0 0 1 370.693 405.057A36.958 36.958 0 0 1 333.735 368.099A36.958 36.958 0 0 1 407.651 368.099z"/><path points="45.42 35.75 14.49 35.75 17.21 27.94" d="M420.711 331.141L134.216 331.141L159.411 258.8"/><path x1="13.09" y1="17.69" x2="48.83" y2="17.69" d="M121.249 163.857L452.297 163.857"/><path x1="29.95" y1="6.82" x2="29.95" y2="27.94" d="M277.418 63.172L277.418 258.8"/><path x1="40.91" y1="6.82" x2="37.57" y2="27.94" d="M378.937 63.172L347.999 258.8"/><path x1="19.63" y1="6.82" x2="22.1" y2="27.94" d="M181.827 63.172L204.705 258.8"/>
+    </svg>
+  {% when 'bag_3' %}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 500 418.951"
+      class="icon icon-cart"
+      aria-hidden="true"
+      focusable="false"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="31.5"
+      style="margin-bottom: 5px; transform: scale(1.03)"
+    >
+      <path d="m71.67 363.56 13.82-178.3a35.72 35.72 0 0 1 35.61-32.99h258.16a35.72 35.72 0 0 1 35.61 32.99l13.82 178.3c3.93 50.17-41.44 92.74-98.79 92.74H170.46c-57.35 0-102.72-42.57-98.79-92.74"></path>
+      <path d="M179 125.3c0-44.44 32.01-80.46 71.5-80.46S322 80.86 322 125.3v53.57c0 44.44-32.01 80.46-71.5 80.46S179 223.31 179 178.87z"></path>
+    </svg>
+
+  {% when 'basket_1' %}
+    <svg
+      class="icon icon-cart"
+      aria-hidden="true"
+      focusable="false"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 500 384.363"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="{{ icon_thickness }}"
+      style="transform:translateY(-1px)"
+    >
+      <path x1="1.5" y1="14.55" x2="51.9" y2="14.55" d="M14.045 136.236L485.955 136.236"/><path x1="20.61" y1="1.5" x2="12.52" y2="14.55" d="M192.978 14.045L117.228 136.236"/><path x1="33.01" y1="1.5" x2="41.06" y2="14.55" d="M309.082 14.045L384.457 136.236"/><path d="m40.075 137.547 81.18 234.082H374.532q46.816 -116.948 93.633 -234.082"/>
+    </svg>
+  {% when 'basket_2' %}
+    <svg
+      class="icon icon-cart"
+      aria-hidden="true"
+      focusable="false"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 500 410.3"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="{{ icon_thickness }}"
+      style="transform:translateY(-1px)"
+    >
+      <path x1="1.5" y1="14.55" x2="51.9" y2="14.55" d="M14.045 136.236L485.955 136.236"/><path x1="19.46" y1="1.5" x2="11.36" y2="14.55" d="M182.21 14.045L106.367 136.236"/><path x1="34.13" y1="1.5" x2="42.18" y2="14.55" d="M319.569 14.045L394.944 136.236"/><path x1="26.7" y1="22.9" x2="26.7" y2="34.13" d="M250 214.419L250 319.569"/><path x1="36.73" y1="22.9" x2="36.73" y2="34.13" d="M343.914 214.419L343.914 319.569"/><path x1="16.71" y1="22.9" x2="16.71" y2="34.13" d="M156.461 214.419L156.461 319.569"/><path d="m40.075 137.547 39.794 217.416a50.655 50.655 0 0 0 49.438 41.479l245.225 1.124a51.03 51.03 0 0 0 50.281 -41.105L468.165 137.547"/>
+    </svg>
+  {% when 'bag_1' %}
+    <svg
+      class="icon icon-cart"
+      aria-hidden="true"
+      focusable="false"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 405.688 500"
+      style="transform: scale(0.9);"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="{{ icon_thickness }}"
+    >
+      <path d="M46.101 113.975H361.031L388.803 422.573a55.543 55.543 0 0 1 -55.543 60.764H72.428a55.543 55.543 0 0 1 -55.543 -60.987Z"/>
+      <path d="M120.973 170.74V99.534a82.871 82.871 0 0 1 165.741 0v71.206"/>
+    </svg>
+  {% else %}
+    <svg
+      class="icon icon-cart"
+      aria-hidden="true"
+      focusable="false"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 396.275 500"
+      style="transform: scale(0.9);"
+      fill="none"
+      stroke="currentColor"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="{{ icon_thickness }}"
+    >
+      <path d="m35.69 118.336 327.683 -0.892q8.03 183.025 16.172 365.827H16.73Z"/><path d="M114.098 117.444V102.61a85.88 85.88 0 1 1 171.649 0v14.834"/><path d="M111.086 168.86a85.88 85.88 0 0 0 168.191 0"/>
+    </svg>
+{% endcase %}

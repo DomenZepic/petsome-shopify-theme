@@ -1,0 +1,187 @@
+<style>
+  {% if block.settings.enable_custom_color %}
+    #CartDrawer-Checkout {
+      --color-button: {{ block.settings.custom_color.red }}, {{ block.settings.custom_color.green }}, {{ block.settings.custom_color.blue }};
+    }
+  {% endif %}
+  #CartDrawer-Checkout {
+    --icon-scale: {{ block.settings.icon_scale | divided_by: 100.0 }}em;
+    --icon-spacing: {{ block.settings.icon_spacing }}px;
+  }
+  {% if block.settings.prefix_icon != blank %}
+    #CartDrawer-Checkout .button__label::before {
+      background-image: url('{{ block.settings.prefix_icon | image_url }}');
+    }
+  {% endif %}
+  {% if block.settings.suffix_icon != blank %}
+    #CartDrawer-Checkout .button__label::after {
+      background-image: url('{{ block.settings.suffix_icon | image_url }}');
+    }
+  {% endif %}
+</style>
+<div class="cart__ctas" style="margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;" {{ block.shopify_attributes }}>
+  <noscript>
+    <button type="submit" class="cart__update-button button button--secondary" form="CartDrawer-Form">
+      {{ 'sections.cart.update' | t }}
+    </button>
+  </noscript>
+  <div class='tnc-checkbox-warning tnc-checkbox-warning-{{ section.id }} tnc-checkbox-warning--above-button-{{ section.id }} hidden' style='margin-bottom: 0.6em;'></div>
+  <button
+    type="submit"
+    id="CartDrawer-Checkout"
+    class="cart__checkout-button button{% if block.settings.prefix_icon != blank %} button--prefix-icon{% endif %}{% if block.settings.suffix_icon != blank %} button--suffix-icon{% endif %}"
+    name="checkout"
+    form="CartDrawer-Form"
+    {% if cart == empty %}
+      disabled
+    {% endif %}
+    onclick="checkoutLoad(event)"
+  >
+    <span class='button__label'>
+      {{ 'sections.cart.checkout' | t }}
+      {% if block.settings.display_price %}
+        • {{ cart.total_price | money }}
+      {% endif %}
+    </span>
+    <div class="loading-overlay__spinner hidden">
+      <svg
+        aria-hidden="true"
+        focusable="false"
+        class="spinner"
+        viewBox="0 0 66 66"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+      </svg>
+    </div>
+  </button>
+  {%- if block.settings.show_additional_checkout_buttons and additional_checkout_buttons -%}
+    <div class="cart__dynamic-checkout-buttons additional-checkout-buttons">
+      {{ content_for_additional_checkout_buttons }}
+    </div>
+  {%- endif -%}
+  <div class='tnc-checkbox-warning tnc-checkbox-warning-{{ section.id }} tnc-checkbox-warning--under-button-{{ section.id }} hidden' style='margin-top: 0.6em;'></div>
+</div>
+<script>
+  function checkoutLoad(e) {
+    const tnc = document.querySelector('#TNC-Checkbox-{{ section.id }}');
+    if (tnc && tnc.dataset.checked != 'true') return;
+    const clickedBtn = e.currentTarget;
+    if (!clickedBtn) return;
+    clickedBtn.classList.add('loading');
+    const clickedBtnSpinner = clickedBtn.querySelector('.loading-overlay__spinner');
+    if (clickedBtnSpinner) clickedBtnSpinner.classList.remove('hidden');
+
+    setTimeout(() => {
+      if (document.location.pathname.includes('/checkout')) return;
+      clickedBtn.classList.remove('loading');
+      clickedBtn.disabled = false;
+      if (clickedBtnSpinner) clickedBtnSpinner.classList.add('hidden');
+    }, 8000);
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Checkout button",
+  "tag": null,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_additional_checkout_buttons",
+      "label": "Display additional checkout buttons",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Checkout button"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_price",
+      "label": "Display subtotal price in the checkout button",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_custom_color",
+      "label": "Enable custom button color",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "custom_color",
+      "default": "#dd1d1d",
+      "label": "Button custom color",
+      "visible_if": "{{ block.settings.enable_custom_color }}"
+    },
+    {
+      "type": "header",
+      "content": "Button icons"
+    },
+    {
+      "type": "image_picker",
+      "id": "prefix_icon",
+      "label": "Label prefix icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "suffix_icon",
+      "label": "Label suffix icon"
+    },
+    {
+      "type": "range",
+      "id": "icon_scale",
+      "min": 80,
+      "max": 180,
+      "step": 5,
+      "unit": "%",
+      "label": "Icons scale",
+      "default": 120,
+      "info": "Related to button label font size",
+      "visible_if": "{{ block.settings.prefix_icon != blank or block.settings.suffix_icon != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "icon_spacing",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Icons spacing",
+      "default": 10,
+      "info": "Empty space between the button label & the icons",
+      "visible_if": "{{ block.settings.prefix_icon != blank or block.settings.suffix_icon != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Block margin"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "label": "Top margin",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "label": "Bottom margin",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Checkout Button"
+    }
+  ]
+}
+{% endschema %}

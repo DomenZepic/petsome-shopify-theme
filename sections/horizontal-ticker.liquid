@@ -1,0 +1,1553 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.mobile_padding_top }}px;
+    padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+  }
+
+  .horizontal-ticker-{{ section.id }} .horizontal-ticker__container {
+    animation: mobileHorTicker{{ section.id }} {{ 150 | divided_by: section.settings.speed }}s linear infinite {{ section.settings.direction }} forwards;
+    column-gap: {{ section.settings.mobile_spacing }}px;
+  }
+
+  {% if section.settings.stop_on_hover %}
+    .horizontal-ticker-{{ section.id }}:hover .horizontal-ticker__container {
+      animation-play-state: paused;
+    }
+  {% endif %}
+
+  .horizontal-ticker-{{ section.id }} .review-item {
+    width: {{ section.settings.mobile_reviews_width }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.desktop_padding_top }}px;
+      padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
+    }
+
+    .horizontal-ticker-{{ section.id }} .horizontal-ticker__container {
+      column-gap: {{ section.settings.desktop_spacing }}px;
+      animation-name: desktopHorTicker{{ section.id }};
+    }
+
+    .horizontal-ticker-{{ section.id }} .review-item {
+      width: {{ section.settings.desktop_reviews_width }}px;
+    }
+  }
+
+  .color-scheme-{{ section.id }}.color-custom {
+    --color-background: {{ section.settings.custom_colors_background.red }}, {{ section.settings.custom_colors_background.green }}, {{ section.settings.custom_colors_background.blue }};
+    --gradient-background: {% if section.settings.custom_gradient_background != blank %}{{ section.settings.custom_gradient_background }}{% else %}{{ section.settings.custom_colors_background }}{% endif %};
+    --color-foreground: {{ section.settings.custom_colors_text.red }}, {{ section.settings.custom_colors_text.green }}, {{ section.settings.custom_colors_text.blue }};
+  }
+  {% if section.settings.pattern_bg != 'none' %}
+    {% render 'pattern-background' %}
+  {% endif %}
+
+  {% liquid
+    assign is_rtl = false
+    if settings.enable_rtl == true
+      assign is_rtl = true
+    elsif settings.rtl_enabled_languages != blank
+      assign lang_array_trim = settings.rtl_enabled_languages | replace: ' ', '' | split: ','
+      if lang_array_trim contains localization.language.iso_code
+        assign is_rtl = true
+      endif
+    endif
+  %}
+  @keyframes mobileHorTicker{{ section.id }} {
+    to {
+      transform: translateX(calc({% unless is_rtl %}-{% endunless %}50% {% if is_rtl %}+{% else %}-{% endif %} {{ section.settings.mobile_spacing | divided_by: 2.0}}px));
+    }
+  }
+  @keyframes desktopHorTicker{{ section.id }} {
+    to {
+      transform: translateX(calc({% unless is_rtl %}-{% endunless %}50% {% if is_rtl %}+{% else %}-{% endif %} {{ section.settings.desktop_spacing | divided_by: 2.0}}px));
+    }
+  }
+{%- endstyle -%}
+
+{% liquid
+  assign displayed = true
+  if section.settings.hidden_products != blank
+    assign hidden_handles = section.settings.hidden_products | split: ','
+    for hidden_handle in hidden_handles
+      assign handle_strip = hidden_handle | strip
+      if handle_strip == product.handle
+        assign displayed = false
+        break
+      endif
+    endfor
+  endif
+  if section.settings.enable_specific_display and section.settings.displayed_products != blank
+    assign displayed_handles = section.settings.displayed_products | split: ','
+    assign displayed = false
+    for displayed_handle in displayed_handles
+      assign handle_strip = displayed_handle | strip
+      if handle_strip == product.handle
+        assign displayed = true
+        break
+      endif
+    endfor
+  endif
+%}
+
+{% if displayed %}
+  {% if section.settings.display_id %}
+    <copy-button class="section-id-btn button" data-content="#shopify-section-{{ section.id }}" data-success="false">
+      <span class="copy-text">Click to copy section ID</span>
+      <span class="copy-success">ID copied successfully!</span>
+    </copy-button>
+  {% endif %}
+  <div
+    class="horizontal-ticker horizontal-ticker-{{ section.id }} color-scheme-{{ section.id }} color-{{ section.settings.color_scheme }} gradient content-for-grouping section-{{ section.id }}-padding {{ section.settings.visibility }}"
+    style="--mobile-text-size: {{ section.settings.mobile_text_size | divided_by: 10.0 }}rem;--desktop-text-size: {{ section.settings.desktop_text_size | divided_by: 10.0 }}rem;--mobile-image-height: {{ section.settings.mobile_image_height | divided_by: 10.0 }}rem;--desktop-image-height: {{ section.settings.desktop_image_height | divided_by: 10.0 }}rem;--mobile-video-height: {{ section.settings.mobile_video_height | divided_by: 10.0 }}rem;--desktop-video-height: {{ section.settings.desktop_video_height | divided_by: 10.0 }}rem;"
+  >
+    <div class="horizontal-ticker__container">
+      {% assign unique_blocks_total = section.blocks | size %}
+      {% assign target_multiply = 20 | divided_by: unique_blocks_total | floor %}
+      {% assign target_total = unique_blocks_total | times: target_multiply | times: 2 %}
+      {% assign block_counter = 0 %}
+
+      {%- for block in section.blocks -%}
+        {%- assign block_counter = block_counter | plus: 1 -%}
+        {% case block.type %}
+          {% when 'text' %}
+            <p class="custom-font-size horizontal-ticker__item{% if section.settings.italic_text %} horizontal-ticker__item--italic{% endif %}{% if section.settings.uppercase_text %} horizontal-ticker__item--uppercase{% endif %}{% if section.settings.bold_text %} horizontal-ticker__item--bold{% endif %}">
+              {{ block.settings.title }}
+            </p>
+          {% when 'image' %}
+            <div
+              class="horizontal-ticker__image media media--transparent media--fit-contain custom-image-height custom-image-width"
+              style="--mobile-width: {{ section.settings.mobile_image_height | times: block.settings.image.aspect_ratio | divided_by: 10.0 }}rem;--desktop-width: {{ section.settings.desktop_image_height | times: block.settings.image.aspect_ratio | divided_by: 10.0 }}rem;"
+            >
+              <img
+                src="{{ block.settings.image | image_url }}"
+                {% if block.settings.image.alt != blank %}
+                  alt="{{ block.settings.image.alt | escape }}"
+                {% else %}
+                  role="presentation"
+                {% endif %}
+                height="auto"
+                width="auto"
+                loading="lazy"
+              >
+            </div>
+          {% when 'video' %}
+            <div
+              class="horizontal-ticker__video media media--transparent media--fit-contain custom-image-height custom-image-width"
+              style="--mobile-width: {{ section.settings.mobile_video_height | times: block.settings.video.aspect_ratio | divided_by: 10.0 }}rem;--desktop-width: {{ section.settings.desktop_video_height | times: block.settings.video.aspect_ratio | divided_by: 10.0 }}rem;"
+            >
+              {% render 'video-player', block: block %}
+            </div>
+          {% when 'reviews' %}
+            {% liquid
+              assign force_padding = false
+              if section.settings.color_scheme != block.settings.color_scheme
+                assign force_padding = true
+              endif
+            %}
+            {%- render 'reviews', block: block, force_padding: force_padding -%}
+          {%- when 'text_with_icon' -%}
+            {% render 'text-with-icon-block', block: block, mobile_align: true %}
+          {% when 'icon_with_content' %}
+            {% render 'icon-with-content-block', block: block, mobile_align: true %}
+        {% endcase %}
+      {%- endfor -%}
+
+      {%- if block_counter < target_total -%}
+        {% for i in (1..15) %}
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'text' %}
+                <p class="custom-font-size horizontal-ticker__item{% if section.settings.italic_text %} horizontal-ticker__item--italic{% endif %}{% if section.settings.uppercase_text %} horizontal-ticker__item--uppercase{% endif %}{% if section.settings.bold_text %} horizontal-ticker__item--bold{% endif %}">
+                  {{ block.settings.title }}
+                </p>
+              {% when 'image' %}
+                <div
+                  class="horizontal-ticker__image media media--transparent media--fit-contain custom-image-height custom-image-width"
+                  style="--mobile-width: {{ section.settings.mobile_image_height | times: block.settings.image.aspect_ratio | divided_by: 10.0 }}rem;--desktop-width: {{ section.settings.desktop_image_height | times: block.settings.image.aspect_ratio | divided_by: 10.0 }}rem;"
+                >
+                  <img
+                    src="{{ block.settings.image | image_url }}"
+                    {% if block.settings.image.alt != blank %}
+                      alt="{{ block.settings.image.alt | escape }}"
+                    {% else %}
+                      role="presentation"
+                    {% endif %}
+                    height="auto"
+                    width="auto"
+                    loading="lazy"
+                  >
+                </div>
+              {% when 'video' %}
+                <div
+                  class="horizontal-ticker__video media media--transparent media--fit-contain custom-image-height custom-image-width"
+                  style="--mobile-width: {{ section.settings.mobile_video_height | times: block.settings.video.aspect_ratio | divided_by: 10.0 }}rem;--desktop-width: {{ section.settings.desktop_video_height | times: block.settings.video.aspect_ratio | divided_by: 10.0 }}rem;"
+                >
+                  {% render 'video-player', block: block %}
+                </div>
+              {% when 'reviews' %}
+                {% liquid
+                  assign force_padding = false
+                  if section.settings.color_scheme != block.settings.color_scheme
+                    assign force_padding = true
+                  endif
+                %}
+                {%- render 'reviews', block: block, force_padding: force_padding -%}
+              {%- when 'text_with_icon' -%}
+                {% render 'text-with-icon-block', block: block, mobile_align: true %}
+              {% when 'icon_with_content' %}
+                {% render 'icon-with-content-block', block: block, mobile_align: true %}
+            {% endcase %}
+
+            {% assign block_counter = block_counter | plus: 1 %}
+            {% if block_counter >= target_total %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+          {% if block_counter >= target_total %}
+            {% break %}
+          {% endif %}
+        {% endfor %}
+      {%- endif -%}
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Horizontal Ticker",
+  "class": "horizontal-ticker-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "display_id",
+      "label": "Display section ID",
+      "info": "ID is used in the Sections group section to merge 2 sections. ID can also be put inside any button link and the button will scroll to this section.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "header",
+      "content": "Ticker"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Ticker speed",
+      "min": 1,
+      "max": 5,
+      "default": 3,
+      "step": 0.5
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "options": [
+        {
+          "value": "normal",
+          "label": "Normal"
+        },
+        {
+          "value": "reverse",
+          "label": "Reverse"
+        }
+      ],
+      "label": "Animation direction",
+      "default": "normal"
+    },
+    {
+      "type": "checkbox",
+      "id": "stop_on_hover",
+      "label": "Pause animation on hover/touch",
+      "default": false
+    },
+    {
+      "type": "number",
+      "id": "mobile_spacing",
+      "label": "Mobile spacing (px)",
+      "default": 60
+    },
+    {
+      "type": "number",
+      "id": "desktop_spacing",
+      "label": "Desktop spacing (px)",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "accent-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_background",
+      "default": "#FFFFFF",
+      "label": "Custom background color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "custom_gradient_background",
+      "label": "Custom gradient background",
+      "info": "If added, replaces Background color when applicable.",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_text",
+      "default": "#2E2A39",
+      "label": "Custom text color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "pattern_bg",
+      "label": "Background pattern",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "dotted",
+          "label": "Dots"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "curved-grid",
+          "label": "Curved grid"
+        },
+        {
+          "value": "diagonal-stripes",
+          "label": "Stripes"
+        },
+        {
+          "value": "zigzag",
+          "label": "ZigZag"
+        },
+        {
+          "value": "arrow-pattern",
+          "label": "3D Boxes"
+        },
+        {
+          "value": "radial-rings",
+          "label": "Rings"
+        },
+        {
+          "value": "diamond-grid-1",
+          "label": "Diamond grid 1"
+        },
+        {
+          "value": "diamond-grid-2",
+          "label": "Diamond grid 2"
+        },
+        {
+          "value": "quatrefoils",
+          "label": "Quatrefoils"
+        },
+        {
+          "value": "ovals",
+          "label": "Ovals"
+        },
+        {
+          "value": "hexagons",
+          "label": "Hexagons"
+        },
+        {
+          "value": "curvy",
+          "label": "Curvy"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "pattern_color",
+      "label": "Pattern color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_size",
+      "min": 4,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Pattern size / spacing",
+      "default": 20,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_thickness",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Line / dot thickness",
+      "default": 2,
+      "visible_if": "{{ section.settings.pattern_bg == 'dotted' or section.settings.pattern_bg == 'grid' or section.settings.pattern_bg == 'diagonal-stripes' or section.settings.pattern_bg == 'radial-rings' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_angle",
+      "min": 0,
+      "max": 180,
+      "step": 15,
+      "unit": "deg",
+      "label": "Stripe angle",
+      "default": 45,
+      "visible_if": "{{ section.settings.pattern_bg == 'diagonal-stripes' }}"
+    },
+    {
+      "type": "select",
+      "id": "pattern_opacity_mode",
+      "label": "Opacity type",
+      "default": "low",
+      "options": [
+        {
+          "value": "low",
+          "label": "Low"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity_low",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 7,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' and section.settings.pattern_opacity_mode == 'low' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity_normal",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 80,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' and section.settings.pattern_opacity_mode == 'normal' }}"
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "range",
+      "id": "mobile_text_size",
+      "min": 8,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 16,
+      "label": "Mobile text size"
+    },
+    {
+      "type": "range",
+      "id": "desktop_text_size",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 18,
+      "label": "Desktop text size"
+    },
+    {
+      "type": "checkbox",
+      "id": "italic_text",
+      "label": "Italic text",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "uppercase_text",
+      "label": "Uppercase text",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "bold_text",
+      "label": "Bold text",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "number",
+      "id": "mobile_image_height",
+      "default": 26,
+      "label": "Mobile image height"
+    },
+    {
+      "type": "number",
+      "id": "desktop_image_height",
+      "default": 40,
+      "label": "Desktop image height"
+    },
+    {
+      "type": "header",
+      "content": "Videos"
+    },
+    {
+      "type": "number",
+      "id": "mobile_video_height",
+      "default": 150,
+      "label": "Mobile video height"
+    },
+    {
+      "type": "number",
+      "id": "desktop_video_height",
+      "default": 250,
+      "label": "Desktop video height"
+    },
+    {
+      "type": "header",
+      "content": "Reviews"
+    },
+    {
+      "type": "number",
+      "id": "mobile_reviews_width",
+      "default": 300,
+      "label": "Mobile reviews width"
+    },
+    {
+      "type": "number",
+      "id": "desktop_reviews_width",
+      "default": 400,
+      "label": "Desktop reviews width"
+    },
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "paragraph",
+      "content": "Use these options if you want to display different tickers in the Header group across different product pages."
+    },
+    {
+      "type": "text",
+      "id": "hidden_products",
+      "label": "Product pages to hide the block on",
+      "info": "Handles of products to hide the block on, split with a comma."
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_specific_display",
+      "label": "Display the block on specific product pages only",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "displayed_products",
+      "label": "Specific product pages to display the block on",
+      "info": "Applied if the checkbox above is checked. Handles of products to only display the block on, split with a comma."
+    },
+    {
+      "type": "header",
+      "content": "Mobile padding"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Desktop padding"
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 16
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Shrine Theme",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    },
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video"
+        },
+        {
+          "type": "image_picker",
+          "id": "thumbnail",
+          "label": "Video Thumbnail",
+          "info": "If empty, the first frame of the video will be displayed."
+        },
+        {
+          "type": "checkbox",
+          "id": "loop",
+          "label": "Video looping",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "muted_autoplay",
+          "label": "Muted autoplay",
+          "default": true,
+          "info": "Use this instead of GIFs & animated WEBPs."
+        },
+        {
+          "type": "checkbox",
+          "id": "display_play_btn",
+          "label": "Enable play & pause on click",
+          "info": "Automatically enabled if autoplay is disabled.",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "Buttons"
+        },
+        {
+          "type": "select",
+          "id": "play_btn_position",
+          "options": [
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "top-left",
+              "label": "Top left"
+            },
+            {
+              "value": "top-right",
+              "label": "Top right"
+            },
+            {
+              "value": "bottom-right",
+              "label": "Bottom right"
+            },
+            {
+              "value": "bottom-left",
+              "label": "Bottom left"
+            }
+          ],
+          "default": "center",
+          "label": "Play button position"
+        },
+        {
+          "type": "select",
+          "id": "btn_color_scheme",
+          "options": [
+            {
+              "value": "accent-1",
+              "label": "Accent 1"
+            },
+            {
+              "value": "accent-2",
+              "label": "Accent 2"
+            },
+            {
+              "value": "background-1",
+              "label": "Background 1"
+            },
+            {
+              "value": "background-2",
+              "label": "Background 2"
+            },
+            {
+              "value": "inverse",
+              "label": "Inverse"
+            }
+          ],
+          "default": "accent-1",
+          "label": "Play button color scheme"
+        },
+        {
+          "type": "select",
+          "id": "play_btn_style",
+          "options": [
+            {
+              "value": "solid",
+              "label": "Filled"
+            },
+            {
+              "value": "outline",
+              "label": "Outlined"
+            }
+          ],
+          "default": "solid",
+          "label": "Play button style"
+        },
+        {
+          "type": "range",
+          "id": "play_btn_size_desktop",
+          "min": 30,
+          "max": 80,
+          "step": 5,
+          "unit": "px",
+          "label": "Play button desktop size",
+          "default": 50
+        },
+        {
+          "type": "range",
+          "id": "play_btn_size_mobile",
+          "min": 25,
+          "max": 75,
+          "step": 5,
+          "unit": "px",
+          "label": "Play button mobile size",
+          "default": 50
+        },
+        {
+          "type": "checkbox",
+          "id": "btn_animation",
+          "label": "Enable button ripple animation",
+          "default": false
+        },
+        {
+          "type": "range",
+          "id": "play_btn_corner_radius",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "label": "Play button corner radius",
+          "default": 100
+        },
+        {
+          "type": "checkbox",
+          "id": "display_sound_btn",
+          "label": "Display mute/unmute button",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "sound_btn_color_scheme",
+          "options": [
+            {
+              "value": "accent-1",
+              "label": "Accent 1"
+            },
+            {
+              "value": "accent-2",
+              "label": "Accent 2"
+            },
+            {
+              "value": "background-1",
+              "label": "Background 1"
+            },
+            {
+              "value": "background-2",
+              "label": "Background 2"
+            },
+            {
+              "value": "inverse",
+              "label": "Inverse"
+            }
+          ],
+          "default": "inverse",
+          "label": "Sound button color scheme"
+        },
+        {
+          "type": "checkbox",
+          "id": "display_timeline",
+          "label": "Display timeline",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "timeline_color",
+          "options": [
+            {
+              "value": "accent-1",
+              "label": "Accent 1"
+            },
+            {
+              "value": "accent-2",
+              "label": "Accent 2"
+            },
+            {
+              "value": "background-1",
+              "label": "Background 1"
+            },
+            {
+              "value": "background-2",
+              "label": "Background 2"
+            },
+            {
+              "value": "inverse",
+              "label": "Text"
+            }
+          ],
+          "default": "accent-1",
+          "label": "Timeline color"
+        }
+      ]
+    },
+    {
+      "type": "reviews",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Container"
+        },
+        {
+          "type": "select",
+          "id": "color_scheme",
+          "options": [
+            {
+              "value": "accent-1",
+              "label": "t:sections.all.colors.accent_1.label"
+            },
+            {
+              "value": "accent-2",
+              "label": "t:sections.all.colors.accent_2.label"
+            },
+            {
+              "value": "background-1",
+              "label": "t:sections.all.colors.background_1.label"
+            },
+            {
+              "value": "background-2",
+              "label": "t:sections.all.colors.background_2.label"
+            },
+            {
+              "value": "inverse",
+              "label": "t:sections.all.colors.inverse.label"
+            }
+          ],
+          "default": "accent-1",
+          "label": "Color scheme"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_custom_bg",
+          "label": "Show custom background",
+          "default": false
+        },
+        {
+          "type": "color",
+          "id": "custom_bg_color",
+          "label": "Custom background color",
+          "default": "#F2F2F2"
+        },
+        {
+          "type": "range",
+          "id": "corner_radius",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "label": "Corner radius",
+          "default": 12
+        },
+        {
+          "type": "range",
+          "id": "border_width",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "label": "Border thickness",
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Border color",
+          "default": "#B7B7B7"
+        },
+        {
+          "type": "header",
+          "content": "Layout"
+        },
+        {
+          "type": "select",
+          "id": "avatar_alignment",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top"
+            },
+            {
+              "value": "middle",
+              "label": "Middle"
+            }
+          ],
+          "label": "Avatar alignment",
+          "default": "top"
+        },
+        {
+          "type": "range",
+          "id": "avatar_corner_radius",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "unit": "px",
+          "label": "Avatar corner radius",
+          "default": 40
+        },
+        {
+          "type": "color",
+          "id": "star_color",
+          "default": "#ffcc00",
+          "label": "Stars color"
+        },
+        {
+          "type": "range",
+          "id": "stars_translate",
+          "min": -10,
+          "max": 20,
+          "step": 1,
+          "unit": "%",
+          "default": 0,
+          "label": "Stars vertical position adjustment",
+          "info": "Move the stars up/down to adjust them to different fonts. Negative values move the stars up."
+        },
+        {
+          "type": "color",
+          "id": "checkmark_color",
+          "default": "#6D388B",
+          "label": "Checkmark background color"
+        },
+        {
+          "type": "color",
+          "id": "checkmark_icon_color",
+          "default": "#FFFFFF",
+          "label": "Checkmark icon color"
+        },
+        {
+          "type": "header",
+          "content": "Review #1"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "author_1",
+          "label": "Author name",
+          "default": "<em>Author</em> [stars]",
+          "info": "Use [stars] to display review stars and [checkmark] to display the verified checkmark icon."
+        },
+        {
+          "type": "image_picker",
+          "id": "image_1",
+          "label": "Author image"
+        },
+        {
+          "type": "richtext",
+          "id": "text_1",
+          "label": "Text",
+          "default": "<p>Share positive thoughts and feedback from your customer.</p>"
+        }
+      ]
+    },
+    {
+      "type": "text_with_icon",
+      "name": "Text with icon",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Width"
+        },
+        {
+          "type": "select",
+          "id": "block_width",
+          "label": "Width",
+          "options": [
+            {
+              "value": "fixed",
+              "label": "Fixed"
+            },
+            {
+              "value": "unlimited",
+              "label": "Unlimited"
+            }
+          ],
+          "default": "unlimited"
+        },
+        {
+          "type": "number",
+          "id": "block_mobile_width",
+          "default": 300,
+          "label": "Mobile width"
+        },
+        {
+          "type": "number",
+          "id": "block_desktop_width",
+          "default": 400,
+          "label": "Desktop width"
+        },
+        {
+          "type": "header",
+          "content": "Text"
+        },
+        {
+          "type": "range",
+          "id": "mobile_text_size",
+          "min": 8,
+          "max": 24,
+          "step": 1,
+          "unit": "px",
+          "default": 14,
+          "label": "Mobile text size"
+        },
+        {
+          "type": "range",
+          "id": "desktop_text_size",
+          "min": 10,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "default": 16,
+          "label": "Desktop text size"
+        },
+        {
+          "type": "select",
+          "id": "alignment",
+          "label": "Text alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "select",
+          "id": "mobile_alignment",
+          "label": "Mobile text alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "default": "#121212",
+          "label": "Text color"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_1",
+          "default": "Text with icon",
+          "label": "Text #1"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_2",
+          "label": "Text #2"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_3",
+          "label": "Text #3"
+        },
+        {
+          "type": "header",
+          "content": "Icons"
+        },
+        {
+          "type": "range",
+          "id": "icon_scale",
+          "min": 100,
+          "max": 200,
+          "step": 5,
+          "default": 120,
+          "unit": "%",
+          "label": "Icon scale",
+          "info": "Relative to text size"
+        },
+        {
+          "type": "color",
+          "id": "icon_color",
+          "default": "#121212",
+          "label": "Icons color"
+        },
+        {
+          "type": "text",
+          "id": "icon_1",
+          "default": "check_circle",
+          "label": "Icon #1",
+          "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+        },
+        {
+          "type": "checkbox",
+          "id": "filled_icon_1",
+          "default": false,
+          "label": "Filled icon #1"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon_1",
+          "label": "Custom icon #1"
+        },
+        {
+          "type": "text",
+          "id": "icon_2",
+          "default": "check_circle",
+          "label": "Icon #2",
+          "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+        },
+        {
+          "type": "checkbox",
+          "id": "filled_icon_2",
+          "default": false,
+          "label": "Filled icon #2"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon_2",
+          "label": "Custom icon #2"
+        },
+        {
+          "type": "text",
+          "id": "icon_3",
+          "default": "check_circle",
+          "label": "Icon #3",
+          "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+        },
+        {
+          "type": "checkbox",
+          "id": "filled_icon_3",
+          "default": false,
+          "label": "Filled icon #3"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon_3",
+          "label": "Custom icon #3"
+        },
+        {
+          "type": "header",
+          "content": "Container"
+        },
+        {
+          "type": "select",
+          "id": "direction",
+          "options": [
+            {
+              "value": "horizontal",
+              "label": "Horizontal"
+            },
+            {
+              "value": "vertical",
+              "label": "Vertical"
+            }
+          ],
+          "default": "horizontal",
+          "label": "Stacking direction",
+          "info": "Applied when multiple texts are added."
+        },
+        {
+          "type": "range",
+          "id": "column_gap",
+          "min": 0,
+          "max": 6,
+          "step": 0.5,
+          "label": "Stacking spacing",
+          "default": 3
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_bg",
+          "default": false,
+          "label": "Enable background",
+          "info": "The following settings are applied when this option is enabled."
+        },
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background color",
+          "default": "#F3F3F3"
+        },
+        {
+          "type": "range",
+          "id": "corner_radius",
+          "min": 0,
+          "max": 100,
+          "step": 5,
+          "unit": "%",
+          "label": "t:settings_schema.global.settings.corner_radius.label",
+          "default": 40,
+          "info": "Relative to font size"
+        },
+        {
+          "type": "range",
+          "id": "padding",
+          "min": 1,
+          "max": 5,
+          "step": 0.5,
+          "label": "Padding",
+          "default": 3
+        },
+        {
+          "type": "range",
+          "id": "border_size",
+          "min": 0,
+          "max": 5,
+          "step": 1,
+          "label": "Border thickness",
+          "unit": "px",
+          "default": 0
+        },
+        {
+          "type": "color",
+          "id": "border_color",
+          "label": "Border color",
+          "default": "#B7B7B7"
+        }
+      ]
+    },
+    {
+      "type": "icon_with_content",
+      "name": "Icon with content",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Width"
+        },
+        {
+          "type": "select",
+          "id": "block_width",
+          "label": "Width",
+          "options": [
+            {
+              "value": "fixed",
+              "label": "Fixed"
+            },
+            {
+              "value": "unlimited",
+              "label": "Unlimited"
+            }
+          ],
+          "default": "fixed"
+        },
+        {
+          "type": "number",
+          "id": "block_mobile_width",
+          "default": 300,
+          "label": "Mobile width"
+        },
+        {
+          "type": "number",
+          "id": "block_desktop_width",
+          "default": 400,
+          "label": "Desktop width"
+        },
+        {
+          "type": "header",
+          "content": "Icon & content"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "default": "check_circle",
+          "label": "Icon",
+          "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+        },
+        {
+          "type": "checkbox",
+          "id": "filled_icon",
+          "default": false,
+          "label": "Filled icon"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom icon"
+        },
+        {
+          "type": "select",
+          "id": "icon_size",
+          "label": "Icon size",
+          "options": [
+            {
+              "value": "xs",
+              "label": "Extra small"
+            },
+            {
+              "value": "s",
+              "label": "Small"
+            },
+            {
+              "value": "m",
+              "label": "Medium"
+            },
+            {
+              "value": "l",
+              "label": "Large"
+            },
+            {
+              "value": "xl",
+              "label": "Extra large"
+            },
+            {
+              "value": "xxl",
+              "label": "Double extra large"
+            }
+          ],
+          "default": "m"
+        },
+        {
+          "type": "select",
+          "id": "icon_position",
+          "options": [
+            {
+              "value": "above",
+              "label": "Above title & text"
+            },
+            {
+              "value": "next-to-title",
+              "label": "Next to title"
+            },
+            {
+              "value": "next-to-text",
+              "label": "Next to text & title"
+            }
+          ],
+          "label": "Icon position",
+          "default": "next-to-title"
+        },
+        {
+          "type": "select",
+          "id": "icon_color",
+          "options": [
+            {
+              "value": "accent-1",
+              "label": "Accent 1"
+            },
+            {
+              "value": "accent-2",
+              "label": "Accent 2"
+            },
+            {
+              "value": "background-1",
+              "label": "Background 1"
+            },
+            {
+              "value": "background-2",
+              "label": "Background 2"
+            },
+            {
+              "value": "inverse",
+              "label": "Inverse"
+            },
+            {
+              "value": "custom",
+              "label": "Custom"
+            }
+          ],
+          "default": "accent-1",
+          "label": "Icon color"
+        },
+        {
+          "type": "select",
+          "id": "icon_heading_size",
+          "options": [
+            {
+              "value": "h5",
+              "label": "Extra small"
+            },
+            {
+              "value": "h4",
+              "label": "Small"
+            },
+            {
+              "value": "h3",
+              "label": "Medium"
+            },
+            {
+              "value": "h2",
+              "label": "Large"
+            }
+          ],
+          "default": "h3",
+          "label": "Heading size"
+        },
+        {
+          "type": "select",
+          "id": "icon_text_alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left",
+          "label": "Text alignment",
+          "info": "Text is automatically centered if the icon position is set to above title & text."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Icon with content",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Pair text with an icon to focus on your chosen product, collection, or blog post</p>",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Horizontal Ticker",
+      "blocks": [
+        {
+          "type": "text"
+        },
+        {
+          "type": "text"
+        },
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

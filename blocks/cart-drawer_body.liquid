@@ -1,0 +1,77 @@
+<div class="cart-drawer__body">
+  {% if block.blocks.size == 0 %}
+    <h3 class='h3 center'>To customize the cart body, add blocks to the Cart Body block</h3>
+  {% endif %}
+
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "Cart Body",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "cart-drawer_items"
+    },
+    {
+      "type": "cart_progress-bar"
+    },
+    {
+      "type": "cart_checkpoints-bar"
+    },
+    {
+      "type": "cart_countdown-timer"
+    },
+    {
+      "type": "cart_product-upsells"
+    },
+    {
+      "type": "cart_gift"
+    },
+    {
+      "type": "text-with-icon"
+    },
+    {
+      "type": "image"
+    },
+    {
+      "type": "icon-with-text"
+    },
+    {
+      "type": "payment-badges"
+    },
+    {
+      "type": "custom-liquid"
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "heading"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "rating-stars"
+    },
+    {
+      "type": "trustpilot-stars"
+    },
+    {
+      "type": "review-avatars"
+    },
+    {
+      "type": "icon-with-content"
+    },
+    {
+      "type": "reviews"
+    },
+    {
+      "type": "container--cart"
+    }
+  ],
+  "settings": []
+}
+{% endschema %}

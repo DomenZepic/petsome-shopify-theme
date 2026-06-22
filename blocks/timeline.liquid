@@ -1,0 +1,120 @@
+{% liquid
+  assign is_horizontal = false
+  
+  if section.settings.timeline_direction == 'horizontal'
+    assign is_horizontal = true
+    
+    assign items_amount = block.blocks.size
+    assign horizontal_max_items = section.settings.desktop_max_horizontal_points
+    assign horizontal_desktop_items = items_amount
+    assign is_desktop_slider = false
+    if items_amount > horizontal_max_items
+      assign horizontal_desktop_items = horizontal_max_items
+      assign is_desktop_slider = true
+    endif
+
+    if section.settings.content_position == 'left' or section.settings.content_position == 'right'
+      assign desktop_slider_breakpoint_css = 990
+    else
+      assign desktop_slider_breakpoint_css = 750
+    endif
+
+    assign desktop_arrows_position = section.settings.desktop_arrows_position
+    assign mobile_arrows_position = section.settings.mobile_arrows_position
+  endif
+%}
+
+<div class="timeline timeline--{{ section.settings.timeline_direction }} animate-item" data-role="timeline-root">
+  {% if is_horizontal %}
+    <style>
+      @media screen and (min-width: {{ desktop_slider_breakpoint_css }}px) {
+        #Timeline-{{ section.id }} .timeline--horizontal .timeline__items > li {
+          width: calc(100% / {{ horizontal_desktop_items }});
+        }
+        {% if is_desktop_slider %}
+          #Timeline-{{ section.id }} .timeline--horizontal .timeline__items {
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+          }
+        {% else %}
+          #Timeline-{{ section.id }} .timeline__arrows {
+            display: none;
+          }
+        {% endif %}
+      }
+    </style>
+    <timeline-slider>
+  {% endif %}
+  <ol
+    id="Slider-{{ section.id }}"
+    class="timeline__items list-unstyled{% if is_desktop_slider %} timeline__items--desktop-slider{% endif %}"
+    role="list"
+    aria-live="polite"
+  >
+    {% content_for 'blocks' %}
+  </ol>
+  
+  {% if is_horizontal %}
+    <div class="arrows-container{% if section.settings.timeline_direction == 'vertical' %} hidden{% endif %}{% if block.settings.transparent_arrows %} splide--transparent-arrows{% endif %} desktop-{{ desktop_arrows_position }} mobile-{{ mobile_arrows_position }}{% if section.settings.transparent_arrows %} splide--transparent-arrows{% endif %}">
+      <button
+        type="button"
+        class="slider-button--prev splide__arrow splide__arrow--prev color-{{ section.settings.arrows_color_scheme }}"
+        name="previous"
+        aria-label="{{ 'general.slider.previous_slide' | t }}"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false">
+          <path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path>
+        </svg>
+      </button>
+      <button
+        type="button"
+        class="slider-button--next splide__arrow splide__arrow--next color-{{ section.settings.arrows_color_scheme }}"
+        name="next"
+        aria-label="{{ 'general.slider.next_slide' | t }}"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" focusable="false">
+          <path d="m15.5 0.932-4.3 4.38 14.5 14.6-14.5 14.5 4.3 4.4 14.6-14.6 4.4-4.3-4.4-4.4-14.6-14.6z"></path>
+        </svg>
+      </button>
+    </div>
+    </timeline-slider>
+  {% endif %}
+</div>
+
+
+{% schema %}
+{
+  "name": "Timeline",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "timeline-item"
+    }
+  ],
+  "settings": [
+  ],
+  "presets": [
+    {
+      "name": "Timeline",
+      "blocks": [
+        {
+          "type": "timeline-item"
+        },
+        {
+          "type": "timeline-item"
+        },
+        {
+          "type": "timeline-item"
+        },
+        {
+          "type": "timeline-item"
+        },
+        {
+          "type": "timeline-item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

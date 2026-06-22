@@ -1,0 +1,236 @@
+{% liquid
+  assign padding_y = block.settings.padding_y | divided_by: 10.0
+  assign padding_x = block.settings.padding_x | divided_by: 10.0
+%}
+{% if block.blocks.size > 0 %}
+  <style>
+    #HeaderDrawer_Footer-{{ block.id }} {
+      padding: {{ padding_y }}rem {{ padding_x }}rem;
+      {% if block.settings.color_scheme == 'custom' %}
+        --color-background: {{ block.settings.custom_colors_background.red }}, {{ block.settings.custom_colors_background.green }}, {{ block.settings.custom_colors_background.blue }};
+        --gradient-background: {% if block.settings.custom_gradient_background != blank %}{{ block.settings.custom_gradient_background }}{% else %}{{ block.settings.custom_colors_background }}{% endif %};
+        --color-foreground: {{ block.settings.custom_colors_text.red }}, {{ block.settings.custom_colors_text.green }}, {{ block.settings.custom_colors_text.blue }};
+      {% endif %}
+      border-color: rgba(var(--color-foreground), {{ block.settings.separator_opacity | divided_by: 100.0 }});
+      {% if block.settings.drop_shadow %}
+        box-shadow: 0px -{{ block.settings.shadow_offset }}px {{ block.settings.shadow_blur }}px rgb(var(--color-base-{{ block.settings.shadow_color }}), {{ block.settings.shadow_opacity | divided_by: 100.0 }});
+      {% endif %}
+      {% if block.blocks.size == 0 %}
+        display: none;
+      {% endif %}
+    }
+  </style>
+  <div id="HeaderDrawer_Footer-{{ block.id }}" class="header-drawer-v2__footer color-{{ block.settings.color_scheme }} gradient block-margins">
+    {% content_for 'blocks' %}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "header-drawer_account"
+    },
+    {
+      "type": "header-drawer_localization"
+    },
+    {
+      "type": "social-media-icons"
+    },
+    {
+      "type": "custom-liquid"
+    },
+    {
+      "type": "image"
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "button"
+    },
+    {
+      "type": "heading"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "rating-stars"
+    },
+    {
+      "type": "container"
+    },
+    {
+      "type": "trustpilot-stars"
+    },
+    {
+      "type": "review-avatars"
+    },
+    {
+      "type": "icon-with-content"
+    },
+    {
+      "type": "text-with-icon"
+    },
+    {
+      "type": "text-with-icon-new"
+    },
+    {
+      "type": "icon-with-text"
+    },
+    {
+      "type": "reviews"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Styling"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_background",
+      "default": "#FFFFFF",
+      "label": "Background color",
+      "visible_if": "{{ block.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "custom_gradient_background",
+      "label": "Gradient background",
+      "info": "If added, replaces Background color.",
+      "visible_if": "{{ block.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_text",
+      "default": "#2E2A39",
+      "label": "Text color",
+      "visible_if": "{{ block.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "padding_y",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "label": "Vertical padding",
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_x",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "label": "Horizontal padding",
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "separator_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Separator opacity",
+      "default": 10,
+      "unit": "%"
+    },
+    {
+      "type": "checkbox",
+      "id": "drop_shadow",
+      "default": false,
+      "label": "Enable drop shadow"
+    },
+    {
+      "type": "range",
+      "id": "shadow_offset",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "label": "Shadow offset",
+      "default": 1,
+      "unit": "px",
+      "visible_if": "{{ block.settings.drop_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "min": 0,
+      "max": 60,
+      "step": 3,
+      "label": "Shadow blur",
+      "default": 9,
+      "unit": "px",
+      "visible_if": "{{ block.settings.drop_shadow }}"
+    },
+    {
+      "type": "select",
+      "id": "shadow_color",
+      "label": "Shadow color",
+      "options": [
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "text", "label": "Text" }
+      ],
+      "default": "text",
+      "visible_if": "{{ block.settings.drop_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "min": 2,
+      "max": 40,
+      "step": 2,
+      "label": "Shadow opacity",
+      "default": 6,
+      "unit": "%",
+      "visible_if": "{{ block.settings.drop_shadow }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Footer"
+    }
+  ]
+}
+{% endschema %}

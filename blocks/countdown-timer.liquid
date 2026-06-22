@@ -1,0 +1,768 @@
+{% liquid
+  assign has_label = false
+  if block.settings.show_days and block.settings.label_days != blank
+    assign has_label = true
+  endif
+  if block.settings.show_hours and block.settings.label_hours != blank
+    assign has_label = true
+  endif
+  if block.settings.show_minutes and block.settings.label_minutes != blank
+    assign has_label = true
+  endif
+  if block.settings.show_seconds and block.settings.label_seconds != blank
+    assign has_label = true
+  endif
+
+  assign has_margins = true
+  assign is_announcement_bar = false
+  if section.settings.show_separator == true or section.settings.show_separator == false
+    assign has_margins = false
+    assign is_announcement_bar = true
+  endif
+%}
+
+{% if is_announcement_bar %}
+<li class="splide__slide">
+  <div class="splide__slide__container">
+    <div class="announcement-bar__item announcement-bar__item-{{ block.settings.text_alignment }}{% if section.settings.show_separator %} announcement-bar__separator{% endif %}">
+{% endif %}
+  {% render 'countdown-timer', block: block %}
+{% if is_announcement_bar %}
+    </div>
+  </div>
+</li>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Countdown timer",
+  "tag": null,
+  "settings": [
+    { "type": "header", "content": "Time goal" },
+    {
+      "type": "text",
+      "id": "end_time",
+      "label": "Countdown end date and time",
+      "default": "2025-03-26T00:00:00",
+      "info": "The date MUST be in this format: YYYY-MM-DDTHH:MM:SS. Example: 2026-03-26T00:00:00, which is March 26th, 2026 at 12:00 AM."
+    },
+    {
+      "type": "select",
+      "id": "timezone",
+      "label": "Timezone",
+      "options": [
+        { "value": "visitor", "label": "Visitor's local time" },
+        { "value": "fixed", "label": "Fixed UTC offset" }
+      ],
+      "default": "visitor"
+    },
+    {
+      "type": "range",
+      "id": "utc_offset",
+      "label": "UTC Offset",
+      "min": -12,
+      "max": 12,
+      "step": 1,
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "end_behavior",
+      "label": "When countdown ends",
+      "options": [
+        { "value": "hide", "label": "Hide countdown" },
+        { "value": "restart", "label": "Add hours and repeat" },
+        { "value": "next_day", "label": "Repeat next day at same time" }
+      ],
+      "default": "next_day"
+    },
+    {
+      "type": "number",
+      "id": "repeat_hours",
+      "label": "Repeat countdown every X hours",
+      "default": 12
+    },
+    { "type": "header", "content": "Container & layout" },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "Width",
+      "options": [
+        { "value": "full", "label": "Full" },
+        { "value": "fit", "label": "Fit content" }
+      ],
+      "default": "fit"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center",
+      "visible_if": "{{ block.settings.width == 'fit' }}"
+    },
+    {
+      "type": "select",
+      "id": "layout_desktop",
+      "label": "Desktop layout",
+      "options": [
+        { "value": "horizontal", "label": "Horizontal" },
+        { "value": "vertical", "label": "Vertical" }
+      ],
+      "default": "vertical"
+    },
+    {
+      "type": "select",
+      "id": "layout_mobile",
+      "label": "Mobile layout",
+      "options": [
+        { "value": "horizontal", "label": "Horizontal" },
+        { "value": "vertical", "label": "Vertical" }
+      ],
+      "default": "vertical"
+    },
+    {
+      "type": "range",
+      "id": "padding_x",
+      "label": "Horizontal padding",
+      "min": 3,
+      "max": 45,
+      "step": 3,
+      "default": 15,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_y",
+      "label": "Vertical padding",
+      "min": 3,
+      "max": 45,
+      "step": 3,
+      "default": 15,
+      "unit": "px"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<strong>Hurry! Sale ends in:</strong>"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading font size (desktop)",
+      "min": 12,
+      "max": 48,
+      "step": 2,
+      "default": 22
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading font size (mobile)",
+      "min": 12,
+      "max": 36,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "type": "select",
+      "id": "heading_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "background-1",
+      "label": "Heading color"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading custom color",
+      "default": "#000",
+      "visible_if": "{{ block.settings.heading_color_scheme == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "vertical_heading_alignment",
+      "label": "Vertical layout heading alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center",
+      "visible_if": "{{ block.settings.layout_mobile == 'vertical' or block.settings.layout_desktop == 'vertical' }}"
+    },
+    {
+      "type": "select",
+      "id": "bg_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        },
+        {
+          "value": "custom-solid",
+          "label": "Custom"
+        },
+        {
+          "value": "custom-gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "accent-1",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "background_solid",
+      "label": "Custom background color",
+      "default": "#6d388b",
+      "visible_if": "{{ block.settings.bg_color_scheme == 'custom-solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "background_gradient",
+      "label": "Background gradient",
+      "default": "linear-gradient(#FBF4FF, #E6D5F1)",
+      "visible_if": "{{ block.settings.bg_color_scheme == 'custom-gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "border_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "text",
+      "label": "Border color",
+      "visible_if": "{{ block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border custom color",
+      "default": "#000000",
+      "visible_if": "{{ block.settings.border_width > 0 and block.settings.border_color_scheme == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    { "type": "header", "content": "Timer layout" },
+    {
+      "type": "checkbox",
+      "id": "show_days",
+      "label": "Show days",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "label_days",
+      "label": "Label for days",
+      "default": "Days",
+      "visible_if": "{{ block.settings.show_days }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hours",
+      "label": "Show hours",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "label_hours",
+      "label": "Label for hours",
+      "default": "Hrs",
+      "visible_if": "{{ block.settings.show_hours }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_minutes",
+      "label": "Show minutes",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "label_minutes",
+      "label": "Label for minutes",
+      "default": "Mins",
+      "visible_if": "{{ block.settings.show_minutes }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_seconds",
+      "label": "Show seconds",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "label_seconds",
+      "label": "Label for seconds",
+      "default": "Secs",
+      "visible_if": "{{ block.settings.show_seconds }}"
+    },
+    { "type": "header", "content": "Timer colors & design" },
+    {
+      "type": "select",
+      "id": "timer_style",
+      "label": "Timer style",
+      "options": [
+        { "value": "1", "label": "Minimalisic" },
+        { "value": "2", "label": "Boxed - classic" },
+        { "value": "3", "label": "Boxed - labels under" },
+        { "value": "4", "label": "Boxed - separate digits" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "range",
+      "id": "timer_spacing",
+      "label": "Spacing between numbers",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 6,
+      "unit": "px"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_colons",
+      "label": "Enable colon separators",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "timer_colon_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "background-1",
+      "label": "Colons color",
+      "visible_if": "{{ block.settings.enable_colons }}"
+    },
+    {
+      "type": "color",
+      "id": "timer_colon_color",
+      "label": "Colons custom color",
+      "default": "#000",
+      "visible_if": "{{ block.settings.enable_colons and block.settings.timer_colon_color_scheme == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "timer_text_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "background-1",
+      "label": "Numbers color"
+    },
+    {
+      "type": "color",
+      "id": "timer_text_color",
+      "label": "Numbers custom color",
+      "default": "#000",
+      "visible_if": "{{ block.settings.timer_text_color_scheme == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "timer_number_size",
+      "label": "Numbers size",
+      "min": 12,
+      "max": 36,
+      "step": 2,
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "timer_label_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "background-1",
+      "label": "Labels color"
+    },
+    {
+      "type": "color",
+      "id": "timer_label_color",
+      "label": "Labels custom color",
+      "default": "#000",
+      "visible_if": "{{ block.settings.timer_label_color_scheme == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "timer_label_size",
+      "label": "Labels size",
+      "min": 6,
+      "max": 20,
+      "step": 1,
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "timer_label_margin",
+      "label": "Labels top margin",
+      "min": 0,
+      "max": 24,
+      "step": 1,
+      "default": 10,
+      "unit": "px",
+      "info": "This option is automatically optimzied for when labels are below the boxes."
+    },
+    {
+      "type": "header",
+      "content": "Boxed layouts design",
+      "info": "Settings below are only applied if Timer style is set to one of the \"Boxed\" options."
+    },
+    {
+      "type": "range",
+      "id": "timer_padding_x",
+      "label": "Boxes horizontal padding",
+      "min": 4,
+      "max": 28,
+      "step": 2,
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "timer_padding_y",
+      "label": "Boxes vertical padding",
+      "min": 4,
+      "max": 28,
+      "step": 2,
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "select",
+      "id": "timer_bg_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Text"
+        },
+        {
+          "value": "custom-solid",
+          "label": "Custom"
+        },
+        {
+          "value": "custom-gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "inverse",
+      "label": "Boxes background color"
+    },
+    {
+      "type": "color",
+      "id": "timer_bg_solid",
+      "label": "Boxes custom background color",
+      "default": "#000000",
+      "visible_if": "{{ block.settings.timer_bg_color_scheme == 'custom-solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "timer_bg_gradient",
+      "label": "Boxes gradient background",
+      "default": "linear-gradient(190deg, rgba(20, 20, 20, 1) 28%, rgba(53, 53, 53, 1) 86%)",
+      "visible_if": "{{ block.settings.timer_bg_color_scheme == 'custom-gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_width--timer",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "border--timer",
+      "label": "Border",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.border_width--timer > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "timer_border_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "background-1",
+      "label": "Border color",
+      "visible_if": "{{ block.settings.border_width--timer > 0 }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color--timer",
+      "label": "Border custom color",
+      "default": "#000000",
+      "visible_if": "{{ block.settings.timer_border_color_scheme == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius--timer",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Margins",
+      "visible_if": "{{ section.settings.show_separator != true or section.settings.show_separator != false }}"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15,
+      "visible_if": "{{ section.settings.show_separator != true or section.settings.show_separator != false }}"
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15,
+      "visible_if": "{{ section.settings.show_separator != true or section.settings.show_separator != false }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Countdown timer",
+      "category": "Urgency"
+    }
+  ]
+}
+{% endschema %}

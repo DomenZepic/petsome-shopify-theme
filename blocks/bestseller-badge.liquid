@@ -1,0 +1,337 @@
+{%- liquid
+  case block.settings.bg_type
+    when 'color'
+      assign bg_value = block.settings.bg_color
+    when 'gradient'
+      assign bg_value = block.settings.bg_gradient
+    else
+      assign bg_value = 'transparent'
+  endcase
+
+  case block.settings.rank_bg_type
+    when 'color'
+      assign rank_bg_value = block.settings.rank_bg_color
+    when 'gradient'
+      assign rank_bg_value = block.settings.rank_bg_gradient
+    else
+      assign rank_bg_value = 'transparent'
+  endcase
+-%}
+
+<div
+  class="bestseller-badge-block {{ block.settings.visibility }}"
+  style="
+    justify-content: {{ block.settings.alignment }};
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  "
+  {{ block.shopify_attributes }}
+>
+  <div
+    class="bestseller-badge"
+    style="
+      --badge-border-width: {{ block.settings.border_thickness }}px;
+      --badge-border-color: {{ block.settings.border_color }};
+      --badge-radius: {{ block.settings.corner_radius }}px;
+      --badge-bg: {{ bg_value }};
+      --rank-bg: {{ rank_bg_value }};
+      --rank-size: {{ block.settings.rank_size }}px;
+      --rank-color: {{ block.settings.rank_color }};
+      --rank-pad-y: {{ block.settings.rank_padding_y }};
+      --rank-pad-x: {{ block.settings.rank_padding_x }};
+      --line1-size: {{ block.settings.line1_size }}px;
+      --line1-color: {{ block.settings.line1_color }};
+      --line2-size: {{ block.settings.line2_size }}px;
+      --line2-color: {{ block.settings.line2_color }};
+    "
+  >
+    {%- if block.settings.rank_text != blank -%}
+      <div class="bestseller-badge__rank font-{{ block.settings.rank_font }}">
+        {{ block.settings.rank_text }}
+      </div>
+    {%- endif -%}
+    <div class="bestseller-badge__content">
+      <span class="bestseller-badge__line-1 font-{{ block.settings.line1_font }}">{{ block.settings.line1_text }}</span>
+      {%- if block.settings.line2_text != blank -%}
+        <span class="bestseller-badge__line-2 font-{{ block.settings.line2_font }}">{{ block.settings.line2_text }}</span>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Bestseller badge",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout & styling"
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        { "value": "desktop-hidden", "label": "Mobile only" },
+        { "value": "mobile-hidden", "label": "Desktop only" },
+        { "value": "always-display", "label": "All devices" }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "range",
+      "id": "border_thickness",
+      "label": "Border thickness",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#000000",
+      "visible_if": "{{ block.settings.border_thickness > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "bg_type",
+      "label": "Background",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "color", "label": "Color" },
+        { "value": "gradient", "label": "Gradient" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#f2f2f2",
+      "visible_if": "{{ block.settings.bg_type == 'color' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_gradient",
+      "label": "Background gradient",
+      "default": "linear-gradient(135deg, rgba(242,242,242,1) 0%, rgba(255,255,255,1) 100%)",
+      "visible_if": "{{ block.settings.bg_type == 'gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Rank"
+    },
+    {
+      "type": "text",
+      "id": "rank_text",
+      "label": "Text",
+      "default": "#1",
+      "info": "Leave empty to hide the rank section."
+    },
+    {
+      "type": "range",
+      "id": "rank_size",
+      "label": "Text size",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 22
+    },
+    {
+      "type": "select",
+      "id": "rank_font",
+      "label": "Font",
+      "options": [
+        { "value": "body", "label": "Body" },
+        { "value": "body-bold", "label": "Body - bold" },
+        { "value": "headings", "label": "Heading" }
+      ],
+      "default": "body-bold"
+    },
+    {
+      "type": "color",
+      "id": "rank_color",
+      "label": "Text color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "rank_padding_y",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 30,
+      "info": "Relative to text size."
+    },
+    {
+      "type": "range",
+      "id": "rank_padding_x",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "%",
+      "default": 50,
+      "info": "Relative to text size."
+    },
+    {
+      "type": "select",
+      "id": "rank_bg_type",
+      "label": "Background",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "color", "label": "Color" },
+        { "value": "gradient", "label": "Gradient" }
+      ],
+      "default": "color"
+    },
+    {
+      "type": "color",
+      "id": "rank_bg_color",
+      "label": "Background color",
+      "default": "#000000",
+      "visible_if": "{{ block.settings.rank_bg_type == 'color' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "rank_bg_gradient",
+      "label": "Background gradient",
+      "default": "linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(51,51,51,1) 100%)",
+      "visible_if": "{{ block.settings.rank_bg_type == 'gradient' }}"
+    },
+    {
+      "type": "header",
+      "content": "Text line #1"
+    },
+    {
+      "type": "text",
+      "id": "line1_text",
+      "label": "Text",
+      "default": "BESTSELLER OF 2026"
+    },
+    {
+      "type": "range",
+      "id": "line1_size",
+      "label": "Text size",
+      "min": 8,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 13
+    },
+    {
+      "type": "select",
+      "id": "line1_font",
+      "label": "Font",
+      "options": [
+        { "value": "body", "label": "Body" },
+        { "value": "body-bold", "label": "Body - bold" },
+        { "value": "headings", "label": "Heading" }
+      ],
+      "default": "body-bold"
+    },
+    {
+      "type": "color",
+      "id": "line1_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Text line #2"
+    },
+    {
+      "type": "text",
+      "id": "line2_text",
+      "label": "Text",
+      "default": "Most [adjective] [product]",
+      "info": "Leave empty to hide."
+    },
+    {
+      "type": "range",
+      "id": "line2_size",
+      "label": "Text size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "select",
+      "id": "line2_font",
+      "label": "Font",
+      "options": [
+        { "value": "body", "label": "Body" },
+        { "value": "body-bold", "label": "Body - bold" },
+        { "value": "headings", "label": "Heading" }
+      ],
+      "default": "body"
+    },
+    {
+      "type": "color",
+      "id": "line2_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Block margin"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top margin",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom margin",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bestseller badge",
+      "category": "Promotions"
+    }
+  ]
+}
+{% endschema %}

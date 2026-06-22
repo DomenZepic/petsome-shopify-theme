@@ -1,0 +1,64 @@
+{% liquid
+  if section.settings.product_images == 'all' or section.settings.product_images == 'one'
+    assign product = section.settings.product
+  endif
+  assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
+%}
+
+{% render 'share-button',
+  block: block,
+  share_link: share_url
+%}
+
+{% schema %}
+{
+  "name": "Share",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "share_label",
+      "label": "t:sections.main-product.blocks.share.settings.text.label",
+      "default": "Share"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-product.blocks.share.settings.featured_image_info.content"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-product.blocks.share.settings.title_info.content"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Share",
+      "category": "Buttons"
+    }
+  ]
+}
+{% endschema %}

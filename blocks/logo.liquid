@@ -1,0 +1,262 @@
+{% liquid
+  assign image = null
+
+  if block.settings.choose_logo == 'secondary' and settings.secondary_logo != blank
+    assign image = settings.secondary_logo
+  elsif block.settings.choose_logo == 'mobile' and settings.logo_mobile != blank
+    assign image = settings.logo_mobile
+  elsif block.settings.choose_logo == 'mobile-secondary' and settings.secondary_logo_mobile != blank
+    assign image = settings.secondary_logo_mobile
+  endif
+
+  if image == null or image == blank
+    assign image = settings.logo
+  endif
+%}
+
+{%- if image != blank -%}
+  {% capture logo_image %}
+    {{-
+      image
+      | image_url: width: 3840
+      | image_tag:
+        width: image.width,
+        widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+        height: image.height,
+        class: 'logo-block__image',
+        alt: shop.name,
+        sizes: '(min-width: 750px) calc(var(--logo-width)), 100vw'
+    -}}
+  {% endcapture %}
+{%- endif -%}
+
+<div
+  class="logo-block custom-padding"
+  style="
+    {% if block.settings.logo_wrapper_visibility %}border: 1px solid #000{% endif %};
+    {% if block.settings.unit == 'percent' %}
+      --logo-width: {{ block.settings.percent_width }}%;
+    {% else %}
+      --logo-width: auto;
+      --logo-height: {{ block.settings.pixel_height }}px;
+    {% endif %}
+    {% if block.settings.custom_mobile_size %}
+      {% if block.settings.unit_mobile == 'percent' %}
+        --logo-width-mobile: {{ block.settings.percent_width_mobile }}%;
+        --logo-height-mobile: auto;
+      {% else %}
+        --logo-width-mobile: auto;
+        --logo-height-mobile: {{ block.settings.pixel_height_mobile }}px;
+      {% endif %}
+    {% endif %}
+    {% render 'custom-padding', settings: block.settings %}
+  "
+  role="img"
+  aria-label="{{ shop.name }}"
+>
+  {% if logo_image %}
+    {% if block.settings.link_logo %}
+      <a href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+        {{ logo_image }}
+      </a>
+    {% else %}
+      {{ logo_image }}
+    {% endif %}
+  {% else %}
+    <p>{{ shop.name }}</p>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Logo",
+  "settings": [
+    {
+      "type": "select",
+      "id": "choose_logo",
+      "label": "Choose logo",
+      "options": [
+        {
+          "value": "desktop",
+          "label": "Desktop logo"
+        },
+        {
+          "value": "secondary",
+          "label": "Desktop secondary logo"
+        },
+        {
+          "value": "mobile",
+          "label": "Mobile logo"
+        },
+        {
+          "value": "mobile-secondary",
+          "label": "Mobile secondary logo"
+        }
+      ],
+      "default": "desktop"
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.header.settings.logo_help.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "logo_wrapper_visibility",
+      "label": "Show logo wrapper in edit mode",
+      "default": false,
+    },
+    {
+      "type": "checkbox",
+      "id": "link_logo",
+      "label": "Make logo a link to homepage",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Size"
+    },
+    {
+      "type": "select",
+      "id": "unit",
+      "label": "Unit",
+      "options": [
+        {
+          "value": "pixel",
+          "label": "Pixel"
+        },
+        {
+          "value": "percent",
+          "label": "Percent"
+        }
+      ],
+      "default": "pixel"
+    },
+    {
+      "type": "range",
+      "id": "percent_width",
+      "label": "Width",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.unit == 'percent' }}"
+    },
+    {
+      "type": "range",
+      "id": "pixel_height",
+      "label": "Height",
+      "min": 16,
+      "max": 320,
+      "step": 8,
+      "unit": "px",
+      "default": 64,
+      "visible_if": "{{ block.settings.unit == 'pixel' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "custom_mobile_size",
+      "label": "Custom mobile size",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Mobile size",
+      "visible_if": "{{ block.settings.custom_mobile_size == true }}"
+    },
+    {
+      "type": "select",
+      "id": "unit_mobile",
+      "label": "Unit",
+      "options": [
+        {
+          "value": "pixel",
+          "label": "Pixel"
+        },
+        {
+          "value": "percent",
+          "label": "Percent"
+        }
+      ],
+      "default": "pixel",
+      "visible_if": "{{ block.settings.custom_mobile_size == true }}"
+    },
+    {
+      "type": "range",
+      "id": "percent_width_mobile",
+      "label": "Width",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.unit_mobile == 'percent' and block.settings.custom_mobile_size == true}}"
+    },
+    {
+      "type": "range",
+      "id": "pixel_height_mobile",
+      "label": "Height",
+      "min": 16,
+      "max": 160,
+      "step": 8,
+      "unit": "px",
+      "default": 120,
+      "visible_if": "{{ block.settings.unit_mobile == 'pixel' and block.settings.custom_mobile_size == true}}"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-left",
+      "label": "Left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-right",
+      "label": "Right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Logo",
+      "category": "Basic",
+      "settings": {
+        "unit": "pixel",
+        "pixel_height": 48
+      }
+    }
+  ]
+}
+{% endschema %}

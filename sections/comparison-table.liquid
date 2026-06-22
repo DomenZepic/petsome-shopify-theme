@@ -1,0 +1,1653 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .comparison-table-{{ section.id }} {
+    --border-radius: {{ section.settings.corner_radius | divided_by: 10.0 }}rem;
+  }
+  {% if section.settings.style != 'minimal' %}
+    .comparison-table-{{ section.id }} tr:not(:last-of-type) .highlighted-cell {
+      --cell-separator-opacity: {{ section.settings.highlighted_separator_opacity | divided_by: 100.0 }};
+    }
+    .comparison-table-{{ section.id }} tr:not(:last-of-type) .regular-cell {
+      --cell-separator-opacity: {{ section.settings.regular_separator_opacity | divided_by: 100.0 }};
+    }
+    .comparison-table-{{ section.id }} tr:nth-child(2n) .highlighted-cell {
+      --cell-overlay-opacity: {{ section.settings.highlighted_overlay_opacity | divided_by: 100.0 }};
+    }
+    .comparison-table-{{ section.id }} tr:nth-child(2n) .regular-cell {
+      --cell-overlay-opacity: {{ section.settings.regular_overlay_opacity | divided_by: 100.0 }};
+    }
+  {% endif %}
+  {% if section.settings.style == 'minimal' %}
+    .comparison-table-{{ section.id }} {
+      --border-opacity: {{ section.settings.minimalistic_border_opacity | divided_by: 100.0 }};
+    }
+  {% endif %}
+
+  .color-scheme-{{ section.id }}.color-custom {
+    --color-background: {{ section.settings.custom_colors_background.red }}, {{ section.settings.custom_colors_background.green }}, {{ section.settings.custom_colors_background.blue }};
+    --gradient-background: {% if section.settings.custom_gradient_background != blank %}{{ section.settings.custom_gradient_background }}{% else %}{{ section.settings.custom_colors_background }}{% endif %};
+    {% if section.settings.custom_image_background != blank %}
+      {% # theme-check-disable %}
+      --gradient-background: url('{{ section.settings.custom_image_background | img_url: 'master' }}') center center / cover no-repeat;
+      {% # theme-check-enable %}
+    {% endif %}
+    --color-foreground: {{ section.settings.custom_colors_text.red }}, {{ section.settings.custom_colors_text.green }}, {{ section.settings.custom_colors_text.blue }};
+    --color-button: {{ section.settings.custom_colors_solid_button_background.red }}, {{ section.settings.custom_colors_solid_button_background.green }}, {{ section.settings.custom_colors_solid_button_background.blue }};
+    --color-button-text: {{ section.settings.custom_colors_solid_button_text.red }}, {{ section.settings.custom_colors_solid_button_text.green }}, {{ section.settings.custom_colors_solid_button_text.blue }};
+    --color-base-outline-button-labels: {{ section.settings.custom_colors_outline_button.red }}, {{ section.settings.custom_colors_outline_button.green }}, {{ section.settings.custom_colors_outline_button.blue }};
+  }
+  {% if section.settings.custom_mobile_image_background != blank %}
+    @media screen and (max-width: 740px) {
+      .color-scheme-{{ section.id }}.color-custom {
+        {% # theme-check-disable %}
+        --gradient-background: url('{{ section.settings.custom_mobile_image_background | img_url: 'master' }}') center center / cover no-repeat;
+        {% # theme-check-enable %}
+      }
+    }
+  {% endif %}
+  {% if section.settings.pattern_bg != 'none' %}
+    {% render 'pattern-background' %}
+  {% endif %}
+
+  .highlighted-color-{{ section.id }}.color-custom {
+    --color-background: {{ section.settings.custom_colors_highlighted_background.red }}, {{ section.settings.custom_colors_highlighted_background.green }}, {{ section.settings.custom_colors_highlighted_background.blue }};
+    --color-foreground: {{ section.settings.custom_colors_highlighted_text.red }}, {{ section.settings.custom_colors_highlighted_text.green }}, {{ section.settings.custom_colors_highlighted_text.blue }};
+  }
+
+  .other-cells-color-{{ section.id }}.color-custom {
+    --color-background: {{ section.settings.custom_colors_others_background.red }}, {{ section.settings.custom_colors_others_background.green }}, {{ section.settings.custom_colors_others_background.blue }};
+    --color-foreground: {{ section.settings.custom_colors_others_text.red }}, {{ section.settings.custom_colors_others_text.green }}, {{ section.settings.custom_colors_others_text.blue }};
+  }
+{%- endstyle -%}
+
+<div class="color-scheme-{{ section.id }} color-{{ section.settings.color_scheme }} gradient content-for-grouping animate-section animate--hidden isolate {{ section.settings.visibility }}">
+  {% if section.settings.display_id %}
+    <copy-button class="section-id-btn button" data-content="#shopify-section-{{ section.id }}" data-success="false">
+      <span class="copy-text">Click to copy section ID</span>
+      <span class="copy-success">ID copied successfully!</span>
+    </copy-button>
+  {% endif %}
+  <div class="page-width section-{{ section.id }}-padding">
+    <div class="content-and-comparison-table section-group__container__child-grid{% if section.settings.layout == 'table_first' %} content-and-comparison-table--table-first{% endif %}{% if section.settings.title == blank and section.settings.text == blank %} content-and-comparison-table--no-content{% endif %}">
+      {% assign content_index = 0 %}
+      <div class="content-container content-rte desktop-{{ section.settings.desktop_alignment }} mobile-{{ section.settings.mobile_content_alignment }} animate-item animate-item--child index-0{% if section.settings.layout == 'table_first' %} desktop-index-1{% endif %}">
+        {%- unless section.settings.title == blank -%}
+          {% assign content_index = 1 %}
+          {% render 'section-title' %}
+        {%- endunless -%}
+        {%- unless section.settings.text == blank -%}
+          {% assign content_index = 1 %}
+          <div class="rte">
+            {{ section.settings.text }}
+          </div>
+        {%- endunless -%}
+        {%- if section.settings.button_label != blank -%}
+          <a
+            {% if section.settings.link %}
+              href="{{ section.settings.link }}"
+            {% else %}
+              role="link" aria-disabled="true"
+            {% endif %}
+            class="button mb-1em {% if section.settings.button_style_secondary %}button--secondary{% else %}button--primary{% endif %}"
+          >
+            {{- section.settings.button_label | escape -}}
+          </a>
+        {%- endif -%}
+        {%- if section.settings.atc_button_label != blank -%}
+          {% if section.settings.atc_product == blank %}
+            <button
+              id="SectionAtcBtn-{{ section.id }}"
+              type="button"
+              class="button mb-1em main-product-atc button--has-spinner"
+              {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
+                disabled
+              {% endif %}
+            >
+              {{ section.settings.atc_button_label }}
+              <div class="loading-overlay__spinner">
+                <svg
+                  aria-hidden="true"
+                  focusable="false"
+                  class="spinner"
+                  viewBox="0 0 66 66"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                </svg>
+              </div>
+            </button>
+          {% else %}
+            {% assign product_form_id = 'section-product-form-' | append: section.id %}
+            {% render 'separate-atc-btn',
+              product: section.settings.atc_product,
+              product_form_id: product_form_id,
+              label: section.settings.atc_button_label,
+              skip_cart: section.settings.atc_skip_cart
+            %}
+          {% endif %}
+        {%- endif -%}
+      </div>
+      <div class="comparison-table-container flex-center animate-item animate-item--child index-{{ content_index }}{% if section.settings.layout == 'table_first' %} desktop-index-0{% endif %}">
+        {% liquid
+          assign number_of_competitors = section.settings.number_of_competitors
+          if section.settings.style == 'minimal'
+            assign number_of_competitors = 1
+          endif
+        %}
+        <table class="comparison-table comparison-table--{{ section.settings.style }} comparison-table-{{ section.id }}">
+          <thead class="isolate">
+            <tr>
+              <th>&nbsp</th>
+              <th
+                align="center"
+                class="comparison-table__logo{% if section.settings.style == 'centered' %} highlighted-color-{{ section.id }} color-{{ section.settings.highlighted_color_scheme }}{% endif %}"
+                style="--mobile-logo-width: {{ section.settings.mobile_logo_width }}px;--font-size: {{ section.settings.us_label_size | divided_by: 10.0 }}rem;"
+              >
+                {%- if section.settings.logo != blank -%}
+                  {%- assign logo_width = section.settings.logo_width -%}
+                  {%- assign logo_height = logo_width | divided_by: section.settings.logo.aspect_ratio -%}
+                  {{
+                    section.settings.logo
+                    | image_url: width: 400
+                    | image_tag: width: logo_width, height: logo_height, alt: shop.name
+                  }}
+                {%- else -%}
+                  {{ section.settings.us_label | replace: '[shop_name]', shop.name }}
+                {%- endif -%}
+              </th>
+              {% for i in (1..number_of_competitors) %}
+                {% liquid
+                  if i == 1
+                    assign mobile_logo_width = section.settings.others_mobile_logo_width
+                    assign logo = section.settings.others_logo
+                    assign logo_width = section.settings.others_logo_width
+                    assign logo_height = logo_width | divided_by: section.settings.others_logo.aspect_ratio
+                    assign label = section.settings.others_label
+                    assign label_size = section.settings.others_label_size
+                  elsif i == 2
+                    assign mobile_logo_width = section.settings.others_2_mobile_logo_width
+                    assign logo = section.settings.others_2_logo
+                    assign logo_width = section.settings.others_2_logo_width
+                    assign logo_height = logo_width | divided_by: section.settings.others_2_logo.aspect_ratio
+                    assign label = section.settings.others_2_label
+                    assign label_size = section.settings.others_2_label_size
+                  else
+                    assign mobile_logo_width = section.settings.others_3_mobile_logo_width
+                    assign logo = section.settings.others_3_logo
+                    assign logo_width = section.settings.others_3_logo_width
+                    assign logo_height = logo_width | divided_by: section.settings.others_3_logo.aspect_ratio
+                    assign label = section.settings.others_3_label
+                    assign label_size = section.settings.others_3_label_size
+                  endif
+                %}
+                <th
+                  align="center"
+                  class="comparison-table__others"
+                  style="--mobile-logo-width: {{ mobile_logo_width }}px;--font-size: {{ label_size | divided_by: 10.0 }}rem;"
+                >
+                  {%- if logo != blank -%}
+                    {{ logo | image_url: width: 400 | image_tag: width: logo_width, height: logo_height, alt: label }}
+                  {%- else -%}
+                    {{ label }}
+                  {%- endif -%}
+                </th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody class="isolate">
+            {% liquid
+              if section.settings.checkmark_style == 'solid' or section.settings.style == 'minimal'
+                assign solid_checkmark = true
+              else
+                assign solid_checkmark = false
+              endif
+              if section.settings.x_style == 'solid' or section.settings.style == 'minimal'
+                assign solid_x = true
+              else
+                assign solid_x = false
+              endif
+            %}
+            {%- for block in section.blocks -%}
+              <tr>
+                <td
+                  align="center"
+                  class="comparison-table__row-name{% if section.settings.style == 'centered' %} other-cells-color-{{ section.id }} color-{{ section.settings.other_cells_color_scheme }} regular-cell{% elsif section.settings.style == 'classic' %} highlighted-color-{{ section.id }} color-{{ section.settings.highlighted_color_scheme }} highlighted-cell{% endif %}"
+                  {{ block.shopify_attributes }}
+                >
+                  {{ block.settings.benefit }}
+                </td>
+                <td
+                  align="center"
+                  class="{% if section.settings.style == 'centered' %}highlighted-color-{{ section.id }} color-{{ section.settings.highlighted_color_scheme }} highlighted-cell{% elsif section.settings.style == 'classic' %}other-cells-color-{{ section.id }} color-{{ section.settings.other_cells_color_scheme }} regular-cell{% endif %}"
+                >
+                  {%- if block.settings.us -%}
+                    <div
+                      class="comparison-table__icon flex-center{% if solid_checkmark %} comparison-table__icon--solid{% endif %}"
+                      style="--icon-color:{{ section.settings.checkmark_color }};--bg-color:{{ section.settings.checkmark_bg_color }}"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path fill='currentColor' d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>
+                      </svg>
+                    </div>
+                  {%- else -%}
+                    <div
+                      class="comparison-table__icon flex-center{% if solid_x %} comparison-table__icon--solid{% endif %}"
+                      style="{% if section.settings.opposite_icon_colors == 'original' %}--icon-color:{{ section.settings.x_color }};--bg-color:{{ section.settings.x_bg_color }}{% else %}--icon-color:{{ section.settings.checkmark_color }};--bg-color:{{ section.settings.checkmark_bg_color }}{% endif %}"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                        <path fill='currentColor' d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+                      </svg>
+                    </div>
+                  {%- endif -%}
+                </td>
+                {% for i in (1..number_of_competitors) %}
+                  {% liquid
+                    if i == 1
+                      assign is_checkmark = block.settings.others
+                    elsif i == 2
+                      assign is_checkmark = block.settings.others_2
+                    else
+                      assign is_checkmark = block.settings.others_3
+                    endif
+                  %}
+                  <td
+                    align="center"
+                    class="regular-cell {% unless section.settings.style == 'minimal' %}other-cells-color-{{ section.id }} color-{{ section.settings.other_cells_color_scheme }}{% endunless %}"
+                  >
+                    {%- if is_checkmark -%}
+                      <div
+                        class="comparison-table__icon flex-center{% if solid_checkmark %} comparison-table__icon--solid{% endif %}"
+                        style="{% if section.settings.opposite_icon_colors == 'original' %}--icon-color:{{ section.settings.checkmark_color }};--bg-color:{{ section.settings.checkmark_bg_color }}{% else %}--icon-color:{{ section.settings.x_color }};--bg-color:{{ section.settings.x_bg_color }}{% endif %}"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                          <path fill='currentColor' d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/>
+                        </svg>
+                      </div>
+                    {%- else -%}
+                      <div
+                        class="comparison-table__icon flex-center{% if solid_x %} comparison-table__icon--solid{% endif %}"
+                        style="--icon-color:{{ section.settings.x_color }};--bg-color:{{ section.settings.x_bg_color }}"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
+                          <path fill='currentColor' d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+                        </svg>
+                      </div>
+                    {%- endif -%}
+                  </td>
+                {%- endfor -%}
+              </tr>
+            {%- endfor -%}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Comparison table",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "display_id",
+      "label": "Display section ID",
+      "info": "ID is used in the Sections group section to merge 2 sections. ID can also be put inside any button link and the button will scroll to this section.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Comparison table",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "title_highlight_1",
+      "label": "Heading words highlight 1",
+      "info": "Put words in BOLD to highlight them with this style.",
+      "options": [
+        {
+          "value": "solid-color",
+          "label": "Color"
+        },
+        {
+          "value": "gradient-color",
+          "label": "Gradient"
+        },
+        {
+          "value": "bg-color",
+          "label": "Background"
+        },
+        {
+          "value": "underline-solid",
+          "label": "Underline"
+        },
+        {
+          "value": "underline-gradient",
+          "label": "Gradient underline"
+        },
+        {
+          "value": "line-1",
+          "label": "Line 1"
+        },
+        {
+          "value": "line-2",
+          "label": "Line 2"
+        },
+        {
+          "value": "line-3",
+          "label": "Line 3"
+        }
+      ],
+      "default": "solid-color"
+    },
+    {
+      "type": "color_background",
+      "id": "title_highlight_1_gradient",
+      "label": "Text gradient",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'gradient-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_1_bg-color",
+      "label": "Text background color",
+      "default": "#F9EFFF",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_1_color",
+      "label": "Text color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'solid-color' or section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-1_border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-1_border_width",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "select",
+      "id": "highlighted-1_border",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ section.settings.highlighted-1_border_width > 0 and section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "highlighted-1_border_color",
+      "label": "Border color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.highlighted-1_border_width > 0 and section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-1_padding-block",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.3,
+      "unit": "%",
+      "info": "Relative to font size",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-1_padding-inline",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "unit": "%",
+      "default": 0.3,
+      "info": "Relative to font size",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_1_underline-thickness",
+      "label": "Underline thickness",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "default": 2,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'underline-solid' or section.settings.title_highlight_1 == 'underline-gradient' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_1_underline-color",
+      "label": "Underline color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'underline-solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "title_highlight_1_underline-color--gradient",
+      "label": "Underline gradient color",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'underline-gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_1_underline-color-position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Vertical position",
+      "unit": "%",
+      "default": 25,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'underline-solid' or section.settings.title_highlight_1 == 'underline-gradient' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_1_handwritten-color",
+      "label": "Stroke color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'line-1' or section.settings.title_highlight_1 == 'line-2' or section.settings.title_highlight_1 == 'line-3' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_1_handwritten-stroke-width",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Stroke thickness",
+      "unit": "px",
+      "default": 3,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'line-1' or section.settings.title_highlight_1 == 'line-2' or section.settings.title_highlight_1 == 'line-3' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_1_handwritten-position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Vertical position",
+      "unit": "%",
+      "default": 60,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'line-1' or section.settings.title_highlight_1 == 'line-2' or section.settings.title_highlight_1 == 'line-3' }}"
+    },
+    {
+      "type": "select",
+      "id": "title_highlight_2",
+      "label": "Heading words highlight 2",
+      "info": "Put words in ITALIC to highlight them with this style (keep it 'None' if you want to use default italic style).",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid-color",
+          "label": "Color"
+        },
+        {
+          "value": "gradient-color",
+          "label": "Gradient"
+        },
+        {
+          "value": "bg-color",
+          "label": "Background"
+        },
+        {
+          "value": "underline-solid",
+          "label": "Underline"
+        },
+        {
+          "value": "underline-gradient",
+          "label": "Gradient underline"
+        },
+        {
+          "value": "line-1",
+          "label": "Line 1"
+        },
+        {
+          "value": "line-2",
+          "label": "Line 2"
+        },
+        {
+          "value": "line-3",
+          "label": "Line 3"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color_background",
+      "id": "title_highlight_2_gradient",
+      "label": "Text gradient",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'gradient-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_2_bg-color",
+      "label": "Text background color",
+      "default": "#F9EFFF",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_2_color",
+      "label": "Text color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'solid-color' or section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-2_border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-2_border_width",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0,
+      "visible_if": "{{  section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "select",
+      "id": "highlighted-2_border",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ section.settings.highlighted-2_border_width > 0 and section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "highlighted-2_border_color",
+      "label": "Border color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.highlighted-2_border_width > 0 and section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-2_padding-block",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.3,
+      "unit": "%",
+      "info": "Relative to font size",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-2_padding-inline",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "unit": "%",
+      "default": 0.3,
+      "info": "Relative to font size",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_2_underline-thickness",
+      "label": "Underline thickness",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "default": 2,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'underline-solid' or section.settings.title_highlight_2 == 'underline-gradient' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_2_underline-color",
+      "label": "Underline color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'underline-solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "title_highlight_2_underline-color--gradient",
+      "label": "Underline gradient color",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'underline-gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_2_underline-color-position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Vertical position",
+      "unit": "%",
+      "default": 25,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'underline-solid' or section.settings.title_highlight_2 == 'underline-gradient' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_2_handwritten-color",
+      "label": "Stroke color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'line-1' or section.settings.title_highlight_2 == 'line-2' or section.settings.title_highlight_2 == 'line-3' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_2_handwritten-stroke-width",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Stroke thickness",
+      "unit": "px",
+      "default": 3,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'line-1' or section.settings.title_highlight_2 == 'line-2' or section.settings.title_highlight_2 == 'line-3' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_2_handwritten-position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Vertical position",
+      "unit": "%",
+      "default": 60,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'line-1' or section.settings.title_highlight_2 == 'line-2' or section.settings.title_highlight_2 == 'line-3' }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h3",
+          "label": "Extra small"
+        },
+        {
+          "value": "h2",
+          "label": "Small"
+        },
+        {
+          "value": "h1",
+          "label": "Medium"
+        },
+        {
+          "value": "h0",
+          "label": "Large"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "h1",
+      "label": "Heading size"
+    },
+    {
+      "type": "range",
+      "id": "custom_desktop_size",
+      "min": 24,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "default": 39,
+      "label": "Custom desktop size",
+      "visible_if": "{{ section.settings.heading_size == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "custom_mobile_size",
+      "min": 20,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 28,
+      "label": "Custom mobile size",
+      "visible_if": "{{ section.settings.heading_size == 'custom' }}"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "default": "<p>Talk about how and why is your brand better than the others.</p>",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.slideshow.blocks.slide.settings.button_label.label",
+      "info": "t:sections.slideshow.blocks.slide.settings.button_label.info"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.slideshow.blocks.slide.settings.link.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_style_secondary",
+      "label": "t:sections.slideshow.blocks.slide.settings.secondary_style.label",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "atc_button_label",
+      "label": "Add to Cart button label",
+      "info": "Leave the label blank to hide the Add to Cart button."
+    },
+    {
+      "type": "product",
+      "id": "atc_product",
+      "label": "ATC Custom product",
+      "info": "IMPORTANT: If empty, the button will add the main product FROM THE PRODUCT PAGE to cart (INCLUDING the selected variant/quantity, upsells etc.)"
+    },
+    {
+      "type": "checkbox",
+      "id": "atc_skip_cart",
+      "label": "ATC Custom product skip cart"
+    },
+    {
+      "type": "select",
+      "id": "desktop_alignment",
+      "label": "Desktop content alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "label": "Mobile content alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_background",
+      "default": "#FFFFFF",
+      "label": "Custom background color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "custom_gradient_background",
+      "label": "Custom gradient background",
+      "info": "If added, replaces Background color when applicable.",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_image_background",
+      "label": "Custom image background",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_mobile_image_background",
+      "label": "Custom mobile image background",
+      "info": "If empty, the Custom image background will also be applied to mobile devices",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' and section.settings.custom_image_background != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_text",
+      "default": "#2E2A39",
+      "label": "Custom text color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_solid_button_background",
+      "default": "#dd1d1d",
+      "label": "Custom solid button background",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_solid_button_text",
+      "default": "#ffffff",
+      "label": "Custom solid button label color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_outline_button",
+      "default": "#dd1d1d",
+      "label": "Custom outline button color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "pattern_bg",
+      "label": "Background pattern",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "dotted",
+          "label": "Dots"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "curved-grid",
+          "label": "Curved grid"
+        },
+        {
+          "value": "diagonal-stripes",
+          "label": "Stripes"
+        },
+        {
+          "value": "zigzag",
+          "label": "ZigZag"
+        },
+        {
+          "value": "arrow-pattern",
+          "label": "3D Boxes"
+        },
+        {
+          "value": "radial-rings",
+          "label": "Rings"
+        },
+        {
+          "value": "diamond-grid-1",
+          "label": "Diamond grid 1"
+        },
+        {
+          "value": "diamond-grid-2",
+          "label": "Diamond grid 2"
+        },
+        {
+          "value": "quatrefoils",
+          "label": "Quatrefoils"
+        },
+        {
+          "value": "ovals",
+          "label": "Ovals"
+        },
+        {
+          "value": "hexagons",
+          "label": "Hexagons"
+        },
+        {
+          "value": "curvy",
+          "label": "Curvy"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "pattern_color",
+      "label": "Pattern color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_size",
+      "min": 4,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Pattern size / spacing",
+      "default": 20,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_thickness",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Line / dot thickness",
+      "default": 2,
+      "visible_if": "{{ section.settings.pattern_bg == 'dotted' or section.settings.pattern_bg == 'grid' or section.settings.pattern_bg == 'diagonal-stripes' or section.settings.pattern_bg == 'radial-rings' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_angle",
+      "min": 0,
+      "max": 180,
+      "step": 15,
+      "unit": "deg",
+      "label": "Stripe angle",
+      "default": 45,
+      "visible_if": "{{ section.settings.pattern_bg == 'diagonal-stripes' }}"
+    },
+    {
+      "type": "select",
+      "id": "pattern_opacity_mode",
+      "label": "Opacity type",
+      "default": "low",
+      "options": [
+        {
+          "value": "low",
+          "label": "Low"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity_low",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 7,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' and section.settings.pattern_opacity_mode == 'low' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity_normal",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 80,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' and section.settings.pattern_opacity_mode == 'normal' }}"
+    },
+    {
+      "type": "header",
+      "content": "Table"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "table_first",
+          "label": "Table first"
+        },
+        {
+          "value": "table_second",
+          "label": "Table second"
+        }
+      ],
+      "default": "table_second",
+      "label": "Desktop table placement"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "options": [
+        {
+          "value": "classic",
+          "label": "Classic"
+        },
+        {
+          "value": "centered",
+          "label": "Centered"
+        },
+        {
+          "value": "minimal",
+          "label": "Minimalistic"
+        }
+      ],
+      "default": "classic",
+      "label": "Table style"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "number_of_competitors",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Number of displayed competitors",
+      "default": 1,
+      "info": "Multiple competitors are not available with the Minimalistic style."
+    },
+    {
+      "type": "header",
+      "content": "Our label/logo"
+    },
+    {
+      "type": "text",
+      "id": "us_label",
+      "label": "Our label",
+      "default": "[shop_name]",
+      "info": "Displayed if logo image is not selected."
+    },
+    {
+      "type": "range",
+      "id": "us_label_size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Label font size",
+      "default": 18
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Our logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 25,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop logo width",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "mobile_logo_width",
+      "min": 25,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile logo width",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Competitor 1"
+    },
+    {
+      "type": "text",
+      "id": "others_label",
+      "label": "Competitor 1 label",
+      "default": "Others",
+      "info": "Displayed if logo image is not selected."
+    },
+    {
+      "type": "range",
+      "id": "others_label_size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Label font size",
+      "default": 18
+    },
+    {
+      "type": "image_picker",
+      "id": "others_logo",
+      "label": "Competitor 1 logo"
+    },
+    {
+      "type": "range",
+      "id": "others_logo_width",
+      "min": 25,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop logo width",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "others_mobile_logo_width",
+      "min": 25,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile logo width",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Competitor 2"
+    },
+    {
+      "type": "text",
+      "id": "others_2_label",
+      "label": "Competitor 2 label",
+      "default": "Competitor 2",
+      "info": "Displayed if logo image is not selected."
+    },
+    {
+      "type": "range",
+      "id": "others_2_label_size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Label font size",
+      "default": 18
+    },
+    {
+      "type": "image_picker",
+      "id": "others_2_logo",
+      "label": "Competitor 2 logo"
+    },
+    {
+      "type": "range",
+      "id": "others_2_logo_width",
+      "min": 25,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop logo width",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "others_2_mobile_logo_width",
+      "min": 25,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile logo width",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Competitor 3"
+    },
+    {
+      "type": "text",
+      "id": "others_3_label",
+      "label": "Competitor 3 label",
+      "default": "Competitor 3",
+      "info": "Displayed if logo image is not selected."
+    },
+    {
+      "type": "range",
+      "id": "others_3_label_size",
+      "min": 12,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Label font size",
+      "default": 18
+    },
+    {
+      "type": "image_picker",
+      "id": "others_3_logo",
+      "label": "Competitor 3 logo"
+    },
+    {
+      "type": "range",
+      "id": "others_3_logo_width",
+      "min": 25,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop logo width",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "others_3_mobile_logo_width",
+      "min": 25,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile logo width",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Icons"
+    },
+    {
+      "type": "select",
+      "id": "checkmark_style",
+      "options": [
+        {
+          "value": "regular",
+          "label": "Regular"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        }
+      ],
+      "default": "regular",
+      "label": "Checkmark style",
+      "info": "Solid is automatically selected if style is set to Minimalistic."
+    },
+    {
+      "type": "color",
+      "id": "checkmark_color",
+      "default": "#53AF01",
+      "label": "Checkmark color"
+    },
+    {
+      "type": "color",
+      "id": "checkmark_bg_color",
+      "default": "#53AF01",
+      "label": "Solid checkmark background"
+    },
+    {
+      "type": "select",
+      "id": "x_style",
+      "options": [
+        {
+          "value": "regular",
+          "label": "Regular"
+        },
+        {
+          "value": "solid",
+          "label": "Solid"
+        }
+      ],
+      "default": "regular",
+      "label": "X style",
+      "info": "Solid is automatically selected if style is set to Minimalistic."
+    },
+    {
+      "type": "color",
+      "id": "x_color",
+      "default": "#121212",
+      "label": "X color"
+    },
+    {
+      "type": "color",
+      "id": "x_bg_color",
+      "default": "#DBDBDB",
+      "label": "Solid X background"
+    },
+    {
+      "type": "select",
+      "id": "opposite_icon_colors",
+      "options": [
+        {
+          "value": "original",
+          "label": "Original"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "original",
+      "label": "Opposite icons color",
+      "info": "Color of the checkmark when it's in \"others\" and X when it's in \"us\"."
+    },
+    {
+      "type": "header",
+      "content": "Classic & Centered style"
+    },
+    {
+      "type": "select",
+      "id": "highlighted_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "accent-1",
+      "label": "Highlighted cells color scheme"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_highlighted_background",
+      "default": "#2E2A39",
+      "label": "Custom background color",
+      "visible_if": "{{ section.settings.highlighted_color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_highlighted_text",
+      "default": "#FFFFFF",
+      "label": "Custom text color",
+      "visible_if": "{{ section.settings.highlighted_color_scheme == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted_separator_opacity",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "%",
+      "label": "Highlighted cells separator opacity",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "highlighted_overlay_opacity",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "%",
+      "label": "Even rows highlighted cells overlay opacity",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "other_cells_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "background-1",
+      "label": "Regular cells color scheme"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_others_background",
+      "default": "#FFFFFF",
+      "label": "Custom background color",
+      "visible_if": "{{ section.settings.other_cells_color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_others_text",
+      "default": "#2E2A39",
+      "label": "Custom text color",
+      "visible_if": "{{ section.settings.other_cells_color_scheme == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "regular_separator_opacity",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "%",
+      "label": "Regular cells separator opacity",
+      "default": 10
+    },
+    {
+      "type": "range",
+      "id": "regular_overlay_opacity",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "%",
+      "label": "Even rows regular cells overlay opacity",
+      "default": 0
+    },
+    {
+      "type": "header",
+      "content": "Minimalistic style"
+    },
+    {
+      "type": "range",
+      "id": "minimalistic_border_opacity",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "%",
+      "label": "Rows separator opacity",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Table row",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "benefit",
+          "default": "<strong>Benefit</strong>",
+          "label": "Benefit"
+        },
+        {
+          "type": "checkbox",
+          "id": "us",
+          "default": true,
+          "label": "Us"
+        },
+        {
+          "type": "checkbox",
+          "id": "others",
+          "default": false,
+          "label": "Competitor 1"
+        },
+        {
+          "type": "checkbox",
+          "id": "others_2",
+          "default": false,
+          "label": "Competitor 2"
+        },
+        {
+          "type": "checkbox",
+          "id": "others_3",
+          "default": false,
+          "label": "Competitor 3"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison table",
+      "blocks": [
+        {
+          "type": "row"
+        },
+        {
+          "type": "row"
+        },
+        {
+          "type": "row"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

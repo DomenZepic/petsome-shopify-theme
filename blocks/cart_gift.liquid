@@ -1,0 +1,615 @@
+{% liquid
+  assign non_upsell_count = cart.item_count
+  for item in cart.items
+    if item.product.tags contains 'cart-hidden'
+      assign non_upsell_count = non_upsell_count | minus: item.quantity
+    endif
+  endfor
+
+  assign display = false
+  case block.settings.display
+    when 'globally'
+      assign display = true
+    when 'specific_products'
+      assign target_handles = block.settings.display_product_list | map: 'handle'
+      if target_handles contains product.handle
+        assign display = true
+      endif
+    when 'products_in_cart'
+      assign target_handles = block.settings.display_product_list | map: 'handle'
+      for item in cart.items
+        if target_handles contains item.product.handle
+          assign display = true
+          break
+        endif
+      endfor
+    when 'products_not_in_cart'
+      assign display = true
+      assign target_handles = block.settings.display_product_list | map: 'handle'
+      for item in cart.items
+        if target_handles contains item.product.handle
+          assign display = false
+          break
+        endif
+      endfor
+    when 'subtotal_less_than'
+      assign threshold = block.settings.display_subtotal_amount | times: 100
+      if cart.total_price < threshold
+        assign display = true
+      endif
+    when 'subtotal_more_than'
+      assign threshold = block.settings.display_subtotal_amount | times: 100
+      if cart.total_price > threshold
+        assign display = true
+      endif
+    when 'specific_page'
+      if block.settings.display_page_link != blank and request.path == block.settings.display_page_link
+        assign display = true
+      endif
+  endcase
+%}
+{% if display %}
+  {% render 'cart-gift', block: block, items_count: non_upsell_count %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Free/Conditional Gift",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "IMPORTANT NOTES"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add a \"cart-hidden\" tag to the product if you don't want to count it in the cart icon bubble (number of items in the cart)."
+    },
+    {
+      "type": "paragraph",
+      "content": "All gift products MUST BE UNIQUE. Main product from the product page, products from upsells, bundles and other gifts WON'T WORK."
+    },
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "options": [
+        {
+          "value": "body",
+          "label": "Cart body"
+        },
+        {
+          "value": "footer",
+          "label": "Cart footer"
+        }
+      ],
+      "default": "body",
+      "label": "Position"
+    },
+    {
+      "type": "select",
+      "id": "display",
+      "options": [
+        {
+          "value": "globally",
+          "label": "Globally"
+        },
+        {
+          "value": "specific_products",
+          "label": "On certain product page(s)"
+        },
+        {
+          "value": "products_in_cart",
+          "label": "Product(s) in cart"
+        },
+        {
+          "value": "products_not_in_cart",
+          "label": "Product(s) NOT in cart"
+        },
+        {
+          "value": "subtotal_less_than",
+          "label": "Subtotal less than"
+        },
+        {
+          "value": "subtotal_more_than",
+          "label": "Subtotal more than"
+        },
+        {
+          "value": "specific_page",
+          "label": "On specific page"
+        }
+      ],
+      "default": "globally",
+      "label": "Display"
+    },
+    {
+      "type": "paragraph",
+      "content": "Block is displayed across all pages in the store.",
+      "visible_if": "{{ block.settings.display == 'globally' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Block is displayed only on the product pages of the selected products below.",
+      "visible_if": "{{ block.settings.display == 'specific_products' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Block is displayed only when at least one of the selected products below is in the cart.",
+      "visible_if": "{{ block.settings.display == 'products_in_cart' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Block is displayed only when none of the selected products below are in the cart.",
+      "visible_if": "{{ block.settings.display == 'products_not_in_cart' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Block is displayed only when the cart subtotal is less than the amount configured below.",
+      "visible_if": "{{ block.settings.display == 'subtotal_less_than' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Block is displayed only when the cart subtotal is greater than the amount configured below.",
+      "visible_if": "{{ block.settings.display == 'subtotal_more_than' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Block is displayed only on the page selected below.",
+      "visible_if": "{{ block.settings.display == 'specific_page' }}"
+    },
+    {
+      "type": "product_list",
+      "id": "display_product_list",
+      "label": "Products (for Display setting)",
+      "limit": 50,
+      "info": "Used by the Display options: On certain product page(s), Product(s) in cart, Product(s) NOT in cart. Ignored for the other Display options."
+    },
+    {
+      "type": "number",
+      "id": "display_subtotal_amount",
+      "label": "Subtotal amount",
+      "default": 50,
+      "info": "Enter the amount in your shop's currency, without the currency symbol. Example: 50 for $50.",
+      "visible_if": "{{ block.settings.display == 'subtotal_less_than' or block.settings.display == 'subtotal_more_than' }}"
+    },
+    {
+      "type": "url",
+      "id": "display_page_link",
+      "label": "Page",
+      "visible_if": "{{ block.settings.display == 'specific_page' }}"
+    },
+    {
+      "type": "select",
+      "id": "accent_color",
+      "label": "Accent color",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-2",
+      "label": "Color scheme"
+    },
+    {
+      "type": "header",
+      "content": "Product"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Featured image",
+      "info": "If empty, default product image will be shown."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "product_desc",
+      "label": "Product description",
+      "default": "Write a short description about your product"
+    },
+    {
+      "type": "header",
+      "content": "Unlocking"
+    },
+    {
+      "type": "select",
+      "id": "goal_type",
+      "options": [
+        {
+          "value": "subtotal",
+          "label": "Cart subtotal price"
+        },
+        {
+          "value": "quantity",
+          "label": "Quantity of added cart items"
+        }
+      ],
+      "label": "Base the unlock requirement on",
+      "default": "subtotal",
+      "info": "Determines if the unlock requirement will be based on the total cart subtotal price, or the total quantity of items added to cart (excluding the items with the \"cart-hidden\" tag)."
+    },
+    {
+      "type": "text",
+      "id": "requirement",
+      "label": "Unlock requirement",
+      "info": "Required cart subtotal/quantity to unlock the gift. If set to 0, the gift is unlocked automatically.",
+      "default": "80"
+    },
+    {
+      "type": "text",
+      "id": "locked_progress_text",
+      "label": "Progress text",
+      "default": "You're [amount] away from a free gift!",
+      "info": "Use [amount] to display the remaining amount to unlock the gift."
+    },
+    {
+      "type": "text",
+      "id": "unlocked_progress_text",
+      "label": "Unlocked text",
+      "default": "Congrats! You unlocked a free gift!🎉",
+      "info": "Displayed after the gift is unlocked."
+    },
+    {
+      "type": "range",
+      "id": "progress_mobile_text_size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 13,
+      "label": "Mobile progress text size"
+    },
+    {
+      "type": "range",
+      "id": "progress_desktop_text_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 15,
+      "label": "Desktop progress text size"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image_locked_overlay",
+      "label": "Show image locked overlay",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "Show product image",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "image_size",
+      "options": [
+        {
+          "value": "3.5",
+          "label": "Extra small"
+        },
+        {
+          "value": "4.25",
+          "label": "Small"
+        },
+        {
+          "value": "5",
+          "label": "Medium"
+        },
+        {
+          "value": "5.75",
+          "label": "Large"
+        },
+        {
+          "value": "6.5",
+          "label": "Extra large"
+        }
+      ],
+      "default": "5",
+      "label": "Image size"
+    },
+    {
+      "type": "range",
+      "id": "image_corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Image corner radius",
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "title_size",
+      "options": [
+        {
+          "value": "1",
+          "label": "Extra small"
+        },
+        {
+          "value": "1.2",
+          "label": "Small"
+        },
+        {
+          "value": "1.4",
+          "label": "Medium"
+        },
+        {
+          "value": "1.6",
+          "label": "Large"
+        },
+        {
+          "value": "1.8",
+          "label": "Extra large"
+        }
+      ],
+      "default": "1.4",
+      "label": "Product title font size"
+    },
+    {
+      "type": "select",
+      "id": "desc_size",
+      "options": [
+        {
+          "value": "0.9",
+          "label": "Extra small"
+        },
+        {
+          "value": "1.05",
+          "label": "Small"
+        },
+        {
+          "value": "1.2",
+          "label": "Medium"
+        },
+        {
+          "value": "1.35",
+          "label": "Large"
+        },
+        {
+          "value": "1.5",
+          "label": "Extra large"
+        }
+      ],
+      "default": "1.2",
+      "label": "Description font size"
+    },
+    {
+      "type": "select",
+      "id": "price_position",
+      "options": [
+        {
+          "value": "next_to_title",
+          "label": "Next to title"
+        },
+        {
+          "value": "separate",
+          "label": "Separate"
+        },
+        {
+          "value": "hidden",
+          "label": "Hidden"
+        }
+      ],
+      "default": "separate",
+      "label": "Price position"
+    },
+    {
+      "type": "select",
+      "id": "displayed_price",
+      "options": [
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "number",
+          "label": "Regular price"
+        }
+      ],
+      "default": "text",
+      "label": "Regular price content"
+    },
+    {
+      "type": "text",
+      "id": "displayed_price_text",
+      "label": "Regular price text",
+      "default": "FREE",
+      "info": "Displayed instead of the regular price (eg. $0.00) if \"Regular price conten\" is set to  \"Text\"."
+    },
+    {
+      "type": "select",
+      "id": "price_size",
+      "options": [
+        {
+          "value": "1",
+          "label": "Extra small"
+        },
+        {
+          "value": "1.2",
+          "label": "Small"
+        },
+        {
+          "value": "1.4",
+          "label": "Medium"
+        },
+        {
+          "value": "1.6",
+          "label": "Large"
+        },
+        {
+          "value": "1.8",
+          "label": "Extra large"
+        }
+      ],
+      "default": "1.4",
+      "label": "Price font size"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_compare_price",
+      "label": "Hide compare price",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variant_picker",
+      "label": "Show variant picker",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Container"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "t:settings_schema.global.settings.corner_radius.label",
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "show_box_shadow",
+      "label": "Show drop shadow",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border",
+      "label": "Show border",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "regular_border_color",
+      "label": "Locked border color",
+      "default": "#d7d7d7"
+    },
+    {
+      "type": "color",
+      "id": "selected_border_color",
+      "label": "Unlocked border color",
+      "default": "#d7d7d7"
+    },
+    {
+      "type": "select",
+      "id": "border_width",
+      "options": [
+        {
+          "value": "0.1",
+          "label": "Thin"
+        },
+        {
+          "value": "0.2",
+          "label": "Normal"
+        }
+      ],
+      "default": "0.1",
+      "label": "Border thickness"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_custom_bg",
+      "label": "Show custom background",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "regular_bg_color",
+      "label": "Locked ackground color",
+      "default": "#F2F2F2"
+    },
+    {
+      "type": "color",
+      "id": "selected_bg_color",
+      "label": "Unlocked background color",
+      "default": "#F2F2F2"
+    },
+    {
+      "type": "header",
+      "content": "Block margin"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "label": "Top margin",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "label": "Bottom margin",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Free/Conditional gift"
+    }
+  ]
+}
+{% endschema %}

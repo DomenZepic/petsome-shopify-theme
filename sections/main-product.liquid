@@ -1,0 +1,1448 @@
+<section
+  id="MainProduct-{{ section.id }}"
+  class="color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding"
+  data-section="{{ section.id }}"
+>
+  {%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.mobile_padding_top }}px;
+      padding-bottom: {{ section.settings.mobile_padding_bottom }}px;
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.desktop_padding_top }}px;
+        padding-bottom: {{ section.settings.desktop_padding_bottom }}px;
+      }
+    }
+    {% if section.settings.pattern_bg != 'none' %}
+      {% render 'pattern-background' %}
+    {% endif %}
+
+    #MediaGallery-{{ section.id }},
+    #MediaGallery-{{ section.id }}-duplicate {
+      --desktop-thumbnails: {{ section.settings.desktop_thumbnails_count }};
+      --desktop-vertical-thumbnails-width: {{ section.settings.desktop_vertical_thumbnails_width }}%;
+      --mobile-thumbnails: {{ section.settings.mobile_thumbnails_count }};
+      --mobile-vertical-thumbnails-width: {{ section.settings.mobile_vertical_thumbnails_width }}%;
+    }
+    @media screen and (max-width: 749px) {
+      #MediaGallery-{{ section.id }},
+      #MediaGallery-{{ section.id }}-duplicate {
+        --media-radius: {{ section.settings.mobile_media_corner_radius }}px;
+        --grid-mobile-horizontal-spacing: {{ section.settings.mobile_spacing_pixels }}px;
+        --mobile-scroll-padding: calc({{ section.settings.mobile_scroll_padding_percentage }}% + {{ section.settings.mobile_scroll_padding_pixels }}px);
+        --slide-container-percentage-width: {{ section.settings.mobile_slides_container_width }}%;
+        --slide-inner-percentage-width: {{ section.settings.mobile_slides_inner_width }}%;
+      }
+    }
+
+    #MainProduct-{{ section.id }} .product-media__trust-badge {
+      width: {{ section.settings.badge_size_percentage }}%;
+    }
+  {%- endstyle -%}
+
+  <script src="{{ 'product-image-zoom.js' | asset_url }}" defer="defer"></script>
+  {%- if request.design_mode -%}
+    <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+
+  {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
+  {%- if first_3d_model -%}
+    {{ 'component-product-model.css' | asset_url | stylesheet_tag }}
+    <link
+      id="ModelViewerStyle"
+      rel="stylesheet"
+      href="https://cdn.shopify.com/shopifycloud/model-viewer-ui/assets/v1.0/model-viewer-ui.css"
+      media="print"
+      onload="this.media='all'"
+    >
+    <link
+      id="ModelViewerOverride"
+      rel="stylesheet"
+      href="{{ 'component-model-viewer-ui.css' | asset_url }}"
+      media="print"
+      onload="this.media='all'"
+    >
+  {%- endif -%}
+
+  {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
+
+  {% if section.settings.display_id %}
+    <copy-button class="section-id-btn button" data-content="#shopify-section-{{ section.id }}" data-success="false">
+      <span class="copy-text">Click to copy section ID</span>
+      <span class="copy-success">ID copied successfully!</span>
+    </copy-button>
+  {% endif %}
+
+  <div class="page-width">
+    {% if section.settings.enable_breadcrumbs and section.settings.breadcrumbs_position == 'above_section' %}
+      {% render 'product-breadcrumbs', product: product, section: section %}
+    {% endif %}
+    <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
+      {% content_for 'block', type: 'main-product_gallery', id: 'Gallery' %}
+      {% content_for 'block', type: 'main-product_details', id: 'Details' %}
+    </div>
+  </div>
+
+  {% render 'product-image-lightbox', variant_images: variant_images %}
+
+  {% assign popups = section.blocks | where: 'type', 'popup' %}
+  {%- for block in popups -%}
+    <modal-dialog id="PopupModal-{{ block.id }}" class="product-popup-modal" {{ block.shopify_attributes }}>
+      <div
+        role="dialog"
+        aria-label="{{ block.settings.text }}"
+        aria-modal="true"
+        class="product-popup-modal__content"
+        tabindex="-1"
+      >
+        <button
+          id="ModalClose-{{ block.id }}"
+          type="button"
+          class="product-popup-modal__toggle product-popup-modal__toggle--{{ block.settings.close_button_style }}"
+          aria-label="{{ 'accessibility.close' | t }}"
+        >
+          {% render 'icon-close' %}
+        </button>
+        <div class="product-popup-modal__content-info">
+          <h1 class="h2">{{ block.settings.page.title }}</h1>
+          {{ block.settings.page.content }}
+        </div>
+      </div>
+    </modal-dialog>
+  {%- endfor -%}
+
+  {%- if product.media.size > 0 -%}
+    <script src="{{ 'product-modal.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'media-gallery.js' | asset_url }}" defer="defer"></script>
+  {%- endif -%}
+
+  {%- if first_3d_model -%}
+    <script type="application/json" id="ProductJSON-{{ product.id }}">
+      {{ product.media | where: 'media_type', 'model' | json }}
+    </script>
+    <script src="{{ 'product-model.js' | asset_url }}" defer></script>
+  {%- endif -%}
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      function isIE() {
+        const ua = window.navigator.userAgent;
+        const msie = ua.indexOf('MSIE ');
+        const trident = ua.indexOf('Trident/');
+
+        return msie > 0 || trident > 0;
+      }
+
+      if (!isIE()) return;
+      const hiddenInput = document.querySelector('#{{ product_form_id }} input[name="id"]');
+      const noScriptInputWrapper = document.createElement('div');
+      const variantSwitcher =
+        document.querySelector('variant-radios[data-section="{{ section.id }}"]') ||
+        document.querySelector('variant-selects[data-section="{{ section.id }}"]');
+      noScriptInputWrapper.innerHTML = document.querySelector(
+        '.product-form__noscript-wrapper-{{ section.id }}'
+      ).textContent;
+      variantSwitcher.outerHTML = noScriptInputWrapper.outerHTML;
+
+      document.querySelector('#Variants-{{ section.id }}').addEventListener('change', function (event) {
+        hiddenInput.value = event.currentTarget.value;
+      });
+    });
+  </script>
+
+  {%- liquid
+    if product.selected_or_first_available_variant.featured_media
+      assign seo_media = product.selected_or_first_available_variant.featured_media
+    else
+      assign seo_media = product.featured_media
+    endif
+  -%}
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org/",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "url": {{ request.origin | append: product.url | json }},
+      {% if seo_media -%}
+        "image": [
+          {{ seo_media | image_url: width: 1920 | prepend: "https:" | json }}
+        ],
+      {%- endif %}
+      "description": {{ product.description | strip_html | json }},
+      {% if product.selected_or_first_available_variant.sku != blank -%}
+        "sku": {{ product.selected_or_first_available_variant.sku | json }},
+      {%- endif %}
+      "brand": {
+        "@type": "Brand",
+        "name": {{ product.vendor | json }}
+      },
+      "offers": [
+        {%- for variant in product.variants -%}
+          {
+            "@type" : "Offer",
+            {%- if variant.sku != blank -%}
+              "sku": {{ variant.sku | json }},
+            {%- endif -%}
+            {%- if variant.barcode.size == 12 -%}
+              "gtin12": {{ variant.barcode }},
+            {%- endif -%}
+            {%- if variant.barcode.size == 13 -%}
+              "gtin13": {{ variant.barcode }},
+            {%- endif -%}
+            {%- if variant.barcode.size == 14 -%}
+              "gtin14": {{ variant.barcode }},
+            {%- endif -%}
+            "availability" : "http://schema.org/{% if variant.available %}InStock{% else %}OutOfStock{% endif %}",
+            "price" : {{ variant.price | divided_by: 100.00 | json }},
+            "priceCurrency" : {{ cart.currency.iso_code | json }},
+            "url" : {{ request.origin | append: variant.url | json }}
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.main-product.name",
+  "tag": "section",
+  "class": "section main-product-section",
+  "blocks": [],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "display_id",
+      "label": "Display section ID",
+      "info": "ID can be put inside any button link and the button will scroll to this section.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky_info",
+      "default": true,
+      "label": "Enable sticky content on desktop"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "select",
+      "id": "pattern_bg",
+      "label": "Background pattern",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "dotted",
+          "label": "Dots"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "curved-grid",
+          "label": "Curved grid"
+        },
+        {
+          "value": "diagonal-stripes",
+          "label": "Stripes"
+        },
+        {
+          "value": "zigzag",
+          "label": "ZigZag"
+        },
+        {
+          "value": "arrow-pattern",
+          "label": "3D Boxes"
+        },
+        {
+          "value": "radial-rings",
+          "label": "Rings"
+        },
+        {
+          "value": "diamond-grid-1",
+          "label": "Diamond grid 1"
+        },
+        {
+          "value": "diamond-grid-2",
+          "label": "Diamond grid 2"
+        },
+        {
+          "value": "quatrefoils",
+          "label": "Quatrefoils"
+        },
+        {
+          "value": "ovals",
+          "label": "Ovals"
+        },
+        {
+          "value": "hexagons",
+          "label": "Hexagons"
+        },
+        {
+          "value": "curvy",
+          "label": "Curvy"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "pattern_color",
+      "label": "Pattern color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_size",
+      "min": 4,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Pattern size / spacing",
+      "default": 20,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_thickness",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Line / dot thickness",
+      "default": 2,
+      "visible_if": "{{ section.settings.pattern_bg == 'dotted' or section.settings.pattern_bg == 'grid' or section.settings.pattern_bg == 'diagonal-stripes' or section.settings.pattern_bg == 'radial-rings' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_angle",
+      "min": 0,
+      "max": 180,
+      "step": 15,
+      "unit": "deg",
+      "label": "Stripe angle",
+      "default": 45,
+      "visible_if": "{{ section.settings.pattern_bg == 'diagonal-stripes' }}"
+    },
+    {
+      "type": "select",
+      "id": "pattern_opacity_mode",
+      "label": "Opacity type",
+      "default": "low",
+      "options": [
+        {
+          "value": "low",
+          "label": "Low"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity_low",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 7,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' and section.settings.pattern_opacity_mode == 'low' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity_normal",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 80,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' and section.settings.pattern_opacity_mode == 'normal' }}"
+    },
+    {
+      "type": "header",
+      "content": "Breadcrumbs"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_breadcrumbs",
+      "label": "Enable product breadcrumbs",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "breadcrumbs_position",
+      "label": "Position",
+      "options": [
+        {
+          "value": "above_section",
+          "label": "Above the section"
+        },
+        {
+          "value": "above_first_block",
+          "label": "Above the first block"
+        }
+      ],
+      "default": "above_first_block",
+      "visible_if": "{{ section.settings.enable_breadcrumbs }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Adding top section padding at the bottom of section settings is highly recommended.",
+      "visible_if": "{{ section.settings.enable_breadcrumbs and section.settings.breadcrumbs_position == 'above_section' and section.settings.mobile_padding_top == 0 or section.settings.desktop_padding_top == 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "breadcrumbs_mode",
+      "label": "Mode",
+      "options": [
+        {
+          "value": "auto",
+          "label": "Auto"
+        },
+        {
+          "value": "manual",
+          "label": "Manual"
+        },
+        {
+          "value": "hybrid",
+          "label": "Hybrid"
+        }
+      ],
+      "default": "hybrid",
+      "visible_if": "{{ section.settings.enable_breadcrumbs }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Automatically displays breadcrumbs using the first collection this product belongs to.",
+      "visible_if": "{{ section.settings.enable_breadcrumbs and section.settings.breadcrumbs_mode == 'auto' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Breadcrumbs are only displayed if configured through product metafields.",
+      "visible_if": "{{ section.settings.enable_breadcrumbs and section.settings.breadcrumbs_mode == 'manual' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Hybrid mode uses metafields when set, and falls back to auto-detection when not.",
+      "visible_if": "{{ section.settings.enable_breadcrumbs and section.settings.breadcrumbs_mode == 'hybrid' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Products without metafields will use the first collection automatically.",
+      "visible_if": "{{ section.settings.enable_breadcrumbs and section.settings.breadcrumbs_mode == 'hybrid' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Step 1: Go to Settings > Metafields and metaobjects > Products in your Shopify admin.",
+      "visible_if": "{{ section.settings.enable_breadcrumbs and section.settings.breadcrumbs_mode != 'auto' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Step 2: Add a new definition. Set Name to 'Breadcrumb 1' and Type to 'Collection'.",
+      "visible_if": "{{ section.settings.enable_breadcrumbs and section.settings.breadcrumbs_mode != 'auto' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Step 3: Repeat for Breadcrumb 2 through 6 (breadcrumb_2, breadcrumb_3, etc.) as needed.",
+      "visible_if": "{{ section.settings.enable_breadcrumbs and section.settings.breadcrumbs_mode != 'auto' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Step 4: Edit each product and select collections in the Metafields section to build the breadcrumb path.",
+      "visible_if": "{{ section.settings.enable_breadcrumbs and section.settings.breadcrumbs_mode != 'auto' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Example: Home > Breadcrumb 1 > Breadcrumb 2 > Product name",
+      "visible_if": "{{ section.settings.enable_breadcrumbs and section.settings.breadcrumbs_mode != 'auto' and section.settings.breadcrumbs_show_home and section.settings.breadcrumbs_show_product }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Example: Home > Breadcrumb 1 > Breadcrumb 2",
+      "visible_if": "{{ section.settings.enable_breadcrumbs and section.settings.breadcrumbs_mode != 'auto' and section.settings.breadcrumbs_show_home and section.settings.breadcrumbs_show_product == false }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Example: Breadcrumb 1 > Breadcrumb 2 > Product name",
+      "visible_if": "{{ section.settings.enable_breadcrumbs and section.settings.breadcrumbs_mode != 'auto' and section.settings.breadcrumbs_show_home == false and section.settings.breadcrumbs_show_product }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Example: Breadcrumb 1 > Breadcrumb 2",
+      "visible_if": "{{ section.settings.enable_breadcrumbs and section.settings.breadcrumbs_mode != 'auto' and section.settings.breadcrumbs_show_home == false and section.settings.breadcrumbs_show_product == false }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "breadcrumbs_show_home",
+      "label": "Show home link",
+      "default": true,
+      "visible_if": "{{ section.settings.enable_breadcrumbs }}"
+    },
+    {
+      "type": "text",
+      "id": "breadcrumbs_home_label",
+      "label": "Home label",
+      "default": "Home",
+      "visible_if": "{{ section.settings.enable_breadcrumbs and section.settings.breadcrumbs_show_home }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "breadcrumbs_show_product",
+      "label": "Show product name",
+      "default": false,
+      "visible_if": "{{ section.settings.enable_breadcrumbs }}"
+    },
+    {
+      "type": "select",
+      "id": "breadcrumbs_separator",
+      "label": "Separator",
+      "options": [
+        {
+          "value": "›",
+          "label": "›"
+        },
+        {
+          "value": "/",
+          "label": "/"
+        },
+        {
+          "value": "→",
+          "label": "→"
+        },
+        {
+          "value": "•",
+          "label": "•"
+        },
+        {
+          "value": ">",
+          "label": ">"
+        }
+      ],
+      "default": "›",
+      "visible_if": "{{ section.settings.enable_breadcrumbs }}"
+    },
+    {
+      "type": "range",
+      "id": "breadcrumbs_desktop_text_size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop text size",
+      "default": 13,
+      "visible_if": "{{ section.settings.enable_breadcrumbs }}"
+    },
+    {
+      "type": "range",
+      "id": "breadcrumbs_mobile_text_size",
+      "min": 10,
+      "max": 16,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile text size",
+      "default": 12,
+      "visible_if": "{{ section.settings.enable_breadcrumbs }}"
+    },
+    {
+      "type": "select",
+      "id": "breadcrumbs_font",
+      "label": "Font",
+      "options": [
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "body_bold",
+          "label": "Body - bold"
+        },
+        {
+          "value": "heading",
+          "label": "Heading"
+        }
+      ],
+      "default": "body",
+      "visible_if": "{{ section.settings.enable_breadcrumbs }}"
+    },
+    {
+      "type": "select",
+      "id": "breadcrumbs_text_color",
+      "label": "Text color",
+      "options": [
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "text-subdued",
+          "label": "Text subdued"
+        },
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "text",
+      "visible_if": "{{ section.settings.enable_breadcrumbs }}"
+    },
+    {
+      "type": "color",
+      "id": "breadcrumbs_custom_color",
+      "label": "Custom text color",
+      "default": "#DD1D1D",
+      "visible_if": "{{ section.settings.enable_breadcrumbs and section.settings.breadcrumbs_text_color == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "breadcrumbs_alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "left",
+      "visible_if": "{{ section.settings.enable_breadcrumbs }}"
+    },
+    {
+      "type": "range",
+      "id": "breadcrumbs_bottom_margin",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Bottom margin",
+      "default": 14,
+      "visible_if": "{{ section.settings.enable_breadcrumbs }}"
+    },
+    {
+      "type": "header",
+      "content": "Media"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_variant_image_first",
+      "default": false,
+      "label": "Display first variant image as featured image"
+    },
+    {
+      "type": "checkbox",
+      "id": "disable_prepend",
+      "label": "Disable prepend of the new active media",
+      "info": "Prepend moves the new active variant media to the first place in the slider.",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_variants",
+      "default": false,
+      "label": "Hide other variants’ media after selecting a variant",
+      "info": "Related to media that are natively assigned in Shopify admin > Products (one media per variant). If you wish to hide multiple media per variant, use the setting below."
+    },
+    {
+      "type": "select",
+      "id": "variant_image_filtering",
+      "label": "Active variant images filtering",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "option1",
+          "label": "Option 1"
+        },
+        {
+          "value": "option2",
+          "label": "Option 2"
+        },
+        {
+          "value": "option3",
+          "label": "Option 3"
+        }
+      ],
+      "default": "none",
+      "info": "This setting allows you to show only the images related to the selected variant. Check the tutorial for this option [here](https://dashboard.shrinesolutions.com/customer/help-center?category=Features&element=Variant+Images+Filtering)."
+    },
+    {
+      "type": "select",
+      "id": "image_zoom_desktop",
+      "label": "Desktop image zoom",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "hover", "label": "Hover to zoom" },
+        { "value": "lightbox", "label": "Open lightbox on click" },
+        { "value": "combined", "label": "Hover to zoom + click for lightbox" }
+      ],
+      "default": "combined"
+    },
+    {
+      "type": "select",
+      "id": "hover_zoom_style",
+      "label": "Hover-zoom style",
+      "options": [
+        { "value": "inline", "label": "Inline (magnify in-place)" },
+        { "value": "pane", "label": "Side-by-side pane" }
+      ],
+      "default": "inline",
+      "info": "Inline magnifies the area under the cursor in-place. Pane shows the zoomed region in a separate panel next to the image.",
+      "visible_if": "{{ section.settings.image_zoom_desktop == 'hover' or section.settings.image_zoom_desktop == 'combined' }}"
+    },
+    {
+      "type": "select",
+      "id": "image_zoom_mobile",
+      "label": "Mobile image zoom",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "lightbox", "label": "Open lightbox on tap" }
+      ],
+      "default": "lightbox",
+      "info": "When enabled, customers can pinch and double-tap to zoom inside the lightbox."
+    },
+    {
+      "type": "select",
+      "id": "thumbnails_ratio",
+      "options": [
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "original",
+          "label": "Original"
+        }
+      ],
+      "default": "square",
+      "label": "Thumbnails aspect ratio"
+    },
+    {
+      "type": "select",
+      "id": "arrows_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "inverse",
+      "label": "Arrows color scheme"
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_arrows",
+      "label": "Transparent arrows",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "dots_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Text"
+        }
+      ],
+      "default": "inverse",
+      "label": "Dots color"
+    },
+    {
+      "type": "header",
+      "content": "Videos"
+    },
+    {
+      "type": "select",
+      "id": "video_player",
+      "options": [
+        {
+          "value": "autoplay",
+          "label": "Muted autoplay"
+        },
+        {
+          "value": "play_btn",
+          "label": "Play button"
+        },
+        {
+          "value": "modal",
+          "label": "Play button with modal"
+        }
+      ],
+      "default": "play_btn",
+      "label": "Video player type"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_video_looping",
+      "default": false,
+      "label": "Enable non-autoplay video looping"
+    },
+    {
+      "type": "paragraph",
+      "content": "Settings bellow are applied if Video player type is set to Muted autoplay or Play button."
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay_videos_pause_btn",
+      "default": false,
+      "label": "Enable pause button in autoplay videos"
+    },
+    {
+      "type": "checkbox",
+      "id": "video_sound_btn",
+      "default": false,
+      "label": "Enable sound button"
+    },
+    {
+      "type": "checkbox",
+      "id": "video_timeline",
+      "default": false,
+      "label": "Enable timeline"
+    },
+    {
+      "type": "select",
+      "id": "play_btn_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "accent-1",
+      "label": "Play button color scheme"
+    },
+    {
+      "type": "select",
+      "id": "sound_btn_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "inverse",
+      "label": "Sound button color scheme"
+    },
+    {
+      "type": "checkbox",
+      "id": "video_fullscreen_btn",
+      "default": false,
+      "label": "Enable fullscreen button"
+    },
+    {
+      "type": "select",
+      "id": "fullscreen_btn_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "inverse",
+      "label": "Fullscreen button color scheme"
+    },
+    {
+      "type": "select",
+      "id": "timeline_color",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1",
+      "label": "Timeline color"
+    },
+    {
+      "type": "header",
+      "content": "Desktop media"
+    },
+    {
+      "type": "select",
+      "id": "media_size",
+      "options": [
+        {
+          "value": "small",
+          "label": "Small"
+        },
+        {
+          "value": "medium",
+          "label": "Medium"
+        },
+        {
+          "value": "large",
+          "label": "Large"
+        }
+      ],
+      "default": "medium",
+      "label": "Media width",
+      "info": "Media is automatically optimized for mobile."
+    },
+    {
+      "type": "select",
+      "id": "media_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left",
+      "label": "Media position",
+      "info": "Position is automatically optimized for mobile."
+    },
+    {
+      "type": "select",
+      "id": "gallery_layout",
+      "options": [
+        {
+          "value": "stacked",
+          "label": "Stacked"
+        },
+        {
+          "value": "columns",
+          "label": "2 columns"
+        },
+        {
+          "value": "thumbnail",
+          "label": "Thumbnails"
+        },
+        {
+          "value": "thumbnail_slider",
+          "label": "Thumbnail carousel"
+        }
+      ],
+      "default": "thumbnail_slider",
+      "label": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "desktop_thumbnails_position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "bottom",
+      "label": "Thumbnails position"
+    },
+    {
+      "type": "range",
+      "id": "desktop_thumbnails_count",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "label": "Displayed horizontal thumbnails",
+      "default": 5,
+      "info": "Applied if \"Thumbnails position\" is set to \"Bottom\"."
+    },
+    {
+      "type": "range",
+      "id": "desktop_vertical_thumbnails_width",
+      "min": 10,
+      "max": 30,
+      "step": 2,
+      "label": "Vertical thumbnails width",
+      "default": 16,
+      "info": "Applied if \"Thumbnails position\" is set to \"Left\" or \"Right\"."
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_vertical_thumbnails_hide_arrows",
+      "default": false,
+      "label": "Hide slider arrows in vertical thumbnails"
+    },
+    {
+      "type": "checkbox",
+      "id": "constrain_to_viewport",
+      "default": true,
+      "label": "Constrain media to screen height"
+    },
+    {
+      "type": "select",
+      "id": "media_fit",
+      "options": [
+        {
+          "value": "contain",
+          "label": "Original"
+        },
+        {
+          "value": "cover",
+          "label": "Fill"
+        }
+      ],
+      "default": "contain",
+      "label": "Media fit"
+    },
+    {
+      "type": "select",
+      "id": "desktop_arrows_position",
+      "options": [
+        {
+          "value": "hidden",
+          "label": "Hidden"
+        },
+        {
+          "value": "sides",
+          "label": "On the sides of the slider"
+        }
+      ],
+      "default": "hidden",
+      "label": "Arrows position"
+    },
+    {
+      "type": "header",
+      "content": "Mobile media"
+    },
+    {
+      "type": "range",
+      "id": "mobile_media_corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "mobile_spacing_pixels",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Spacing between slides",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "mobile_arrows_position",
+      "options": [
+        {
+          "value": "hidden",
+          "label": "Hidden"
+        },
+        {
+          "value": "pagination",
+          "label": "Next to pagination"
+        },
+        {
+          "value": "sides",
+          "label": "On the sides of the slider"
+        }
+      ],
+      "default": "sides",
+      "label": "Arrows position"
+    },
+    {
+      "type": "select",
+      "id": "mobile_pagination",
+      "options": [
+        {
+          "value": "hidden",
+          "label": "Hidden"
+        },
+        {
+          "value": "numeric",
+          "label": "Numeric"
+        },
+        {
+          "value": "dots_under",
+          "label": "Dots - Under media"
+        },
+        {
+          "value": "dots_overlay",
+          "label": "Dots - Over media"
+        }
+      ],
+      "default": "dots_overlay",
+      "label": "Pagination type"
+    },
+    {
+      "type": "select",
+      "id": "mobile_thumbnails_position",
+      "options": [
+        {
+          "value": "hidden",
+          "label": "Hidden"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "hidden",
+      "label": "Thumbnails position"
+    },
+    {
+      "type": "range",
+      "id": "mobile_thumbnails_count",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "label": "Displayed horizontal thumbnails",
+      "default": 5,
+      "info": "Applied if \"Thumbnails position\" is set to \"Bottom\"."
+    },
+    {
+      "type": "range",
+      "id": "mobile_vertical_thumbnails_width",
+      "min": 10,
+      "max": 30,
+      "step": 2,
+      "label": "Vertical thumbnails width",
+      "default": 22,
+      "info": "Applied if \"Thumbnails position\" is set to \"Left\" or \"Right\"."
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_vertical_thumbnails_hide_arrows",
+      "default": true,
+      "label": "Hide slider arrows in vertical thumbnails"
+    },
+    {
+      "type": "header",
+      "content": "Mobile slider scroll padding",
+      "info": "Scroll padding adjusts the visible portion of the previous & next slides on the sides of the slider, creating an inset effect. The settings for percentage and pixels are combined to define this space, enhancing the slider's usability by indicating more content is available to view."
+    },
+    {
+      "type": "range",
+      "id": "mobile_scroll_padding_percentage",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "%",
+      "label": "Scroll padding percentage",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "mobile_scroll_padding_pixels",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Scroll padding pixels",
+      "default": 16
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_outher_spacing",
+      "label": "First & last slide outer spacing",
+      "info": "If enabled, spaces the first & last slides from the outer edges. The spacing is equal to the selected scroll padding.",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Mobile slides width"
+    },
+    {
+      "type": "range",
+      "id": "mobile_slides_container_width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Container width from available space",
+      "default": 100,
+      "info": "This setting adjusts the width of the slide container relative to the available space (full screen width minus scroll paddings & spacings). At 100%, the container takes up the full width, with equal scroll padding on both sides. Reducing the percentage increases the right-side scroll padding relative to the left, creating an asymmetrical padding effect."
+    },
+    {
+      "type": "range",
+      "id": "mobile_slides_inner_width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Inner slide content width",
+      "default": 100,
+      "info": "This setting controls the width of the content within each slide, relative to the slide container's width set previously. It allows you to adjust how much of the container's width the content occupies, without affecting the scroll padding. A value of 100% means the content will fill the entire width of the container, while a lower percentage will reduce the content width, centering it within the container."
+    },
+    {
+      "type": "header",
+      "content": "Trust badge"
+    },
+    {
+      "type": "image_picker",
+      "id": "trust_badge",
+      "label": "Trust badge"
+    },
+    {
+      "type": "select",
+      "id": "trust_badge_position",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "Top left"
+        },
+        {
+          "value": "top-right",
+          "label": "Top right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom left"
+        },
+        {
+          "value": "bottom-right",
+          "label": "Bottom right"
+        }
+      ],
+      "default": "top-right",
+      "label": "Badge position",
+      "visible_if": "{{ section.settings.trust_badge != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "badge_display_on",
+      "options": [
+        {
+          "value": "all",
+          "label": "All images"
+        },
+        {
+          "value": "first",
+          "label": "Only the first image"
+        }
+      ],
+      "default": "all",
+      "label": "Display badge on",
+      "visible_if": "{{ section.settings.trust_badge != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "badge_size_percentage",
+      "min": 6,
+      "max": 50,
+      "step": 2,
+      "unit": "%",
+      "default": 20,
+      "label": "Badge size",
+      "visible_if": "{{ section.settings.trust_badge != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Mobile padding"
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "mobile_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Desktop padding"
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "desktop_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ]
+}
+{% endschema %}

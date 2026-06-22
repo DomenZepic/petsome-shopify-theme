@@ -1,0 +1,78 @@
+{% liquid
+  assign nowrap = false
+  if block.settings.image != blank or block.settings.icon != blank
+    assign has_icon = true
+  else
+    assign has_icon = false
+  endif
+%}
+{% if block.settings.block_width == 'fixed' %}
+  <style>
+    .icons-with-text__icon-item-{{ block.id }} {
+      width: {{ block.settings.block_mobile_width }}px;
+      flex-shrink: 0;
+    }
+    @media screen and (min-width: 750px) {
+      .icons-with-text__icon-item-{{ block.id }} {
+        width: {{ block.settings.block_desktop_width }}px;
+      }
+    }
+  </style>
+{% elsif block.settings.block_width == 'unlimited' %}
+  {% assign nowrap = true %}
+{% endif %}
+<div class="icons-with-text__icon-item icons-with-text__icon-item-{{ block.id }} icons-with-text__icon-item--{{ block.settings.icon_position }} icons-with-text__icon-item--{{ block.settings.icon_text_alignment }}">
+  {% if block.settings.icon_position != 'next-to-title' and has_icon %}
+    <div class="icons-with-text__icon__icon icons-with-text__icon__icon--{{ block.settings.icon_size }} color-{{ block.settings.icon_color }}">
+      {%- if block.settings.image != blank -%}
+        <img
+          src="{{ block.settings.image | image_url: width: 300 }}"
+          {% if block.settings.image.alt != blank %}
+            alt="{{ block.settings.image.alt | escape }}"
+          {% else %}
+            role="presentation"
+          {% endif %}
+          height="auto"
+          width="auto"
+          loading="lazy"
+        >
+      {%- else -%}
+        {% render 'material-icon', icon: block.settings.icon, filled: block.settings.filled_icon %}
+      {%- endif -%}
+    </div>
+  {% endif %}
+  <div class="icons-with-text__icon__text{% if nowrap %} nowrap{% endif %}">
+    <h3 class="icons-with-text__icon__title {{ block.settings.icon_heading_size }}">
+      {% if block.settings.icon_position == 'next-to-title' and has_icon %}
+        <div class="icons-with-text__icon__icon icons-with-text__icon__icon--title icons-with-text__icon__icon--{{ block.settings.icon_size }} color-{{ block.settings.icon_color }}">
+          {%- if block.settings.image != blank -%}
+            <img
+              src="{{ block.settings.image | image_url: width: 300 }}"
+              {% if block.settings.image.alt != blank %}
+                alt="{{ block.settings.image.alt | escape }}"
+              {% else %}
+                role="presentation"
+              {% endif %}
+              height="auto"
+              width="auto"
+              loading="lazy"
+            >
+          {%- else -%}
+            {% render 'material-icon',
+              icon: block.settings.icon,
+              filled: block.settings.filled_icon
+            %}
+          {%- endif -%}
+        </div>
+      {% endif %}
+      <span>
+        {{ block.settings.title | escape }}
+      </span>
+    </h3>
+    {%- if block.settings.text != blank -%}
+      <div class="rte">
+        {{ block.settings.text }}
+      </div>
+    {%- endif -%}
+  </div>
+</div>

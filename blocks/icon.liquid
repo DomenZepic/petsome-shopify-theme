@@ -1,0 +1,161 @@
+{% style %}
+  .icon-block {
+    --icon-font-size: {{ block.settings.font_size }}px;
+    --icon-image-width: {{ block.settings.icon_width }}px;
+  }
+{% endstyle %}
+<div
+  role="group"
+  class="icon-block custom-padding"
+  style="{% render 'custom-padding', settings: block.settings %}"
+  aria-label="{{ block.settings.image.alt | default: block.settings.icon | replace: '_', ' ' | capitalize | escape }}"
+>
+  {% assign link_url = block.settings.link %}
+  {% assign open_in_new_tab = block.settings.open_in_new_tab %}
+  {% assign image_alt = block.settings.image.alt | default: '' %}
+
+  {%- if link_url != blank -%}
+    <a
+      href="{{ link_url }}"
+      {% if open_in_new_tab %}
+        target="_blank" rel="noopener"
+      {% endif %}
+      aria-label="{% if image_alt != '' %}{{ image_alt | escape }}{% elsif block.settings.icon != blank %}{{ block.settings.icon | replace: '_', ' ' | capitalize | escape }} icon{% else %}Icon link{% endif %}"
+    >
+  {%- endif -%}
+
+  {%- if block.settings.image == blank -%}
+    {% render 'material-icon', icon: block.settings.icon, filled: block.settings.filled_icon, aria_hidden: true %}
+  {%- else -%}
+    <img
+      src="{{ block.settings.image | image_url }}"
+      {% if block.settings.image.alt != blank %}
+        alt="{{ block.settings.image.alt | escape }}"
+        role="img"
+      {% else %}
+        alt=""
+        role="presentation"
+        aria-hidden="true"
+      {% endif %}
+      height="auto"
+      width="auto"
+      loading="lazy"
+    >
+  {%- endif -%}
+
+  {%- if link_url != blank -%}</a>{%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Icon Bar",
+  "class": "icon-block",
+  "settings": [
+    {
+      "type": "text",
+      "id": "icon",
+      "default": "check_circle",
+      "label": "Icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+    },
+    {
+      "type": "checkbox",
+      "id": "filled_icon",
+      "default": false,
+      "label": "Filled icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Custom icon"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Icon font size",
+      "min": 12,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 24,
+      "visible_if": "{{ block.settings.image == blank }}"
+    },
+    {
+      "type": "range",
+      "id": "icon_width",
+      "label": "Icon image witdh",
+      "min": 12,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 48,
+      "visible_if": "{{ block.settings.image }}"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_in_new_tab",
+      "label": "Open in new tab",
+      "default": false,
+      "visible_if": "{{ block.settings.link }}"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-left",
+      "label": "Left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-right",
+      "label": "Right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon",
+      "category": "Basic",
+      "settings": {
+        "icon": "check_circle"
+      }
+    }
+  ]
+}
+{% endschema %}

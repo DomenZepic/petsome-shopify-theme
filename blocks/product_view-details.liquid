@@ -1,0 +1,131 @@
+{% if block.settings.enable_custom_color %}
+  {% liquid
+    assign button_color = block.settings.custom_color
+    case block.settings.style
+      when 'primary'
+        assign variable = '--color-button'
+      when 'secondary'
+        assign variable = '--color-base-outline-button-labels'
+      else
+        assign variable = '--color-link'
+    endcase
+  %}
+  <style>
+    #ViewFullDetails-{{ section.id }} {
+      {{ variable }}: {{ button_color.red }}, {{ button_color.green }}, {{ button_color.blue }};
+    }
+  </style>
+{% endif %}
+{% assign product = section.settings.product %}
+<a
+  id='ViewFullDetails-{{ section.id }}'
+  {% if product == blank %}
+    role="link" aria-disabled="true"
+  {% else %}
+    href="{{ product.url }}"
+  {% endif %}
+  class="{% if block.settings.style == 'text' %} link product__view-details {% if block.settings.display_arrow %}animate-arrow{% endif %}{% else %} button button--{{ block.settings.style }} button--full-width{% if block.settings.large_font_size %} button--large-text{% endif %}{% if block.settings.uppercase %} uppercase{% endif %}{% endif %}"
+>
+  {{ 'products.product.view_full_details' | t }}
+  {% if block.settings.style == 'text' and block.settings.display_arrow %}
+    {% render 'icon-arrow' %}
+  {% endif %}
+</a>
+
+{% schema %}
+{
+  "name": "View full details",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Solid"
+        },
+        {
+          "value": "secondary",
+          "label": "Outline"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "text",
+      "label": "Button style"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_custom_color",
+      "label": "Enable custom button color",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "custom_color",
+      "default": "#dd1d1d",
+      "label": "Button custom color",
+      "info": "Applied when Enable custom button color is checked."
+    },
+    {
+      "type": "header",
+      "content": "Solid/outlined button"
+    },
+    {
+      "type": "checkbox",
+      "id": "large_font_size",
+      "default": false,
+      "label": "Use larger font size"
+    },
+    {
+      "type": "checkbox",
+      "id": "uppercase",
+      "default": false,
+      "label": "Uppercase label"
+    },
+    {
+      "type": "header",
+      "content": "Text button"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_arrow",
+      "default": true,
+      "label": "Display link arrow"
+    },
+    {
+      "type": "header",
+      "content": "Block margin"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "label": "Top margin",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "label": "Bottom margin",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "View full details",
+      "category": "Product basics"
+    }
+  ]
+}
+{% endschema %}

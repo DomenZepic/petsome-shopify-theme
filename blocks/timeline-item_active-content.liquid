@@ -1,0 +1,136 @@
+
+<div class="timeline-item__active hidden" data-role="active">
+  <div class="timeline-item__active-content block-margins">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Item active content",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "custom-liquid"
+    },
+    {
+      "type": "image"
+    },
+    {
+      "type": "json-animation"
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "button"
+    },
+    {
+      "type": "atc-button"
+    },
+    {
+      "type": "heading"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "rating-stars"
+    },
+    {
+      "type": "countdown-timer"
+    },
+    {
+      "type": "collapsible-row"
+    },
+    {
+      "type": "video"
+    },
+    {
+      "type": "slider"
+    },
+    {
+      "type": "container"
+    },
+    {
+      "type": "media-slider"
+    },
+    {
+      "type": "trustpilot-stars"
+    },
+    {
+      "type": "product_popup"
+    },
+    {
+      "type": "payment-badges"
+    },
+    {
+      "type": "product_urgency"
+    },
+    {
+      "type": "review-avatars"
+    },
+    {
+      "type": "icon-with-content"
+    },
+    {
+      "type": "text-with-icon"
+    },
+    {
+      "type": "text-with-icon-new"
+    },
+    {
+      "type": "icon-with-text"
+    },
+    {
+      "type": "reviews"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "IMPORTANT WARNING",
+      "visible_if": "{{ section.settings.timeline_direction == 'vertical' and section.settings.style_vertical == 'classic' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "To use this feature, you must set 'Style' to 'Scroll / click activated' OR 'Accordion' in section settings.",
+      "visible_if": "{{ section.settings.timeline_direction == 'vertical' and section.settings.style_vertical == 'classic' }}"
+    },
+    {
+      "type": "header",
+      "content": "IMPORTANT WARNING",
+      "visible_if": "{{ section.settings.timeline_direction == 'horizontal' and section.settings.style_horizontal == 'classic' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "To use this feature, you must set 'Style' to 'Arrows / click activated' in section settings.",
+      "visible_if": "{{ section.settings.timeline_direction == 'horizontal' and section.settings.style_horizontal == 'classic' }}"
+    },
+    {
+      "type": "header",
+      "content": "HOW TO USE?"
+    },
+    {
+      "type": "paragraph",
+      "content": "When this timeline item is active (scroll activated / clicked on / switched to with an arrow), the content from here will be displayed in the 'Active content cointainer' block."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Item active content",
+      "blocks": [
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>WEEK X active content</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

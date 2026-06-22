@@ -1,0 +1,502 @@
+<splide-component
+  data-type="{{ block.settings.type }}"
+  data-autoplay="{{ block.settings.autoplay }}"
+  data-autoplay-speed="{{ block.settings.autoplay_speed }}"
+  data-arrows-color="{{ block.settings.arrows_color_scheme }}"
+  data-dots-color="{{ block.settings.dots_color_scheme }}"
+  data-slides-desktop="{{ block.settings.slides_desktop }}"
+  data-per-move-desktop="{{ block.settings.per_move_desktop }}"
+  data-gap-desktop="{{ block.settings.desktop_spacing }}"
+  data-side-padding-desktop="{{ block.settings.desktop_side_padding }}"
+  data-padding-calc-desktop="{{ block.settings.desktop_padding_calc }}"
+  data-slides-mobile="{{ block.settings.slides_mobile }}"
+  data-per-move-mobile="{{ block.settings.per_move_mobile }}"
+  data-gap-mobile="{{ block.settings.mobile_spacing }}"
+  data-side-padding-mobile="{{ block.settings.mobile_side_padding }}"
+  data-padding-calc-mobile="{{ block.settings.mobile_padding_calc }}"
+  {% if block.settings.desktop_adaptive_height and block.settings.slides_desktop == 1 %}
+    data-desktop-adaptive-height="true"
+  {% endif %}
+  {% if block.settings.mobile_adaptive_height and block.settings.slides_mobile == 1 %}
+    data-mobile-adaptive-height="true"
+  {% endif %}
+  data-image-slider="true"
+  data-pause-videos="true"
+  style="
+    --columns-desktop:{{ block.settings.slides_desktop }};
+    --columns-mobile:{{ block.settings.slides_mobile }};
+    --gap-desktop:{{ block.settings.desktop_spacing }}px;
+    --gap-mobile:{{ block.settings.mobile_spacing }}px;
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  "
+  class="{% if block.settings.mobile_full_page %}mobile-side-margins-negative {% endif %}{{ block.settings.visibility }}"
+  {{- block.shopify_attributes -}}
+>
+  <div
+    class="
+      splide splide--precalc-width
+      splide--desktop-dots-{{ block.settings.desktop_dots_position }}
+      splide--mobile-dots-{{ block.settings.mobile_dots_position }}
+      splide--desktop-arrows-{{ block.settings.desktop_arrows_position }}
+      splide--mobile-arrows-{{ block.settings.mobile_arrows_position }}
+      {% if block.settings.transparent_arrows %} splide--transparent-arrows{% endif %}
+      {% if block.settings.desktop_same_height %} splide--desktop-same-height{% endif %}
+      {% if block.settings.mobile_same_height %} splide--mobile-same-height{% endif %}
+    "
+  >
+    <div class="splide__track">
+      <ul class="splide__list splide__list--regular">
+        {% if block.blocks.size == 0 %}
+          {% for i in (1..5) %}
+            <li class="splide__slide">
+              <div class="splide__slide__container">
+                <div class="image-slide">
+                  <div class="image-slide__image">
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                  </div>
+                </div>
+              </div>
+            </li>
+          {% endfor %}
+        {% else %}
+          {% for inner_block in block.blocks %}
+            <li class="splide__slide" {{ inner_block.shopify_attributes }}>
+              <div class="splide__slide__container">
+                {% render inner_block %}
+              </div>
+            </li>
+          {% endfor %}
+        {% endif %}
+      </ul>
+    </div>
+    <div class="splide__dots-and-arrows">
+      <ul class="splide__pagination"></ul>
+      <div class="splide__arrows"></div>
+    </div>
+  </div>
+</splide-component>
+
+{% schema %}
+{
+  "name": "Slider",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "slide"
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "header",
+      "content": "Slider"
+    },
+    {
+      "type": "paragraph",
+      "content": "ATTENTION: ONLY in the theme editor, pagination dots might duplicate after changing section settings. To overcome this, simply click Save. This has NO EFFECT on the published website."
+    },
+    {
+      "type": "select",
+      "id": "type",
+      "label": "Type",
+      "options": [
+        { "value": "slide", "label": "Classic" },
+        { "value": "loop", "label": "Infinite" },
+        { "value": "fade", "label": "Fade" }
+      ],
+      "default": "slide"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Enable autoplay",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "Autoplay speed",
+      "min": 1,
+      "max": 15,
+      "step": 0.5,
+      "unit": "sec",
+      "default": 5
+    },
+    {
+      "type": "select",
+      "id": "arrows_color_scheme",
+      "label": "Arrows color scheme",
+      "options": [
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "inverse", "label": "Inverse" }
+      ],
+      "default": "inverse"
+    },
+    {
+      "type": "checkbox",
+      "id": "transparent_arrows",
+      "label": "Transparent arrows",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "dots_color_scheme",
+      "label": "Dots color",
+      "options": [
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "inverse", "label": "Text" }
+      ],
+      "default": "inverse"
+    },
+    {
+      "type": "header",
+      "content": "Desktop"
+    },
+    {
+      "type": "range",
+      "id": "desktop_border_radius",
+      "label": "Slides corner radius",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "slides_desktop",
+      "label": "Slides per page",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "per_move_desktop",
+      "label": "Slides to scroll on one move",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "desktop_spacing",
+      "label": "Spacing",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "desktop_side_padding",
+      "label": "Preview of prev & next slide",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "default": 0,
+      "info": "Only recommended if Type is set to Infinite"
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_padding_calc",
+      "label": "Disable empty preview on first & last slide",
+      "default": true,
+      "info": "Moves the first slide to the left edge and last one to the right if Preview value is enabled. Visible if type is set to Slider."
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_adaptive_height",
+      "label": "Adaptive height",
+      "default": false,
+      "info": "Only available if Slides per page is set to 1."
+    },
+    {
+      "type": "checkbox",
+      "id": "desktop_same_height",
+      "label": "All slides same height",
+      "default": false,
+      "info": "All slides have the same height as the tallest one"
+    },
+    {
+      "type": "select",
+      "id": "desktop_dots_position",
+      "label": "Dots position",
+      "options": [
+        { "value": "hidden", "label": "Hidden" },
+        { "value": "under", "label": "Under the slider" },
+        { "value": "over", "label": "Over the slider" }
+      ],
+      "default": "under"
+    },
+    {
+      "type": "select",
+      "id": "desktop_arrows_position",
+      "label": "Arrows position",
+      "options": [
+        { "value": "hidden", "label": "Hidden" },
+        { "value": "under", "label": "Under the slider" },
+        { "value": "sides", "label": "On sides of the slider" }
+      ],
+      "default": "under"
+    },
+
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_full_page",
+      "label": "Full page width",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "mobile_border_radius",
+      "label": "Slides corner radius",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "slides_mobile",
+      "label": "Slides per page",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "per_move_mobile",
+      "label": "Slides to scroll on one move",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "mobile_spacing",
+      "label": "Spacing",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "mobile_side_padding",
+      "label": "Preview of prev & next slide",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "default": 0,
+      "info": "Only recommended if Type is set to Infinite"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_padding_calc",
+      "label": "Disable empty preview on first & last slide",
+      "default": true,
+      "info": "Moves the first slide to the left edge adn last one to the right if Preview value is enabled. Visible if type is set to Slider."
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_adaptive_height",
+      "label": "Adaptive height",
+      "default": false,
+      "info": "Only available if Slides per page is set to 1."
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_same_height",
+      "label": "All slides same height",
+      "default": false,
+      "info": "All slides have the same height as the tallest one"
+    },
+    {
+      "type": "select",
+      "id": "mobile_dots_position",
+      "label": "Dots position",
+      "options": [
+        { "value": "hidden", "label": "Hidden" },
+        { "value": "under", "label": "Under the slider" },
+        { "value": "over", "label": "Over the slider" }
+      ],
+      "default": "under"
+    },
+    {
+      "type": "select",
+      "id": "mobile_arrows_position",
+      "label": "Arrows position",
+      "options": [
+        { "value": "hidden", "label": "Hidden" },
+        { "value": "under", "label": "Under the slider" },
+        { "value": "sides", "label": "On sides of the slider" }
+      ],
+      "default": "under"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slider",
+      "category": "Layout",
+      "blocks": [
+        {
+          "type": "slide",
+          "blocks": [
+            {
+              "type": "heading",
+              "settings": {
+                "title": "Slide",
+                "heading_size": "h3",
+                "alignment": "center",
+                "mobile_alignment": "mobile-center"
+              }
+            },
+            {
+              "type": "text",
+              "settings": {
+                "text": "<p>Use the flexible slider system to create any slider layout. Each block can be placed in any of the slides.</p>",
+                "alignment": "center",
+                "mobile_alignment": "mobile-center",
+                "text_size": 10
+              }
+            }
+          ]
+        },
+        {
+          "type": "slide",
+          "blocks": [
+            {
+              "type": "heading",
+              "settings": {
+                "title": "Slide",
+                "heading_size": "h3",
+                "alignment": "center",
+                "mobile_alignment": "mobile-center"
+              }
+            },
+            {
+              "type": "text",
+              "settings": {
+                "text": "<p>Use the flexible slider system to create any slider layout. Each block can be placed in any of the slides.</p>",
+                "alignment": "center",
+                "mobile_alignment": "mobile-center",
+                "text_size": 10
+              }
+            }
+          ]
+        },
+        {
+          "type": "slide",
+          "blocks": [
+            {
+              "type": "heading",
+              "settings": {
+                "title": "Slide",
+                "heading_size": "h3",
+                "alignment": "center",
+                "mobile_alignment": "mobile-center"
+              }
+            },
+            {
+              "type": "text",
+              "settings": {
+                "text": "<p>Use the flexible slider system to create any slider layout. Each block can be placed in any of the slides.</p>",
+                "alignment": "center",
+                "mobile_alignment": "mobile-center",
+                "text_size": 10
+              }
+            }
+          ]
+        },
+        {
+          "type": "slide",
+          "blocks": [
+            {
+              "type": "heading",
+              "settings": {
+                "title": "Slide",
+                "heading_size": "h3",
+                "alignment": "center",
+                "mobile_alignment": "mobile-center"
+              }
+            },
+            {
+              "type": "text",
+              "settings": {
+                "text": "<p>Use the flexible slider system to create any slider layout. Each block can be placed in any of the slides.</p>",
+                "alignment": "center",
+                "mobile_alignment": "mobile-center",
+                "text_size": 10
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

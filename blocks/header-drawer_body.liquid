@@ -1,0 +1,178 @@
+{% liquid
+  assign padding_y = block.settings.padding_y | divided_by: 10.0
+  assign padding_x = block.settings.padding_x | divided_by: 10.0
+%}
+<style>
+  #HeaderDrawer_Body {
+    padding: {{ padding_y }}rem {{ padding_x }}rem;
+    {% if block.settings.color_scheme == 'custom' %}
+      --color-background: {{ block.settings.custom_colors_background.red }}, {{ block.settings.custom_colors_background.green }}, {{ block.settings.custom_colors_background.blue }};
+      --gradient-background: {% if block.settings.custom_gradient_background != blank %}{{ block.settings.custom_gradient_background }}{% else %}{{ block.settings.custom_colors_background }}{% endif %};
+      --color-foreground: {{ block.settings.custom_colors_text.red }}, {{ block.settings.custom_colors_text.green }}, {{ block.settings.custom_colors_text.blue }};
+    {% endif %}
+  }
+  #HeaderDrawer_Body .menu-drawer__navigation {
+    margin-left: -{{ padding_x }}rem;
+    margin-right: -{{ padding_x }}rem;
+  }
+</style>
+<div id="HeaderDrawer_Body" class="header-drawer-v2__body block-margins color-{{ block.settings.color_scheme }} gradient">
+  {% if block.blocks.size == 0 %}
+    {% render 'header-drawer_menu' %}
+  {% endif %}
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "Body",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "header-drawer_menu"
+    },
+    {
+      "type": "header-drawer_account"
+    },
+    {
+      "type": "header-drawer_localization"
+    },
+    {
+      "type": "social-media-icons"
+    },
+    {
+      "type": "custom-liquid"
+    },
+    {
+      "type": "image"
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "button"
+    },
+    {
+      "type": "heading"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "rating-stars"
+    },
+    {
+      "type": "container"
+    },
+    {
+      "type": "trustpilot-stars"
+    },
+    {
+      "type": "review-avatars"
+    },
+    {
+      "type": "icon-with-content"
+    },
+    {
+      "type": "text-with-icon"
+    },
+    {
+      "type": "text-with-icon-new"
+    },
+    {
+      "type": "icon-with-text"
+    },
+    {
+      "type": "reviews"
+    }
+  ],
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Enable the 'Test mode' in Drawer (mobile) menu block settings for faster customization"
+    },
+    {
+      "type": "header",
+      "content": "Styling"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_background",
+      "default": "#FFFFFF",
+      "label": "Background color",
+      "visible_if": "{{ block.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "custom_gradient_background",
+      "label": "Gradient background",
+      "info": "If added, replaces Background color.",
+      "visible_if": "{{ block.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_text",
+      "default": "#2E2A39",
+      "label": "Text color",
+      "visible_if": "{{ block.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "padding_y",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "label": "Vertical padding",
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_x",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "label": "Horizontal padding",
+      "default": 16,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Body"
+    }
+  ]
+}
+{% endschema %}

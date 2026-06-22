@@ -1,0 +1,152 @@
+{% liquid
+  assign item_count = 0
+  if block.settings.avatar_1 != blank
+    assign item_count = item_count | plus: 1
+  endif
+  if block.settings.avatar_2 != blank
+    assign item_count = item_count | plus: 1
+  endif
+  if block.settings.avatar_3 != blank
+    assign item_count = item_count | plus: 1
+  endif
+  if block.settings.avatar_4 != blank
+    assign item_count = item_count | plus: 1
+  endif
+  if block.settings.avatar_1 != blank
+    assign item_count = item_count | plus: 1
+  endif
+%}
+
+{% capture stars %}
+  <{% if block.settings.stars_scroll_id != blank %}a href="{{ block.settings.stars_scroll_id }}"{% else %}div{% endif %} class='rating-stars__container' style='transform: translateY({{ block.settings.stars_translate }}%);font-size: 0.9em; color: var(--star-color);'>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='currentColor'>
+      <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='currentColor'>
+      <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='currentColor'>
+      <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='currentColor'>
+      <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='currentColor'>
+      <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+    </svg>
+  </{% if block.settings.stars_scroll_id != blank %}a{% else %}div{% endif %}>
+{% endcapture %}
+{% capture checkmark %}
+<svg xmlns="http://www.w3.org/2000/svg" class='verified-icon' viewBox="0 0 122.88 116.87">
+  <polygon fill='{{ block.settings.checkmark_color }}' fill-rule="evenodd" points="61.37 8.24 80.43 0 90.88 17.79 111.15 22.32 109.15 42.85 122.88 58.43 109.2 73.87 111.15 94.55 91 99 80.43 116.87 61.51 108.62 42.45 116.87 32 99.08 11.73 94.55 13.73 74.01 0 58.43 13.68 42.99 11.73 22.32 31.88 17.87 42.45 0 61.37 8.24 61.37 8.24"/>
+  <path fill='{{ block.settings.checkmark_icon_color }}' d="M37.92,65c-6.07-6.53,3.25-16.26,10-10.1,2.38,2.17,5.84,5.34,8.24,7.49L74.66,39.66C81.1,33,91.27,42.78,84.91,49.48L61.67,77.2a7.13,7.13,0,0,1-9.9.44C47.83,73.89,42.05,68.5,37.92,65Z"/>
+</svg>
+{% endcapture %}
+
+<div
+  class='review-avatars review-avatars--{{ block.settings.avatars_size }} review-avatars--{{ block.settings.avatars_position }} isolate flex-justify-{{ block.settings.alignment }}'
+  style="
+    --avatar-size:{{ block.settings.avatar_size | divided_by: 10.0 }}rem;
+    --avatar-offset:{{ block.settings.avatar_offset | divided_by: 10.0 }}rem;
+    --corner-radius:{{ block.settings.corner_radius | divided_by: 10.0 }}rem;
+    --icon-size:{{ block.settings.checkmark_size | divided_by: 10.0 }}rem;
+    --star-color:{{ block.settings.star_color }};
+    --margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    --margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  "
+  {{ block.shopify_attributes }}
+>
+  {% if item_count > 0 %}
+    <div class="review-avatars__avatars-container flex isolate">
+      {% for i in (1..5) %}
+        {% liquid
+          case i 
+            when 1
+              assign avatar = block.settings.avatar_1
+              assign verified = block.settings.avatar_1_verified
+            when 2
+              assign avatar = block.settings.avatar_2
+              assign verified = block.settings.avatar_2_verified
+            when 3
+              assign avatar = block.settings.avatar_3
+              assign verified = block.settings.avatar_3_verified
+            when 4
+              assign avatar = block.settings.avatar_4
+              assign verified = block.settings.avatar_4_verified
+            when 5
+              assign avatar = block.settings.avatar_5
+              assign verified = block.settings.avatar_5_verified
+          endcase
+        %}
+        {% if avatar != blank %}
+          <div class="review-avatars__avatar{% if verified %} review-avatars__avatar--verified{% endif %}">
+            <img
+              src="{{ avatar | image_url }}"
+              {% if avatar.alt != blank %}
+                alt="{{ avatar.alt }}"
+              {% else %}
+                role="presentation"
+              {% endif %}
+              width="auto"
+              height="auto"
+              loading="lazy"
+            >
+            {{ checkmark }}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+  {% if block.settings.text_1_line_1 != blank or block.settings.text_1_line_2 != blank %}
+    <div
+      class="review-avatars__text review-avatars__text-1{% if block.settings.text_1_stretch_height %} review-avatars__text--stretch{% endif %} custom-bg custom-border-hex text-color isolate"
+      style="
+        --text-color:{{ block.settings.text_1_color }};
+        --bg-color:{{ block.settings.text_1_bg_color }};
+        --border-thickness:{{ block.settings.text_1_border_size }}px;
+        --border-color:{{ block.settings.text_1_border_color }};
+        --offset:{{ block.settings.text_1_offset | divided_by: 10.0 }}rem;
+        --padding-offset:{% if block.settings.text_1_offset < 0 %}{{ block.settings.text_1_offset | times: -1.0 | divided_by: 10.0 }}{% else %}0{% endif %}rem;
+        --padding-y: {{ block.settings.text_1_padding_y | divided_by: 10.0 }}rem;
+        --padding-x: {{ block.settings.text_1_padding_x | divided_by: 10.0 }}rem;
+      "
+    >
+      {% if block.settings.text_1_line_1 != blank %}
+        <div class="font-size" style="--font-size: {{ block.settings.text_1_line_1_size | divided_by: 10.0 }}rem;">
+          {{ block.settings.text_1_line_1 | replace: '[stars]', stars }}
+        </div>
+      {% endif %}
+      {% if block.settings.text_1_line_2 != blank %}
+        <div class="font-size" style="--font-size: {{ block.settings.text_1_line_2_size | divided_by: 10.0 }}rem;">
+          {{ block.settings.text_1_line_2 | replace: '[stars]', stars }}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+  {% if block.settings.text_2_line_1 != blank or block.settings.text_2_line_2 != blank %}
+    <div
+      class="review-avatars__text{% if block.settings.text_2_stretch_height %} review-avatars__text--stretch{% endif %} custom-bg custom-border-hex text-color isolate"
+      style="
+        --text-color:{{ block.settings.text_2_color }};
+        --bg-color:{{ block.settings.text_2_bg_color }};
+        --border-thickness:{{ block.settings.text_2_border_size }}px;
+        --border-color:{{ block.settings.text_2_border_color }};
+        --offset:{{ block.settings.text_2_offset | divided_by: 10.0 }}rem;
+        --padding-offset:{% if block.settings.text_2_offset < 0 %}{{ block.settings.text_2_offset | times: -1.0 | divided_by: 10.0 }}{% else %}0{% endif %}rem;
+        --padding-y: {{ block.settings.text_2_padding_y | divided_by: 10.0 }}rem;
+        --padding-x: {{ block.settings.text_2_padding_x | divided_by: 10.0 }}rem;
+      "
+    >
+      {% if block.settings.text_2_line_1 != blank %}
+        <div class="font-size" style="--font-size: {{ block.settings.text_2_line_1_size | divided_by: 10.0 }}rem;">
+          {{ block.settings.text_2_line_1 | replace: '[stars]', stars }}
+        </div>
+      {% endif %}
+      {% if block.settings.text_2_line_2 != blank %}
+        <div class="font-size" style="--font-size: {{ block.settings.text_2_line_2_size | divided_by: 10.0 }}rem;">
+          {{ block.settings.text_2_line_2 | replace: '[stars]', stars }}
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>

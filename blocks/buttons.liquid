@@ -1,0 +1,121 @@
+{% unless section.settings.url != blank %}
+  <div
+    class="banner__buttons{% if block.settings.button_label_1 != blank and block.settings.button_label_2 != blank %} banner__buttons--multiple{% endif %} {{ block.settings.visibility }}"
+    style="
+      margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+      margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+    "
+    {{ block.shopify_attributes }}
+  >
+    {%- if block.settings.button_label_1 != blank -%}
+      <a
+        {% if block.settings.button_link_1 == blank %}
+          role="link" aria-disabled="true"
+        {% else %}
+          href="{{ block.settings.button_link_1 }}"
+        {% endif %}
+        class="button{% if block.settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"
+      >
+        {{- block.settings.button_label_1 | escape -}}
+      </a>
+    {%- endif -%}
+    {%- if block.settings.button_label_2 != blank -%}
+      <a
+        {% if block.settings.button_link_2 == blank %}
+          role="link" aria-disabled="true"
+        {% else %}
+          href="{{ block.settings.button_link_2 }}"
+        {% endif %}
+        class="button{% if block.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"
+      >
+        {{- block.settings.button_label_2 | escape -}}
+      </a>
+    {%- endif -%}
+  </div>
+{% endunless %}
+
+{% schema %}
+{
+  "name": "Buttons",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "default": "Button label",
+      "label": "t:sections.image-banner.blocks.buttons.settings.button_label_1.label",
+      "info": "t:sections.image-banner.blocks.buttons.settings.button_label_1.info"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "t:sections.image-banner.blocks.buttons.settings.button_link_1.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_style_secondary_1",
+      "default": false,
+      "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_1.label"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "default": "Button label",
+      "label": "t:sections.image-banner.blocks.buttons.settings.button_label_2.label",
+      "info": "t:sections.image-banner.blocks.buttons.settings.button_label_2.info"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "t:sections.image-banner.blocks.buttons.settings.button_link_2.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_style_secondary_2",
+      "default": false,
+      "label": "t:sections.image-banner.blocks.buttons.settings.button_style_secondary_2.label"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Buttons",
+      "category": "Buttons"
+    }
+  ]
+}
+{% endschema %}
+

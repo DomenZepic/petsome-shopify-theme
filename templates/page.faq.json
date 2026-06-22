@@ -1,0 +1,81 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "9c121ec4-42cd-4c8e-82a2-935e073db7d7": {
+      "type": "collapsible-content",
+      "blocks": {
+        "template-19742927749415_9c121ec4-42cd-4c8e-82a2-935e073db7d7-16889993318614e07a-0": {
+          "type": "collapsible-row-content",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "check_box",
+            "filled_icon": false,
+            "page": ""
+          }
+        },
+        "template-19742927749415_9c121ec4-42cd-4c8e-82a2-935e073db7d7-16889993318614e07a-1": {
+          "type": "collapsible-row-content",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "check_box",
+            "filled_icon": false,
+            "page": ""
+          }
+        },
+        "template-19742927749415_9c121ec4-42cd-4c8e-82a2-935e073db7d7-16889993318614e07a-2": {
+          "type": "collapsible-row-content",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "check_box",
+            "filled_icon": false,
+            "page": ""
+          }
+        },
+        "template-19742927749415_9c121ec4-42cd-4c8e-82a2-935e073db7d7-16889993318614e07a-3": {
+          "type": "collapsible-row-content",
+          "settings": {
+            "heading": "Collapsible row",
+            "icon": "check_box",
+            "filled_icon": false,
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "template-19742927749415_9c121ec4-42cd-4c8e-82a2-935e073db7d7-16889993318614e07a-0",
+        "template-19742927749415_9c121ec4-42cd-4c8e-82a2-935e073db7d7-16889993318614e07a-1",
+        "template-19742927749415_9c121ec4-42cd-4c8e-82a2-935e073db7d7-16889993318614e07a-2",
+        "template-19742927749415_9c121ec4-42cd-4c8e-82a2-935e073db7d7-16889993318614e07a-3"
+      ],
+      "settings": {
+        "caption": "Frequently asked questions",
+        "heading_size": "h0",
+        "color_scheme": "background-1",
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "main",
+    "9c121ec4-42cd-4c8e-82a2-935e073db7d7"
+  ]
+}

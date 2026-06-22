@@ -1,0 +1,1190 @@
+{% liquid
+  if section.settings.product_images == 'all' or section.settings.product_images == 'one'
+    assign product = section.settings.product
+  endif
+%}
+{% if product.selling_plan_groups.size == 0 %}
+  <h4>This product has no active subscription plans created. Create a subscription plan by using a <a href='https://apps.shopify.com/shopify-subscriptions'>subscription app</a></h4>
+{% else %}
+  {% liquid
+    assign show_one_time = true
+    assign is_checkbox = false
+    if block.settings.style == 'checkbox'
+      assign show_one_time = false
+      assign is_checkbox = true
+    endif
+    assign preselected = block.settings.preselected_option
+
+    assign variant = product.selected_or_first_available_variant
+    assign allocation = variant.selling_plan_allocations[0]     
+    assign subscription_name = product.selling_plan_groups[0].name
+    assign first_selling_plan_id = product.selected_or_first_available_variant.selling_plan_allocations[0].selling_plan.id
+    assign price = product.selected_or_first_available_variant.price
+    assign compare_price = price
+    if product.selected_or_first_available_variant.compare_at_price > price
+      assign compare_price = product.selected_or_first_available_variant.compare_at_price
+    endif
+    
+    assign amount_saved = compare_price | minus: price
+    assign amount_saved_rounded = amount_saved | divided_by: 100.0 | round | times: 100
+    assign percentage_saved = compare_price | minus: price | times: 100.0 | divided_by: compare_price | floor 
+    
+    assign sub_price = allocation.price
+    assign sub_compare_price = allocation.compare_at_price
+    if block.settings.sub_compare_based_on == 'compare' and compare_price > sub_compare_price
+      assign sub_compare_price = compare_price
+    endif
+    
+    assign sub_amount_saved = sub_compare_price | minus: sub_price
+    assign sub_amount_saved_rounded = sub_amount_saved | divided_by: 100.0 | round | times: 100
+    assign sub_percentage_saved = sub_compare_price | minus: sub_price | times: 100.0 | divided_by: sub_compare_price | floor
+
+    assign plan_adj = allocation.selling_plan.price_adjustments | first
+    assign plan_adj_type = plan_adj.value_type
+    assign plan_adj_val = plan_adj.value
+    if plan_adj_type == 'price'
+      assign plan_adj_val = plan_adj.price
+    endif
+  %}
+  <shrine-subscription-widget
+    id="SubscriptionWidget-{{ section.id }}"
+    class="subscription-widget subscription-widget--style-{{ block.settings.style }} accent-color-{{ block.settings.color_scheme }} display-block full-width{% if block.settings.first_displayed_option == 'subscription' %} subscription-widget--sub-first{% endif %}{% if block.settings.show_selected_indicators and block.settings.style == 'horizontal' %} subscription-widget--show-indicators{% endif %}"
+    data-first-selling-plan-id="{{ first_selling_plan_id }}"
+    data-preselected="{{ preselected }}"
+    data-update-prices="{{ block.settings.update_prices }}"
+    data-money-format="{{ shop.money_format | escape }}"
+    data-subscription-name="{{ subscription_name }}"
+    data-base-price="{{ price }}"
+    data-base-compare-price="{{ compare_price }}"
+    data-discount-type="{{ plan_adj_type }}"
+    data-discount-value="{{ plan_adj_val }}"
+    data-displayed-prices="{{ block.settings.dispalyed_prices }}"
+    {% if block.settings.style == 'checkbox' %}
+      data-is-checkbox="true"
+    {% endif %}
+    data-section="{{ section.id }}"
+    style="
+      margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+      margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+    "
+    {{ block.shopify_attributes }}
+  >
+
+    <style>
+      #SubscriptionWidget-{{ section.id }} .subscription__box {
+        border-width: {{ block.settings.border_width }}px;
+        --border-width: {{ block.settings.border_width }}px;
+        --text-accent-color: rgb(var(--color-base-{{ block.settings.accent_color }}));
+        border-radius: {{ block.settings.corner_radius }}px;
+        --badge-border-radius: {{  block.settings.badge_radius | divided_by: 100.0 | times: 1.33 }}em;
+        --checkbox-size: {{ block.settings.checkbox_size | divided_by: 10.0 }}rem;
+        {% if block.settings.hide_pickers_overlay %}--pickers-overlay-opacity:0;--pickers-hover-overlay-opacity:0;{% endif %}
+      }
+
+      #SubscriptionWidget-{{ section.id }} .subscription__wrapper {
+        display: grid;
+        grid-template-columns: repeat({% if block.settings.style == 'vertical' %}2{% else %}1{% endif %}, 1fr);
+        gap: {{ block.settings.spacing_between_options }}px;
+        {% if block.settings.style == 'vertical' %}align-items: {{ block.settings.vertical_align }}{% endif %};
+      }
+
+      #SubscriptionWidget-{{ section.id }} .subscription__content__right {
+        flex-direction: {{ block.settings.price_layout }};
+        {% if block.settings.price_layout contains 'row' %}align-items: baseline;{% endif %}
+      }
+
+      #SubscriptionWidget-{{ section.id }} .subscription__separator {
+        opacity: {{  block.settings.subscription_separator_opacity }}%;
+      }
+
+      #SubscriptionWidget-{{ section.id }} .subscription__benefits p {
+        font-size: {{ block.settings.subscription_description_font_size | divided_by: 10.0 }}rem;
+      }
+
+      #SubscriptionWidget-{{ section.id }} .subscription__benefits p + p {
+        margin-top: {{ block.settings.subscription_benefits_spacing | divided_by: 10.0 }}rem;
+      }
+
+      #SubscriptionWidget-{{ section.id }} .subscription__benefits p .material-icon {
+        font-size: {{ block.settings.subscription_benefits_icon_size | divided_by: 100.0 }}em;
+        {% if block.settings.subscription_benefits_icon_color == 'accent' %}color: var(--text-accent-color);{% endif %}
+      }
+
+      #SubscriptionWidget-{{ section.id }} .subscription__benefits p img {
+        height: {{ block.settings.subscription_benefits_icon_size | divided_by: 100.0 }}em;
+        width: auto;
+      }
+
+      {% if block.settings.colors == 'custom' %}
+        #SubscriptionWidget-{{ section.id }} .subscription__box {
+          border-style: {{ block.settings.non_selected_border_style }};
+          border-color: {{ block.settings.non_selected_border_color }};
+          background: {% if block.settings.non_selected_background_type == 'color' %}{{ block.settings.non_selected_background_color }}{% elsif block.settings.non_selected_background_type == 'gradient' %}{{ block.settings.non_selected_background_gradient }}{% else %}transparent{% endif %};
+          color: {{ block.settings.non_selected_text_color }};
+          --text-accent-color: {{ block.settings.non_selected_accent_color }};
+          --checkbox-color: {{ block.settings.non_selected_checkbox_color }};
+        }
+        #SubscriptionWidget-{{ section.id }} .subscription__box .subscription__badge {
+          color: {{ block.settings.non_selected_badge_text_color }};
+          background: {{ block.settings.non_selected_badge_bg_color }};
+        }
+
+        #SubscriptionWidget-{{ section.id }} .subscription__box--selected {
+          border-style: {{ block.settings.selected_border_style }};
+          border-color: {{ block.settings.selected_border_color }};
+          background: {% if block.settings.selected_background_type == 'color' %}{{ block.settings.selected_background_color }}{% elsif block.settings.selected_background_type == 'gradient' %}{{ block.settings.selected_background_gradient }}{% else %}transparent{% endif %};
+          color: {{ block.settings.selected_text_color }};
+          --text-accent-color: {{ block.settings.selected_accent_color }};
+          --checkbox-color: {{ block.settings.selected_checkbox_color }};
+        }
+        #SubscriptionWidget-{{ section.id }} .subscription__box--selected .subscription__badge {
+          color: {{ block.settings.selected_badge_text_color }};
+          background: {{ block.settings.selected_badge_bg_color }};
+        }
+      {% endif %}
+    </style>
+
+    <div class="subscription__wrapper">
+      {% if show_one_time %}
+        <div
+          class="subscription__box subscription__box--one-time{% if preselected == 'one_time' %} subscription__box--selected{% endif %}"
+          data-type="one_time"
+          data-selected="{% if preselected == 'one_time' %}true{% endif %}"
+        >
+          <div class="subscription__content">
+            <div class="subscription__content__left left"> 
+              {% if block.settings.one_time_label != blank %}
+                <span class="subscription__label one-time-price-update" data-text="{{ block.settings.one_time_label }}">
+                  {% render 'text-with-price',
+                    text: block.settings.one_time_label,
+                    price: price,
+                    compare_price: compare_price,
+                    amount_saved: amount_saved,
+                    amount_saved_rounded: amount_saved_rounded,
+                    percentage_saved: percentage_saved,
+                    subscription_name: subscription_name
+                  %}
+                </span>
+              {% endif %}
+              {% if block.settings.one_time_caption != blank %}
+                <span class="subscription__caption one-time-price-update" data-text="{{ block.settings.one_time_caption }}">
+                  {% render 'text-with-price',
+                    text: block.settings.one_time_caption,
+                    price: price,
+                    compare_price: compare_price,
+                    amount_saved: amount_saved,
+                    amount_saved_rounded: amount_saved_rounded,
+                    percentage_saved: percentage_saved,
+                    subscription_name: subscription_name
+                  %}
+                </span>
+              {% endif %}
+            </div>
+            <div class="subscription__content__right right">
+              {% if block.settings.one_time_price_text != blank %}
+                <span class="subscription__price one-time-price-update" data-text="{{ block.settings.one_time_price_text }}">
+                  {% render 'text-with-price',
+                    text: block.settings.one_time_price_text,
+                    price: price,
+                    compare_price: compare_price,
+                    amount_saved: amount_saved,
+                    amount_saved_rounded: amount_saved_rounded,
+                    percentage_saved: percentage_saved,
+                    subscription_name: subscription_name
+                  %}
+                </span>
+              {% endif %}
+              {% if block.settings.one_time_compare_price_text != blank %}
+                <span class="subscription__compare-price one-time-price-update" data-text="{{ block.settings.one_time_compare_price_text }}">
+                  {% render 'text-with-price',
+                    text: block.settings.one_time_compare_price_text,
+                    price: price,
+                    compare_price: compare_price,
+                    amount_saved: amount_saved,
+                    amount_saved_rounded: amount_saved_rounded,
+                    percentage_saved: percentage_saved,
+                    subscription_name: subscription_name
+                  %}
+                </span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
+      <div
+        class="subscription__box subscription__box--subscription{% if preselected == 'subscription' %} subscription__box--selected{% endif %}{% if block.settings.subscription_badge_text != blank %} subscription__box--badge-style-{{ block.settings.subscription_badge_style }}{% endif %}{% if block.settings.hide_frequency %} subscription__box--hide-frequency{% endif %}"
+        data-type="subscription"
+        data-selected="{% if preselected == 'subscription' %}true{% else %}false{% endif %}"
+      >
+        {% if block.settings.subscription_badge_text != blank %}
+          <span class="subscription__badge quantity-break__badge{% if block.settings.colors == 'theme' %} color-{{ block.settings.badge_color_scheme }}{% endif %} sub-price-update" data-text="{{ block.settings.subscription_badge_text }}">
+            {% render 'text-with-price',
+              text: block.settings.subscription_badge_text,
+              price: sub_price,
+              compare_price: sub_compare_price,
+              amount_saved: sub_amount_saved,
+              amount_saved_rounded: sub_amount_saved_rounded,
+              percentage_saved: sub_percentage_saved,
+              subscription_name: subscription_name
+            %}
+          </span>
+        {% endif %}
+        <div class="subscription__content">
+          {% if is_checkbox %}
+            {% render 'checkbox-icons', checked: preselected == 'subscription' %}
+          {% endif %}
+          <div class="subscription__content__left left">
+            {% if block.settings.subscription_label != blank %}
+              <span class="subscription__label sub-price-update" data-text="{{ block.settings.subscription_label }}">
+                {% render 'text-with-price',
+                  text: block.settings.subscription_label,
+                  price: sub_price,
+                  compare_price: sub_compare_price,
+                  amount_saved: sub_amount_saved,
+                  amount_saved_rounded: sub_amount_saved_rounded,
+                  percentage_saved: sub_percentage_saved,
+                  subscription_name: subscription_name
+                %}
+              </span>
+            {% endif %}
+            {% if block.settings.subscription_caption != blank %}
+              <span class="subscription__caption sub-price-update" data-text="{{ block.settings.subscription_caption }}">
+                {% render 'text-with-price',
+                  text: block.settings.subscription_caption,
+                  price: sub_price,
+                  compare_price: sub_compare_price,
+                  amount_saved: sub_amount_saved,
+                  amount_saved_rounded: sub_amount_saved_rounded,
+                  percentage_saved: sub_percentage_saved,
+                  subscription_name: subscription_name
+                %}
+              </span>
+            {% endif %}
+          </div>
+          <div class="subscription__content__right right flex flex-justify-end">
+            {% if block.settings.subscription_price_text != blank %}
+              <span class="subscription__price sub-price-update" data-text="{{ block.settings.subscription_price_text }}">
+                {% render 'text-with-price',
+                  text: block.settings.subscription_price_text,
+                  price: sub_price,
+                  compare_price: sub_compare_price,
+                  mount_saved: sub_amount_saved,
+                  amount_saved_rounded: sub_amount_saved_rounded,
+                  percentage_saved: sub_percentage_saved,
+                  subscription_name: subscription_name
+                %}
+              </span>
+            {% endif %}
+            {% if block.settings.subscription_compare_price_text != blank %}
+              <span class="subscription__compare-price sub-price-update" data-text="{{ block.settings.subscription_compare_price_text }}">
+                {% render 'text-with-price',
+                  text: block.settings.subscription_compare_price_text,
+                  price: sub_price,
+                  compare_price: sub_compare_price,
+                  amount_saved: sub_amount_saved,
+                  amount_saved_rounded: sub_amount_saved_rounded,
+                  percentage_saved: sub_percentage_saved,
+                  subscription_name: subscription_name
+                %}
+              </span>
+            {% endif %}
+          </div>
+        </div>
+        {% liquid
+          assign current_variant = product.selected_or_first_available_variant
+
+          # All plans available for THIS variant (no premature group filter)
+          assign allocations = current_variant.selling_plan_allocations
+          assign allocations_count = allocations.size
+
+          # If you still need the group object/name, resolve it from the first allocation:
+          assign first_allocation = allocations | first
+          assign group = blank
+          if first_allocation
+            assign group_id = first_allocation.selling_plan.selling_plan_group_id
+            assign group = product.selling_plan_groups | where: 'id', group_id | first
+          endif
+
+          assign frequency_selector_type = block.settings.frequency_selector_type
+
+          assign has_separator = false
+          if block.settings.subscription_separator_opacity > 0
+            assign has_separator = true
+          endif
+
+          assign has_bottom = false
+          if block.settings.subscription_description_text != blank
+            assign has_bottom = true
+          endif
+          if allocations_count > 1
+            assign has_bottom = true
+          endif
+        %}
+        {% if has_separator %}<div class="subscription__separator">&nbsp</div>{% endif %}
+        <div class="subscription__bottom{% unless has_bottom %} hidden{% endunless %}">
+          {% if block.settings.subscription_description_text != blank %}
+            {% capture benefit_icon %}
+              {%- if block.settings.benefits_custom_icon == blank -%}
+                {% render 'material-icon', icon: block.settings.benefits_icon, filled: block.settings.benefits_filled_icon %}
+              {%- else -%}
+                <img
+                  src="{{ block.settings.benefits_custom_icon | image_url }}"
+                  {% if block.settings.benefits_custom_icon.alt != blank %}
+                    alt="{{ block.settings.benefits_custom_icon.alt | escape }}"
+                  {% else %}
+                    role="presentation"
+                  {% endif %}
+                  height="auto"
+                  width="auto"
+                  loading="lazy"
+                >
+              {%- endif -%}
+            {% endcapture %}
+            <div class="subscription__benefits rte">
+              {{ block.settings.subscription_description_text | replace: '[icon]', benefit_icon }}
+            </div>
+          {% endif %}
+          {% if allocations_count > 1 %}
+            <div class="subscription__frequency subscription__frequency--{{ frequency_selector_type }}">
+              <span class="subscription__frequency-label">
+                {{ block.settings.frequency_label }}
+              </span>
+
+              {%- if frequency_selector_type == 'dropdown' -%}
+                <div class="select select--small subscription__select{% if block.settings.frequency_dropdown_width != 'full' %} fit-content{% endif %} no-background color-{{ settings.pickers_color_scheme }} accent-color-{{ settings.pickers_overlay_color }} accent-2-color-{{ settings.pickers_text_color }}">
+                  <select id="SubscriptionFrequency-{{ section.id }}" class="select__select">
+                    {%- for allocation in allocations -%}
+                      {%- liquid
+                        assign plan_id = allocation.selling_plan.id
+                        assign plan_name = allocation.selling_plan.name
+                        if block.settings.frequency_names == 'no_discount'
+                          assign plan_name = plan_name | split: ',' | first
+                        elsif block.settings.frequency_names == 'dash'
+                          assign plan_name = plan_name | replace: ',', ' -'
+                        elsif block.settings.frequency_names == 'brackets'
+                          assign plan_name = plan_name | replace: ', ', ' (' | append: ")"
+                        endif
+
+                        assign plan_price_cents = allocation.price
+                        assign plan_compare_cents = allocation.compare_at_price
+
+                        assign adj = allocation.selling_plan.price_adjustments | first
+                        assign adj_type = adj.value_type
+                        assign adj_val = adj.value
+                        if adj_type == 'price' or adj_type == blank
+                          assign adj_type = 'price'
+                          assign adj_val  = plan_price_cents
+                        endif
+                      -%}
+                      <option
+                        value="{{ plan_id }}"
+                        data-selling-plan-id="{{ plan_id }}"
+                        data-price="{{ plan_price_cents }}"
+                        data-compare-price="{{ plan_compare_cents }}"
+                        data-discount-type="{{ adj_type }}"
+                        data-discount-value="{{ adj_val }}"
+                        {% if forloop.first %}selected{% endif %}
+                      >
+                        {{ plan_name }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                  {% render 'icon-caret' %}
+                </div>
+
+              {%- elsif frequency_selector_type == 'radio' -%}
+                <div class="subscription__frequency-radios">
+                  <form id="SubscriptionFrequency-{{ block.id }}">
+                    {%- for allocation in allocations -%}
+                      {%- liquid
+                        assign plan_id = allocation.selling_plan.id
+                        assign plan_name = allocation.selling_plan.name
+                        if block.settings.frequency_names == 'no_discount'
+                          assign plan_name = plan_name | split: ',' | first
+                        elsif block.settings.frequency_names == 'dash'
+                          assign plan_name = plan_name | replace: ',', ' -'
+                        elsif block.settings.frequency_names == 'brackets'
+                          assign plan_name = plan_name | replace: ', ', ' (' | append: ")"
+                        endif
+
+                        assign plan_price_cents = allocation.price
+                        assign plan_compare_cents = allocation.compare_at_price
+                        assign input_id = 'SubFreq-' | append: section.id | append: '-' | append: plan_id
+
+                        assign adj = allocation.selling_plan.price_adjustments | first
+                        assign adj_type = adj.value_type
+                        assign adj_val = adj.value
+                        if adj_type == 'price' or adj_type == blank
+                          assign adj_type = 'price'
+                          assign adj_val  = plan_price_cents
+                        endif
+                      -%}
+                      <label class="subscription__frequency-radio" for="{{ input_id }}">
+                        <input
+                          id="{{ input_id }}"
+                          type="radio"
+                          name="subscription_frequency_{{ section.id }}"
+                          class="subscription__frequency-input"
+                          value="{{ plan_id }}"
+                          data-selling-plan-id="{{ plan_id }}"
+                          data-price="{{ plan_price_cents }}"
+                          data-compare-price="{{ plan_compare_cents }}"
+                          data-discount-type="{{ adj_type }}"
+                          data-discount-value="{{ adj_val }}"
+                          {% if forloop.first %}checked{% endif %}
+                        />
+                        <span class="subscription__frequency-text">{{ plan_name }}</span>
+                      </label>
+                    {%- endfor -%}
+                  </form>
+                </div>
+              {%- endif -%}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </shrine-subscription-widget>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Subscription widget",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "HOW TO USE"
+    },
+    {
+      "type": "paragraph",
+      "content": "To create a subscription plan, you'll need to install an app. [Shopify's FREE app](https://apps.shopify.com/shopify-subscriptions) can be used."
+    },
+    {
+      "type": "paragraph",
+      "content": "Once a subscription has been created for the product, this widget can be used to display it."
+    },
+    {
+      "type": "paragraph",
+      "content": "Do NOT use other widgets from the subscription apps."
+    },
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "select",
+      "id": "first_displayed_option",
+      "label": "First displayed option",
+      "options": [
+        { "label": "One-time purchase", "value": "one_time" },
+        { "label": "Subscription", "value": "subscription" }
+      ],
+      "default": "one_time",
+      "visible_if": "{{ block.settings.style != 'checkbox' }}"
+    },
+    {
+      "type": "select",
+      "id": "preselected_option",
+      "label": "Preselected option",
+      "options": [
+        { "label": "One-time purchase", "value": "one_time" },
+        { "label": "Subscription", "value": "subscription" }
+      ],
+      "default": "one_time"
+    },
+    {
+      "type": "checkbox",
+      "id": "update_prices",
+      "label": "Update product page & quantity breaks prices",
+      "default": true,
+      "info": "Updates all prices depending on if the one-time or subscription offer is selected."
+    },
+    {
+      "type": "select",
+      "id": "dispalyed_prices",
+      "label": "Displayed widget prices",
+      "options": [
+        { "label": "Unit price", "value": "unit" },
+        { "label": "Unit price with quantity break discounts", "value": "unit_with_discount" },
+        { "label": "Total price of the selected quantity break", "value": "total" }
+      ],
+      "default": "unit",
+      "info": "The 2nd and 3rd option are applied only if quantity breaks are added."
+    },
+    {
+      "type": "header",
+      "content": "Style & layout"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "Style",
+      "options": [
+        { "label": "Horizontal", "value": "horizontal" },
+        { "label": "Vertical", "value": "vertical" },
+        { "label": "Checkbox", "value": "checkbox" }
+      ],
+      "default": "horizontal"
+    },
+    {
+      "type": "select",
+      "id": "vertical_align",
+      "label": "Vertical alignment",
+      "options": [
+        { "label": "Top", "value": "flex-start" },
+        { "label": "Center", "value": "center" },
+        { "label": "Bottom", "value": "flex-end" },
+        { "label": "Same heights", "value": "stretch" }
+      ],
+      "default": "stretch",
+      "visible_if": "{{ block.settings.style == 'vertical' }}"
+    },
+    {
+      "type": "range",
+      "id": "spacing_between_options",
+      "label": "Spacing between options",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 10,
+      "visible_if": "{{ block.settings.style != 'checkbox' }}"
+    },
+    {
+      "type": "range",
+      "id": "checkbox_size",
+      "label": "Checkbox size",
+      "min": 16,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 22,
+      "visible_if": "{{ block.settings.style == 'checkbox' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "show_selected_indicators",
+      "label": "Display the cirlce selection indicators",
+      "default": true,
+      "visible_if": "{{ block.settings.style == 'horizontal' }}"
+    },
+  
+    {
+      "type": "header",
+      "content": "Colors selection"
+    },
+    {
+      "type": "select",
+      "id": "colors",
+      "label": "Colors",
+      "options": [
+        {
+          "value": "theme",
+          "label": "Theme colors"
+        },
+        {
+          "value": "custom",
+          "label": "Custom colors"
+        }
+      ],
+      "default": "theme"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ block.settings.colors == 'theme' }}"
+    },
+    {
+      "type": "select",
+      "id": "accent_color",
+      "label": "Text accent color",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1",
+      "info": "Put words in italic to make them be in this color.",
+      "visible_if": "{{ block.settings.colors == 'theme' }}"
+    },
+    {
+      "type": "select",
+      "id": "badge_color_scheme",
+      "label": "Badge color scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ block.settings.colors == 'theme' }}"
+    },
+
+    {
+      "type": "header",
+      "content": "Non-selected box styling",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "non_selected_border_style",
+      "label": "Border style",
+      "options": [
+        { "label": "Solid", "value": "solid" },
+        { "label": "Dashed", "value": "dashed" }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.border_width > 0 and block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "non_selected_border_color",
+      "label": "Border color",
+      "default": "#D9D9D9",
+      "visible_if": "{{ block.settings.border_width > 0 and block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "non_selected_background_type",
+      "label": "Background",
+      "options": [
+        { "label": "None", "value": "none" },
+        { "label": "Color", "value": "color" },
+        { "label": "Gradient", "value": "gradient" }
+      ],
+      "default": "none",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "non_selected_background_color",
+      "label": "Background color",
+      "default": "#FFFFFF",
+      "visible_if": "{{ block.settings.non_selected_background_type == 'color' and block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "non_selected_background_gradient",
+      "label": "Background gradient",
+      "default": "linear-gradient(#ffffff, #f5f5f5)",
+      "visible_if": "{{ block.settings.non_selected_background_type == 'gradient' and block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "non_selected_text_color",
+      "label": "Text color",
+      "default": "#121212",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "non_selected_accent_color",
+      "label": "Text accent color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "non_selected_checkbox_color",
+      "label": "Checkbox color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.style == 'checkbox' and block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "non_selected_badge_text_color",
+      "label": "Badge text color",
+      "default": "#FFF",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "non_selected_badge_bg_color",
+      "label": "Badge background color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+  
+    {
+      "type": "header",
+      "content": "Selected box styling",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "selected_border_style",
+      "label": "Border style",
+      "options": [
+        { "label": "Solid", "value": "solid" },
+        { "label": "Dashed", "value": "dashed" }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.border_width > 0 and block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_border_color",
+      "label": "Border color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.border_width > 0 and block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "selected_background_type",
+      "label": "Background",
+      "options": [
+        { "label": "None", "value": "none" },
+        { "label": "Color", "value": "color" },
+        { "label": "Gradient", "value": "gradient" }
+      ],
+      "default": "color",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_background_color",
+      "label": "Background color",
+      "default": "#F0EBF4",
+      "visible_if": "{{ block.settings.selected_background_type == 'color' and block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "selected_background_gradient",
+      "label": "Background gradient",
+      "default": "linear-gradient(#f9f9f9, #e9e9e9)",
+      "visible_if": "{{ block.settings.selected_background_type == 'gradient' and block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_text_color",
+      "label": "Text color",
+      "default": "#121212",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_accent_color",
+      "label": "Text accent color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_checkbox_color",
+      "label": "Checkbox color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.style == 'checkbox' and block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_badge_text_color",
+      "label": "Badge text color",
+      "default": "#FFF",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "selected_badge_bg_color",
+      "label": "Badge background color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.colors == 'custom' }}"
+    },
+  
+    {
+      "type": "header",
+      "content": "Prices"
+    },
+    {
+      "type": "select",
+      "id": "price_layout",
+      "label": "Prices layout",
+      "options": [
+        { "value": "row", "label": "Price first - horizontal" },
+        { "value": "column", "label": "Price first - vertical" },
+        { "value": "row-reverse", "label": "Compare price first - horizontal" },
+        { "value": "column-reverse", "label": "Compare price first - vertical" }
+      ],
+      "default": "row"
+    },
+    {
+      "type": "select",
+      "id": "sub_compare_based_on",
+      "label": "Subscription compare price based on",
+      "options": [
+        { "value": "price", "label": "Old (real) product price" },
+        { "value": "compare", "label": "Product compare price (if available)" }
+      ],
+      "default": "price"
+    },
+    {
+      "type": "header",
+      "content": "Delivery frequency"
+    },
+    {
+      "type": "select",
+      "id": "frequency_selector_type",
+      "label": "Selection type",
+      "options": [
+        { "label": "Radio buttons", "value": "radio" },
+        { "label": "Dropdown", "value": "dropdown" }
+      ],
+      "default": "radio"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_frequency",
+      "label": "Hide frequency selection unless subscription is selected",
+      "default": true
+    },
+    {
+      "type": "inline_richtext",
+      "id": "frequency_label",
+      "label": "Selection label",
+      "default": "<strong>Delivery frequency</strong>"
+    },
+    {
+      "type": "select",
+      "id": "frequency_names",
+      "label": "Options name format",
+      "options": [
+        { "label": "Deliver every X", "value": "no_discount" },
+        { "label": "Deliver every X, Y off", "value": "original" },
+        { "label": "Deliver every X - Y off", "value": "dash" },
+        { "label": "Deliver every X (Y off)", "value": "brackets" }
+      ],
+      "default": "no_discount"
+    },
+    {
+      "type": "select",
+      "id": "frequency_dropdown_width",
+      "label": "Dropdown width",
+      "options": [
+        { "label": "Fit content", "value": "fit-content" },
+        { "label": "Full width", "value": "full" }
+      ],
+      "default": "full",
+      "visible_if": "{{ block.settings.frequency_selector_type == 'dropdown' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_pickers_overlay",
+      "label": "Disable variant selectors color overlay",
+      "default": true,
+      "visible_if": "{{ block.settings.frequency_selector_type == 'dropdown' }}"
+    },
+    {
+      "type": "header",
+      "content": "How to use text content settings",
+      "info": "In all text settings below, you can use all keywords (words in square brackets) listed below, and they are going to get automatically replaced into their corresponding values."
+    },
+    {
+      "type": "paragraph",
+      "content": "[subscription_name] - displays name of the subscription plan"
+    },
+    {
+      "type": "paragraph",
+      "content": "[price] - displays total price"
+    },
+    {
+      "type": "paragraph",
+      "content": "[compare_price] - displays total compare price"
+    },
+    {
+      "type": "paragraph",
+      "content": "[amount_saved] - displays the difference between the price & compare price"
+    },
+    {
+      "type": "paragraph",
+      "content": "[amount_saved_rounded] - displays the same difference as [amount_saved], but rounded up. For example. 20 instead of 19.95."
+    },
+    {
+      "type": "paragraph",
+      "content": "[percentage_saved] - displays the total percentage saved"
+    },
+    {
+      "type": "header",
+      "content": "Text accent color"
+    },
+    {
+      "type": "paragraph",
+      "content": "To put certain words in texts in a different color, make them italic. Choose this color by changing the \"Text accent color\" settings above."
+    },
+    {
+      "type": "header",
+      "content": "One-time purchase text",
+      "visible_if": "{{ block.settings.style != 'checkbox' }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "one_time_label",
+      "label": "Label",
+      "default": "<strong>One-time purchase</strong>",
+      "visible_if": "{{ block.settings.style != 'checkbox' }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "one_time_caption",
+      "label": "Caption",
+      "visible_if": "{{ block.settings.style != 'checkbox' }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "one_time_price_text",
+      "label": "Price text",
+      "default": "<strong><em>[price]</em></strong>",
+      "visible_if": "{{ block.settings.style != 'checkbox' }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "one_time_compare_price_text",
+      "label": "Compare price text",
+      "visible_if": "{{ block.settings.style != 'checkbox' }}"
+    },
+  
+    {
+      "type": "header",
+      "content": "Subscription text"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subscription_label",
+      "label": "Label",
+      "default": "<strong>Subscribe & save</strong>"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subscription_caption",
+      "label": "Caption"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subscription_price_text",
+      "label": "Price text",
+      "default": "<strong><em>[price]</em></strong>",
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subscription_compare_price_text",
+      "label": "Compare price text",
+      "default": "[compare_price]"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subscription_badge_text",
+      "label": "Badge text",
+      "default": "<strong>SAVE [percentage_saved]</strong>"
+    },
+    {
+      "type": "richtext",
+      "id": "subscription_description_text",
+      "label": "Benefits/description",
+      "default": "<p>[icon] Cancel anytime</p><p>[icon] Choose your delivery schedule</p>"
+    },
+    {
+      "type": "text",
+      "id": "benefits_icon",
+      "default": "check",
+      "label": "Benefits icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+    },
+    {
+      "type": "checkbox",
+      "id": "benefits_filled_icon",
+      "default": false,
+      "label": "Benefits filled icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "benefits_custom_icon",
+      "label": "Benefits custom icon"
+    },
+    {
+      "type": "header",
+      "content": "Subscription box styling"
+    },
+    {
+      "type": "select",
+      "id": "subscription_badge_style",
+      "label": "Badge style",
+      "options": [
+        {
+          "value": "1",
+          "label": "Style 1"
+        },
+        {
+          "value": "2",
+          "label": "Style 2"
+        },
+        {
+          "value": "3",
+          "label": "Style 3"
+        }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "range",
+      "id": "badge_radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Badge corner radius",
+      "default": 45
+    },
+    {
+      "type": "range",
+      "id": "subscription_separator_opacity",
+      "label": "Separator line opacity",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "%",
+      "default": 10,
+      "info": "Separates the top content area from the description & delivery frequency area."
+    },
+    {
+      "type": "range",
+      "id": "subscription_description_font_size",
+      "label": "Benefits/description font size",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "subscription_benefits_spacing",
+      "label": "Benefits/description spacing between paragraphs (benefits)",
+      "min": -10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 5
+    },
+    {
+      "type": "range",
+      "id": "subscription_benefits_icon_size",
+      "label": "Benefits icon size scale",
+      "min": 75,
+      "max": 300,
+      "step": 15,
+      "unit": "%",
+      "default": 150
+    },
+    {
+      "type": "select",
+      "id": "subscription_benefits_icon_color",
+      "label": "Benefits icon color",
+      "options": [
+        { "label": "Text", "value": "text" },
+        { "label": "Accent", "value": "accent" }
+      ],
+      "default": "accent"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Subscription widget",
+      "category": "Upsells, offers & gifts"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,67 @@
+{% liquid
+  assign icon_thickness = section.settings.icons_thickness | times: 13 | plus: 12
+%}
+
+{% case section.settings.search_icon %}
+  {% when 'text' %}
+    <span class="header__text-icon icon icon-search">
+      {{ section.settings.search_icon_text }}
+    </span>
+  {% when 'style_2' %}
+    <svg
+      class="modal__toggle-open icon icon-search"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 500 500"
+      aria-hidden="true"
+      focusable="false"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="{{ icon_thickness }}"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path d="M430,449.9c-57.1-57-114.2-114.1-171.3-171.1"/>
+      <circle cx="159.4" cy="175.7" r="143.1"/>
+    </svg>
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_2" x="0px" y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#231F20;stroke-width:24;stroke-linecap:round;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#231F20;stroke-width:24;stroke-miterlimit:10;}
+</style>
+<path class="st0" d="M430,449.9c-57.1-57-114.2-114.1-171.3-171.1"/>
+<path class="st0" d="M500,0"/>
+<circle class="st1" cx="159.4" cy="175.7" r="143.1"/>
+</svg> -->
+  {% when 'style_3' %}
+    <svg
+      class="modal__toggle-open icon icon-search"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 500 500"
+      aria-hidden="true"
+      focusable="false"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="{{ icon_thickness }}"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <circle cx="144.9" cy="161.1" r="128.5" />
+      <path d="M430,449.9c-65.2-65.1-130.3-130.2-195.5-195.3" />
+    </svg>
+  {% else %}
+    <svg
+      class="modal__toggle-open icon icon-search"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 500 500"
+      aria-hidden="true"
+      focusable="false"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="{{ icon_thickness }}"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <circle cx="173.4" cy="189.6" r="157"/>
+      <path d="M430,449.9c-49.2-49.1-98.3-98.2-147.5-147.3"/>
+    </svg>
+{% endcase %}

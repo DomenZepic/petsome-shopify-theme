@@ -1,0 +1,1507 @@
+{%- liquid
+  assign arc_bg = ''
+  if section.settings.circle_color == 'gradient'
+    assign arc_bg = section.settings.circle_gradient
+  elsif section.settings.circle_color == 'custom'
+    assign arc_bg = section.settings.circle_custom_color
+  else
+    assign arc_bg = 'rgb(var(--color-base-' | append: section.settings.circle_color | append: '))'
+  endif
+-%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .color-scheme-{{ section.id }}.color-custom {
+    --color-background: {{ section.settings.custom_colors_background.red }}, {{ section.settings.custom_colors_background.green }}, {{ section.settings.custom_colors_background.blue }};
+    --gradient-background: {% if section.settings.custom_gradient_background != blank %}{{ section.settings.custom_gradient_background }}{% else %}{{ section.settings.custom_colors_background }}{% endif %};
+    {% if section.settings.custom_image_background != blank %}
+      {% # theme-check-disable %}
+      --gradient-background: url('{{ section.settings.custom_image_background | img_url: 'master' }}') center center / cover no-repeat;
+      {% # theme-check-enable %}
+    {% endif %}
+    --color-foreground: {{ section.settings.custom_colors_text.red }}, {{ section.settings.custom_colors_text.green }}, {{ section.settings.custom_colors_text.blue }};
+    --accent-color: {{ section.settings.custom_colors_accent.red }}, {{ section.settings.custom_colors_accent.green }}, {{ section.settings.custom_colors_accent.blue }};
+    --color-button: {{ section.settings.custom_colors_solid_button_background.red }}, {{ section.settings.custom_colors_solid_button_background.green }}, {{ section.settings.custom_colors_solid_button_background.blue }};
+    --color-button-text: {{ section.settings.custom_colors_solid_button_text.red }}, {{ section.settings.custom_colors_solid_button_text.green }}, {{ section.settings.custom_colors_solid_button_text.blue }};
+    --color-base-outline-button-labels: {{ section.settings.custom_colors_outline_button.red }}, {{ section.settings.custom_colors_outline_button.green }}, {{ section.settings.custom_colors_outline_button.blue }};
+  }
+  {% if section.settings.custom_mobile_image_background != blank %}
+    @media screen and (max-width: 740px) {
+      .color-scheme-{{ section.id }}.color-custom {
+        {% # theme-check-disable %}
+        --gradient-background: url('{{ section.settings.custom_mobile_image_background | img_url: 'master' }}') center center / cover no-repeat;
+        {% # theme-check-enable %}
+      }
+    }
+  {% endif %}
+  {% if section.settings.pattern_bg != 'none' %}
+    {% render 'pattern-background' %}
+  {% endif %}
+
+  #Results-{{ section.id }} .results__row {
+    row-gap: {{ section.settings.result_vertical_spacing | divided_by: 10.0 }}rem;
+    column-gap: {{ section.settings.result_horizontal_spacing | divided_by: 10.0 }}rem;
+  }
+  #Results-{{ section.id }} .results__content__heading {
+    margin: 0;
+    font-size: {{ section.settings.result_heading_size | divided_by: 10.0 }}rem;
+  }
+  #Results-{{ section.id }} .results__text {
+    line-height: {{ section.settings.result_text_line_height }};
+    font-size: {{ section.settings.result_text_size | divided_by: 10.0 }}rem;
+  }
+  #Results-{{ section.id }} .results__content__heading + .results__text {
+    margin-top: {{ section.settings.result_heading_text_spacing | divided_by: 10.0 }}rem;
+  }
+  #Results-{{ section.id }} .results__row--circle .results__percentage {
+    width: {{ section.settings.circle_diameter | divided_by: 10.0 }}rem;
+    height: {{ section.settings.circle_diameter | divided_by: 10.0 }}rem;
+    --thickness: {{ section.settings.circle_border_width | divided_by: 10.0 }}rem;
+    {% if section.settings.circle_color == 'gradient' %}
+      --ring-bg: {{ section.settings.circle_gradient }};
+    {% elsif section.settings.circle_color == 'custom' %}
+      --ring-bg: {{ section.settings.circle_custom_color }};
+    {% else %}
+      --ring-bg: rgb(var(--color-base-{{ section.settings.circle_color }}));
+    {% endif %}
+  }
+  #Results-{{ section.id }} .ring__prog {
+    transition: stroke-dasharray {{ section.settings.animation_duration }}ms ease;
+  }
+  #Results-{{ section.id }} .results__percentage p {
+    {% if section.settings.style == 'circle' %}
+      font-size: {{ section.settings.circle_number_size | divided_by: 10.0 }}rem;
+    {% else %}
+      font-size: {{ section.settings.number_number_size | divided_by: 10.0 }}rem;
+    {% endif %}
+    {% if section.settings.number_color == 'gradient' %}
+      background: {{ section.settings.number_gradient }};
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    {% elsif section.settings.number_color == 'custom' %}
+      color: {{ section.settings.number_custom_color }};
+    {% else %}
+      color: rgb(var(--color-base-{{ section.settings.number_color }}));
+    {% endif %}
+  }
+{%- endstyle -%}
+
+<div class="color-scheme-{{ section.id }} color-{{ section.settings.color_scheme }} gradient content-for-grouping animate-section animate--hidden {{ section.settings.visibility }}">
+  {% if section.settings.display_id %}
+    <copy-button class='section-id-btn button' data-content="#shopify-section-{{ section.id }}" data-success="false">
+      <span class="copy-text">Click to copy section ID</span>
+      <span class="copy-success">ID copied successfully!</span>
+    </copy-button>
+  {% endif %}
+  <div class="page-width section-{{ section.id }}-padding">
+    <div class="content-and-results section-group__container__child-grid{% if section.settings.layout == 'results_first' %} content-and-results--results-first{% endif %}{% if section.settings.title == blank and section.settings.text == blank and section.settings.image == blank and section.settings.video == blank %} content-and-results--no-content{% endif %}">
+      {% assign content_index = 0 %}
+      <div class="content-container content-rte center animate-item animate-item--child index-0{% if section.settings.layout == 'results_first' %} desktop-index-1{% endif %}">
+        {%- unless section.settings.title == blank -%}
+          {% assign content_index = 1 %}
+          {% render 'section-title' %}
+        {%- endunless -%}
+        {%- unless section.settings.text == blank -%}
+          {% assign content_index = 1 %}
+          <div class='rte'>
+            {{ section.settings.text }}
+          </div>
+        {%- endunless -%}
+        {%- if section.settings.video != blank -%}
+          {% liquid
+            assign autoplay = false
+            if section.settings.video_muted_autoplay
+              assign autoplay = true
+            endif
+          %}
+          <div class="content-and-results__image media media--transparent global-media-settings ratio" style="--ratio-percent: {{ 1 | divided_by: section.settings.video.aspect_ratio | times: 100 }}%">
+            <internal-video data-autoplay="{{ autoplay }}" data-no-play-btn="{{ autoplay }}">
+              <video 
+                width="100%" 
+                height="auto" 
+                preload='metadata'
+                poster="{{ section.settings.video.preview_image | image_url }}"
+                {% if autoplay %}
+                  muted autoplay loop
+                {% endif %}
+                playsinline disablepictureinpicture
+              >
+                {% for source in section.settings.video.sources %}
+                  <source 
+                    {% if autoplay %}data-{% endif %}src="{{ source.url }}" 
+                    type="{{ source.mime_type }}"
+                  >
+                {% endfor %}
+              </video>
+              <button class="internal-video__play"{% if autoplay %} style='visibility: hidden;'{% endif %}>
+                <div class="play-button color-accent-1">
+                  {%- render 'icon-play' -%}
+                </div>
+              </button>
+            </internal-video>
+          </div>
+        {%- elsif section.settings.image != blank -%}
+          {%- capture sizes -%}
+            (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 50 | divided_by: 2 }}px,
+            (min-width: 900px) calc((100vw - 130px) / 2), (min-width: 700px) 600px, calc(100vw - 50px)
+          {%- endcapture -%}
+          <div class="content-and-results__image media media--transparent global-media-settings ratio" style="--ratio-percent: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%">
+            {{
+              section.settings.image
+              | image_url: width: 1500
+              | image_tag: loading: 'lazy', sizes: sizes, widths: '165, 360, 535, 750, 1070, 1500'
+            }}
+          </div>
+        {%- endif -%}
+      </div>
+      <div class="results-container" id="Results-{{ section.id }}">
+        <div class="results animate-item animate-item--child index-{{ content_index }}{% if section.settings.layout == 'results_first' %} desktop-index-0{% endif %}">
+          {%- unless section.settings.results_headline == blank -%}
+            <h3 class="title {{ section.settings.results_headline_size }} {{ section.settings.results_headline_alignment }} title-with-highlight" style='--hightlight-color:{{ section.settings.results_title_highlight_color }}'>
+              {{ section.settings.results_headline }}
+            </h3>
+          {%- endunless -%}
+          {%- unless section.settings.results_text == blank -%}
+            <div class='rte {{ section.settings.results_headline_alignment }}'>
+              {{ section.settings.results_text }}
+            </div>
+          {%- endunless -%}
+          {% liquid
+            assign delay = section.settings.animation_init_delay
+            if settings.enable_load_animations
+              assign delay = delay | plus: settings.animation_duration
+            endif
+          %}
+          <{% if section.settings.enable_animations %}results-container{% else %}div{% endif %}
+            class="results__rows-container display-block"
+            data-style="{{ section.settings.style }}"
+            data-duration="{{ section.settings.animation_duration }}"
+            data-delay="{{ delay }}"
+          >
+            {%- for row in section.blocks -%}
+              <div class="results__row results__row--{{ section.settings.style }}{% if section.settings.result_layout == 'vertical' %} results__row--vertical{% endif %}">
+                <div
+                  class="results__percentage flex-center center{% if section.settings.style == 'number' and section.settings.enable_animations %} results__percentage--width-fix{% endif %}"
+                  style="--percentage: {% if section.settings.enable_animations %}0{% else %}{{ row.settings.percentage }}{% endif %}%"
+                  data-percentage="{{ row.settings.percentage }}"
+                >
+                  {% if section.settings.style == 'circle' %}
+                    {%- assign diam = section.settings.circle_diameter -%}
+                    {%- assign thick = section.settings.circle_border_width -%}
+                    {%- assign radius = diam | minus: thick | divided_by: 2 -%}
+
+                    <svg
+                      class="results__ring-svg"
+                      width="{{ diam }}" height="{{ diam }}"
+                      viewBox="0 0 {{ diam }} {{ diam }}"
+                      aria-hidden="true"
+                      data-gradient="{{ section.settings.circle_gradient | escape }}"
+                      data-circle-color="{{ section.settings.circle_color }}"
+                      data-circle-custom="{{ section.settings.circle_custom_color }}"
+                    >
+                      <defs>
+                        <linearGradient id="ring-grad-{{ section.id }}-{{ forloop.index }}"
+                                        gradientUnits="objectBoundingBox"
+                                        x1="0.5" y1="0" x2="0.5" y2="1">
+                          <stop offset="0%"  stop-color="#0AEAED"/>
+                          <stop offset="100%" stop-color="#FA0DFD"/>
+                        </linearGradient>
+                      </defs>
+
+                      {% capture stroke_value %}
+                        {% if section.settings.circle_color == 'gradient' %}
+                          url(#ring-grad-{{ section.id }}-{{ forloop.index }})
+                        {% elsif section.settings.circle_color == 'custom' %}
+                          {{ section.settings.circle_custom_color }}
+                        {% else %}
+                          rgb(var(--color-base-{{ section.settings.circle_color }}))
+                        {% endif %}
+                      {% endcapture %}
+                      <circle
+                        class="ring__prog"
+                        cx="{{ diam | divided_by: 2 }}"
+                        cy="{{ diam | divided_by: 2 }}"
+                        r="{{ radius }}"
+                        fill="none"
+                        stroke="{{ stroke_value | strip }}"
+                        stroke-width="{{ thick }}"
+                        stroke-linecap="{{ section.settings.circle_linecap }}"
+                        pathLength="100"
+                        transform="rotate(-90 {{ diam | divided_by: 2 }} {{ diam | divided_by: 2 }})"
+                        {% if section.settings.enable_animations %}
+                          stroke-dasharray="0 100"
+                        {% else %}
+                          stroke-dasharray="{{ row.settings.percentage }} 100"
+                        {% endif %}
+                      />
+                    </svg>
+                  {% endif %}
+
+                  <p>
+                    {% if section.settings.enable_animations %}
+                      0%
+                    {% else %}
+                      {{ row.settings.percentage }}%
+                    {% endif %}
+                  </p>
+                  {% if section.settings.style == 'number' and section.settings.enable_animations %}
+                    <p>
+                      {{ row.settings.percentage }}%
+                    </p>
+                  {% endif %}
+                </div>
+                <div class="results__content">
+                  {% if row.settings.row_heading != blank %}
+                    <h3 class="results__content__heading">
+                      {{ row.settings.row_heading }}
+                    </h3>
+                  {% endif %}
+                  {% if row.settings.row_text != blank %}
+                    <div class="results__text">
+                      {{ row.settings.row_text }}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            {%- endfor -%}
+          </{% if section.settings.enable_animations %}results-container{% else %}div{% endif %}>
+          {%- unless section.settings.caption == blank -%}
+            <div class="results__caption">
+              {{ section.settings.caption }}
+            </div>
+          {%- endunless -%}
+          {%- if section.settings.button_label != blank -%}
+            <a
+              {% if section.settings.link %}
+                href="{{ section.settings.link }}"
+              {% else %}
+                role="link" aria-disabled="true"
+              {% endif %}
+              class="button btn--mt-center {% if section.settings.button_style_secondary %}button--secondary{% else %}button--primary{% endif %}"
+            >
+              {{- section.settings.button_label | escape -}}
+            </a>
+          {%- endif -%}
+          {%- if section.settings.atc_button_label != blank -%}
+            {% if section.settings.atc_product == blank %}
+              <button
+                id="SectionAtcBtn-{{ section.id }}"
+                type="button"
+                class="button btn--mt-center main-product-atc button--has-spinner"
+                {% if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
+                  disabled
+                {% endif %}
+              >
+                {{ section.settings.atc_button_label | escape }}
+                <div class="loading-overlay__spinner">
+                  <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    class="spinner"
+                    viewBox="0 0 66 66"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                  </svg>
+                </div>
+              </button>
+            {% else %}
+              {% assign product_form_id = 'section-product-form-'
+                | append: section.id
+              %}
+              {% render 'separate-atc-btn',
+                product: section.settings.atc_product,
+                product_form_id: product_form_id,
+                label: section.settings.atc_button_label,
+                class: 'btn--mt-center',
+                skip_cart: section.settings.atc_skip_cart
+              %}
+            {% endif %}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Results",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "display_id",
+      "label": "Display section ID",
+      "info": "ID is used in the Sections group section to merge 2 sections. ID can also be put inside any button link and the button will scroll to this section.",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "header",
+      "content": "General"
+    },
+
+
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "default": "Results",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "title_highlight_1",
+      "label": "Heading words highlight 1",
+      "info": "Put words in BOLD to highlight them with this style.",
+      "options": [
+        {
+          "value": "solid-color",
+          "label": "Color"
+        },
+        {
+          "value": "gradient-color",
+          "label": "Gradient"
+        },
+        {
+          "value": "bg-color",
+          "label": "Background"
+        },
+        {
+          "value": "underline-solid",
+          "label": "Underline"
+        },
+        {
+          "value": "underline-gradient",
+          "label": "Gradient underline"
+        },
+        {
+          "value": "line-1",
+          "label": "Line 1"
+        },
+        {
+          "value": "line-2",
+          "label": "Line 2"
+        },
+        {
+          "value": "line-3",
+          "label": "Line 3"
+        }
+      ],
+      "default": "solid-color"
+    },
+    {
+      "type": "color_background",
+      "id": "title_highlight_1_gradient",
+      "label": "Text gradient",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'gradient-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_1_bg-color",
+      "label": "Text background color",
+      "default": "#F9EFFF",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_1_color",
+      "label": "Text color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'solid-color' or section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-1_border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-1_border_width",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "select",
+      "id": "highlighted-1_border",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ section.settings.highlighted-1_border_width > 0 and section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "highlighted-1_border_color",
+      "label": "Border color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.highlighted-1_border_width > 0 and section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-1_padding-block",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.3,
+      "unit": "%",
+      "info": "Relative to font size",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-1_padding-inline",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "unit": "%",
+      "default": 0.3,
+      "info": "Relative to font size",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_1_underline-thickness",
+      "label": "Underline thickness",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "default": 2,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'underline-solid' or section.settings.title_highlight_1 == 'underline-gradient' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_1_underline-color",
+      "label": "Underline color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'underline-solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "title_highlight_1_underline-color--gradient",
+      "label": "Underline gradient color",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'underline-gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_1_underline-color-position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Vertical position",
+      "unit": "%",
+      "default": 25,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'underline-solid' or section.settings.title_highlight_1 == 'underline-gradient' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_1_handwritten-color",
+      "label": "Stroke color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_1 == 'line-1' or section.settings.title_highlight_1 == 'line-2' or section.settings.title_highlight_1 == 'line-3' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_1_handwritten-stroke-width",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Stroke thickness",
+      "unit": "px",
+      "default": 3,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'line-1' or section.settings.title_highlight_1 == 'line-2' or section.settings.title_highlight_1 == 'line-3' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_1_handwritten-position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Vertical position",
+      "unit": "%",
+      "default": 60,
+      "visible_if": "{{ section.settings.title_highlight_1 == 'line-1' or section.settings.title_highlight_1 == 'line-2' or section.settings.title_highlight_1 == 'line-3' }}"
+    },
+    {
+      "type": "select",
+      "id": "title_highlight_2",
+      "label": "Heading words highlight 2",
+      "info": "Put words in ITALIC to highlight them with this style (keep it 'None' if you want to use default italic style).",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid-color",
+          "label": "Color"
+        },
+        {
+          "value": "gradient-color",
+          "label": "Gradient"
+        },
+        {
+          "value": "bg-color",
+          "label": "Background"
+        },
+        {
+          "value": "underline-solid",
+          "label": "Underline"
+        },
+        {
+          "value": "underline-gradient",
+          "label": "Gradient underline"
+        },
+        {
+          "value": "line-1",
+          "label": "Line 1"
+        },
+        {
+          "value": "line-2",
+          "label": "Line 2"
+        },
+        {
+          "value": "line-3",
+          "label": "Line 3"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color_background",
+      "id": "title_highlight_2_gradient",
+      "label": "Text gradient",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'gradient-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_2_bg-color",
+      "label": "Text background color",
+      "default": "#F9EFFF",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_2_color",
+      "label": "Text color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'solid-color' or section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-2_border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-2_border_width",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0,
+      "visible_if": "{{  section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "select",
+      "id": "highlighted-2_border",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ section.settings.highlighted-2_border_width > 0 and section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "color",
+      "id": "highlighted-2_border_color",
+      "label": "Border color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.highlighted-2_border_width > 0 and section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-2_padding-block",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.3,
+      "unit": "%",
+      "info": "Relative to font size",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "highlighted-2_padding-inline",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "unit": "%",
+      "default": 0.3,
+      "info": "Relative to font size",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'bg-color' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_2_underline-thickness",
+      "label": "Underline thickness",
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "unit": "px",
+      "default": 2,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'underline-solid' or section.settings.title_highlight_2 == 'underline-gradient' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_2_underline-color",
+      "label": "Underline color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'underline-solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "title_highlight_2_underline-color--gradient",
+      "label": "Underline gradient color",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'underline-gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_2_underline-color-position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Vertical position",
+      "unit": "%",
+      "default": 25,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'underline-solid' or section.settings.title_highlight_2 == 'underline-gradient' }}"
+    },
+    {
+      "type": "color",
+      "id": "title_highlight_2_handwritten-color",
+      "label": "Stroke color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.title_highlight_2 == 'line-1' or section.settings.title_highlight_2 == 'line-2' or section.settings.title_highlight_2 == 'line-3' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_2_handwritten-stroke-width",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "label": "Stroke thickness",
+      "unit": "px",
+      "default": 3,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'line-1' or section.settings.title_highlight_2 == 'line-2' or section.settings.title_highlight_2 == 'line-3' }}"
+    },
+    {
+      "type": "range",
+      "id": "title_highlight_2_handwritten-position",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Vertical position",
+      "unit": "%",
+      "default": 60,
+      "visible_if": "{{ section.settings.title_highlight_2 == 'line-1' or section.settings.title_highlight_2 == 'line-2' or section.settings.title_highlight_2 == 'line-3' }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "h3",
+          "label": "Extra small"
+        },
+        {
+          "value": "h2",
+          "label": "Small"
+        },
+        {
+          "value": "h1",
+          "label": "Medium"
+        },
+        {
+          "value": "h0",
+          "label": "Large"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "h1",
+      "label": "Heading size"
+    },
+    {
+      "type": "range",
+      "id": "custom_desktop_size",
+      "min": 24,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "default": 39,
+      "label": "Custom desktop size",
+      "visible_if": "{{ section.settings.heading_size == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "custom_mobile_size",
+      "min": 20,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 28,
+      "label": "Custom mobile size",
+      "visible_if": "{{ section.settings.heading_size == 'custom' }}"
+    },
+
+    {
+      "type": "richtext",
+      "id": "text",
+      "default": "<p>Talk about results of your customers and how your product improved their life.</p>",
+      "label": "Text"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "paragraph",
+      "content": "Or"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video",
+      "info": "Use autoplay mp4 instead of GIFs & animated WEBPs."
+    },
+    {
+      "type": "checkbox",
+      "id": "video_muted_autoplay",
+      "label": "Muted autoplay",
+      "default": true,
+      "info": "Use this instead of GIFs & animated WEBPs."
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_background",
+      "default": "#FFFFFF",
+      "label": "Custom background color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "custom_gradient_background",
+      "label": "Custom gradient background",
+      "info": "If added, replaces Background color when applicable.",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_image_background",
+      "label": "Custom image background",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_mobile_image_background",
+      "label": "Custom mobile image background",
+      "info": "If empty, the Custom image background will also be applied to mobile devices",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' and section.settings.custom_image_background != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_text",
+      "default": "#2E2A39",
+      "label": "Custom text color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_accent",
+      "default": "#dd1d1d",
+      "label": "Custom accents color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_solid_button_background",
+      "default": "#dd1d1d",
+      "label": "Custom solid button background",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_solid_button_text",
+      "default": "#ffffff",
+      "label": "Custom solid button label color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_outline_button",
+      "default": "#dd1d1d",
+      "label": "Custom outline button color",
+      "visible_if": "{{ section.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "pattern_bg",
+      "label": "Background pattern",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "dotted",
+          "label": "Dots"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "curved-grid",
+          "label": "Curved grid"
+        },
+        {
+          "value": "diagonal-stripes",
+          "label": "Stripes"
+        },
+        {
+          "value": "zigzag",
+          "label": "ZigZag"
+        },
+        {
+          "value": "arrow-pattern",
+          "label": "3D Boxes"
+        },
+        {
+          "value": "radial-rings",
+          "label": "Rings"
+        },
+        {
+          "value": "diamond-grid-1",
+          "label": "Diamond grid 1"
+        },
+        {
+          "value": "diamond-grid-2",
+          "label": "Diamond grid 2"
+        },
+        {
+          "value": "quatrefoils",
+          "label": "Quatrefoils"
+        },
+        {
+          "value": "ovals",
+          "label": "Ovals"
+        },
+        {
+          "value": "hexagons",
+          "label": "Hexagons"
+        },
+        {
+          "value": "curvy",
+          "label": "Curvy"
+        }
+      ]
+    },
+    {
+      "type": "color",
+      "id": "pattern_color",
+      "label": "Pattern color",
+      "default": "#6D388B",
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_size",
+      "min": 4,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Pattern size / spacing",
+      "default": 20,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_thickness",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Line / dot thickness",
+      "default": 2,
+      "visible_if": "{{ section.settings.pattern_bg == 'dotted' or section.settings.pattern_bg == 'grid' or section.settings.pattern_bg == 'diagonal-stripes' or section.settings.pattern_bg == 'radial-rings' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_angle",
+      "min": 0,
+      "max": 180,
+      "step": 15,
+      "unit": "deg",
+      "label": "Stripe angle",
+      "default": 45,
+      "visible_if": "{{ section.settings.pattern_bg == 'diagonal-stripes' }}"
+    },
+    {
+      "type": "select",
+      "id": "pattern_opacity_mode",
+      "label": "Opacity type",
+      "default": "low",
+      "options": [
+        {
+          "value": "low",
+          "label": "Low"
+        },
+        {
+          "value": "normal",
+          "label": "Normal"
+        }
+      ],
+      "visible_if": "{{ section.settings.pattern_bg != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity_low",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 7,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' and section.settings.pattern_opacity_mode == 'low' }}"
+    },
+    {
+      "type": "range",
+      "id": "pattern_opacity_normal",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Opacity",
+      "default": 80,
+      "visible_if": "{{ section.settings.pattern_bg != 'none' and section.settings.pattern_opacity_mode == 'normal' }}"
+    },
+    {
+      "type": "header",
+      "content": "Results styling"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "results_first",
+          "label": "Results first"
+        },
+        {
+          "value": "results_second",
+          "label": "Results second"
+        }
+      ],
+      "default": "results_second",
+      "label": "Desktop results placement"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "options": [
+        { "value": "circle", "label": "Circle" },
+        { "value": "number", "label": "Percentage only" }
+      ],
+      "default": "circle",
+      "label": "Style"
+    },
+    {
+      "type": "select",
+      "id": "result_layout",
+      "options": [
+        { "value": "horizontal", "label": "Horizontal" },
+        { "value": "vertical", "label": "Vertical" }
+      ],
+      "default": "horizontal",
+      "label": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "result_horizontal_spacing",
+      "label": "Horizontal spacing",
+      "default": 20,
+      "min": 10,
+      "max": 30,
+      "step": 2,
+      "visible_if": "{{ section.settings.result_layout == 'horizontal' }}"
+    },
+    {
+      "type": "range",
+      "id": "result_vertical_spacing",
+      "label": "Vertical spacing",
+      "default": 20,
+      "min": 10,
+      "max": 50,
+      "step": 2,
+      "visible_if": "{{ section.settings.result_layout == 'vertical' }}"
+    },
+    {
+      "type": "range",
+      "id": "circle_number_size",
+      "label": "Percentage size",
+      "default": 18,
+      "min": 10,
+      "max": 34,
+      "step": 1,
+      "visible_if": "{{ section.settings.style == 'circle' }}"
+    },
+    {
+      "type": "range",
+      "id": "number_number_size",
+      "label": "Percentage size",
+      "default": 45,
+      "min": 30,
+      "max": 120,
+      "step": 3,
+      "visible_if": "{{ section.settings.style == 'number' }}"
+    },
+    {
+      "type": "select",
+      "id": "number_color",
+      "label": "Percentage color",
+      "options": [
+        { "label": "Accent 1", "value": "accent-1" },
+        { "label": "Accent 2", "value": "accent-2" },
+        { "label": "Background 1", "value": "background-1" },
+        { "label": "Background 2", "value": "background-2" },
+        { "label": "Text", "value": "text" },
+        { "label": "Custom", "value": "custom" },
+        { "label": "Gradient", "value": "gradient" }
+      ],
+      "default": "accent-1"
+    },
+    {
+      "type": "color",
+      "id": "number_custom_color",
+      "label": "Percentage custom color",
+      "visible_if": "{{ section.settings.number_color == 'custom' }}",
+      "default": "#FF0000"
+    },
+    {
+      "type": "color_background",
+      "id": "number_gradient",
+      "label": "Percentage gradient color",
+      "visible_if": "{{ section.settings.number_color == 'gradient' }}",
+      "default": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
+    },
+    {
+      "type": "range",
+      "id": "circle_border_width",
+      "label": "Circle thickness",
+      "default": 7,
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "visible_if": "{{ section.settings.style == 'circle' }}"
+    },
+    {
+      "type": "range",
+      "id": "circle_diameter",
+      "label": "Circle size",
+      "default": 70,
+      "min": 30,
+      "max": 120,
+      "step": 5,
+      "visible_if": "{{ section.settings.style == 'circle' }}"
+    },
+    {
+      "type": "select",
+      "id": "circle_color",
+      "label": "Circle color",
+      "options": [
+        { "label": "Accent 1", "value": "accent-1" },
+        { "label": "Accent 2", "value": "accent-2" },
+        { "label": "Background 1", "value": "background-1" },
+        { "label": "Background 2", "value": "background-2" },
+        { "label": "Text", "value": "text" },
+        { "label": "Custom", "value": "custom" },
+        { "label": "Gradient", "value": "gradient" }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ section.settings.style == 'circle' }}"
+    },
+    {
+      "type": "color",
+      "id": "circle_custom_color",
+      "label": "Circle custom color",
+      "visible_if": "{{ section.settings.circle_color == 'custom' }}",
+      "default": "#FF0000"
+    },
+    {
+      "type": "color_background",
+      "id": "circle_gradient",
+      "label": "Circle gradient color",
+      "visible_if": "{{ section.settings.style == 'circle' and section.settings.circle_color == 'gradient' }}",
+      "default": "linear-gradient(136deg, rgba(10, 234, 237, 1) 11%, rgba(250, 13, 253, 1) 84%)"
+    },
+    {
+      "type": "select",
+      "id": "circle_linecap",
+      "label": "Circle edges style",
+      "options": [
+        { "label": "Flat", "value": "unset" },
+        { "label": "Round", "value": "round" }
+      ],
+      "default": "unset",
+      "visible_if": "{{ section.settings.style == 'circle' }}"
+    },
+    {
+      "type": "range",
+      "id": "result_heading_size",
+      "label": "Result heading size",
+      "default": 18,
+      "min": 12,
+      "max": 28,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "result_text_size",
+      "label": "Result text size",
+      "default": 15,
+      "min": 10,
+      "max": 24,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "result_heading_text_spacing",
+      "label": "Spacing between heading & text",
+      "default": 6,
+      "min": 0,
+      "max": 28,
+      "step": 2
+    },
+    {
+      "type": "range",
+      "id": "result_text_line_height",
+      "label": "Text line height",
+      "default": 1.6,
+      "min": 1,
+      "max": 2.5,
+      "step": 0.1
+    },
+    {
+      "type": "header",
+      "content": "Loading animations"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_animations",
+      "label": "Enable loading animations",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "label": "Animation duration",
+      "min": 300,
+      "max": 1000,
+      "step": 50,
+      "default": 650,
+      "unit": "ms",
+      "visible_if": "{{ section.settings.enable_animations == true }}"
+    },
+    {
+      "type": "range",
+      "id": "animation_init_delay",
+      "label": "Animation initial delay",
+      "min": 0,
+      "max": 300,
+      "step": 30,
+      "default": 0,
+      "unit": "ms",
+      "visible_if": "{{ section.settings.enable_animations == true }}"
+    },
+    {
+      "type": "header",
+      "content": "Results content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "results_headline",
+      "default": "Results heading",
+      "label": "Results heading"
+    },
+    {
+      "type": "color",
+      "id": "results_title_highlight_color",
+      "label": "Results heading highlight color",
+      "default": "#6D388B"
+    },
+    {
+      "type": "select",
+      "id": "results_headline_size",
+      "options": [
+        {
+          "value": "h3",
+          "label": "Small"
+        },
+        {
+          "value": "h2",
+          "label": "Medium"
+        },
+        {
+          "value": "h1",
+          "label": "Large"
+        }
+      ],
+      "default": "h2",
+      "label": "Results heading size"
+    },
+    {
+      "type": "richtext",
+      "id": "results_text",
+      "label": "Results text"
+    },
+    {
+      "type": "select",
+      "id": "results_headline_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left",
+      "label": "Results heading & text alignment"
+    },
+    {
+      "type": "richtext",
+      "id": "caption",
+      "default": "<p>Caption about the results and/or link for their proof.</p>",
+      "label": "Caption"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.slideshow.blocks.slide.settings.button_label.label",
+      "info": "t:sections.slideshow.blocks.slide.settings.button_label.info"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "t:sections.slideshow.blocks.slide.settings.link.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_style_secondary",
+      "label": "t:sections.slideshow.blocks.slide.settings.secondary_style.label",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "atc_button_label",
+      "label": "Add to Cart button label",
+      "info": "Leave the label blank to hide the Add to Cart button."
+    },
+    {
+      "type": "product",
+      "id": "atc_product",
+      "label": "ATC Custom product",
+      "info": "IMPORTANT: If empty, the button will add the main product FROM THE PRODUCT PAGE to cart (INCLUDING the selected variant/quantity, upsells etc.)"
+    },
+    {
+      "type": "checkbox",
+      "id": "atc_skip_cart",
+      "label": "ATC Custom product skip cart"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Result row",
+      "settings": [
+        {
+          "type": "range",
+          "id": "percentage",
+          "min": 0,
+          "max": 100,
+          "default": 90,
+          "step": 1,
+          "label": "Percentage"
+        },
+        {
+          "type": "text",
+          "id": "row_heading",
+          "label": "Heading"
+        },
+        {
+          "type": "richtext",
+          "id": "row_text",
+          "default": "<p>Noticed that this product has significantly improved their life.</p>",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Results",
+      "blocks": [
+        {
+          "type": "row"
+        },
+        {
+          "type": "row"
+        },
+        {
+          "type": "row"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  }
+}
+{% endschema %}

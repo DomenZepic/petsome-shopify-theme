@@ -1,0 +1,307 @@
+{% liquid
+  if section.settings.product_images == 'all' or section.settings.product_images == 'one'
+    assign product = section.settings.product
+  endif
+%}
+<div
+  class="no-js-hidden product-page-price"
+  id="price-{{ section.id }}"
+  role="status"
+  {{ block.shopify_attributes }}
+  style="
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  "
+>
+  {%- render 'price',
+    product: product,
+    block: block,
+    use_variant: true,
+    show_badges: true,
+    hide_sale_badge: block.settings.hide_sale_badge,
+    price_class: 'price--large',
+    main_price: true,
+    layout: block.settings.price_layout
+  -%}
+</div>
+{% if product != blank %}
+  <div {{ block.shopify_attributes }}>
+    {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
+    {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
+      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+      {{ form | payment_terms }}
+    {%- endform -%}
+  </div>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Price",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "price_layout",
+      "label": "Layout",
+      "options": [
+        { "value": "price-first", "label": "Price first - horizontal" },
+        { "value": "price-first-vertical", "label": "Price first - vertical" },
+        { "value": "compare-price-first", "label": "Compare price first - horizontal" },
+        { "value": "compare-price-first-vertical", "label": "Compare price first - vertical" }
+      ],
+      "default": "price-first"
+    },
+    {
+      "type": "select",
+      "id": "price_color",
+      "label": "Price color",
+      "options": [
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1"
+    },
+    {
+      "type": "select",
+      "id": "compare_price_color",
+      "label": "Compare price color",
+      "options": [
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "text"
+    },
+    {
+      "type": "range",
+      "id": "regular_price_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 25,
+      "label": "Price size"
+    },
+    {
+      "type": "range",
+      "id": "sale_price_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "label": "Price size with compare price"
+    },
+    {
+      "type": "range",
+      "id": "compare_price_size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16,
+      "label": "Compare price size"
+    },
+    {
+      "type": "range",
+      "id": "letter_spacing",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "unit": "%",
+      "default": 6,
+      "label": "Letter spacing",
+      "info": "Relative to font size"
+    },
+    {
+      "type": "header",
+      "content": "Badge"
+    },
+    {
+      "type": "select",
+      "id": "displayed_badge",
+      "label": "Displayed badge",
+      "options": [
+        {
+          "value": "none",
+          "label": "Hidden"
+        },
+        {
+          "value": "sale",
+          "label": "Sale badge"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "sale",
+      "info": "If the variant is sold out, the sold out badge will be displayed instead. \"Sale badge\" displays the classci sale badge from Theme settings > Badges if product has a comapre price. \"Custom\" displays a custom badge that's configured below. The custom badge is displayed even if the product doesn't have a compare price."
+    },
+    {
+      "type": "select",
+      "id": "sale_badge_color",
+      "label": "Sale & custom badge color scheme",
+      "options": [
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "accent-2",
+      "visible_if": "{{ block.settings.displayed_badge != 'none' }}"
+    },
+    {
+      "type": "text",
+      "id": "custom_badge_text",
+      "label": "Custom badge text",
+      "default": "[icon_1] SPECIAL OFFER",
+      "info": "Dynamic values that can be used: [icon_1] dispalys the Icon #1. [icon_2] dispalys the Icon #1. [percentage] displays the percentage saved from the product compare price. [amount] displays the money amount saved from the comapre price.",
+      "visible_if": "{{ block.settings.displayed_badge == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "icon_scale",
+      "min": 100,
+      "max": 200,
+      "step": 5,
+      "default": 140,
+      "unit": "%",
+      "label": "Icon scale",
+      "info": "Relative to text size",
+      "visible_if": "{{ block.settings.displayed_badge == 'custom' }}"
+    },
+    {
+      "type": "text",
+      "id": "icon_1",
+      "default": "redeem",
+      "label": "Icon #1",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web).",
+      "visible_if": "{{ block.settings.displayed_badge == 'custom' and block.settings.custom_icon_1 == blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "filled_icon_1",
+      "default": false,
+      "label": "Filled icon #1",
+      "visible_if": "{{ block.settings.displayed_badge == 'custom' and block.settings.custom_icon_1 == blank and block.settings.icon_1 != blank}}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_icon_1",
+      "label": "Custom icon #1",
+      "visible_if": "{{ block.settings.displayed_badge == 'custom' }}"
+    },
+    {
+      "type": "text",
+      "id": "icon_2",
+      "default": "check_circle",
+      "label": "Icon #2",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web).",
+      "visible_if": "{{ block.settings.displayed_badge == 'custom' and block.settings.custom_icon_2 == blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "filled_icon_2",
+      "default": false,
+      "label": "Filled icon #2",
+      "visible_if": "{{ block.settings.displayed_badge == 'custom' and block.settings.custom_icon_2 == blank and block.settings.icon_2 != blank}}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_icon_2",
+      "label": "Custom icon #2",
+      "visible_if": "{{ block.settings.displayed_badge == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Price",
+      "category": "Product basics"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,170 @@
+{%liquid
+  assign is_pointer = false
+  if section.settings.timeline_direction == 'horizontal'
+    if section.settings.style_horizontal != 'classic'
+      assign is_pointer = true
+    endif
+  elsif section.settings.style_vertical != 'classic'
+    assign is_pointer = true
+  endif
+%}
+<li
+  id="Slide-{{ block.id }}"
+  class="timeline__item"
+  data-timeline-item
+  role="listitem"
+>
+  <div class="timeline__row">
+    <div class="timeline__row__placeholder"></div>
+    <div class="timeline__rail">  
+      {%- comment -%} point {%- endcomment -%}
+      <div class="timeline__point" data-marker> 
+        {%- case block.settings.point_content -%}
+          {%- when 'icon' -%}
+            {% render 'material-icon', icon: block.settings.point_icon_name, filled: block.settings.point_icon_filled %}
+          {%- when 'custom_icon' -%}
+            {%- if block.settings.point_custom_icon != blank -%}
+              {{ block.settings.point_custom_icon | image_url: width: 400 | image_tag: loading: 'lazy' }}
+            {% else %}
+              &nbsp
+            {%- endif -%}
+          {%- when 'text' -%}
+            <span class="timeline__point-text">{{ block.settings.point_text }}</span>
+          {%- else -%}
+            <span class="timeline__point-dot" aria-hidden="true">&nbsp</span>
+        {%- endcase -%}
+      </div>
+      {%- comment -%} line {%- endcomment -%}
+      <div class="timeline__line" aria-hidden="true">&nbsp</div>
+    </div>
+
+    {%- comment -%} content {%- endcomment -%}
+    <div class="timeline-item{% if is_pointer %} cursor-pointer{% endif %}">
+      {% content_for 'blocks' %}
+    </div>
+  </div>
+</li>
+
+
+{% schema %}
+{
+  "name": "Timeline item",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "timeline-item_header"
+    },
+    {
+      "type": "timeline-item_content"
+    },
+    {
+      "type": "timeline-item_active-content"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Point"
+    },
+    {
+      "type": "select",
+      "id": "point_content",
+      "label": "Point content",
+      "options": [
+        { "value": "icon", "label": "Icon" },
+        { "value": "custom_icon", "label": "Custom icon" },
+        { "value": "dot", "label": "Dot" },
+        { "value": "text", "label": "Text" }
+      ],
+      "default": "icon"
+    },
+    {
+      "type": "text",
+      "id": "point_icon_name",
+      "label": "Icon",
+      "default": "check_circle",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web).",
+      "visible_if": "{{ block.settings.point_content == 'icon' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "point_icon_filled",
+      "label": "Filled icon",
+      "default": false,
+      "visible_if": "{{ block.settings.point_content == 'icon' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "point_custom_icon",
+      "label": "Custom icon",
+      "visible_if": "{{ block.settings.point_content == 'custom_icon' }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "point_text",
+      "label": "Point text",
+      "default": "1",
+      "info": "Keep to 1–3 characters.",
+      "visible_if": "{{ block.settings.point_content == 'text' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Timeline item",
+      "blocks": [
+        {
+          "type": "timeline-item_header",
+          "name": "Header",
+          "blocks": [
+            {
+              "type": "text",
+              "settings": {
+                "text": "<p>WEEK x</p>",
+                "margin_bottom": 0
+              }
+            },
+            {
+              "type": "heading",
+              "settings": {
+                "title": "Point heading",
+                "margin_top": 0,
+                "heading_size": "h3"
+              }
+            }
+          ]
+        },
+        {
+          "type": "timeline-item_content",
+          "name": "Content",
+          "blocks": [
+            {
+              "type": "text",
+              "settings": {
+                "text": "<p>Use this stage to outline the key goals or tasks for this step. Add details that help clarify what happens during this part of the process.</p>"
+              }
+            },
+            {
+              "type": "text",
+              "settings": {
+                "text": "<p>Include any useful details that help guide the visitor forward.</p>"
+              }
+            }
+          ]
+        },
+        {
+          "type": "timeline-item_active-content",
+          "name": "Active content",
+          "blocks": [
+            {
+              "type": "text",
+              "settings": {
+                "text": "<p>WEEK X active content</p>"
+              }
+            }
+          ]
+        }
+      ] 
+    }
+  ]
+}
+{% endschema %}

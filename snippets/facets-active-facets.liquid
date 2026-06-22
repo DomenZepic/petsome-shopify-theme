@@ -1,0 +1,79 @@
+{% comment %}
+  Active facets
+  Accepts:
+  - mobile (boolean)
+  - vertical (boolean)
+{% endcomment %}
+
+{% liquid
+  assign desktop_style = 'horizontal'
+  if vertical
+    assign desktop_style = 'vertical'
+  endif
+%}
+
+{%- unless results.filters == empty -%}
+  <div class="active-facets {% if mobile %}active-facets-mobile desktop-hidden{% else %}active-facets-desktop active-facets--desktop-{{ desktop_style }}{% endif %}">
+    {% if vertical %}
+      <div class="active-facets-vertical-filter">
+        <h2
+          class="facets__heading facets__heading--vertical caption-large text-body"
+          id="verticalTitle"
+          tabindex="-1"
+        >
+          {{ 'products.facets.filter_by_label' | t }}
+        </h2>
+        {% if results.filters.size > 1 %}
+          <facet-remove class="active-facets__button-wrapper">
+            <a href="{{ results_url }}" class="active-facets__button-remove underlined-link">
+              <span>{{ 'products.facets.clear_all' | t }}</span>
+            </a>
+          </facet-remove>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    {% assign active_count = 0 %}
+
+    {%- for filter in results.filters -%}
+      {%- for value in filter.active_values -%}
+        {% assign active_count = active_count | plus: 1 %}
+        <facet-remove>
+          <a href="{{ value.url_to_remove }}" class="active-facets__button active-facets__button--light">
+            <span class="active-facets__button-inner button button--tertiary">
+              {% assign filter_name = filter.label %}
+              {% assign filter_value = value.label | escape %}
+              {{ section.settings.active_buttons_text | replace: '[filter]', filter_name | replace: '[value]', filter_value }}
+              {% render 'icon-close-small' %}
+              <span class="visually-hidden">{{ 'products.facets.clear_filter' | t }}</span>
+            </span>
+          </a>
+        </facet-remove>
+      {%- endfor -%}
+
+      {%- if filter.type == 'price_range' -%}
+        {%- if filter.min_value.value != null or filter.max_value.value != null -%}
+          {% assign active_count = active_count | plus: 1 %}
+          {% render 'facet-price-active-button', filter: filter %}
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+    
+    {% unless vertical %}
+      {% if results.filters.size > 1 %}
+        <facet-remove class="active-facets__button-wrapper active-facets__button-remove-wrapper">
+          <a href="{{ results_url }}" class="active-facets__button-remove underlined-link">
+            <span>{{ 'products.facets.clear_all' | t }}</span>
+          </a>
+        </facet-remove>
+      {% endif %}
+    {% endunless %}
+    {% if active_count < 2 %}
+      <style>
+        .active-facets__button-remove-wrapper {
+          display: none !important;
+        }
+      </style>
+    {% endif %}
+  </div>
+{%- endunless -%}

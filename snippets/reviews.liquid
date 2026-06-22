@@ -1,0 +1,148 @@
+{% liquid
+  assign items_count = 0
+  if block.settings.text_1 != blank
+    assign items_count = items_count | plus: 1
+  endif
+  if block.settings.text_2 != blank
+    assign items_count = items_count | plus: 1
+  endif
+  if block.settings.text_3 != blank
+    assign items_count = items_count | plus: 1
+  endif
+  if block.settings.show_custom_bg or block.settings.color_scheme != section.settings.color_scheme or block.settings.border_width > 0 or force_padding
+   assign padding_class = ' review-item--padding'
+  endif
+  if items_count > 1 
+    assign show_slider = true
+  endif
+  if block.settings.display_arrows 
+    assign arrows_class = 'under'
+  else
+    assign arrows_class = 'hidden'
+  endif
+  if block.settings.display_dots 
+    assign dots_class = 'under'
+  else
+    assign dots_class = 'hidden'
+  endif
+%}
+{% capture stars %}
+  <div class='rating-stars__container' style='transform: translateY({{ block.settings.stars_translate }}%);font-size: 0.9em; color: var(--star-color);'>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='currentColor'>
+      <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='currentColor'>
+      <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='currentColor'>
+      <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='currentColor'>
+      <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill='currentColor'>
+      <path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/>
+    </svg>
+  </div>
+{% endcapture %}
+{% capture checkmark %}
+<svg xmlns="http://www.w3.org/2000/svg" class='verified-icon' viewBox="0 0 122.88 116.87">
+  <polygon fill='currentColor' fill-rule="evenodd" points="61.37 8.24 80.43 0 90.88 17.79 111.15 22.32 109.15 42.85 122.88 58.43 109.2 73.87 111.15 94.55 91 99 80.43 116.87 61.51 108.62 42.45 116.87 32 99.08 11.73 94.55 13.73 74.01 0 58.43 13.68 42.99 11.73 22.32 31.88 17.87 42.45 0 61.37 8.24 61.37 8.24"/>
+  <path fill='{{ block.settings.checkmark_icon_color }}' d="M37.92,65c-6.07-6.53,3.25-16.26,10-10.1,2.38,2.17,5.84,5.34,8.24,7.49L74.66,39.66C81.1,33,91.27,42.78,84.91,49.48L61.67,77.2a7.13,7.13,0,0,1-9.9.44C47.83,73.89,42.05,68.5,37.92,65Z"/>
+</svg>
+{% endcapture %}
+<div 
+  class="review-items-container{% if show_slider %} side-margins-negative{% endif %} {{ block.settings.visibility }}"
+  style="
+    --star-color:{{ block.settings.star_color }};
+    --checkmark-color:{{ block.settings.checkmark_color }};
+    --bg-color:{{ block.settings.custom_bg_color }};
+    --border-radius: {{ block.settings.corner_radius | divided_by: 10.0 }}rem;
+    --border-thickness: {{ block.settings.border_width }}px;
+    --border-color: {{ block.settings.border_color }};
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  " 
+  {{ block.shopify_attributes }}
+>
+  {% if show_slider %}
+    {% liquid
+      assign side_padding = '15'
+      assign gap = '45'
+    %}
+    <splide-component
+      data-type='{{ block.settings.slider_type }}'
+      data-autoplay='{{ block.settings.autoplay }}'
+      data-autoplay-speed='{{ block.settings.autoplay_speed }}'
+      data-gap-desktop="{{ gap }}"
+      data-gap-mobile="{{ gap }}"
+      data-side-padding-desktop="{{ side_padding }}"
+      data-side-padding-mobile="{{ side_padding }}"
+      data-slides-desktop="1"
+      data-slides-mobile="1"
+      style="--columns-desktop:1;--columns-mobile:1;--gap-desktop:{{ gap }}px;--gap-mobile:{{ gap }}px;--padding-desktop:{{ side_padding }}px;--padding-mobile:{{ side_padding }}px;"
+    >
+      <div class='splide splide--precalc-width splide--precalc-padding splide--small-pagination splide--desktop-dots-{{ dots_class }} splide--mobile-dots-{{ dots_class }} splide--desktop-arrows-{{ arrows_class }} splide--mobile-arrows-{{ arrows_class }}' data-desktop-adaptive-height="true" data-mobile-adaptive-height="true">
+        <div class='splide__track'>
+          <ul class="splide__list">
+  {% endif %}
+  {% for i in (1..items_count) %}
+    {% liquid
+      if i == 1
+        assign author = block.settings.author_1
+        assign image = block.settings.image_1
+        assign text = block.settings.text_1
+      elsif i == 2
+        assign author = block.settings.author_2
+        assign image = block.settings.image_2
+        assign text = block.settings.text_2
+      else
+        assign author = block.settings.author_3
+        assign image = block.settings.image_3
+        assign text = block.settings.text_3
+      endif
+    %}
+      {% if show_slider %}
+        <li class="splide__slide">
+          <div class="splide__slide__container">
+      {% endif %}
+          <div class="review-item review-item--{{ block.settings.avatar_alignment }}{{ padding_class }} custom-border-radius custom-border-hex{% if block.settings.show_custom_bg %} custom-bg{% endif %} color-{{ block.settings.color_scheme }}">
+            {%- unless image == blank -%}
+              <div class="review-item__image media media--transparent custom-border-radius" style='--border-radius: {{ block.settings.avatar_corner_radius | divided_by: 10.0 }}rem;'>
+                <img
+                  src="{{ image | image_url }}"
+                  alt="{{ image }}"
+                  width="auto"
+                  height="auto"
+                  loading="lazy"
+                >
+              </div>
+            {%- endunless -%}
+            <div class="review-item__right">
+              <div class="review-item__text">
+                {{ text }}
+              </div>
+              {%- unless author == blank -%}
+                <div class="review-item__author">
+                  {{ author | replace: '[stars]', stars | replace: '[checkmark]', checkmark }}
+                </div>
+              {%- endunless -%}
+            </div>
+          </div>
+    {% if show_slider %}
+        </div>
+      </li>
+    {% endif %}
+  {% endfor %}
+  {% if show_slider %}
+          </ul>
+        </div>
+        <div class='splide__dots-and-arrows'>
+          <ul class="splide__pagination"></ul>
+          <div class="splide__arrows"></div>
+        </div>
+      </div>
+    </splide-component>
+  {% endif %}
+</div>
+

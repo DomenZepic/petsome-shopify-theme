@@ -1,0 +1,506 @@
+<div
+  class="
+    custom-columns__column
+    animate-item
+    animate-item--child
+    {% if block.settings.border_color_type == 'gradient' %}
+      border-gradient
+    {% endif %}
+    {% if block.settings.bg_type == 'gradient' %}
+      bg-gradient
+    {% endif %}
+    {% if block.settings.enable_shadow %}
+      block-shadow
+    {% endif %}
+    {{ block.settings.visibility }}
+  "
+  style="
+    {% if block.settings.bg_type == 'solid' %}
+      {% assign red = block.settings.bg_color | color_extract: 'red' %}
+      {% assign green = block.settings.bg_color | color_extract: 'green' %}
+      {% assign blue = block.settings.bg_color | color_extract: 'blue' %}
+      --bg-color: rgba({{ red }}, {{ green }}, {{ blue }}, {{ block.settings.bg_opacity | divided_by: 100.0 }});
+    {% elsif block.settings.bg_type == 'gradient' %}
+      --bg-color: {{ block.settings.bg_gradient }};
+      --bg-opacity: {{ block.settings.bg_opacity | divided_by: 100.0 }};
+    {% endif %}
+    --border-style: {{ block.settings.border }};
+    --mobile-width: {{ block.settings.mobile_width }};
+    --desktop-width: {{ block.settings.desktop_width }};
+    --border-width: {{ block.settings.border_width }}px;
+    {% if block.settings.round_corners_equally %}
+      --border-radius: {{ block.settings.border_radius }}px;
+    {% else %}
+      --border-radius: {{ block.settings.border_radius_top_left }}px {{ block.settings.border_radius_top_right }}px {{ block.settings.border_radius_bottom_right }}px {{ block.settings.border_radius_bottom_left }}px;
+    {% endif %}
+
+    {% if block.settings.border_color_type == 'solid' %}
+      {% assign border_alpha = block.settings.border_opacity | divided_by: 100.0 %}
+      --border-color: {{ block.settings.border_color | color_modify: 'alpha', border_alpha }};
+    {% elsif block.settings.border_color_type == 'gradient' %}
+      --border-color: {{ block.settings.border_gradient }};
+      --border-opacity: {{ block.settings.border_opacity | divided_by: 100.0  }};
+    {% endif %}
+    {% if block.settings.enable_shadow %}
+      {% assign shadow_alpha = block.settings.shadow_opacity | divided_by: 100.0 %}
+      --shadow-color: {{ block.settings.shadow_color | color_modify: 'alpha', shadow_alpha }};
+      --shadow-offset-x: {{ block.settings.shadow_horizontal_offset }}px;
+      --shadow-offset-y: {{ block.settings.shadow_vertical_offset }}px;
+      --shadow-blur: {{ block.settings.shadow_blur }}px;
+      --shadow-spread: {{ block.settings.shadow_spread }}px;
+    {% else %}
+      box-shadow: none;
+    {% endif %}
+    {% if block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow %}
+      --padding-y--mobile: {{ block.settings.vertical_mobile_padding | divided_by: 10.0 }}rem;
+      --padding-x--mobile: {{ block.settings.horizontal_mobile_padding | divided_by: 10.0 }}rem;
+      --padding-y--desktop: {{ block.settings.vertical_desktop_padding | divided_by: 10.0 }}rem;
+      --padding-x--desktop: {{ block.settings.horizontal_desktop_padding | divided_by: 10.0 }}rem;
+    {% endif %}
+  "
+>
+  <div class="content-wrapper block-margins">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Column",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "image"
+    },
+    {
+      "type": "video"
+    },
+    {
+      "type": "json-animation"
+    },
+    {
+      "type": "button"
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "heading"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "atc-button"
+    },
+    {
+      "type": "email-signup"
+    },
+    {
+      "type": "rating-stars"
+    },
+    {
+      "type": "trustpilot-stars"
+    },
+    {
+      "type": "reviews"
+    },
+    {
+      "type": "badge"
+    },
+    {
+      "type": "review-avatars"
+    },
+    {
+      "type": "slider"
+    },
+    {
+      "type": "container"
+    },
+    {
+      "type": "media-slider"
+    },
+    {
+      "type": "custom-liquid"
+    },
+    {
+      "type": "payment-badges"
+    },
+    {
+      "type": "text-with-icon"
+    },
+    {
+      "type": "countdown-timer"
+    },
+    {
+      "type": "collapsible-row"
+    },
+    {
+      "type": "icon-with-content"
+    },
+    {
+      "type": "icon-with-text"
+    }
+  ],
+  "settings": [
+    {
+      "type": "range",
+      "id": "desktop_width",
+      "max": 12,
+      "min": 1,
+      "step": 1,
+      "default": 3,
+      "label": "Desktop width"
+    },
+    {
+      "type": "range",
+      "id": "mobile_width",
+      "max": 4,
+      "min": 1,
+      "step": 1,
+      "default": 4,
+      "label": "Mobile width"
+    },
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "header",
+      "content": "Column style"
+    },
+    {
+      "type": "select",
+      "id": "bg_type",
+      "label": "Background",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid",
+          "label": "Solid color"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient color"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.bg_type == 'solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_gradient",
+      "label": "Background gradient color",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ block.settings.bg_type == 'gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "bg_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Background opacity",
+      "default": 100,
+      "visible_if": "{{ block.settings.bg_type != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 12,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.border_width > 0 and block.settings.border_color_type != 'gradient' }}"
+    },
+    {
+      "type": "select",
+      "id": "border_color_type",
+      "label": "Border color type",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.border_width > 0 and block.settings.border_color_type == 'solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "border_gradient",
+      "label": "Border gradient color",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ block.settings.border_width > 0 and block.settings.border_color_type == 'gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Border opacity",
+      "default": 100,
+      "visible_if": "{{ block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_shadow",
+      "label": "Enable drop shadow",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "shadow_color",
+      "label": "Shadow color",
+      "default": "#000000",
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "label": "Shadow opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 15,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_horizontal_offset",
+      "label": "Shadow horizontal offset (px)",
+      "min": -50,
+      "max": 50,
+      "step": 2,
+      "default": 2,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_vertical_offset",
+      "label": "Shadow vertical offset (px)",
+      "min": -50,
+      "max": 50,
+      "step": 2,
+      "default": 6,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_spread",
+      "label": "Shadow spread (px)",
+      "min": -50,
+      "max": 50,
+      "step": 2,
+      "default": 0,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "label": "Shadow blur (px)",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "default": 16,
+      "visible_if": "{{ block.settings.enable_shadow }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "round_corners_equally",
+      "label": "Round all corners equally",
+      "default": true,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 12,
+      "visible_if": "{{ block.settings.round_corners_equally and block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius_top_left",
+      "label": "Top-left corner radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 12,
+      "visible_if": "{{ block.settings.round_corners_equally == false and block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius_top_right",
+      "label": "Top-right corner radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 12,
+      "visible_if": "{{ block.settings.round_corners_equally == false and block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius_bottom_right",
+      "label": "Bottom-right corner radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 12,
+      "visible_if": "{{ block.settings.round_corners_equally == false and block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius_bottom_left",
+      "label": "Bottom-left corner radius",
+      "min": 0,
+      "max": 50,
+      "step": 2,
+      "unit": "px",
+      "default": 12,
+      "visible_if": "{{ block.settings.round_corners_equally == false and block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "header",
+      "content": "Padding",
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "vertical_desktop_padding",
+      "label": "Vertical desktop padding",
+      "min": 0,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "default": 15,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "horizontal_desktop_padding",
+      "label": "Horizontal desktop padding",
+      "min": 0,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "default": 15,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "vertical_mobile_padding",
+      "label": "Vertical mobile padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 14,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "horizontal_mobile_padding",
+      "label": "Horizontal mobile padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 14,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_width > 0 or block.settings.enable_shadow }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Column",
+      "blocks": [
+        {
+          "type": "heading",
+          "settings": {
+            "title": "Column",
+            "heading_size": "h2",
+            "alignment": "center",
+            "mobile_alignment": "mobile-center"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>Use the flexible grid system to create any layout. Each block can be placed in any of the columns.</p>",
+            "alignment": "center",
+            "mobile_alignment": "mobile-center"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

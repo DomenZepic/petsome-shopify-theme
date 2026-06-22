@@ -1,0 +1,504 @@
+{% render 'quantity-gifts', block: block %}
+
+{% schema %}
+{
+  "name": "Gifts on quantity",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "IMPORTANT NOTES"
+    },
+    {
+      "type": "paragraph",
+      "content": "All gift products must be unique, and not used anywhere else (in bundles, upsells or other gift blocks). A gift product can't be the main product from the product page. To overcome this, you can create a duplicate of the product & assign that duplicate as a gift."
+    },
+    {
+      "type": "paragraph",
+      "content": "The gift products will be automatically added & removed from cart, based on the quantity of the main product page product."
+    },
+    {
+      "type": "paragraph",
+      "content": "To hide the gift products from the store & prevent customers from buying them alone, add \"collection-hidden\" and \"search-hidden\" tags to them."
+    },
+    {
+      "type": "header",
+      "content": "Styling"
+    },
+    {
+      "type": "range",
+      "id": "border_thickness",
+      "label": "Border thickness",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "default": 2
+    },
+    {
+      "type": "select",
+      "id": "border_style",
+      "label": "Border style",
+      "options": [
+        { "label": "Solid", "value": "solid" },
+        { "label": "Dashed", "value": "dashed" }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Locked gifts"
+    },
+    {
+      "type": "select",
+      "id": "locked_background",
+      "label": "Background",
+      "options": [
+        { "label": "Solid", "value": "solid" },
+        { "label": "Diagonal stripes", "value": "stripes" }
+      ],
+      "default": "stripes"
+    },
+    {
+      "type": "range",
+      "id": "locked_image_opacity",
+      "label": "Image opacity",
+      "min": 0,
+      "max": 30,
+      "step": 3,
+      "unit": "%",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "locked_image_blur",
+      "label": "Image blur",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "default": 3,
+      "visible_if": "{{ block.settings.locked_image_opacity > 0 }}"
+    },
+    {
+      "type": "header",
+      "content": "Unlocked gifts"
+    },
+    {
+      "type": "color",
+      "id": "unlocked_bg_color",
+      "default": "#FEF8F8",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "unlocked_border_color",
+      "default": "#EB7E7E",
+      "label": "Border color"
+    },
+    {
+      "type": "checkbox",
+      "id": "gift_box_animation",
+      "label": "Enable gift box animation",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "gift_box_color",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1",
+      "label": "Gift box color",
+      "visible_if": "{{ block.settings.gift_box_animation }}"
+    },
+    {
+      "type": "color",
+      "id": "gift_box_tie_color",
+      "default": "#FAE787",
+      "label": "Gift box tie color",
+      "visible_if": "{{ block.settings.gift_box_animation }}"
+    },
+    {
+      "type": "header",
+      "content": "Badges"
+    },
+    {
+      "type": "select",
+      "id": "badge_style",
+      "label": "Style",
+      "options": [
+        { "label": "Style 1", "value": "1" },
+        { "label": "Style 2", "value": "2" }
+      ],
+      "default": "1"
+    },
+    {
+      "type": "select",
+      "id": "badge_width",
+      "label": "Width",
+      "options": [
+        { "label": "Fit text", "value": "fit" },
+        { "label": "Full width", "value": "full" }
+      ],
+      "default": "fit"
+    },
+    {
+      "type": "range",
+      "id": "badge_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 45
+    },
+    {
+      "type": "color",
+      "id": "badge_bg_color",
+      "default": "#E74C4C",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "default": "#FFFFFF",
+      "label": "Text color"
+    },
+    {
+      "type": "select",
+      "id": "locked_badge_colors",
+      "label": "Locked items badge colors",
+      "options": [
+        { "label": "Same as unlocked", "value": "same" },
+        { "label": "Custom", "value": "custom" }
+      ],
+      "default": "same"
+    },
+    {
+      "type": "color",
+      "id": "locked_badge_bg_color",
+      "default": "#2E2E2E",
+      "label": "Locked gifts badge background color",
+      "visible_if": "{{ block.settings.locked_badge_colors == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "locked_badge_text_color",
+      "default": "#FFFFFF",
+      "label": "Locked gifts badge text color",
+      "visible_if": "{{ block.settings.locked_badge_colors == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "Gift #1"
+    },
+    {
+      "type": "product",
+      "id": "gift_1",
+      "label": "Gift #1"
+    },
+    {
+      "type": "number",
+      "id": "gift_1_quantity",
+      "default": 1,
+      "label": "Gift #1 minimum quantity",
+      "info": "Minimum quantity required to unlock the gift.",
+      "visible_if": "{{ block.settings.gift_1 != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "gift_1_image",
+      "label": "Gift #1 featured image",
+      "info": "An image with transparent background is recommended.",
+      "visible_if": "{{ block.settings.gift_1 != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "gift_1_badge_text",
+      "label": "Gift #1 Badge text",
+      "info": "Use [compare_price] to display the product compare price",
+      "visible_if": "{{ block.settings.gift_1 != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "gift_1_cross_out_compare",
+      "label": "Cross out the compare price (the [compare_price] text)",
+      "default": true,
+      "visible_if": "{{ block.settings.gift_1 != blank and block.settings.gift_1_badge_text contains '[compare_price]' }}"
+    },
+    {
+      "type": "select",
+      "id": "gift_1_compare_price_based_on",
+      "label": "Gift #1 Compare price based on",
+      "options": [
+        { "label": "Real product price", "value": "price" },
+        { "label": "Product compare price", "value": "compare_price" }
+      ],
+      "default": "compare_price",
+      "visible_if": "{{ block.settings.gift_1 != blank and block.settings.gift_1_badge_text contains '[compare_price]' }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "gift_1_top_text",
+      "label": "Gift #1 locked top text",
+      "default": "<strong>1 PACK</strong>",
+      "visible_if": "{{ block.settings.gift_1 != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "gift_1_bottom_text",
+      "label": "Gift #1 locked bottom text",
+      "default": "<strong>Exclusive</strong>",
+      "visible_if": "{{ block.settings.gift_1 != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Gift #2"
+    },
+    {
+      "type": "product",
+      "id": "gift_2",
+      "label": "Gift #2"
+    },
+    {
+      "type": "number",
+      "id": "gift_2_quantity",
+      "default": 2,
+      "label": "Gift #2 minimum quantity",
+      "info": "Minimum quantity required to unlock the gift.",
+      "visible_if": "{{ block.settings.gift_2 != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "gift_2_image",
+      "label": "Gift #2 featured image",
+      "info": "An image with transparent background is recommended.",
+      "visible_if": "{{ block.settings.gift_2 != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "gift_2_badge_text",
+      "label": "Gift #2 Badge text",
+      "info": "Use [compare_price] to display the product compare price",
+      "visible_if": "{{ block.settings.gift_2 != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "gift_2_cross_out_compare",
+      "label": "Cross out the compare price (the [compare_price] text)",
+      "default": true,
+      "visible_if": "{{ block.settings.gift_2 != blank and block.settings.gift_2_badge_text contains '[compare_price]' }}"
+    },
+    {
+      "type": "select",
+      "id": "gift_2_compare_price_based_on",
+      "label": "Gift #2 Compare price based on",
+      "options": [
+        { "label": "Real product price", "value": "price" },
+        { "label": "Product compare price", "value": "compare_price" }
+      ],
+      "default": "compare_price",
+      "visible_if": "{{ block.settings.gift_2 != blank and block.settings.gift_2_badge_text contains '[compare_price]' }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "gift_2_top_text",
+      "label": "Gift #2 locked top text",
+      "default": "<strong>2 PACK</strong>",
+      "visible_if": "{{ block.settings.gift_2 != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "gift_2_bottom_text",
+      "label": "Gift #2 locked bottom text",
+      "default": "<strong>Exclusive</strong>",
+      "visible_if": "{{ block.settings.gift_2 != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Gift #3"
+    },
+    {
+      "type": "product",
+      "id": "gift_3",
+      "label": "Gift #3"
+    },
+    {
+      "type": "number",
+      "default": 3,
+      "id": "gift_3_quantity",
+      "label": "Gift #3 minimum quantity",
+      "info": "Minimum quantity required to unlock the gift.",
+      "visible_if": "{{ block.settings.gift_3 != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "gift_3_image",
+      "label": "Gift #3 featured image",
+      "info": "An image with transparent background is recommended.",
+      "visible_if": "{{ block.settings.gift_3 != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "gift_3_badge_text",
+      "label": "Gift #3 Badge text",
+      "info": "Use [compare_price] to display the product compare price",
+      "visible_if": "{{ block.settings.gift_3 != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "gift_3_cross_out_compare",
+      "label": "Cross out the compare price (the [compare_price] text)",
+      "default": true,
+      "visible_if": "{{ block.settings.gift_3 != blank and block.settings.gift_3_badge_text contains '[compare_price]' }}"
+    },
+    {
+      "type": "select",
+      "id": "gift_3_compare_price_based_on",
+      "label": "Gift #3 Compare price based on",
+      "options": [
+        { "label": "Real product price", "value": "price" },
+        { "label": "Product compare price", "value": "compare_price" }
+      ],
+      "default": "compare_price",
+      "visible_if": "{{ block.settings.gift_3 != blank and block.settings.gift_3_badge_text contains '[compare_price]' }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "gift_3_top_text",
+      "label": "Gift #3 locked top text",
+      "default": "<strong>3 PACK</strong>",
+      "visible_if": "{{ block.settings.gift_3 != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "gift_3_bottom_text",
+      "label": "Gift #3 locked bottom text",
+      "default": "<strong>Exclusive</strong>",
+      "visible_if": "{{ block.settings.gift_3 != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Gift #4"
+    },
+    {
+      "type": "product",
+      "id": "gift_4",
+      "label": "Gift #4"
+    },
+    {
+      "type": "number",
+      "default": 4,
+      "id": "gift_4_quantity",
+      "label": "Gift #4 minimum quantity",
+      "info": "Minimum quantity required to unlock the gift.",
+      "visible_if": "{{ block.settings.gift_4 != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "gift_4_image",
+      "label": "Gift #4 featured image",
+      "info": "An image with transparent background is recommended.",
+      "visible_if": "{{ block.settings.gift_4 != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "gift_4_badge_text",
+      "label": "Gift #4 Badge text",
+      "info": "Use [compare_price] to display the product compare price",
+      "visible_if": "{{ block.settings.gift_4 != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "gift_4_cross_out_compare",
+      "label": "Cross out the compare price (the [compare_price] text)",
+      "default": true,
+      "visible_if": "{{ block.settings.gift_4 != blank and block.settings.gift_4_badge_text contains '[compare_price]' }}"
+    },
+    {
+      "type": "select",
+      "id": "gift_4_compare_price_based_on",
+      "label": "Gift #4 Compare price based on",
+      "options": [
+        { "label": "Real product price", "value": "price" },
+        { "label": "Product compare price", "value": "compare_price" }
+      ],
+      "default": "compare_price",
+      "visible_if": "{{ block.settings.gift_4 != blank and block.settings.gift_4_badge_text contains '[compare_price]' }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "gift_4_top_text",
+      "label": "Gift #4 locked top text",
+      "default": "<strong>4 PACK</strong>",
+      "visible_if": "{{ block.settings.gift_4 != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "gift_4_bottom_text",
+      "label": "Gift #4 locked bottom text",
+      "default": "<strong>Exclusive</strong>",
+      "visible_if": "{{ block.settings.gift_4 != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gifts on quantity",
+      "category": "Upsells, offers & gifts"
+    }
+  ]
+}
+{% endschema %}

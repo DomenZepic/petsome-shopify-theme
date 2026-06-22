@@ -1,0 +1,23 @@
+{% liquid
+  assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src'
+
+  assign has_filtering = false
+  if section.settings.variant_image_filtering != 'none'
+    assign has_filtering = true
+  endif
+%}
+
+{% render 'product-media-gallery', variant_images: variant_images, has_filtering: has_filtering %}
+
+{% schema %}
+{
+  "name": "Media gallery",
+  "tag": null,
+  "settings": [],
+  "presets": [
+    {
+      "name": "Media gallery"
+    }
+  ]
+}
+{% endschema %}

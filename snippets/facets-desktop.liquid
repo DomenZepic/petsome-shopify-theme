@@ -1,0 +1,103 @@
+{% comment %}
+  Desktop facets (vertical + horizontal)
+  IMPORTANT: everything that JS re-renders stays inside #FacetsWrapperDesktop
+{% endcomment %}
+
+<facet-filters-form class="facets small-hide">
+  <form
+    id="FacetFiltersForm"
+    class="{% if filter_type == 'horizontal' %}facets__form{% else %}facets__form-vertical{% endif %}"
+  >
+    {%- if results.terms -%}
+      <input type="hidden" name="q" value="{{ results.terms | escape }}">
+      <input name="options[prefix]" type="hidden" value="last">
+    {%- endif -%}
+
+    {% if enable_filtering %}
+      <div
+        id="FacetsWrapperDesktop"
+        {% if filter_type == 'horizontal' %}
+          class="facets__wrapper"
+        {% endif %}
+      >
+        {%- if filter_type == 'vertical' -%}
+          {%- render 'facets-active-facets',
+            results: results,
+            results_url: results_url,
+            vertical: true
+          -%}
+        {%- elsif filter_type == 'horizontal' and results.filters != empty -%}
+          <h2 class="facets__heading caption-large text-body" id="verticalTitle" tabindex="-1">
+            {{ 'products.facets.filter_by_label' | t }}
+          </h2>
+        {%- endif -%}
+
+        {%- render 'facets-desktop-filters',
+          results: results,
+          filter_type: filter_type
+        -%}
+      </div>
+
+      {%- if filter_type == 'horizontal' -%}
+        {%- render 'facets-active-facets',
+          results: results,
+          results_url: results_url,
+          horizontal: true
+        -%}
+      {% endif %}
+    {% endif %}
+
+    {% if results.current_vendor or results.current_type %}
+      <input type="hidden" name="q" value="{{ results.current_vendor }}{{ results.current_type }}">
+    {% endif %}
+
+    {%- if filter_type == 'horizontal' -%}
+      {%- render 'facets-sorting',
+        results: results,
+        enable_sorting: enable_sorting,
+        desktop: true
+      -%}
+      <div class="product-count light" role="status">
+        <h2 class="product-count__text text-body">
+          <span id="ProductCountDesktop">
+            {%- if results.results_count -%}
+              {{ 'templates.search.results_with_count' | t: terms: results.terms, count: results.results_count }}
+            {%- elsif results.products_count == results.all_products_count -%}
+              {{ 'products.facets.product_count_simple' | t: count: results.products_count }}
+            {%- else -%}
+              {{ 'products.facets.product_count'
+                | t: product_count: results.products_count, count: results.all_products_count }}
+            {%- endif -%}
+          </span>
+        </h2>
+        <div class="loading-overlay__spinner">
+          <svg aria-hidden="true" focusable="false" class="spinner" viewBox="0 0 66 66"
+            xmlns="http://www.w3.org/2000/svg">
+            <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+          </svg>
+        </div>
+      </div>
+    {%- endif -%}
+  </form>
+</facet-filters-form>
+
+{%- if enable_sorting and filter_type == 'vertical' -%}
+  <facet-filters-form class="small-hide">
+    <form class="no-js">
+      {%- render 'facets-sorting',
+        results: results,
+        enable_sorting: true,
+        desktop: true
+      -%}
+
+      {% if results.current_vendor or results.current_type %}
+        <input type="hidden" name="q" value="{{ results.current_vendor }}{{ results.current_type }}">
+      {% endif %}
+
+      {%- if results.terms -%}
+        <input type="hidden" name="q" value="{{ results.terms | escape }}">
+        <input name="options[prefix]" type="hidden" value="last">
+      {%- endif -%}
+    </form>
+  </facet-filters-form>
+{%- endif -%}

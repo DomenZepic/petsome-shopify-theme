@@ -1,0 +1,365 @@
+{% liquid
+  assign total_compare_price = 0
+  assign product_discounts_number = 0
+  assign product_discounts = ''
+
+  for item in cart.items
+    assign display_compare = false
+    assign compare_price = 0
+
+    for variant in item.product.variants
+      if variant.id == item.id
+        assign current_variant = variant
+      endif
+    endfor
+
+    if current_variant.compare_at_price > item.final_price
+      assign display_compare = true
+      assign compare_price = current_variant.compare_at_price | times: item.quantity
+    elsif item.original_line_price != item.final_line_price
+      assign display_compare = true
+      assign compare_price = item.original_line_price
+    endif
+
+    if display_compare
+      assign total_compare_price = total_compare_price | plus: compare_price
+    else
+      assign total_compare_price = total_compare_price | plus: item.original_line_price
+    endif
+
+    if item.original_price != item.final_price
+      for discount in item.discounts
+        capture discount_html
+          echo '<div class="badge">'
+          render 'icon-discount'
+          echo '<span>' | append: discount.title | append: ' (-' | append: item.original_price | minus: item.final_price | money | append: ')</span></div>'
+        endcapture
+
+        if product_discounts_number > 0
+          assign product_discounts = product_discounts | append: 'DIVIDER'
+        endif
+        assign product_discounts_number = product_discounts_number | plus: 1
+        assign product_discounts = product_discounts | append: discount_html
+      endfor
+    endif
+  endfor
+%}
+
+<div class="cart-drawer__footer" style="margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;" {{ block.shopify_attributes }}>
+  <div class="cart-drawer__totals{% if block.settings.savings_position == 'bellow' %} cart-drawer__totals--reverse{% endif %}" role="status" style='--spacing:{{ block.settings.savings_spacing | divided_by: 10.0 }}rem;'>
+    {% if block.settings.display_total_savings %}
+      {% assign total_savings = total_compare_price | minus: cart.total_price %}
+      {% if total_savings > 0 %}
+        {% capture savings_money %}<span class='cart-drawer__totals__row__money'>{{ total_savings | money }}</span>{% endcapture %}
+        <p class='cart-drawer__totals__row cart-drawer__totals__row--{{ block.settings.savings_alignment }} text-color-{{ block.settings.savings_text_color }}' style='--text-size:{{ block.settings.savings_text_size | divided_by: 10.0 }}rem;'>
+          <span>{{ block.settings.savings_left_text | replace: '[savings]', savings_money }}</span><span>{{ block.settings.savings_right_text | replace: '[savings]', savings_money }}</span>
+        </p>
+      {% endif %}
+    {% endif %}
+    {% if block.settings.display_subtotal %}
+      {% capture subtotal_money %}<span class='cart-drawer__totals__row__money'>{{ cart.total_price | money }}</span>{% endcapture %}
+      <p class='cart-drawer__totals__row cart-drawer__totals__row--{{ block.settings.subtotal_alignment }} text-color-{{ block.settings.subtotal_text_color }}' style='--text-size:{{ block.settings.subtotal_text_size | divided_by: 10.0 }}rem;'>
+        <span>{{ block.settings.subtotal_left_text | replace: '[subtotal]', subtotal_money }}</span><span>{{ block.settings.subtotal_right_text | replace: '[subtotal]', subtotal_money }}</span>
+      </p>
+    {% endif %}
+  </div>
+  {%- if block.settings.display_discounts -%}
+    {% liquid
+      if block.settings.display_product_discounts == false
+        assign product_discounts_number = 0
+      endif
+    %}
+    {% if product_discounts_number > 0 or cart.cart_level_discount_applications.size > 0 %}
+      <div class="cart-drawer__discounts cart-drawer__footer__discounts list-unstyled" style='--alignment:{{ block.settings.discounts_alignment }};' role="list" aria-label="{{ 'customer.order.discount' | t }}">
+        <span class='cart-drawer__discounts__label'>{{ block.settings.discounts_label }}</span>
+        {%- for discount in cart.cart_level_discount_applications -%}
+          <div class="badge">
+            {%- render 'icon-discount' -%}
+            <span>{{ discount.title }} (-{{ discount.total_allocated_amount | money }})</span>
+          </div>
+        {%- endfor -%}
+        {% if block.settings.display_product_discounts %}
+          {% assign product_discounts_arr = product_discounts | split: 'DIVIDER' %}
+          {% for discount in product_discounts_arr %}
+            {{ discount }}
+          {% endfor %}
+        {% endif %}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Subtotals",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Total savings"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_total_savings",
+      "label": "Display total savings",
+      "default": false
+    },
+    {
+      "type": "paragraph",
+      "content": "Use [savings] to display total savings (works on both texts).",
+      "visible_if": "{{ block.settings.display_total_savings }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "savings_left_text",
+      "label": "Left text",
+      "default": "<strong>Savings: </strong>",
+      "visible_if": "{{ block.settings.display_total_savings }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "savings_right_text",
+      "label": "Right text",
+      "default": "<strong>-[savings]</strong>",
+      "visible_if": "{{ block.settings.display_total_savings }}"
+    },
+    {
+      "type": "select",
+      "id": "savings_alignment",
+      "label": "Texts layout",
+      "options": [
+        {
+          "value": "spaced",
+          "label": "Spaced out"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "spaced",
+      "visible_if": "{{ block.settings.display_total_savings }}"
+    },
+    {
+      "type": "select",
+      "id": "savings_text_color",
+      "label": "Text color",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1",
+      "visible_if": "{{ block.settings.display_total_savings }}"
+    },
+    {
+      "type": "range",
+      "id": "savings_text_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 16,
+      "label": "Text size",
+      "visible_if": "{{ block.settings.display_total_savings }}"
+    },
+    {
+      "type": "select",
+      "id": "savings_position",
+      "label": "Position",
+      "options": [
+        {
+          "value": "above",
+          "label": "Above subtotal price"
+        },
+        {
+          "value": "bellow",
+          "label": "Bellow subtotal price"
+        }
+      ],
+      "default": "above",
+      "visible_if": "{{ block.settings.display_total_savings }}"
+    },
+    {
+      "type": "range",
+      "id": "savings_spacing",
+      "min": 0,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 10,
+      "label": "Spacing between subtotal price",
+      "visible_if": "{{ block.settings.display_total_savings }}"
+    },
+    {
+      "type": "header",
+      "content": "Subtotal price"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_subtotal",
+      "label": "Display subtotal price",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "Use [subtotal] to display subtotal price (works on both texts).",
+      "visible_if": "{{ block.settings.display_subtotal }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subtotal_left_text",
+      "label": "Left text",
+      "default": "<strong>Subtotal: </strong>",
+      "visible_if": "{{ block.settings.display_subtotal }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subtotal_right_text",
+      "label": "Right text",
+      "default": "<strong>[subtotal]</strong>",
+      "visible_if": "{{ block.settings.display_subtotal }}"
+    },
+    {
+      "type": "select",
+      "id": "subtotal_alignment",
+      "label": "Texts layout",
+      "options": [
+        {
+          "value": "spaced",
+          "label": "Spaced out"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "spaced",
+      "visible_if": "{{ block.settings.display_subtotal }}"
+    },
+    {
+      "type": "select",
+      "id": "subtotal_text_color",
+      "label": "Text color",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "text",
+      "visible_if": "{{ block.settings.display_subtotal }}"
+    },
+    {
+      "type": "range",
+      "id": "subtotal_text_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 20,
+      "label": "Text size",
+      "visible_if": "{{ block.settings.display_subtotal }}"
+    },
+    {
+      "type": "header",
+      "content": "Discount badges"
+    },
+    {
+      "type": "checkbox",
+      "id": "display_discounts",
+      "label": "Display cart discount badges",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "display_product_discounts",
+      "label": "Include product discounts in the displayed badges",
+      "default": true,
+      "visible_if": "{{ block.settings.display_discounts }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "discounts_label",
+      "label": "Discounts label",
+      "default": "<strong>Discounts:</strong>",
+      "visible_if": "{{ block.settings.display_discounts }}"
+    },
+    {
+      "type": "select",
+      "id": "discounts_alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "label": "Alignment",
+      "default": "flex-start",
+      "visible_if": "{{ block.settings.display_discounts }}"
+    },
+    {
+      "type": "header",
+      "content": "Block margin"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "label": "Top margin",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "label": "Bottom margin",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Subtotals"
+    }
+  ]
+}
+{% endschema %}

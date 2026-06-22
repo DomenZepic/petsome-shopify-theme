@@ -1,0 +1,240 @@
+<div
+  class="slide-item"
+  style="
+    {% if block.settings.bg_type == 'solid' %}
+      --bg-color: {{ block.settings.bg_color }};
+    {% elsif block.settings.bg_type == 'gradient' %}
+      --bg-color: {{ block.settings.bg_gradient }};
+    {% endif %}
+    --border-style: {{ block.settings.border }};
+    --mobile-width: {{ block.settings.mobile_width }};
+    --border-color: {{ block.settings.border_color }};
+    --desktop-width: {{ block.settings.desktop_width }};
+    --border-width: {{ block.settings.border_width }}px;
+    {% if block.settings.bg_type != 'none' or block.settings.border_width > 0 %}
+      --border-radius: {{ block.settings.border_radius }}px;
+      --padding-y--mobile: {{ block.settings.vertical_mobile_padding | divided_by: 10.0 }}rem;
+      --padding-x--mobile: {{ block.settings.horizontal_mobile_padding | divided_by: 10.0 }}rem;
+      --padding-y--desktop: {{ block.settings.vertical_desktop_padding | divided_by: 10.0 }}rem;
+      --padding-x--desktop: {{ block.settings.horizontal_desktop_padding | divided_by: 10.0 }}rem;
+    {% endif %}
+  "
+>
+  <div class="content-wrapper block-margins">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Slide",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "custom-liquid"
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "atc-button"
+    },
+    {
+      "type": "image"
+    },
+    {
+      "type": "video"
+    },
+    {
+      "type": "heading"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "button"
+    },
+    {
+      "type": "container"
+    },
+    {
+      "type": "rating-stars"
+    },
+    {
+      "type": "trustpilot-stars"
+    },
+    {
+      "type": "icon-with-content"
+    },
+    {
+      "type": "review-avatars"
+    },
+    {
+      "type": "reviews"
+    },
+    {
+      "type": "text-with-icon"
+    },
+    {
+      "type": "icon-with-text"
+    }
+  ],
+  "settings": [
+    {
+      "type": "select",
+      "id": "bg_type",
+      "label": "Background",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "solid",
+          "label": "Solid color"
+        },
+        {
+          "value": "gradient",
+          "label": "Gradient color"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#F4E1FF",
+      "visible_if": "{{ block.settings.bg_type == 'solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_gradient",
+      "label": "Background gradient color",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ block.settings.bg_type == 'gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "default": 12,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 8,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "header",
+      "content": "Padding",
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "range",
+      "id": "vertical_desktop_padding",
+      "label": "Vertical desktop padding",
+      "min": 0,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "default": 12,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "range",
+      "id": "horizontal_desktop_padding",
+      "label": "Horizontal desktop padding",
+      "min": 0,
+      "max": 60,
+      "step": 3,
+      "unit": "px",
+      "default": 12,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "range",
+      "id": "vertical_mobile_padding",
+      "label": "Vertical mobile padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "range",
+      "id": "horizontal_mobile_padding",
+      "label": "Horizontal mobile padding",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 8,
+      "visible_if": "{{ block.settings.bg_type != 'none' or block.settings.border_width > 0 }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Slide",
+      "blocks": [
+        {
+          "type": "heading",
+          "settings": {
+            "title": "Slide",
+            "heading_size": "h3",
+            "alignment": "center",
+            "mobile_alignment": "mobile-center"
+          }
+        },
+        {
+          "type": "text",
+          "settings": {
+            "text": "<p>Use the flexible slider system to create any slider layout. Each block can be placed in any of the slides.</p>",
+            "alignment": "center",
+            "mobile_alignment": "mobile-center"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

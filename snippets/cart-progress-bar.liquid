@@ -1,0 +1,143 @@
+{% liquid
+  assign is_quantity = false
+  if block.settings.goal_type == 'quantity'
+    assign is_quantity = true
+  endif
+
+  if is_quantity
+    assign goal_multiplier = 1.0
+    assign goal_max_reference = items_count
+  else
+    assign goal_multiplier = 100.00
+    assign goal_max_reference = cart.total_price
+  endif
+
+  assign goal = block.settings.goal | times: goal_multiplier
+  assign goal_progress = goal_max_reference | divided_by: goal | times: 100.0
+
+  assign sub_auto_complete = false
+  if block.settings.sub_auto_complete
+    for item in cart.items
+      if item.selling_plan_allocation
+        assign sub_auto_complete = true
+        break
+      endif
+    endfor
+  endif
+  assign goal_reached = false
+  if goal_progress >= 100.00 or sub_auto_complete
+    assign goal_reached = true
+    assign goal_progress = 100
+  endif
+
+  assign icon_size = block.settings.icon_size | divided_by: 10.0
+  assign icon_scale = block.settings.icon_scale | divided_by: 100.0
+  assign icon_corner_radius = block.settings.icon_corner_radius | divided_by: 2.0
+  assign border_thickness = block.settings.border_thickness | divided_by: 10.0
+  assign line_height = block.settings.line_height | divided_by: 10.0
+%}
+
+{% capture goal_difference_html %}
+  {% if is_quantity %}
+    {{ goal | minus: items_count | round }}
+  {% else %}
+    <span>{{ goal | minus: cart.total_price | money_without_trailing_zeros }}</span>
+  {% endif %}
+{% endcapture %}
+
+<style>
+  .cart-progress-{{ block.id }} {
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  }
+  .cart-progress-{{ block.id }} .cart-progress__bar {
+    height: {{ line_height }}rem;
+  }
+  .cart-progress-{{ block.id }} .cart-progress__bar__badge {
+    width: {{ icon_size }}rem;
+    height: {{ icon_size }}rem;
+    border-radius: {{ icon_corner_radius }}%;
+    {% if block.settings.border_thickness > 0 %}
+      border: {{ border_thickness }}rem {{ block.settings.border_style }} {% if block.settings.border_color == 'custom' %}{{ block.settings.border_custom_color }}{% else %}rgb(var(--color-base-{{ block.settings.border_color }})){% endif %};
+    {% endif %}
+    {% if block.settings.icon_bg == 'custom_color' %}
+      background: {{ block.settings.icon_bg_color }};
+    {% elsif block.settings.icon_bg == 'gradient' %}
+      background: {{ block.settings.icon_bg_gradient }};
+    {% else %}
+      background: rgb(var(--color-base-{{ block.settings.icon_bg }}));
+    {% endif %}
+  }
+  .cart-progress-{{ block.id }} .cart-progress__bar__badge .material-symbols-outlined,
+  .cart-progress-{{ block.id }} .cart-progress__bar__badge img {
+    font-size: calc({{ icon_size }}rem * {{ icon_scale }});
+    width: calc({{ icon_size }}rem * {{ icon_scale }});
+    height: calc({{ icon_size }}rem * {{ icon_scale }});
+    {% if block.settings.icon_color == 'custom' %}
+      color: {{ block.settings.icon_custom_color }};
+    {% else %}
+      color: rgb(var(--accent-color));
+    {% endif %}
+  }
+  {% if block.settings.icon_type == 'dot' %}
+    .cart-progress-{{ block.id }} .cart-progress__bar__badge::before {
+      content: '';
+      display: block;
+      width: calc({{ icon_size }}rem * {{ icon_scale }});
+      height: calc({{ icon_size }}rem * {{ icon_scale }});
+      border-radius: 50%;
+      flex-shrink: 0;
+      {% if block.settings.icon_color == 'custom' %}
+        background: {{ block.settings.icon_custom_color }};
+      {% else %}
+        background: rgb(var(--accent-color));
+      {% endif %}
+    }
+  {% endif %}
+  .cart-progress-{{ block.id }} .cart-progress__bar__progress {
+    {% unless block.settings.display_stripes %}
+      background-image: none !important;
+      animation: none !important;
+    {% endunless %}
+    {% if block.settings.line_color == 'custom_color' %}
+      background-color: {{ block.settings.line_custom_color }} !important;
+    {% elsif block.settings.line_color == 'gradient' %}
+      background: {{ block.settings.line_gradient }} !important;
+    {% endif %}
+  }
+</style>
+
+<div class="cart-progress cart-progress-{{ block.id }} {% if block.settings.icon_color != 'custom' %}accent-color-{{ block.settings.icon_color }}{% endif %}" {{ block.shopify_attributes }}>
+  <p class="cart-progress__text">
+    {% if goal_reached == false %}
+      {{ block.settings.progress_message | replace: '[amount]', goal_difference_html }}
+    {% else %}
+      {{ block.settings.success_message }}
+    {% endif %}
+  </p>
+  <div class="cart-progress__bar">
+    <div class="cart-progress__bar__progress {% if block.settings.line_color != 'custom_color' and block.settings.line_color != 'gradient' %}accent-color-{{ block.settings.line_color }}{% endif %}{% if block.settings.display_stripes %} cart-progress__bar__progress--striped{% endif %}" style="width: {{ goal_progress }}%;">
+      <div class="cart-progress__bar__badge">
+        {% if block.settings.icon_type == 'custom_icon' and block.settings.custom_icon != blank %}
+          <img
+            src="{{ block.settings.custom_icon | image_url }}"
+            {% if block.settings.custom_icon.alt != blank %}
+              alt="{{ block.settings.custom_icon.alt | escape }}"
+            {% else %}
+              role="presentation"
+            {% endif %}
+            height="200"
+            width="200"
+            loading="lazy"
+          >
+        {% elsif block.settings.icon_type == 'icon' and block.settings.icon != blank %}
+          <span class="material-symbols-outlined{% if block.settings.icon_filled %} filled{% endif %}">
+            {{ block.settings.icon | strip | downcase | replace: ' ', '_' }}
+          </span>
+        {% elsif block.settings.icon_type == 'dot' %}
+          {%- comment -%}Dot is rendered via CSS pseudo-element{%- endcomment -%}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

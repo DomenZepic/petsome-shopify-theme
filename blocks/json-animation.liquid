@@ -1,0 +1,266 @@
+<style>
+  {% if block.settings.percentage_width_desktop < 100 %}
+    @media screen and (min-width: 750px) {
+      .json-animation__wrapper-{{ block.id }} {
+        align-items: {{ block.settings.alignment }};
+      }
+      .json-animation__wrapper-{{ block.id }} .json-animation__canvas {
+        width: {{ block.settings.percentage_width_desktop }}%
+      }
+    }
+  {% endif %}
+  {% if block.settings.mobile_width < 100 %}
+    @media screen and (max-width: 749px) {
+      .json-animation__wrapper-{{ block.id }} {
+        align-items: {{ block.settings.mobile_alignment }};
+      }
+      .json-animation__wrapper-{{ block.id }} .json-animation__canvas {
+        width: {{ block.settings.mobile_width }}%;
+      }
+    }
+  {% endif %}
+</style>
+<div 
+  class="json-animation__wrapper json-animation__wrapper-{{ block.id }} {{ block.settings.visibility }}" 
+  style="
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  "
+  {{ block.shopify_attributes }}
+>
+  {% if block.settings.animation_json_url != blank %}
+    <json-animation
+      class="json-animation__canvas json-animation__canvas-{{ block.id }}"
+      animation-url="{{ block.settings.animation_json_url }}"
+      animation-url-mobile="{{ block.settings.animation_json_url_mobile }}"
+      loop="{{ block.settings.loop }}"
+      autoplay="{{ block.settings.autoplay }}"
+      speed="{{ block.settings.animation_speed | divided_by: 100.0 }}"
+      {% if block.settings.click_to_play %}click-to-play="true"{% endif %}
+    >
+      {% if block.settings.fallback_image != blank %}
+        <img
+          src="{{ block.settings.fallback_image | image_url: width: 1200 }}"
+          alt="{{ block.settings.fallback_image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.fallback_image.width }}"
+          height="{{ block.settings.fallback_image.height }}"
+        >
+      {% endif %}
+    </json-animation>
+  {% else %}
+    <div class="json-animation__placeholder flex-center center">
+      <p>Add your animation file URL</p>
+      <p>Detailed nstructions are provided in block settings</p>
+    </div>
+  {% endif %}
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js"></script>
+
+{% schema %}
+{
+  "name": "JSON (Lottie) Animation",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "header",
+      "content": "HOW TO USE?"
+    },
+    {
+      "type": "paragraph",
+      "content": "1) Find and configure your animation on [LottieFiles](https://lottiefiles.com/)"
+    },
+    {
+      "type": "paragraph",
+      "content": "2) Download your animation in .json format (NOT in .lottie format)"
+    },
+    {
+      "type": "paragraph",
+      "content": "3) Go to Shopify admin > Content > Files and upload the .json file you downloaded"
+    },
+    {
+      "type": "paragraph",
+      "content": "4) From there, copy the URL of the file"
+    },
+    {
+      "type": "paragraph",
+      "content": "4) In the theme editor, paste the copied URL into the 'Animation file URL' setting"
+    },
+    {
+      "type": "paragraph",
+      "content": "5) OPTIONAL: If you want a separate animation for mobile devices, repeat the same steps and paste the 2nd file URL into the 'Mobile animation file URL' setting"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "text",
+      "id": "animation_json_url",
+      "label": "Animation file URL"
+    },
+    {
+      "type": "text",
+      "id": "animation_json_url_mobile",
+      "label": "Mobile animation file URL",
+      "info": "OPTIONAL: Use a different animation for mobile. If left blank, desktop animation will be used"
+    },
+    {
+      "type": "image_picker",
+      "id": "fallback_image",
+      "label": "Fallback Image",
+      "info": "Shown while the animation loads, or if the animation fails to load"
+    },
+    {
+      "type": "checkbox",
+      "id": "loop",
+      "label": "Loop animation",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Autoplay",
+      "default": true,
+      "info": "If disabled, animation plays when scrolled into view"
+    },
+    {
+      "type": "checkbox",
+      "id": "click_to_play",
+      "label": "Click to play/pause",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "animation_speed",
+      "min": 10,
+      "max": 300,
+      "step": 10,
+      "unit": "%",
+      "label": "Animation Speed",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Desktop layout"
+    },
+    {
+      "type": "range",
+      "id": "percentage_width_desktop",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Animation width",
+      "default": 80
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "visible_if": "{{ block.settings.percentage_width_desktop < 100 }}"
+    },
+    {
+      "type": "header",
+      "content": "Mobile layout"
+    },
+    {
+      "type": "range",
+      "id": "mobile_width",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Animation width",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "mobile_alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "visible_if": "{{ block.settings.mobile_width < 100 }}"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "JSON (Lottie) animation",
+      "category": "Media"
+    }
+  ]
+}
+{% endschema %}

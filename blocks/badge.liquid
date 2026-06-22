@@ -1,0 +1,364 @@
+<div
+  class="badge-block text-color-{{ block.settings.text_color }} font-{{ block.settings.font_style }}-style flex-center {{ block.settings.visibility }}"
+  style="
+    {% if block.settings.text_color == 'custom' %}
+      --text-color-custom: {{ block.settings.custom_text_color }};
+    {% endif %}
+    {% if block.settings.bg_color_scheme == 'custom-solid' %}
+      background: {{ block.settings.bg_color }};
+    {% elsif block.settings.bg_color_scheme == 'custom-gradient' %}
+      background: {{ block.settings.bg_gradient }};
+    {% else %}
+      background: rgb(var(--color-base-{{ block.settings.bg_color_scheme }}));
+    {% endif %}
+    border: {{ block.settings.border }} {{ block.settings.border_color }} {{ block.settings.border_width }}px;
+    padding: {{ block.settings.vertical_padding }}em {{ block.settings.horizontal_padding }}em;
+    border-radius: {{ block.settings.border_radius }}px;
+    --mobile-font-size: {{ block.settings.mobile_text_size }}px;
+    --desktop-font-size: {{ block.settings.desktop_text_size }}px;
+    {% render 'badge-position', block: block %}
+  "
+  {{ block.shopify_attributes }}
+>
+  {{ block.settings.badge_text }}
+</div>
+
+{% schema %}
+{
+  "name": "Badge",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "header",
+      "content": "Position & Layout"
+    },
+    {
+      "type": "select",
+      "id": "position_horizontal",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "label": "Position",
+      "default": "top"
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment_writing_horizontal",
+      "options": [
+        {
+          "value": "top_outside_border",
+          "label": "Top"
+        },
+        {
+          "value": "top",
+          "label": "Top - inside the border"
+        },
+        {
+          "value": "middle",
+          "label": "Middle"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom - inside the border"
+        },
+        {
+          "value": "bottom_outside_border",
+          "label": "Bottom"
+        }
+      ],
+      "label": "Vertical alignment",
+      "default": "top",
+      "info": "The 'Inside the border' options are applied if the parent container (Container or Column block) has a border."
+    },
+    {
+      "type": "select",
+      "id": "horizontal_alignment_writing_horizontal",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "label": "Horizontal alignment",
+      "default": "right"
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "badge_text",
+      "default": "Badge text",
+      "label": "Badge text"
+    },
+    {
+      "type": "select",
+      "id": "text_color",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "text",
+      "label": "Text color"
+    },
+    {
+      "type": "color",
+      "id": "custom_text_color",
+      "label": "Custom text color",
+      "default": "#FF0000",
+      "visible_if": "{{ block.settings.text_color == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "desktop_text_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 14,
+      "label": "Desktop text size"
+    },
+    {
+      "type": "range",
+      "id": "mobile_text_size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 12,
+      "label": "Mobile text size"
+    },
+    {
+      "type": "select",
+      "id": "font_style",
+      "options": [
+        {
+          "value": "body",
+          "label": "Body"
+        },
+        {
+          "value": "heading",
+          "label": "Heading"
+        }
+      ],
+      "label": "Font",
+      "default": "body"
+    },
+    {
+      "type": "header",
+      "content": "Styling"
+    },
+    {
+      "type": "select",
+      "id": "bg_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        },
+        {
+          "value": "custom-solid",
+          "label": "Custom"
+        },
+        {
+          "value": "custom-gradient",
+          "label": "Gradient"
+        }
+      ],
+      "default": "accent-1",
+      "label": "Background color"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#6D388B",
+      "visible_if": "{{ block.settings.bg_color_scheme == 'custom-solid' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "bg_gradient",
+      "label": "Background gradient color",
+      "default": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+      "visible_if": "{{ block.settings.bg_color_scheme == 'custom-gradient' }}"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Corner radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Border thickness",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "border",
+      "label": "Border style",
+      "options": [
+        {
+          "value": "solid",
+          "label": "Solid"
+        },
+        {
+          "value": "dashed",
+          "label": "Dashed"
+        }
+      ],
+      "default": "solid",
+      "visible_if": "{{ block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "select",
+      "id": "border_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "text",
+      "label": "Border color",
+      "visible_if": "{{ block.settings.border_width > 0 }}"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border custom color",
+      "default": "#000000",
+      "visible_if": "{{ block.settings.border_width > 0 and block.settings.border_color_scheme == 'custom' }}"
+    },
+    {
+      "type": "range",
+      "id": "vertical_padding",
+      "label": "Vertical padding",
+      "min": 0,
+      "max": 2,
+      "step": 0.2,
+      "default": 0.6,
+      "info": "Relative to text size"
+    },
+    {
+      "type": "range",
+      "id": "horizontal_padding",
+      "label": "Horizontal padding",
+      "min": 0,
+      "max": 4,
+      "step": 0.2,
+      "default": 1.2,
+      "info": "Relative to text size"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Badge",
+      "category": "Text"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,238 @@
+{% comment %}
+  Renders product variant-picker
+
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} passing the block information.
+  - product_form_id: {String} Id of the product form to which the variant picker is associated.
+  - update_url: {Boolean} whether or not to update url when changing variants. If false, the url isn't updated. Default: true (optional).
+  Usage:
+  {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
+{% endcomment %}
+
+{%- unless product.has_only_default_variant -%}
+  {% liquid
+    assign types_string = block.settings.picker_types | downcase
+    if types_string == blank
+      assign types_string = 'pills,pills,pills'
+    endif
+    assign types_array = types_string | split: ','
+  %}
+  <variant-selects
+    id="variant-selects-{{ section.id }}"
+    class="no-js-hidden"
+    data-section="{{ section.id }}"
+    data-url="{{ product.url }}"
+    data-skip-non-existent='true'
+    data-skip-unavailable="{{ block.settings.skip_unavailable }}"
+    {% if update_url == false %}
+      data-update-url="false"
+    {% endif %}
+    {% if section.settings.variant_image_filtering != 'none' %}
+      data-has-filtering="true"
+    {% endif %}
+    {% if types_string contains 'quantity breaks' %}
+      data-has-quantity-breaks-picker="true"
+      data-quantity-breaks-picker-style="{{ block.settings.breaks_style }}"
+      data-quantity-breaks-picker-displayed-images="{{ block.settings.breaks_displayed_images }}"
+    {% endif %}
+    style="
+      margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+      margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+    "
+    {{ block.shopify_attributes }}
+  >
+    {%- for option in product.options_with_values -%}
+      {% liquid
+        assign type = types_array[forloop.index0] | strip | replace: ' ', '-'
+        if type != 'dropdown' and type != 'swatches' and type != 'quantity-breaks' and type != 'hidden'
+          assign type = 'pills'
+        endif
+      %}
+      <div
+        class="product-form__input product-form__input--{{ type }}{% if block.settings.full_width_dropdowns %} product-form__input--full{% endif %}{% if type == 'hidden' %} hidden{% endif %}"
+      >
+        <div class="visually-hidden product-form__input__type" data-type="{{ type }}">&nbsp</div>
+        {% unless type == 'quantity-breaks' %}
+          {%- liquid
+            case block.settings.labels_color
+              when 'accent-1'
+                assign label_color_value = 'rgb(var(--color-base-accent-1))'
+              when 'accent-2'
+                assign label_color_value = 'rgb(var(--color-base-accent-2))'
+              when 'custom'
+                assign label_color_value = block.settings.labels_custom_color
+              else
+                assign label_color_value = 'rgb(var(--color-foreground))'
+            endcase
+
+            case block.settings.labels_line_color
+              when 'accent-1'
+                assign label_line_color_value = 'rgb(var(--color-base-accent-1))'
+              when 'accent-2'
+                assign label_line_color_value = 'rgb(var(--color-base-accent-2))'
+              when 'custom'
+                assign label_line_color_value = block.settings.labels_line_custom_color
+              else
+                assign label_line_color_value = 'rgb(var(--color-foreground))'
+            endcase
+
+            assign label_alignment = block.settings.labels_alignment
+            if block.settings.show_label_lines
+              assign label_alignment = 'stretch'
+            endif
+          -%}
+          <div
+            class='product-form__label-container{% if block.settings.show_label_lines %} product-form__label-container--style-divider{% endif %}{% if block.settings.show_step_indicator %} product-form__label-container--has-step{% endif %}'
+            id='SizeChartAppend-{{ section.id }}-option_{{ forloop.index }}_label_container'
+            style='
+              --label-size: {{ block.settings.labels_size }}px;
+              --label-color: {{ label_color_value }};
+              --label-alignment: {{ label_alignment }};
+              --label-divider-color: {{ label_line_color_value }};
+              --label-divider-thickness: {{ block.settings.labels_line_thickness }}px;
+              --step-size: {{ block.settings.step_indicator_size }}px;
+              --step-bg: {{ block.settings.step_indicator_bg_color }};
+              --step-text: {{ block.settings.step_indicator_text_color }};
+              --step-radius: {{ block.settings.step_indicator_corner_radius | divided_by: 2 }}%;
+            '
+          >
+            <label class="form__label font-{{ block.settings.labels_font }}" for="Option-{{ section.id }}-{{ forloop.index0 }}">
+              {%- if block.settings.show_label_lines -%}<span class="form__label-line"></span>{%- endif -%}
+              {%- if block.settings.show_step_indicator -%}
+                <span class="product-form__step-indicator" aria-hidden="true">{{ forloop.index }}</span>
+              {%- endif -%}
+              <span class="form__label-text">
+                {% if block.settings.custom_labels == blank %}
+                  {{ option.name }}
+                {% else %}
+                  <span id="custom-label-{{ section.id }}-{{ forloop.index }}">
+                    {% assign downcase_name = option.name | downcase %}
+                    {% assign uppercase_name = option.name | upcase %}
+                    {{
+                      block.settings.custom_labels
+                      | replace: '[count]', forloop.index
+                      | replace: '[name]', option.name
+                      | replace: '[name_lowercase]', downcase_name
+                      | replace: '[name_uppercase]', uppercase_name
+                      | replace: '[selected]', option.selected_value
+                    }}
+                  </span>
+                {% endif %}
+              </span>
+              {%- if block.settings.show_label_lines -%}<span class="form__label-line"></span>{%- endif -%}
+            </label>
+            {% capture current_append %}option_{{ forloop.index }}_label_container{% endcapture %}
+            {% if sizing_chart_html != nil and sizing_chart_append == current_append %}
+              {{ sizing_chart_html }}
+            {% endif %}
+          </div>
+        {% endunless %}
+        {% case type %}
+          {% when 'dropdown' %}
+            <div class="select no-background color-{{ settings.pickers_color_scheme }} accent-color-{{ settings.pickers_overlay_color }} accent-2-color-{{ settings.pickers_text_color }}">
+              <select
+                id="Option-{{ section.id }}-{{ forloop.index0 }}"
+                class="select__select"
+                name="options[{{ option.name | escape }}]"
+                form="{{ product_form_id }}"
+              >
+                {% render 'product-variant-options', product: product, option: option, block: block, type: 'dropdown' %}
+              </select>
+              {% render 'icon-caret' %}
+            </div>
+          {% when 'swatches' %}
+            <div class="color-swatches-container color-swatches-container--size-{{ block.settings.swatches_size }}">
+              {% render 'product-variant-options', product: product, option: option, block: block, type: 'swatches' %}
+            </div>
+          {% when 'quantity-breaks' %}
+            <div 
+              class="quantity-breaks quantity-breaks--{{ block.settings.breaks_style }} accent-color-{{ block.settings.breaks_color_scheme }}{% if block.settings.breaks_space_images %} quantity-breaks--space-images{% endif %}{% if block.settings.breaks_badges != blank %} quantity-breaks--has-badge{% endif %} quantity-breaks--vertical-image-{{ block.settings.breaks_vertical_images_position }} quantity-breaks--vertical-prices-{{ block.settings.breaks_vertical_prices_layout }}{% if block.settings.breaks_display_selected_indicator %} quantity-breaks--show-indicator{% endif %}{% if block.settings.breaks_image_width == 100 %} quantity-breaks--max-width-images{% endif %}"
+              data-items="{{ option.values.size }}"
+              style="--items-count:{{ option.values.size }};--image-width:{{ block.settings.breaks_image_width }}%;--vertical-items-align:{{ block.settings.breaks_vertical_items_align }};--border-radius:{{ block.settings.breaks_border_radius | divided_by: 10.0 }}rem;--border-width:{{ block.settings.breaks_border_width | divided_by: 10.0 }}rem;"
+            >
+              {% if block.settings.breaks_headline != blank %}
+                <h3 class="quantity-breaks__title flex-center">
+                  <span></span>
+                  <span>{{ block.settings.breaks_headline }}</span>
+                  <span></span>
+                </h3>
+              {% endif %}
+              <div class="quantity-breaks-container">
+                {% render 'product-variant-options',
+                  product: product,
+                  option: option,
+                  block: block,
+                  type: 'quantity-breaks'
+                %}
+              </div>
+            </div>
+          {% else %}
+            {% render 'product-variant-options', product: product, option: option, block: block, type: 'pills' %}
+        {% endcase %}
+        {% capture current_append %}option_{{ forloop.index }}_under_container{% endcapture %}
+        <div class='product-form__under-container'>{% if sizing_chart_html != nil and sizing_chart_append == current_append %}{{ sizing_chart_html }}{% endif %}</div>
+      </div>
+    {%- endfor -%}
+
+    <script type="application/json">
+      {{ product.variants | json }}
+    </script>
+  </variant-selects>
+{%- endunless -%}
+
+<noscript
+  class="product-form__noscript-wrapper-{{ section.id }}"
+  style="--margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;--margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;"
+>
+  <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
+    <label class="form__label font-body-bold" for="Variants-{{ section.id }}">
+      {{- 'products.product.product_variants' | t -}}
+    </label>
+    <div class="select">
+      <select
+        name="id"
+        id="Variants-{{ section.id }}"
+        class="select__select"
+        form="{{ product_form_id }}"
+      >
+        {%- for variant in product.variants -%}
+          <option
+            {% if variant == product.selected_or_first_available_variant %}
+              selected="selected"
+            {% endif %}
+            {% if variant.available == false %}
+              disabled
+            {% endif %}
+            value="{{ variant.id }}"
+          >
+            {%- liquid
+              echo variant.title
+              echo variant.price | money | strip_html | prepend: ' - '
+              if variant.available == false
+                echo 'products.product.sold_out' | t | prepend: ' - '
+              endif
+              if variant.quantity_rule.increment > 1
+                echo 'products.product.quantity.multiples_of' | t: quantity: variant.quantity_rule.increment | prepend: ' - '
+              endif
+              if variant.quantity_rule.min > 1
+                echo 'products.product.quantity.minimum_of' | t: quantity: variant.quantity_rule.min | prepend: ' - '
+              endif
+              if variant.quantity_rule.max != null
+                echo 'products.product.quantity.maximum_of' | t: quantity: variant.quantity_rule.max | prepend: ' - '
+              endif
+              # TODO: enable theme-check once `item_count_for_variant` is accepted as valid filter
+              # theme-check-disable
+              assign cart_quantity = cart | item_count_for_variant: variant.id
+              # theme-check-enable
+              if cart_quantity > 0
+                echo 'products.product.quantity.in_cart_html' | t: quantity: cart_quantity | prepend: ' - '
+              endif
+            -%}
+          </option>
+        {%- endfor -%}
+      </select>
+      {% render 'icon-caret' %}
+    </div>
+  </div>
+</noscript>

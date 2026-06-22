@@ -1,0 +1,249 @@
+{% render 'icon-with-text', block: block %}
+
+{% schema %}
+{
+  "name": "Icons with text",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "horizontal",
+          "label": "Horizontal"
+        },
+        {
+          "value": "vertical",
+          "label": "Vertical"
+        }
+      ],
+      "default": "horizontal",
+      "label": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "icon_color",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "outline-button",
+          "label": "Outline button"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        }
+      ],
+      "default": "accent-1",
+      "label": "Icon color"
+    },
+    {
+      "type": "header",
+      "content": "Desktop"
+    },
+    {
+      "type": "range",
+      "id": "desktop_icon_size",
+      "min": 16,
+      "max": 72,
+      "step": 4,
+      "unit": "px",
+      "default": 48,
+      "label": "Icon size"
+    },
+    {
+      "type": "range",
+      "id": "desktop_spacing",
+      "min": 2,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 12,
+      "label": "Icon & text spacing"
+    },
+    {
+      "type": "range",
+      "id": "desktop_text_size",
+      "min": 12,
+      "max": 34,
+      "step": 2,
+      "unit": "px",
+      "default": 18,
+      "label": "Text size"
+    },
+    {
+      "type": "header",
+      "content": "Mobile"
+    },
+    {
+      "type": "range",
+      "id": "mobile_icon_size",
+      "min": 12,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "default": 40,
+      "label": "Icon size"
+    },
+    {
+      "type": "range",
+      "id": "mobile_spacing",
+      "min": 2,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "default": 10,
+      "label": "Icon & text spacing"
+    },
+    {
+      "type": "range",
+      "id": "mobile_text_size",
+      "min": 8,
+      "max": 26,
+      "step": 2,
+      "unit": "px",
+      "default": 14,
+      "label": "Text size"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-product.blocks.icon_with_text.settings.content.label",
+      "info": "t:sections.main-product.blocks.icon_with_text.settings.content.info"
+    },
+    {
+      "type": "text",
+      "id": "icon_1",
+      "default": "favorite",
+      "label": "t:sections.main-product.blocks.icon_with_text.settings.icon_1.label",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+    },
+    {
+      "type": "checkbox",
+      "id": "icon_1_fill",
+      "default": false,
+      "label": "First icon fill"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "t:sections.main-product.blocks.icon_with_text.settings.image_1.label"
+    },
+    {
+      "type": "text",
+      "id": "heading_1",
+      "default": "Heading",
+      "label": "t:sections.main-product.blocks.icon_with_text.settings.heading_1.label",
+      "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+    },
+    {
+      "type": "text",
+      "id": "icon_2",
+      "default": "undo",
+      "label": "t:sections.main-product.blocks.icon_with_text.settings.icon_2.label",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+    },
+    {
+      "type": "checkbox",
+      "id": "icon_2_fill",
+      "default": false,
+      "label": "Second icon fill"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "t:sections.main-product.blocks.icon_with_text.settings.image_2.label"
+    },
+    {
+      "type": "text",
+      "id": "heading_2",
+      "default": "Heading",
+      "label": "t:sections.main-product.blocks.icon_with_text.settings.heading_2.label",
+      "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+    },
+    {
+      "type": "text",
+      "id": "icon_3",
+      "default": "local_shipping",
+      "label": "t:sections.main-product.blocks.icon_with_text.settings.icon_3.label",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+    },
+    {
+      "type": "checkbox",
+      "id": "icon_3_fill",
+      "default": false,
+      "label": "Third icon fill"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "t:sections.main-product.blocks.icon_with_text.settings.image_3.label"
+    },
+    {
+      "type": "text",
+      "id": "heading_3",
+      "default": "Heading",
+      "label": "t:sections.main-product.blocks.icon_with_text.settings.heading_3.label",
+      "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15,
+      "visible_if": "{{ section.settings.image_1_visibility != 'mobile-hidden' and section.settings.image_1_visibility != 'always-display' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icons with text",
+      "category": "Icons"
+    }
+  ]
+}
+{% endschema %}

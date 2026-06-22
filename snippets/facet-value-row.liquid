@@ -1,0 +1,114 @@
+{% comment %}
+  Params:
+  - li_class
+  - input_id
+  - value
+{% endcomment %}
+
+{% liquid
+  assign the_type = type | default: 'checkbox'
+
+  assign is_checked = false
+  if value.active
+    assign is_checked = true
+  endif
+
+  assign is_disabled = false
+  if value.count == 0 and value.active == false
+    assign is_disabled = true
+  endif
+
+  assign count = value.count
+%}
+
+<li class="{% if the_type == 'checkbox' %}{{ li_class }}{% endif %}">
+  <label
+    for="{{ input_id }}"
+    class="facet-item{% if the_type == 'checkbox' %} facet-checkbox{% endif %}{% if mobile and the_type == 'checkbox' %} mobile-facets__label{% endif %}{% if is_disabled %} disabled{% endif %}{% if is_checked %} active{% else %} inactive{% endif %}"
+  >
+    <input
+      type="checkbox"
+      name="{{ value.param_name }}"
+      value="{{ value.value }}"
+      id="{{ input_id }}"
+      class="visually-hidden"
+      {% if is_checked %}checked{% endif %}
+      {% if is_disabled %}disabled{% endif %}
+    >
+
+    {%- case the_type -%}
+
+      {%- when 'swatch' -%}
+        {%- liquid
+          assign swatch_bg = ''
+
+          if value.swatch
+            if value.swatch.image
+              assign img_url = value.swatch.image | image_url: width: 300
+              assign swatch_bg = 'no-repeat center / cover url(' | append: img_url | append: ')'
+            elsif value.swatch.color and value.swatch.color.rgb
+              assign swatch_bg = 'rgb(' | append: value.swatch.color.rgb | append: ')'
+            endif
+          endif
+
+          if swatch_bg == ''
+            assign predefined_raw = settings.swatches_predefined_colors_list | default: ''
+            assign predefined_lines = predefined_raw | replace: '<p>', '' | split: '</p>'
+            assign wanted_name = value.label | strip
+
+            for line in predefined_lines
+              assign clean = line | strip
+              if clean == '' or clean contains '<'
+                continue
+              endif
+              assign parts = clean | split: '='
+              if parts.size > 1
+                assign opt_name = parts[0] | strip
+                assign opt_val  = parts[1] | strip
+                if opt_name == wanted_name
+                  assign swatch_bg = opt_val
+                  break
+                endif
+              endif
+            endfor
+
+            if swatch_bg == ''
+              assign swatch_bg = 'var(--swatch-fallback, #e5e5e5)'
+            endif
+          endif
+        -%}
+
+        <div class="color-swatch{% if is_checked %} color-swatch--active{% endif %}">
+          <div class="color-swatch__image">
+            <div class="color-swatch__custom-color" style="--bg-color: {{ swatch_bg }}">&nbsp</div>
+          </div>
+          <span class="color-swatch__label">
+            {{ value.label | escape }} <span class="facet-swatch__count">({{ count }})</span>
+          </span>
+        </div>
+
+      {%- when 'pill' -%}
+        <span class="facet-pill color-{{ section.settings.facets_pills_color }} flex-center" aria-hidden="true">
+          {{ value.label | escape }}
+          {% comment %} <span class="facet-pill__count">({{ count }})</span> {% endcomment %}
+        </span>
+
+      {%- else -%}
+        {% render 'checkbox-icons' %}
+        <span aria-hidden="true">
+          {{ value.label | escape }} ({{ count }})
+        </span>
+
+    {%- endcase -%}
+
+    <span class="visually-hidden">
+      {{- value.label | escape }} (
+      {%- if count == 1 -%}
+        {{- 'products.facets.product_count_simple.one' | t: count: count -}}
+      {%- else -%}
+        {{- 'products.facets.product_count_simple.other' | t: count: count -}}
+      {%- endif -%}
+      )
+    </span>
+  </label>
+</li>

@@ -1,0 +1,502 @@
+{% liquid
+  assign min_height = block.settings.min_height | divided_by: 10.0
+  assign padding_y = block.settings.padding_y | divided_by: 10.0
+  assign padding_x = block.settings.padding_x | divided_by: 10.0
+  assign title_size = block.settings.title_size | divided_by: 10.0
+  assign subtitle_size = block.settings.subtitle_size | divided_by: 10.0
+  assign subtitle_spacing = block.settings.subtitle_spacing | divided_by: 10.0
+  assign close_btn_offset = block.settings.close_btn_offset | divided_by: 10.0
+  assign close_btn_size = block.settings.close_btn_size | divided_by: 10.0
+  assign x_icon_scale = block.settings.close_btn_x_size | divided_by: 100.0
+  assign x_icon_thickness = block.settings.close_btn_x_thickness
+  assign image_spacing = block.settings.image_spacing | divided_by: 10.0
+
+  assign title = block.settings.menu_title
+  assign subtitle = block.settings.subtitle
+  assign has_text = false
+  if title != blank or subtitle != blank
+    assign has_text = true
+  endif
+%}
+<style>
+  #HeaderDrawer_Header {
+    --btn-size: {{ close_btn_size }}rem;
+    --btn-offset: {{ close_btn_offset }}rem;
+    --x-scale: {{ x_icon_scale }};
+    --x-stroke: {{ x_icon_thickness }}px;
+    min-height: {{ min_height }}rem;
+    padding: {{ padding_y }}rem {{ padding_x }}rem;
+    gap: {{ image_spacing }}rem;
+    {% if block.settings.color_scheme == 'custom' %}
+      --color-background: {{ block.settings.custom_colors_background.red }}, {{ block.settings.custom_colors_background.green }}, {{ block.settings.custom_colors_background.blue }};
+      --gradient-background: {% if block.settings.custom_gradient_background != blank %}{{ block.settings.custom_gradient_background }}{% else %}{{ block.settings.custom_colors_background }}{% endif %};
+      --color-foreground: {{ block.settings.custom_colors_text.red }}, {{ block.settings.custom_colors_text.green }}, {{ block.settings.custom_colors_text.blue }};
+    {% endif %}
+    {% if block.settings.alignment == 'center' %}
+      justify-content: center;
+      text-align: center;
+    {% endif %}
+    border-color: rgba(var(--color-foreground), {{ block.settings.separator_opacity | divided_by: 100.0 }});
+    {% if block.settings.drop_shadow %}
+      box-shadow: 0px {{ block.settings.shadow_offset }}px {{ block.settings.shadow_blur }}px rgb(var(--color-base-{{ block.settings.shadow_color }}), {{ block.settings.shadow_opacity | divided_by: 100.0 }});
+    {% endif %}
+  }
+  #HeaderDrawer_Header .menu-drawer__title {
+    font-size: {{ title_size }}rem;
+  }
+  #HeaderDrawer_Header .menu-drawer__subtitle {
+    font-size: {{ subtitle_size }}rem;
+    margin-top: {{ subtitle_spacing }}rem;
+  }
+  {% if block.settings.image != blank %}
+    {% if block.settings.image_position == 'side' %}
+      #HeaderDrawer_Header .media {
+        width: {{ block.settings.image_height | times: block.settings.image.aspect_ratio }}px;
+      }
+    {% else %}
+      #HeaderDrawer_Header {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        {% if block.settings.alignment == 'center' %}
+          align-items: center;
+        {% endif %}
+      }
+      #HeaderDrawer_Header .media {
+        width: {{ block.settings.image_width }}%;
+      }
+      #HeaderDrawer_Header .media + div {
+        {% if block.settings.image_position == 'bottom' %}
+          margin-bottom: {{ image_spacing }}rem;
+          order: -1;
+        {% else %}
+          margin-top: {{ image_spacing }}rem;
+        {% endif %}
+      }
+    {% endif %}
+  {% endif %}
+  #HeaderDrawer_Header .menu-drawer__close-btn {
+    background: rgba(var(--color-foreground), {{ block.settings.close_btn_bg_opacity | divided_by: 100.0 }});
+    border-radius: {{ block.settings.close_btn_radius | divided_by: 2.0 }}%;
+    {% if block.settings.color_scheme == 'custom' %}
+      --color-foreground: {{ block.settings.custom_colors_close.red }}, {{ block.settings.custom_colors_close.green }}, {{ block.settings.custom_colors_close.blue }};
+      color: rgb(var(--color-foreground));
+    {% endif %}
+  }
+</style>
+
+<div id="HeaderDrawer_Header" class="header-drawer-v2__header menu-drawer__title-and-close-btn color-{{ block.settings.color_scheme }} gradient">
+  {% if block.settings.image != blank %}
+    <div class="media media--transparent ratio flex-shrink-0" style="--ratio-percent: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%;">
+      {{ block.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+    </div>
+  {% endif %}
+  {% if has_text %}
+    <div class="header-drawer__header__text">
+      {% if block.settings.menu_title != blank %}
+        <span class='menu-drawer__title font-{{ block.settings.title_font }}'>
+          {{ block.settings.menu_title }}
+        </span>
+      {% endif %}
+      {% if block.settings.subtitle != blank %}
+        <span class="menu-drawer__subtitle font-{{ block.settings.subtitle_font }}">
+          {{ block.settings.subtitle }}
+        </span>
+      {% endif %}
+    </div>
+  {% endif %}
+  <button class='menu-drawer__close-btn menu-drawer__close-menu-btn header__icon header__icon--menu header__icon--summary link focus-inset flex-center'>
+     <svg class="x-svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <line x1="6" y1="6" x2="18" y2="18"></line>
+      <line x1="18" y1="6" x2="6" y2="18"></line>
+    </svg>
+  </button>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Enable the 'Test mode' in Drawer (mobile) menu block settings for faster customization"
+    },
+    {
+      "type": "header",
+      "content": "Styling"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_background",
+      "default": "#FFFFFF",
+      "label": "Background color",
+      "visible_if": "{{ block.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color_background",
+      "id": "custom_gradient_background",
+      "label": "Gradient background",
+      "info": "If added, replaces Background color.",
+      "visible_if": "{{ block.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_text",
+      "default": "#2E2A39",
+      "label": "Text color",
+      "visible_if": "{{ block.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "color",
+      "id": "custom_colors_close",
+      "default": "#2E2A39",
+      "label": "Close button color",
+      "visible_if": "{{ block.settings.color_scheme == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "default": "left",
+      "label": "Text & image alignment"
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "min": 30,
+      "max": 90,
+      "step": 3,
+      "label": "Minimum height",
+      "default": 66,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_y",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "label": "Vertical padding",
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_x",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "label": "Horizontal padding",
+      "default": 20,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "separator_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Separator opacity",
+      "default": 10,
+      "unit": "%"
+    },
+    {
+      "type": "checkbox",
+      "id": "drop_shadow",
+      "default": false,
+      "label": "Enable drop shadow"
+    },
+    {
+      "type": "range",
+      "id": "shadow_offset",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "label": "Shadow offset",
+      "default": 1,
+      "unit": "px",
+      "visible_if": "{{ block.settings.drop_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_blur",
+      "min": 0,
+      "max": 60,
+      "step": 3,
+      "label": "Shadow blur",
+      "default": 9,
+      "unit": "px",
+      "visible_if": "{{ block.settings.drop_shadow }}"
+    },
+    {
+      "type": "select",
+      "id": "shadow_color",
+      "label": "Shadow color",
+      "options": [
+        { "value": "accent-1", "label": "Accent 1" },
+        { "value": "accent-2", "label": "Accent 2" },
+        { "value": "background-1", "label": "Background 1" },
+        { "value": "background-2", "label": "Background 2" },
+        { "value": "text", "label": "Text" }
+      ],
+      "default": "text",
+      "visible_if": "{{ block.settings.drop_shadow }}"
+    },
+    {
+      "type": "range",
+      "id": "shadow_opacity",
+      "min": 2,
+      "max": 40,
+      "step": 2,
+      "label": "Shadow opacity",
+      "default": 6,
+      "unit": "%",
+      "visible_if": "{{ block.settings.drop_shadow }}"
+    },
+
+    {
+      "type": "header",
+      "content": "Close button"
+    },
+    {
+      "type": "range",
+      "id": "close_btn_offset",
+      "min": 5,
+      "max": 20,
+      "step": 1,
+      "label": "Offset from the side",
+      "default": 10,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "close_btn_size",
+      "min": 20,
+      "max": 50,
+      "step": 2,
+      "label": "Button size",
+      "default": 30,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "close_btn_bg_opacity",
+      "min": 0,
+      "max": 20,
+      "step": 1,
+      "label": "Background opacity",
+      "default": 5,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "close_btn_radius",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "label": "Corner radius",
+      "default": 15,
+      "unit": "%",
+      "visible_if": "{{ block.settings.close_btn_bg_opacity > 0 }}"
+    },
+    {
+      "type": "range",
+      "id": "close_btn_x_size",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "label": "X icon size",
+      "default": 65,
+      "unit": "%",
+      "info": "Relative to the button size"
+    },
+    {
+      "type": "range",
+      "id": "close_btn_x_thickness",
+      "min": 0.3,
+      "max": 3,
+      "step": 0.3,
+      "label": "X icon thickness",
+      "default": 1.5,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Title"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "menu_title",
+      "label": "Title",
+      "default": "Menu"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 12,
+      "max": 36,
+      "step": 2,
+      "label": "Size",
+      "default": 22,
+      "unit": "px",
+      "visible_if": "{{ block.settings.menu_title != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "title_font",
+      "label": "Font",
+      "options": [
+        { "value": "body", "label": "Body" },
+        { "value": "body-bold", "label": "Body - bold" },
+        { "value": "headings", "label": "Headings" }
+      ],
+      "default": "headings",
+      "visible_if": "{{ block.settings.menu_title != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Subtitle"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subtitle",
+      "label": "Subtitle"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 8,
+      "max": 28,
+      "step": 1,
+      "label": "Size",
+      "default": 15,
+      "unit": "px",
+      "visible_if": "{{ block.settings.subtitle != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "subtitle_font",
+      "label": "Font",
+      "options": [
+        { "value": "body", "label": "Body" },
+        { "value": "body_bold", "label": "Body - bold" },
+        { "value": "headings", "label": "Headings" }
+      ],
+      "default": "body",
+      "visible_if": "{{ block.settings.subtitle != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "subtitle_spacing",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "label": "Spacing from the heading",
+      "default": 2,
+      "unit": "px",
+      "visible_if": "{{ block.settings.menu_title != blank and block.settings.subtitle != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Position",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" },
+        { "value": "side", "label": "Next to the text" }
+      ],
+      "default": "side",
+      "visible_if": "{{ block.settings.image != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 5,
+      "max": 100,
+      "step": 5,
+      "label": "Width",
+      "default": 30,
+      "unit": "%",
+      "visible_if": "{{ block.settings.image != blank and block.settings.image_position != 'side' }}"
+    },
+    {
+      "type": "range",
+      "id": "image_height",
+      "min": 20,
+      "max": 80,
+      "step": 2,
+      "label": "Height",
+      "default": 34,
+      "unit": "px",
+      "visible_if": "{{ block.settings.image != blank and block.settings.image_position == 'side' }}"
+    },
+    {
+      "type": "range",
+      "id": "image_spacing",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "label": "Spacing from the text",
+      "default": 10,
+      "unit": "px",
+      "visible_if": "{{ block.settings.image != blank and block.settings.menu_title != blank or block.settings.subtitle != blank }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Header"
+    }
+  ]
+}
+{% endschema %}

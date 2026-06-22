@@ -1,0 +1,100 @@
+{% assign selected_country = localization.country %}
+
+<localization-form class="localization-form-v2 localization-form-v2--images-{{ section.settings.country_images_ratio }} {{ section.settings.country_selector_visibility }}">
+  {%- form 'localization', id: 'HeaderCountryForm', class: 'localization-form' -%}
+    <div class="no-js-hidden">
+      <style>
+        {% if section.settings.country_selector_selected_text_desktop == blank %}
+          @media screen and (min-width: 750px) {
+            #CountrySelectorButton-{{ section.id }} {
+              gap: 5px;
+            }
+          }
+        {% endif %}
+        {% if section.settings.country_selector_selected_text_mobile == blank %}
+          @media screen and (max-width: 749px) {
+            #CountrySelectorButton-{{ section.id }} {
+              gap: 3px;
+            }
+          }
+        {% endif %}
+      </style>
+      <div class="disclosure localization-v2">
+        <button
+          type="button"
+          class="localization-v2__button"
+          id="CountrySelectorButton-{{ section.id }}"
+          aria-expanded="false"
+          aria-controls="HeaderCountryList"
+          aria-describedby="HeaderCountryLabel"
+        >
+          {% liquid
+            assign desktop_image = section.settings.country_selector_selected_flags_desktop
+            assign mobile_image = section.settings.country_selector_selected_flags_mobile
+            assign desktop_text = section.settings.country_selector_selected_text_desktop
+            assign mobile_text = country_selector_selected_text_mobile
+          %}
+          {% if desktop_image or mobile_image %}
+            <img
+              src="https://flagcdn.com/w80/{{ selected_country.iso_code | downcase }}.png"
+              width="20"
+              height="15"
+              alt="{{ selected_country.name }}"
+              class="localization-form-v2__image{% unless desktop_image %} desktop-hidden{% endunless %}{% unless mobile_image %} mobile-hidden{% endunless %}"
+            >
+          {% endif %}
+          <span class="mobile-hidden">
+            {{ desktop_text
+              | replace: '[country_name]', selected_country.name
+              | replace: '[country_code]', selected_country.iso_code
+              | replace: '[currency_code]', selected_country.currency.iso_code
+              | replace: '[currency_symbol]', selected_country.currency.symbol
+            }}
+          </span>
+          <span class="desktop-hidden">
+            {{ mobile_text
+              | replace: '[country_name]', selected_country.name
+              | replace: '[country_code]', selected_country.iso_code
+              | replace: '[currency_code]', selected_country.currency.iso_code
+              | replace: '[currency_symbol]', selected_country.currency.symbol
+            }}
+          </span>
+          {% render 'icon-caret' %}
+        </button>
+        <div class="disclosure__list-wrapper" hidden>
+          <ul id="HeaderCountryList" role="list" class="disclosure__list list-unstyled">
+            {%- for country in localization.available_countries -%}
+              <li class="disclosure__item" tabindex="-1">
+                <a
+                  class="disclosure__link caption-large{% if country.iso_code == selected_country.iso_code %} disclosure__link--active{% endif %}"
+                  href="#"
+                  {% if country.iso_code == selected_country.iso_code %}
+                    aria-current="true"
+                  {% endif %}
+                  data-value="{{ country.iso_code }}"
+                >
+                  {% if section.settings.country_selector_options_flags %}
+                    <img
+                      src="https://flagcdn.com/w80/{{ country.iso_code | downcase }}.png"
+                      width="20"
+                      height="15"
+                      alt="{{ country.name }}"
+                      class="localization-form-v2__image"
+                    >
+                  {% endif %}
+                  {{ section.settings.country_selector_options_text
+                    | replace: '[country_name]', country.name
+                    | replace: '[country_code]', country.iso_code
+                    | replace: '[currency_code]', country.currency.iso_code
+                    | replace: '[currency_symbol]', country.currency.symbol
+                  }}
+                </a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </div>
+      </div>
+      <input type="hidden" name="country_code" value="{{ selected_country.iso_code }}">
+    </div>
+  {%- endform -%}
+</localization-form>

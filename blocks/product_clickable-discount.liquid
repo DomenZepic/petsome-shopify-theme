@@ -1,0 +1,400 @@
+{% if product %}
+<div
+  style="
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  "
+  {{- block.shopify_attributes -}}
+>
+  {% if block.settings.discount_code != blank %}
+    <clickable-discount
+      class="clickable-discount"
+      data-error="false"
+      data-applied="false"
+      data-loading="false"
+      data-code="{{ block.settings.discount_code }}"
+      style="
+        --alignment:{{ block.settings.alignment }};
+        --mobile-text-size: {{ block.settings.mobile_text_size | divided_by: 10.0 }}rem;
+        --desktop-text-size: {{ block.settings.desktop_text_size | divided_by: 10.0 }}rem;
+      "
+    >
+      <button
+        class="clickable-discount__btn"
+        role="button"
+        aria-pressed="false"
+        aria-label="{{ block.settings.text_1 | strip_html }} {{ block.settings.text_2 | strip_html }}"
+      >
+        <div
+          class="
+            clickable-discount__btn__text-1
+            product__text-container
+            product__text-container--{{ block.settings.alignment }}
+          "
+          style="
+              {% if block.settings.enable_bg %}
+                  background-color:{{ block.settings.bg_color_1 }};
+                  padding:{{ block.settings.padding }}px;
+                  border-radius:{{ block.settings.corner_radius }}px;
+              {% endif %}
+              --icon-scale:{{ block.settings.icon_scale | divided_by: 100.0 }};
+          "
+        >
+          <p
+            class="product__text product__text-{{ block.settings.alignment }}"
+            style="
+              --text-color:{{ block.settings.text_color_1 }};
+              --icon-color:{{ block.settings.icon_color_1 }};
+            "
+          >
+            {% if block.settings.custom_icon_1 != blank %}
+              <img
+                width="auto"
+                height="auto"
+                loading="lazy"
+                alt="{{ block.settings.custom_icon_1.alt | default: '' }}"
+                src="{{ block.settings.custom_icon_1 | image_url }}"
+                {% if block.settings.custom_icon_1.alt == blank %}aria-hidden="true"{% endif %}
+              >
+            {% elsif block.settings.icon_1 != blank %}
+              {% render 'material-icon', icon: block.settings.icon_1, filled: block.settings.filled_icon_1 %}
+            {% endif %}
+            <span class="product__text__text">{{- block.settings.text_1 -}}</span>
+            <svg
+              class="spinner"
+              focusable="false"
+              aria-hidden="true"
+              viewBox="0 0 66 66"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+            </svg>
+          </p>
+        </div>
+        <div
+          class="
+            clickable-discount__btn__text-2
+            product__text-container
+            product__text-container--{{ block.settings.alignment }}
+          "
+          style="
+            {% if block.settings.enable_bg %}
+              background-color:{{ block.settings.bg_color_2 }};
+              padding:{{ block.settings.padding }}px;
+              border-radius:{{ block.settings.corner_radius }}px;
+            {% endif %}
+            --icon-scale:{{ block.settings.icon_scale | divided_by: 100.0 }};
+          "
+        >
+          <p
+            class="product__text product__text-{{ block.settings.alignment }}"
+            style="
+              --text-color:{{ block.settings.text_color_2 }};
+              --icon-color:{{ block.settings.icon_color_2 }};
+            "
+          >
+            {% if block.settings.custom_icon_2 != blank %}
+              <img
+                width="auto"
+                height="auto"
+                loading="lazy"
+                alt="{{ block.settings.custom_icon_2.alt | default: '' }}"
+                src="{{ block.settings.custom_icon_2 | image_url }}"
+                {% if block.settings.custom_icon_2.alt == blank %}aria-hidden="true"{% endif %}
+              >
+            {% elsif block.settings.icon_2 != blank %}
+              {% render 'material-icon', icon: block.settings.icon_2, filled: block.settings.filled_icon_2 %}
+            {% endif %}
+            <span class="product__text__text">{{- block.settings.text_2 -}}</span>
+          </p>
+        </div>
+      </button>
+    </clickable-discount>
+    <p
+      class="clickable-discount__error"
+      role="status"
+      aria-live="polite"
+    >
+      An error has occured. Please try again.
+    </p>
+  {% else %}
+    <h4>Enter a discount code in block settings</h4>
+  {% endif %}
+</div>
+
+{% else %}
+  {% render 'error-msg' %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Clickable discount",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Important notes"
+    },
+    {
+      "type": "paragraph",
+      "content": "Click on the button automatically applies a discount code in the checkout."
+    },
+    {
+      "type": "paragraph",
+      "content": "Shopify only allows ONE discount code to be applied (the one with a largest discout). Use this block only if you don't have any other discount (automatic/code) that will conflict."
+    },
+    {
+      "type": "paragraph",
+      "content": "If you use quantity breaks with automatic discounts, ask your supplier for new SKUs with quantity and use the Variant picker with Quantity breaks style. This will allow you to use this block with quantity breaks."
+    },
+    {
+      "type": "paragraph",
+      "content": "If the customer applied the code and went back to the page, the code will stay applied."
+    },
+    {
+      "type": "header",
+      "content": "Discount code"
+    },
+    {
+      "type": "text",
+      "id": "discount_code",
+      "label": "Discount code"
+    },
+    {
+      "type": "paragraph",
+      "content": "Enter a discount code to see all settings.",
+      "visible_if": "{{ block.settings.discount_code == blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Button settings",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "mobile_text_size",
+      "min": 8,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14,
+      "label": "Mobile text size",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "desktop_text_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 16,
+      "label": "Desktop text size",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "flex-start",
+      "visible_if": "{{ block.settings.discount_code }}"
+    },
+    {
+      "type": "range",
+      "id": "icon_scale",
+      "min": 100,
+      "max": 200,
+      "step": 5,
+      "default": 110,
+      "unit": "%",
+      "label": "Icon scale",
+      "info": "Relative to text size",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_bg",
+      "default": false,
+      "label": "Enable background",
+      "info": "The following settings are applied when this option is enabled.",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "t:settings_schema.global.settings.corner_radius.label",
+      "default": 3,
+      "visible_if": "{{ block.settings.discount_code != blank and block.settings.enable_bg }}"
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "min": 1,
+      "max": 50,
+      "step": 0.5,
+      "label": "Padding",
+      "default": 5,
+      "visible_if": "{{ block.settings.discount_code != blank and block.settings.enable_bg }}"
+    },
+    {
+      "type": "header",
+      "content": "Non-applied content",
+      "info": "Shown before the customer clicks to apply a discount.",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text_1",
+      "default": "<strong>Click to apply a discount</strong>",
+      "label": "Text",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "text_color_1",
+      "default": "#449502",
+      "label": "Text color",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "text",
+      "id": "icon_1",
+      "label": "Icon",
+      "default": "sell",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web).",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "filled_icon_1",
+      "default": true,
+      "label": "Filled icon",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "icon_color_1",
+      "default": "#449502",
+      "label": "Icon color",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_icon_1",
+      "label": "Custom icon",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_1",
+      "label": "Background color",
+      "default": "#F3F3F3",
+      "visible_if": "{{ block.settings.discount_code != blank and block.settings.enable_bg }}"
+    },
+    {
+      "type": "header",
+      "content": "Applied content",
+      "info": "Shown after the discount has been applied",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "text_2",
+      "default": "<strong>A XX% discount will be applied at checkout!</strong>",
+      "label": "Text",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "text_color_2",
+      "default": "#449502",
+      "label": "Text color",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "text",
+      "id": "icon_2",
+      "label": "Icon",
+      "default": "sell",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web).",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "filled_icon_2",
+      "default": true,
+      "label": "Filled icon",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "icon_color_2",
+      "default": "#449502",
+      "label": "Icon color",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_icon_2",
+      "label": "Custom icon",
+      "visible_if": "{{ block.settings.discount_code != blank }}"
+    },
+    {
+      "type": "color",
+      "id": "bg_color_2",
+      "label": "Background color",
+      "default": "#F3F3F3",
+      "info": "Applied if Enable background is checked.",
+      "visible_if": "{{ block.settings.discount_code != blank and block.settings.enable_bg }}"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Clickable discount",
+      "category": "Promotions"
+    }
+  ]
+}
+{% endschema %}

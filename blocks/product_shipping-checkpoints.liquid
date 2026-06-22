@@ -1,0 +1,363 @@
+{% render 'shipping-checkpoints', block: block %}
+
+{% schema %}
+{
+  "name": "Shipping checkpoints",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "header",
+      "content": "How to use"
+    },
+    {
+      "type": "paragraph",
+      "content": "Use [start_date} and {end_date} to automatically display the dates calculated based on the required days needed you enter."
+    },
+    {
+      "type": "header",
+      "content": "Checkpoint #1"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "top_text_1",
+      "label": "#1 Top Text",
+      "default": "<strong>[start_date]</strong>"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "bottom_text_1",
+      "label": "#1 Bottom Text",
+      "default": "Ordered"
+    },
+    {
+      "type": "text",
+      "id": "icon_1",
+      "default": "add_shopping_cart",
+      "label": "#1 Icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web).",
+      "visible_if": "{{ block.settings.top_text_1 != blank or block.settings.bottom_text_1 != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "filled_icon_1",
+      "default": false,
+      "label": "#1 Filled icon",
+      "visible_if": "{{ block.settings.top_text_1 != blank or block.settings.bottom_text_1 != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_1_image",
+      "label": "#1 Custom icon",
+      "visible_if": "{{ block.settings.top_text_1 != blank or block.settings.bottom_text_1 != blank }}"
+    },
+    {
+      "type": "number",
+      "id": "min_days_1",
+      "label": "#1 Minimum required days",
+      "default": 0,
+      "visible_if": "{{ block.settings.top_text_1 != blank or block.settings.bottom_text_1 != blank }}"
+    },
+    {
+      "type": "number",
+      "id": "max_days_1",
+      "label": "#1 Maximum required days",
+      "default": 0,
+      "visible_if": "{{ block.settings.top_text_1 != blank or block.settings.bottom_text_1 != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Checkpoint #2"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "top_text_2",
+      "label": "#2 Top Text",
+      "default": "<strong>[start_date] - [end_date]</strong>"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "bottom_text_2",
+      "label": "#2 Bottom Text",
+      "default": "Order Ready"
+    },
+    {
+      "type": "text",
+      "id": "icon_2",
+      "default": "local_shipping",
+      "label": "#2 Icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web).",
+      "visible_if": "{{ block.settings.top_text_2 != blank or block.settings.bottom_text_2 != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "filled_icon_2",
+      "default": false,
+      "label": "#2 Filled icon",
+      "visible_if": "{{ block.settings.top_text_2 != blank or block.settings.bottom_text_2 != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_2_image",
+      "label": "#2 Custom icon",
+      "visible_if": "{{ block.settings.top_text_2 != blank or block.settings.bottom_text_2 != blank }}"
+    },
+    {
+      "type": "number",
+      "id": "min_days_2",
+      "label": "#2 Minimum required days",
+      "default": 1,
+      "visible_if": "{{ block.settings.top_text_2 != blank or block.settings.bottom_text_2 != blank }}"
+    },
+    {
+      "type": "number",
+      "id": "max_days_2",
+      "label": "#2 Maximum required days",
+      "default": 2,
+      "visible_if": "{{ block.settings.top_text_2 != blank or block.settings.bottom_text_2 != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Checkpoint #3"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "top_text_3",
+      "label": "#3 Top Text",
+      "default": "<strong>[start_date] - [end_date]</strong>"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "bottom_text_3",
+      "label": "#3 Bottom Text",
+      "default": "Delivered"
+    },
+    {
+      "type": "text",
+      "id": "icon_3",
+      "default": "redeem",
+      "label": "#3 Icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web).",
+      "visible_if": "{{ block.settings.top_text_3 != blank or block.settings.bottom_text_3 != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "filled_icon_3",
+      "default": false,
+      "label": "#3 Filled icon",
+      "visible_if": "{{ block.settings.top_text_3 != blank or block.settings.bottom_text_3 != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_3_image",
+      "label": "#3 Custom icon",
+      "visible_if": "{{ block.settings.top_text_3 != blank or block.settings.bottom_text_3 != blank }}"
+    },
+    {
+      "type": "number",
+      "id": "min_days_3",
+      "label": "#3 Minimum required days",
+      "default": 10,
+      "visible_if": "{{ block.settings.top_text_3 != blank or block.settings.bottom_text_3 != blank }}"
+    },
+    {
+      "type": "number",
+      "id": "max_days_3",
+      "label": "#3 Maximum required days",
+      "default": 12,
+      "visible_if": "{{ block.settings.top_text_3 != blank or block.settings.bottom_text_3 != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Checkpoint #4"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "top_text_4",
+      "label": "#4 Top Text"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "bottom_text_4",
+      "label": "#4 Bottom Text"
+    },
+    {
+      "type": "text",
+      "id": "icon_4",
+      "label": "#4 Icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web).",
+      "visible_if": "{{ block.settings.top_text_4 != blank or block.settings.bottom_text_4 != blank }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "filled_icon_4",
+      "default": false,
+      "label": "#4 Filled icon",
+      "visible_if": "{{ block.settings.top_text_4 != blank or block.settings.bottom_text_4 != blank }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_4_image",
+      "label": "#4 Custom icon",
+      "visible_if": "{{ block.settings.top_text_4 != blank or block.settings.bottom_text_4 != blank }}"
+    },
+    {
+      "type": "number",
+      "id": "min_days_4",
+      "label": "#4 Minimum required days",
+      "visible_if": "{{ block.settings.top_text_4 != blank or block.settings.bottom_text_4 != blank }}"
+    },
+    {
+      "type": "number",
+      "id": "max_days_4",
+      "label": "#4 Maximum required days",
+      "visible_if": "{{ block.settings.top_text_4 != blank or block.settings.bottom_text_4 != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Date formating"
+    },
+    {
+      "type": "select",
+      "id": "date_format",
+      "label": "Date format",
+      "options": [
+        {
+          "value": "day_mm_dd",
+          "label": "Monday, February 1st"
+        },
+        {
+          "value": "day_dd_mm",
+          "label": "Monday, 1. February"
+        },
+        {
+          "value": "mm_dd",
+          "label": "February 1st"
+        },
+        {
+          "value": "dd_mm",
+          "label": "1. February"
+        },
+        {
+          "value": "dd_mm_no_dot",
+          "label": "1 February"
+        },
+        {
+          "value": "day_dd_mm_numeric",
+          "label": "Monday, 01. 02."
+        },
+        {
+          "value": "dd_mm_numeric",
+          "label": "01. 02."
+        }
+      ],
+      "default": "mm_dd"
+    },
+    {
+      "type": "text",
+      "id": "days_labels",
+      "label": "Day labels",
+      "default": "Mon, Tue, Wed, Thu, Fri, Sat, Sun"
+    },
+    {
+      "type": "text",
+      "id": "months_labels",
+      "label": "Month labels",
+      "default": "Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
+    },
+    {
+      "type": "text",
+      "id": "days_to_skip",
+      "label": "Week days to skip",
+      "info": "Enter the names of days to skip. If there are multiple days to skip, separate them with commas. Available days to use: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday. Example usage if you want to skip weekends: \"Saturday, Sunday\"."
+    },
+    {
+      "type": "text",
+      "id": "dates_to_skip",
+      "label": "Specific dates to skip",
+      "info": "Enter the exact dates to skip. If there are multiple dates to skip, separate them with commas. The date has to be in this format: MM-DD. Example usage if you want to skip Christmass & New Years: \"12-25, 12-31, 01-01\"."
+    },
+    {
+      "type": "header",
+      "content": "Color"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "inverse",
+      "label": "Bar color scheme"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 21
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 21
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shipping checkpoints",
+      "category": "Shipping information"
+    }
+  ]
+}
+{% endschema %}

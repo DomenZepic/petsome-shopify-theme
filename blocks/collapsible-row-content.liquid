@@ -1,0 +1,219 @@
+{%liquid
+  assign colors = 'theme'
+  if section.settings.enable_custom_style
+    assign colors = 'custom'
+  endif
+%}
+<div
+  id="Accordion-{{ block.id }}"
+  class="product__accordion accordion accordion-v2 accordion-v2--colors-{{ colors }} accordion--{{ section.settings.row_heading_size }} quick-add-hidden"
+  data-border-type="{{ section.settings.border_type }}"
+  style="
+    --border-style: {{ section.settings.border_style }};
+    --border-thickness: {{ section.settings.border_thickness }}px;
+    --solid-collapse-icon-radius: {{ section.settings.collapse_icon_radius | divided_by: 2.0 }}%;
+  "
+  role="region"
+  aria-labelledby="AccordionHeading-{{ block.id }}-{{ section.id }}"
+  {{ block.shopify_attributes }}
+>
+  <details
+    class="accordion__details"
+    {% if block.settings.open %}
+      open
+    {% endif %}
+  >
+    <summary
+      class="accordion__summary"
+      id="AccordionHeading-{{ block.id }}-{{ section.id }}"
+      aria-controls="AccordionContent-{{ block.id }}-{{ section.id }}"
+      aria-expanded="{% if block.settings.open %}true{% else %}false{% endif %}"
+    >
+      <div class="summary__title">
+        {% if block.settings.custom_icon != blank %}
+          <img
+            src="{{ block.settings.custom_icon | image_url }}"
+            {% if block.settings.custom_icon.alt != blank %}
+              alt="{{ block.settings.custom_icon.alt | escape }}"
+            {% else %}
+              role="presentation"
+            {% endif %}
+            height="auto"
+            width="auto"
+            loading="lazy"
+          >
+        {% else %}
+          {% render 'material-icon', icon: block.settings.icon, filled: block.settings.filled_icon %}
+        {% endif %}
+        <h2 class="h4 accordion__title">
+          {{ block.settings.heading | default: block.settings.page.title }}
+        </h2>
+      </div>
+      <div class="accordion__collapse-icon accordion__collapse-icon--{{ section.settings.collapse_icon_style }} flex-shrink-0 flex-center">
+        {% if section.settings.collapse_icon == 'carret' %}
+          {% render 'icon-caret' %}
+        {% else %}
+          {% render 'icon-plus' %}
+        {% endif %}
+      </div>
+    </summary>
+  </details>
+  <div
+    class="accordion__content-wrapper"
+    id="AccordionContent-{{ block.id }}-{{ section.id }}"
+    role="region"
+    aria-labelledby="AccordionHeading-{{ block.id }}-{{ section.id }}"
+  >
+    <div
+      class="accordion__content"
+      id="CollapsibleAccordion-{{ block.id }}-{{ section.id }}"
+      role="region"
+      aria-labelledby="Summary-{{ block.id }}-{{ section.id }}"
+    >
+      <div class="accordion__content__inner rte block-margins">
+        {{ block.settings.row_content }}
+        {{ block.settings.page.content }}
+        {% content_for 'blocks' %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collapsible row",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "custom-liquid"
+    },
+    {
+      "type": "image"
+    },
+    {
+      "type": "divider"
+    },
+    {
+      "type": "button"
+    },
+    {
+      "type": "heading"
+    },
+    {
+      "type": "text"
+    },
+    {
+      "type": "rating-stars"
+    },
+    {
+      "type": "video"
+    },
+    {
+      "type": "slider"
+    },
+    {
+      "type": "container"
+    },
+    {
+      "type": "media-slider"
+    },
+    {
+      "type": "trustpilot-stars"
+    },
+    {
+      "type": "payment-badges"
+    },
+    {
+      "type": "product_urgency"
+    },
+    {
+      "type": "product_emoji-benefits"
+    },
+    {
+      "type": "review-avatars"
+    },
+    {
+      "type": "icon-with-content"
+    },
+    {
+      "type": "text-with-icon"
+    },
+    {
+      "type": "icon-with-text"
+    },
+    {
+      "type": "reviews"
+    },
+    {
+      "type": "product-rating"
+    }
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "open",
+      "label": "Open row by default",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Collapsible row",
+      "label": "Heading"
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "text",
+      "id": "icon",
+      "default": "check_box",
+      "label": "Icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+    },
+    {
+      "type": "checkbox",
+      "id": "filled_icon",
+      "default": false,
+      "label": "Filled icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_icon",
+      "label": "Custom icon"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "paragraph",
+      "content": "To add other types of content, add blocks directly into this Collapsible row block."
+    },
+    {
+      "type": "richtext",
+      "id": "row_content",
+      "label": "Content",
+      "info": "If you are using this block on product page use [description] to automatically display product description."
+    },
+    {
+      "type": "page",
+      "id": "page",
+      "label": "Content from page"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collapsible row"
+    }
+  ]
+}
+{% endschema %}

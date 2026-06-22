@@ -1,0 +1,402 @@
+{% render 'scroll-buttons', block: block %}
+
+{% schema %}
+{
+  "name": "Scroll-to buttons",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "container_heading",
+      "default": "<strong>Jump to..</strong>",
+      "label": "Heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left",
+      "visible_if": "{{ block.settings.container_heading != blank }}"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14,
+      "label": "Heading size",
+      "visible_if": "{{ block.settings.container_heading != blank }}"
+    },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "flex-start",
+      "label": "Alignment"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "default": 12,
+      "label": "Text size"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "default": "#121212",
+      "label": "Text color"
+    },
+    {
+      "type": "range",
+      "id": "icon_scale",
+      "min": 100,
+      "max": 200,
+      "step": 5,
+      "default": 110,
+      "unit": "%",
+      "label": "Icon scale",
+      "info": "Relative to text size"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "default": "#121212",
+      "label": "Icons color"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "label": "Padding",
+      "default": 2.5
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#F3F3F3"
+    },
+    {
+      "type": "range",
+      "id": "border_size",
+      "min": 0,
+      "max": 5,
+      "step": 1,
+      "label": "Border thickness",
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#B7B7B7",
+      "visible_if": "{{ block.settings.border_size > 0 }}"
+    },
+    {
+      "type": "header",
+      "content": "Button #1"
+    },
+    {
+      "type": "text",
+      "id": "btn_1_scroll_id",
+      "label": "ID of the section to scroll to",
+      "info": "Copy the ID of a section but activating the \"Display section ID\" checkbox in section settings."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "btn_1_text",
+      "label": "Text",
+      "default": "Details"
+    },
+    {
+      "type": "text",
+      "id": "btn_1_icon",
+      "default": "info",
+      "label": "Icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+    },
+    {
+      "type": "checkbox",
+      "id": "btn_1_filled_icon",
+      "default": false,
+      "label": "Filled icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "btn_1_custom_icon",
+      "label": "Custom icon"
+    },
+    {
+      "type": "header",
+      "content": "Button #2"
+    },
+    {
+      "type": "text",
+      "id": "btn_2_scroll_id",
+      "label": "ID of the section to scroll to",
+      "info": "Copy the ID of a section but activating the \"Display section ID\" checkbox in section settings."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "btn_2_text",
+      "label": "Text",
+      "default": "Instructions"
+    },
+    {
+      "type": "text",
+      "id": "btn_2_icon",
+      "default": "help",
+      "label": "Icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+    },
+    {
+      "type": "checkbox",
+      "id": "btn_2_filled_icon",
+      "default": false,
+      "label": "Filled icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "btn_2_custom_icon",
+      "label": "Custom icon"
+    },
+    {
+      "type": "header",
+      "content": "Button #3"
+    },
+    {
+      "type": "text",
+      "id": "btn_3_scroll_id",
+      "label": "ID of the section to scroll to",
+      "info": "Copy the ID of a section but activating the \"Display section ID\" checkbox in section settings."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "btn_3_text",
+      "label": "Text",
+      "default": "Reviews"
+    },
+    {
+      "type": "text",
+      "id": "btn_3_icon",
+      "default": "verified",
+      "label": "Icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+    },
+    {
+      "type": "checkbox",
+      "id": "btn_3_filled_icon",
+      "default": false,
+      "label": "Filled icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "btn_3_custom_icon",
+      "label": "Custom icon"
+    },
+    {
+      "type": "header",
+      "content": "Button #4"
+    },
+    {
+      "type": "text",
+      "id": "btn_4_scroll_id",
+      "label": "ID of the section to scroll to",
+      "info": "Copy the ID of a section but activating the \"Display section ID\" checkbox in section settings."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "btn_4_text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "btn_4_icon",
+      "default": "info",
+      "label": "Icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+    },
+    {
+      "type": "checkbox",
+      "id": "btn_4_filled_icon",
+      "default": false,
+      "label": "Filled icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "btn_4_custom_icon",
+      "label": "Custom icon"
+    },
+    {
+      "type": "header",
+      "content": "Button #5"
+    },
+    {
+      "type": "text",
+      "id": "btn_5_scroll_id",
+      "label": "ID of the section to scroll to",
+      "info": "Copy the ID of a section but activating the \"Display section ID\" checkbox in section settings."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "btn_5_text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "btn_5_icon",
+      "default": "info",
+      "label": "Icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+    },
+    {
+      "type": "checkbox",
+      "id": "btn_5_filled_icon",
+      "default": false,
+      "label": "Filled icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "btn_5_custom_icon",
+      "label": "Custom icon"
+    },
+    {
+      "type": "header",
+      "content": "Button #6"
+    },
+    {
+      "type": "text",
+      "id": "btn_6_scroll_id",
+      "label": "ID of the section to scroll to",
+      "info": "Copy the ID of a section but activating the \"Display section ID\" checkbox in section settings."
+    },
+    {
+      "type": "inline_richtext",
+      "id": "btn_6_text",
+      "label": "Text"
+    },
+    {
+      "type": "text",
+      "id": "btn_6_icon",
+      "default": "info",
+      "label": "Icon",
+      "info": "[View all available icons](https:\/\/fonts.google.com\/icons?icon.set=Material+Symbols&icon.platform=web)."
+    },
+    {
+      "type": "checkbox",
+      "id": "btn_6_filled_icon",
+      "default": false,
+      "label": "Filled icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "btn_6_custom_icon",
+      "label": "Custom icon"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Scroll-to buttons",
+      "category": "Buttons"
+    }
+  ]
+}
+{% endschema %}
