@@ -161,6 +161,7 @@
             "product_quantity_gifts_YPryHt": {
               "type": "product_quantity-gifts",
               "name": "Gifts on quantity",
+              "disabled": true,
               "settings": {
                 "border_thickness": 2,
                 "border_style": "solid",
