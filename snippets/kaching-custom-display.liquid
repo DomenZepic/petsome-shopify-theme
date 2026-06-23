@@ -15,6 +15,14 @@
     display: none !important;
   }
 
+  #kaching-custom-display-{{ section.id }}-{{ block.id }} {
+    --kaching-accent: {{ block.settings.accent_color }};
+    --kaching-secondary: {{ block.settings.secondary_color }};
+    --kaching-accent-dark: color-mix(in srgb, var(--kaching-accent) 70%, black);
+    --kaching-secondary-tint: color-mix(in srgb, var(--kaching-secondary) 15%, white);
+    --kaching-accent-tint: color-mix(in srgb, var(--kaching-accent) 20%, white);
+  }
+
   .kaching-custom-display__heading {
     font-weight: 700;
     font-size: 1.6rem;
@@ -56,16 +64,16 @@
   }
 
   .kaching-tile--selected {
-    border-color: #f8aaa7;
+    border-color: var(--kaching-accent);
   }
 
   .kaching-tile[data-badge-style="recommended"] {
-    background: #f8f4ee;
-    border-color: #e8d6c5;
+    background: var(--kaching-secondary-tint);
+    border-color: var(--kaching-secondary);
   }
 
   .kaching-tile[data-badge-style="best"] {
-    border-color: #f8aaa7;
+    border-color: var(--kaching-accent);
   }
 
   .kaching-tile__badge {
@@ -76,12 +84,12 @@
     font-weight: 700;
     padding: 0.2rem 1rem;
     border-radius: 0.6rem;
-    background: #e8d6c5;
+    background: var(--kaching-secondary);
     color: #0e1111;
   }
 
   .kaching-tile[data-badge-style="best"] .kaching-tile__badge {
-    background: linear-gradient(180deg, #f8aaa7 0%, #f47671 100%);
+    background: linear-gradient(180deg, var(--kaching-accent) 0%, var(--kaching-accent-dark) 100%);
     color: #fef6f6;
   }
 
@@ -130,7 +138,7 @@
   .kaching-custom-display__gifts {
     margin-top: 1.6rem;
     background: #ffffff;
-    border: 0.2rem solid #e8d6c5;
+    border: 0.2rem solid var(--kaching-secondary);
     border-radius: 1.2rem;
     overflow: hidden;
   }
@@ -138,7 +146,7 @@
   .kaching-custom-display__gifts-heading {
     margin: 0;
     padding: 0.8rem 1.2rem;
-    background: #e8d6c5;
+    background: var(--kaching-secondary);
     color: #0e1111;
     font-weight: 700;
     font-size: 1.4rem;
@@ -165,7 +173,7 @@
     width: 4rem;
     height: 4rem;
     border-radius: 0.8rem;
-    background-color: rgba(193, 122, 79, 0.2);
+    background-color: var(--kaching-accent-tint);
     background-size: cover;
     background-position: center;
     display: flex;
