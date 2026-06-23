@@ -68,19 +68,24 @@ if (!customElements.get('kaching-custom-display')) {
       });
     }
 
-    readDealBars() {
+    readDealSettings() {
       const productId = this.kachingEl.getAttribute('product-id');
       const settingsEl = document.querySelector(
         `script.kaching-bundles-deal-block-settings[data-product-id="${productId}"]`
       );
-      if (!settingsEl) return [];
+      if (!settingsEl) return null;
       try {
-        const settings = JSON.parse(settingsEl.textContent);
-        this.preselectedDealBarId = settings.preselectedDealBarId || null;
-        return Array.isArray(settings.dealBars) ? settings.dealBars : [];
+        return JSON.parse(settingsEl.textContent);
       } catch (error) {
-        return [];
+        return null;
       }
+    }
+
+    readDealBars() {
+      const settings = this.readDealSettings();
+      if (!settings) return [];
+      this.preselectedDealBarId = settings.preselectedDealBarId || null;
+      return Array.isArray(settings.dealBars) ? settings.dealBars : [];
     }
 
     getSelectedTier() {
@@ -91,27 +96,60 @@ if (!customElements.get('kaching-custom-display')) {
       );
     }
 
+    getSelectedBarPosition() {
+      const tier = this.getSelectedTier();
+      const index = this.dealBars.findIndex((bar) => bar.id === (tier && tier.id));
+      return index === -1 ? 1 : index + 1;
+    }
+
+    resolveGiftDisplay(gift) {
+      if (gift.giftType === 'shipping') {
+        return { title: gift.title, image: null, icon: '🚚' };
+      }
+      if (gift.productGID) {
+        const numericId = gift.productGID.split('/').pop();
+        const productEl = document.querySelector(
+          `script.kaching-bundles-product[data-product-id="${numericId}"]`
+        );
+        if (productEl) {
+          try {
+            const productData = JSON.parse(productEl.textContent);
+            return { title: productData.title, image: productData.image, icon: '🎁' };
+          } catch (error) {
+            // fall through to default below
+          }
+        }
+      }
+      return { title: gift.title === '{{product}}' ? 'Gift' : gift.title, image: null, icon: '🎁' };
+    }
+
     collectGifts() {
-      const sortedTiers = [...this.dealBars].sort((a, b) => a.quantity - b.quantity);
-      const gifts = [];
-      const seenIds = new Set();
+      const settings = this.readDealSettings();
+      this.giftsTitle = null;
+      this.hideLockedGifts = false;
 
-      sortedTiers.forEach((tier) => {
-        const freeGifts = Array.isArray(tier.freeGifts) ? tier.freeGifts : [];
-        freeGifts.forEach((gift) => {
-          const giftId = gift.id || gift.productId || gift.variantId || gift.title;
-          if (giftId == null || seenIds.has(giftId)) return;
-          seenIds.add(giftId);
-          gifts.push({
-            id: giftId,
-            title: gift.title || gift.productTitle || gift.name || 'Gift',
-            image: gift.image || gift.imageUrl || gift.featuredImage || null,
-            requiredQuantity: tier.quantity,
-          });
-        });
+      if (!settings || !settings.progressiveGiftsEnabled || !settings.progressiveGifts) {
+        return [];
+      }
+
+      this.giftsTitle = settings.progressiveGifts.title || null;
+      this.hideLockedGifts = !!settings.progressiveGifts.hideLockedGifts;
+
+      const rawGifts = Array.isArray(settings.progressiveGifts.gifts)
+        ? settings.progressiveGifts.gifts
+        : [];
+
+      return rawGifts.map((gift) => {
+        const display = this.resolveGiftDisplay(gift);
+        return {
+          id: gift.id,
+          title: display.title,
+          image: display.image,
+          icon: display.icon,
+          lockedTitle: gift.lockedTitle,
+          unlockAtBar: gift.unlockAtBar,
+        };
       });
-
-      return gifts;
     }
 
     getSelectedSizeIndex() {
@@ -306,23 +344,31 @@ if (!customElements.get('kaching-custom-display')) {
       }
 
       if (this.giftsWrapper) this.giftsWrapper.hidden = false;
-      const selectedTier = this.getSelectedTier();
-      const selectedQuantity = selectedTier ? selectedTier.quantity : 0;
 
-      this.giftsContainer.innerHTML = this.gifts
+      const headingEl = this.querySelector('.kaching-custom-display__gifts-heading');
+      if (headingEl && this.giftsTitle) {
+        headingEl.textContent = this.giftsTitle;
+      }
+
+      const selectedBarPosition = this.getSelectedBarPosition();
+      const visibleGifts = this.hideLockedGifts
+        ? this.gifts.filter((gift) => selectedBarPosition >= gift.unlockAtBar)
+        : this.gifts;
+
+      this.giftsContainer.innerHTML = visibleGifts
         .map((gift) => {
-          const unlocked = selectedQuantity >= gift.requiredQuantity;
+          const unlocked = selectedBarPosition >= gift.unlockAtBar;
           const image = gift.image
             ? `<span class="kaching-gift__image" style="background-image:url('${gift.image}')"></span>`
-            : '<span class="kaching-gift__image kaching-gift__image--placeholder">🎁</span>';
+            : `<span class="kaching-gift__image kaching-gift__image--placeholder">${gift.icon || '🎁'}</span>`;
           const lockText = unlocked
             ? ''
-            : `<span class="kaching-gift__lock-text">Kupi ${gift.requiredQuantity} in odkleni</span>`;
+            : `<span class="kaching-gift__lock-text">${gift.lockedTitle || 'Locked'}</span>`;
 
           return `
             <div class="kaching-gift${unlocked ? ' kaching-gift--unlocked' : ''}">
               ${image}
-              <span class="kaching-gift__title">${gift.title}</span>
+              ${unlocked ? `<span class="kaching-gift__title">${gift.title}</span>` : ''}
               ${lockText}
             </div>
           `;
