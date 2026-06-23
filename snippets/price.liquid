@@ -116,7 +116,7 @@
   </div>
   {%- if show_badges -%}
     {% capture percentage_saved %}
-      <span class="badge__percentage-saved">{{ compare_at_price | minus: price | times: 100.0 | divided_by: compare_at_price | floor }}</span>%
+      <span class="badge__percentage-saved">{% if compare_at_price > price %}{{ compare_at_price | minus: price | times: 100.0 | divided_by: compare_at_price | floor }}{% else %}0{% endif %}</span>%
     {% endcapture %}
     {% capture money_saved %}
       <span class="badge__money-saved">{{ compare_at_price | minus: price | money_without_trailing_zeros }}</span>
