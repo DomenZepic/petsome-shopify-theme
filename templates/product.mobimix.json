@@ -104,7 +104,7 @@
             "5fcc0428-e768-4cb7-bea3-eb0274198dd1": {
               "type": "product_product-variant-picker-block",
               "settings": {
-                "picker_types": "pills, quantity breaks",
+                "picker_types": "pills",
                 "skip_unavailable": false,
                 "custom_labels": "[name] - [selected]",
                 "labels_size": 15,
