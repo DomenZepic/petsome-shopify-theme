@@ -244,7 +244,12 @@ if (!customElements.get('kaching-custom-display')) {
     }
 
     async refinePricesWithKaching(tilesData) {
+      const readyStart = performance.now();
       await this.waitForKachingReady();
+      console.log('[kaching-debug] ready after ms:', Math.round(performance.now() - readyStart));
+      console.log('[kaching-debug] pricing is function:', typeof this.kachingEl.pricing === 'function');
+      console.log('[kaching-debug] items is function:', typeof this.kachingEl.items === 'function');
+      console.log('[kaching-debug] quantity property:', this.kachingEl.quantity);
       if (typeof this.kachingEl.pricing !== 'function') return;
 
       const originalQuantity = this.kachingEl.quantity;
@@ -254,12 +259,17 @@ if (!customElements.get('kaching-custom-display')) {
         await this.setKachingQuantity(data.tier.quantity);
         try {
           const pricing = await this.kachingEl.pricing();
+          console.log('[kaching-debug] tier', data.tier.quantity, 'pricing() returned:', JSON.stringify(pricing));
+          if (typeof this.kachingEl.items === 'function') {
+            const items = await this.kachingEl.items();
+            console.log('[kaching-debug] tier', data.tier.quantity, 'items() returned:', JSON.stringify(items));
+          }
           if (pricing && pricing.discountedPrice != null && pricing.discountedPrice !== data.price) {
             data.price = pricing.discountedPrice;
             changed = true;
           }
         } catch (error) {
-          // keep the fallback estimate for this tile
+          console.log('[kaching-debug] tier', data.tier.quantity, 'threw:', error);
         }
       }
 
