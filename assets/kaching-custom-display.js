@@ -255,16 +255,23 @@ if (!customElements.get('kaching-custom-display')) {
       return Number.isNaN(value) ? null : value;
     }
 
-    async correctPricesFromRealWidget(tilesData) {
+    async correctPricesFromRealWidget(tilesData, attempt = 1) {
       const kachingBlock = await this.waitForKachingBlock();
       if (!kachingBlock) return;
 
       let changed = false;
+      let anyZero = false;
       tilesData.forEach((data) => {
         const barEl = kachingBlock.querySelector(`[data-deal-bar-id="${data.tier.id}"]`);
         const priceEl = barEl ? barEl.querySelector('.kaching-bundles__bar-price') : null;
         const perItemPrice = priceEl ? this.parseMoneyText(priceEl.textContent) : null;
-        if (perItemPrice == null) return;
+        // Kaching's block can briefly render before it has resolved a
+        // variant/price (shows 0,00 for an instant) - never trust that as
+        // a real correction, keep our fallback estimate until it settles.
+        if (perItemPrice == null || perItemPrice <= 0) {
+          anyZero = true;
+          return;
+        }
 
         const total = perItemPrice * data.tier.quantity;
         if (Math.abs(total - data.price) > 0.005) {
@@ -275,6 +282,13 @@ if (!customElements.get('kaching-custom-display')) {
 
       if (changed) {
         this.renderTiles(tilesData);
+      }
+
+      // It can take a moment for Kaching to resolve the initial variant -
+      // retry a couple of times so the real price settles without needing
+      // the user to touch a size pill first.
+      if (anyZero && attempt < 5) {
+        setTimeout(() => this.correctPricesFromRealWidget(tilesData, attempt + 1), 400);
       }
     }
 
@@ -397,6 +411,10 @@ if (!customElements.get('kaching-custom-display')) {
       this.selectedDealBarId = tier.id;
       this.renderGifts();
 
+      // Only sync the selection into Kaching's own widget so its internal
+      // state (and therefore the real Add to Cart button) reflects the
+      // chosen tier. Adding to cart itself is left entirely to the
+      // visible Add to Cart button - we never submit on the user's behalf.
       const kachingBlock = await this.waitForKachingBlock();
       if (kachingBlock) {
         const radio = kachingBlock.querySelector(
@@ -407,21 +425,11 @@ if (!customElements.get('kaching-custom-display')) {
           radio.dispatchEvent(new Event('input', { bubbles: true }));
           radio.dispatchEvent(new Event('change', { bubbles: true }));
           radio.dispatchEvent(new Event('click', { bubbles: true }));
-          // Give Kaching's own listeners a moment to react before the
-          // page's Add to Cart button reads the (now updated) state.
-          await new Promise((resolve) => setTimeout(resolve, 150));
         } else if (!radio) {
           console.warn('kaching-custom-display: no matching deal-bar radio found for', tier.id);
         }
       } else {
         console.warn('kaching-custom-display: kaching-bundles-block never appeared.');
-      }
-
-      const addToCartButton = document.querySelector(`#ProductSubmitButton-${this.sectionId}`);
-      if (addToCartButton) {
-        addToCartButton.click();
-      } else {
-        console.warn('kaching-custom-display: could not find the Add to Cart button.');
       }
     }
   }
