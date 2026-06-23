@@ -589,12 +589,20 @@
                 "margin_bottom": 0
               },
               "blocks": {}
+            },
+            "kaching_bundles_app_block_1": {
+              "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
+              "settings": {
+                "product": "{{closest.product}}",
+                "manual_deal_block_id": ""
+              }
             }
           },
           "block_order": [
             "title",
             "a6eb81db-40e4-43e0-972f-32db010a4a56",
             "price",
+            "kaching_bundles_app_block_1",
             "5fcc0428-e768-4cb7-bea3-eb0274198dd1",
             "product_quantity_gifts_YPryHt",
             "quantity_selector_4KXChJ",
