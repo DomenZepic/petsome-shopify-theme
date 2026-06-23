@@ -531,6 +531,16 @@
                 "margin_bottom": 0
               },
               "blocks": {}
+            },
+            "progressive_gifts_1": {
+              "type": "product_progressive-gifts",
+              "settings": {
+                "heading": "Free gifts with your order",
+                "margin_top": 15,
+                "margin_bottom": 15
+              },
+              "blocks": {},
+              "block_order": []
             }
           },
           "block_order": [
@@ -538,6 +548,7 @@
             "a6eb81db-40e4-43e0-972f-32db010a4a56",
             "price",
             "5fcc0428-e768-4cb7-bea3-eb0274198dd1",
+            "progressive_gifts_1",
             "quantity_selector_4KXChJ",
             "buy_buttons",
             "e0a0b690-50df-4ca4-acfd-ce2980696cce",

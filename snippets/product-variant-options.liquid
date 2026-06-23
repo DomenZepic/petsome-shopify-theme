@@ -236,12 +236,16 @@
         {%- endif %}
       </option>
     {% when 'quantity-breaks' %}
+      {% liquid
+        assign package_qty = package_quantities[forloop.index0] | strip | times: 1.0
+      %}
       <input
         type="radio"
         id="{{ section.id }}-{{ option.position }}-{{ forloop.index0 }}"
         name="{{ option.name }}{{ custom_name_identifier }}"
         value="{{ value | escape }}"
         form="{{ product_form_id }}"
+        data-package-quantity="{{ package_qty }}"
         {% if option.selected_value == value %}
           checked
         {% endif %}
@@ -266,7 +270,6 @@
         assign price_per_day = ''
 
         if capsules_per_day > 0
-          assign package_qty = package_quantities[forloop.index0] | strip | times: 1.0
           assign total_capsules = capsules_per_package | times: package_qty
           assign days_supply = total_capsules | divided_by: capsules_per_day
           assign months_supply_raw = days_supply | divided_by: 30.0 | round: 4

@@ -1,0 +1,83 @@
+{% render 'progressive-gifts', block: block, section: section %}
+
+{% schema %}
+{
+  "name": "Progressive gifts",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "IMPORTANT NOTES"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add one \"Gift\" block per gift product below. Set its required quantity to match the number on the bottle-count tile that should unlock it (e.g. 1, 2 or 3). Add multiple Gift blocks with the same required quantity to show more than one gift on that tile. No code changes needed to test a new offer — just add/edit/remove Gift blocks here."
+    },
+    {
+      "type": "paragraph",
+      "content": "Gift products are automatically added to and removed from the cart as the customer changes the bottle-count tile. To prevent customers from buying gift products on their own, add \"collection-hidden\" and \"search-hidden\" tags to them in Shopify Admin."
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Free gifts with your order"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "blocks": [
+    {
+      "type": "gift",
+      "name": "Gift",
+      "settings": [
+        {
+          "type": "product",
+          "id": "gift_product",
+          "label": "Gift product"
+        },
+        {
+          "type": "number",
+          "id": "required_quantity",
+          "label": "Required quantity",
+          "info": "Matches the package quantity of the bottle-count tile that should unlock this gift.",
+          "default": 1
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge text (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Progressive gifts",
+      "category": "Product basics"
+    }
+  ]
+}
+{% endschema %}
