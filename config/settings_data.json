@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "animations_type": "mZPg78xoKSofM8fM7hwryk4DaXqI181Jh3sw1HJPDEOlhbPGdF7IXUjdejmYi6gveKW7LpdQl20gQizM/6O0hyMkd7wG1nMjuFtrozjXfmm5IXFvdbsk3OxPGrD+sQkHJoxmoxkNNdriNQ5sf2YK3q1aOFRoDoJvvlGFwC8/40xhJIddwQOtadmTJ3T+t6z4lVDD+bEyJr6Ru4LN+hb2ZUczifRud2lDgtWXLy1H77HVryV0Gy+z12VfOCNb7gBCCjvXXGx95yTfF+E94thfdJOlvOYqP00qjLuRtL/LS2cM61woSWhfrFVeCQeJcPnQEBBuvzjQ6Iu3Sy1DDRh7nscEFBZciUZiClXD+L+c+Z6/wfCucPcmm7hRiiwT3ItFd/KKsgkeVCzL5Bw7RejdUQ==",
@@ -192,6 +201,7 @@
     "cart_upsell_2_desc": "",
     "cart_upsell_2_btn_label": "+ Add",
     "section_animation_type": "none",
+    "_shrine_token_injected": "2026-06-22T17:36:11.025Z",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
@@ -276,7 +286,8 @@
                   "color_scheme": "inverse",
                   "margin_top": 0,
                   "margin_bottom": 15
-                }
+                },
+                "blocks": {}
               },
               "926ea95f-fd8a-43e7-b215-de4f6cbc19f9": {
                 "type": "cart_checkpoints-bar",
@@ -287,7 +298,25 @@
                   "success_message": "Congrats! You've unlocked all promotions!",
                   "labels_mobile_text_size": 10,
                   "labels_desktop_text_size": 12,
+                  "icon_size": 24,
+                  "icon_scale": 60,
+                  "icon_color": "accent-1",
+                  "icon_custom_color": "#dd1d1d",
+                  "icon_bg": "background-1",
+                  "icon_bg_color": "#ececec",
+                  "icon_bg_gradient": "linear-gradient(89deg, rgba(249, 234, 255, 1) 7%, rgba(218, 197, 255, 1) 94%)",
+                  "border_thickness": 2,
+                  "border_style": "solid",
+                  "border_color": "accent-1",
+                  "border_custom_color": "#dd1d1d",
+                  "icon_corner_radius": 100,
+                  "line_height": 7,
+                  "display_stripes": true,
+                  "line_color": "accent-1",
+                  "line_custom_color": "#dd1d1d",
+                  "line_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
                   "enable_goal_1": true,
+                  "goal_1_icon_type": "icon",
                   "goal_1_icon": "local_shipping",
                   "goal_1_icon_filled": false,
                   "goal_1_label": "Free Shipping",
@@ -295,6 +324,7 @@
                   "goal_1_text": "FREE shipping",
                   "goal_1_amount": 40,
                   "enable_goal_2": true,
+                  "goal_2_icon_type": "icon",
                   "goal_2_icon": "sell",
                   "goal_2_icon_filled": false,
                   "goal_2_label": "20% OFF",
@@ -302,6 +332,7 @@
                   "goal_2_text": "a 20% discount",
                   "goal_2_amount": 60,
                   "enable_goal_3": true,
+                  "goal_3_icon_type": "icon",
                   "goal_3_icon": "redeem",
                   "goal_3_icon_filled": false,
                   "goal_3_label": "Free Gift",
@@ -310,7 +341,8 @@
                   "goal_3_amount": 80,
                   "margin_top": 15,
                   "margin_bottom": 15
-                }
+                },
+                "blocks": {}
               },
               "058d6d0a-ba0d-48cb-9432-de85da1e5aef": {
                 "type": "cart_progress-bar",
@@ -321,11 +353,30 @@
                   "sub_auto_complete": false,
                   "progress_message": "Spend [amount] more to get FREE shipping!",
                   "success_message": "Congrats! You get FREE shipping!",
+                  "icon_size": 30,
+                  "icon_type": "icon",
                   "icon": "local_shipping",
                   "icon_filled": false,
+                  "icon_scale": 60,
+                  "icon_color": "accent-1",
+                  "icon_custom_color": "#dd1d1d",
+                  "icon_bg": "background-1",
+                  "icon_bg_color": "#ececec",
+                  "icon_bg_gradient": "linear-gradient(89deg, rgba(249, 234, 255, 1) 7%, rgba(218, 197, 255, 1) 94%)",
+                  "border_thickness": 2,
+                  "border_style": "solid",
+                  "border_color": "accent-1",
+                  "border_custom_color": "#dd1d1d",
+                  "icon_corner_radius": 100,
+                  "line_height": 9,
+                  "display_stripes": true,
+                  "line_color": "accent-1",
+                  "line_custom_color": "#dd1d1d",
+                  "line_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
                   "margin_top": 15,
                   "margin_bottom": 15
-                }
+                },
+                "blocks": {}
               },
               "097b7b4f-c0b8-4073-a06b-e6d49a5aad20": {
                 "type": "cart-drawer_items",
@@ -334,6 +385,8 @@
                   "image_link": false,
                   "title_size": "1.5",
                   "title_link": false,
+                  "bundle_title_suffix": "+ [BUNDLE]",
+                  "bundle_show_images": false,
                   "displayed_variants": "compact",
                   "prices_position": "right",
                   "free_prices_text": "",
@@ -359,7 +412,8 @@
                   "quantity_btns_icon_size": 70,
                   "margin_top": 21,
                   "margin_bottom": 21
-                }
+                },
+                "blocks": {}
               }
             },
             "block_order": [
@@ -382,9 +436,14 @@
                   "placeholder": "Enter discount code",
                   "btn_label": "ADD",
                   "error_msg": "Please enter a discount code!",
+                  "error_not_applicable_msg": "This code isn't valid or doesn't apply to your cart.",
+                  "error_already_applied_msg": "This code is already applied to your order.",
+                  "success_msg": "",
+                  "success_msg_duration": 3000,
                   "margin_top": 15,
                   "margin_bottom": 15
-                }
+                },
+                "blocks": {}
               },
               "4f3e2a5f-006d-40ed-8370-49b15e0e427d": {
                 "type": "cart_subtotals",
@@ -409,7 +468,8 @@
                   "discounts_alignment": "flex-start",
                   "margin_top": 15,
                   "margin_bottom": 15
-                }
+                },
+                "blocks": {}
               },
               "0935e47c-9604-4faa-b47a-d61ca49c0c16": {
                 "type": "cart_checkout-btn",
@@ -422,15 +482,20 @@
                   "icon_spacing": 10,
                   "margin_top": 15,
                   "margin_bottom": 15
-                }
+                },
+                "blocks": {}
               },
               "68fdc0a0-cd7c-40b9-97b3-a76eb7917a47": {
                 "type": "payment-badges",
                 "settings": {
+                  "visibility": "always-display",
                   "enabled_payment_types": "",
+                  "width_desktop": 38,
+                  "width_mobile": 38,
                   "margin_top": 12,
                   "margin_bottom": 12
-                }
+                },
+                "blocks": {}
               }
             },
             "block_order": [
@@ -445,11 +510,32 @@
           "test_mode": false,
           "heading_text": "Cart • [count] items",
           "heading_alignment": "flex-start",
+          "heading_size": 26,
+          "display_count_bubble": false,
+          "count_bubble_position": "after",
+          "count_bubble_size": 24,
+          "count_bubble_bg_color": "#2e2a39",
+          "count_bubble_radius": 100,
+          "count_number_size": 60,
+          "count_number_color": "#ffffff",
+          "count_number_font": "body-bold",
+          "close_btn_offset": 10,
+          "close_btn_size": 30,
+          "close_btn_bg_color": "#ebebeb",
+          "close_btn_x_color": "#2e2a39",
+          "close_btn_x_size": 65,
+          "close_btn_x_thickness": 1.5,
           "desktop_width": "normal",
           "mobile_width": "full",
+          "header_bg_type": "none",
           "header_bg_color": "#f3f3f3",
+          "header_bg_gradient": "linear-gradient(#ffffff, #000000)",
+          "body_bg_type": "none",
           "body_bg_color": "#f3f3f3",
-          "footer_bg_color": "#f3f3f3"
+          "body_bg_gradient": "linear-gradient(#ffffff, #000000)",
+          "footer_bg_type": "none",
+          "footer_bg_color": "#f3f3f3",
+          "footer_bg_gradient": "linear-gradient(#ffffff, #000000)"
         }
       },
       "header": {
@@ -752,7 +838,23 @@
       }
     },
     "content_for_index": [],
-    "_shrine_token_injected": "2026-06-22T17:36:11.025Z"
+    "blocks": {
+      "12007544985113008798": {
+        "type": "shopify://apps/trueroas/blocks/trueroas_embed/019bb66d-cf11-7699-b405-0095159ab71a",
+        "disabled": true,
+        "settings": {}
+      },
+      "17676059084223943535": {
+        "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
+        "disabled": true,
+        "settings": {}
+      },
+      "15557474716127144420": {
+        "type": "shopify://apps/kaching-bundles/blocks/app-embed-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
+        "disabled": false,
+        "settings": {}
+      }
+    }
   },
   "presets": {
     "Default": {
