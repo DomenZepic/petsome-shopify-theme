@@ -234,6 +234,42 @@ if (!customElements.get('kaching-custom-display')) {
 
       this.renderTiles(tilesData);
       this.renderGifts();
+
+      // Show instantly with our own estimate, then silently correct the
+      // price to whatever is actually configured in Kaching once it's
+      // ready - keeps the page fast without showing a stale/wrong price.
+      this.refiningPromise = this.refinePricesWithKaching(tilesData).finally(() => {
+        this.refiningPromise = null;
+      });
+    }
+
+    async refinePricesWithKaching(tilesData) {
+      await this.waitForKachingReady();
+      if (typeof this.kachingEl.pricing !== 'function') return;
+
+      const originalQuantity = this.kachingEl.quantity;
+      let changed = false;
+
+      for (const data of tilesData) {
+        await this.setKachingQuantity(data.tier.quantity);
+        try {
+          const pricing = await this.kachingEl.pricing();
+          if (pricing && pricing.discountedPrice != null && pricing.discountedPrice !== data.price) {
+            data.price = pricing.discountedPrice;
+            changed = true;
+          }
+        } catch (error) {
+          // keep the fallback estimate for this tile
+        }
+      }
+
+      if (originalQuantity != null) {
+        await this.setKachingQuantity(originalQuantity);
+      }
+
+      if (changed) {
+        this.renderTiles(tilesData);
+      }
     }
 
     formatMoney(amount) {
@@ -291,7 +327,7 @@ if (!customElements.get('kaching-custom-display')) {
         tile.addEventListener('click', () => this.handleTileClick(tier));
         this.tilesContainer.appendChild(tile);
 
-        if (tier.id === this.preselectedDealBarId) {
+        if (tier.id === (this.selectedDealBarId || this.preselectedDealBarId)) {
           tile.classList.add('kaching-tile--selected');
         }
       });
@@ -354,6 +390,12 @@ if (!customElements.get('kaching-custom-display')) {
 
       this.selectedDealBarId = tier.id;
       this.renderGifts();
+
+      // Avoid racing the background price-refinement loop, which is also
+      // setting the widget's quantity tier-by-tier in the background.
+      if (this.refiningPromise) {
+        await this.refiningPromise;
+      }
 
       await this.waitForKachingReady();
       await this.setKachingQuantity(tier.quantity);
