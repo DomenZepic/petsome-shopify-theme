@@ -46,7 +46,10 @@ if (!customElements.get('kaching-custom-display')) {
       this.onSizeChange = this.onSizeChange.bind(this);
       this.sizeRadios.forEach((radio) => radio.addEventListener('change', this.onSizeChange));
 
-      this.waitForKachingReady().then(() => this.refresh());
+      // Everything needed to render (dealBars, gifts, variant prices) is
+      // already in the page synchronously - no need to wait on the live
+      // Kaching widget just to paint. It's only touched at add-to-cart time.
+      this.refresh();
     }
 
     disconnectedCallback() {
@@ -54,7 +57,9 @@ if (!customElements.get('kaching-custom-display')) {
     }
 
     waitForKachingReady() {
-      if (typeof this.kachingEl.pricing === 'function') return Promise.resolve();
+      if (typeof this.kachingEl.quantity !== 'undefined' || this.kachingEl.querySelector('form')) {
+        return Promise.resolve();
+      }
       return new Promise((resolve) => {
         let resolved = false;
         const done = () => {
@@ -64,7 +69,9 @@ if (!customElements.get('kaching-custom-display')) {
         };
         document.addEventListener('kaching-bundles-initialized', done, { once: true });
         this.kachingEl.addEventListener('kaching-bundles-initialized', done, { once: true });
-        setTimeout(done, 4000);
+        // Click-time only: a short cap so add-to-cart never hangs even if
+        // the ready signal never fires, instead of blocking the whole page.
+        setTimeout(done, 1200);
       });
     }
 
@@ -186,36 +193,6 @@ if (!customElements.get('kaching-custom-display')) {
       await new Promise((resolve) => setTimeout(resolve, 60));
     }
 
-    async readPricingForTier(tier) {
-      await this.setKachingQuantity(tier.quantity);
-
-      let pricing = null;
-      let valid = true;
-      let validationMessage = null;
-
-      try {
-        if (typeof this.kachingEl.pricing === 'function') {
-          pricing = await this.kachingEl.pricing();
-        }
-      } catch (error) {
-        pricing = null;
-      }
-
-      try {
-        if (typeof this.kachingEl.isItemSelectionValid === 'function') {
-          valid = this.kachingEl.isItemSelectionValid();
-        } else if (typeof this.kachingEl.validateItemSelection === 'function') {
-          const result = await this.kachingEl.validateItemSelection();
-          valid = !!(result && result.valid);
-          validationMessage = result && result.message;
-        }
-      } catch (error) {
-        valid = true;
-      }
-
-      return { pricing, valid, validationMessage };
-    }
-
     computeFallbackPrice(tier, variant) {
       if (!variant) return null;
       const basePrice = Number(variant.price) / 100 || Number(variant.price);
@@ -241,27 +218,19 @@ if (!customElements.get('kaching-custom-display')) {
       return { totalCapsules: Math.round(totalCapsules), daysSupply, monthsSupply };
     }
 
-    async refresh() {
-      this.renderLoading();
+    refresh() {
       const sizeIndex = this.getSelectedSizeIndex();
       const variant = this.getSelectedVariant();
       this.currentImageUrl = variant && variant.featured_image ? variant.featured_image.src : null;
-      const previousQuantity = this.kachingEl.quantity;
+      const available = variant ? variant.available !== false : true;
 
-      const tilesData = [];
-      for (const tier of this.dealBars) {
-        const { pricing, valid, validationMessage } = await this.readPricingForTier(tier);
-        const price = pricing && pricing.discountedPrice != null
-          ? pricing.discountedPrice
-          : this.computeFallbackPrice(tier, variant);
-        const dosage = this.computeDosage(tier, sizeIndex);
-
-        tilesData.push({ tier, price, valid, validationMessage, dosage });
-      }
-
-      if (previousQuantity != null) {
-        await this.setKachingQuantity(previousQuantity);
-      }
+      const tilesData = this.dealBars.map((tier) => ({
+        tier,
+        price: this.computeFallbackPrice(tier, variant),
+        valid: available,
+        validationMessage: available ? null : 'Unavailable',
+        dosage: this.computeDosage(tier, sizeIndex),
+      }));
 
       this.renderTiles(tilesData);
       this.renderGifts();
@@ -276,12 +245,6 @@ if (!customElements.get('kaching-custom-display')) {
         }).format(amount);
       } catch (error) {
         return `${amount.toFixed(2)}`;
-      }
-    }
-
-    renderLoading() {
-      if (!this.tilesContainer.querySelector('.kaching-tile')) {
-        this.tilesContainer.innerHTML = '<p class="kaching-custom-display__loading">…</p>';
       }
     }
 
@@ -392,6 +355,7 @@ if (!customElements.get('kaching-custom-display')) {
       this.selectedDealBarId = tier.id;
       this.renderGifts();
 
+      await this.waitForKachingReady();
       await this.setKachingQuantity(tier.quantity);
 
       const form = this.kachingEl.querySelector('form');
