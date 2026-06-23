@@ -348,7 +348,6 @@
               },
               "058d6d0a-ba0d-48cb-9432-de85da1e5aef": {
                 "type": "cart_progress-bar",
-                "disabled": true,
                 "settings": {
                   "goal_type": "subtotal",
                   "goal": 50,
@@ -416,13 +415,83 @@
                   "margin_bottom": 21
                 },
                 "blocks": {}
+              },
+              "cart_product_upsells_EmHKnm": {
+                "type": "cart_product-upsells",
+                "name": "Product upsells",
+                "settings": {
+                  "position": "body",
+                  "display": "globally",
+                  "display_product_list": [],
+                  "display_subtotal_amount": 50,
+                  "display_page_link": "",
+                  "style": "toggle_switch",
+                  "btn_position": "right",
+                  "toggle_element": "button",
+                  "add_btn_label": "<strong>Add</strong>",
+                  "hide_in_cart_items": true,
+                  "stacking": "row",
+                  "accent_color": "accent-1",
+                  "color_scheme": "background-1",
+                  "product_list": [
+                    "allergymix-starter-pack",
+                    "dentalmix-starter-pack"
+                  ],
+                  "collection": "",
+                  "prdouct_1_preselected": false,
+                  "product_1_desc": "",
+                  "product_1_percentage_discount": "0",
+                  "product_1_fixed_amount_discount": "0",
+                  "prdouct_2_preselected": false,
+                  "product_2_desc": "",
+                  "product_2_percentage_discount": "0",
+                  "product_2_fixed_amount_discount": "0",
+                  "prdouct_3_preselected": false,
+                  "product_3_desc": "",
+                  "product_3_percentage_discount": "0",
+                  "product_3_fixed_amount_discount": "0",
+                  "show_images": true,
+                  "images_size": "5",
+                  "images_corner_radius": 2,
+                  "title_size": "1.4",
+                  "title_link": false,
+                  "desc_size": "1.2",
+                  "price_position": "next_to_title",
+                  "price_size": "1.4",
+                  "hide_compare_price": false,
+                  "show_variant_picker": true,
+                  "update_prices": false,
+                  "skip_unavailable": false,
+                  "container_title": "",
+                  "container_title_position": "outside",
+                  "container_title_mobile_text_size": 20,
+                  "container_title_desktop_text_size": 20,
+                  "corner_radius": 10,
+                  "show_box_shadow": false,
+                  "show_border": false,
+                  "regular_border_color": "#E6E6E6",
+                  "selected_border_color": "#DD1D1D",
+                  "border_width": "0.2",
+                  "show_custom_bg": false,
+                  "regular_bg_color": "#F2F2F2",
+                  "selected_bg_color": "#F2F2F2",
+                  "slider_type": "slide",
+                  "arrows_position": "hidden",
+                  "arrows_color_scheme": "inverse",
+                  "transparent_arrows": true,
+                  "display_dots": true,
+                  "margin_top": 15,
+                  "margin_bottom": 15
+                },
+                "blocks": {}
               }
             },
             "block_order": [
               "6269cf6e-8e24-4068-8e2a-35bb4addad4e",
               "926ea95f-fd8a-43e7-b215-de4f6cbc19f9",
               "058d6d0a-ba0d-48cb-9432-de85da1e5aef",
-              "097b7b4f-c0b8-4073-a06b-e6d49a5aad20"
+              "097b7b4f-c0b8-4073-a06b-e6d49a5aad20",
+              "cart_product_upsells_EmHKnm"
             ]
           },
           "Footer": {
