@@ -126,6 +126,74 @@
     font-size: 1.6rem;
     color: #0e1111;
   }
+
+  .kaching-custom-display__gifts {
+    margin-top: 1.6rem;
+    background: #ffffff;
+    border: 0.2rem solid #e8d6c5;
+    border-radius: 1.2rem;
+    overflow: hidden;
+  }
+
+  .kaching-custom-display__gifts-heading {
+    margin: 0;
+    padding: 0.8rem 1.2rem;
+    background: #e8d6c5;
+    color: #0e1111;
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .kaching-custom-display__gifts-list {
+    display: flex;
+    gap: 1.2rem;
+    padding: 1.2rem;
+  }
+
+  .kaching-gift {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    text-align: center;
+  }
+
+  .kaching-gift__image {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 0.8rem;
+    background-color: rgba(193, 122, 79, 0.2);
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    opacity: 0.5;
+    filter: grayscale(1);
+  }
+
+  .kaching-gift--unlocked .kaching-gift__image {
+    opacity: 1;
+    filter: none;
+  }
+
+  .kaching-gift__title {
+    font-size: 1.3rem;
+    color: #0e1111;
+  }
+
+  .kaching-gift:not(.kaching-gift--unlocked) .kaching-gift__title {
+    color: #a0a0a0;
+  }
+
+  .kaching-gift__lock-text {
+    font-size: 1.1rem;
+    color: #565858;
+  }
 </style>
 
 <div
@@ -148,6 +216,12 @@
     {% endif %}
     <div class="kaching-custom-display__tiles" data-tiles-container>
       <p class="kaching-custom-display__loading">{{ 'accessibility.loading' | t }}</p>
+    </div>
+    <div class="kaching-custom-display__gifts" hidden>
+      {% if block.settings.gifts_heading != blank %}
+        <p class="kaching-custom-display__gifts-heading">{{ block.settings.gifts_heading }}</p>
+      {% endif %}
+      <div class="kaching-custom-display__gifts-list" data-gifts-container></div>
     </div>
   </kaching-custom-display>
 </div>

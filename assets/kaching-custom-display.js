@@ -9,6 +9,10 @@ if (!customElements.get('kaching-custom-display')) {
         .filter((value) => !Number.isNaN(value));
 
       this.tilesContainer = this.querySelector('[data-tiles-container]');
+      this.giftsContainer = this.querySelector('[data-gifts-container]');
+      this.giftsWrapper = this.giftsContainer
+        ? this.giftsContainer.closest('.kaching-custom-display__gifts')
+        : null;
 
       this.kachingEl = document.querySelector('kaching-bundle');
       this.variantRoot = document.querySelector(`#variant-selects-${this.sectionId}`);
@@ -32,6 +36,9 @@ if (!customElements.get('kaching-custom-display')) {
         this.renderError('No Kaching deal configured for this product yet.');
         return;
       }
+
+      this.gifts = this.collectGifts();
+      this.selectedDealBarId = this.preselectedDealBarId;
 
       this.sizeRadios = this.variantRoot
         ? Array.from(this.variantRoot.querySelectorAll('input[type="radio"]'))
@@ -69,10 +76,42 @@ if (!customElements.get('kaching-custom-display')) {
       if (!settingsEl) return [];
       try {
         const settings = JSON.parse(settingsEl.textContent);
+        this.preselectedDealBarId = settings.preselectedDealBarId || null;
         return Array.isArray(settings.dealBars) ? settings.dealBars : [];
       } catch (error) {
         return [];
       }
+    }
+
+    getSelectedTier() {
+      return (
+        this.dealBars.find((tier) => tier.id === this.selectedDealBarId) ||
+        this.dealBars.find((tier) => tier.id === this.preselectedDealBarId) ||
+        this.dealBars[0]
+      );
+    }
+
+    collectGifts() {
+      const sortedTiers = [...this.dealBars].sort((a, b) => a.quantity - b.quantity);
+      const gifts = [];
+      const seenIds = new Set();
+
+      sortedTiers.forEach((tier) => {
+        const freeGifts = Array.isArray(tier.freeGifts) ? tier.freeGifts : [];
+        freeGifts.forEach((gift) => {
+          const giftId = gift.id || gift.productId || gift.variantId || gift.title;
+          if (giftId == null || seenIds.has(giftId)) return;
+          seenIds.add(giftId);
+          gifts.push({
+            id: giftId,
+            title: gift.title || gift.productTitle || gift.name || 'Gift',
+            image: gift.image || gift.imageUrl || gift.featuredImage || null,
+            requiredQuantity: tier.quantity,
+          });
+        });
+      });
+
+      return gifts;
     }
 
     getSelectedSizeIndex() {
@@ -187,6 +226,7 @@ if (!customElements.get('kaching-custom-display')) {
       }
 
       this.renderTiles(tilesData);
+      this.renderGifts();
     }
 
     formatMoney(amount) {
@@ -256,6 +296,40 @@ if (!customElements.get('kaching-custom-display')) {
       });
     }
 
+    renderGifts() {
+      if (!this.giftsContainer) return;
+
+      if (!this.gifts || this.gifts.length === 0) {
+        this.giftsContainer.innerHTML = '';
+        if (this.giftsWrapper) this.giftsWrapper.hidden = true;
+        return;
+      }
+
+      if (this.giftsWrapper) this.giftsWrapper.hidden = false;
+      const selectedTier = this.getSelectedTier();
+      const selectedQuantity = selectedTier ? selectedTier.quantity : 0;
+
+      this.giftsContainer.innerHTML = this.gifts
+        .map((gift) => {
+          const unlocked = selectedQuantity >= gift.requiredQuantity;
+          const image = gift.image
+            ? `<span class="kaching-gift__image" style="background-image:url('${gift.image}')"></span>`
+            : '<span class="kaching-gift__image kaching-gift__image--placeholder">🎁</span>';
+          const lockText = unlocked
+            ? ''
+            : `<span class="kaching-gift__lock-text">Kupi ${gift.requiredQuantity} in odkleni</span>`;
+
+          return `
+            <div class="kaching-gift${unlocked ? ' kaching-gift--unlocked' : ''}">
+              ${image}
+              <span class="kaching-gift__title">${gift.title}</span>
+              ${lockText}
+            </div>
+          `;
+        })
+        .join('');
+    }
+
     badgeStyleFor(badgeText) {
       if (!badgeText) return 'none';
       const normalized = badgeText.toLowerCase();
@@ -268,6 +342,9 @@ if (!customElements.get('kaching-custom-display')) {
       this.querySelectorAll('.kaching-tile').forEach((tile) => {
         tile.classList.toggle('kaching-tile--selected', tile.dataset.dealBarId === tier.id);
       });
+
+      this.selectedDealBarId = tier.id;
+      this.renderGifts();
 
       await this.setKachingQuantity(tier.quantity);
 
