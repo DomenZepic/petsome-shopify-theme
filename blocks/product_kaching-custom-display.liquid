@@ -1,0 +1,72 @@
+{% render 'kaching-custom-display', block: block, section: section %}
+
+{% schema %}
+{
+  "name": "Kaching custom display",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "IMPORTANT NOTES"
+    },
+    {
+      "type": "paragraph",
+      "content": "Replaces Kaching Bundles' own widget UI with our custom tiles, while keeping Kaching's pricing/discount/gift logic. Requires a Kaching Bundles app block to already be present on this page (it gets hidden automatically) and a deal configured for this product."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Choose your package"
+    },
+    {
+      "type": "header",
+      "content": "Dosage / supply math"
+    },
+    {
+      "type": "number",
+      "id": "capsules_per_package",
+      "label": "Capsules per package",
+      "info": "0 disables the dosage/supply captions.",
+      "default": 90
+    },
+    {
+      "type": "text",
+      "id": "capsules_per_day_by_size",
+      "label": "Capsules per day, by size option value",
+      "info": "One number per size option value, comma-separated, in the same order as the size option's values.",
+      "default": "1, 2, 3"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kaching custom display",
+      "category": "Product basics"
+    }
+  ]
+}
+{% endschema %}

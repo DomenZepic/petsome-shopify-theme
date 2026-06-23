@@ -126,33 +126,6 @@
                 "swatches_custom_colors": "disabled",
                 "swatches_custom_colors_list": "#000000, #6D388B, #0000FF, #FFCC00",
                 "full_width_dropdowns": false,
-                "breaks_style": "normal",
-                "breaks_headline": "",
-                "breaks_prices_layout": "price-first-vertical",
-                "breaks_display_selected_indicator": true,
-                "breaks_border_radius": 10,
-                "breaks_border_width": 2,
-                "breaks_color_scheme": "accent-1",
-                "breaks_vertical_items_align": "flex-start",
-                "breaks_badges": "[empty], Priporočeno, Največji prihranek",
-                "breaks_badge_style": "1",
-                "breaks_badge_color": "accent-1",
-                "breaks_displayed_images": "variant_images",
-                "breaks_custom_images": "",
-                "breaks_image_width": 70,
-                "breaks_space_images": true,
-                "breaks_vertical_images_position": "top",
-                "breaks_labels": "[name], [name], [name]",
-                "breaks_benefits": "[empty], [empty], [empty]",
-                "breaks_benefit_position": "top",
-                "breaks_benefit_style": "outlined",
-                "breaks_benefit_color": "accent-1",
-                "breaks_captions": "[months_supply]-mesečna zaloga ([total_capsules] kapsul) · [price_per_day] / dan, [months_supply]-mesečna zaloga ([total_capsules] kapsul) · [price_per_day] / dan, [months_supply]-mesečna zaloga ([total_capsules] kapsul) · [price_per_day] / dan",
-                "breaks_price_texts": "[price], [price], [price]",
-                "breaks_compare_price_texts": "[compare_price], [compare_price], [compare_price]",
-                "breaks_capsules_per_package": 90,
-                "breaks_capsules_per_day_by_size": "1, 2, 3",
-                "breaks_package_quantities": "1, 2, 3",
                 "margin_top": 15,
                 "margin_bottom": 15
               },
@@ -597,6 +570,16 @@
                 "product": "{{closest.product}}",
                 "manual_deal_block_id": ""
               }
+            },
+            "kaching_custom_display_1": {
+              "type": "product_kaching-custom-display",
+              "settings": {
+                "heading": "Izberite svoj paket",
+                "capsules_per_package": 90,
+                "capsules_per_day_by_size": "1, 2, 3",
+                "margin_top": 15,
+                "margin_bottom": 15
+              }
             }
           },
           "block_order": [
@@ -605,6 +588,7 @@
             "price",
             "kaching_bundles_app_block_1",
             "5fcc0428-e768-4cb7-bea3-eb0274198dd1",
+            "kaching_custom_display_1",
             "product_quantity_gifts_YPryHt",
             "quantity_selector_4KXChJ",
             "buy_buttons",

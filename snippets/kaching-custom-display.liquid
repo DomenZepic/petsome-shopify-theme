@@ -1,0 +1,43 @@
+{% comment %}
+  Renders a custom UI driven by an existing Kaching Bundles app block's
+  data/logic on the same page. Hides Kaching's own widget visually but keeps
+  it mounted so its pricing/discount/cart/gift logic keeps working.
+
+  Accepts:
+  - block: {Object} block object (type product_kaching-custom-display).
+  - section: {Object} parent section object.
+
+  Usage:
+  {% render 'kaching-custom-display', block: block, section: section %}
+{% endcomment %}
+<style>
+  kaching-bundle {
+    display: none !important;
+  }
+</style>
+
+<div
+  class="kaching-custom-display-container"
+  style="
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  "
+  {{ block.shopify_attributes }}
+>
+  <kaching-custom-display
+    id="kaching-custom-display-{{ section.id }}-{{ block.id }}"
+    class="kaching-custom-display"
+    data-section="{{ section.id }}"
+    data-capsules-per-package="{{ block.settings.capsules_per_package }}"
+    data-capsules-per-day-by-size="{{ block.settings.capsules_per_day_by_size }}"
+  >
+    {% if block.settings.heading != blank %}
+      <p class="kaching-custom-display__heading">{{ block.settings.heading }}</p>
+    {% endif %}
+    <div class="kaching-custom-display__tiles" data-tiles-container>
+      <p class="kaching-custom-display__loading">{{ 'accessibility.loading' | t }}</p>
+    </div>
+  </kaching-custom-display>
+</div>
+
+<script src="{{ 'kaching-custom-display.js' | asset_url }}" defer="defer"></script>
