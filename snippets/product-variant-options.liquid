@@ -104,23 +104,23 @@
       endif
     endif
 
-    assign currentVariant = null
+    assign current_variant = null
 
     for variant in product.variants
       case option.position
         when 1
           if variant.option1 == value
-            assign currentVariant = variant
+            assign current_variant = variant
             break
           endif
         when 2
           if variant.option1 == product.selected_or_first_available_variant.option1 and variant.option2 == value
-            assign currentVariant = variant
+            assign current_variant = variant
             break
           endif
         when 3
           if variant.option1 == product.selected_or_first_available_variant.option1 and variant.option2 == product.selected_or_first_available_variant.option2 and variant.option3 == value
-            assign currentVariant = variant
+            assign current_variant = variant
             break
           endif
       endcase
@@ -248,8 +248,8 @@
         class="{{ option_class }}{% if option_disabled %} disabled{% endif %}"
       >
       {% liquid
-        assign price = currentVariant.price
-        assign compare_price = currentVariant.compare_at_price
+        assign price = current_variant.price
+        assign compare_price = current_variant.compare_at_price
         assign price_difference = compare_price | minus: price
         assign price_difference_rounded = price_difference | divided_by: 100.00 | round | times: 100
 
@@ -270,9 +270,10 @@
           assign total_capsules = capsules_per_package | times: package_qty
           assign days_supply = total_capsules | divided_by: capsules_per_day
           assign months_supply_raw = days_supply | divided_by: 30.0 | round: 4
+          assign months_supply_rounded = months_supply_raw | round
 
-          if months_supply_raw == months_supply_raw | round
-            assign months_supply = months_supply_raw | round
+          if months_supply_raw == months_supply_rounded
+            assign months_supply = months_supply_rounded
           else
             assign months_supply = months_supply_raw | round: 1 | replace: '.', ','
           endif
@@ -305,7 +306,7 @@
           <div class="quantity-break__image-and-content">
             {% liquid
               if block.settings.breaks_displayed_images == 'variant_images'
-                assign image_url = currentVariant.featured_image | image_url
+                assign image_url = current_variant.featured_image | image_url
               else
                 assign image_url = custom_images[forloop.index0]
               endif
