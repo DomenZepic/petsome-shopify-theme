@@ -160,6 +160,7 @@
             },
             "quantity_selector_4KXChJ": {
               "type": "product_quantity-selector",
+              "disabled": true,
               "settings": {
                 "full_width_classic": false,
                 "enable_quantity_discounts": true,
