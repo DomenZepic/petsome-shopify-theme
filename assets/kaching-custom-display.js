@@ -56,22 +56,29 @@ if (!customElements.get('kaching-custom-display')) {
       this.sizeRadios.forEach((radio) => radio.removeEventListener('change', this.onSizeChange));
     }
 
-    waitForKachingReady() {
-      if (typeof this.kachingEl.quantity !== 'undefined' || this.kachingEl.querySelector('form')) {
-        return Promise.resolve();
-      }
+    // The real rendered widget (verified via devtools) is a child
+    // <kaching-bundles-block> custom element that Kaching inserts inside
+    // our hidden <kaching-bundle> after its own JS runs - it isn't present
+    // at page load. There's no .pricing()/.items()/.quantity JS API on this
+    // build; selection happens via plain <input type="radio"> elements
+    // inside it, one per deal bar (data-deal-bar-id="<tier.id>").
+    waitForKachingBlock() {
+      const existing = document.querySelector('kaching-bundles-block');
+      if (existing) return Promise.resolve(existing);
+
       return new Promise((resolve) => {
-        let resolved = false;
-        const done = () => {
-          if (resolved) return;
-          resolved = true;
-          resolve();
-        };
-        document.addEventListener('kaching-bundles-initialized', done, { once: true });
-        this.kachingEl.addEventListener('kaching-bundles-initialized', done, { once: true });
-        // Click-time only: a short cap so add-to-cart never hangs even if
-        // the ready signal never fires, instead of blocking the whole page.
-        setTimeout(done, 1200);
+        const observer = new MutationObserver(() => {
+          const el = document.querySelector('kaching-bundles-block');
+          if (el) {
+            observer.disconnect();
+            resolve(el);
+          }
+        });
+        observer.observe(document.body, { childList: true, subtree: true });
+        setTimeout(() => {
+          observer.disconnect();
+          resolve(document.querySelector('kaching-bundles-block'));
+        }, 3000);
       });
     }
 
@@ -171,31 +178,23 @@ if (!customElements.get('kaching-custom-display')) {
     }
 
     onSizeChange() {
-      const variant = this.getSelectedVariant();
-      if (variant && this.kachingEl) {
-        this.kachingEl.currentVariantId = variant.id;
-      }
+      // Kaching syncs itself to the native variant picker (confirmed by
+      // disableVariantOptionSync: false in its deal config) - no need to
+      // push the selection into it ourselves.
       this.refresh();
     }
 
-    async setKachingQuantity(quantity) {
-      try {
-        this.kachingEl.quantity = quantity;
-      } catch (error) {
-        // ignore, fall through to manual input fallback below
-      }
-      const quantityInput = this.kachingEl.querySelector('input[name="quantity"]');
-      if (quantityInput) {
-        quantityInput.value = quantity;
-        quantityInput.dispatchEvent(new Event('input', { bubbles: true }));
-        quantityInput.dispatchEvent(new Event('change', { bubbles: true }));
-      }
-      await new Promise((resolve) => setTimeout(resolve, 60));
-    }
-
+    // discountType is "default" (no discount), "percentage" (off the
+    // quantity x base-price total), or "specific" (discountValue IS the
+    // exact final total price for the tier, confirmed against Kaching's
+    // own rendered per-item price: e.g. discountValue 69.8 for a 2x tier
+    // renders as "€34,90" per item, i.e. 69.8 / 2).
     computeFallbackPrice(tier, variant) {
       if (!variant) return null;
       const basePrice = Number(variant.price) / 100 || Number(variant.price);
+      if (tier.discountType === 'specific') {
+        return tier.discountValue;
+      }
       const total = basePrice * tier.quantity;
       if (tier.discountType === 'percentage') {
         return total * (1 - (tier.discountValue || 0) / 100);
@@ -234,52 +233,6 @@ if (!customElements.get('kaching-custom-display')) {
 
       this.renderTiles(tilesData);
       this.renderGifts();
-
-      // Show instantly with our own estimate, then silently correct the
-      // price to whatever is actually configured in Kaching once it's
-      // ready - keeps the page fast without showing a stale/wrong price.
-      this.refiningPromise = this.refinePricesWithKaching(tilesData).finally(() => {
-        this.refiningPromise = null;
-      });
-    }
-
-    async refinePricesWithKaching(tilesData) {
-      const readyStart = performance.now();
-      await this.waitForKachingReady();
-      console.log('[kaching-debug] ready after ms:', Math.round(performance.now() - readyStart));
-      console.log('[kaching-debug] pricing is function:', typeof this.kachingEl.pricing === 'function');
-      console.log('[kaching-debug] items is function:', typeof this.kachingEl.items === 'function');
-      console.log('[kaching-debug] quantity property:', this.kachingEl.quantity);
-      if (typeof this.kachingEl.pricing !== 'function') return;
-
-      const originalQuantity = this.kachingEl.quantity;
-      let changed = false;
-
-      for (const data of tilesData) {
-        await this.setKachingQuantity(data.tier.quantity);
-        try {
-          const pricing = await this.kachingEl.pricing();
-          console.log('[kaching-debug] tier', data.tier.quantity, 'pricing() returned:', JSON.stringify(pricing));
-          if (typeof this.kachingEl.items === 'function') {
-            const items = await this.kachingEl.items();
-            console.log('[kaching-debug] tier', data.tier.quantity, 'items() returned:', JSON.stringify(items));
-          }
-          if (pricing && pricing.discountedPrice != null && pricing.discountedPrice !== data.price) {
-            data.price = pricing.discountedPrice;
-            changed = true;
-          }
-        } catch (error) {
-          console.log('[kaching-debug] tier', data.tier.quantity, 'threw:', error);
-        }
-      }
-
-      if (originalQuantity != null) {
-        await this.setKachingQuantity(originalQuantity);
-      }
-
-      if (changed) {
-        this.renderTiles(tilesData);
-      }
     }
 
     formatMoney(amount) {
@@ -401,32 +354,31 @@ if (!customElements.get('kaching-custom-display')) {
       this.selectedDealBarId = tier.id;
       this.renderGifts();
 
-      // Avoid racing the background price-refinement loop, which is also
-      // setting the widget's quantity tier-by-tier in the background.
-      if (this.refiningPromise) {
-        await this.refiningPromise;
-      }
-
-      await this.waitForKachingReady();
-      await this.setKachingQuantity(tier.quantity);
-
-      const form = this.kachingEl.querySelector('form');
-      if (form) {
-        if (typeof form.requestSubmit === 'function') {
-          form.requestSubmit();
-        } else {
-          form.submit();
+      const kachingBlock = await this.waitForKachingBlock();
+      if (kachingBlock) {
+        const radio = kachingBlock.querySelector(
+          `[data-deal-bar-id="${tier.id}"] input[type="radio"]`
+        );
+        if (radio && !radio.checked) {
+          radio.checked = true;
+          radio.dispatchEvent(new Event('input', { bubbles: true }));
+          radio.dispatchEvent(new Event('change', { bubbles: true }));
+          radio.dispatchEvent(new Event('click', { bubbles: true }));
+          // Give Kaching's own listeners a moment to react before the
+          // page's Add to Cart button reads the (now updated) state.
+          await new Promise((resolve) => setTimeout(resolve, 150));
+        } else if (!radio) {
+          console.warn('kaching-custom-display: no matching deal-bar radio found for', tier.id);
         }
-        return;
+      } else {
+        console.warn('kaching-custom-display: kaching-bundles-block never appeared.');
       }
 
-      const addToCartButton = this.kachingEl.querySelector(
-        'button[type="submit"], input[type="submit"]'
-      );
+      const addToCartButton = document.querySelector(`#ProductSubmitButton-${this.sectionId}`);
       if (addToCartButton) {
         addToCartButton.click();
       } else {
-        console.warn('kaching-custom-display: could not find a way to trigger add-to-cart on the Kaching widget.');
+        console.warn('kaching-custom-display: could not find the Add to Cart button.');
       }
     }
   }
