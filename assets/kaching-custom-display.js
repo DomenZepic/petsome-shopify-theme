@@ -168,6 +168,7 @@ if (!customElements.get('kaching-custom-display')) {
       this.renderLoading();
       const sizeIndex = this.getSelectedSizeIndex();
       const variant = this.getSelectedVariant();
+      this.currentImageUrl = variant && variant.featured_image ? variant.featured_image.src : null;
       const previousQuantity = this.kachingEl.quantity;
 
       const tilesData = [];
@@ -221,6 +222,7 @@ if (!customElements.get('kaching-custom-display')) {
         tile.className = 'kaching-tile';
         tile.disabled = !valid;
         tile.dataset.dealBarId = tier.id;
+        tile.dataset.badgeStyle = this.badgeStyleFor(tier.badgeText);
 
         const badge = tier.badgeText
           ? `<span class="kaching-tile__badge">${tier.badgeText}</span>`
@@ -236,10 +238,13 @@ if (!customElements.get('kaching-custom-display')) {
 
         tile.innerHTML = `
           ${badge}
-          <span class="kaching-tile__title">${tier.title}</span>
-          <span class="kaching-tile__subtitle">${subtitleParts.join(' · ')}</span>
+          <span class="kaching-tile__image" aria-hidden="true"${this.currentImageUrl ? ` style="background-image:url('${this.currentImageUrl}')"` : ''}></span>
+          <span class="kaching-tile__content">
+            <span class="kaching-tile__title">${tier.title}</span>
+            <span class="kaching-tile__subtitle">${subtitleParts.join(' · ')}</span>
+            ${!valid ? `<span class="kaching-tile__unavailable">${validationMessage || 'Unavailable'}</span>` : ''}
+          </span>
           <span class="kaching-tile__price">${this.formatMoney(price)}</span>
-          ${!valid ? `<span class="kaching-tile__unavailable">${validationMessage || 'Unavailable'}</span>` : ''}
         `;
 
         tile.addEventListener('click', () => this.handleTileClick(tier));
@@ -249,6 +254,14 @@ if (!customElements.get('kaching-custom-display')) {
           tile.classList.add('kaching-tile--selected');
         }
       });
+    }
+
+    badgeStyleFor(badgeText) {
+      if (!badgeText) return 'none';
+      const normalized = badgeText.toLowerCase();
+      if (normalized.includes('največji') || normalized.includes('prihranek')) return 'best';
+      if (normalized.includes('priporo') || normalized.includes('popular')) return 'recommended';
+      return 'default';
     }
 
     async handleTileClick(tier) {

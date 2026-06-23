@@ -14,6 +14,118 @@
   kaching-bundle {
     display: none !important;
   }
+
+  .kaching-custom-display__heading {
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin: 0 0 1rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  .kaching-custom-display__tiles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .kaching-custom-display__loading,
+  .kaching-custom-display__error {
+    font-size: 1.4rem;
+    color: rgba(var(--color-foreground), 0.7);
+  }
+
+  .kaching-tile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    width: 100%;
+    text-align: left;
+    background: #ffffff;
+    border: 0.2rem solid #e7e7e7;
+    border-radius: 1.2rem;
+    padding: 1.2rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: border-color 0.15s ease;
+  }
+
+  .kaching-tile:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .kaching-tile--selected {
+    border-color: #f8aaa7;
+  }
+
+  .kaching-tile[data-badge-style="recommended"] {
+    background: #f8f4ee;
+    border-color: #e8d6c5;
+  }
+
+  .kaching-tile[data-badge-style="best"] {
+    border-color: #f8aaa7;
+  }
+
+  .kaching-tile__badge {
+    position: absolute;
+    top: -1.1rem;
+    left: 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 0.2rem 1rem;
+    border-radius: 0.6rem;
+    background: #e8d6c5;
+    color: #0e1111;
+  }
+
+  .kaching-tile[data-badge-style="best"] .kaching-tile__badge {
+    background: linear-gradient(180deg, #f8aaa7 0%, #f47671 100%);
+    color: #fef6f6;
+  }
+
+  .kaching-tile__image {
+    flex-shrink: 0;
+    width: 6rem;
+    height: 6rem;
+    border-radius: 0.8rem;
+    background-color: #f4f4f4;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .kaching-tile__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .kaching-tile__title {
+    font-weight: 700;
+    font-size: 1.7rem;
+    color: #0e1111;
+  }
+
+  .kaching-tile__subtitle {
+    font-size: 1.3rem;
+    color: #565858;
+  }
+
+  .kaching-tile__unavailable {
+    font-size: 1.2rem;
+    color: #c0392b;
+    font-weight: 700;
+  }
+
+  .kaching-tile__price {
+    flex-shrink: 0;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: #0e1111;
+  }
 </style>
 
 <div
