@@ -233,6 +233,49 @@ if (!customElements.get('kaching-custom-display')) {
 
       this.renderTiles(tilesData);
       this.renderGifts();
+
+      // computeFallbackPrice re-implements Kaching's discount math just to
+      // paint instantly - it WILL go stale the next time the deal's
+      // discount type/value changes in Kaching admin. Once Kaching's own
+      // widget has actually rendered, correct the displayed price to
+      // whatever IT shows - that's authoritative and survives any future
+      // change in Kaching, since we're reading its output, not guessing
+      // its formula.
+      this.correctPricesFromRealWidget(tilesData);
+    }
+
+    parseMoneyText(text) {
+      if (!text) return null;
+      const cleaned = text.replace(/[^\d.,-]/g, '').trim();
+      if (!cleaned) return null;
+      const normalized = cleaned.includes(',') && !cleaned.includes('.')
+        ? cleaned.replace(',', '.')
+        : cleaned.replace(/,(?=\d{3}\b)/g, '');
+      const value = parseFloat(normalized);
+      return Number.isNaN(value) ? null : value;
+    }
+
+    async correctPricesFromRealWidget(tilesData) {
+      const kachingBlock = await this.waitForKachingBlock();
+      if (!kachingBlock) return;
+
+      let changed = false;
+      tilesData.forEach((data) => {
+        const barEl = kachingBlock.querySelector(`[data-deal-bar-id="${data.tier.id}"]`);
+        const priceEl = barEl ? barEl.querySelector('.kaching-bundles__bar-price') : null;
+        const perItemPrice = priceEl ? this.parseMoneyText(priceEl.textContent) : null;
+        if (perItemPrice == null) return;
+
+        const total = perItemPrice * data.tier.quantity;
+        if (Math.abs(total - data.price) > 0.005) {
+          data.price = total;
+          changed = true;
+        }
+      });
+
+      if (changed) {
+        this.renderTiles(tilesData);
+      }
     }
 
     formatMoney(amount) {
