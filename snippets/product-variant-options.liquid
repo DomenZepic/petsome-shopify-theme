@@ -247,9 +247,6 @@
         {% endif %}
         class="{{ option_class }}{% if option_disabled %} disabled{% endif %}"
       >
-      <div style="font-size:10px;color:red;background:yellow;">
-        DEBUG cpp={{ capsules_per_package }} | selected_size={{ selected_size }} | size_values={{ size_values | join: '|' }} | cpd={{ capsules_per_day }} | pkgqty={{ package_quantities | join: '|' }}
-      </div>
       {% liquid
         assign price = current_variant.price
         assign compare_price = current_variant.compare_at_price

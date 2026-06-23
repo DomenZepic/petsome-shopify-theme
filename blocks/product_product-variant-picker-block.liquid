@@ -714,7 +714,8 @@
       "type": "number",
       "id": "breaks_capsules_per_package",
       "label": "Capsules per package",
-      "info": "0 or empty disables the dosage/supply tokens below.",
+      "info": "0 disables the dosage/supply tokens below.",
+      "default": 0,
       "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
     },
     {

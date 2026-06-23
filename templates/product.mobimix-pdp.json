@@ -150,6 +150,7 @@
                 "breaks_captions": "[months_supply]-mesečna zaloga ([total_capsules] kapsul) · [price_per_day] / dan, [months_supply]-mesečna zaloga ([total_capsules] kapsul) · [price_per_day] / dan, [months_supply]-mesečna zaloga ([total_capsules] kapsul) · [price_per_day] / dan",
                 "breaks_price_texts": "[price], [price], [price]",
                 "breaks_compare_price_texts": "[compare_price], [compare_price], [compare_price]",
+                "breaks_capsules_per_package": 90,
                 "breaks_capsules_per_day_by_size": "1, 2, 3",
                 "breaks_package_quantities": "1, 2, 3",
                 "margin_top": 15,
