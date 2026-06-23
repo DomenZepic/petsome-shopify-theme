@@ -47,7 +47,7 @@
     "spacing_grid_horizontal": 40,
     "spacing_grid_vertical": 40,
     "link_btn_hover": "arrow",
-    "action_btn_hover": "center",
+    "action_btn_hover": "glow",
     "buttons_border_thickness": 2,
     "buttons_border_opacity": 100,
     "buttons_radius": 6,

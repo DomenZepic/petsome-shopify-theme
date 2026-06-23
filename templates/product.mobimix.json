@@ -101,6 +101,13 @@
               },
               "blocks": {}
             },
+            "kaching_bundles_app_block_1": {
+              "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
+              "settings": {
+                "product": "{{closest.product}}",
+                "manual_deal_block_id": ""
+              }
+            },
             "5fcc0428-e768-4cb7-bea3-eb0274198dd1": {
               "type": "product_product-variant-picker-block",
               "settings": {
@@ -126,6 +133,47 @@
                 "swatches_custom_colors": "disabled",
                 "swatches_custom_colors_list": "#000000, #6D388B, #0000FF, #FFCC00",
                 "full_width_dropdowns": false,
+                "breaks_style": "normal",
+                "breaks_headline": "BUNDLE & SAVE",
+                "breaks_prices_layout": "price-first-vertical",
+                "breaks_display_selected_indicator": true,
+                "breaks_border_radius": 10,
+                "breaks_border_width": 2,
+                "breaks_color_scheme": "accent-1",
+                "breaks_vertical_items_align": "flex-start",
+                "breaks_badges": "[empty], Most popular, [empty]",
+                "breaks_badge_style": "1",
+                "breaks_badge_color": "accent-1",
+                "breaks_displayed_images": "none",
+                "breaks_custom_images": "",
+                "breaks_image_width": 70,
+                "breaks_space_images": true,
+                "breaks_vertical_images_position": "top",
+                "breaks_labels": "[name], [name], [name]",
+                "breaks_benefits": "[empty], Free Shipping, Free Shipping",
+                "breaks_benefit_position": "top",
+                "breaks_benefit_style": "outlined",
+                "breaks_benefit_color": "accent-1",
+                "breaks_captions": "Variant 1 caption, Variant 2 caption, Variant 3 caption",
+                "breaks_price_texts": "[price], [price], [price]",
+                "breaks_compare_price_texts": "[compare_price], [compare_price], [compare_price]",
+                "breaks_capsules_per_package": 0,
+                "breaks_capsules_per_day_by_size": "1, 2, 3",
+                "breaks_package_quantities": "1, 2, 3",
+                "margin_top": 15,
+                "margin_bottom": 15
+              },
+              "blocks": {}
+            },
+            "kaching_custom_display_1": {
+              "type": "product_kaching-custom-display",
+              "settings": {
+                "heading": "Izberite svoj paket",
+                "gifts_heading": "Brezplačna darila ob nakupu",
+                "accent_color": "#f8aaa7",
+                "secondary_color": "#e8d6c5",
+                "capsules_per_package": 90,
+                "capsules_per_day_by_size": "1, 2, 3",
                 "margin_top": 15,
                 "margin_bottom": 15
               },
@@ -142,19 +190,19 @@
                 "locked_background": "stripes",
                 "locked_image_opacity": 0,
                 "locked_image_blur": 3,
-                "unlocked_bg_color": "#FEF8F8",
-                "unlocked_border_color": "#EB7E7E",
+                "unlocked_bg_color": "#fef8f8",
+                "unlocked_border_color": "#eb7e7e",
                 "gift_box_animation": true,
                 "gift_box_color": "accent-1",
-                "gift_box_tie_color": "#FAE787",
+                "gift_box_tie_color": "#fae787",
                 "badge_style": "1",
                 "badge_width": "fit",
                 "badge_radius": 45,
-                "badge_bg_color": "#E74C4C",
-                "badge_text_color": "#FFFFFF",
+                "badge_bg_color": "#e74c4c",
+                "badge_text_color": "#ffffff",
                 "locked_badge_colors": "same",
-                "locked_badge_bg_color": "#2E2E2E",
-                "locked_badge_text_color": "#FFFFFF",
+                "locked_badge_bg_color": "#2e2e2e",
+                "locked_badge_text_color": "#ffffff",
                 "gift_1": "2x-e-knjiga",
                 "gift_1_quantity": 1,
                 "gift_1_badge_text": "",
@@ -563,23 +611,6 @@
                 "margin_bottom": 0
               },
               "blocks": {}
-            },
-            "kaching_bundles_app_block_1": {
-              "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
-              "settings": {
-                "product": "{{closest.product}}",
-                "manual_deal_block_id": ""
-              }
-            },
-            "kaching_custom_display_1": {
-              "type": "product_kaching-custom-display",
-              "settings": {
-                "heading": "Izberite svoj paket",
-                "capsules_per_package": 90,
-                "capsules_per_day_by_size": "1, 2, 3",
-                "margin_top": 15,
-                "margin_bottom": 15
-              }
             }
           },
           "block_order": [
