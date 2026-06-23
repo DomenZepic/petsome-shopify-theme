@@ -147,9 +147,12 @@
                 "breaks_benefit_position": "top",
                 "breaks_benefit_style": "outlined",
                 "breaks_benefit_color": "accent-1",
-                "breaks_captions": "1-mesečna zaloga (90 kapsul) · 0,43 €/dan, 2-mesečna zaloga (180 kapsul) · 0,43 €/dan, 3-mesečna zaloga (270 kapsul) · 0,43 €/dan",
+                "breaks_captions": "[months_supply]-mesečna zaloga ([total_capsules] kapsul) · [price_per_day] / dan, [months_supply]-mesečna zaloga ([total_capsules] kapsul) · [price_per_day] / dan, [months_supply]-mesečna zaloga ([total_capsules] kapsul) · [price_per_day] / dan",
                 "breaks_price_texts": "[price], [price], [price]",
                 "breaks_compare_price_texts": "[compare_price], [compare_price], [compare_price]",
+                "breaks_capsules_per_package": 90,
+                "breaks_capsules_per_day_by_size": "1, 2, 3",
+                "breaks_package_quantities": "1, 2, 3",
                 "margin_top": 15,
                 "margin_bottom": 15
               },

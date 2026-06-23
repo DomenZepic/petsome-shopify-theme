@@ -40,6 +40,23 @@
     if block.settings.breaks_displayed_images == 'custom'
       assign custom_images = block.settings.breaks_custom_images | split: ','
     endif
+
+    assign capsules_per_package = block.settings.breaks_capsules_per_package | times: 1.0
+    assign package_quantities = block.settings.breaks_package_quantities | split: ','
+    assign capsules_per_day = 0
+
+    if capsules_per_package > 0
+      assign size_values = product.options_with_values[0].values
+      assign selected_size = product.selected_or_first_available_variant.option1
+      assign capsules_per_day_arr = block.settings.breaks_capsules_per_day_by_size | split: ','
+
+      for size_value in size_values
+        if size_value == selected_size
+          assign capsules_per_day = capsules_per_day_arr[forloop.index0] | strip | times: 1.0
+          break
+        endif
+      endfor
+    endif
   endif
 -%}
 
@@ -242,6 +259,27 @@
         assign caption = captions[forloop.index0] | replace: '[empty]', '' | strip
         assign price_text = price_texts[forloop.index0] | replace: '[empty]', '' | strip
         assign compare_price_text = compare_price_texts[forloop.index0] | replace: '[empty]', '' | strip
+
+        assign total_capsules = ''
+        assign days_supply = ''
+        assign months_supply = ''
+        assign price_per_day = ''
+
+        if capsules_per_day > 0
+          assign package_qty = package_quantities[forloop.index0] | strip | times: 1.0
+          assign total_capsules = capsules_per_package | times: package_qty
+          assign days_supply = total_capsules | divided_by: capsules_per_day
+          assign months_supply_raw = days_supply | divided_by: 30.0 | round: 4
+
+          if months_supply_raw == months_supply_raw | round
+            assign months_supply = months_supply_raw | round
+          else
+            assign months_supply = months_supply_raw | round: 1 | replace: '.', ','
+          endif
+
+          assign price_per_day = price | times: 1.0 | divided_by: days_supply
+          assign total_capsules = total_capsules | round
+        endif
       %}
       <label
         class="quantity-break{% if badge != blank %} quantity-break--badge{% else %} quantity-break--no-badge{% endif %} quantity-break--badge-style-{{ block.settings.breaks_badge_style }} quantity-break--benefit-{{ block.settings.breaks_benefit_position }}"
@@ -256,7 +294,11 @@
                 price: price,
                 compare_price: compare_price,
                 amount_saved: price_difference,
-                amount_saved_rounded: price_difference_rounded
+                amount_saved_rounded: price_difference_rounded,
+                days_supply: days_supply,
+                months_supply: months_supply,
+                price_per_day: price_per_day,
+                total_capsules: total_capsules
               %}
             </p>
           {% endif %}
@@ -290,7 +332,11 @@
                         price: price,
                         compare_price: compare_price,
                         amount_saved: price_difference,
-                        amount_saved_rounded: price_difference_rounded
+                        amount_saved_rounded: price_difference_rounded,
+                        days_supply: days_supply,
+                        months_supply: months_supply,
+                        price_per_day: price_per_day,
+                        total_capsules: total_capsules
                       %}
                     </span>
                   {% endif %}
@@ -302,7 +348,11 @@
                         price: price,
                         compare_price: compare_price,
                         amount_saved: price_difference,
-                        amount_saved_rounded: price_difference_rounded
+                        amount_saved_rounded: price_difference_rounded,
+                        days_supply: days_supply,
+                        months_supply: months_supply,
+                        price_per_day: price_per_day,
+                        total_capsules: total_capsules
                       %}
                     </span>
                   {% endif %}
@@ -315,7 +365,11 @@
                       price: price,
                       compare_price: compare_price,
                       amount_saved: price_difference,
-                      amount_saved_rounded: price_difference_rounded
+                      amount_saved_rounded: price_difference_rounded,
+                      days_supply: days_supply,
+                      months_supply: months_supply,
+                      price_per_day: price_per_day,
+                      total_capsules: total_capsules
                     %}
                   </span>
                 {% endif %}
@@ -329,7 +383,11 @@
                       price: price,
                       compare_price: compare_price,
                       amount_saved: price_difference,
-                      amount_saved_rounded: price_difference_rounded
+                      amount_saved_rounded: price_difference_rounded,
+                      days_supply: days_supply,
+                      months_supply: months_supply,
+                      price_per_day: price_per_day,
+                      total_capsules: total_capsules
                     %}
                   </span>
                 {% endif %}
@@ -341,7 +399,11 @@
                       price: price,
                       compare_price: compare_price,
                       amount_saved: price_difference,
-                      amount_saved_rounded: price_difference_rounded
+                      amount_saved_rounded: price_difference_rounded,
+                      days_supply: days_supply,
+                      months_supply: months_supply,
+                      price_per_day: price_per_day,
+                      total_capsules: total_capsules
                     %}
                   </span>
                 {%- endif -%}

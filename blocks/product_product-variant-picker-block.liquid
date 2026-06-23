@@ -702,6 +702,39 @@
     },
     {
       "type": "header",
+      "content": "Dosage / supply math (optional)",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "paragraph",
+      "content": "Use this to compute [days_supply], [months_supply], [price_per_day] and [total_capsules] tokens (usable in Captions/Labels/Badges/Benefits above) from the selected size option. Leave Capsules per package empty/0 to disable. Capsules per day and Package quantities must be comma-separated lists in the SAME ORDER as the size option's values and this option's values, respectively.",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "number",
+      "id": "breaks_capsules_per_package",
+      "label": "Capsules per package",
+      "info": "0 or empty disables the dosage/supply tokens below.",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "text",
+      "id": "breaks_capsules_per_day_by_size",
+      "label": "Capsules per day, by size option value",
+      "info": "One number per size option value, comma-separated, in the same order as the size option's values.",
+      "default": "1, 2, 3",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "text",
+      "id": "breaks_package_quantities",
+      "label": "Packages per quantity option value",
+      "info": "One number per quantity option value, comma-separated, in the same order as this option's values.",
+      "default": "1, 2, 3",
+      "visible_if": "{{ block.settings.picker_types contains 'quantity breaks' }}"
+    },
+    {
+      "type": "header",
       "content": "Margins"
     },
     {

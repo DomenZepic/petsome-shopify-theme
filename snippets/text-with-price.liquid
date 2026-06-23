@@ -5,6 +5,7 @@
 {% capture price_each %}{{ price_each | money_without_trailing_zeros }}{% endcapture %}
 {% capture compare_price_each %}{{ compare_price_each | money_without_trailing_zeros }}{% endcapture %}
 {% capture percentage_saved %}{{ percentage_saved }}%{% endcapture %}
+{% capture price_per_day %}{% if price_per_day != blank %}{{ price_per_day | money_without_trailing_zeros }}{% endif %}{% endcapture %}
 
 {{ text
   | replace: '[quantity]', quantity
@@ -17,4 +18,8 @@
   | replace: '[price_each]', price_each
   | replace: '[compare_price_each]', compare_price_each
   | replace: '[percentage_saved]', percentage_saved
+  | replace: '[days_supply]', days_supply
+  | replace: '[months_supply]', months_supply
+  | replace: '[price_per_day]', price_per_day
+  | replace: '[total_capsules]', total_capsules
 }}
