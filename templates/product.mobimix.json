@@ -711,6 +711,54 @@
         "desktop_padding_bottom": 36
       }
     },
+    "petsome_rotating_bullets_1": {
+      "type": "petsome-rotating-bullets",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "text": "Podpira zdravje sklepov"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "text": "Zmanjšuje jutranjo togost"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "text": "Varuje hrustanec pred obrabo"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "text": "Spodbuja gibljivost in aktivnost"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ],
+      "settings": {
+        "speed": 30,
+        "direction": "left",
+        "pause_on_hover": true,
+        "background_color": "#faf9f6",
+        "text_color": "#565858",
+        "text_size": 16,
+        "dot_color": "#F8AAA7",
+        "dot_size": 20,
+        "item_spacing": 32,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "related-products": {
       "type": "related-products",
       "disabled": true,
@@ -1594,54 +1642,6 @@
         "mobile_adaptive_height": false,
         "mobile_dots_position": "under",
         "mobile_arrows_position": "under",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "petsome_rotating_bullets_1": {
-      "type": "petsome-rotating-bullets",
-      "blocks": {
-        "item_1": {
-          "type": "item",
-          "settings": {
-            "text": "Podpira zdravje sklepov"
-          }
-        },
-        "item_2": {
-          "type": "item",
-          "settings": {
-            "text": "Zmanjšuje jutranjo togost"
-          }
-        },
-        "item_3": {
-          "type": "item",
-          "settings": {
-            "text": "Varuje hrustanec pred obrabo"
-          }
-        },
-        "item_4": {
-          "type": "item",
-          "settings": {
-            "text": "Spodbuja gibljivost in aktivnost"
-          }
-        }
-      },
-      "block_order": [
-        "item_1",
-        "item_2",
-        "item_3",
-        "item_4"
-      ],
-      "settings": {
-        "speed": 30,
-        "direction": "left",
-        "pause_on_hover": true,
-        "background_color": "#FAF9F6",
-        "text_color": "#565858",
-        "text_size": 16,
-        "dot_color": "#F8AAA7",
-        "dot_size": 20,
-        "item_spacing": 32,
         "padding_top": 36,
         "padding_bottom": 36
       }
