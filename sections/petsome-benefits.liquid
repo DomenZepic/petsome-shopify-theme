@@ -22,13 +22,13 @@
   #petsome-benefits-{{ section.id }} .petsome-benefits__inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 32px;
+    padding: 0 var(--petsome-padding-x);
   }
 
   #petsome-benefits-{{ section.id }} .petsome-benefits__heading {
     font-family: var(--font-heading-family);
     font-weight: 700;
-    font-size: 3rem;
+    font-size: var(--petsome-heading-size);
     color: rgb(var(--color-foreground));
     text-align: center;
     max-width: 838px;
@@ -46,10 +46,6 @@
   @media screen and (max-width: 749px) {
     #petsome-benefits-{{ section.id }} .petsome-benefits__grid {
       grid-template-columns: 1fr;
-    }
-
-    #petsome-benefits-{{ section.id }} .petsome-benefits__heading {
-      font-size: 2.2rem;
     }
   }
 

@@ -145,6 +145,12 @@
         --font-heading-line-height: {{ settings.heading_line_height | minus: 1.0 }};
         --font-heading-letter-spacing: {{ settings.heading_letter_spacing | divided_by: 10.0 }}rem;
 
+        /* Shared responsive tokens for all custom "petsome-*" sections, so
+           side padding / section heading size stay consistent everywhere
+           without each section redefining its own breakpoints. */
+        --petsome-padding-x: 16px;
+        --petsome-heading-size: 24px;
+
         --color-base-text: {{ settings.colors_text.red }}, {{ settings.colors_text.green }}, {{ settings.colors_text.blue }};
         --color-shadow: {{ settings.colors_text.red }}, {{ settings.colors_text.green }}, {{ settings.colors_text.blue }};
         --color-base-background-1: {{ settings.colors_background_1.red }}, {{ settings.colors_background_1.green }}, {{ settings.colors_background_1.blue }};
@@ -316,6 +322,19 @@
         --variant-pills-shadow-horizontal-offset: {{ settings.variant_pills_shadow_horizontal_offset }}px;
         --variant-pills-shadow-vertical-offset: {{ settings.variant_pills_shadow_vertical_offset }}px;
         --variant-pills-shadow-blur-radius: {{ settings.variant_pills_shadow_blur }}px;
+      }
+
+      @media screen and (min-width: 750px) {
+        :root {
+          --petsome-padding-x: 24px;
+        }
+      }
+
+      @media screen and (min-width: 990px) {
+        :root {
+          --petsome-padding-x: 32px;
+          --petsome-heading-size: 30px;
+        }
       }
 
       *,
