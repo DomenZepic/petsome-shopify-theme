@@ -1,0 +1,236 @@
+{% comment %}
+  Petsome: Rotating bullets - an infinitely, seamlessly looping horizontal
+  strip of short bullet-point text items, separated by a colored dot
+  (solid or gradient). Generic/reusable across any product.
+{% endcomment %}
+{%- style -%}
+  #petsome-rotating-bullets-{{ section.id }} {
+    --prb-bg: {{ section.settings.background_color }};
+    --prb-text: {{ section.settings.text_color }};
+    --prb-text-size: {{ section.settings.text_size }}px;
+    --prb-dot: {{ section.settings.dot_color }};
+    --prb-dot-size: {{ section.settings.dot_size }}px;
+    --prb-gap: {{ section.settings.item_spacing }}px;
+    --prb-speed: {{ section.settings.speed }}s;
+    --prb-direction: {% if section.settings.direction == 'right' %}reverse{% else %}normal{% endif %};
+    background-color: var(--prb-bg);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-rotating-bullets-{{ section.id }} .petsome-rotating-bullets__viewport {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  #petsome-rotating-bullets-{{ section.id }} .petsome-rotating-bullets__track {
+    display: flex;
+    width: max-content;
+    animation: petsome-rotating-bullets-scroll var(--prb-speed) linear infinite;
+    animation-direction: var(--prb-direction);
+  }
+
+  {% if section.settings.pause_on_hover %}
+    #petsome-rotating-bullets-{{ section.id }} .petsome-rotating-bullets__track:hover {
+      animation-play-state: paused;
+    }
+  {% endif %}
+
+  #petsome-rotating-bullets-{{ section.id }} .petsome-rotating-bullets__set {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  #petsome-rotating-bullets-{{ section.id }} .petsome-rotating-bullets__item {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: var(--prb-text-size);
+    color: var(--prb-text);
+    white-space: nowrap;
+    margin-right: var(--prb-gap);
+  }
+
+  #petsome-rotating-bullets-{{ section.id }} .petsome-rotating-bullets__dot {
+    display: inline-block;
+    width: var(--prb-dot-size);
+    height: var(--prb-dot-size);
+    border-radius: 50%;
+    background: var(--prb-dot);
+    margin-right: var(--prb-gap);
+    flex-shrink: 0;
+  }
+
+  @keyframes petsome-rotating-bullets-scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #petsome-rotating-bullets-{{ section.id }} .petsome-rotating-bullets__track {
+      animation: none;
+    }
+  }
+{%- endstyle -%}
+
+{%- if section.blocks.size > 0 -%}
+  <div id="petsome-rotating-bullets-{{ section.id }}" class="petsome-rotating-bullets">
+    <div class="petsome-rotating-bullets__viewport">
+      <div class="petsome-rotating-bullets__track">
+        {%- for i in (1..2) -%}
+          <div class="petsome-rotating-bullets__set" aria-hidden="{% if i == 2 %}true{% else %}false{% endif %}">
+            {%- for block in section.blocks -%}
+              <span class="petsome-rotating-bullets__item" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+              <span class="petsome-rotating-bullets__dot" aria-hidden="true"></span>
+            {%- endfor -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Petsome: Rotating bullets",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "label": "Animation duration (seconds per loop)",
+      "min": 10,
+      "max": 120,
+      "step": 5,
+      "unit": "s",
+      "default": 30
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Direction",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FAF9F6"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#565858"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color_background",
+      "id": "dot_color",
+      "label": "Separator dot color",
+      "default": "#F8AAA7"
+    },
+    {
+      "type": "range",
+      "id": "dot_size",
+      "label": "Separator dot size",
+      "min": 6,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "item_spacing",
+      "label": "Spacing between items",
+      "min": 8,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Bullet point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Bullet point text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Rotating bullets",
+      "blocks": [
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" },
+        { "type": "item" }
+      ]
+    }
+  ]
+}
+{% endschema %}
