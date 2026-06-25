@@ -1645,11 +1645,67 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "petsome_benefits_1": {
+      "type": "petsome-benefits",
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "icon": "pets",
+            "filled_icon": false,
+            "title": "Manj bolečin že po 2–3 tednih",
+            "text": "<p>Sestavine MobiMixa začnejo delovati takoj. Večina lastnikov opaži, da pes zjutraj vstane lažje in da je v gibanju manj previdnosti. Ne zato, ker bi bila bolečina zakrita, ampak ker se vnetje umirja in hrustanec dobiva podporo, ki jo potrebuje.</p>"
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "icon": "directions_run",
+            "filled_icon": false,
+            "title": "Lahkotnejše gibanje dan za dnem",
+            "text": "<p>Kapsulo preprosto dodaš k dnevnemu obroku. Ni posebnih postopkov, ni kompromisov. Samo dosledna, dnevna podpora, ki sčasoma prinese razliko, ki jo opazite vsak dan.</p>"
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "icon": "bolt",
+            "filled_icon": true,
+            "title": "Več energije za sprehode in igranje",
+            "text": "<p>Ko se vnetje umiri, se vrne igrivost. Lastniki poročajo: pes spet pohiti do vrat, spet zahteva sprehod, spet povleče povodec. Ta trenutek je vreden vsega.</p>"
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "shield",
+            "filled_icon": true,
+            "title": "Dolgoročna zaščita sklepov",
+            "text": "<p>MobiMix je zasnovan za dolgotrajno uporabo. Idealen za pse nad 5 let, velike pasme in aktivne pse, ki sklepe obremenjujejo vsak dan. Hrustanca, ki ga ni, ne moremo obnoviti, tistega, ki je še tam, pa lahko zaščitimo.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4"
+      ],
+      "settings": {
+        "heading": "<p>Iz ljubezni do naših ljubljenčkov smo razvili celostno formulo za zdrave sklepe in lahkotno gibanje psov.</p>",
+        "columns": "2",
+        "accent_color": "#F8AAA7",
+        "secondary_color": "#E8D6C5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
     "main",
     "petsome_rotating_bullets_1",
+    "petsome_benefits_1",
     "related-products",
     "custom_columns_new_dBCjfR",
     "eba88da5-80ac-47fc-aa75-997cfe7b2e59",

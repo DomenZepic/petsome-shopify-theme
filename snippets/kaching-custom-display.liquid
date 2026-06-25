@@ -10,14 +10,18 @@
   Usage:
   {% render 'kaching-custom-display', block: block, section: section %}
 {% endcomment %}
+{%- liquid
+  assign accent_color = product.metafields.custom.product_accent_color.value | default: block.settings.accent_color
+  assign secondary_color = product.metafields.custom.product_secondary_color.value | default: block.settings.secondary_color
+-%}
 <style>
   kaching-bundle {
     display: none !important;
   }
 
   #kaching-custom-display-{{ section.id }}-{{ block.id }} {
-    --kaching-accent: {{ block.settings.accent_color }};
-    --kaching-secondary: {{ block.settings.secondary_color }};
+    --kaching-accent: {{ accent_color }};
+    --kaching-secondary: {{ secondary_color }};
     --kaching-accent-dark: color-mix(in srgb, var(--kaching-accent) 70%, black);
     --kaching-secondary-tint: color-mix(in srgb, var(--kaching-secondary) 15%, white);
     --kaching-accent-tint: color-mix(in srgb, var(--kaching-accent) 20%, white);

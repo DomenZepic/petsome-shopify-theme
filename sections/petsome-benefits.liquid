@@ -1,0 +1,289 @@
+{% comment %}
+  Petsome: Benefits - a heading + a grid of "benefit" cards (image, icon,
+  title, description). Accent/secondary colors default to the product's
+  "Product accent color" / "Product secondary color" metafields when set,
+  falling back to this section's own color settings otherwise. Generic/
+  reusable across any product.
+{% endcomment %}
+{%- liquid
+  assign accent_color = product.metafields.custom.product_accent_color.value | default: section.settings.accent_color
+  assign secondary_color = product.metafields.custom.product_secondary_color.value | default: section.settings.secondary_color
+-%}
+<style>
+  #petsome-benefits-{{ section.id }} {
+    --pb-accent: {{ accent_color }};
+    --pb-secondary: {{ secondary_color }};
+    --pb-accent-tint: color-mix(in srgb, var(--pb-accent) 20%, white);
+    --pb-secondary-tint: color-mix(in srgb, var(--pb-secondary) 20%, white);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-benefits-{{ section.id }} .petsome-benefits__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  #petsome-benefits-{{ section.id }} .petsome-benefits__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 3rem;
+    color: rgb(var(--color-foreground));
+    text-align: center;
+    max-width: 838px;
+    margin: 0 auto 24px;
+  }
+
+  #petsome-benefits-{{ section.id }} .petsome-benefits__grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
+    gap: 12px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-benefits-{{ section.id }} .petsome-benefits__grid {
+      grid-template-columns: 1fr;
+    }
+
+    #petsome-benefits-{{ section.id }} .petsome-benefits__heading {
+      font-size: 2.2rem;
+    }
+  }
+
+  #petsome-benefits-{{ section.id }} .petsome-benefit {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid var(--pb-secondary);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  #petsome-benefits-{{ section.id }} .petsome-benefit__image {
+    flex-shrink: 0;
+    width: 80px;
+    object-fit: cover;
+  }
+
+  #petsome-benefits-{{ section.id }} .petsome-benefit__image-placeholder {
+    flex-shrink: 0;
+    width: 80px;
+    background-color: var(--pb-secondary-tint);
+  }
+
+  #petsome-benefits-{{ section.id }} .petsome-benefit__content {
+    flex: 1;
+    min-width: 0;
+    background-color: color-mix(in srgb, var(--pb-secondary) 20%, white);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  #petsome-benefits-{{ section.id }} .petsome-benefit__icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--pb-accent);
+    background-color: var(--pb-accent-tint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
+  #petsome-benefits-{{ section.id }} .petsome-benefit__icon img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+  }
+
+  #petsome-benefits-{{ section.id }} .petsome-benefit__icon .material-icon {
+    font-size: 25px;
+    color: var(--pb-accent);
+  }
+
+  #petsome-benefits-{{ section.id }} .petsome-benefit__title {
+    font-weight: 700;
+    font-size: 2rem;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-benefits-{{ section.id }} .petsome-benefit__text {
+    font-size: 1.4rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+</style>
+
+{%- if section.blocks.size > 0 -%}
+  <div id="petsome-benefits-{{ section.id }}" class="petsome-benefits">
+    <div class="petsome-benefits__inner">
+      {%- if section.settings.heading != blank -%}
+        <div class="petsome-benefits__heading">{{ section.settings.heading }}</div>
+      {%- endif -%}
+      <div class="petsome-benefits__grid">
+        {%- for block in section.blocks -%}
+          <div class="petsome-benefit" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <img
+                class="petsome-benefit__image"
+                src="{{ block.settings.image | image_url: width: 160 }}"
+                alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+                width="80"
+                height="auto"
+                loading="lazy"
+              >
+            {%- else -%}
+              <div class="petsome-benefit__image-placeholder"></div>
+            {%- endif -%}
+            <div class="petsome-benefit__content">
+              <span class="petsome-benefit__icon">
+                {%- if block.settings.custom_icon != blank -%}
+                  <img src="{{ block.settings.custom_icon | image_url: width: 50 }}" alt="">
+                {%- else -%}
+                  {% render 'material-icon', icon: block.settings.icon, filled: block.settings.filled_icon %}
+                {%- endif -%}
+              </span>
+              <p class="petsome-benefit__title">{{ block.settings.title }}</p>
+              <div class="petsome-benefit__text">{{ block.settings.text }}</div>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Petsome: Benefits",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Why pet owners love this product</p>"
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns (desktop)",
+      "options": [
+        { "value": "1", "label": "1" },
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "2"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "If the product has a \"Product accent color\" / \"Product secondary color\" metafield set, that value is used instead of the colors below - these only apply as a fallback when the metafield is blank."
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color (fallback)",
+      "info": "Used for the icon circle border/background and accents.",
+      "default": "#F8AAA7"
+    },
+    {
+      "type": "color",
+      "id": "secondary_color",
+      "label": "Secondary color (fallback)",
+      "info": "Used for the card border and content background tint.",
+      "default": "#E8D6C5"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon",
+          "default": "check_circle",
+          "info": "[View all available icons](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.platform=web). Ignored if a custom icon image is set below."
+        },
+        {
+          "type": "checkbox",
+          "id": "filled_icon",
+          "label": "Filled icon",
+          "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_icon",
+          "label": "Custom icon (optional)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Benefit title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description",
+          "default": "<p>Describe this benefit.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Benefits",
+      "blocks": [
+        { "type": "benefit" },
+        { "type": "benefit" },
+        { "type": "benefit" },
+        { "type": "benefit" }
+      ]
+    }
+  ]
+}
+{% endschema %}
