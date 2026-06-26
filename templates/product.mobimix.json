@@ -1182,6 +1182,54 @@
         "padding_bottom": 80
       }
     },
+    "petsome_how_to_use_1": {
+      "type": "petsome-how-to-use",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "title": "1. Korak",
+            "description": "Odmeri kapsule glede na težo psa"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "title": "2. Korak",
+            "description": "Odpri ali dodaj celo kapsulo na obrok."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "title": "3. Korak",
+            "description": "Zmešaj z obrokom."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "title": "4. Korak",
+            "description": "Ponavljaj vsak dan in opazuj razliko."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "settings": {
+        "heading": "<p>Ena rutina. Vsak dan. To je vse.</p>",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
     "related-products": {
       "type": "related-products",
       "disabled": true,
@@ -1254,6 +1302,7 @@
     "petsome_mechanism_1",
     "petsome_before_after_1",
     "petsome_certificates_1",
+    "petsome_how_to_use_1",
     "related-products"
   ]
 }

@@ -1,0 +1,209 @@
+{% comment %}
+  Petsome: How to use - a heading above repeatable numbered "step"
+  blocks (square image, step title, description). 4 columns on
+  desktop, 2x2 grid on mobile (12px column gap / 24px row gap).
+  Generic/reusable across any product - step count, images and copy
+  are all editable, not hardcoded.
+{% endcomment %}
+<style>
+  #petsome-how-to-use-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-how-to-use-{{ section.id }} p {
+    margin: 0;
+  }
+
+  #petsome-how-to-use-{{ section.id }} .petsome-how-to-use__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  #petsome-how-to-use-{{ section.id }} .petsome-how-to-use__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: var(--petsome-heading-size);
+    color: rgb(var(--color-foreground));
+    text-align: center;
+    margin: 0;
+  }
+
+  #petsome-how-to-use-{{ section.id }} .petsome-how-to-use__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-how-to-use-{{ section.id }} .petsome-how-to-use__grid {
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 12px;
+      row-gap: 24px;
+    }
+  }
+
+  #petsome-how-to-use-{{ section.id }} .petsome-how-to-use-step {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  #petsome-how-to-use-{{ section.id }} .petsome-how-to-use-step__image-wrapper {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: color-mix(in srgb, rgb(var(--color-foreground)) 8%, white);
+  }
+
+  #petsome-how-to-use-{{ section.id }} .petsome-how-to-use-step__image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #petsome-how-to-use-{{ section.id }} .petsome-how-to-use-step__text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  #petsome-how-to-use-{{ section.id }} .petsome-how-to-use-step__title {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 2.4rem;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-how-to-use-{{ section.id }} .petsome-how-to-use-step__title {
+      font-size: 2rem;
+    }
+  }
+
+  #petsome-how-to-use-{{ section.id }} .petsome-how-to-use-step__description {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+</style>
+
+{%- if section.blocks.size > 0 -%}
+  <div id="petsome-how-to-use-{{ section.id }}" class="petsome-how-to-use">
+    <div class="petsome-how-to-use__inner">
+      {%- if section.settings.heading != blank -%}
+        <div class="petsome-how-to-use__heading">{{ section.settings.heading }}</div>
+      {%- endif -%}
+
+      <div class="petsome-how-to-use__grid">
+        {%- for block in section.blocks -%}
+          <div class="petsome-how-to-use-step" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <div class="petsome-how-to-use-step__image-wrapper">
+                <img
+                  src="{{ block.settings.image | image_url: width: 500 }}"
+                  alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                  loading="lazy"
+                >
+              </div>
+            {%- endif -%}
+            <div class="petsome-how-to-use-step__text">
+              {%- if block.settings.title != blank -%}
+                <p class="petsome-how-to-use-step__title">{{ block.settings.title }}</p>
+              {%- endif -%}
+              {%- if block.settings.description != blank -%}
+                <p class="petsome-how-to-use-step__description">{{ block.settings.description }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Petsome: How to use",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>One routine. Every day. That's it.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step title",
+          "default": "1. Step"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Describe this step."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: How to use",
+      "blocks": [
+        { "type": "step" },
+        { "type": "step" },
+        { "type": "step" },
+        { "type": "step" }
+      ]
+    }
+  ]
+}
+{% endschema %}
