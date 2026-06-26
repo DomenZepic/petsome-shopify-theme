@@ -1761,6 +1761,75 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "petsome_checklist_1": {
+      "type": "petsome-checklist",
+      "blocks": {
+        "bullet_1": {
+          "type": "bullet",
+          "settings": {
+            "text": "🐕 ima več energije čez dan in ni več hitro utrujen"
+          }
+        },
+        "bullet_2": {
+          "type": "bullet",
+          "settings": {
+            "text": "🦴 se giblje bolj sproščeno, brez okorelosti po počitku"
+          }
+        },
+        "bullet_3": {
+          "type": "bullet",
+          "settings": {
+            "text": "🚶‍♂️ z veseljem hodi na sprehode in ne zaostaja več"
+          }
+        },
+        "bullet_4": {
+          "type": "bullet",
+          "settings": {
+            "text": "🐾 spet skače, teče in se igra brez zadržkov"
+          }
+        },
+        "bullet_5": {
+          "type": "bullet",
+          "settings": {
+            "text": "❤️ se počuti bolje v svojem telesu, tudi v zrelih letih"
+          }
+        },
+        "bullet_6": {
+          "type": "bullet",
+          "settings": {
+            "text": "🔁 ohrani zdrave sklepe dolgoročno, ne samo kratkoročno"
+          }
+        },
+        "bullet_7": {
+          "type": "bullet",
+          "settings": {
+            "text": "🛡 ima ves čas podporo sklepom tudi če je večje pasme ali zelo aktiven"
+          }
+        },
+        "bullet_8": {
+          "type": "bullet",
+          "settings": {
+            "text": "😊 uživa v vsakodnevnem gibanju, brez bolečine in nelagodja"
+          }
+        }
+      },
+      "block_order": [
+        "bullet_1",
+        "bullet_2",
+        "bullet_3",
+        "bullet_4",
+        "bullet_5",
+        "bullet_6",
+        "bullet_7",
+        "bullet_8"
+      ],
+      "settings": {
+        "heading": "<p>MobiMix je prava izbira za vašega psa, če želite, da:</p>",
+        "secondary_color": "#E8D6C5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
@@ -1768,6 +1837,7 @@
     "petsome_rotating_bullets_1",
     "petsome_benefits_1",
     "petsome_timeframe_1",
+    "petsome_checklist_1",
     "related-products",
     "custom_columns_new_dBCjfR",
     "eba88da5-80ac-47fc-aa75-997cfe7b2e59",

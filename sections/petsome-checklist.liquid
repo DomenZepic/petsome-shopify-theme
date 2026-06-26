@@ -1,0 +1,200 @@
+{% comment %}
+  Petsome: Checklist - a heading + a manually-entered list of bullet
+  items on the left, and a single image on the right (stacks below the
+  text on mobile). Background/border use the product's "Product
+  secondary color" metafield when set, falling back to this section's
+  own color setting otherwise. Generic/reusable across any product.
+{% endcomment %}
+{%- liquid
+  assign secondary_color = product.metafields.custom.product_secondary_color.value | default: section.settings.secondary_color
+-%}
+<style>
+  #petsome-checklist-{{ section.id }} {
+    --pc-secondary: {{ secondary_color }};
+    background-color: color-mix(in srgb, var(--pc-secondary) 20%, white);
+    border-top: 1px solid var(--pc-secondary);
+    border-bottom: 1px solid var(--pc-secondary);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-checklist-{{ section.id }} .petsome-checklist__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+    display: flex;
+    align-items: center;
+    gap: 64px;
+  }
+
+  #petsome-checklist-{{ section.id }} .petsome-checklist__text {
+    flex: 1 0 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  #petsome-checklist-{{ section.id }} .petsome-checklist__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: var(--petsome-heading-size);
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-checklist-{{ section.id }} .petsome-checklist__heading p {
+    margin: 0;
+  }
+
+  #petsome-checklist-{{ section.id }} .petsome-checklist__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #petsome-checklist-{{ section.id }} .petsome-checklist__item {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+  }
+
+  #petsome-checklist-{{ section.id }} .petsome-checklist__image-wrapper {
+    flex: 1 0 0;
+    min-width: 0;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  #petsome-checklist-{{ section.id }} .petsome-checklist__image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media screen and (max-width: 989px) {
+    #petsome-checklist-{{ section.id }} .petsome-checklist__inner {
+      flex-direction: column;
+      gap: 32px;
+    }
+  }
+</style>
+
+<div id="petsome-checklist-{{ section.id }}" class="petsome-checklist">
+  <div class="petsome-checklist__inner">
+    <div class="petsome-checklist__text">
+      {%- if section.settings.heading != blank -%}
+        <div class="petsome-checklist__heading">{{ section.settings.heading }}</div>
+      {%- endif -%}
+      {%- if section.blocks.size > 0 -%}
+        <div class="petsome-checklist__list">
+          {%- for block in section.blocks -%}
+            <div class="petsome-checklist__item" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.image != blank -%}
+      <div class="petsome-checklist__image-wrapper">
+        <img
+          src="{{ section.settings.image | image_url: width: 1200 }}"
+          alt="{{ section.settings.image.alt | default: section.settings.heading | strip_html | escape }}"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+          loading="lazy"
+        >
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Petsome: Checklist",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>This is the right choice for your pet if you want:</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "If the product has a \"Product secondary color\" metafield set, that value is used instead of the color below - this only applies as a fallback when the metafield is blank."
+    },
+    {
+      "type": "color",
+      "id": "secondary_color",
+      "label": "Secondary color (fallback)",
+      "info": "Used for the section's background tint and top/bottom border.",
+      "default": "#E8D6C5"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bullet",
+      "name": "Bullet point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "info": "Include an emoji directly in the text if you want one.",
+          "default": "🐾 Bullet point text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Checklist",
+      "blocks": [
+        { "type": "bullet" },
+        { "type": "bullet" },
+        { "type": "bullet" },
+        { "type": "bullet" }
+      ]
+    }
+  ]
+}
+{% endschema %}
