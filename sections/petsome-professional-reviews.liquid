@@ -125,6 +125,22 @@
     line-height: 1.5;
     color: rgb(var(--color-foreground));
     margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: {{ section.settings.max_lines }};
+    overflow: hidden;
+  }
+
+  #petsome-professional-reviews-{{ section.id }} .petsome-professional-review__read-more {
+    align-self: flex-start;
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-decoration: underline;
+    color: rgb(var(--color-foreground));
+    cursor: pointer;
   }
 
   @media screen and (max-width: 749px) {
@@ -137,6 +153,106 @@
       width: 100%;
       aspect-ratio: 4 / 3;
     }
+  }
+
+  #petsome-professional-reviews-modal-{{ section.id }} {
+    --ppr-star: {{ section.settings.star_color }};
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: var(--petsome-padding-x);
+  }
+
+  #petsome-professional-reviews-modal-{{ section.id }} p {
+    margin: 0;
+  }
+
+  #petsome-professional-reviews-modal-{{ section.id }}.is-open {
+    display: flex;
+  }
+
+  #petsome-professional-reviews-modal-{{ section.id }} .petsome-professional-reviews__modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+  }
+
+  #petsome-professional-reviews-modal-{{ section.id }} .petsome-professional-reviews__modal-card {
+    position: relative;
+    background-color: #ffffff;
+    border: 1px solid #e8d6c5;
+    border-radius: 16px;
+    max-width: 560px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  #petsome-professional-reviews-modal-{{ section.id }} .petsome-professional-reviews__modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background-color: color-mix(in srgb, #e8d6c5 20%, white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  #petsome-professional-reviews-modal-{{ section.id }} .petsome-professional-reviews__modal-close .material-icon {
+    font-size: 2rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  #petsome-professional-reviews-modal-{{ section.id }} .petsome-professional-reviews__modal-image-wrapper {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  #petsome-professional-reviews-modal-{{ section.id }} .petsome-professional-reviews__modal-image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #petsome-professional-reviews-modal-{{ section.id }} .petsome-professional-reviews__modal-stars {
+    display: flex;
+    gap: 5px;
+  }
+
+  #petsome-professional-reviews-modal-{{ section.id }} .petsome-professional-reviews__modal-stars .material-icon {
+    font-size: 1.4rem;
+    color: var(--ppr-star);
+  }
+
+  #petsome-professional-reviews-modal-{{ section.id }} .petsome-professional-reviews__modal-author {
+    font-weight: 700;
+    font-size: 1.8rem;
+    line-height: 1.4;
+    color: rgb(var(--color-foreground));
+  }
+
+  #petsome-professional-reviews-modal-{{ section.id }} .petsome-professional-reviews__modal-body {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+    white-space: pre-line;
   }
 </style>
 
@@ -185,6 +301,19 @@
                 </p>
                 {%- if review.body.value != blank -%}
                   <p class="petsome-professional-review__body">{{ review.body.value }}</p>
+                  {%- if review.body.value.size > 220 -%}
+                    <button
+                      type="button"
+                      class="petsome-professional-review__read-more"
+                      data-petsome-pr-read-more
+                      data-name="{{ review.author.value | escape }}{% if review.role.value != blank %}, {{ review.role.value | escape }}{% endif %}"
+                      data-rating="{{ review.rating.value }}"
+                      data-body="{{ review.body.value | escape }}"
+                      data-image="{{ review.image.value | image_url: width: 800 }}"
+                    >
+                      {{ section.settings.read_more_label }}
+                    </button>
+                  {%- endif -%}
                 {%- endif -%}
               </div>
             </div>
@@ -196,6 +325,21 @@
             {% render 'material-icon', icon: 'chevron_right' %}
           </button>
         {%- endif -%}
+      </div>
+    </div>
+
+    <div id="petsome-professional-reviews-modal-{{ section.id }}" data-petsome-pr-modal>
+      <div class="petsome-professional-reviews__modal-backdrop" data-petsome-pr-modal-close></div>
+      <div class="petsome-professional-reviews__modal-card">
+        <button type="button" class="petsome-professional-reviews__modal-close" data-petsome-pr-modal-close aria-label="Close">
+          {% render 'material-icon', icon: 'close' %}
+        </button>
+        <div class="petsome-professional-reviews__modal-image-wrapper" data-petsome-pr-modal-image-wrapper>
+          <img data-petsome-pr-modal-image src="" alt="">
+        </div>
+        <div class="petsome-professional-reviews__modal-stars" data-petsome-pr-modal-stars></div>
+        <p class="petsome-professional-reviews__modal-author" data-petsome-pr-modal-author></p>
+        <p class="petsome-professional-reviews__modal-body" data-petsome-pr-modal-body></p>
       </div>
     </div>
   </div>
@@ -227,6 +371,51 @@
           showCard(activeIndex + 1);
         });
       }
+
+      var modal = root.querySelector('[data-petsome-pr-modal]');
+      document.body.appendChild(modal);
+      var modalImageWrapper = modal.querySelector('[data-petsome-pr-modal-image-wrapper]');
+      var modalImage = modal.querySelector('[data-petsome-pr-modal-image]');
+      var modalStars = modal.querySelector('[data-petsome-pr-modal-stars]');
+      var modalAuthor = modal.querySelector('[data-petsome-pr-modal-author]');
+      var modalBody = modal.querySelector('[data-petsome-pr-modal-body]');
+
+      function openModal(trigger) {
+        var image = trigger.getAttribute('data-image') || '';
+        modalImage.src = image;
+        modalImageWrapper.style.display = image ? '' : 'none';
+        var rating = parseInt(trigger.getAttribute('data-rating'), 10) || 0;
+        modalStars.innerHTML = '';
+        for (var i = 1; i <= 5; i++) {
+          var star = document.createElement('span');
+          star.className = 'material-icon material-symbols-outlined' + (i <= rating ? ' filled' : '');
+          star.textContent = 'star';
+          modalStars.appendChild(star);
+        }
+        modalAuthor.textContent = trigger.getAttribute('data-name') || '';
+        modalBody.textContent = trigger.getAttribute('data-body') || '';
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+
+      root.querySelectorAll('[data-petsome-pr-read-more]').forEach(function (trigger) {
+        trigger.addEventListener('click', function () {
+          openModal(trigger);
+        });
+      });
+
+      modal.querySelectorAll('[data-petsome-pr-modal-close]').forEach(function (closer) {
+        closer.addEventListener('click', closeModal);
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') closeModal();
+      });
     })();
   </script>
 {%- endif -%}
@@ -258,6 +447,25 @@
       "id": "star_color",
       "label": "Star rating color",
       "default": "#FFCC00"
+    },
+    {
+      "type": "header",
+      "content": "Review text"
+    },
+    {
+      "type": "range",
+      "id": "max_lines",
+      "label": "Max lines before truncating",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "text",
+      "id": "read_more_label",
+      "label": "\"Read more\" label",
+      "default": "Preberi več"
     },
     {
       "type": "header",

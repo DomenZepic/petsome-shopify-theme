@@ -1296,7 +1296,7 @@
         "direction": "left",
         "pause_on_hover": true,
         "background_color": "#faf9f6",
-        "logo_height": 70,
+        "logo_height": 72,
         "item_spacing": 24,
         "padding_top": 36,
         "padding_bottom": 36
