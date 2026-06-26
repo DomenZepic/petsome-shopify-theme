@@ -150,7 +150,14 @@
     opacity: 0.6;
   }
 
-  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal {
+  #petsome-ingredients-modal-{{ section.id }} {
+    --pi-accent: {{ accent_color }};
+    {%- if accent_color_dark != blank -%}
+      --pi-accent-dark: {{ accent_color_dark }};
+    {%- else -%}
+      --pi-accent-dark: color-mix(in srgb, var(--pi-accent) 70%, black);
+    {%- endif -%}
+    --pi-secondary: {{ secondary_color }};
     display: none;
     position: fixed;
     inset: 0;
@@ -160,17 +167,17 @@
     padding: var(--petsome-padding-x);
   }
 
-  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal.is-open {
+  #petsome-ingredients-modal-{{ section.id }}.is-open {
     display: flex;
   }
 
-  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-backdrop {
+  #petsome-ingredients-modal-{{ section.id }} .petsome-ingredients__modal-backdrop {
     position: absolute;
     inset: 0;
     background-color: rgba(0, 0, 0, 0.65);
   }
 
-  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-card {
+  #petsome-ingredients-modal-{{ section.id }} .petsome-ingredients__modal-card {
     position: relative;
     background-color: #ffffff;
     border-radius: 16px;
@@ -184,7 +191,7 @@
     gap: 16px;
   }
 
-  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-close {
+  #petsome-ingredients-modal-{{ section.id }} .petsome-ingredients__modal-close {
     position: absolute;
     top: 12px;
     right: 12px;
@@ -200,12 +207,12 @@
     padding: 0;
   }
 
-  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-close .material-icon {
+  #petsome-ingredients-modal-{{ section.id }} .petsome-ingredients__modal-close .material-icon {
     font-size: 2rem;
     color: rgb(var(--color-foreground));
   }
 
-  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-image-wrapper {
+  #petsome-ingredients-modal-{{ section.id }} .petsome-ingredients__modal-image-wrapper {
     width: 100%;
     max-width: 350px;
     max-height: 350px;
@@ -216,14 +223,14 @@
     background-color: color-mix(in srgb, var(--pi-secondary) 20%, white);
   }
 
-  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-image-wrapper img {
+  #petsome-ingredients-modal-{{ section.id }} .petsome-ingredients__modal-image-wrapper img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
 
-  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-badge {
+  #petsome-ingredients-modal-{{ section.id }} .petsome-ingredients__modal-badge {
     display: inline-flex;
     align-self: flex-start;
     padding: 4px 12px;
@@ -235,7 +242,7 @@
     letter-spacing: 0.04rem;
   }
 
-  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-name {
+  #petsome-ingredients-modal-{{ section.id }} .petsome-ingredients__modal-name {
     font-family: var(--font-heading-family);
     font-weight: 700;
     font-size: 2.2rem;
@@ -243,14 +250,14 @@
     margin: 0;
   }
 
-  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-text {
+  #petsome-ingredients-modal-{{ section.id }} .petsome-ingredients__modal-text {
     font-size: 1.5rem;
     line-height: 1.5;
     color: rgb(var(--color-foreground));
     margin: 0;
   }
 
-  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-amount {
+  #petsome-ingredients-modal-{{ section.id }} .petsome-ingredients__modal-amount {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -259,13 +266,13 @@
     background-color: color-mix(in srgb, var(--pi-secondary) 20%, white);
   }
 
-  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-amount-label {
+  #petsome-ingredients-modal-{{ section.id }} .petsome-ingredients__modal-amount-label {
     font-size: 1.4rem;
     color: rgb(var(--color-foreground));
     margin: 0;
   }
 
-  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-amount-value {
+  #petsome-ingredients-modal-{{ section.id }} .petsome-ingredients__modal-amount-value {
     font-weight: 700;
     font-size: 1.6rem;
     color: rgb(var(--color-foreground));
@@ -321,7 +328,7 @@
       </div>
     </div>
 
-    <div class="petsome-ingredients__modal" data-petsome-ingredient-modal>
+    <div id="petsome-ingredients-modal-{{ section.id }}" class="petsome-ingredients__modal" data-petsome-ingredient-modal>
       <div class="petsome-ingredients__modal-backdrop" data-petsome-ingredient-modal-close></div>
       <div class="petsome-ingredients__modal-card">
         <button type="button" class="petsome-ingredients__modal-close" data-petsome-ingredient-modal-close aria-label="Close">
@@ -347,11 +354,12 @@
       if (!root) return;
 
       var modal = root.querySelector('[data-petsome-ingredient-modal]');
-      var modalImage = root.querySelector('[data-petsome-ingredient-modal-image]');
-      var modalCategory = root.querySelector('[data-petsome-ingredient-modal-category]');
-      var modalName = root.querySelector('[data-petsome-ingredient-modal-name]');
-      var modalBody = root.querySelector('[data-petsome-ingredient-modal-body]');
-      var modalAmount = root.querySelector('[data-petsome-ingredient-modal-amount]');
+      document.body.appendChild(modal);
+      var modalImage = modal.querySelector('[data-petsome-ingredient-modal-image]');
+      var modalCategory = modal.querySelector('[data-petsome-ingredient-modal-category]');
+      var modalName = modal.querySelector('[data-petsome-ingredient-modal-name]');
+      var modalBody = modal.querySelector('[data-petsome-ingredient-modal-body]');
+      var modalAmount = modal.querySelector('[data-petsome-ingredient-modal-amount]');
 
       function openModal(trigger) {
         modalImage.src = trigger.getAttribute('data-image') || '';
@@ -376,7 +384,7 @@
         });
       });
 
-      root.querySelectorAll('[data-petsome-ingredient-modal-close]').forEach(function (closer) {
+      modal.querySelectorAll('[data-petsome-ingredient-modal-close]').forEach(function (closer) {
         closer.addEventListener('click', closeModal);
       });
 
