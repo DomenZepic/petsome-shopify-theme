@@ -1,0 +1,259 @@
+{% comment %}
+  Petsome: FAQ - an accordion FAQ list grouped by category, merging
+  two sources: the product's "Product FAQs" metafield (questions
+  unique to this product) and the shop's "Global FAQs" metafield
+  (shared questions - shipping, returns, company - reused across
+  every product so they only need editing in one place). Both
+  metafields reference the same "faq" metaobject (category,
+  category emoji, question, answer); grouping is computed dynamically
+  from each FAQ's "category" value, so adding a new category (e.g.
+  "About us") is just a matter of adding metaobjects - no code
+  changes needed. One column per category on desktop (collapsing to
+  a single stacked column on mobile). Item tint defaults to the
+  product's "Product secondary color" metafield when set, falling
+  back to this section's own color setting otherwise. Generic/
+  reusable across any product.
+{% endcomment %}
+{%- liquid
+  assign secondary_color = product.metafields.custom.product_secondary_color.value | default: section.settings.item_color
+  assign product_faqs = product.metafields.custom.product_faqs.value
+  assign global_faqs = shop.metafields.custom.global_faqs.value
+  assign all_faqs = product_faqs | concat: global_faqs
+
+  assign category_keys = ''
+  for faq in all_faqs
+    assign cat = faq.category.value
+    unless category_keys contains cat
+      assign category_keys = category_keys | append: cat | append: '||'
+    endunless
+  endfor
+  assign categories = category_keys | split: '||'
+  assign column_count = categories.size
+-%}
+<style>
+  #petsome-faq-{{ section.id }} {
+    --faq-item: {{ secondary_color }};
+    background-color: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-faq-{{ section.id }} p {
+    margin: 0;
+  }
+
+  #petsome-faq-{{ section.id }} .petsome-faq__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  #petsome-faq-{{ section.id }} .petsome-faq__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: var(--petsome-heading-size);
+    color: rgb(var(--color-foreground));
+    text-align: center;
+    margin: 0;
+  }
+
+  #petsome-faq-{{ section.id }} .petsome-faq__grid {
+    display: grid;
+    grid-template-columns: repeat({{ column_count }}, 1fr);
+    gap: 24px;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 989px) {
+    #petsome-faq-{{ section.id }} .petsome-faq__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  #petsome-faq-{{ section.id }} .petsome-faq__category {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #petsome-faq-{{ section.id }} .petsome-faq__category-title {
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-faq-{{ section.id }} .petsome-faq-item {
+    border-radius: 8px;
+    background-color: color-mix(in srgb, var(--faq-item) 50%, transparent);
+    overflow: hidden;
+  }
+
+  #petsome-faq-{{ section.id }} .petsome-faq-item__question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: none;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  #petsome-faq-{{ section.id }} .petsome-faq-item__question-text {
+    flex: 1 0 0;
+    min-width: 0;
+  }
+
+  #petsome-faq-{{ section.id }} .petsome-faq-item__icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+  }
+
+  #petsome-faq-{{ section.id }} .petsome-faq-item.is-open .petsome-faq-item__icon {
+    transform: rotate(180deg);
+  }
+
+  #petsome-faq-{{ section.id }} .petsome-faq-item__answer {
+    display: none;
+    padding: 0 12px 12px;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+  }
+
+  #petsome-faq-{{ section.id }} .petsome-faq-item.is-open .petsome-faq-item__answer {
+    display: block;
+  }
+</style>
+
+{%- if all_faqs.size > 0 -%}
+  <div id="petsome-faq-{{ section.id }}" class="petsome-faq">
+    <div class="petsome-faq__inner">
+      {%- if section.settings.heading != blank -%}
+        <div class="petsome-faq__heading">{{ section.settings.heading }}</div>
+      {%- endif -%}
+
+      <div class="petsome-faq__grid">
+        {%- for category in categories -%}
+          <div class="petsome-faq__category">
+            {%- assign category_emoji = '' -%}
+            {%- for faq in all_faqs -%}
+              {%- if faq.category.value == category and category_emoji == '' -%}
+                {%- assign category_emoji = faq.category_emoji.value -%}
+              {%- endif -%}
+            {%- endfor -%}
+            <p class="petsome-faq__category-title">
+              {%- if category_emoji != blank -%}{{ category_emoji }} {%- endif -%}{{ category }}
+            </p>
+            {%- for faq in all_faqs -%}
+              {%- if faq.category.value == category -%}
+                <div class="petsome-faq-item" data-petsome-faq-item>
+                  <button type="button" class="petsome-faq-item__question" data-petsome-faq-toggle>
+                    <span class="petsome-faq-item__question-text">{{ faq.question.value }}</span>
+                    <span class="petsome-faq-item__icon">
+                      {% render 'material-icon', icon: 'expand_more' %}
+                    </span>
+                  </button>
+                  <div class="petsome-faq-item__answer">{{ faq.answer.value }}</div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('petsome-faq-{{ section.id }}');
+      if (!root) return;
+
+      root.querySelectorAll('[data-petsome-faq-toggle]').forEach(function (toggle) {
+        toggle.addEventListener('click', function () {
+          var item = toggle.closest('[data-petsome-faq-item]');
+          item.classList.toggle('is-open');
+        });
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Petsome: FAQ",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Frequently asked questions</p>"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "If the product has a \"Product secondary color\" metafield set, that value is used instead of the color below - this only applies as a fallback when the metafield is blank."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#FAF9F6"
+    },
+    {
+      "type": "color",
+      "id": "item_color",
+      "label": "Question tint color (fallback)",
+      "default": "#E8D6C5"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: FAQ"
+    }
+  ]
+}
+{% endschema %}
