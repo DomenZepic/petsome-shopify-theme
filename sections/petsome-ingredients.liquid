@@ -82,25 +82,24 @@
 
   #petsome-ingredients-{{ section.id }} .petsome-ingredient {
     position: relative;
-    display: block;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     width: 100%;
     border: none;
     padding: 0;
     background: none;
     text-align: left;
     cursor: pointer;
-    border-radius: 12px;
-    overflow: hidden;
-    background-color: #ffffff;
-    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.08);
   }
 
   #petsome-ingredients-{{ section.id }} .petsome-ingredient__image-wrapper {
     position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
+    border-radius: 12px;
     overflow: hidden;
-    background-color: color-mix(in srgb, var(--pi-secondary) 20%, white);
+    background-color: #ffffff;
   }
 
   #petsome-ingredients-{{ section.id }} .petsome-ingredient__image-wrapper img {
@@ -112,15 +111,15 @@
 
   #petsome-ingredients-{{ section.id }} .petsome-ingredient__badge {
     position: absolute;
-    top: 8px;
-    left: 8px;
-    padding: 4px 10px;
+    top: 12px;
+    left: 12px;
+    padding: 4px 16px;
     border-radius: 999px;
     background: linear-gradient(180deg, var(--pi-accent) 0%, var(--pi-accent-dark) 100%);
     color: {{ section.settings.background_color }};
     font-weight: 700;
-    font-size: 1.2rem;
-    letter-spacing: 0.04rem;
+    font-size: 1.4rem;
+    text-transform: uppercase;
   }
 
   #petsome-ingredients-{{ section.id }} .petsome-ingredient__footer {
@@ -128,11 +127,10 @@
     align-items: center;
     justify-content: space-between;
     gap: 8px;
-    padding: 12px;
   }
 
   #petsome-ingredients-{{ section.id }} .petsome-ingredient__name {
-    font-weight: 700;
+    font-weight: 400;
     font-size: 1.6rem;
     color: rgb(var(--color-foreground));
     margin: 0;
@@ -140,18 +138,17 @@
 
   #petsome-ingredients-{{ section.id }} .petsome-ingredient__plus {
     flex-shrink: 0;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background-color: color-mix(in srgb, var(--pi-accent) 20%, white);
+    width: 24px;
+    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   #petsome-ingredients-{{ section.id }} .petsome-ingredient__plus .material-icon {
-    font-size: 1.8rem;
-    color: var(--pi-accent-dark);
+    font-size: 2.4rem;
+    color: rgb(var(--color-foreground));
+    opacity: 0.6;
   }
 
   #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal {
@@ -297,29 +294,29 @@
             type="button"
             class="petsome-ingredient"
             data-petsome-ingredient-trigger
-            data-name="{{ ingredient.fields.ime.value | escape }}"
-            data-category="{{ ingredient.fields.kategorija.value | escape }}"
-            data-body="{{ ingredient.fields.opis.value | escape }}"
-            data-amount="{{ ingredient.fields.kolicina.value | escape }}"
-            data-image="{{ ingredient.fields.slika.value | image_url: width: 700 }}"
-            data-image-alt="{{ ingredient.fields.ime.value | escape }}"
+            data-name="{{ ingredient.ime.value | escape }}"
+            data-category="{{ ingredient.kategorija.value | escape }}"
+            data-body="{{ ingredient.opis.value | escape }}"
+            data-amount="{{ ingredient.kolicina.value | escape }}"
+            data-image="{{ ingredient.slika.value | image_url: width: 700 }}"
+            data-image-alt="{{ ingredient.ime.value | escape }}"
           >
             <span class="petsome-ingredient__image-wrapper">
-              {%- if ingredient.fields.slika.value != blank -%}
+              {%- if ingredient.slika.value != blank -%}
                 <img
-                  src="{{ ingredient.fields.slika.value | image_url: width: 400 }}"
-                  alt="{{ ingredient.fields.ime.value | escape }}"
+                  src="{{ ingredient.slika.value | image_url: width: 400 }}"
+                  alt="{{ ingredient.ime.value | escape }}"
                   loading="lazy"
                 >
               {%- endif -%}
-              {%- if ingredient.fields.kategorija.value != blank -%}
-                <span class="petsome-ingredient__badge">{{ ingredient.fields.kategorija.value }}</span>
+              {%- if ingredient.kategorija.value != blank -%}
+                <span class="petsome-ingredient__badge">{{ ingredient.kategorija.value }}</span>
               {%- endif -%}
             </span>
             <span class="petsome-ingredient__footer">
-              <span class="petsome-ingredient__name">{{ ingredient.fields.ime.value }}</span>
+              <span class="petsome-ingredient__name">{{ ingredient.ime.value }}</span>
               <span class="petsome-ingredient__plus">
-                {% render 'material-icon', icon: 'add' %}
+                {% render 'material-icon', icon: 'add_circle' %}
               </span>
             </span>
           </button>
