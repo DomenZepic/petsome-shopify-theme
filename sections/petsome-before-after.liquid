@@ -20,6 +20,10 @@
     padding-bottom: {{ section.settings.padding_bottom }}px;
   }
 
+  #petsome-before-after-{{ section.id }} p {
+    margin: 0;
+  }
+
   @media screen and (max-width: 749px) {
     #petsome-before-after-{{ section.id }} {
       padding-top: 48px;
@@ -95,7 +99,7 @@
 
   @media screen and (max-width: 749px) {
     #petsome-before-after-{{ section.id }} .petsome-before-after-card {
-      flex: 0 0 min(85vw, 320px);
+      flex: 0 0 min(100%, 320px);
     }
   }
 
@@ -168,6 +172,14 @@
     font-size: 2.4rem;
     color: rgb(var(--color-foreground));
   }
+
+  {%- if section.blocks.size <= 3 -%}
+    @media screen and (min-width: 990px) {
+      #petsome-before-after-{{ section.id }} .petsome-before-after__nav {
+        display: none;
+      }
+    }
+  {%- endif -%}
 </style>
 
 {%- if section.blocks.size > 0 -%}
