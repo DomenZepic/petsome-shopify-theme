@@ -1242,6 +1242,43 @@
         "padding_bottom": 80
       }
     },
+    "petsome_stats_1": {
+      "type": "petsome-stats",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "95%",
+            "description": "lastnikov pravi, da se je njihov pes začel gibati bolj lahkotno in samozavestno."
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "93%",
+            "description": "lastnikov poroča o zmanjšanih znakih bolečin pri hoji in vstajanju."
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "90%",
+            "description": "opazi več igrivosti in energije pri svojem psu čez dan."
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3"
+      ],
+      "settings": {
+        "background_color": "#e8d6c5",
+        "number_color": "#f47671",
+        "padding_top": 50,
+        "padding_bottom": 50
+      }
+    },
     "related-products": {
       "type": "related-products",
       "disabled": true,
@@ -1315,6 +1352,7 @@
     "petsome_before_after_1",
     "petsome_certificates_1",
     "petsome_how_to_use_1",
+    "petsome_stats_1",
     "related-products"
   ]
 }
