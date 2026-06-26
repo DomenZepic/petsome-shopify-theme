@@ -1117,7 +1117,7 @@
         "heading": "<p>Zakaj 8 sestavin in ne samo 2?</p>",
         "description": "<p>Večina dodatkov cilja en problem. ArtroRegen Formula cilja tri — hkrati. To ni slučajnost. To je razlog, zakaj tista kapsula iz zoološkege vrta ni delala. In zakaj ta dela.</p>",
         "background_color": "#e8d6c5",
-        "kicker_background": "#E0B58D",
+        "kicker_background": "#e0b58d",
         "card_background": "#ffffff",
         "padding_top": 48,
         "padding_bottom": 48
@@ -1169,6 +1169,18 @@
     },
     "petsome_certificates_1": {
       "type": "petsome-certificates",
+      "blocks": {
+        "badge_4JraCr": {
+          "type": "badge",
+          "settings": {
+            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "label": ""
+          }
+        }
+      },
+      "block_order": [
+        "badge_4JraCr"
+      ],
       "settings": {
         "heading": "<p>Proizvedeno v skladu z najvišjimi standardi</p>",
         "description": "<p>MobiMix je izdelan v skladu z najvišjimi evropskimi standardi. Vsaka sestavina in vsak odmerek sta neodvisno testirana, brez nepotrebnih dodatkov in polnil.</p>",
