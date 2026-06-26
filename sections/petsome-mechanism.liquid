@@ -1,0 +1,302 @@
+{% comment %}
+  Petsome: Mechanism - explains a product's unique formula/mechanism:
+  a kicker badge (formula name) + heading + description on a tinted
+  background, followed by 3 repeatable "mechanism" cards (category
+  badge, bold title, body text), 3 columns desktop collapsing to a
+  single column on mobile. Content is fully unique per product
+  (formula name, copy, card count/order), but the visual style stays
+  consistent - so this section is driven entirely by settings/blocks,
+  no hardcoded product content. Background/card-badge tint defaults to
+  the product's "Product secondary color" metafield when set, falling
+  back to this section's own color setting otherwise.
+{% endcomment %}
+{%- liquid
+  assign secondary_color = product.metafields.custom.product_secondary_color.value | default: section.settings.background_color
+-%}
+<style>
+  #petsome-mechanism-{{ section.id }} {
+    --pm-secondary: {{ secondary_color }};
+    position: relative;
+    background-color: var(--pm-secondary);
+    overflow: hidden;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-mechanism-{{ section.id }} .petsome-mechanism__pattern {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1440px;
+    max-width: none;
+    height: auto;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  #petsome-mechanism-{{ section.id }} .petsome-mechanism__inner {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  #petsome-mechanism-{{ section.id }} .petsome-mechanism__header {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  #petsome-mechanism-{{ section.id }} .petsome-mechanism__kicker {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 4px 16px;
+    border-radius: 999px;
+    background-color: {{ section.settings.kicker_background }};
+    color: rgb(var(--color-foreground));
+    font-weight: 700;
+    font-size: 1.6rem;
+  }
+
+  #petsome-mechanism-{{ section.id }} .petsome-mechanism__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: var(--petsome-heading-size);
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-mechanism-{{ section.id }} .petsome-mechanism__heading p {
+    margin: 0;
+  }
+
+  #petsome-mechanism-{{ section.id }} .petsome-mechanism__description {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-mechanism-{{ section.id }} .petsome-mechanism__description p {
+    margin: 0;
+  }
+
+  #petsome-mechanism-{{ section.id }} .petsome-mechanism__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  @media screen and (max-width: 989px) {
+    #petsome-mechanism-{{ section.id }} .petsome-mechanism__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  #petsome-mechanism-{{ section.id }} .petsome-mechanism-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: {{ section.settings.card_background }};
+  }
+
+  #petsome-mechanism-{{ section.id }} .petsome-mechanism-card__badge {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 4px 16px;
+    border-radius: 999px;
+    background-color: var(--pm-secondary);
+    color: rgb(var(--color-foreground));
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+  }
+
+  #petsome-mechanism-{{ section.id }} .petsome-mechanism-card__title {
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 1.4;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-mechanism-{{ section.id }} .petsome-mechanism-card__text {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: #565858;
+    margin: 0;
+  }
+
+  #petsome-mechanism-{{ section.id }} .petsome-mechanism-card__text p {
+    margin: 0;
+  }
+</style>
+
+{%- if section.blocks.size > 0 -%}
+  <div id="petsome-mechanism-{{ section.id }}" class="petsome-mechanism">
+    {%- if section.settings.pattern_image != blank -%}
+      <img
+        class="petsome-mechanism__pattern"
+        src="{{ section.settings.pattern_image | image_url: width: 1440 }}"
+        alt=""
+        loading="lazy"
+      >
+    {%- endif -%}
+    <div class="petsome-mechanism__inner">
+      {%- if section.settings.kicker_text != blank or section.settings.heading != blank or section.settings.description != blank -%}
+        <div class="petsome-mechanism__header">
+          {%- if section.settings.kicker_text != blank -%}
+            <span class="petsome-mechanism__kicker">{{ section.settings.kicker_text }}</span>
+          {%- endif -%}
+          {%- if section.settings.heading != blank -%}
+            <div class="petsome-mechanism__heading">{{ section.settings.heading }}</div>
+          {%- endif -%}
+          {%- if section.settings.description != blank -%}
+            <div class="petsome-mechanism__description">{{ section.settings.description }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="petsome-mechanism__grid">
+        {%- for block in section.blocks -%}
+          <div class="petsome-mechanism-card" {{ block.shopify_attributes }}>
+            {%- if block.settings.badge_text != blank -%}
+              <span class="petsome-mechanism-card__badge">{{ block.settings.badge_text }}</span>
+            {%- endif -%}
+            {%- if block.settings.title != blank -%}
+              <p class="petsome-mechanism-card__title">{{ block.settings.title }}</p>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <div class="petsome-mechanism-card__text">{{ block.settings.text }}</div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Petsome: Mechanism",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker_text",
+      "label": "Kicker / formula name",
+      "default": "FORMULA NAME"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Why these ingredients, together?</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "image_picker",
+      "id": "pattern_image",
+      "label": "Decorative background pattern",
+      "info": "Optional full-bleed decorative image behind the content (e.g. a subtle paw print pattern). Leave blank to hide."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "If the product has a \"Product secondary color\" metafield set, that value is used instead of the background color below - this only applies as a fallback when the metafield is blank."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background / card badge color (fallback)",
+      "default": "#E8D6C5"
+    },
+    {
+      "type": "color",
+      "id": "kicker_background",
+      "label": "Kicker badge background",
+      "default": "#FEF6F6"
+    },
+    {
+      "type": "color",
+      "id": "card_background",
+      "label": "Card background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Mechanism card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Category badge text",
+          "default": "Category"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Card title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Describe this part of the mechanism.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Mechanism",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}
