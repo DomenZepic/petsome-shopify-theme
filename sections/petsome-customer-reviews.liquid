@@ -1,0 +1,391 @@
+{% comment %}
+  Petsome: Customer reviews - an aggregate rating summary above a
+  horizontally scrollable slider of review cards (star rating, quote,
+  avatar, author, dog), sourced from the product's "Reviews" metafield
+  (a list of "review" metaobjects). Always a slider on both desktop
+  and mobile, same technique as Petsome: Before & After - desktop
+  sizes cards so exactly 3 fit with extras scrollable to the right,
+  mobile caps card width at 320px - with prev/next nav buttons under
+  it (hidden on desktop when 3 or fewer reviews exist). Card tint
+  defaults to the product's "Product secondary color" metafield when
+  set, falling back to this section's own color setting otherwise.
+  Generic/reusable across any product.
+{% endcomment %}
+{%- liquid
+  assign secondary_color = product.metafields.custom.product_secondary_color.value | default: section.settings.card_color
+  assign reviews = product.metafields.custom.reviews.value
+-%}
+<style>
+  #petsome-customer-reviews-{{ section.id }} {
+    --cr-card: {{ secondary_color }};
+    --cr-star: {{ section.settings.star_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-customer-reviews-{{ section.id }} p {
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-customer-reviews-{{ section.id }} {
+      padding-top: 40px;
+      padding-bottom: 40px;
+    }
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-reviews__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-reviews__header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-reviews__rating-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-reviews__rating-stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-reviews__rating-stars .material-icon {
+    font-size: 1.8rem;
+    color: var(--cr-star);
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-reviews__rating-value {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: rgb(var(--color-foreground));
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-reviews__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: var(--petsome-heading-size);
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-reviews__slider {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-reviews__track {
+    display: flex;
+    gap: 24px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-reviews__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-review {
+    flex: 0 0 calc((100% - 48px) / 3);
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: color-mix(in srgb, var(--cr-card) 50%, transparent);
+    scroll-snap-align: start;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-customer-reviews-{{ section.id }} .petsome-customer-review {
+      flex: 0 0 min(100%, 320px);
+    }
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-review__stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-review__stars .material-icon {
+    font-size: 1.8rem;
+    color: var(--cr-star);
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-review__body {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    font-style: italic;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-review__footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: auto;
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-review__avatar {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: color-mix(in srgb, var(--cr-card) 80%, white);
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-review__avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-review__author {
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-review__dog {
+    font-size: 1.6rem;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-reviews__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-reviews__nav-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 2px solid var(--cr-card);
+    background-color: color-mix(in srgb, var(--cr-card) 10%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  #petsome-customer-reviews-{{ section.id }} .petsome-customer-reviews__nav-button .material-icon {
+    font-size: 2.4rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  {%- if reviews.size <= 3 -%}
+    @media screen and (min-width: 990px) {
+      #petsome-customer-reviews-{{ section.id }} .petsome-customer-reviews__nav {
+        display: none;
+      }
+    }
+  {%- endif -%}
+</style>
+
+{%- if reviews.size > 0 -%}
+  <div id="petsome-customer-reviews-{{ section.id }}" class="petsome-customer-reviews">
+    <div class="petsome-customer-reviews__inner">
+      <div class="petsome-customer-reviews__header">
+        {%- if section.settings.rating_value != blank -%}
+          <div class="petsome-customer-reviews__rating-row">
+            <div class="petsome-customer-reviews__rating-stars">
+              {%- assign full_stars = section.settings.rating_value | round -%}
+              {%- for i in (1..5) -%}
+                {%- assign is_filled = false -%}
+                {%- if i <= full_stars -%}
+                  {%- assign is_filled = true -%}
+                {%- endif -%}
+                {% render 'material-icon', icon: 'star', filled: is_filled %}
+              {%- endfor -%}
+            </div>
+            <span class="petsome-customer-reviews__rating-value">{{ section.settings.rating_value }} / 5</span>
+          </div>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <div class="petsome-customer-reviews__heading">{{ section.settings.heading }}</div>
+        {%- endif -%}
+      </div>
+
+      <div class="petsome-customer-reviews__slider">
+        <div class="petsome-customer-reviews__track" data-petsome-cr-track>
+          {%- for review in reviews -%}
+            <div class="petsome-customer-review">
+              {%- if review.rating.value != blank -%}
+                <div class="petsome-customer-review__stars">
+                  {%- for i in (1..5) -%}
+                    {%- assign is_filled = false -%}
+                    {%- if i <= review.rating.value -%}
+                      {%- assign is_filled = true -%}
+                    {%- endif -%}
+                    {% render 'material-icon', icon: 'star', filled: is_filled %}
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+              {%- if review.body.value != blank -%}
+                <p class="petsome-customer-review__body">&ldquo;{{ review.body.value }}&rdquo;</p>
+              {%- endif -%}
+              <div class="petsome-customer-review__footer">
+                <div class="petsome-customer-review__avatar">
+                  {%- if review.image.value != blank -%}
+                    <img
+                      src="{{ review.image.value | image_url: width: 100 }}"
+                      alt="{{ review.author.value | escape }}"
+                      width="50"
+                      height="50"
+                      loading="lazy"
+                    >
+                  {%- endif -%}
+                </div>
+                <div>
+                  {%- if review.author.value != blank -%}
+                    <p class="petsome-customer-review__author">{{ review.author.value }}</p>
+                  {%- endif -%}
+                  {%- if review.dog.value != blank -%}
+                    <p class="petsome-customer-review__dog">{{ review.dog.value }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if reviews.size > 1 -%}
+          <div class="petsome-customer-reviews__nav">
+            <button type="button" class="petsome-customer-reviews__nav-button" data-petsome-cr-prev aria-label="Previous">
+              {% render 'material-icon', icon: 'chevron_left' %}
+            </button>
+            <button type="button" class="petsome-customer-reviews__nav-button" data-petsome-cr-next aria-label="Next">
+              {% render 'material-icon', icon: 'chevron_right' %}
+            </button>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('petsome-customer-reviews-{{ section.id }}');
+      if (!root) return;
+
+      var track = root.querySelector('[data-petsome-cr-track]');
+      var prevButton = root.querySelector('[data-petsome-cr-prev]');
+      var nextButton = root.querySelector('[data-petsome-cr-next]');
+
+      function scrollByCard(direction) {
+        var card = track.querySelector('.petsome-customer-review');
+        if (!card) return;
+        var amount = card.getBoundingClientRect().width + 24;
+        track.scrollBy({ left: amount * direction, behavior: 'smooth' });
+      }
+
+      if (prevButton) {
+        prevButton.addEventListener('click', function () {
+          scrollByCard(-1);
+        });
+      }
+
+      if (nextButton) {
+        nextButton.addEventListener('click', function () {
+          scrollByCard(1);
+        });
+      }
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Petsome: Customer reviews",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "rating_value",
+      "label": "Aggregate rating",
+      "info": "E.g. \"4.7\". Leave blank to hide the summary row.",
+      "default": "4.7"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Trusted by thousands of pet owners</p>"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "If the product has a \"Product secondary color\" metafield set, that value is used instead of the color below - this only applies as a fallback when the metafield is blank."
+    },
+    {
+      "type": "color",
+      "id": "card_color",
+      "label": "Card tint color (fallback)",
+      "default": "#E8D6C5"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star rating color",
+      "default": "#FFCC00"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Customer reviews"
+    }
+  ]
+}
+{% endschema %}
