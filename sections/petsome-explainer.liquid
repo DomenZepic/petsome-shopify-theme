@@ -1,0 +1,289 @@
+{% comment %}
+  Petsome: Explainer - an image on the left and a stack of repeatable
+  "explainer card" blocks (heading, text, badge) on the right, plus an
+  optional CTA button below the cards. Content max-width is 1000px
+  (narrower than the 1200px used elsewhere), side padding/heading size
+  follow the shared petsome-* convention. Badge/shadow tint resolve
+  from the product's "Product secondary color" metafield when set,
+  falling back to this section's own color setting otherwise.
+  Generic/reusable across any product.
+{% endcomment %}
+{%- liquid
+  assign secondary_color = product.metafields.custom.product_secondary_color.value | default: section.settings.secondary_color
+-%}
+<style>
+  #petsome-explainer-{{ section.id }} {
+    --pe-secondary: {{ secondary_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-explainer-{{ section.id }} .petsome-explainer__inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+    display: flex;
+    align-items: stretch;
+    gap: 40px;
+  }
+
+  #petsome-explainer-{{ section.id }} .petsome-explainer__image-wrapper {
+    flex: 1 0 0;
+    min-width: 0;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  #petsome-explainer-{{ section.id }} .petsome-explainer__image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #petsome-explainer-{{ section.id }} .petsome-explainer__content {
+    flex: 1 0 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  #petsome-explainer-{{ section.id }} .petsome-explainer-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-shadow: 0 0 15px color-mix(in srgb, var(--pe-secondary) 70%, transparent);
+  }
+
+  #petsome-explainer-{{ section.id }} .petsome-explainer-card__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 2rem;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-explainer-{{ section.id }} .petsome-explainer-card__text {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-explainer-{{ section.id }} .petsome-explainer-card__text p {
+    margin: 0;
+  }
+
+  #petsome-explainer-{{ section.id }} .petsome-explainer-card__badge {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background-color: var(--pe-secondary);
+    color: rgb(var(--color-foreground));
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 0.06rem;
+  }
+
+  #petsome-explainer-{{ section.id }} .petsome-explainer__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    align-self: flex-start;
+    padding: 20px 64px;
+    border-radius: 15px;
+    background-color: {{ section.settings.button_background_color }};
+    color: {{ section.settings.button_text_color }};
+    font-weight: 700;
+    font-size: 1.6rem;
+    text-decoration: none;
+  }
+
+  #petsome-explainer-{{ section.id }} .petsome-explainer__button .material-icon {
+    font-size: 2rem;
+    color: {{ section.settings.button_text_color }};
+  }
+
+  @media screen and (max-width: 989px) {
+    #petsome-explainer-{{ section.id }} .petsome-explainer__inner {
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    #petsome-explainer-{{ section.id }} .petsome-explainer__button {
+      align-self: stretch;
+      padding: 16px 32px;
+    }
+  }
+</style>
+
+<div id="petsome-explainer-{{ section.id }}" class="petsome-explainer">
+  <div class="petsome-explainer__inner">
+    {%- if section.settings.image != blank -%}
+      <div class="petsome-explainer__image-wrapper">
+        <img
+          src="{{ section.settings.image | image_url: width: 1200 }}"
+          alt="{{ section.settings.image.alt | escape }}"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+          loading="lazy"
+        >
+      </div>
+    {%- endif -%}
+    <div class="petsome-explainer__content">
+      {%- for block in section.blocks -%}
+        <div class="petsome-explainer-card" {{ block.shopify_attributes }}>
+          {%- if block.settings.heading != blank -%}
+            <p class="petsome-explainer-card__heading">{{ block.settings.heading }}</p>
+          {%- endif -%}
+          {%- if block.settings.text != blank -%}
+            <div class="petsome-explainer-card__text">{{ block.settings.text }}</div>
+          {%- endif -%}
+          {%- if block.settings.badge_text != blank -%}
+            <span class="petsome-explainer-card__badge">{{ block.settings.badge_text }}</span>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+      {%- if section.settings.button_label != blank -%}
+        <a
+          href="{{ section.settings.button_link | default: '#' }}"
+          class="petsome-explainer__button"
+        >
+          <span>{{ section.settings.button_label }}</span>
+          {%- if section.settings.button_icon != blank -%}
+            {% render 'material-icon', icon: section.settings.button_icon %}
+          {%- endif -%}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Petsome: Explainer",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Order now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "button_icon",
+      "label": "Button icon",
+      "default": "shopping_bag",
+      "info": "[View all available icons](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.platform=web). Leave blank to hide."
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button background",
+      "default": "#0E1111"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "If the product has a \"Product secondary color\" metafield set, that value is used instead of the color below - this only applies as a fallback when the metafield is blank."
+    },
+    {
+      "type": "color",
+      "id": "secondary_color",
+      "label": "Secondary color (fallback)",
+      "info": "Used for card badges and the card drop-shadow tint.",
+      "default": "#E8D6C5"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Explainer card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "info": "Include an emoji directly in the text if you want one.",
+          "default": "🛑 Card heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Describe this point.</p>"
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Explainer",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

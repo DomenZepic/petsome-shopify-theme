@@ -1084,6 +1084,40 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "petsome_explainer_1": {
+      "type": "petsome-explainer",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "heading": "🛑 Zakaj mnogi dodatki razočarajo?",
+            "text": "<p>Veliko dodatkov za sklepe temelji le na eni ali dveh sestavinah, zato delujejo predvsem kratkoročno in ne naslavljajo vseh vzrokov težav s sklepi. Posledično lahko prinesejo le začasno olajšanje, ne pa dolgoročne podpore in trajnih izboljšav.</p>",
+            "badge_text": "Kratkoročno olajšanje ≠ dolgoročna rešitev"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "heading": "✅ Zakaj MobiMix deluje drugače?",
+            "text": "<p>MobiMix združuje 8 skrbno izbranih učinkovin s sinergičnim delovanjem, ki hkrati zagotavljajo protivnetno, regenerativno in zaščitno podporo sklepom. Razvit je za redno in dolgotrajno uporabo, saj sklepe podpira celostno in skozi čas.</p>",
+            "badge_text": "Celostna podpora sklepom skozi čas"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2"
+      ],
+      "settings": {
+        "button_label": "Naroči MobiMix",
+        "button_icon": "shopping_bag",
+        "button_background_color": "#0E1111",
+        "button_text_color": "#FFFFFF",
+        "secondary_color": "#E8D6C5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
@@ -1093,6 +1127,7 @@
     "petsome_timeframe_1",
     "petsome_checklist_1",
     "petsome_comparison_1",
+    "petsome_explainer_1",
     "related-products"
   ]
 }
