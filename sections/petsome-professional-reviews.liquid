@@ -1,0 +1,293 @@
+{% comment %}
+  Petsome: Expert reviews - a heading above a single-review-at-a-
+  time carousel sourced from the product's "Professional reviews"
+  metafield (a list of "professional_review" metaobjects: image,
+  author, role/title, star rating, body), with prev/next controls.
+  Image sits beside the content on desktop, stacks above it on
+  mobile. Generic/reusable across any product - nothing hardcoded.
+{% endcomment %}
+{%- liquid
+  assign reviews = product.metafields.custom.professional_reviews.value
+-%}
+<style>
+  #petsome-professional-reviews-{{ section.id }} {
+    --ppr-star: {{ section.settings.star_color }};
+    background-color: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-professional-reviews-{{ section.id }} p {
+    margin: 0;
+  }
+
+  #petsome-professional-reviews-{{ section.id }} .petsome-professional-reviews__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  #petsome-professional-reviews-{{ section.id }} .petsome-professional-reviews__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: var(--petsome-heading-size);
+    color: rgb(var(--color-foreground));
+    text-align: center;
+    margin: 0;
+  }
+
+  #petsome-professional-reviews-{{ section.id }} .petsome-professional-reviews__row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  #petsome-professional-reviews-{{ section.id }} .petsome-professional-reviews__nav-button {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  #petsome-professional-reviews-{{ section.id }} .petsome-professional-reviews__nav-button .material-icon {
+    font-size: 2.8rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  #petsome-professional-reviews-{{ section.id }} .petsome-professional-reviews__card-wrapper {
+    flex: 1 0 0;
+    min-width: 0;
+  }
+
+  #petsome-professional-reviews-{{ section.id }} .petsome-professional-review {
+    display: none;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    min-height: 350px;
+  }
+
+  #petsome-professional-reviews-{{ section.id }} .petsome-professional-review.is-active {
+    display: flex;
+  }
+
+  #petsome-professional-reviews-{{ section.id }} .petsome-professional-review__image-wrapper {
+    flex: 1 0 0;
+    min-width: 0;
+  }
+
+  #petsome-professional-reviews-{{ section.id }} .petsome-professional-review__image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #petsome-professional-reviews-{{ section.id }} .petsome-professional-review__content {
+    flex: 1 0 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+  }
+
+  #petsome-professional-reviews-{{ section.id }} .petsome-professional-review__stars {
+    display: flex;
+    gap: 5px;
+  }
+
+  #petsome-professional-reviews-{{ section.id }} .petsome-professional-review__stars .material-icon {
+    font-size: 1.4rem;
+    color: var(--ppr-star);
+  }
+
+  #petsome-professional-reviews-{{ section.id }} .petsome-professional-review__author {
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-professional-reviews-{{ section.id }} .petsome-professional-review__body {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-professional-reviews-{{ section.id }} .petsome-professional-review {
+      flex-direction: column;
+    }
+
+    #petsome-professional-reviews-{{ section.id }} .petsome-professional-review__image-wrapper {
+      flex: none;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+    }
+  }
+</style>
+
+{%- if reviews.size > 0 -%}
+  <div id="petsome-professional-reviews-{{ section.id }}" class="petsome-professional-reviews">
+    <div class="petsome-professional-reviews__inner">
+      {%- if section.settings.heading != blank -%}
+        <div class="petsome-professional-reviews__heading">{{ section.settings.heading }}</div>
+      {%- endif -%}
+
+      <div class="petsome-professional-reviews__row">
+        {%- if reviews.size > 1 -%}
+          <button type="button" class="petsome-professional-reviews__nav-button" data-petsome-pr-prev aria-label="Previous review">
+            {% render 'material-icon', icon: 'chevron_left' %}
+          </button>
+        {%- endif -%}
+
+        <div class="petsome-professional-reviews__card-wrapper">
+          {%- for review in reviews -%}
+            <div class="petsome-professional-review{% if forloop.first %} is-active{% endif %}" data-petsome-pr-card>
+              <div class="petsome-professional-review__image-wrapper">
+                {%- if review.image.value != blank -%}
+                  <img
+                    src="{{ review.image.value | image_url: width: 800 }}"
+                    alt="{{ review.author.value | escape }}"
+                    width="{{ review.image.value.width }}"
+                    height="{{ review.image.value.height }}"
+                    loading="lazy"
+                  >
+                {%- endif -%}
+              </div>
+              <div class="petsome-professional-review__content">
+                {%- if review.rating.value != blank -%}
+                  <div class="petsome-professional-review__stars">
+                    {%- for i in (1..5) -%}
+                      {%- assign is_filled = false -%}
+                      {%- if i <= review.rating.value -%}
+                        {%- assign is_filled = true -%}
+                      {%- endif -%}
+                      {% render 'material-icon', icon: 'star', filled: is_filled %}
+                    {%- endfor -%}
+                  </div>
+                {%- endif -%}
+                <p class="petsome-professional-review__author">
+                  {{ review.author.value }}{% if review.role.value != blank %}, {{ review.role.value }}{% endif %}
+                </p>
+                {%- if review.body.value != blank -%}
+                  <p class="petsome-professional-review__body">{{ review.body.value }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if reviews.size > 1 -%}
+          <button type="button" class="petsome-professional-reviews__nav-button" data-petsome-pr-next aria-label="Next review">
+            {% render 'material-icon', icon: 'chevron_right' %}
+          </button>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('petsome-professional-reviews-{{ section.id }}');
+      if (!root) return;
+
+      var cards = Array.prototype.slice.call(root.querySelectorAll('[data-petsome-pr-card]'));
+      var prevButton = root.querySelector('[data-petsome-pr-prev]');
+      var nextButton = root.querySelector('[data-petsome-pr-next]');
+      var activeIndex = 0;
+
+      function showCard(index) {
+        cards[activeIndex].classList.remove('is-active');
+        activeIndex = (index + cards.length) % cards.length;
+        cards[activeIndex].classList.add('is-active');
+      }
+
+      if (prevButton) {
+        prevButton.addEventListener('click', function () {
+          showCard(activeIndex - 1);
+        });
+      }
+
+      if (nextButton) {
+        nextButton.addEventListener('click', function () {
+          showCard(activeIndex + 1);
+        });
+      }
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Petsome: Expert reviews",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Trusted by professionals and pet owners</p>"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#FAF9F6"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star rating color",
+      "default": "#FFCC00"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Expert reviews"
+    }
+  ]
+}
+{% endschema %}
