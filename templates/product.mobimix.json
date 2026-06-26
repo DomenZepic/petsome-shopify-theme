@@ -818,6 +818,133 @@
         "padding_bottom": 36
       }
     },
+    "petsome_timeframe_1": {
+      "type": "petsome-timeframe",
+      "blocks": {
+        "tf_1": {
+          "type": "timeframe",
+          "settings": {
+            "highlighted": false,
+            "badge_text": "2-3 tedni",
+            "title": "Vstane malo lažje.",
+            "text": "<p>To je navadno prva stvar, ki jo opazite. Tista sekunda oklevanja zjutraj — začne izginjati. Hoja po stopnicah je manj previdna. Drobne spremembe, ki pa jih ne morete spregledati, ko jih vidite.</p>"
+          }
+        },
+        "tf_2": {
+          "type": "timeframe",
+          "settings": {
+            "highlighted": false,
+            "badge_text": "1 mesec",
+            "title": "Spet hodi kot bi moral.",
+            "text": "<p>Tempo se vrne. Pes bolj pogumno stopa po klančinah. Na sprehodu spet malo zahteva — ne samo sledi. Sprehodi postanejo prijetnejši. Za oba.</p>"
+          }
+        },
+        "tf_3": {
+          "type": "timeframe",
+          "settings": {
+            "highlighted": true,
+            "badge_text": "2–3 meseci",
+            "title": "Deluje kot mlajši.",
+            "text": "<p>To je stavek, ki ga slišimo najpogosteje. Pes se igra. Prinese igračo. Pohiti do vrat. Stvari, ki jih je nehal počati — se vračajo. Po eni za drugo.</p>"
+          }
+        },
+        "tf_4": {
+          "type": "timeframe",
+          "settings": {
+            "highlighted": false,
+            "badge_text": "3+ meseci",
+            "title": "Zdaj pa ne bi več prenehala.",
+            "text": "<p>Ko lastniki vidijo, kaj se zgodi, če za teden pozabijo na kapsulo — se ne ustavijo več. Sklepi so zaščiteni. Pes je aktiven. To je bil cilj od začetka.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "tf_1",
+        "tf_2",
+        "tf_3",
+        "tf_4"
+      ],
+      "settings": {
+        "heading": "<p>Kaj se zgodi, ko vaš pes začne z MobiMixom?</p>",
+        "subheading": "Vsak pes je drugačen. A večina lastnikov opazi prve spremembe hitreje, kot so pričakovali.",
+        "columns": "4",
+        "background_color": "#faf9f6",
+        "accent_color": "#f8aaa7",
+        "secondary_color": "#e8d6c5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "petsome_checklist_1": {
+      "type": "petsome-checklist",
+      "blocks": {
+        "bullet_1": {
+          "type": "bullet",
+          "settings": {
+            "text": "🐕 ima več energije čez dan in ni več hitro utrujen"
+          }
+        },
+        "bullet_2": {
+          "type": "bullet",
+          "settings": {
+            "text": "🦴 se giblje bolj sproščeno, brez okorelosti po počitku"
+          }
+        },
+        "bullet_3": {
+          "type": "bullet",
+          "settings": {
+            "text": "🚶‍♂️ z veseljem hodi na sprehode in ne zaostaja več"
+          }
+        },
+        "bullet_4": {
+          "type": "bullet",
+          "settings": {
+            "text": "🐾 spet skače, teče in se igra brez zadržkov"
+          }
+        },
+        "bullet_5": {
+          "type": "bullet",
+          "settings": {
+            "text": "❤️ se počuti bolje v svojem telesu, tudi v zrelih letih"
+          }
+        },
+        "bullet_6": {
+          "type": "bullet",
+          "settings": {
+            "text": "🔁 ohrani zdrave sklepe dolgoročno, ne samo kratkoročno"
+          }
+        },
+        "bullet_7": {
+          "type": "bullet",
+          "settings": {
+            "text": "🛡 ima ves čas podporo sklepom tudi če je večje pasme ali zelo aktiven"
+          }
+        },
+        "bullet_8": {
+          "type": "bullet",
+          "settings": {
+            "text": "😊 uživa v vsakodnevnem gibanju, brez bolečine in nelagodja"
+          }
+        }
+      },
+      "block_order": [
+        "bullet_1",
+        "bullet_2",
+        "bullet_3",
+        "bullet_4",
+        "bullet_5",
+        "bullet_6",
+        "bullet_7",
+        "bullet_8"
+      ],
+      "settings": {
+        "heading": "<p>MobiMix je prava izbira za vašega psa, če želite, da:</p>",
+        "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+        "secondary_color": "#e8d6c5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "related-products": {
       "type": "related-products",
       "disabled": true,
@@ -1701,132 +1828,6 @@
         "mobile_adaptive_height": false,
         "mobile_dots_position": "under",
         "mobile_arrows_position": "under",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "petsome_timeframe_1": {
-      "type": "petsome-timeframe",
-      "blocks": {
-        "tf_1": {
-          "type": "timeframe",
-          "settings": {
-            "highlighted": false,
-            "badge_text": "2-3 tedni",
-            "title": "Vstane malo lažje.",
-            "text": "<p>To je navadno prva stvar, ki jo opazite. Tista sekunda oklevanja zjutraj — začne izginjati. Hoja po stopnicah je manj previdna. Drobne spremembe, ki pa jih ne morete spregledati, ko jih vidite.</p>"
-          }
-        },
-        "tf_2": {
-          "type": "timeframe",
-          "settings": {
-            "highlighted": false,
-            "badge_text": "1 mesec",
-            "title": "Spet hodi kot bi moral.",
-            "text": "<p>Tempo se vrne. Pes bolj pogumno stopa po klančinah. Na sprehodu spet malo zahteva — ne samo sledi. Sprehodi postanejo prijetnejši. Za oba.</p>"
-          }
-        },
-        "tf_3": {
-          "type": "timeframe",
-          "settings": {
-            "highlighted": true,
-            "badge_text": "2–3 meseci",
-            "title": "Deluje kot mlajši.",
-            "text": "<p>To je stavek, ki ga slišimo najpogosteje. Pes se igra. Prinese igračo. Pohiti do vrat. Stvari, ki jih je nehal počati — se vračajo. Po eni za drugo.</p>"
-          }
-        },
-        "tf_4": {
-          "type": "timeframe",
-          "settings": {
-            "highlighted": false,
-            "badge_text": "3+ meseci",
-            "title": "Zdaj pa ne bi več prenehala.",
-            "text": "<p>Ko lastniki vidijo, kaj se zgodi, če za teden pozabijo na kapsulo — se ne ustavijo več. Sklepi so zaščiteni. Pes je aktiven. To je bil cilj od začetka.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "tf_1",
-        "tf_2",
-        "tf_3",
-        "tf_4"
-      ],
-      "settings": {
-        "heading": "<p>Kaj se zgodi, ko vaš pes začne z MobiMixom?</p>",
-        "subheading": "Vsak pes je drugačen. A večina lastnikov opazi prve spremembe hitreje, kot so pričakovali.",
-        "columns": "4",
-        "background_color": "#FAF9F6",
-        "accent_color": "#F8AAA7",
-        "secondary_color": "#E8D6C5",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "petsome_checklist_1": {
-      "type": "petsome-checklist",
-      "blocks": {
-        "bullet_1": {
-          "type": "bullet",
-          "settings": {
-            "text": "🐕 ima več energije čez dan in ni več hitro utrujen"
-          }
-        },
-        "bullet_2": {
-          "type": "bullet",
-          "settings": {
-            "text": "🦴 se giblje bolj sproščeno, brez okorelosti po počitku"
-          }
-        },
-        "bullet_3": {
-          "type": "bullet",
-          "settings": {
-            "text": "🚶‍♂️ z veseljem hodi na sprehode in ne zaostaja več"
-          }
-        },
-        "bullet_4": {
-          "type": "bullet",
-          "settings": {
-            "text": "🐾 spet skače, teče in se igra brez zadržkov"
-          }
-        },
-        "bullet_5": {
-          "type": "bullet",
-          "settings": {
-            "text": "❤️ se počuti bolje v svojem telesu, tudi v zrelih letih"
-          }
-        },
-        "bullet_6": {
-          "type": "bullet",
-          "settings": {
-            "text": "🔁 ohrani zdrave sklepe dolgoročno, ne samo kratkoročno"
-          }
-        },
-        "bullet_7": {
-          "type": "bullet",
-          "settings": {
-            "text": "🛡 ima ves čas podporo sklepom tudi če je večje pasme ali zelo aktiven"
-          }
-        },
-        "bullet_8": {
-          "type": "bullet",
-          "settings": {
-            "text": "😊 uživa v vsakodnevnem gibanju, brez bolečine in nelagodja"
-          }
-        }
-      },
-      "block_order": [
-        "bullet_1",
-        "bullet_2",
-        "bullet_3",
-        "bullet_4",
-        "bullet_5",
-        "bullet_6",
-        "bullet_7",
-        "bullet_8"
-      ],
-      "settings": {
-        "heading": "<p>MobiMix je prava izbira za vašega psa, če želite, da:</p>",
-        "secondary_color": "#E8D6C5",
         "padding_top": 36,
         "padding_bottom": 36
       }
