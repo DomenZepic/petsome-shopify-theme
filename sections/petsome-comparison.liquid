@@ -11,12 +11,17 @@
 {% endcomment %}
 {%- liquid
   assign accent_color = product.metafields.custom.product_accent_color.value | default: section.settings.accent_color
+  assign accent_color_dark = product.metafields.custom.product_accent_color_dark.value | default: section.settings.accent_color_dark
   assign secondary_color = product.metafields.custom.product_secondary_color.value | default: section.settings.secondary_color
 -%}
 <style>
   #petsome-comparison-{{ section.id }} {
     --cmp-accent: {{ accent_color }};
-    --cmp-accent-dark: color-mix(in srgb, var(--cmp-accent) 70%, black);
+    {%- if accent_color_dark != blank -%}
+      --cmp-accent-dark: {{ accent_color_dark }};
+    {%- else -%}
+      --cmp-accent-dark: color-mix(in srgb, var(--cmp-accent) 70%, black);
+    {%- endif -%}
     --cmp-secondary: {{ secondary_color }};
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -232,6 +237,13 @@
       "label": "Accent color (fallback)",
       "info": "Used for the \"Us\" column header gradient and cell tint.",
       "default": "#F8AAA7"
+    },
+    {
+      "type": "color",
+      "id": "accent_color_dark",
+      "label": "Accent color dark / gradient end (fallback)",
+      "info": "Used as the darker end of the \"Us\" column header gradient. Set \"Product accent color (gradient end)\" on the product to control this precisely; if left blank everywhere, it's auto-darkened from the accent color.",
+      "default": "#F47671"
     },
     {
       "type": "color",

@@ -12,6 +12,7 @@
 {% endcomment %}
 {%- liquid
   assign accent_color = product.metafields.custom.product_accent_color.value | default: block.settings.accent_color
+  assign accent_color_dark = product.metafields.custom.product_accent_color_dark.value | default: block.settings.accent_color_dark
   assign secondary_color = product.metafields.custom.product_secondary_color.value | default: block.settings.secondary_color
 -%}
 <style>
@@ -22,7 +23,11 @@
   #kaching-custom-display-{{ section.id }}-{{ block.id }} {
     --kaching-accent: {{ accent_color }};
     --kaching-secondary: {{ secondary_color }};
-    --kaching-accent-dark: color-mix(in srgb, var(--kaching-accent) 70%, black);
+    {%- if accent_color_dark != blank -%}
+      --kaching-accent-dark: {{ accent_color_dark }};
+    {%- else -%}
+      --kaching-accent-dark: color-mix(in srgb, var(--kaching-accent) 70%, black);
+    {%- endif -%}
     --kaching-secondary-tint: color-mix(in srgb, var(--kaching-secondary) 15%, white);
     --kaching-accent-tint: color-mix(in srgb, var(--kaching-accent) 20%, white);
   }

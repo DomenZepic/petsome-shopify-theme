@@ -9,12 +9,17 @@
 {% endcomment %}
 {%- liquid
   assign accent_color = product.metafields.custom.product_accent_color.value | default: section.settings.accent_color
+  assign accent_color_dark = product.metafields.custom.product_accent_color_dark.value | default: section.settings.accent_color_dark
   assign secondary_color = product.metafields.custom.product_secondary_color.value | default: section.settings.secondary_color
 -%}
 <style>
   #petsome-timeframe-{{ section.id }} {
     --tf-accent: {{ accent_color }};
-    --tf-accent-dark: color-mix(in srgb, var(--tf-accent) 70%, black);
+    {%- if accent_color_dark != blank -%}
+      --tf-accent-dark: {{ accent_color_dark }};
+    {%- else -%}
+      --tf-accent-dark: color-mix(in srgb, var(--tf-accent) 70%, black);
+    {%- endif -%}
     --tf-secondary: {{ secondary_color }};
     background-color: {{ section.settings.background_color }};
     padding-top: {{ section.settings.padding_top }}px;
@@ -197,6 +202,13 @@
       "label": "Accent color (fallback)",
       "info": "Used for the highlighted card's background and badge.",
       "default": "#F8AAA7"
+    },
+    {
+      "type": "color",
+      "id": "accent_color_dark",
+      "label": "Accent color dark / gradient end (fallback)",
+      "info": "Used as the darker end of the highlighted badge's gradient. Set \"Product accent color (gradient end)\" on the product to control this precisely; if left blank everywhere, it's auto-darkened from the accent color.",
+      "default": "#F47671"
     },
     {
       "type": "color",
