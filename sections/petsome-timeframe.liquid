@@ -1,0 +1,278 @@
+{% comment %}
+  Petsome: Timeframe - a heading + subheading and a row of "timeframe"
+  cards (badge, title, description). Any one card can be marked
+  "Highlight this card" to use the product's accent color instead of
+  the default secondary/tan tint. Colors default to the product's
+  "Product accent color" / "Product secondary color" metafields when
+  set, falling back to this section's own color settings otherwise.
+  Generic/reusable across any product.
+{% endcomment %}
+{%- liquid
+  assign accent_color = product.metafields.custom.product_accent_color.value | default: section.settings.accent_color
+  assign secondary_color = product.metafields.custom.product_secondary_color.value | default: section.settings.secondary_color
+-%}
+<style>
+  #petsome-timeframe-{{ section.id }} {
+    --tf-accent: {{ accent_color }};
+    --tf-accent-dark: color-mix(in srgb, var(--tf-accent) 70%, black);
+    --tf-secondary: {{ secondary_color }};
+    background-color: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-timeframe-{{ section.id }} .petsome-timeframe__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+  }
+
+  #petsome-timeframe-{{ section.id }} .petsome-timeframe__header {
+    text-align: center;
+    margin: 0 auto 24px;
+  }
+
+  #petsome-timeframe-{{ section.id }} .petsome-timeframe__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: var(--petsome-heading-size);
+    color: rgb(var(--color-foreground));
+    margin: 0 0 12px;
+  }
+
+  #petsome-timeframe-{{ section.id }} .petsome-timeframe__heading p {
+    margin: 0;
+  }
+
+  #petsome-timeframe-{{ section.id }} .petsome-timeframe__subheading {
+    font-size: 1.6rem;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-timeframe-{{ section.id }} .petsome-timeframe__grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
+    gap: 12px;
+  }
+
+  @media screen and (max-width: 989px) {
+    #petsome-timeframe-{{ section.id }} .petsome-timeframe__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-timeframe-{{ section.id }} .petsome-timeframe__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  #petsome-timeframe-{{ section.id }} .petsome-timeframe-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 16px;
+    border: 1px solid var(--tf-secondary);
+    border-radius: 12px;
+    background-color: color-mix(in srgb, var(--tf-secondary) 20%, white);
+  }
+
+  #petsome-timeframe-{{ section.id }} .petsome-timeframe-card--highlighted {
+    background-color: color-mix(in srgb, var(--tf-accent) 50%, white);
+  }
+
+  #petsome-timeframe-{{ section.id }} .petsome-timeframe-card__badge {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 4px 16px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1.6rem;
+    background-color: var(--tf-secondary);
+    color: rgb(var(--color-foreground));
+  }
+
+  #petsome-timeframe-{{ section.id }} .petsome-timeframe-card--highlighted .petsome-timeframe-card__badge {
+    background: linear-gradient(180deg, var(--tf-accent) 0%, var(--tf-accent-dark) 100%);
+    color: {{ section.settings.background_color }};
+  }
+
+  #petsome-timeframe-{{ section.id }} .petsome-timeframe-card__title {
+    font-weight: 700;
+    font-size: 2rem;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-timeframe-{{ section.id }} .petsome-timeframe-card__text {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-timeframe-{{ section.id }} .petsome-timeframe-card__text p {
+    margin: 0;
+  }
+</style>
+
+{%- if section.blocks.size > 0 -%}
+  <div id="petsome-timeframe-{{ section.id }}" class="petsome-timeframe">
+    <div class="petsome-timeframe__inner">
+      {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+        <div class="petsome-timeframe__header">
+          {%- if section.settings.heading != blank -%}
+            <div class="petsome-timeframe__heading">{{ section.settings.heading }}</div>
+          {%- endif -%}
+          {%- if section.settings.subheading != blank -%}
+            <p class="petsome-timeframe__subheading">{{ section.settings.subheading }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      <div class="petsome-timeframe__grid">
+        {%- for block in section.blocks -%}
+          <div
+            class="petsome-timeframe-card{% if block.settings.highlighted %} petsome-timeframe-card--highlighted{% endif %}"
+            {{ block.shopify_attributes }}
+          >
+            {%- if block.settings.badge_text != blank -%}
+              <span class="petsome-timeframe-card__badge">{{ block.settings.badge_text }}</span>
+            {%- endif -%}
+            <p class="petsome-timeframe-card__title">{{ block.settings.title }}</p>
+            <div class="petsome-timeframe-card__text">{{ block.settings.text }}</div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Petsome: Timeframe",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>What happens after you start?</p>"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns (desktop)",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" },
+        { "value": "5", "label": "5" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "If the product has a \"Product accent color\" / \"Product secondary color\" metafield set, that value is used instead of the colors below - these only apply as a fallback when the metafield is blank."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#FAF9F6"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color (fallback)",
+      "info": "Used for the highlighted card's background and badge.",
+      "default": "#F8AAA7"
+    },
+    {
+      "type": "color",
+      "id": "secondary_color",
+      "label": "Secondary color (fallback)",
+      "info": "Used for non-highlighted cards' border/background/badge.",
+      "default": "#E8D6C5"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "timeframe",
+      "name": "Timeframe card",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "highlighted",
+          "label": "Highlight this card",
+          "info": "Uses the product's accent color instead of the default secondary color. Pick one card per section to highlight.",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge text",
+          "default": "2-3 weeks"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Card title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Description",
+          "default": "<p>Describe what happens at this point in time.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Timeframe",
+      "blocks": [
+        { "type": "timeframe" },
+        { "type": "timeframe" },
+        { "type": "timeframe", "settings": { "highlighted": true } },
+        { "type": "timeframe" }
+      ]
+    }
+  ]
+}
+{% endschema %}

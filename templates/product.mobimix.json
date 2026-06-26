@@ -1704,12 +1704,70 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "petsome_timeframe_1": {
+      "type": "petsome-timeframe",
+      "blocks": {
+        "tf_1": {
+          "type": "timeframe",
+          "settings": {
+            "highlighted": false,
+            "badge_text": "2-3 tedni",
+            "title": "Vstane malo lažje.",
+            "text": "<p>To je navadno prva stvar, ki jo opazite. Tista sekunda oklevanja zjutraj — začne izginjati. Hoja po stopnicah je manj previdna. Drobne spremembe, ki pa jih ne morete spregledati, ko jih vidite.</p>"
+          }
+        },
+        "tf_2": {
+          "type": "timeframe",
+          "settings": {
+            "highlighted": false,
+            "badge_text": "1 mesec",
+            "title": "Spet hodi kot bi moral.",
+            "text": "<p>Tempo se vrne. Pes bolj pogumno stopa po klančinah. Na sprehodu spet malo zahteva — ne samo sledi. Sprehodi postanejo prijetnejši. Za oba.</p>"
+          }
+        },
+        "tf_3": {
+          "type": "timeframe",
+          "settings": {
+            "highlighted": true,
+            "badge_text": "2–3 meseci",
+            "title": "Deluje kot mlajši.",
+            "text": "<p>To je stavek, ki ga slišimo najpogosteje. Pes se igra. Prinese igračo. Pohiti do vrat. Stvari, ki jih je nehal počati — se vračajo. Po eni za drugo.</p>"
+          }
+        },
+        "tf_4": {
+          "type": "timeframe",
+          "settings": {
+            "highlighted": false,
+            "badge_text": "3+ meseci",
+            "title": "Zdaj pa ne bi več prenehala.",
+            "text": "<p>Ko lastniki vidijo, kaj se zgodi, če za teden pozabijo na kapsulo — se ne ustavijo več. Sklepi so zaščiteni. Pes je aktiven. To je bil cilj od začetka.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "tf_1",
+        "tf_2",
+        "tf_3",
+        "tf_4"
+      ],
+      "settings": {
+        "heading": "<p>Kaj se zgodi, ko vaš pes začne z MobiMixom?</p>",
+        "subheading": "Vsak pes je drugačen. A večina lastnikov opazi prve spremembe hitreje, kot so pričakovali.",
+        "columns": "4",
+        "background_color": "#FAF9F6",
+        "accent_color": "#F8AAA7",
+        "secondary_color": "#E8D6C5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
     "main",
     "petsome_rotating_bullets_1",
     "petsome_benefits_1",
+    "petsome_timeframe_1",
     "related-products",
     "custom_columns_new_dBCjfR",
     "eba88da5-80ac-47fc-aa75-997cfe7b2e59",
