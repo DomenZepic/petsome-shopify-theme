@@ -1279,16 +1279,6 @@
         "padding_bottom": 48
       }
     },
-    "petsome_professional_reviews_1": {
-      "type": "petsome-professional-reviews",
-      "settings": {
-        "heading": "<p>Preverjeno v praksi – s strani strokovnjakov in lastnikov psov</p>",
-        "background_color": "#faf9f6",
-        "star_color": "#ffcc00",
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
-    },
     "petsome_rotating_logos_1": {
       "type": "petsome-rotating-logos",
       "settings": {
@@ -1360,6 +1350,17 @@
         "padding_top": 36,
         "padding_bottom": 24
       }
+    },
+    "petsome_professional_reviews_BkgaUN": {
+      "type": "petsome-professional-reviews",
+      "name": "Petsome: Expert reviews",
+      "settings": {
+        "heading": "<p>Preverjeno v praksi – s strani strokovnjakov in lastnikov psov</p>",
+        "background_color": "#FAF9F6",
+        "star_color": "#FFCC00",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     }
   },
   "order": [
@@ -1376,7 +1377,7 @@
     "petsome_certificates_1",
     "petsome_how_to_use_1",
     "petsome_stats_1",
-    "petsome_professional_reviews_1",
+    "petsome_professional_reviews_BkgaUN",
     "petsome_rotating_logos_1",
     "related-products"
   ]
