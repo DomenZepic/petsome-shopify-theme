@@ -1167,6 +1167,21 @@
         "padding_bottom": 80
       }
     },
+    "petsome_certificates_1": {
+      "type": "petsome-certificates",
+      "settings": {
+        "heading": "<p>Proizvedeno v skladu z najvišjimi standardi</p>",
+        "description": "<p>MobiMix je izdelan v skladu z najvišjimi evropskimi standardi. Vsaka sestavina in vsak odmerek sta neodvisno testirana, brez nepotrebnih dodatkov in polnil.</p>",
+        "button_label": "Naroči MobiMix",
+        "button_link": "",
+        "button_icon": "shopping_bag",
+        "button_background_color": "#0e1111",
+        "button_text_color": "#ffffff",
+        "background_color": "#e8d6c5",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
     "related-products": {
       "type": "related-products",
       "disabled": true,
@@ -1238,6 +1253,7 @@
     "petsome_ingredients_1",
     "petsome_mechanism_1",
     "petsome_before_after_1",
+    "petsome_certificates_1",
     "related-products"
   ]
 }

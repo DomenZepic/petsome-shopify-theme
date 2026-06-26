@@ -1,0 +1,322 @@
+{% comment %}
+  Petsome: Certificates - a "we are legit" trust section on a tinted
+  background: heading + description + CTA button on one side, and a
+  row of repeatable certificate/trust badge images on the other
+  (stacks below the text on mobile, wraps if needed). Background
+  defaults to the product's "Product secondary color" metafield when
+  set, falling back to this section's own color setting otherwise.
+  Generic/reusable across any product - badges, copy and button are
+  all editable, not hardcoded.
+{% endcomment %}
+{%- liquid
+  assign secondary_color = product.metafields.custom.product_secondary_color.value | default: section.settings.background_color
+-%}
+<style>
+  #petsome-certificates-{{ section.id }} {
+    --pc-secondary: {{ secondary_color }};
+    position: relative;
+    background-color: var(--pc-secondary);
+    overflow: hidden;
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-certificates-{{ section.id }} p {
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-certificates-{{ section.id }} {
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
+  }
+
+  #petsome-certificates-{{ section.id }} .petsome-certificates__pattern {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1440px;
+    max-width: none;
+    height: auto;
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  #petsome-certificates-{{ section.id }} .petsome-certificates__inner {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 64px;
+  }
+
+  #petsome-certificates-{{ section.id }} .petsome-certificates__content {
+    flex: 1 0 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  #petsome-certificates-{{ section.id }} .petsome-certificates__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: var(--petsome-heading-size);
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-certificates-{{ section.id }} .petsome-certificates__description {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-certificates-{{ section.id }} .petsome-certificates__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    align-self: flex-start;
+    padding: 20px 64px;
+    border-radius: 15px;
+    background-color: {{ section.settings.button_background_color }};
+    color: {{ section.settings.button_text_color }};
+    font-weight: 700;
+    font-size: 1.6rem;
+    text-decoration: none;
+  }
+
+  #petsome-certificates-{{ section.id }} .petsome-certificates__button .material-icon {
+    font-size: 2rem;
+    color: {{ section.settings.button_text_color }};
+  }
+
+  #petsome-certificates-{{ section.id }} .petsome-certificates__badges {
+    flex: 0 0 auto;
+    width: 356px;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  #petsome-certificates-{{ section.id }} .petsome-certificates__badge {
+    height: 64px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  @media screen and (max-width: 989px) {
+    #petsome-certificates-{{ section.id }} .petsome-certificates__inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 40px;
+    }
+
+    #petsome-certificates-{{ section.id }} .petsome-certificates__button {
+      align-self: stretch;
+      padding: 16px 32px;
+    }
+
+    #petsome-certificates-{{ section.id }} .petsome-certificates__badges {
+      width: 100%;
+      justify-content: flex-start;
+    }
+
+    #petsome-certificates-{{ section.id }} .petsome-certificates__badge {
+      height: 48px;
+    }
+  }
+</style>
+
+{%- if section.settings.heading != blank or section.blocks.size > 0 -%}
+  <div id="petsome-certificates-{{ section.id }}" class="petsome-certificates">
+    {%- if section.settings.pattern_image != blank -%}
+      <img
+        class="petsome-certificates__pattern"
+        src="{{ section.settings.pattern_image | image_url: width: 1440 }}"
+        alt=""
+        width="1440"
+        height="{{ 1440 | divided_by: section.settings.pattern_image.aspect_ratio }}"
+        loading="lazy"
+      >
+    {%- endif -%}
+    <div class="petsome-certificates__inner">
+      <div class="petsome-certificates__content">
+        {%- if section.settings.heading != blank -%}
+          <div class="petsome-certificates__heading">{{ section.settings.heading }}</div>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="petsome-certificates__description">{{ section.settings.description }}</div>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a
+            href="{{ section.settings.button_link | default: '#' }}"
+            class="petsome-certificates__button"
+          >
+            <span>{{ section.settings.button_label }}</span>
+            {%- if section.settings.button_icon != blank -%}
+              {% render 'material-icon', icon: section.settings.button_icon %}
+            {%- endif -%}
+          </a>
+        {%- endif -%}
+      </div>
+      {%- if section.blocks.size > 0 -%}
+        <div class="petsome-certificates__badges">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.image != blank -%}
+              <img
+                class="petsome-certificates__badge"
+                src="{{ block.settings.image | image_url: height: 128 }}"
+                alt="{{ block.settings.image.alt | default: block.settings.label | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                loading="lazy"
+                {{ block.shopify_attributes }}
+              >
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Petsome: Certificates",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Made to the highest standards</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Order now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "button_icon",
+      "label": "Button icon",
+      "default": "shopping_bag",
+      "info": "[View all available icons](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.platform=web). Leave blank to hide."
+    },
+    {
+      "type": "color",
+      "id": "button_background_color",
+      "label": "Button background",
+      "default": "#0E1111"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "If the product has a \"Product secondary color\" metafield set, that value is used instead of the background color below - this only applies as a fallback when the metafield is blank."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color (fallback)",
+      "default": "#E8D6C5"
+    },
+    {
+      "type": "image_picker",
+      "id": "pattern_image",
+      "label": "Decorative background pattern",
+      "info": "Optional full-bleed decorative image behind the content (e.g. a subtle paw print pattern). Leave blank to hide."
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Certificate badge",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Badge image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label (for alt text)",
+          "info": "Used as the image's alt text if the image itself has none set."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Certificates",
+      "blocks": [
+        { "type": "badge" },
+        { "type": "badge" },
+        { "type": "badge" },
+        { "type": "badge" },
+        { "type": "badge" }
+      ]
+    }
+  ]
+}
+{% endschema %}
