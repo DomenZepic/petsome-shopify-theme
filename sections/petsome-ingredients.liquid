@@ -1,0 +1,485 @@
+{% comment %}
+  Petsome: Ingredients - a heading/description above a grid of ingredient
+  cards (image, category badge, name) sourced from the product's
+  "Ingredients" metafield (a list of "sestavina" metaobjects), not manual
+  blocks - so the same section works for any product as long as that
+  metafield is set. 4 columns desktop, 2 columns mobile with a 12px gap.
+  Each card is fully clickable and opens a shared modal with a larger
+  image, the ingredient's full description, and its amount per package
+  (no Figma reference for the modal - styled to match the other petsome-*
+  sections; adapt later if needed). Accent/secondary colors default to the
+  product's "Product accent color" / "Product accent color (gradient end)"
+  / "Product secondary color" metafields when set, falling back to this
+  section's own color settings otherwise.
+{% endcomment %}
+{%- liquid
+  assign accent_color = product.metafields.custom.product_accent_color.value | default: section.settings.accent_color
+  assign accent_color_dark = product.metafields.custom.product_accent_color_dark.value | default: section.settings.accent_color_dark
+  assign secondary_color = product.metafields.custom.product_secondary_color.value | default: section.settings.secondary_color
+  assign ingredients = product.metafields.custom.ingredients.value
+-%}
+<style>
+  #petsome-ingredients-{{ section.id }} {
+    --pi-accent: {{ accent_color }};
+    {%- if accent_color_dark != blank -%}
+      --pi-accent-dark: {{ accent_color_dark }};
+    {%- else -%}
+      --pi-accent-dark: color-mix(in srgb, var(--pi-accent) 70%, black);
+    {%- endif -%}
+    --pi-secondary: {{ secondary_color }};
+    background-color: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 32px;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: var(--petsome-heading-size);
+    color: rgb(var(--color-foreground));
+    margin: 0 0 12px;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__heading p {
+    margin: 0;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__description {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__description p {
+    margin: 0;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-ingredients-{{ section.id }} .petsome-ingredients__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredient {
+    position: relative;
+    display: block;
+    width: 100%;
+    border: none;
+    padding: 0;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.08);
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredient__image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background-color: color-mix(in srgb, var(--pi-secondary) 20%, white);
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredient__image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredient__badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, var(--pi-accent) 0%, var(--pi-accent-dark) 100%);
+    color: {{ section.settings.background_color }};
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 0.04rem;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredient__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 12px;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredient__name {
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredient__plus {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: color-mix(in srgb, var(--pi-accent) 20%, white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredient__plus .material-icon {
+    font-size: 1.8rem;
+    color: var(--pi-accent-dark);
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: var(--petsome-padding-x);
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal.is-open {
+    display: flex;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-card {
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 16px;
+    max-width: 420px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background-color: color-mix(in srgb, var(--pi-secondary) 20%, white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-close .material-icon {
+    font-size: 2rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-image-wrapper {
+    width: 100%;
+    max-width: 350px;
+    max-height: 350px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: color-mix(in srgb, var(--pi-secondary) 20%, white);
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-badge {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, var(--pi-accent) 0%, var(--pi-accent-dark) 100%);
+    color: {{ section.settings.background_color }};
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: 0.04rem;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-name {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 2.2rem;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-text {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-amount {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background-color: color-mix(in srgb, var(--pi-secondary) 20%, white);
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-amount-label {
+    font-size: 1.4rem;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-amount-value {
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+</style>
+
+{%- if ingredients.size > 0 -%}
+  <div id="petsome-ingredients-{{ section.id }}" class="petsome-ingredients">
+    <div class="petsome-ingredients__inner">
+      {%- if section.settings.heading != blank or section.settings.description != blank -%}
+        <div class="petsome-ingredients__header">
+          {%- if section.settings.heading != blank -%}
+            <div class="petsome-ingredients__heading">{{ section.settings.heading }}</div>
+          {%- endif -%}
+          {%- if section.settings.description != blank -%}
+            <div class="petsome-ingredients__description">{{ section.settings.description }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="petsome-ingredients__grid">
+        {%- for ingredient in ingredients -%}
+          <button
+            type="button"
+            class="petsome-ingredient"
+            data-petsome-ingredient-trigger
+            data-name="{{ ingredient.fields.ime.value | escape }}"
+            data-category="{{ ingredient.fields.kategorija.value | escape }}"
+            data-body="{{ ingredient.fields.opis.value | escape }}"
+            data-amount="{{ ingredient.fields.kolicina.value | escape }}"
+            data-image="{{ ingredient.fields.slika.value | image_url: width: 700 }}"
+            data-image-alt="{{ ingredient.fields.ime.value | escape }}"
+          >
+            <span class="petsome-ingredient__image-wrapper">
+              {%- if ingredient.fields.slika.value != blank -%}
+                <img
+                  src="{{ ingredient.fields.slika.value | image_url: width: 400 }}"
+                  alt="{{ ingredient.fields.ime.value | escape }}"
+                  loading="lazy"
+                >
+              {%- endif -%}
+              {%- if ingredient.fields.kategorija.value != blank -%}
+                <span class="petsome-ingredient__badge">{{ ingredient.fields.kategorija.value }}</span>
+              {%- endif -%}
+            </span>
+            <span class="petsome-ingredient__footer">
+              <span class="petsome-ingredient__name">{{ ingredient.fields.ime.value }}</span>
+              <span class="petsome-ingredient__plus">
+                {% render 'material-icon', icon: 'add' %}
+              </span>
+            </span>
+          </button>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div class="petsome-ingredients__modal" data-petsome-ingredient-modal>
+      <div class="petsome-ingredients__modal-backdrop" data-petsome-ingredient-modal-close></div>
+      <div class="petsome-ingredients__modal-card">
+        <button type="button" class="petsome-ingredients__modal-close" data-petsome-ingredient-modal-close aria-label="Close">
+          {% render 'material-icon', icon: 'close' %}
+        </button>
+        <div class="petsome-ingredients__modal-image-wrapper">
+          <img data-petsome-ingredient-modal-image src="" alt="">
+        </div>
+        <span class="petsome-ingredients__modal-badge" data-petsome-ingredient-modal-category></span>
+        <p class="petsome-ingredients__modal-name" data-petsome-ingredient-modal-name></p>
+        <p class="petsome-ingredients__modal-text" data-petsome-ingredient-modal-body></p>
+        <div class="petsome-ingredients__modal-amount">
+          <p class="petsome-ingredients__modal-amount-label">{{ section.settings.amount_label | default: 'Amount per package' }}</p>
+          <p class="petsome-ingredients__modal-amount-value" data-petsome-ingredient-modal-amount></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('petsome-ingredients-{{ section.id }}');
+      if (!root) return;
+
+      var modal = root.querySelector('[data-petsome-ingredient-modal]');
+      var modalImage = root.querySelector('[data-petsome-ingredient-modal-image]');
+      var modalCategory = root.querySelector('[data-petsome-ingredient-modal-category]');
+      var modalName = root.querySelector('[data-petsome-ingredient-modal-name]');
+      var modalBody = root.querySelector('[data-petsome-ingredient-modal-body]');
+      var modalAmount = root.querySelector('[data-petsome-ingredient-modal-amount]');
+
+      function openModal(trigger) {
+        modalImage.src = trigger.getAttribute('data-image') || '';
+        modalImage.alt = trigger.getAttribute('data-image-alt') || '';
+        modalCategory.textContent = trigger.getAttribute('data-category') || '';
+        modalCategory.style.display = modalCategory.textContent ? '' : 'none';
+        modalName.textContent = trigger.getAttribute('data-name') || '';
+        modalBody.textContent = trigger.getAttribute('data-body') || '';
+        modalAmount.textContent = trigger.getAttribute('data-amount') || '';
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+
+      root.querySelectorAll('[data-petsome-ingredient-trigger]').forEach(function (trigger) {
+        trigger.addEventListener('click', function () {
+          openModal(trigger);
+        });
+      });
+
+      root.querySelectorAll('[data-petsome-ingredient-modal-close]').forEach(function (closer) {
+        closer.addEventListener('click', closeModal);
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') closeModal();
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Petsome: Ingredients",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>What's inside</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "amount_label",
+      "label": "Modal amount label",
+      "default": "Amount per package"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "If the product has \"Product accent color\" / \"Product accent color (gradient end)\" / \"Product secondary color\" metafields set, those values are used instead of the colors below - these only apply as a fallback when the metafields are blank."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#FAF9F6"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color (fallback)",
+      "info": "Used for the category badge gradient and the \"+\" icon.",
+      "default": "#F8AAA7"
+    },
+    {
+      "type": "color",
+      "id": "accent_color_dark",
+      "label": "Accent color dark / gradient end (fallback)",
+      "info": "Used as the darker end of the category badge gradient. Set \"Product accent color (gradient end)\" on the product to control this precisely; if left blank everywhere, it's auto-darkened from the accent color.",
+      "default": "#F47671"
+    },
+    {
+      "type": "color",
+      "id": "secondary_color",
+      "label": "Secondary color (fallback)",
+      "info": "Used for image placeholder backgrounds and modal panel tints.",
+      "default": "#E8D6C5"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Ingredients"
+    }
+  ]
+}
+{% endschema %}

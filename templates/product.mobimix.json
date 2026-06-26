@@ -1065,6 +1065,20 @@
         "padding_bottom": 36
       }
     },
+    "petsome_ingredients_1": {
+      "type": "petsome-ingredients",
+      "settings": {
+        "heading": "<p>8 skrbno izbranih sestavin</p>",
+        "description": "<p>Vsaka sestavina v MobiMixu ima svojo vlogo — skupaj naslavljajo vnetje, obnovo hrustanca in dolgoročno zaščito sklepov. Kliknite na sestavino za več informacij.</p>",
+        "amount_label": "Količina v paketu",
+        "background_color": "#faf9f6",
+        "accent_color": "#f8aaa7",
+        "accent_color_dark": "#f47671",
+        "secondary_color": "#e8d6c5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "related-products": {
       "type": "related-products",
       "disabled": true,
@@ -1133,6 +1147,7 @@
     "petsome_checklist_1",
     "petsome_comparison_1",
     "petsome_explainer_1",
+    "petsome_ingredients_1",
     "related-products"
   ]
 }
