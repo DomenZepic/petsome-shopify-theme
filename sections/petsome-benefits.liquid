@@ -35,6 +35,10 @@
     margin: 0 auto 24px;
   }
 
+  #petsome-benefits-{{ section.id }} .petsome-benefits__heading p {
+    margin: 0;
+  }
+
   #petsome-benefits-{{ section.id }} .petsome-benefits__grid {
     display: grid;
     grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
@@ -112,6 +116,10 @@
     font-size: 1.4rem;
     line-height: 1.5;
     color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-benefits-{{ section.id }} .petsome-benefit__text p {
     margin: 0;
   }
 </style>
