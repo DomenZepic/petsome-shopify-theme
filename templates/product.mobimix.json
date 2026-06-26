@@ -1003,6 +1003,87 @@
         "padding_top": 36,
         "padding_bottom": 24
       }
+    },
+    "petsome_comparison_1": {
+      "type": "petsome-comparison",
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Hrustanec dobiva gradbeni material za obnovo",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Vnetje se umirja — na treh poteh hkrati",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Sklepna tekočina se vzdržuje — manj trenja, lažje gibanje",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Število aktivnih sestavin",
+            "them_value": "1-3",
+            "us_value": "8"
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Učinek, ki traja — ne le začetni skok",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "label": "Priporočeno v veterinarskih in rehab. centrih",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_7": {
+          "type": "row",
+          "settings": {
+            "label": "Formulirano in proizvedeno v EU",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6",
+        "row_7"
+      ],
+      "settings": {
+        "heading": "<p>Zakaj običajni dodatki pogosto ne pomagajo?</p>",
+        "description": "<p>Ko pes začne šepati, kupite, kar priporoči sosed ali kar najdete na polici. Glukozamin. Morda hondroitin. Psu dodatek dajete en mesec in ne opazite nič. Razlog ni, da \"dodatki pač ne delajo.\" Razlog je, da sklepna bolečina ni en problem. So trije in navadni dodatki naslavljajo samo enega.</p>",
+        "them_label": "Ostali dodatki",
+        "us_label": "MobiMix",
+        "background_color": "#FAF9F6",
+        "accent_color": "#F8AAA7",
+        "secondary_color": "#E8D6C5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
@@ -1011,6 +1092,7 @@
     "petsome_benefits_1",
     "petsome_timeframe_1",
     "petsome_checklist_1",
+    "petsome_comparison_1",
     "related-products"
   ]
 }

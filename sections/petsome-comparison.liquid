@@ -1,0 +1,307 @@
+{% comment %}
+  Petsome: Comparison - a heading/description above a 3-column "us vs
+  them" comparison table (label column + 2 value columns). Desktop uses
+  a 2fr/1fr/1fr grid (label column wider); 990px and below all 3
+  columns become equal width. The "us" column uses the product's
+  accent color (header gradient + tinted cell background), defaulting
+  to the "Product accent color" metafield, falling back to this
+  section's own color setting otherwise. Generic/reusable across any
+  product - rows, column titles/images, and cell values are all
+  editable, not hardcoded.
+{% endcomment %}
+{%- liquid
+  assign accent_color = product.metafields.custom.product_accent_color.value | default: section.settings.accent_color
+  assign secondary_color = product.metafields.custom.product_secondary_color.value | default: section.settings.secondary_color
+-%}
+<style>
+  #petsome-comparison-{{ section.id }} {
+    --cmp-accent: {{ accent_color }};
+    --cmp-accent-dark: color-mix(in srgb, var(--cmp-accent) 70%, black);
+    --cmp-secondary: {{ secondary_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-comparison-{{ section.id }} .petsome-comparison__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+  }
+
+  #petsome-comparison-{{ section.id }} .petsome-comparison__header {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 40px;
+  }
+
+  #petsome-comparison-{{ section.id }} .petsome-comparison__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: var(--petsome-heading-size);
+    color: rgb(var(--color-foreground));
+    margin: 0 0 16px;
+  }
+
+  #petsome-comparison-{{ section.id }} .petsome-comparison__heading p {
+    margin: 0;
+  }
+
+  #petsome-comparison-{{ section.id }} .petsome-comparison__description {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-comparison-{{ section.id }} .petsome-comparison__description p {
+    margin: 0;
+  }
+
+  #petsome-comparison-{{ section.id }} .petsome-comparison__table {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  #petsome-comparison-{{ section.id }} .petsome-comparison__grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  @media screen and (max-width: 989px) {
+    #petsome-comparison-{{ section.id }} .petsome-comparison__grid {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  #petsome-comparison-{{ section.id }} .petsome-comparison__cell {
+    padding: 16px 24px;
+    border-bottom: 1px solid color-mix(in srgb, var(--cmp-secondary) 40%, transparent);
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  @media screen and (max-width: 989px) {
+    #petsome-comparison-{{ section.id }} .petsome-comparison__cell {
+      padding: 12px;
+    }
+  }
+
+  #petsome-comparison-{{ section.id }} .petsome-comparison__cell--value {
+    justify-content: center;
+    text-align: center;
+  }
+
+  #petsome-comparison-{{ section.id }} .petsome-comparison__cell--us {
+    background-color: color-mix(in srgb, var(--cmp-accent) 20%, white);
+  }
+
+  #petsome-comparison-{{ section.id }} .petsome-comparison__column-header {
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    padding: 12px;
+  }
+
+  #petsome-comparison-{{ section.id }} .petsome-comparison__column-header img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+  }
+
+  #petsome-comparison-{{ section.id }} .petsome-comparison__column-title {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 2rem;
+    text-align: center;
+  }
+
+  #petsome-comparison-{{ section.id }} .petsome-comparison__column-header--us {
+    background: linear-gradient(180deg, var(--cmp-accent) 0%, var(--cmp-accent-dark) 100%);
+  }
+
+  #petsome-comparison-{{ section.id }} .petsome-comparison__column-header--us .petsome-comparison__column-title {
+    color: {{ section.settings.background_color }};
+  }
+</style>
+
+<div id="petsome-comparison-{{ section.id }}" class="petsome-comparison">
+  <div class="petsome-comparison__inner">
+    {%- if section.settings.heading != blank or section.settings.description != blank -%}
+      <div class="petsome-comparison__header">
+        {%- if section.settings.heading != blank -%}
+          <div class="petsome-comparison__heading">{{ section.settings.heading }}</div>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <div class="petsome-comparison__description">{{ section.settings.description }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="petsome-comparison__table">
+      <div class="petsome-comparison__grid">
+        <div class="petsome-comparison__cell"></div>
+        <div class="petsome-comparison__cell petsome-comparison__column-header">
+          {%- if section.settings.them_image != blank -%}
+            <img src="{{ section.settings.them_image | image_url: width: 180 }}" alt="" loading="lazy">
+          {%- endif -%}
+          <p class="petsome-comparison__column-title">{{ section.settings.them_label }}</p>
+        </div>
+        <div class="petsome-comparison__cell petsome-comparison__cell--us petsome-comparison__column-header petsome-comparison__column-header--us">
+          {%- if section.settings.us_image != blank -%}
+            <img src="{{ section.settings.us_image | image_url: width: 180 }}" alt="" loading="lazy">
+          {%- endif -%}
+          <p class="petsome-comparison__column-title">{{ section.settings.us_label }}</p>
+        </div>
+
+        {%- for block in section.blocks -%}
+          <div class="petsome-comparison__cell" {{ block.shopify_attributes }}>{{ block.settings.label }}</div>
+          <div class="petsome-comparison__cell petsome-comparison__cell--value">{{ block.settings.them_value }}</div>
+          <div class="petsome-comparison__cell petsome-comparison__cell--value petsome-comparison__cell--us">{{ block.settings.us_value }}</div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Petsome: Comparison",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Why other products often don't help</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Columns"
+    },
+    {
+      "type": "image_picker",
+      "id": "them_image",
+      "label": "\"Them\" column image"
+    },
+    {
+      "type": "text",
+      "id": "them_label",
+      "label": "\"Them\" column title",
+      "default": "Other products"
+    },
+    {
+      "type": "image_picker",
+      "id": "us_image",
+      "label": "\"Us\" column image"
+    },
+    {
+      "type": "text",
+      "id": "us_label",
+      "label": "\"Us\" column title",
+      "default": "Us"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "If the product has \"Product accent color\" / \"Product secondary color\" metafields set, those values are used instead of the colors below - these only apply as a fallback when the metafields are blank."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#FAF9F6"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color (fallback)",
+      "info": "Used for the \"Us\" column header gradient and cell tint.",
+      "default": "#F8AAA7"
+    },
+    {
+      "type": "color",
+      "id": "secondary_color",
+      "label": "Secondary color (fallback)",
+      "info": "Used for row divider lines.",
+      "default": "#E8D6C5"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Comparison row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Feature label",
+          "default": "Feature"
+        },
+        {
+          "type": "text",
+          "id": "them_value",
+          "label": "\"Them\" value",
+          "info": "Type an emoji or short value, e.g. ❌ or 1-3.",
+          "default": "❌"
+        },
+        {
+          "type": "text",
+          "id": "us_value",
+          "label": "\"Us\" value",
+          "info": "Type an emoji or short value, e.g. ✅ or 8.",
+          "default": "✅"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Comparison",
+      "blocks": [
+        { "type": "row" },
+        { "type": "row" },
+        { "type": "row" }
+      ]
+    }
+  ]
+}
+{% endschema %}
