@@ -1,0 +1,369 @@
+{% comment %}
+  Petsome: Before & After - a heading/description above a horizontally
+  scrollable slider of repeatable "story" cards (image or video, dog
+  name, the issue they had, and a body text). Always a slider on both
+  desktop and mobile: on desktop card width is set so exactly 3 fit in
+  the container with any extra cards scrollable to the right; on
+  mobile each card is narrower (max 320px) and the whole row scrolls/
+  swipes, with prev/next buttons under it on both breakpoints. Border
+  color around the media defaults to the product's "Product secondary
+  color" metafield when set, falling back to this section's own color
+  setting otherwise. Generic/reusable across any product.
+{% endcomment %}
+{%- liquid
+  assign secondary_color = product.metafields.custom.product_secondary_color.value | default: section.settings.border_color
+-%}
+<style>
+  #petsome-before-after-{{ section.id }} {
+    --ba-border: {{ secondary_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-before-after-{{ section.id }} {
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after__header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: var(--petsome-heading-size);
+    color: rgb(var(--color-foreground));
+    margin: 0 0 10px;
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after__heading p {
+    margin: 0;
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after__description {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after__description p {
+    margin: 0;
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after__slider {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after__track {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after-card {
+    flex: 0 0 calc((100% - 32px) / 3);
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    scroll-snap-align: start;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-before-after-{{ section.id }} .petsome-before-after-card {
+      flex: 0 0 min(85vw, 320px);
+    }
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after-card__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border: 2px solid var(--ba-border);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #ffffff;
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after-card__media img,
+  #petsome-before-after-{{ section.id }} .petsome-before-after-card__media video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after-card__name {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 2rem;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after-card__issue {
+    font-family: var(--font-heading-family);
+    font-weight: 400;
+    font-size: 1.8rem;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after-card__text {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after-card__text p {
+    margin: 0;
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after__nav-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 2px solid var(--ba-border);
+    background-color: color-mix(in srgb, var(--ba-border) 10%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  #petsome-before-after-{{ section.id }} .petsome-before-after__nav-button .material-icon {
+    font-size: 2.4rem;
+    color: rgb(var(--color-foreground));
+  }
+</style>
+
+{%- if section.blocks.size > 0 -%}
+  <div id="petsome-before-after-{{ section.id }}" class="petsome-before-after">
+    <div class="petsome-before-after__inner">
+      {%- if section.settings.heading != blank or section.settings.description != blank -%}
+        <div class="petsome-before-after__header">
+          {%- if section.settings.heading != blank -%}
+            <div class="petsome-before-after__heading">{{ section.settings.heading }}</div>
+          {%- endif -%}
+          {%- if section.settings.description != blank -%}
+            <div class="petsome-before-after__description">{{ section.settings.description }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="petsome-before-after__slider">
+        <div class="petsome-before-after__track" data-petsome-before-after-track>
+          {%- for block in section.blocks -%}
+            <div class="petsome-before-after-card" {{ block.shopify_attributes }}>
+              <div class="petsome-before-after-card__media">
+                {%- if block.settings.video != blank -%}
+                  <video
+                    poster="{{ block.settings.image | default: block.settings.video.preview_image | image_url: width: 800 }}"
+                    controls
+                    playsinline
+                    preload="metadata"
+                  >
+                    {%- for source in block.settings.video.sources -%}
+                      <source src="{{ source.url }}" type="{{ source.mime_type }}">
+                    {%- endfor -%}
+                  </video>
+                {%- elsif block.settings.image != blank -%}
+                  <img
+                    src="{{ block.settings.image | image_url: width: 800 }}"
+                    alt="{{ block.settings.dog_name | escape }}"
+                    loading="lazy"
+                  >
+                {%- endif -%}
+              </div>
+              {%- if block.settings.dog_name != blank -%}
+                <p class="petsome-before-after-card__name">{{ block.settings.dog_name }}</p>
+              {%- endif -%}
+              {%- if block.settings.issue != blank -%}
+                <p class="petsome-before-after-card__issue">{{ block.settings.issue }}</p>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <div class="petsome-before-after-card__text">{{ block.settings.text }}</div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div class="petsome-before-after__nav">
+          <button type="button" class="petsome-before-after__nav-button" data-petsome-before-after-prev aria-label="Previous">
+            {% render 'material-icon', icon: 'chevron_left' %}
+          </button>
+          <button type="button" class="petsome-before-after__nav-button" data-petsome-before-after-next aria-label="Next">
+            {% render 'material-icon', icon: 'chevron_right' %}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('petsome-before-after-{{ section.id }}');
+      if (!root) return;
+
+      var track = root.querySelector('[data-petsome-before-after-track]');
+      var prevButton = root.querySelector('[data-petsome-before-after-prev]');
+      var nextButton = root.querySelector('[data-petsome-before-after-next]');
+
+      function scrollByCard(direction) {
+        var card = track.querySelector('.petsome-before-after-card');
+        if (!card) return;
+        var amount = card.getBoundingClientRect().width + 16;
+        track.scrollBy({ left: amount * direction, behavior: 'smooth' });
+      }
+
+      prevButton.addEventListener('click', function () {
+        scrollByCard(-1);
+      });
+
+      nextButton.addEventListener('click', function () {
+        scrollByCard(1);
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Petsome: Before & After",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Proof is in the results</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "If the product has a \"Product secondary color\" metafield set, that value is used instead of the color below - this only applies as a fallback when the metafield is blank."
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border / nav button color (fallback)",
+      "info": "Used for the media border and the prev/next button outline.",
+      "default": "#E8D6C5"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom (desktop)",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "story",
+      "name": "Before & after story",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Used as the card media, or as the video poster/thumbnail if a video is set below."
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "Video (optional)",
+          "info": "If set, this plays instead of the image."
+        },
+        {
+          "type": "text",
+          "id": "dog_name",
+          "label": "Dog name",
+          "default": "Rex, 8-year-old Labrador"
+        },
+        {
+          "type": "text",
+          "id": "issue",
+          "label": "Issue they had",
+          "default": "Trouble getting up"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Story text",
+          "default": "<p>Describe what changed for this dog.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Before & After",
+      "blocks": [
+        { "type": "story" },
+        { "type": "story" },
+        { "type": "story" }
+      ]
+    }
+  ]
+}
+{% endschema %}

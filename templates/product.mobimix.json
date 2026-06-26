@@ -1123,6 +1123,50 @@
         "padding_bottom": 48
       }
     },
+    "petsome_before_after_1": {
+      "type": "petsome-before-after",
+      "blocks": {
+        "story_1": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "dog_name": "Rex, 8-letni labradorec",
+            "issue": "Težave pri vstajanju",
+            "text": "<p>Rex je imel vsako jutro težave že pri prvih korakih. Po nekaj tednih MobiMixa vstane brez obotavljanja in spet rade volje teče do vrat.</p>"
+          }
+        },
+        "story_2": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "dog_name": "Zala, 11-letna čivava",
+            "issue": "Operacija kolena",
+            "text": "<p>Po operaciji kolena je bila Zala previdna pri vsakem koraku. Lastnica poroča, da je danes spet igriva in brez vidnega nelagodja pri gibanju.</p>"
+          }
+        },
+        "story_3": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "dog_name": "Fifi, 12-letni ovčar",
+            "issue": "Star pes",
+            "text": "<p>Fifi je v zrelih letih postajala vse manj aktivna. Z rednim dodajanjem MobiMixa je spet pripravljena na daljše sprehode in igro v parku.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "story_1",
+        "story_2",
+        "story_3"
+      ],
+      "settings": {
+        "heading": "<p>Dokazi so v rezultatih</p>",
+        "description": "<p>Pomagali smo že več kot 10.000 psom po vsej Evropi. Tukaj je nekaj njihovih zgodb.</p>",
+        "border_color": "#e8d6c5",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
     "related-products": {
       "type": "related-products",
       "disabled": true,
@@ -1193,6 +1237,7 @@
     "petsome_explainer_1",
     "petsome_ingredients_1",
     "petsome_mechanism_1",
+    "petsome_before_after_1",
     "related-products"
   ]
 }
