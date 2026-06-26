@@ -143,10 +143,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  #petsome-ingredients-{{ section.id }} .petsome-ingredient__plus .material-icon {
-    font-size: 2.4rem;
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: 1;
     color: rgb(var(--color-foreground));
     opacity: 0.6;
   }
@@ -168,7 +167,7 @@
   #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-backdrop {
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.65);
   }
 
   #petsome-ingredients-{{ section.id }} .petsome-ingredients__modal-card {
@@ -315,9 +314,7 @@
             </span>
             <span class="petsome-ingredient__footer">
               <span class="petsome-ingredient__name">{{ ingredient.ime.value }}</span>
-              <span class="petsome-ingredient__plus">
-                {% render 'material-icon', icon: 'add_circle' %}
-              </span>
+              <span class="petsome-ingredient__plus" aria-hidden="true">+</span>
             </span>
           </button>
         {%- endfor -%}
