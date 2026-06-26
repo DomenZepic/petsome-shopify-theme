@@ -16,8 +16,15 @@
 {% endcomment %}
 {%- liquid
   assign secondary_color = product.metafields.custom.product_secondary_color.value | default: section.settings.item_color
+  assign empty_array = '' | split: ','
   assign product_faqs = product.metafields.custom.product_faqs.value
   assign global_faqs = shop.metafields.custom.global_faqs.value
+  unless product_faqs
+    assign product_faqs = empty_array
+  endunless
+  unless global_faqs
+    assign global_faqs = empty_array
+  endunless
   assign all_faqs = product_faqs | concat: global_faqs
 
   assign category_keys = ''
