@@ -25,10 +25,14 @@
   unless global_faqs
     assign global_faqs = empty_array
   endunless
-  assign all_faqs = product_faqs | concat: global_faqs
-
   assign category_keys = ''
-  for faq in all_faqs
+  for faq in product_faqs
+    assign cat = faq.category.value
+    unless category_keys contains cat
+      assign category_keys = category_keys | append: cat | append: '||'
+    endunless
+  endfor
+  for faq in global_faqs
     assign cat = faq.category.value
     unless category_keys contains cat
       assign category_keys = category_keys | append: cat | append: '||'
@@ -36,6 +40,8 @@
   endfor
   assign categories = category_keys | split: '||'
   assign column_count = categories.size
+
+  assign total_faq_count = product_faqs.size | plus: global_faqs.size
 -%}
 <style>
   #petsome-faq-{{ section.id }} {
@@ -147,20 +153,7 @@
   }
 </style>
 
-{% comment %} TEMPORARY DEBUG - remove once the empty-render issue is diagnosed {% endcomment %}
-<div style="background:#ffe6e6;border:2px solid red;padding:12px;font-size:14px;font-family:monospace;white-space:pre-wrap;">
-DEBUG petsome-faq:
-product_faqs.size = {{ product_faqs.size }}
-global_faqs.size = {{ global_faqs.size }}
-all_faqs.size = {{ all_faqs.size }}
-product.metafields.custom.product_faqs exists = {% if product.metafields.custom.product_faqs %}YES{% else %}NO{% endif %}
-product.metafields.custom.product_faqs.value.size = {{ product.metafields.custom.product_faqs.value.size }}
-shop.metafields.custom.global_faqs exists = {% if shop.metafields.custom.global_faqs %}YES{% else %}NO{% endif %}
-shop.metafields.custom.global_faqs.value.size = {{ shop.metafields.custom.global_faqs.value.size }}
-first faq question (if any) = {{ all_faqs.first.question.value }}
-</div>
-
-{%- if all_faqs.size > 0 -%}
+{%- if total_faq_count > 0 -%}
   <div id="petsome-faq-{{ section.id }}" class="petsome-faq">
     <div class="petsome-faq__inner">
       {%- if section.settings.heading != blank -%}
@@ -171,7 +164,12 @@ first faq question (if any) = {{ all_faqs.first.question.value }}
         {%- for category in categories -%}
           <div class="petsome-faq__category">
             {%- assign category_emoji = '' -%}
-            {%- for faq in all_faqs -%}
+            {%- for faq in product_faqs -%}
+              {%- if faq.category.value == category and category_emoji == '' -%}
+                {%- assign category_emoji = faq.category_emoji.value -%}
+              {%- endif -%}
+            {%- endfor -%}
+            {%- for faq in global_faqs -%}
               {%- if faq.category.value == category and category_emoji == '' -%}
                 {%- assign category_emoji = faq.category_emoji.value -%}
               {%- endif -%}
@@ -179,7 +177,20 @@ first faq question (if any) = {{ all_faqs.first.question.value }}
             <p class="petsome-faq__category-title">
               {%- if category_emoji != blank -%}{{ category_emoji }} {%- endif -%}{{ category }}
             </p>
-            {%- for faq in all_faqs -%}
+            {%- for faq in product_faqs -%}
+              {%- if faq.category.value == category -%}
+                <div class="petsome-faq-item" data-petsome-faq-item>
+                  <button type="button" class="petsome-faq-item__question" data-petsome-faq-toggle>
+                    <span class="petsome-faq-item__question-text">{{ faq.question.value }}</span>
+                    <span class="petsome-faq-item__icon">
+                      {% render 'material-icon', icon: 'expand_more' %}
+                    </span>
+                  </button>
+                  <div class="petsome-faq-item__answer">{{ faq.answer.value }}</div>
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+            {%- for faq in global_faqs -%}
               {%- if faq.category.value == category -%}
                 <div class="petsome-faq-item" data-petsome-faq-item>
                   <button type="button" class="petsome-faq-item__question" data-petsome-faq-toggle>
