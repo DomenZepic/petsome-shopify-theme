@@ -104,7 +104,7 @@
   }
 </style>
 
-<div id="petsome-pro-review-{{ block.id }}" class="petsome-pro-review" {{ block.shopify_attributes }}>
+<div id="petsome-pro-review-{{ block.id }}" class="petsome-pro-review {{ block.settings.visibility }}" {{ block.shopify_attributes }}>
   {%- if block.settings.image != blank -%}
     <div class="petsome-pro-review__image-wrapper">
       <img
@@ -149,6 +149,26 @@
   "name": "Petsome: Expert review",
   "tag": null,
   "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "options": [
+        {
+          "value": "desktop-hidden",
+          "label": "Mobile only"
+        },
+        {
+          "value": "mobile-hidden",
+          "label": "Desktop only"
+        },
+        {
+          "value": "always-display",
+          "label": "All devices"
+        }
+      ],
+      "label": "Display on",
+      "default": "always-display"
+    },
     {
       "type": "image_picker",
       "id": "image",
