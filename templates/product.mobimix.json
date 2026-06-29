@@ -113,7 +113,7 @@
               "settings": {
                 "picker_types": "pills",
                 "skip_unavailable": false,
-                "custom_labels": "[name] - [selected]",
+                "custom_labels": "Izberite težo psa:",
                 "labels_size": 16,
                 "labels_font": "body-bold",
                 "labels_color": "text",
