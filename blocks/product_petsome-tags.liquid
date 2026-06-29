@@ -44,11 +44,7 @@
 
 {%- if block.blocks.size > 0 -%}
   <div id="petsome-tags-{{ block.id }}" class="petsome-tags" {{ block.shopify_attributes }}>
-    {%- for tag_block in block.blocks -%}
-      {%- if tag_block.settings.text != blank -%}
-        <span class="petsome-tag" {{ tag_block.shopify_attributes }}>{{ tag_block.settings.text }}</span>
-      {%- endif -%}
-    {%- endfor -%}
+    {% content_for 'blocks' %}
   </div>
 {%- endif -%}
 
@@ -58,16 +54,7 @@
   "tag": null,
   "blocks": [
     {
-      "type": "tag",
-      "name": "Tag",
-      "settings": [
-        {
-          "type": "text",
-          "id": "text",
-          "label": "Text",
-          "default": "Tag text"
-        }
-      ]
+      "type": "petsome-tag"
     }
   ],
   "settings": [
@@ -122,9 +109,9 @@
       "name": "Petsome: Tags",
       "category": "Product basics",
       "blocks": [
-        { "type": "tag" },
-        { "type": "tag" },
-        { "type": "tag" }
+        { "type": "petsome-tag" },
+        { "type": "petsome-tag" },
+        { "type": "petsome-tag" }
       ]
     }
   ]

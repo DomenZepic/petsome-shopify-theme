@@ -36,19 +36,19 @@
               "type": "product_petsome-tags",
               "blocks": {
                 "tag_1": {
-                  "type": "tag",
+                  "type": "petsome-tag",
                   "settings": {
                     "text": "Podpora sklepom"
                   }
                 },
                 "tag_2": {
-                  "type": "tag",
+                  "type": "petsome-tag",
                   "settings": {
                     "text": "Večja gibljivost"
                   }
                 },
                 "tag_3": {
-                  "type": "tag",
+                  "type": "petsome-tag",
                   "settings": {
                     "text": "Veterinarsko podprto"
                   }

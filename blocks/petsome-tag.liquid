@@ -1,0 +1,23 @@
+{% comment %}
+  Petsome: Tag - a single small gradient pill, used as a repeatable
+  child block inside the "Petsome: Tags" block. Styling (gradient,
+  padding, radius) is provided by the parent block's <style> rules.
+{% endcomment %}
+{%- if block.settings.text != blank -%}
+  <span class="petsome-tag" {{ block.shopify_attributes }}>{{ block.settings.text }}</span>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Tag",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "text",
+      "label": "Text",
+      "default": "Tag text"
+    }
+  ]
+}
+{% endschema %}
