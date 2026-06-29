@@ -32,19 +32,6 @@
           "static": true,
           "settings": {},
           "blocks": {
-            "title": {
-              "type": "product_title",
-              "settings": {
-                "uppercase_title": false,
-                "desktop_size": 39,
-                "alignment": "left",
-                "mobile_size": 28,
-                "mobile_alignment": "mobile-left",
-                "margin_top": 0,
-                "margin_bottom": 0
-              },
-              "blocks": {}
-            },
             "petsome_tags_1": {
               "type": "product_petsome-tags",
               "blocks": {
@@ -83,11 +70,11 @@
               "type": "rating-stars",
               "settings": {
                 "visibility": "always-display",
-                "rating": 4.4,
+                "rating": 4.8,
                 "star_color": "#ffcc00",
                 "bg_stars_style": "full",
                 "bg_star_color": "#ececec",
-                "label": "(xxxx Reviews)",
+                "label": "4.8 / 5 (2.000+ zadovoljnih lastnikov)",
                 "size": 16,
                 "scroll_id": "",
                 "alignment": "flex-start",
@@ -109,6 +96,97 @@
                 "shadow_spread": 0,
                 "margin_top": 0,
                 "margin_bottom": 9
+              },
+              "blocks": {}
+            },
+            "heading_HDTL7R": {
+              "type": "heading",
+              "name": "Heading",
+              "settings": {
+                "visibility": "always-display",
+                "title": "MobiMix - Dodatek za sklepe psov",
+                "heading_size": "h1",
+                "custom_desktop_size": 39,
+                "custom_mobile_size": 28,
+                "alignment": "left",
+                "mobile_alignment": "mobile-left",
+                "enable_custom_color": false,
+                "custom_color": "#FF0000",
+                "title_highlight_1": "solid-color",
+                "title_highlight_1_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                "title_highlight_1_bg-color": "#F9EFFF",
+                "title_highlight_1_color": "#6D388B",
+                "highlighted-1_border_radius": 8,
+                "highlighted-1_border_width": 0,
+                "highlighted-1_border": "solid",
+                "highlighted-1_border_color": "#6D388B",
+                "highlighted-1_padding-block": 0.3,
+                "highlighted-1_padding-inline": 0.3,
+                "title_highlight_1_underline-thickness": 2,
+                "title_highlight_1_underline-color": "#6D388B",
+                "title_highlight_1_underline-color--gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                "title_highlight_1_underline-color-position": 25,
+                "title_highlight_1_handwritten-color": "#6D388B",
+                "title_highlight_1_handwritten-stroke-width": 3,
+                "title_highlight_1_handwritten-position": 60,
+                "title_highlight_2": "none",
+                "highlight_2_keep_italic": false,
+                "title_highlight_2_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                "title_highlight_2_bg-color": "#F9EFFF",
+                "title_highlight_2_color": "#6D388B",
+                "highlighted-2_border_radius": 8,
+                "highlighted-2_border_width": 0,
+                "highlighted-2_border": "solid",
+                "highlighted-2_border_color": "#6D388B",
+                "highlighted-2_padding-block": 0.3,
+                "highlighted-2_padding-inline": 0.3,
+                "title_highlight_2_underline-thickness": 2,
+                "title_highlight_2_underline-color": "#6D388B",
+                "title_highlight_2_underline-color--gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                "title_highlight_2_underline-color-position": 25,
+                "title_highlight_2_handwritten-color": "#6D388B",
+                "title_highlight_2_handwritten-stroke-width": 3,
+                "title_highlight_2_handwritten-position": 60,
+                "text_animation": "none",
+                "split_type": "chars",
+                "split_delay": 30,
+                "split_duration": 600,
+                "split_y_offset": 40,
+                "split_animate_on_scroll": true,
+                "shiny_speed": 5,
+                "shiny_on_scroll": false,
+                "blur_type": "words",
+                "blur_direction": "top",
+                "blur_delay": 200,
+                "blur_duration": 350,
+                "blur_animate_on_scroll": true,
+                "highlight_bold_only": false,
+                "remove_bold_styling": false,
+                "highlight_color": "#ffd1dc",
+                "highlight_height": 40,
+                "highlight_position": 10,
+                "highlighter_underline_color": "#000000",
+                "highlighter_underline_thickness": 2,
+                "highlighter_underline_offset": 0,
+                "highlighter_strike_color": "#FF0000",
+                "highlighter_strike_thickness": 2,
+                "highlighter_strike_offset": 0,
+                "highlighter_animation_duration": 800,
+                "highlighter_animation_delay": 200,
+                "highlighter_animate_on_scroll": false,
+                "typing_speed": 50,
+                "typing_initial_delay": 0,
+                "typing_pause_duration": 2000,
+                "typing_deleting_speed": 30,
+                "typing_loop": true,
+                "typing_show_cursor": true,
+                "typing_cursor_character": "|",
+                "typing_cursor_blink_duration": 500,
+                "typing_hide_cursor_while_typing": false,
+                "typing_start_on_visible": false,
+                "typing_reverse_mode": false,
+                "margin_top": 15,
+                "margin_bottom": 15
               },
               "blocks": {}
             },
@@ -650,9 +728,9 @@
             }
           },
           "block_order": [
-            "title",
-            "petsome_tags_1",
             "a6eb81db-40e4-43e0-972f-32db010a4a56",
+            "heading_HDTL7R",
+            "petsome_tags_1",
             "price",
             "kaching_bundles_app_block_1",
             "5fcc0428-e768-4cb7-bea3-eb0274198dd1",
@@ -1315,6 +1393,19 @@
         "padding_bottom": 48
       }
     },
+    "petsome_professional_reviews_BkgaUN": {
+      "type": "petsome-professional-reviews",
+      "name": "Petsome: Expert reviews",
+      "settings": {
+        "heading": "<p>Preverjeno v praksi – s strani strokovnjakov in lastnikov psov</p>",
+        "background_color": "#faf9f6",
+        "star_color": "#ffcc00",
+        "max_lines": 4,
+        "read_more_label": "Preberi več",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
     "petsome_rotating_logos_1": {
       "type": "petsome-rotating-logos",
       "settings": {
@@ -1337,6 +1428,31 @@
         "star_color": "#ffcc00",
         "padding_top": 64,
         "padding_bottom": 64
+      }
+    },
+    "17827582468bb08a41": {
+      "type": "apps",
+      "blocks": {
+        "loox_reviews_loox_dynamic_section_dAPRGq": {
+          "type": "shopify://apps/loox-reviews/blocks/loox-dynamic-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "settings": {
+            "reviews_to_display": "",
+            "default_tab": "automatic",
+            "only_photos": false,
+            "aggregated": false,
+            "limit": 5,
+            "hide_thumbnails": false,
+            "maxwidth": 1080,
+            "is_sample": true
+          }
+        }
+      },
+      "block_order": [
+        "loox_reviews_loox_dynamic_section_dAPRGq"
+      ],
+      "settings": {
+        "display_id": false,
+        "include_margins": true
       }
     },
     "petsome_faq_1": {
@@ -1407,17 +1523,6 @@
         "padding_top": 36,
         "padding_bottom": 24
       }
-    },
-    "petsome_professional_reviews_BkgaUN": {
-      "type": "petsome-professional-reviews",
-      "name": "Petsome: Expert reviews",
-      "settings": {
-        "heading": "<p>Preverjeno v praksi – s strani strokovnjakov in lastnikov psov</p>",
-        "background_color": "#FAF9F6",
-        "star_color": "#FFCC00",
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
     }
   },
   "order": [
@@ -1437,6 +1542,7 @@
     "petsome_professional_reviews_BkgaUN",
     "petsome_rotating_logos_1",
     "petsome_customer_reviews_1",
+    "17827582468bb08a41",
     "petsome_faq_1",
     "related-products"
   ]
