@@ -45,6 +45,40 @@
               },
               "blocks": {}
             },
+            "petsome_tags_1": {
+              "type": "product_petsome-tags",
+              "blocks": {
+                "tag_1": {
+                  "type": "tag",
+                  "settings": {
+                    "text": "Podpora sklepom"
+                  }
+                },
+                "tag_2": {
+                  "type": "tag",
+                  "settings": {
+                    "text": "Večja gibljivost"
+                  }
+                },
+                "tag_3": {
+                  "type": "tag",
+                  "settings": {
+                    "text": "Veterinarsko podprto"
+                  }
+                }
+              },
+              "block_order": [
+                "tag_1",
+                "tag_2",
+                "tag_3"
+              ],
+              "settings": {
+                "accent_color": "#f8aaa7",
+                "accent_color_dark": "#f47671",
+                "margin_top": 0,
+                "margin_bottom": 15
+              }
+            },
             "a6eb81db-40e4-43e0-972f-32db010a4a56": {
               "type": "rating-stars",
               "settings": {
@@ -617,6 +651,7 @@
           },
           "block_order": [
             "title",
+            "petsome_tags_1",
             "a6eb81db-40e4-43e0-972f-32db010a4a56",
             "price",
             "kaching_bundles_app_block_1",

@@ -1,0 +1,132 @@
+{% comment %}
+  Petsome: Tags - a wrapping row of repeatable small gradient pill tags
+  (e.g. "Podpora sklepom", "Veterinarsko podprto"), for use inside the
+  Product information block area. Add as many tags as needed. Gradient
+  defaults to the product's "Product accent color" / "Product accent
+  color (gradient end)" metafields when set, falling back to this
+  block's own color settings otherwise. Generic/reusable across any
+  product.
+{% endcomment %}
+{%- liquid
+  assign accent_color = product.metafields.custom.product_accent_color.value | default: block.settings.accent_color
+  assign accent_color_dark = product.metafields.custom.product_accent_color_dark.value | default: block.settings.accent_color_dark
+-%}
+<style>
+  #petsome-tags-{{ block.id }} {
+    --petsome-tags-accent: {{ accent_color }};
+    {%- if accent_color_dark != blank -%}
+      --petsome-tags-accent-dark: {{ accent_color_dark }};
+    {%- else -%}
+      --petsome-tags-accent-dark: color-mix(in srgb, var(--petsome-tags-accent) 70%, black);
+    {%- endif -%}
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  }
+
+  #petsome-tags-{{ block.id }} .petsome-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    border-radius: 4px;
+    background: linear-gradient(180deg, var(--petsome-tags-accent) 0%, var(--petsome-tags-accent-dark) 100%);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+  }
+</style>
+
+{%- if block.blocks.size > 0 -%}
+  <div id="petsome-tags-{{ block.id }}" class="petsome-tags" {{ block.shopify_attributes }}>
+    {%- for tag_block in block.blocks -%}
+      {%- if tag_block.settings.text != blank -%}
+        <span class="petsome-tag" {{ tag_block.shopify_attributes }}>{{ tag_block.settings.text }}</span>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Petsome: Tags",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "tag",
+      "name": "Tag",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "default": "Tag text"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "If the product has \"Product accent color\" / \"Product accent color (gradient end)\" metafields set, those values are used instead of the colors below - these only apply as a fallback when the metafields are blank."
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color (fallback)",
+      "default": "#F8AAA7"
+    },
+    {
+      "type": "color",
+      "id": "accent_color_dark",
+      "label": "Accent color dark / gradient end (fallback)",
+      "info": "Set \"Product accent color (gradient end)\" on the product to control this precisely; if left blank everywhere, it's auto-darkened from the accent color.",
+      "default": "#F47671"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Tags",
+      "category": "Product basics",
+      "blocks": [
+        { "type": "tag" },
+        { "type": "tag" },
+        { "type": "tag" }
+      ]
+    }
+  ]
+}
+{% endschema %}
