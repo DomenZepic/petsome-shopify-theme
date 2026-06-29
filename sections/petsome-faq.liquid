@@ -147,6 +147,19 @@
   }
 </style>
 
+{% comment %} TEMPORARY DEBUG - remove once the empty-render issue is diagnosed {% endcomment %}
+<div style="background:#ffe6e6;border:2px solid red;padding:12px;font-size:14px;font-family:monospace;white-space:pre-wrap;">
+DEBUG petsome-faq:
+product_faqs.size = {{ product_faqs.size }}
+global_faqs.size = {{ global_faqs.size }}
+all_faqs.size = {{ all_faqs.size }}
+product.metafields.custom.product_faqs exists = {% if product.metafields.custom.product_faqs %}YES{% else %}NO{% endif %}
+product.metafields.custom.product_faqs.value.size = {{ product.metafields.custom.product_faqs.value.size }}
+shop.metafields.custom.global_faqs exists = {% if shop.metafields.custom.global_faqs %}YES{% else %}NO{% endif %}
+shop.metafields.custom.global_faqs.value.size = {{ shop.metafields.custom.global_faqs.value.size }}
+first faq question (if any) = {{ all_faqs.first.question.value }}
+</div>
+
 {%- if all_faqs.size > 0 -%}
   <div id="petsome-faq-{{ section.id }}" class="petsome-faq">
     <div class="petsome-faq__inner">
