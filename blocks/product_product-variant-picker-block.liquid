@@ -9,7 +9,53 @@
   if section.settings.product_images == 'all' or section.settings.product_images == 'one'
     assign product = section.settings.product
   endif
+
+  assign petsome_pill_secondary = product.metafields.custom.product_secondary_color.value | default: '#E8D6C5'
 %}
+
+{% comment %}
+  Petsome: pill variant-option restyle - applies everywhere this block
+  renders a "pills" picker type, so every product's pill picker gets the
+  same flat-card look (white/neutral border unselected, secondary-tinted
+  border+background selected). Selected color follows the product's
+  "Product secondary color" metafield, falling back to #E8D6C5.
+{% endcomment %}
+<style>
+  .product-form__input--pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .product-form__input--pills label {
+    flex: 1 0 0;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    padding: 16px !important;
+    border: 2px solid #e7e7e7 !important;
+    border-radius: 12px !important;
+    background-color: #ffffff !important;
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 1.4;
+    color: rgb(var(--color-foreground)) !important;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .product-form__input--pills input[type='radio']:checked + label {
+    border-color: {{ petsome_pill_secondary }} !important;
+    background-color: color-mix(in srgb, {{ petsome_pill_secondary }} 20%, white) !important;
+  }
+
+  .product-form__input--pills label.disabled,
+  .product-form__input--pills input[type='radio'].disabled + label {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+</style>
 
 {% capture sizing_chart_html %}
   {% content_for 'blocks' %}

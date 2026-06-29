@@ -114,7 +114,7 @@
                 "picker_types": "pills",
                 "skip_unavailable": false,
                 "custom_labels": "[name] - [selected]",
-                "labels_size": 15,
+                "labels_size": 16,
                 "labels_font": "body-bold",
                 "labels_color": "text",
                 "labels_custom_color": "#dd1d1d",
