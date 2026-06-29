@@ -632,6 +632,22 @@
               },
               "blocks": {}
             },
+            "product_petsome_professional_review_BGLaVX": {
+              "type": "product_petsome-professional-review",
+              "name": "Petsome: Expert review",
+              "settings": {
+                "image": "shopify://shop_images/unnamed_1.jpg",
+                "rating": 5,
+                "quote": "\"Pri starejših in aktivnih psih pogosto opažamo spremembe v gibanju, ki niso nujno takoj boleče, a vplivajo na kakovost življenja. MobiMix cilja ključne elemente, povezane z zdravjem sklepov in gibanjem. Pomaga vašemu psu ostati aktiven in brez bolečin z podporo obnovi hrustanca, mazanju sklepov in zmanjšanju vnetja.\"",
+                "author": "Blaž Petelinek Ledinski, dr. vet. med.",
+                "role": "",
+                "background_color": "#FFFFFF",
+                "star_color": "#FFCC00",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
             "e7a28cbe-03cb-4c9d-a2c4-0e3e76ffb3e5": {
               "type": "product_sticky-atc",
               "settings": {
@@ -773,6 +789,7 @@
             "5fcc0428-e768-4cb7-bea3-eb0274198dd1",
             "kaching_custom_display_1",
             "buy_buttons",
+            "product_petsome_professional_review_BGLaVX",
             "e7a28cbe-03cb-4c9d-a2c4-0e3e76ffb3e5",
             "description",
             "reviews_8UgFbe",
