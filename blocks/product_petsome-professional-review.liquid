@@ -1,0 +1,233 @@
+{% comment %}
+  Petsome: Professional review - a compact card (avatar image, star
+  rating, quote, author) for use inside the Product information block
+  area. Image sits beside the content on desktop, stacks above it on
+  mobile. Generic/reusable across any product.
+{% endcomment %}
+<style>
+  #petsome-pro-review-{{ block.id }} {
+    --ppr-star: {{ block.settings.star_color }};
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background-color: {{ block.settings.background_color }};
+    border-radius: 12px;
+    box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  }
+
+  #petsome-pro-review-{{ block.id }} p {
+    margin: 0;
+  }
+
+  #petsome-pro-review-{{ block.id }} .petsome-pro-review__image-wrapper {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #d9d9d9;
+  }
+
+  #petsome-pro-review-{{ block.id }} .petsome-pro-review__image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #petsome-pro-review-{{ block.id }} .petsome-pro-review__content {
+    flex: 1 0 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  #petsome-pro-review-{{ block.id }} .petsome-pro-review__top {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  #petsome-pro-review-{{ block.id }} .petsome-pro-review__rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #petsome-pro-review-{{ block.id }} .petsome-pro-review__stars {
+    display: flex;
+    gap: 5px;
+  }
+
+  #petsome-pro-review-{{ block.id }} .petsome-pro-review__stars .material-icon {
+    font-size: 1.4rem;
+    color: var(--ppr-star);
+  }
+
+  #petsome-pro-review-{{ block.id }} .petsome-pro-review__rating-label {
+    font-weight: 700;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-decoration: underline;
+    color: rgb(var(--color-foreground));
+  }
+
+  #petsome-pro-review-{{ block.id }} .petsome-pro-review__quote {
+    font-style: italic;
+    font-size: 1.4rem;
+    line-height: 1.3;
+    color: rgb(var(--color-foreground));
+  }
+
+  #petsome-pro-review-{{ block.id }} .petsome-pro-review__author {
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 1.3;
+    color: rgb(var(--color-foreground));
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-pro-review-{{ block.id }} {
+      flex-direction: column;
+    }
+
+    #petsome-pro-review-{{ block.id }} .petsome-pro-review__image-wrapper {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+    }
+  }
+</style>
+
+<div id="petsome-pro-review-{{ block.id }}" class="petsome-pro-review" {{ block.shopify_attributes }}>
+  {%- if block.settings.image != blank -%}
+    <div class="petsome-pro-review__image-wrapper">
+      <img
+        src="{{ block.settings.image | image_url: width: 320 }}"
+        alt="{{ block.settings.author | escape }}"
+        width="{{ block.settings.image.width }}"
+        height="{{ block.settings.image.height }}"
+        loading="lazy"
+      >
+    </div>
+  {%- endif -%}
+  <div class="petsome-pro-review__content">
+    <div class="petsome-pro-review__top">
+      {%- if block.settings.rating != blank -%}
+        <div class="petsome-pro-review__rating">
+          <div class="petsome-pro-review__stars">
+            {%- for i in (1..5) -%}
+              {%- assign is_filled = false -%}
+              {%- if i <= block.settings.rating -%}
+                {%- assign is_filled = true -%}
+              {%- endif -%}
+              {% render 'material-icon', icon: 'star', filled: is_filled %}
+            {%- endfor -%}
+          </div>
+          <p class="petsome-pro-review__rating-label">{{ block.settings.rating }} / 5</p>
+        </div>
+      {%- endif -%}
+      {%- if block.settings.quote != blank -%}
+        <p class="petsome-pro-review__quote">{{ block.settings.quote }}</p>
+      {%- endif -%}
+    </div>
+    {%- if block.settings.author != blank -%}
+      <p class="petsome-pro-review__author">
+        {{ block.settings.author }}{% if block.settings.role != blank %}, {{ block.settings.role }}{% endif %}
+      </p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Petsome: Professional review",
+  "tag": null,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Reviewer photo"
+    },
+    {
+      "type": "range",
+      "id": "rating",
+      "label": "Rating",
+      "min": 0,
+      "max": 5,
+      "step": 0.1,
+      "default": 5
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "\"This product made a noticeable difference for my patients.\""
+    },
+    {
+      "type": "text",
+      "id": "author",
+      "label": "Author name",
+      "default": "Dr. Jane Doe"
+    },
+    {
+      "type": "text",
+      "id": "role",
+      "label": "Role / title",
+      "info": "E.g. a professional title. Leave blank to hide.",
+      "default": "DVM"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Card background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star rating color",
+      "default": "#FFCC00"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Professional review",
+      "category": "Product basics"
+    }
+  ]
+}
+{% endschema %}
