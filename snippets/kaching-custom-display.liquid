@@ -28,21 +28,103 @@
     {%- else -%}
       --kaching-accent-dark: color-mix(in srgb, var(--kaching-accent) 70%, black);
     {%- endif -%}
-    --kaching-secondary-tint: color-mix(in srgb, var(--kaching-secondary) 15%, white);
-    --kaching-accent-tint: color-mix(in srgb, var(--kaching-accent) 20%, white);
+    --kaching-secondary-tint: color-mix(in srgb, var(--kaching-secondary) 20%, white);
+    --kaching-gift-bg: rgba(193, 122, 79, 0.2);
+    display: block;
   }
 
-  .kaching-custom-display__heading {
+  .kaching-custom-display p {
+    margin: 0;
+  }
+
+  .kaching-custom-display__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .kaching-custom-display__top {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .kaching-custom-display__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .kaching-custom-display__header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1 0 0;
+    min-width: 0;
+  }
+
+  .kaching-custom-display__title {
     font-weight: 700;
-    font-size: 1.6rem;
-    margin: 0 0 1rem;
+    font-size: 2.4rem;
+    line-height: 1.4;
     color: rgb(var(--color-foreground));
+  }
+
+  .kaching-custom-display__savings-badge {
+    display: inline-flex;
+    align-self: flex-start;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 12px;
+    border-radius: 4px;
+    background: linear-gradient(180deg, var(--kaching-accent) 0%, var(--kaching-accent-dark) 100%);
+  }
+
+  .kaching-custom-display__savings-badge .material-icon {
+    font-size: 1.6rem;
+    color: {{ block.settings.light_text_color }};
+  }
+
+  .kaching-custom-display__savings-badge-text {
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.05;
+    color: {{ block.settings.light_text_color }};
+    white-space: nowrap;
+  }
+
+  .kaching-custom-display__price-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .kaching-custom-display__price-current {
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 1.4;
+    color: rgb(var(--color-foreground));
+    white-space: nowrap;
+  }
+
+  .kaching-custom-display__price-compare {
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: #565858;
+    text-decoration: line-through;
+    white-space: nowrap;
   }
 
   .kaching-custom-display__tiles {
     display: flex;
     flex-direction: column;
-    gap: 0.8rem;
+    gap: 8px;
   }
 
   .kaching-custom-display__loading,
@@ -51,20 +133,66 @@
     color: rgba(var(--color-foreground), 0.7);
   }
 
+  .kaching-tile-wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .kaching-tile-wrapper__label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px 2px;
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 1.3;
+    text-align: center;
+  }
+
+  .kaching-tile-wrapper--recommended {
+    background-color: var(--kaching-secondary);
+  }
+
+  .kaching-tile-wrapper--recommended .kaching-tile-wrapper__label {
+    color: rgb(var(--color-foreground));
+  }
+
+  .kaching-tile-wrapper--best {
+    background-color: var(--kaching-accent);
+  }
+
+  .kaching-tile-wrapper--best .kaching-tile-wrapper__label {
+    color: {{ block.settings.light_text_color }};
+  }
+
   .kaching-tile {
     position: relative;
     display: flex;
     align-items: center;
-    gap: 1.2rem;
+    gap: 12px;
     width: 100%;
     text-align: left;
-    background: #ffffff;
-    border: 0.2rem solid #e7e7e7;
-    border-radius: 1.2rem;
-    padding: 1.2rem;
+    background-color: #ffffff;
+    border: 2px solid #e7e7e7;
+    border-radius: 12px;
+    padding: 12px;
     font-family: inherit;
     cursor: pointer;
-    transition: border-color 0.15s ease;
+  }
+
+  .kaching-tile-wrapper--recommended .kaching-tile {
+    border-color: var(--kaching-secondary);
+    background-color: var(--kaching-secondary-tint);
+  }
+
+  .kaching-tile-wrapper--best .kaching-tile {
+    border-color: var(--kaching-accent);
+    background-color: #ffffff;
+  }
+
+  .kaching-tile--selected {
+    border-color: var(--kaching-secondary) !important;
+    background-color: var(--kaching-secondary-tint) !important;
   }
 
   .kaching-tile:disabled {
@@ -72,41 +200,11 @@
     opacity: 0.5;
   }
 
-  .kaching-tile--selected {
-    border-color: var(--kaching-accent);
-  }
-
-  .kaching-tile[data-badge-style="recommended"] {
-    background: var(--kaching-secondary-tint);
-    border-color: var(--kaching-secondary);
-  }
-
-  .kaching-tile[data-badge-style="best"] {
-    border-color: var(--kaching-accent);
-  }
-
-  .kaching-tile__badge {
-    position: absolute;
-    top: -1.1rem;
-    left: 1.2rem;
-    font-size: 1.2rem;
-    font-weight: 700;
-    padding: 0.2rem 1rem;
-    border-radius: 0.6rem;
-    background: var(--kaching-secondary);
-    color: #0e1111;
-  }
-
-  .kaching-tile[data-badge-style="best"] .kaching-tile__badge {
-    background: linear-gradient(180deg, var(--kaching-accent) 0%, var(--kaching-accent-dark) 100%);
-    color: #fef6f6;
-  }
-
   .kaching-tile__image {
     flex-shrink: 0;
-    width: 6rem;
-    height: 6rem;
-    border-radius: 0.8rem;
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
     background-color: #f4f4f4;
     background-size: cover;
     background-position: center;
@@ -115,19 +213,29 @@
   .kaching-tile__content {
     display: flex;
     flex-direction: column;
-    gap: 0.2rem;
-    flex: 1;
+    gap: 4px;
+    flex: 1 0 0;
     min-width: 0;
   }
 
   .kaching-tile__title {
     font-weight: 700;
-    font-size: 1.7rem;
-    color: #0e1111;
+    font-size: 2rem;
+    line-height: 1.2;
+    color: rgb(var(--color-foreground));
   }
 
-  .kaching-tile__subtitle {
-    font-size: 1.3rem;
+  .kaching-tile__price {
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 1.3;
+    color: rgb(var(--color-foreground));
+  }
+
+  .kaching-tile__dosage {
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 1.3;
     color: #565858;
   }
 
@@ -137,79 +245,89 @@
     font-weight: 700;
   }
 
-  .kaching-tile__price {
-    flex-shrink: 0;
-    font-weight: 700;
-    font-size: 1.6rem;
-    color: #0e1111;
+  .kaching-custom-display__disclaimer {
+    font-size: 1.4rem;
+    line-height: 1.3;
+    color: rgb(var(--color-foreground));
+    text-align: center;
   }
 
   .kaching-custom-display__gifts {
-    margin-top: 1.6rem;
-    background: #ffffff;
-    border: 0.2rem solid var(--kaching-secondary);
-    border-radius: 1.2rem;
+    background-color: #ffffff;
+    border: 2px solid var(--kaching-secondary);
+    border-radius: 12px;
     overflow: hidden;
   }
 
   .kaching-custom-display__gifts-heading {
     margin: 0;
-    padding: 0.8rem 1.2rem;
-    background: var(--kaching-secondary);
-    color: #0e1111;
+    padding: 8px 12px;
+    background-color: var(--kaching-secondary);
+    color: rgb(var(--color-foreground));
     font-weight: 700;
-    font-size: 1.4rem;
+    font-size: 2rem;
     text-align: center;
     text-transform: uppercase;
   }
 
+  @media screen and (max-width: 749px) {
+    .kaching-custom-display__gifts-heading {
+      font-size: 1.8rem;
+    }
+  }
+
   .kaching-custom-display__gifts-list {
     display: flex;
-    gap: 1.2rem;
-    padding: 1.2rem;
+    gap: 12px;
+    padding: 12px;
   }
 
   .kaching-gift {
-    flex: 1;
+    flex: 1 0 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.6rem;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px;
+    background-color: var(--kaching-gift-bg);
+    border: 2px dashed #b7b8b8;
+    border-radius: 12px;
     text-align: center;
   }
 
   .kaching-gift__image {
-    width: 4rem;
-    height: 4rem;
-    border-radius: 0.8rem;
-    background-color: var(--kaching-accent-tint);
-    background-size: cover;
-    background-position: center;
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    flex-shrink: 0;
+  }
+
+  .kaching-gift__icon {
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
-    opacity: 0.5;
-    filter: grayscale(1);
+    flex-shrink: 0;
   }
 
-  .kaching-gift--unlocked .kaching-gift__image {
-    opacity: 1;
-    filter: none;
+  .kaching-gift__icon .material-icon {
+    font-size: 3.2rem;
+    color: rgb(var(--color-foreground));
   }
 
   .kaching-gift__title {
-    font-size: 1.3rem;
-    color: #0e1111;
+    font-size: 1.4rem;
+    line-height: 1.3;
+    color: rgb(var(--color-foreground));
   }
 
-  .kaching-gift:not(.kaching-gift--unlocked) .kaching-gift__title {
-    color: #a0a0a0;
-  }
-
-  .kaching-gift__lock-text {
-    font-size: 1.1rem;
-    color: #565858;
+  .kaching-gift__compare-price {
+    font-size: 1.2rem;
+    line-height: 1.3;
+    color: rgb(var(--color-foreground));
+    text-decoration: line-through;
   }
 </style>
 
@@ -227,18 +345,36 @@
     data-section="{{ section.id }}"
     data-capsules-per-package="{{ block.settings.capsules_per_package }}"
     data-capsules-per-day-by-size="{{ block.settings.capsules_per_day_by_size }}"
+    data-product-title="{{ product.title | escape }}"
   >
-    {% if block.settings.heading != blank %}
-      <p class="kaching-custom-display__heading">{{ block.settings.heading }}</p>
-    {% endif %}
-    <div class="kaching-custom-display__tiles" data-tiles-container>
-      <p class="kaching-custom-display__loading">{{ 'accessibility.loading' | t }}</p>
-    </div>
-    <div class="kaching-custom-display__gifts" hidden>
-      {% if block.settings.gifts_heading != blank %}
-        <p class="kaching-custom-display__gifts-heading">{{ block.settings.gifts_heading }}</p>
-      {% endif %}
-      <div class="kaching-custom-display__gifts-list" data-gifts-container></div>
+    <div class="kaching-custom-display__inner">
+      <div class="kaching-custom-display__top">
+        <div class="kaching-custom-display__header" data-header-container hidden>
+          <div class="kaching-custom-display__header-left">
+            <p class="kaching-custom-display__title" data-header-title></p>
+            <span class="kaching-custom-display__savings-badge" data-savings-badge hidden>
+              {% render 'material-icon', icon: 'sell' %}
+              <span class="kaching-custom-display__savings-badge-text" data-savings-badge-text></span>
+            </span>
+          </div>
+          <div class="kaching-custom-display__price-block">
+            <p class="kaching-custom-display__price-current" data-header-price-current></p>
+            <p class="kaching-custom-display__price-compare" data-header-price-compare hidden></p>
+          </div>
+        </div>
+        <div class="kaching-custom-display__tiles" data-tiles-container>
+          <p class="kaching-custom-display__loading">{{ 'accessibility.loading' | t }}</p>
+        </div>
+        {%- if block.settings.disclaimer_text != blank -%}
+          <div class="kaching-custom-display__disclaimer">{{ block.settings.disclaimer_text }}</div>
+        {%- endif -%}
+      </div>
+      <div class="kaching-custom-display__gifts" hidden>
+        {% if block.settings.gifts_heading != blank %}
+          <p class="kaching-custom-display__gifts-heading">{{ block.settings.gifts_heading }}</p>
+        {% endif %}
+        <div class="kaching-custom-display__gifts-list" data-gifts-container></div>
+      </div>
     </div>
   </kaching-custom-display>
 </div>

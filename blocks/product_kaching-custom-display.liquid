@@ -11,13 +11,14 @@
     },
     {
       "type": "paragraph",
-      "content": "Replaces Kaching Bundles' own widget UI with our custom tiles, while keeping Kaching's pricing/discount/gift logic. Requires a Kaching Bundles app block to already be present on this page (it gets hidden automatically) and a deal configured for this product."
+      "content": "Replaces Kaching Bundles' own widget UI with our custom tiles, while keeping Kaching's pricing/discount/cart/gift logic. Requires a Kaching Bundles app block to already be present on this page (it gets hidden automatically) and a deal configured for this product."
     },
     {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Choose your package"
+      "type": "richtext",
+      "id": "disclaimer_text",
+      "label": "Disclaimer text",
+      "info": "Shown below the package tiles. Leave blank to hide.",
+      "default": "<p>*First changes are visible in 2-3 weeks. For best results we recommend 2-3 months of use.</p>"
     },
     {
       "type": "text",
@@ -38,22 +39,29 @@
       "type": "color",
       "id": "accent_color",
       "label": "Accent color (fallback)",
-      "info": "Used for the selected tile border, the \"best savings\" badge, and the gifts panel highlight.",
+      "info": "Used for the savings badge gradient and the \"best savings\" tile/badge.",
       "default": "#f8aaa7"
     },
     {
       "type": "color",
       "id": "accent_color_dark",
       "label": "Accent color dark / gradient end (fallback)",
-      "info": "Used as the darker end of the \"best savings\" badge gradient. Same metafield-first pattern: set \"Product accent color (gradient end)\" on the product to control this precisely; if left blank everywhere, it's auto-darkened from the accent color.",
+      "info": "Used as the darker end of the savings badge gradient. Same metafield-first pattern: set \"Product accent color (gradient end)\" on the product to control this precisely; if left blank everywhere, it's auto-darkened from the accent color.",
       "default": "#f47671"
     },
     {
       "type": "color",
       "id": "secondary_color",
       "label": "Secondary color (fallback)",
-      "info": "Used for the \"recommended\" tile/badge and the gifts panel heading.",
+      "info": "Used for the \"recommended\" tile/badge, the selected-tile highlight, and the gifts panel.",
       "default": "#e8d6c5"
+    },
+    {
+      "type": "color",
+      "id": "light_text_color",
+      "label": "Light text color",
+      "info": "Used for text on top of the accent-colored savings badge and \"best savings\" label.",
+      "default": "#FAF9F6"
     },
     {
       "type": "header",

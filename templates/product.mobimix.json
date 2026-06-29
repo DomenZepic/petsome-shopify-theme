@@ -168,11 +168,12 @@
             "kaching_custom_display_1": {
               "type": "product_kaching-custom-display",
               "settings": {
-                "heading": "Izberite svoj paket",
+                "disclaimer_text": "<p>*Prve spremembe so vidne v 2–3 tednih.  Za najboljše rezultate priporočamo uporabo 2–3 mesece.</p>",
                 "gifts_heading": "Brezplačna darila ob nakupu",
                 "accent_color": "#f8aaa7",
                 "accent_color_dark": "#f47671",
                 "secondary_color": "#e8d6c5",
+                "light_text_color": "#faf9f6",
                 "capsules_per_package": 90,
                 "capsules_per_day_by_size": "1, 2, 3",
                 "margin_top": 15,

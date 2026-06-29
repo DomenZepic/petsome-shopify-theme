@@ -2,12 +2,19 @@ if (!customElements.get('kaching-custom-display')) {
   class KachingCustomDisplay extends HTMLElement {
     connectedCallback() {
       this.sectionId = this.dataset.section;
+      this.productTitle = this.dataset.productTitle || '';
       this.capsulesPerPackage = parseFloat(this.dataset.capsulesPerPackage) || 0;
       this.capsulesPerDayBySize = (this.dataset.capsulesPerDayBySize || '')
         .split(',')
         .map((value) => parseFloat(value.trim()))
         .filter((value) => !Number.isNaN(value));
 
+      this.headerContainer = this.querySelector('[data-header-container]');
+      this.headerTitle = this.querySelector('[data-header-title]');
+      this.savingsBadge = this.querySelector('[data-savings-badge]');
+      this.savingsBadgeText = this.querySelector('[data-savings-badge-text]');
+      this.headerPriceCurrent = this.querySelector('[data-header-price-current]');
+      this.headerPriceCompare = this.querySelector('[data-header-price-compare]');
       this.tilesContainer = this.querySelector('[data-tiles-container]');
       this.giftsContainer = this.querySelector('[data-gifts-container]');
       this.giftsWrapper = this.giftsContainer
@@ -118,7 +125,7 @@ if (!customElements.get('kaching-custom-display')) {
 
     resolveGiftDisplay(gift) {
       if (gift.giftType === 'shipping') {
-        return { title: gift.title, image: null, icon: '🚚' };
+        return { title: gift.title, image: null, icon: 'local_shipping' };
       }
       if (gift.productGID) {
         const numericId = gift.productGID.split('/').pop();
@@ -128,13 +135,13 @@ if (!customElements.get('kaching-custom-display')) {
         if (productEl) {
           try {
             const productData = JSON.parse(productEl.textContent);
-            return { title: productData.title, image: productData.image, icon: '🎁' };
+            return { title: productData.title, image: productData.image, icon: 'redeem' };
           } catch (error) {
             // fall through to default below
           }
         }
       }
-      return { title: gift.title === '{{product}}' ? 'Gift' : gift.title, image: null, icon: '🎁' };
+      return { title: gift.title === '{{product}}' ? 'Gift' : gift.title, image: null, icon: 'redeem' };
     }
 
     collectGifts() {
@@ -160,6 +167,7 @@ if (!customElements.get('kaching-custom-display')) {
           title: display.title,
           image: display.image,
           icon: display.icon,
+          comparePrice: gift.comparePrice || null,
           lockedTitle: gift.lockedTitle,
           unlockAtBar: gift.unlockAtBar,
         };
@@ -184,14 +192,19 @@ if (!customElements.get('kaching-custom-display')) {
       this.refresh();
     }
 
+    getBasePrice(variant) {
+      if (!variant) return null;
+      return Number(variant.price) / 100 || Number(variant.price);
+    }
+
     // discountType is "default" (no discount), "percentage" (off the
     // quantity x base-price total), or "specific" (discountValue IS the
     // exact final total price for the tier, confirmed against Kaching's
     // own rendered per-item price: e.g. discountValue 69.8 for a 2x tier
     // renders as "€34,90" per item, i.e. 69.8 / 2).
     computeFallbackPrice(tier, variant) {
-      if (!variant) return null;
-      const basePrice = Number(variant.price) / 100 || Number(variant.price);
+      const basePrice = this.getBasePrice(variant);
+      if (basePrice == null) return null;
       if (tier.discountType === 'specific') {
         return tier.discountValue;
       }
@@ -222,15 +235,18 @@ if (!customElements.get('kaching-custom-display')) {
       const variant = this.getSelectedVariant();
       this.currentImageUrl = variant && variant.featured_image ? variant.featured_image.src : null;
       const available = variant ? variant.available !== false : true;
+      const basePrice = this.getBasePrice(variant);
 
       const tilesData = this.dealBars.map((tier) => ({
         tier,
         price: this.computeFallbackPrice(tier, variant),
+        comparePrice: basePrice != null ? basePrice * tier.quantity : null,
         valid: available,
         validationMessage: available ? null : 'Unavailable',
         dosage: this.computeDosage(tier, sizeIndex),
       }));
 
+      this.renderHeader(tilesData);
       this.renderTiles(tilesData);
       this.renderGifts();
 
@@ -281,6 +297,7 @@ if (!customElements.get('kaching-custom-display')) {
       });
 
       if (changed) {
+        this.renderHeader(tilesData);
         this.renderTiles(tilesData);
       }
 
@@ -310,45 +327,81 @@ if (!customElements.get('kaching-custom-display')) {
       }
     }
 
+    renderHeader(tilesData) {
+      if (!this.headerContainer) return;
+      const selected = tilesData.find((data) => data.tier.id === (this.selectedDealBarId || this.preselectedDealBarId))
+        || tilesData[0];
+      if (!selected) {
+        this.headerContainer.hidden = true;
+        return;
+      }
+
+      this.headerContainer.hidden = false;
+      this.headerTitle.textContent = `${selected.tier.quantity}x ${this.productTitle}`;
+      this.headerPriceCurrent.textContent = this.formatMoney(selected.price);
+
+      const hasSavings = selected.comparePrice != null && selected.comparePrice > selected.price + 0.005;
+      this.headerPriceCompare.hidden = !hasSavings;
+      this.headerPriceCompare.textContent = hasSavings ? this.formatMoney(selected.comparePrice) : '';
+
+      this.savingsBadge.hidden = !hasSavings;
+      if (hasSavings) {
+        this.savingsBadgeText.textContent = `Prihraniš ${this.formatMoney(selected.comparePrice - selected.price)}`;
+      }
+    }
+
     renderTiles(tilesData) {
       this.tilesContainer.innerHTML = '';
 
       tilesData.forEach(({ tier, price, valid, validationMessage, dosage }) => {
-        const tile = document.createElement('button');
-        tile.type = 'button';
-        tile.className = 'kaching-tile';
-        tile.disabled = !valid;
-        tile.dataset.dealBarId = tier.id;
-        tile.dataset.badgeStyle = this.badgeStyleFor(tier.badgeText);
+        const badgeStyle = this.badgeStyleFor(tier.badgeText);
+        const isSelected = tier.id === (this.selectedDealBarId || this.preselectedDealBarId);
 
-        const badge = tier.badgeText
-          ? `<span class="kaching-tile__badge">${tier.badgeText}</span>`
-          : '';
-
-        const subtitleParts = [];
-        if (tier.subtitle) subtitleParts.push(tier.subtitle);
+        const dosageLines = [];
         if (dosage) {
-          subtitleParts.push(
-            `${dosage.monthsSupply}-mesečna zaloga (${dosage.totalCapsules} kapsul) · ${this.formatMoney(price / (dosage.daysSupply || 1))} / dan`
-          );
+          dosageLines.push(`${dosage.monthsSupply}-mesečna zaloga (${dosage.totalCapsules} kapsul)`);
+          dosageLines.push(`${this.formatMoney(price / (dosage.daysSupply || 1))} / dan`);
+        } else if (tier.subtitle) {
+          dosageLines.push(tier.subtitle);
         }
 
-        tile.innerHTML = `
-          ${badge}
-          <span class="kaching-tile__image" aria-hidden="true"${this.currentImageUrl ? ` style="background-image:url('${this.currentImageUrl}')"` : ''}></span>
-          <span class="kaching-tile__content">
-            <span class="kaching-tile__title">${tier.title}</span>
-            <span class="kaching-tile__subtitle">${subtitleParts.join(' · ')}</span>
-            ${!valid ? `<span class="kaching-tile__unavailable">${validationMessage || 'Unavailable'}</span>` : ''}
-          </span>
-          <span class="kaching-tile__price">${this.formatMoney(price)}</span>
+        const tileHtml = `
+          <button
+            type="button"
+            class="kaching-tile${isSelected ? ' kaching-tile--selected' : ''}"
+            ${valid ? '' : 'disabled'}
+            data-deal-bar-id="${tier.id}"
+          >
+            <span class="kaching-tile__image" aria-hidden="true"${this.currentImageUrl ? ` style="background-image:url('${this.currentImageUrl}')"` : ''}></span>
+            <span class="kaching-tile__content">
+              <span class="kaching-tile__title">${tier.title}</span>
+              <span class="kaching-tile__price">${this.formatMoney(price)}</span>
+              ${dosageLines.map((line) => `<span class="kaching-tile__dosage">${line}</span>`).join('')}
+              ${!valid ? `<span class="kaching-tile__unavailable">${validationMessage || 'Unavailable'}</span>` : ''}
+            </span>
+          </button>
         `;
 
-        tile.addEventListener('click', () => this.handleTileClick(tier));
-        this.tilesContainer.appendChild(tile);
+        let wrapperEl;
+        if (badgeStyle === 'none') {
+          wrapperEl = document.createElement('div');
+          wrapperEl.innerHTML = tileHtml;
+        } else {
+          wrapperEl = document.createElement('div');
+          wrapperEl.className = `kaching-tile-wrapper kaching-tile-wrapper--${badgeStyle}`;
+          wrapperEl.innerHTML = `
+            <p class="kaching-tile-wrapper__label">${tier.badgeText}</p>
+            ${tileHtml}
+          `;
+        }
 
-        if (tier.id === (this.selectedDealBarId || this.preselectedDealBarId)) {
-          tile.classList.add('kaching-tile--selected');
+        const tileButton = wrapperEl.querySelector('.kaching-tile');
+        tileButton.addEventListener('click', () => this.handleTileClick(tier));
+
+        if (badgeStyle === 'none') {
+          this.tilesContainer.appendChild(tileButton);
+        } else {
+          this.tilesContainer.appendChild(wrapperEl);
         }
       });
     }
@@ -378,17 +431,20 @@ if (!customElements.get('kaching-custom-display')) {
         .map((gift) => {
           const unlocked = selectedBarPosition >= gift.unlockAtBar;
           const image = gift.image
-            ? `<span class="kaching-gift__image" style="background-image:url('${gift.image}')"></span>`
-            : `<span class="kaching-gift__image kaching-gift__image--placeholder">${gift.icon || '🎁'}</span>`;
-          const lockText = unlocked
-            ? ''
-            : `<span class="kaching-gift__lock-text">${gift.lockedTitle || 'Locked'}</span>`;
+            ? `<img class="kaching-gift__image" src="${gift.image}" alt="" loading="lazy">`
+            : `<span class="kaching-gift__icon"><span class="material-icon material-symbols-outlined">${gift.icon || 'redeem'}</span></span>`;
+          const title = unlocked
+            ? `<span class="kaching-gift__title">${gift.title}</span>`
+            : `<span class="kaching-gift__title">${gift.lockedTitle || 'Locked'}</span>`;
+          const comparePrice = unlocked && gift.comparePrice
+            ? `<span class="kaching-gift__compare-price">${this.formatMoney(gift.comparePrice)}</span>`
+            : '';
 
           return `
             <div class="kaching-gift${unlocked ? ' kaching-gift--unlocked' : ''}">
               ${image}
-              ${unlocked ? `<span class="kaching-gift__title">${gift.title}</span>` : ''}
-              ${lockText}
+              ${title}
+              ${comparePrice}
             </div>
           `;
         })
@@ -399,17 +455,16 @@ if (!customElements.get('kaching-custom-display')) {
       if (!badgeText) return 'none';
       const normalized = badgeText.toLowerCase();
       if (normalized.includes('največji') || normalized.includes('prihranek')) return 'best';
-      if (normalized.includes('priporo') || normalized.includes('popular')) return 'recommended';
-      return 'default';
+      // Any other non-empty badge text (including "Priporočeno") falls
+      // back to the secondary-colored wrapper - there's no third wrapper
+      // style in the design, so an arbitrary merchant-entered badge still
+      // gets a visible treatment instead of being silently dropped.
+      return 'recommended';
     }
 
     async handleTileClick(tier) {
-      this.querySelectorAll('.kaching-tile').forEach((tile) => {
-        tile.classList.toggle('kaching-tile--selected', tile.dataset.dealBarId === tier.id);
-      });
-
       this.selectedDealBarId = tier.id;
-      this.renderGifts();
+      this.refresh();
 
       // Only sync the selection into Kaching's own widget so its internal
       // state (and therefore the real Add to Cart button) reflects the
