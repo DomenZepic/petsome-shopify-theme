@@ -50,7 +50,7 @@
     "action_btn_hover": "glow",
     "buttons_border_thickness": 2,
     "buttons_border_opacity": 100,
-    "buttons_radius": 6,
+    "buttons_radius": 12,
     "buttons_shadow_opacity": 0,
     "buttons_shadow_horizontal_offset": 0,
     "buttons_shadow_vertical_offset": 4,
