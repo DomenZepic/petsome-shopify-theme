@@ -1,14 +1,22 @@
 {% comment %}
   Petsome: Rotating bullets - an infinitely, seamlessly looping horizontal
   strip of short bullet-point text items, separated by a colored dot
-  (solid or gradient). Generic/reusable across any product.
+  (solid or gradient). Dot color defaults to the product's "Product
+  accent color" metafield when set, falling back to this section's own
+  color setting otherwise (the metafield always wins, so the dot stays
+  on-brand automatically when reused on a different product; the
+  gradient option in the setting only applies when no metafield is
+  set). Generic/reusable across any product.
 {% endcomment %}
+{%- liquid
+  assign dot_color = product.metafields.custom.product_accent_color.value | default: section.settings.dot_color
+-%}
 {%- style -%}
   #petsome-rotating-bullets-{{ section.id }} {
     --prb-bg: {{ section.settings.background_color }};
     --prb-text: {{ section.settings.text_color }};
     --prb-text-size: {{ section.settings.text_size }}px;
-    --prb-dot: {{ section.settings.dot_color }};
+    --prb-dot: {{ dot_color }};
     --prb-dot-size: {{ section.settings.dot_size }}px;
     --prb-gap: {{ section.settings.item_spacing }}px;
     --prb-speed: {{ section.settings.speed }}s;
@@ -157,9 +165,13 @@
       "default": 16
     },
     {
+      "type": "paragraph",
+      "content": "If the product has a \"Product accent color\" metafield set, that value is used instead of the color/gradient below - this only applies as a fallback when the metafield is blank."
+    },
+    {
       "type": "color_background",
       "id": "dot_color",
-      "label": "Separator dot color",
+      "label": "Separator dot color (fallback)",
       "default": "#F8AAA7"
     },
     {

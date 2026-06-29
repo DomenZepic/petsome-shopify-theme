@@ -58,7 +58,8 @@
   #petsome-timeframe-{{ section.id }} .petsome-timeframe__grid {
     display: grid;
     grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
-    gap: 12px;
+    column-gap: 12px;
+    row-gap: 24px;
   }
 
   @media screen and (max-width: 989px) {
