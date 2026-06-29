@@ -507,31 +507,31 @@
                 "skip_cart": false,
                 "atc_append": "left",
                 "atc_append_heights": "stretch-quantity",
-                "uppercase_text": true,
+                "uppercase_text": false,
                 "icon_scale": 120,
                 "icon_spacing": 10,
-                "atc_custom_label": "",
-                "atc_label_size": 18,
+                "atc_custom_label": "Dodaj v košarico",
+                "atc_label_size": 16,
                 "atc_label_2": "",
                 "atc_label_2_size": 12,
                 "atc_label_2_font": "body",
                 "atc_label_2_uppercase": false,
                 "atc_lines_spacing": 3,
-                "atc_button_padding_y": 8,
-                "display_price": false,
-                "price_position": "left",
-                "price_separator": "•",
-                "enable_custom_color": false,
-                "custom_color": "#53af01",
+                "atc_button_padding_y": 10,
+                "display_price": true,
+                "price_position": "right",
+                "price_separator": " - ",
+                "enable_custom_color": true,
+                "custom_color": "#0e1111",
                 "custom_text_color": "#ffffff",
                 "icon_1_attach": "both",
                 "icon_2_attach": "both",
-                "enable_secondary_btn": true,
+                "enable_secondary_btn": false,
                 "secondary_btn_label": "Buy It Now",
                 "secondary_btn_enable_custom_color": false,
                 "secondary_btn_custom_color": "#dd1d1d",
-                "margin_top": 24,
-                "margin_bottom": 24
+                "margin_top": 12,
+                "margin_bottom": 12
               },
               "blocks": {}
             },
@@ -615,14 +615,6 @@
               },
               "blocks": {}
             },
-            "description": {
-              "type": "product_description",
-              "settings": {
-                "margin_top": 24,
-                "margin_bottom": 24
-              },
-              "blocks": {}
-            },
             "reviews_8UgFbe": {
               "type": "reviews",
               "settings": {
@@ -660,9 +652,9 @@
               "settings": {
                 "visibility": "always-display",
                 "open": false,
-                "heading": "Collapsible row",
+                "heading": "Opis izdelka",
                 "heading_size": "medium",
-                "icon": "check_box",
+                "icon": "",
                 "filled_icon": false,
                 "collapse_icon": "carret",
                 "collapse_icon_style": "standard",
@@ -671,54 +663,455 @@
                 "border_type": "bottom",
                 "border_thickness": 1,
                 "border_style": "solid",
-                "corner_radius": 8,
+                "corner_radius": 0,
                 "enable_custom_style": false,
-                "heading_padding_vertical": 12,
-                "heading_padding_horizontal": 10,
+                "heading_padding_vertical": 8,
+                "heading_padding_horizontal": 0,
                 "content_padding_vertical": 10,
-                "content_padding_horizontal": 10,
-                "closed_state_border": "#dddddd",
-                "closed_state_header_bg": "#f9f9f9",
-                "closed_state_header_text": "#121212",
-                "closed_state_row_icon": "#121212",
-                "closed_state_collapse_icon": "#121212",
+                "content_padding_horizontal": 0,
+                "closed_state_border": "#cfcfcf",
+                "closed_state_header_bg": "#faf9f6",
+                "closed_state_header_text": "#0e1111",
+                "closed_state_row_icon": "#0e1111",
+                "closed_state_collapse_icon": "#0e1111",
                 "closed_state_collapse_icon_solid": "#ffffff",
-                "closed_state_collapse_bg": "#121212",
-                "closed_state_content_bg": "#f9f9f9",
-                "closed_state_content_text": "#121212",
+                "closed_state_collapse_bg": "#faf9f6",
+                "closed_state_content_bg": "#faf9f6",
+                "closed_state_content_text": "#0e1111",
                 "open_colors_on_hover": true,
-                "open_state_border": "#d5aeea",
-                "open_state_header_bg": "#fefaff",
-                "open_state_header_text": "#000000",
-                "open_state_row_icon": "#6d388b",
-                "open_state_collapse_icon": "#121212",
+                "open_state_border": "#cfcfcf",
+                "open_state_header_bg": "#faf9f6",
+                "open_state_header_text": "#0e1111",
+                "open_state_row_icon": "#0e1111",
+                "open_state_collapse_icon": "#0e1111",
                 "open_state_collapse_icon_solid": "#ffffff",
-                "open_state_collapse_bg": "#6d388b",
-                "open_state_content_bg": "#fefaff",
-                "open_state_content_text": "#121212",
+                "open_state_collapse_bg": "#faf9f6",
+                "open_state_content_bg": "#faf9f6",
+                "open_state_content_text": "#0e1111",
                 "content": "",
                 "page": "",
                 "margin_top": 24,
                 "margin_bottom": 0
               },
-              "blocks": {}
+              "blocks": {
+                "description_inner": {
+                  "type": "product_description",
+                  "settings": {
+                    "margin_top": 0,
+                    "margin_bottom": 0
+                  }
+                }
+              },
+              "block_order": [
+                "description_inner"
+              ]
+            },
+            "collapsible_prednosti": {
+              "type": "collapsible-row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Prednosti MobiMixa",
+                "heading_size": "medium",
+                "icon": "",
+                "filled_icon": false,
+                "collapse_icon": "carret",
+                "collapse_icon_style": "standard",
+                "collapse_icon_radius": 15,
+                "animation_speed": 0.4,
+                "border_type": "bottom",
+                "border_thickness": 1,
+                "border_style": "solid",
+                "corner_radius": 0,
+                "enable_custom_style": false,
+                "heading_padding_vertical": 8,
+                "heading_padding_horizontal": 0,
+                "content_padding_vertical": 10,
+                "content_padding_horizontal": 0,
+                "closed_state_border": "#cfcfcf",
+                "closed_state_header_bg": "#faf9f6",
+                "closed_state_header_text": "#0e1111",
+                "closed_state_row_icon": "#0e1111",
+                "closed_state_collapse_icon": "#0e1111",
+                "closed_state_collapse_icon_solid": "#ffffff",
+                "closed_state_collapse_bg": "#faf9f6",
+                "closed_state_content_bg": "#faf9f6",
+                "closed_state_content_text": "#0e1111",
+                "open_colors_on_hover": true,
+                "open_state_border": "#cfcfcf",
+                "open_state_header_bg": "#faf9f6",
+                "open_state_header_text": "#0e1111",
+                "open_state_row_icon": "#0e1111",
+                "open_state_collapse_icon": "#0e1111",
+                "open_state_collapse_icon_solid": "#ffffff",
+                "open_state_collapse_bg": "#faf9f6",
+                "open_state_content_bg": "#faf9f6",
+                "open_state_content_text": "#0e1111",
+                "content": "",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {
+                "text_inner": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<ul><li>Podpira zdravje sklepov in hrustanca</li><li>Zmanjšuje vnetje in jutranjo togost</li><li>Izboljšuje gibljivost in aktivnost</li><li>Primeren za dolgotrajno, vsakodnevno uporabo</li><li>Brez nepotrebnih dodatkov in polnil</li></ul>",
+                    "alignment": "left",
+                    "mobile_alignment": "left"
+                  }
+                }
+              },
+              "block_order": [
+                "text_inner"
+              ]
+            },
+            "collapsible_kako": {
+              "type": "collapsible-row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Kako deluje MobiMix?",
+                "heading_size": "medium",
+                "icon": "",
+                "filled_icon": false,
+                "collapse_icon": "carret",
+                "collapse_icon_style": "standard",
+                "collapse_icon_radius": 15,
+                "animation_speed": 0.4,
+                "border_type": "bottom",
+                "border_thickness": 1,
+                "border_style": "solid",
+                "corner_radius": 0,
+                "enable_custom_style": false,
+                "heading_padding_vertical": 8,
+                "heading_padding_horizontal": 0,
+                "content_padding_vertical": 10,
+                "content_padding_horizontal": 0,
+                "closed_state_border": "#cfcfcf",
+                "closed_state_header_bg": "#faf9f6",
+                "closed_state_header_text": "#0e1111",
+                "closed_state_row_icon": "#0e1111",
+                "closed_state_collapse_icon": "#0e1111",
+                "closed_state_collapse_icon_solid": "#ffffff",
+                "closed_state_collapse_bg": "#faf9f6",
+                "closed_state_content_bg": "#faf9f6",
+                "closed_state_content_text": "#0e1111",
+                "open_colors_on_hover": true,
+                "open_state_border": "#cfcfcf",
+                "open_state_header_bg": "#faf9f6",
+                "open_state_header_text": "#0e1111",
+                "open_state_row_icon": "#0e1111",
+                "open_state_collapse_icon": "#0e1111",
+                "open_state_collapse_icon_solid": "#ffffff",
+                "open_state_collapse_bg": "#faf9f6",
+                "open_state_content_bg": "#faf9f6",
+                "open_state_content_text": "#0e1111",
+                "content": "",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {
+                "text_inner": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>MobiMix združuje glukozamin, hondroitin in vitamin C za obnovo hrustanca, vražji krempelj, kurkumo in ingver za zmanjšanje vnetja, ter zelenoustno školjko in šipek za dolgoročno vzdrževanje sklepov. Skupaj te sestavine naslavljajo tri glavne vzroke sklepnih težav hkrati, namesto le enega, kot to počnejo običajni dodatki.</p>",
+                    "alignment": "left",
+                    "mobile_alignment": "left"
+                  }
+                }
+              },
+              "block_order": [
+                "text_inner"
+              ]
+            },
+            "collapsible_sestavine": {
+              "type": "collapsible-row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Sestavine",
+                "heading_size": "medium",
+                "icon": "",
+                "filled_icon": false,
+                "collapse_icon": "carret",
+                "collapse_icon_style": "standard",
+                "collapse_icon_radius": 15,
+                "animation_speed": 0.4,
+                "border_type": "bottom",
+                "border_thickness": 1,
+                "border_style": "solid",
+                "corner_radius": 0,
+                "enable_custom_style": false,
+                "heading_padding_vertical": 8,
+                "heading_padding_horizontal": 0,
+                "content_padding_vertical": 10,
+                "content_padding_horizontal": 0,
+                "closed_state_border": "#cfcfcf",
+                "closed_state_header_bg": "#faf9f6",
+                "closed_state_header_text": "#0e1111",
+                "closed_state_row_icon": "#0e1111",
+                "closed_state_collapse_icon": "#0e1111",
+                "closed_state_collapse_icon_solid": "#ffffff",
+                "closed_state_collapse_bg": "#faf9f6",
+                "closed_state_content_bg": "#faf9f6",
+                "closed_state_content_text": "#0e1111",
+                "open_colors_on_hover": true,
+                "open_state_border": "#cfcfcf",
+                "open_state_header_bg": "#faf9f6",
+                "open_state_header_text": "#0e1111",
+                "open_state_row_icon": "#0e1111",
+                "open_state_collapse_icon": "#0e1111",
+                "open_state_collapse_icon_solid": "#ffffff",
+                "open_state_collapse_bg": "#faf9f6",
+                "open_state_content_bg": "#faf9f6",
+                "open_state_content_text": "#0e1111",
+                "content": "",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {
+                "text_inner": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>MobiMix vsebuje 8 naravnih sestavin: zelenoustno školjko, glukozamin, hondroitin, vražji krempelj, kurkumo, ingver, šipek in vitamin C. Natančne količine posamezne sestavine so navedene na embalaži izdelka.</p>",
+                    "alignment": "left",
+                    "mobile_alignment": "left"
+                  }
+                }
+              },
+              "block_order": [
+                "text_inner"
+              ]
+            },
+            "collapsible_dostava": {
+              "type": "collapsible-row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Dostava",
+                "heading_size": "medium",
+                "icon": "",
+                "filled_icon": false,
+                "collapse_icon": "carret",
+                "collapse_icon_style": "standard",
+                "collapse_icon_radius": 15,
+                "animation_speed": 0.4,
+                "border_type": "bottom",
+                "border_thickness": 1,
+                "border_style": "solid",
+                "corner_radius": 0,
+                "enable_custom_style": false,
+                "heading_padding_vertical": 8,
+                "heading_padding_horizontal": 0,
+                "content_padding_vertical": 10,
+                "content_padding_horizontal": 0,
+                "closed_state_border": "#cfcfcf",
+                "closed_state_header_bg": "#faf9f6",
+                "closed_state_header_text": "#0e1111",
+                "closed_state_row_icon": "#0e1111",
+                "closed_state_collapse_icon": "#0e1111",
+                "closed_state_collapse_icon_solid": "#ffffff",
+                "closed_state_collapse_bg": "#faf9f6",
+                "closed_state_content_bg": "#faf9f6",
+                "closed_state_content_text": "#0e1111",
+                "open_colors_on_hover": true,
+                "open_state_border": "#cfcfcf",
+                "open_state_header_bg": "#faf9f6",
+                "open_state_header_text": "#0e1111",
+                "open_state_row_icon": "#0e1111",
+                "open_state_collapse_icon": "#0e1111",
+                "open_state_collapse_icon_solid": "#ffffff",
+                "open_state_collapse_bg": "#faf9f6",
+                "open_state_content_bg": "#faf9f6",
+                "open_state_content_text": "#0e1111",
+                "content": "",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {
+                "text_inner": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Naročila oddana do 14. ure odpremimo še isti delovni dan. Dostava po Sloveniji traja običajno 2-3 delovne dni. Brezplačno dostavo nudimo pri naročilih nad 50 €.</p>",
+                    "alignment": "left",
+                    "mobile_alignment": "left"
+                  }
+                }
+              },
+              "block_order": [
+                "text_inner"
+              ]
+            },
+            "collapsible_studije": {
+              "type": "collapsible-row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Študije",
+                "heading_size": "medium",
+                "icon": "",
+                "filled_icon": false,
+                "collapse_icon": "carret",
+                "collapse_icon_style": "standard",
+                "collapse_icon_radius": 15,
+                "animation_speed": 0.4,
+                "border_type": "bottom",
+                "border_thickness": 1,
+                "border_style": "solid",
+                "corner_radius": 0,
+                "enable_custom_style": false,
+                "heading_padding_vertical": 8,
+                "heading_padding_horizontal": 0,
+                "content_padding_vertical": 10,
+                "content_padding_horizontal": 0,
+                "closed_state_border": "#cfcfcf",
+                "closed_state_header_bg": "#faf9f6",
+                "closed_state_header_text": "#0e1111",
+                "closed_state_row_icon": "#0e1111",
+                "closed_state_collapse_icon": "#0e1111",
+                "closed_state_collapse_icon_solid": "#ffffff",
+                "closed_state_collapse_bg": "#faf9f6",
+                "closed_state_content_bg": "#faf9f6",
+                "closed_state_content_text": "#0e1111",
+                "open_colors_on_hover": true,
+                "open_state_border": "#cfcfcf",
+                "open_state_header_bg": "#faf9f6",
+                "open_state_header_text": "#0e1111",
+                "open_state_row_icon": "#0e1111",
+                "open_state_collapse_icon": "#0e1111",
+                "open_state_collapse_icon_solid": "#ffffff",
+                "open_state_collapse_bg": "#faf9f6",
+                "open_state_content_bg": "#faf9f6",
+                "open_state_content_text": "#0e1111",
+                "content": "",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {
+                "text_inner": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Sestavine v MobiMixu, kot so glukozamin, hondroitin in kurkuma, so med najbolj raziskanimi učinkovinami na področju podpore sklepom pri psih. Pri razvoju formule smo upoštevali javno dostopne študije in priporočila veterinarjev s področja rehabilitacije gibalnega aparata.</p>",
+                    "alignment": "left",
+                    "mobile_alignment": "left"
+                  }
+                }
+              },
+              "block_order": [
+                "text_inner"
+              ]
+            },
+            "petsome_checkmarks_1": {
+              "type": "product_petsome-checkmarks",
+              "blocks": {
+                "check_1": {
+                  "type": "petsome-checkmark",
+                  "settings": {
+                    "text": "Tvoj pes se spet premika brez obotavljanja"
+                  }
+                },
+                "check_2": {
+                  "type": "petsome-checkmark",
+                  "settings": {
+                    "text": "Manj jutranje togosti že v 2–3 tednih"
+                  }
+                },
+                "check_3": {
+                  "type": "petsome-checkmark",
+                  "settings": {
+                    "text": "Več energije za igro in sprehode"
+                  }
+                },
+                "check_4": {
+                  "type": "petsome-checkmark",
+                  "settings": {
+                    "text": "Dolgoročna zaščita pred obrabo sklepov"
+                  }
+                }
+              },
+              "block_order": [
+                "check_1",
+                "check_2",
+                "check_3",
+                "check_4"
+              ],
+              "settings": {
+                "check_color": "#2FA84F",
+                "margin_top": 0,
+                "margin_bottom": 15
+              }
+            },
+            "petsome_shipping_info_1": {
+              "type": "product_petsome-shipping-info",
+              "settings": {
+                "icon": "local_shipping",
+                "text": "<p>Predviden čas dostave: <strong>2-3 dni</strong></p>",
+                "margin_top": 0,
+                "margin_bottom": 12
+              }
+            },
+            "petsome_payment_label": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Varno plačevanje z:</p>",
+                "alignment": "center",
+                "mobile_alignment": "center",
+                "text_size": 14,
+                "enable_custom_color": true,
+                "custom_text_color": "#565858"
+              }
+            },
+            "payment_badges_1": {
+              "type": "payment-badges",
+              "settings": {
+                "visibility": "always-display",
+                "enabled_payment_types": "apple_pay, google_pay, paypal, american_express, visa, master, maestro, shopify_pay",
+                "width_desktop": 35,
+                "width_mobile": 35,
+                "margin_top": 6,
+                "margin_bottom": 15
+              }
+            },
+            "petsome_guarantee_1": {
+              "type": "product_petsome-guarantee",
+              "settings": {
+                "text": "<p>Pri Petsome želimo, da vsak MobiMix ljubljenčku izboljša gibanje. Če ste v dvomih, ali je ta izdelek za vašega ljubljenčka - ni panike. Vaše naročilo je zaščiteno z 60-dnevno garancijo vračila denarja. Brez slabe vesti.</p>",
+                "background_color": "#e8d6c5",
+                "border_color": "#b6a87c",
+                "margin_top": 12,
+                "margin_bottom": 0
+              }
             }
           },
           "block_order": [
             "a6eb81db-40e4-43e0-972f-32db010a4a56",
             "heading_HDTL7R",
             "petsome_tags_1",
-            "kaching_bundles_app_block_1",
+            "petsome_checkmarks_1",
             "5fcc0428-e768-4cb7-bea3-eb0274198dd1",
+            "kaching_bundles_app_block_1",
             "kaching_custom_display_1",
             "product_quantity_gifts_YPryHt",
             "quantity_selector_4KXChJ",
+            "petsome_shipping_info_1",
             "buy_buttons",
+            "petsome_payment_label",
+            "payment_badges_1",
             "e0a0b690-50df-4ca4-acfd-ce2980696cce",
             "e7a28cbe-03cb-4c9d-a2c4-0e3e76ffb3e5",
-            "description",
             "reviews_8UgFbe",
-            "de158e68-5d0d-4819-a625-e2dabdff87d1"
+            "de158e68-5d0d-4819-a625-e2dabdff87d1",
+            "collapsible_prednosti",
+            "collapsible_kako",
+            "collapsible_sestavine",
+            "collapsible_dostava",
+            "collapsible_studije",
+            "petsome_guarantee_1"
           ]
         }
       },

@@ -1,0 +1,100 @@
+{% comment %}
+  Petsome: Shipping info - a single icon + text line (e.g. "Predviden
+  čas dostave: 2-3 dni"), for use inside the Product information
+  block area. Generic/reusable across any product.
+{% endcomment %}
+<style>
+  #petsome-shipping-info-{{ block.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  }
+
+  #petsome-shipping-info-{{ block.id }} p {
+    margin: 0;
+  }
+
+  #petsome-shipping-info-{{ block.id }} .petsome-shipping-info__icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #petsome-shipping-info-{{ block.id }} .petsome-shipping-info__icon .material-icon {
+    font-size: 2.4rem;
+    color: #565858;
+  }
+
+  #petsome-shipping-info-{{ block.id }} .petsome-shipping-info__text {
+    font-size: 1.4rem;
+    color: #565858;
+    text-align: center;
+  }
+</style>
+
+{%- if block.settings.text != blank -%}
+  <div id="petsome-shipping-info-{{ block.id }}" class="petsome-shipping-info" {{ block.shopify_attributes }}>
+    {%- if block.settings.icon != blank -%}
+      <span class="petsome-shipping-info__icon">{% render 'material-icon', icon: block.settings.icon %}</span>
+    {%- endif -%}
+    <div class="petsome-shipping-info__text">{{ block.settings.text }}</div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Petsome: Shipping info",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "icon",
+      "label": "Icon",
+      "default": "local_shipping",
+      "info": "[View all available icons](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.platform=web). Leave blank to hide."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Predviden čas dostave: <strong>2-3 dni</strong></p>"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 12
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Shipping info",
+      "category": "Product basics"
+    }
+  ]
+}
+{% endschema %}

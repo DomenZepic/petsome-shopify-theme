@@ -1,0 +1,105 @@
+{% comment %}
+  Petsome: Checkmarks - a stacked list of repeatable checkmark + text
+  lines (e.g. "Manj jutranje togosti že v 2-3 tednih"), for use inside
+  the Product information block area. Add as many lines as needed.
+  Generic/reusable across any product.
+{% endcomment %}
+<style>
+  #petsome-checkmarks-{{ block.id }} {
+    --petsome-checkmark-color: {{ block.settings.check_color }};
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
+    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+  }
+
+  #petsome-checkmarks-{{ block.id }} .petsome-checkmark {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #petsome-checkmarks-{{ block.id }} .petsome-checkmark__icon {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #petsome-checkmarks-{{ block.id }} .petsome-checkmark__icon .material-icon {
+    font-size: 2.4rem;
+    color: var(--petsome-checkmark-color);
+  }
+
+  #petsome-checkmarks-{{ block.id }} .petsome-checkmark__text {
+    flex: 1 0 0;
+    min-width: 0;
+    font-size: 1.6rem;
+    line-height: 1.3;
+    color: rgb(var(--color-foreground));
+  }
+</style>
+
+{%- if block.blocks.size > 0 -%}
+  <div id="petsome-checkmarks-{{ block.id }}" class="petsome-checkmarks" {{ block.shopify_attributes }}>
+    {% content_for 'blocks' %}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Petsome: Checkmarks",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "petsome-checkmark"
+    }
+  ],
+  "settings": [
+    {
+      "type": "color",
+      "id": "check_color",
+      "label": "Checkmark color",
+      "default": "#2FA84F"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 15
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Checkmarks",
+      "category": "Product basics",
+      "blocks": [
+        { "type": "petsome-checkmark" },
+        { "type": "petsome-checkmark" },
+        { "type": "petsome-checkmark" }
+      ]
+    }
+  ]
+}
+{% endschema %}
