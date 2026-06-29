@@ -33,7 +33,7 @@
                 "role": "",
                 "background_color": "#FFFFFF",
                 "star_color": "#FFCC00",
-                "margin_top": 0,
+                "margin_top": 24,
                 "margin_bottom": 0
               },
               "blocks": {}
