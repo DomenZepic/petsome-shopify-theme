@@ -33,6 +33,10 @@
     display: block;
   }
 
+  #kaching-custom-display-{{ section.id }}-{{ block.id }} [hidden] {
+    display: none !important;
+  }
+
   .kaching-custom-display p {
     margin: 0;
   }
@@ -182,7 +186,7 @@
 
   .kaching-tile-wrapper--recommended .kaching-tile {
     border-color: var(--kaching-secondary);
-    background-color: var(--kaching-secondary-tint);
+    background-color: #ffffff;
   }
 
   .kaching-tile-wrapper--best .kaching-tile {
