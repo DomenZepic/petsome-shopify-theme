@@ -119,7 +119,6 @@
 
     #petsome-home-hero-{{ section.id }} {
       align-items: flex-start;
-      min-height: 0;
     }
 
     #petsome-home-hero-{{ section.id }} .petsome-home-hero__inner {
@@ -195,6 +194,8 @@
                 class="petsome-home-hero__rating-img"
                 src="{{ section.settings.rating_image | image_url: height: 44 }}"
                 alt=""
+                width="{{ section.settings.rating_image.width }}"
+                height="{{ section.settings.rating_image.height }}"
                 loading="lazy"
               >
             {%- endif -%}
