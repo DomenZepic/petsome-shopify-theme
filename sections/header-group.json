@@ -87,7 +87,7 @@
           "settings": {
             "text": "🦷 Predstavljamo DentalMix",
             "text_alignment": "center",
-            "mobile_text_size": 16,
+            "mobile_text_size": 14,
             "desktop_text_size": 20,
             "icon": "",
             "filled_icon": false,
