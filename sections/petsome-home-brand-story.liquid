@@ -1,0 +1,199 @@
+{% comment %}
+  Petsome: Home – Brand story. Image on the left, heading + body text +
+  author on the right. Stacks vertically on mobile with image on top.
+{% endcomment %}
+<style>
+  #petsome-home-brand-story-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-home-brand-story-{{ section.id }} p {
+    margin: 0;
+  }
+
+  #petsome-home-brand-story-{{ section.id }} .petsome-home-brand-story__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+    display: flex;
+    align-items: center;
+    gap: 64px;
+  }
+
+  #petsome-home-brand-story-{{ section.id }} .petsome-home-brand-story__image-wrapper {
+    flex: 1 0 0;
+    min-width: 0;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  #petsome-home-brand-story-{{ section.id }} .petsome-home-brand-story__image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #petsome-home-brand-story-{{ section.id }} .petsome-home-brand-story__text {
+    flex: 1 0 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  #petsome-home-brand-story-{{ section.id }} .petsome-home-brand-story__body-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #petsome-home-brand-story-{{ section.id }} .petsome-home-brand-story__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: var(--petsome-heading-size);
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-home-brand-story-{{ section.id }} .petsome-home-brand-story__heading p {
+    margin: 0;
+  }
+
+  #petsome-home-brand-story-{{ section.id }} .petsome-home-brand-story__body {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+  }
+
+  #petsome-home-brand-story-{{ section.id }} .petsome-home-brand-story__body p {
+    margin: 0;
+  }
+
+  #petsome-home-brand-story-{{ section.id }} .petsome-home-brand-story__author {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+  }
+
+  #petsome-home-brand-story-{{ section.id }} .petsome-home-brand-story__author p {
+    margin: 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-home-brand-story-{{ section.id }} .petsome-home-brand-story__inner {
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    #petsome-home-brand-story-{{ section.id }} .petsome-home-brand-story__image-wrapper {
+      flex: none;
+      width: 100%;
+    }
+  }
+</style>
+
+<div id="petsome-home-brand-story-{{ section.id }}" class="petsome-home-brand-story">
+  <div class="petsome-home-brand-story__inner">
+    {%- if section.settings.image != blank -%}
+      <div class="petsome-home-brand-story__image-wrapper">
+        <img
+          src="{{ section.settings.image | image_url: width: 1200 }}"
+          alt="{{ section.settings.image.alt | default: '' }}"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+          loading="lazy"
+        >
+      </div>
+    {%- endif -%}
+    <div class="petsome-home-brand-story__text">
+      <div class="petsome-home-brand-story__body-group">
+        {%- if section.settings.heading != blank -%}
+          <div class="petsome-home-brand-story__heading">{{ section.settings.heading }}</div>
+        {%- endif -%}
+        {%- if section.settings.body != blank -%}
+          <div class="petsome-home-brand-story__body">{{ section.settings.body }}</div>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.author != blank -%}
+        <div class="petsome-home-brand-story__author">{{ section.settings.author }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Petsome: Home brand story",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Zakaj smo ustvarili Petsome</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body text",
+      "default": "<p>Ko je naš pes začel počasneje hoditi na sprehode, smo ugotovili, da na trgu primanjkuje resnih, naravnih rešitev. Razvili smo MobiMix — in videli rezultate. Danes širimo to skrb na vsa področja psovega zdravja. Ker vsak pes si zasluži živeti brez bolečine in nelagodja.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "author",
+      "label": "Author",
+      "default": "<p>Staš Juliano Štampar,<br>ustanovitelj Petsome</p>"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Home brand story"
+    }
+  ]
+}
+{% endschema %}

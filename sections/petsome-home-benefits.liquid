@@ -1,0 +1,239 @@
+{% comment %}
+  Petsome: Home – Benefits. Heading + repeatable benefit item blocks on
+  the left, a single image on the right, and a CTA button below the
+  list. Image stacks below the text on mobile. Not product-specific.
+{% endcomment %}
+<style>
+  #petsome-home-benefits-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-home-benefits-{{ section.id }} p {
+    margin: 0;
+  }
+
+  #petsome-home-benefits-{{ section.id }} .petsome-home-benefits__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+    display: flex;
+    align-items: center;
+    gap: 64px;
+  }
+
+  #petsome-home-benefits-{{ section.id }} .petsome-home-benefits__text {
+    flex: 1 0 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  #petsome-home-benefits-{{ section.id }} .petsome-home-benefits__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: var(--petsome-heading-size);
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-home-benefits-{{ section.id }} .petsome-home-benefits__heading p {
+    margin: 0;
+  }
+
+  #petsome-home-benefits-{{ section.id }} .petsome-home-benefits__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #petsome-home-benefits-{{ section.id }} .petsome-home-benefits__item {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 12px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+  }
+
+  #petsome-home-benefits-{{ section.id }} .petsome-home-benefits__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgb(var(--color-foreground));
+    color: rgb(var(--color-background));
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.5;
+    padding: 16px 48px;
+    border-radius: 8px;
+    text-decoration: none;
+    align-self: flex-start;
+  }
+
+  #petsome-home-benefits-{{ section.id }} .petsome-home-benefits__cta .material-icon {
+    font-size: 2rem;
+  }
+
+  #petsome-home-benefits-{{ section.id }} .petsome-home-benefits__image-wrapper {
+    flex: 1 0 0;
+    min-width: 0;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  #petsome-home-benefits-{{ section.id }} .petsome-home-benefits__image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media screen and (max-width: 989px) {
+    #petsome-home-benefits-{{ section.id }} .petsome-home-benefits__inner {
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    #petsome-home-benefits-{{ section.id }} .petsome-home-benefits__image-wrapper {
+      flex: none;
+      width: 100%;
+    }
+
+    #petsome-home-benefits-{{ section.id }} .petsome-home-benefits__cta {
+      align-self: stretch;
+      justify-content: center;
+      padding: 16px 24px;
+    }
+  }
+</style>
+
+<div id="petsome-home-benefits-{{ section.id }}" class="petsome-home-benefits">
+  <div class="petsome-home-benefits__inner">
+    <div class="petsome-home-benefits__text">
+      {%- if section.settings.heading != blank -%}
+        <div class="petsome-home-benefits__heading">{{ section.settings.heading }}</div>
+      {%- endif -%}
+      {%- if section.blocks.size > 0 -%}
+        <div class="petsome-home-benefits__list">
+          {%- for block in section.blocks -%}
+            <div class="petsome-home-benefits__item" {{ block.shopify_attributes }}>{{ block.settings.text }}</div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.cta_label != blank and section.settings.cta_url != blank -%}
+        <a href="{{ section.settings.cta_url }}" class="petsome-home-benefits__cta">
+          {{ section.settings.cta_label }}
+          {% render 'material-icon', icon: 'arrow_forward' %}
+        </a>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.image != blank -%}
+      <div class="petsome-home-benefits__image-wrapper">
+        <img
+          src="{{ section.settings.image | image_url: width: 1200 }}"
+          alt="{{ section.settings.image.alt | default: section.settings.heading | strip_html | escape }}"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+          loading="lazy"
+        >
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Petsome: Home benefits",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Petsome izdelki so prava izbira za vašega psa, če želite, da:</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Razišči Petsome izdelke"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#FAF9F6"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Text",
+          "info": "Include an emoji at the start if you want one.",
+          "default": "🐾 Benefit item text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Home benefits",
+      "blocks": [
+        { "type": "benefit" },
+        { "type": "benefit" },
+        { "type": "benefit" },
+        { "type": "benefit" }
+      ]
+    }
+  ]
+}
+{% endschema %}

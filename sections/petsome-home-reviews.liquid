@@ -1,0 +1,533 @@
+{% comment %}
+  Petsome: Home – Reviews + logos. Trustpilot header above a
+  horizontally scrollable review slider (from "review" blocks), with an
+  infinitely rotating logo strip below (from "logo" blocks).
+  Desktop: 3 cards visible, extras scroll. Mobile: cards snap at 320px.
+  Nav buttons are hidden on desktop when 3 or fewer reviews exist.
+{% endcomment %}
+{%- liquid
+  assign review_blocks = section.blocks | where: 'type', 'review'
+  assign logo_blocks   = section.blocks | where: 'type', 'logo'
+-%}
+<style>
+  #petsome-home-reviews-{{ section.id }} {
+    --hr-star: {{ section.settings.star_color }};
+    --hr-card: {{ section.settings.card_color }};
+    background-color: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-home-reviews-{{ section.id }} p {
+    margin: 0;
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* Header */
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    text-align: center;
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__trustpilot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__trustpilot img {
+    height: 22px;
+    width: auto;
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__trustpilot-label {
+    font-size: 1.4rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: var(--petsome-heading-size);
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__heading p {
+    margin: 0;
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__subline {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+    max-width: 720px;
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__subline p {
+    margin: 0;
+  }
+
+  /* Slider */
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__slider {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__track {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-review {
+    flex: 0 0 calc((100% - 32px) / 3);
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 16px;
+    border-radius: 12px;
+    background-color: var(--hr-card);
+    scroll-snap-align: start;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-home-reviews-{{ section.id }} .petsome-home-review {
+      flex: 0 0 min(100%, 320px);
+    }
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-review__stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-review__stars .material-icon {
+    font-size: 1.8rem;
+    color: var(--hr-star);
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-review__body {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    font-style: italic;
+    color: rgb(var(--color-foreground));
+    flex: 1 0 0;
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-review__footer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-review__avatar {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: color-mix(in srgb, var(--hr-card) 80%, #d9d9d9);
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-review__avatar img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-review__author {
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-review__dog {
+    font-size: 1.4rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  /* Nav */
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__nav-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    border: 2px solid var(--hr-card);
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__nav-button .material-icon {
+    font-size: 2.4rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  {%- if review_blocks.size <= 3 -%}
+    @media screen and (min-width: 750px) {
+      #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__nav {
+        display: none;
+      }
+    }
+  {%- endif -%}
+
+  /* Rotating logos */
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__logos-viewport {
+    overflow: hidden;
+    width: 100%;
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__logos-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    animation: petsome-hr-logos-{{ section.id }} {{ section.settings.logo_speed }}s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__logos-track {
+      animation: none;
+    }
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__logos-set {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  #petsome-home-reviews-{{ section.id }} .petsome-home-reviews__logo {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    margin-right: 40px;
+  }
+
+  @keyframes petsome-hr-logos-{{ section.id }} {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+</style>
+
+<div id="petsome-home-reviews-{{ section.id }}" class="petsome-home-reviews">
+  <div class="petsome-home-reviews__inner">
+
+    <div class="petsome-home-reviews__header">
+      {%- if section.settings.trustpilot_stars != blank or section.settings.trustpilot_logo != blank or section.settings.trustpilot_label != blank -%}
+        <div class="petsome-home-reviews__trustpilot">
+          {%- if section.settings.trustpilot_stars != blank -%}
+            <img src="{{ section.settings.trustpilot_stars | image_url: height: 44 }}" alt="Trustpilot stars" loading="lazy">
+          {%- endif -%}
+          {%- if section.settings.trustpilot_logo != blank -%}
+            <img src="{{ section.settings.trustpilot_logo | image_url: height: 44 }}" alt="Trustpilot" loading="lazy">
+          {%- endif -%}
+          {%- if section.settings.trustpilot_label != blank -%}
+            <span class="petsome-home-reviews__trustpilot-label">{{ section.settings.trustpilot_label }}</span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <div class="petsome-home-reviews__heading">{{ section.settings.heading }}</div>
+      {%- endif -%}
+      {%- if section.settings.subline != blank -%}
+        <div class="petsome-home-reviews__subline">{{ section.settings.subline }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if review_blocks.size > 0 -%}
+      <div class="petsome-home-reviews__slider">
+        <div class="petsome-home-reviews__track" data-petsome-hr-track>
+          {%- for block in review_blocks -%}
+            <div class="petsome-home-review" {{ block.shopify_attributes }}>
+              <div class="petsome-home-review__stars">
+                {%- for i in (1..5) -%}
+                  {%- assign is_filled = false -%}
+                  {%- if i <= block.settings.rating -%}{%- assign is_filled = true -%}{%- endif -%}
+                  {% render 'material-icon', icon: 'star', filled: is_filled %}
+                {%- endfor -%}
+              </div>
+              {%- if block.settings.body != blank -%}
+                <p class="petsome-home-review__body">&ldquo;{{ block.settings.body }}&rdquo;</p>
+              {%- endif -%}
+              <div class="petsome-home-review__footer">
+                <div class="petsome-home-review__avatar">
+                  {%- if block.settings.avatar != blank -%}
+                    <img
+                      src="{{ block.settings.avatar | image_url: width: 100 }}"
+                      alt="{{ block.settings.author | escape }}"
+                      width="50"
+                      height="50"
+                      loading="lazy"
+                    >
+                  {%- endif -%}
+                </div>
+                <div>
+                  {%- if block.settings.author != blank -%}
+                    <p class="petsome-home-review__author">{{ block.settings.author }}</p>
+                  {%- endif -%}
+                  {%- if block.settings.dog != blank -%}
+                    <p class="petsome-home-review__dog">{{ block.settings.dog }}</p>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+        {%- if review_blocks.size > 1 -%}
+          <div class="petsome-home-reviews__nav">
+            <button type="button" class="petsome-home-reviews__nav-button" data-petsome-hr-prev aria-label="Previous">
+              {% render 'material-icon', icon: 'chevron_left' %}
+            </button>
+            <button type="button" class="petsome-home-reviews__nav-button" data-petsome-hr-next aria-label="Next">
+              {% render 'material-icon', icon: 'chevron_right' %}
+            </button>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if logo_blocks.size > 0 -%}
+      <div class="petsome-home-reviews__logos-viewport">
+        <div class="petsome-home-reviews__logos-track">
+          {%- for i in (1..2) -%}
+            <div class="petsome-home-reviews__logos-set" aria-hidden="{% if i == 2 %}true{% else %}false{% endif %}">
+              {%- for block in logo_blocks -%}
+                {%- if block.settings.image != blank -%}
+                  <img
+                    class="petsome-home-reviews__logo"
+                    src="{{ block.settings.image | image_url: height: 100 }}"
+                    alt="{{ block.settings.image.alt | default: block.settings.label | escape }}"
+                    loading="lazy"
+                    {{ block.shopify_attributes }}
+                  >
+                {%- endif -%}
+              {%- endfor -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+<script>
+  (function () {
+    var root = document.getElementById('petsome-home-reviews-{{ section.id }}');
+    if (!root) return;
+    var track = root.querySelector('[data-petsome-hr-track]');
+    var prev  = root.querySelector('[data-petsome-hr-prev]');
+    var next  = root.querySelector('[data-petsome-hr-next]');
+    if (!track) return;
+    function scrollByCard(dir) {
+      var card = track.querySelector('.petsome-home-review');
+      if (!card) return;
+      track.scrollBy({ left: (card.getBoundingClientRect().width + 16) * dir, behavior: 'smooth' });
+    }
+    if (prev) prev.addEventListener('click', function () { scrollByCard(-1); });
+    if (next) next.addEventListener('click', function () { scrollByCard(1); });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Petsome: Home reviews",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Trustpilot header"
+    },
+    {
+      "type": "image_picker",
+      "id": "trustpilot_stars",
+      "label": "Stars image",
+      "info": "Export the Trustpilot star row as PNG/WebP."
+    },
+    {
+      "type": "image_picker",
+      "id": "trustpilot_logo",
+      "label": "Trustpilot logo image"
+    },
+    {
+      "type": "text",
+      "id": "trustpilot_label",
+      "label": "Label",
+      "default": "Excellent"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Več kot 2.000 psov. Ena skupna zgodba.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "subline",
+      "label": "Subline"
+    },
+    {
+      "type": "header",
+      "content": "Logo strip"
+    },
+    {
+      "type": "range",
+      "id": "logo_speed",
+      "label": "Rotation speed (seconds per loop)",
+      "min": 10,
+      "max": 120,
+      "step": 5,
+      "unit": "s",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#E8D6C5"
+    },
+    {
+      "type": "color",
+      "id": "card_color",
+      "label": "Card background",
+      "default": "#FAF9F6"
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Star color",
+      "default": "#FFCC00"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "avatar",
+          "label": "Avatar photo"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Review text"
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author name",
+          "default": "Ime Priimek"
+        },
+        {
+          "type": "text",
+          "id": "dog",
+          "label": "Dog description",
+          "info": "E.g. \"12-letni ovčar\"",
+          "default": "12-letni ovčar"
+        }
+      ]
+    },
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Alt text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Home reviews",
+      "blocks": [
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "review" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" }
+      ]
+    }
+  ]
+}
+{% endschema %}

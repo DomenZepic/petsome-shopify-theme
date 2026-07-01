@@ -1,0 +1,327 @@
+{% comment %}
+  Petsome: Home – Hero. Full-width background image with separate desktop
+  and mobile images. Content (rating badge, heading, subline, CTA) is
+  left-aligned on desktop and centred on mobile.
+{% endcomment %}
+<style>
+  #petsome-home-hero-{{ section.id }} {
+    position: relative;
+    overflow: hidden;
+    min-height: {{ section.settings.min_height }}px;
+    display: flex;
+    align-items: center;
+    background-color: {{ section.settings.background_color }};
+  }
+
+  #petsome-home-hero-{{ section.id }} .petsome-home-hero__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+  }
+
+  #petsome-home-hero-{{ section.id }} .petsome-home-hero__bg--mobile {
+    display: none;
+  }
+
+  #petsome-home-hero-{{ section.id }} .petsome-home-hero__inner {
+    position: relative;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: {{ section.settings.padding_top }}px var(--petsome-padding-x) {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-home-hero-{{ section.id }} .petsome-home-hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 560px;
+  }
+
+  #petsome-home-hero-{{ section.id }} .petsome-home-hero__text {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #petsome-home-hero-{{ section.id }} .petsome-home-hero__rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #petsome-home-hero-{{ section.id }} .petsome-home-hero__rating-img {
+    height: 22px;
+    width: auto;
+  }
+
+  #petsome-home-hero-{{ section.id }} .petsome-home-hero__rating-text {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #3b2f2f;
+    line-height: 1.3;
+  }
+
+  #petsome-home-hero-{{ section.id }} .petsome-home-hero__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 4.8rem;
+    line-height: 1.3;
+    color: #3b2f2f;
+    margin: 0;
+  }
+
+  #petsome-home-hero-{{ section.id }} .petsome-home-hero__heading p {
+    margin: 0;
+  }
+
+  #petsome-home-hero-{{ section.id }} .petsome-home-hero__subline {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: #3b2f2f;
+    margin: 0;
+  }
+
+  #petsome-home-hero-{{ section.id }} .petsome-home-hero__subline p {
+    margin: 0;
+  }
+
+  #petsome-home-hero-{{ section.id }} .petsome-home-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #3b2f2f;
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.5;
+    padding: 16px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+    align-self: flex-start;
+  }
+
+  #petsome-home-hero-{{ section.id }} .petsome-home-hero__cta .material-icon {
+    font-size: 2rem;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-home-hero-{{ section.id }} .petsome-home-hero__bg--desktop {
+      display: none;
+    }
+
+    #petsome-home-hero-{{ section.id }} .petsome-home-hero__bg--mobile {
+      display: block;
+    }
+
+    #petsome-home-hero-{{ section.id }} .petsome-home-hero__content {
+      max-width: 100%;
+      align-items: center;
+      text-align: center;
+    }
+
+    #petsome-home-hero-{{ section.id }} .petsome-home-hero__rating {
+      justify-content: center;
+    }
+
+    #petsome-home-hero-{{ section.id }} .petsome-home-hero__heading {
+      font-size: 3.2rem;
+    }
+
+    #petsome-home-hero-{{ section.id }} .petsome-home-hero__cta {
+      align-self: center;
+    }
+  }
+</style>
+
+<div id="petsome-home-hero-{{ section.id }}" class="petsome-home-hero">
+  {%- if section.settings.desktop_image != blank -%}
+    <img
+      class="petsome-home-hero__bg petsome-home-hero__bg--desktop"
+      src="{{ section.settings.desktop_image | image_url: width: 2400 }}"
+      alt=""
+      width="{{ section.settings.desktop_image.width }}"
+      height="{{ section.settings.desktop_image.height }}"
+      loading="eager"
+      fetchpriority="high"
+    >
+  {%- endif -%}
+
+  {%- if section.settings.mobile_image != blank -%}
+    <img
+      class="petsome-home-hero__bg petsome-home-hero__bg--mobile"
+      src="{{ section.settings.mobile_image | image_url: width: 1200 }}"
+      alt=""
+      width="{{ section.settings.mobile_image.width }}"
+      height="{{ section.settings.mobile_image.height }}"
+      loading="eager"
+      fetchpriority="high"
+    >
+  {%- elsif section.settings.desktop_image != blank -%}
+    <img
+      class="petsome-home-hero__bg petsome-home-hero__bg--mobile"
+      src="{{ section.settings.desktop_image | image_url: width: 1200 }}"
+      alt=""
+      width="{{ section.settings.desktop_image.width }}"
+      height="{{ section.settings.desktop_image.height }}"
+      loading="eager"
+      fetchpriority="high"
+    >
+  {%- endif -%}
+
+  <div class="petsome-home-hero__inner">
+    <div class="petsome-home-hero__content">
+      <div class="petsome-home-hero__text">
+        {%- if section.settings.rating_image != blank or section.settings.rating_text != blank -%}
+          <div class="petsome-home-hero__rating">
+            {%- if section.settings.rating_image != blank -%}
+              <img
+                class="petsome-home-hero__rating-img"
+                src="{{ section.settings.rating_image | image_url: height: 44 }}"
+                alt=""
+                loading="lazy"
+              >
+            {%- endif -%}
+            {%- if section.settings.rating_text != blank -%}
+              <span class="petsome-home-hero__rating-text">{{ section.settings.rating_text }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <div class="petsome-home-hero__heading">{{ section.settings.heading }}</div>
+        {%- endif -%}
+        {%- if section.settings.subline != blank -%}
+          <div class="petsome-home-hero__subline">{{ section.settings.subline }}</div>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.cta_label != blank and section.settings.cta_url != blank -%}
+        <a href="{{ section.settings.cta_url }}" class="petsome-home-hero__cta">
+          {{ section.settings.cta_label }}
+          {% render 'material-icon', icon: 'arrow_forward' %}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Petsome: Home hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background image"
+    },
+    {
+      "type": "image_picker",
+      "id": "desktop_image",
+      "label": "Desktop image",
+      "info": "Recommended 2400 × 1500px."
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Mobile image",
+      "info": "Optional — falls back to the desktop image if left blank. Recommended 750 × 900px."
+    },
+    {
+      "type": "header",
+      "content": "Rating badge"
+    },
+    {
+      "type": "image_picker",
+      "id": "rating_image",
+      "label": "Rating image",
+      "info": "E.g. a Trustpilot or star-rating graphic exported as PNG/WebP."
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating text",
+      "default": "Zaupa nam več kot 2.000 lastnikov psov"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Za boljše življenje ljubljenčkov</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "subline",
+      "label": "Subline",
+      "default": "<p>Naravna podpora sklepom za aktivno in brezbolečinsko gibanje.</p>"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "Preizkusi MobiMix"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "label": "Minimum height",
+      "min": 300,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "default": 560
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Fallback background",
+      "info": "Shown while the image loads or if no image is set.",
+      "default": "#E8D6C5"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Home hero"
+    }
+  ]
+}
+{% endschema %}
