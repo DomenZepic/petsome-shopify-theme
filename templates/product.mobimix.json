@@ -598,6 +598,17 @@
               },
               "blocks": {}
             },
+            "product_petsome_shipping_info_Jcitpf": {
+              "type": "product_petsome-shipping-info",
+              "name": "Petsome: Shipping info",
+              "settings": {
+                "icon": "local_shipping",
+                "text": "<p>Predviden čas dostave: <strong>2-3 dni</strong></p>",
+                "margin_top": 0,
+                "margin_bottom": 12
+              },
+              "blocks": {}
+            },
             "buy_buttons": {
               "type": "product_buy-buttons",
               "settings": {
@@ -608,7 +619,7 @@
                 "uppercase_text": true,
                 "icon_scale": 120,
                 "icon_spacing": 10,
-                "atc_custom_label": "",
+                "atc_custom_label": "Dodaj v košarico",
                 "atc_label_size": 18,
                 "atc_label_2": "",
                 "atc_label_2_size": 12,
@@ -616,9 +627,9 @@
                 "atc_label_2_uppercase": false,
                 "atc_lines_spacing": 3,
                 "atc_button_padding_y": 8,
-                "display_price": false,
-                "price_position": "left",
-                "price_separator": "•",
+                "display_price": true,
+                "price_position": "right",
+                "price_separator": "-",
                 "enable_custom_color": false,
                 "custom_color": "#53af01",
                 "custom_text_color": "#ffffff",
@@ -628,8 +639,21 @@
                 "secondary_btn_label": "Buy It Now",
                 "secondary_btn_enable_custom_color": false,
                 "secondary_btn_custom_color": "#dd1d1d",
-                "margin_top": 24,
-                "margin_bottom": 24
+                "margin_top": 12,
+                "margin_bottom": 3
+              },
+              "blocks": {}
+            },
+            "payment_badges_jpEXd3": {
+              "type": "payment-badges",
+              "name": "Payment badges",
+              "settings": {
+                "visibility": "always-display",
+                "enabled_payment_types": "",
+                "width_desktop": 38,
+                "width_mobile": 38,
+                "margin_top": 15,
+                "margin_bottom": 15
               },
               "blocks": {}
             },
@@ -701,38 +725,6 @@
               },
               "blocks": {}
             },
-            "reviews_8UgFbe": {
-              "type": "reviews",
-              "settings": {
-                "visibility": "always-display",
-                "color_scheme": "background-1",
-                "show_custom_bg": false,
-                "custom_bg_color": "#f2f2f2",
-                "corner_radius": 12,
-                "border_width": 0,
-                "border_color": "#b7b7b7",
-                "avatar_alignment": "top",
-                "avatar_corner_radius": 40,
-                "star_color": "#ffcc00",
-                "stars_translate": 0,
-                "checkmark_color": "#6d388b",
-                "checkmark_icon_color": "#ffffff",
-                "slider_type": "slide",
-                "autoplay": false,
-                "autoplay_speed": 5,
-                "display_arrows": false,
-                "display_dots": true,
-                "text_1": "<p>Share positive thoughts and feedback from your customer.</p>",
-                "author_1": "<em>Author</em> [stars]",
-                "text_2": "<p>Share positive thoughts and feedback from your customer.</p>",
-                "author_2": "<em>Author</em> [stars]",
-                "text_3": "<p>Share positive thoughts and feedback from your customer.</p>",
-                "author_3": "<em>Author</em> [stars]",
-                "margin_top": 24,
-                "margin_bottom": 24
-              },
-              "blocks": {}
-            },
             "de158e68-5d0d-4819-a625-e2dabdff87d1": {
               "type": "collapsible-row",
               "settings": {
@@ -790,11 +782,12 @@
             "kaching_bundles_app_block_1",
             "5fcc0428-e768-4cb7-bea3-eb0274198dd1",
             "kaching_custom_display_1",
+            "product_petsome_shipping_info_Jcitpf",
             "buy_buttons",
+            "payment_badges_jpEXd3",
             "product_petsome_professional_review_BGLaVX",
             "e7a28cbe-03cb-4c9d-a2c4-0e3e76ffb3e5",
             "description",
-            "reviews_8UgFbe",
             "de158e68-5d0d-4819-a625-e2dabdff87d1"
           ]
         }
