@@ -233,12 +233,12 @@ if (!customElements.get('kaching-custom-display')) {
     refresh() {
       const sizeIndex = this.getSelectedSizeIndex();
       const variant = this.getSelectedVariant();
-      this.currentImageUrl = variant && variant.featured_image ? variant.featured_image.src : null;
       const available = variant ? variant.available !== false : true;
       const basePrice = this.getBasePrice(variant);
 
       const tilesData = this.dealBars.map((tier) => ({
         tier,
+        imageUrl: tier.kachingImageUrl || null,
         price: this.computeFallbackPrice(tier, variant),
         comparePrice: basePrice != null ? basePrice * tier.quantity : null,
         valid: available,
@@ -279,6 +279,16 @@ if (!customElements.get('kaching-custom-display')) {
       let anyZero = false;
       tilesData.forEach((data) => {
         const barEl = kachingBlock.querySelector(`[data-deal-bar-id="${data.tier.id}"]`);
+
+        // Extract image from Kaching's rendered bar element and cache on the tier
+        // so it survives across refresh() calls (e.g. size changes).
+        const imgEl = barEl ? barEl.querySelector('img') : null;
+        if (imgEl && imgEl.src && data.tier.kachingImageUrl !== imgEl.src) {
+          data.tier.kachingImageUrl = imgEl.src;
+          data.imageUrl = imgEl.src;
+          changed = true;
+        }
+
         const priceEl = barEl ? barEl.querySelector('.kaching-bundles__bar-price') : null;
         const perItemPrice = priceEl ? this.parseMoneyText(priceEl.textContent) : null;
         // Kaching's block can briefly render before it has resolved a
@@ -353,7 +363,7 @@ if (!customElements.get('kaching-custom-display')) {
     renderTiles(tilesData) {
       this.tilesContainer.innerHTML = '';
 
-      tilesData.forEach(({ tier, price, valid, validationMessage, dosage }) => {
+      tilesData.forEach(({ tier, imageUrl, price, valid, validationMessage, dosage }) => {
         const badgeStyle = this.badgeStyleFor(tier.badgeText);
         const isSelected = tier.id === (this.selectedDealBarId || this.preselectedDealBarId);
 
@@ -372,7 +382,7 @@ if (!customElements.get('kaching-custom-display')) {
             ${valid ? '' : 'disabled'}
             data-deal-bar-id="${tier.id}"
           >
-            <span class="kaching-tile__image" aria-hidden="true"${this.currentImageUrl ? ` style="background-image:url('${this.currentImageUrl}')"` : ''}></span>
+            <span class="kaching-tile__image" aria-hidden="true"${imageUrl ? ` style="background-image:url('${imageUrl}')"` : ''}></span>
             <span class="kaching-tile__content">
               <span class="kaching-tile__title">${tier.title}</span>
               <span class="kaching-tile__price">${this.formatMoney(price)}</span>
