@@ -730,9 +730,9 @@
               "settings": {
                 "visibility": "always-display",
                 "open": false,
-                "heading": "Collapsible row",
+                "heading": "Opis izdelka",
                 "heading_size": "medium",
-                "icon": "check_box",
+                "icon": "",
                 "filled_icon": false,
                 "collapse_icon": "carret",
                 "collapse_icon_style": "standard",
@@ -766,7 +766,7 @@
                 "open_state_collapse_bg": "#6d388b",
                 "open_state_content_bg": "#fefaff",
                 "open_state_content_text": "#121212",
-                "content": "",
+                "content": "<p>alsjdoasjdojasoajsdojasojaodjas</p>",
                 "page": "",
                 "margin_top": 24,
                 "margin_bottom": 0
