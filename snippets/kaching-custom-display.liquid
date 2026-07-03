@@ -154,19 +154,19 @@
   }
 
   .kaching-tile-wrapper--recommended {
-    background-color: var(--kaching-secondary);
-  }
-
-  .kaching-tile-wrapper--recommended .kaching-tile-wrapper__label {
-    color: rgb(var(--color-foreground));
-  }
-
-  .kaching-tile-wrapper--best {
     background-color: var(--kaching-accent);
   }
 
-  .kaching-tile-wrapper--best .kaching-tile-wrapper__label {
+  .kaching-tile-wrapper--recommended .kaching-tile-wrapper__label {
     color: {{ block.settings.light_text_color }};
+  }
+
+  .kaching-tile-wrapper--best {
+    background-color: #0e1111;
+  }
+
+  .kaching-tile-wrapper--best .kaching-tile-wrapper__label {
+    color: #ffffff;
   }
 
   .kaching-tile {
@@ -185,18 +185,18 @@
   }
 
   .kaching-tile-wrapper--recommended .kaching-tile {
-    border-color: var(--kaching-secondary);
-    background-color: #ffffff;
+    border-color: var(--kaching-accent);
+    background-color: color-mix(in srgb, var(--kaching-accent) 20%, white);
   }
 
   .kaching-tile-wrapper--best .kaching-tile {
-    border-color: var(--kaching-accent);
+    border-color: #0e1111;
     background-color: #ffffff;
   }
 
   .kaching-tile--selected {
-    border-color: var(--kaching-secondary) !important;
-    background-color: var(--kaching-secondary-tint) !important;
+    border-color: var(--kaching-accent) !important;
+    background-color: color-mix(in srgb, var(--kaching-accent) 20%, white) !important;
   }
 
   .kaching-tile:disabled {
