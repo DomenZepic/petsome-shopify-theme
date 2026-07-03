@@ -436,15 +436,17 @@ if (!customElements.get('kaching-custom-display')) {
           const title = unlocked
             ? `<span class="kaching-gift__title">${gift.title}</span>`
             : `<span class="kaching-gift__title">${gift.lockedTitle || 'Locked'}</span>`;
-          const comparePrice = unlocked && gift.comparePrice
-            ? `<span class="kaching-gift__compare-price">${this.formatMoney(gift.comparePrice)}</span>`
-            : '';
+          const priceEl = unlocked
+            ? `<span class="kaching-gift__free">FREE</span>`
+            : gift.comparePrice
+              ? `<span class="kaching-gift__compare-price">${this.formatMoney(gift.comparePrice)}</span>`
+              : '';
 
           return `
             <div class="kaching-gift${unlocked ? ' kaching-gift--unlocked' : ''}">
               ${image}
               ${title}
-              ${comparePrice}
+              ${priceEl}
             </div>
           `;
         })
