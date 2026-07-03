@@ -579,7 +579,7 @@
           }
         },
         "settings": {
-          "test_mode": true,
+          "test_mode": false,
           "heading_text": "Košarica",
           "heading_alignment": "flex-start",
           "heading_size": 26,
