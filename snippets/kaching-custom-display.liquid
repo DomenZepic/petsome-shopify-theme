@@ -153,13 +153,21 @@
     text-align: center;
   }
 
-  /* Recommended tile: always beige/secondary */
+  /* Recommended tile: beige by default, switches to accent when selected */
   .kaching-tile-wrapper--recommended {
     background-color: var(--kaching-secondary);
   }
 
   .kaching-tile-wrapper--recommended .kaching-tile-wrapper__label {
     color: rgb(var(--color-foreground));
+  }
+
+  .kaching-tile-wrapper--recommended:has(.kaching-tile--selected) {
+    background-color: var(--kaching-accent);
+  }
+
+  .kaching-tile-wrapper--recommended:has(.kaching-tile--selected) .kaching-tile-wrapper__label {
+    color: {{ block.settings.light_text_color }};
   }
 
   /* Best tile: black by default, switches to accent when its tile is selected */
