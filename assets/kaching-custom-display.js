@@ -385,7 +385,7 @@ if (!customElements.get('kaching-custom-display')) {
             <span class="kaching-tile__image" aria-hidden="true"${imageUrl ? ` style="background-image:url('${imageUrl}')"` : ''}></span>
             <span class="kaching-tile__content">
               <span class="kaching-tile__title">${tier.title}</span>
-              <span class="kaching-tile__price">${this.formatMoney(price)}</span>
+              <span class="kaching-tile__price">${this.formatMoney(price / tier.quantity)}</span>
               ${dosageLines.map((line) => `<span class="kaching-tile__dosage">${line}</span>`).join('')}
               ${!valid ? `<span class="kaching-tile__unavailable">${validationMessage || 'Unavailable'}</span>` : ''}
             </span>
