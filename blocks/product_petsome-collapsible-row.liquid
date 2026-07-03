@@ -1,0 +1,162 @@
+<style>
+  #petsome-cr-{{ block.id }} {
+    border-bottom: 1px solid #cfcfcf;
+    margin-top: {{ block.settings.margin_top }}px;
+    margin-bottom: {{ block.settings.margin_bottom }}px;
+  }
+
+  #petsome-cr-{{ block.id }} summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 0;
+    cursor: pointer;
+    list-style: none;
+    -webkit-appearance: none;
+  }
+
+  #petsome-cr-{{ block.id }} summary::-webkit-details-marker {
+    display: none;
+  }
+
+  #petsome-cr-{{ block.id }} .petsome-cr__title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.5;
+    color: #3b2f2f;
+    margin: 0;
+  }
+
+  #petsome-cr-{{ block.id }} .petsome-cr__chevron {
+    flex-shrink: 0;
+    color: #3b2f2f;
+    font-size: 2rem;
+    transition: transform 0.25s ease;
+  }
+
+  #petsome-cr-{{ block.id }} details[open] .petsome-cr__chevron {
+    transform: rotate(90deg);
+  }
+
+  #petsome-cr-{{ block.id }} .petsome-cr__body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+  }
+
+  #petsome-cr-{{ block.id }} details[open] + .petsome-cr__body {
+    grid-template-rows: 1fr;
+  }
+
+  #petsome-cr-{{ block.id }} .petsome-cr__body-inner {
+    overflow: hidden;
+  }
+
+  #petsome-cr-{{ block.id }} .petsome-cr__content {
+    padding-bottom: 16px;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: #3b2f2f;
+  }
+
+  #petsome-cr-{{ block.id }} .petsome-cr__content p {
+    margin: 0 0 8px;
+  }
+
+  #petsome-cr-{{ block.id }} .petsome-cr__content p:last-child {
+    margin-bottom: 0;
+  }
+</style>
+
+<div
+  id="petsome-cr-{{ block.id }}"
+  class="petsome-collapsible-row quick-add-hidden {{ block.settings.visibility }}"
+  {{ block.shopify_attributes }}
+>
+  <details {% if block.settings.open %}open{% endif %}>
+    <summary>
+      <span class="petsome-cr__title">{{ block.settings.heading | default: 'Collapsible row' }}</span>
+      <span class="petsome-cr__chevron material-symbols-outlined">chevron_right</span>
+    </summary>
+  </details>
+  <div class="petsome-cr__body">
+    <div class="petsome-cr__body-inner">
+      <div class="petsome-cr__content rte">
+        {{ block.settings.content }}
+        {{ block.settings.page.content }}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Petsome: Collapsible row",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "visibility",
+      "label": "Display on",
+      "options": [
+        { "value": "desktop-hidden", "label": "Mobile only" },
+        { "value": "mobile-hidden", "label": "Desktop only" },
+        { "value": "always-display", "label": "All devices" }
+      ],
+      "default": "always-display"
+    },
+    {
+      "type": "checkbox",
+      "id": "open",
+      "label": "Open by default",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Collapsible row"
+    },
+    {
+      "type": "richtext",
+      "id": "content",
+      "label": "Content"
+    },
+    {
+      "type": "page",
+      "id": "page",
+      "label": "Content from page"
+    },
+    {
+      "type": "header",
+      "content": "Margins"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Top",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Collapsible row"
+    }
+  ]
+}
+{% endschema %}
