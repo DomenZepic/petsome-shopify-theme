@@ -1,42 +1,20 @@
-{% comment %}
-  Petsome: Guarantee - a dashed-border tan box with a badge image and
-  guarantee text (e.g. 60-day money-back guarantee), for use inside
-  the Product information block area. Background defaults to the
-  product's "Product secondary color" metafield when set, falling
-  back to this block's own color setting otherwise. Generic/reusable
-  across any product.
-{% endcomment %}
-{%- liquid
-  assign secondary_color = product.metafields.custom.product_secondary_color.value | default: block.settings.background_color
--%}
 <style>
   #petsome-guarantee-{{ block.id }} {
-    --petsome-guarantee-bg: {{ secondary_color }};
     display: flex;
     align-items: center;
     gap: 12px;
     padding: 16px;
     border: 1px dashed {{ block.settings.border_color }};
     border-radius: 12px;
-    background-color: var(--petsome-guarantee-bg);
-    margin-top: {{ block.settings.margin_top | divided_by: 10.0 }}rem;
-    margin-bottom: {{ block.settings.margin_bottom | divided_by: 10.0 }}rem;
+    background-color: {{ block.settings.background_color }};
+    margin-top: {{ block.settings.margin_top }}px;
+    margin-bottom: {{ block.settings.margin_bottom }}px;
   }
 
-  #petsome-guarantee-{{ block.id }} p {
-    margin: 0;
-  }
-
-  #petsome-guarantee-{{ block.id }} .petsome-guarantee__image-wrapper {
+  #petsome-guarantee-{{ block.id }} .petsome-guarantee__image {
     flex-shrink: 0;
-    width: 70px;
+    width: 73px;
     height: 70px;
-  }
-
-  #petsome-guarantee-{{ block.id }} .petsome-guarantee__image-wrapper img {
-    display: block;
-    width: 100%;
-    height: 100%;
     object-fit: contain;
   }
 
@@ -45,26 +23,33 @@
     min-width: 0;
     font-size: 1.4rem;
     line-height: 1.3;
-    color: rgb(var(--color-foreground));
+    color: #3b2f2f;
+  }
+
+  #petsome-guarantee-{{ block.id }} .petsome-guarantee__text p {
+    margin: 0;
   }
 </style>
 
-{%- if block.settings.text != blank -%}
-  <div id="petsome-guarantee-{{ block.id }}" class="petsome-guarantee" {{ block.shopify_attributes }}>
-    {%- if block.settings.image != blank -%}
-      <div class="petsome-guarantee__image-wrapper">
-        <img
-          src="{{ block.settings.image | image_url: width: 140 }}"
-          alt=""
-          width="{{ block.settings.image.width }}"
-          height="{{ block.settings.image.height }}"
-          loading="lazy"
-        >
-      </div>
-    {%- endif -%}
+<div
+  id="petsome-guarantee-{{ block.id }}"
+  class="petsome-guarantee quick-add-hidden {{ block.settings.visibility }}"
+  {{ block.shopify_attributes }}
+>
+  {%- if block.settings.badge_image != blank -%}
+    <img
+      class="petsome-guarantee__image"
+      src="{{ block.settings.badge_image | image_url: width: 146 }}"
+      alt="{{ block.settings.badge_image.alt | default: '' }}"
+      width="73"
+      height="70"
+      loading="lazy"
+    >
+  {%- endif -%}
+  {%- if block.settings.text != blank -%}
     <div class="petsome-guarantee__text">{{ block.settings.text }}</div>
-  </div>
-{%- endif -%}
+  {%- endif -%}
+</div>
 
 {% schema %}
 {
@@ -72,36 +57,43 @@
   "tag": null,
   "settings": [
     {
+      "type": "select",
+      "id": "visibility",
+      "label": "Display on",
+      "options": [
+        { "value": "desktop-hidden", "label": "Mobile only" },
+        { "value": "mobile-hidden", "label": "Desktop only" },
+        { "value": "always-display", "label": "All devices" }
+      ],
+      "default": "always-display"
+    },
+    {
       "type": "image_picker",
-      "id": "image",
+      "id": "badge_image",
       "label": "Badge image",
-      "info": "E.g. a \"100% money-back guarantee\" seal. Leave blank to hide."
+      "info": "Recommended 146 × 140px."
     },
     {
       "type": "richtext",
       "id": "text",
       "label": "Text",
-      "default": "<p>We want every product to work for your pet. If you're unsure, don't worry - your order is protected by a 60-day money-back guarantee. No hard feelings.</p>"
+      "default": "<p>Pri Petsome želimo, da vsak MobiMix ljubljenčku izboljša gibanje. Če ste v dvomih, ali je ta izdelek za vašega ljubljenčka - ni panike. Vaše naročilo je zaščiteno z 60-dnevno garancijo vračila denarja. Brez slabe vesti.</p>"
     },
     {
       "type": "header",
       "content": "Colors"
     },
     {
-      "type": "paragraph",
-      "content": "If the product has a \"Product secondary color\" metafield set, that value is used instead of the background color below - this only applies as a fallback when the metafield is blank."
-    },
-    {
       "type": "color",
       "id": "background_color",
-      "label": "Background color (fallback)",
+      "label": "Background",
       "default": "#E8D6C5"
     },
     {
       "type": "color",
       "id": "border_color",
-      "label": "Border color",
-      "default": "#B6A87C"
+      "label": "Border",
+      "default": "#b6a87c"
     },
     {
       "type": "header",
@@ -112,8 +104,8 @@
       "id": "margin_top",
       "label": "Top",
       "min": 0,
-      "max": 45,
-      "step": 3,
+      "max": 40,
+      "step": 4,
       "unit": "px",
       "default": 0
     },
@@ -122,16 +114,15 @@
       "id": "margin_bottom",
       "label": "Bottom",
       "min": 0,
-      "max": 45,
-      "step": 3,
+      "max": 40,
+      "step": 4,
       "unit": "px",
       "default": 0
     }
   ],
   "presets": [
     {
-      "name": "Petsome: Guarantee",
-      "category": "Product basics"
+      "name": "Petsome: Guarantee"
     }
   ]
 }
