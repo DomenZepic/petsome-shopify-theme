@@ -981,7 +981,7 @@
         "benefit_1": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "image": "shopify://shop_images/less_pain.png",
             "icon": "pets",
             "filled_icon": false,
             "title": "Manj bolečin že po 2–3 tednih",
@@ -991,7 +991,7 @@
         "benefit_2": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "image": "shopify://shop_images/easy_moving.png",
             "icon": "directions_run",
             "filled_icon": false,
             "title": "Lahkotnejše gibanje dan za dnem",
@@ -1001,7 +1001,7 @@
         "benefit_3": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "image": "shopify://shop_images/energy.png",
             "icon": "bolt",
             "filled_icon": true,
             "title": "Več energije za sprehode in igranje",
@@ -1011,7 +1011,7 @@
         "benefit_4": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "image": "shopify://shop_images/joint_protection.png",
             "icon": "shield",
             "filled_icon": true,
             "title": "Dolgoročna zaščita sklepov",
@@ -1156,7 +1156,7 @@
       ],
       "settings": {
         "heading": "<p>MobiMix je prava izbira za vašega psa, če želite, da:</p>",
-        "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+        "image": "shopify://shop_images/hf_20260122_143423_91f5eeda-985c-4ddc-97ca-bdfb6690d8f7.png",
         "secondary_color": "#e8d6c5",
         "padding_top": 36,
         "padding_bottom": 36
@@ -1234,6 +1234,7 @@
       "settings": {
         "heading": "<p>Zakaj običajni dodatki pogosto ne pomagajo?</p>",
         "description": "<p>Ko pes začne šepati, kupite, kar priporoči sosed ali kar najdete na polici. Glukozamin. Morda hondroitin. Psu dodatek dajete en mesec in ne opazite nič. Razlog ni, da \"dodatki pač ne delajo.\" Razlog je, da sklepna bolečina ni en problem. So trije in navadni dodatki naslavljajo samo enega.</p>",
+        "them_image": "shopify://shop_images/us_vs_them.png",
         "them_label": "Ostali dodatki",
         "us_label": "MobiMix",
         "background_color": "#faf9f6",
@@ -1269,7 +1270,7 @@
         "card_2"
       ],
       "settings": {
-        "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+        "image": "shopify://shop_images/2dd3df11ba896ac16b47bbb251e809585011a8f3.jpg",
         "button_label": "Naroči MobiMix",
         "button_link": "",
         "button_icon": "shopping_bag",
@@ -1415,7 +1416,7 @@
         "step_1": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "image": "shopify://shop_images/step_1.png",
             "title": "1. Korak",
             "description": "Odmeri kapsule glede na težo psa"
           }
@@ -1423,7 +1424,7 @@
         "step_2": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "image": "shopify://shop_images/step_2.png",
             "title": "2. Korak",
             "description": "Odpri ali dodaj celo kapsulo na obrok."
           }
@@ -1431,7 +1432,7 @@
         "step_3": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "image": "shopify://shop_images/step_3.png",
             "title": "3. Korak",
             "description": "Zmešaj z obrokom."
           }
@@ -1439,7 +1440,7 @@
         "step_4": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "image": "shopify://shop_images/step_4.png",
             "title": "4. Korak",
             "description": "Ponavljaj vsak dan in opazuj razliko."
           }
