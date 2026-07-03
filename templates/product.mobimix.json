@@ -808,6 +808,19 @@
                 "margin_bottom": 0
               },
               "blocks": {}
+            },
+            "product_petsome_guarantee_UVLUtf": {
+              "type": "product_petsome-guarantee",
+              "name": "Petsome: Guarantee",
+              "settings": {
+                "image": "shopify://shop_images/Guarantee.png",
+                "text": "<p>Pri Petsome želimo, da vsak MobiMix ljubljenčku izboljša gibanje. Če ste v dvomih, ali je ta izdelek za vašega ljubljenčka - ni panike. Vaše naročilo je zaščiteno z 60-dnevno garancijo vračila denarja. Brez slabe vesti.</p>",
+                "background_color": "#E8D6C5",
+                "border_color": "#B6A87C",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
             }
           },
           "block_order": [
@@ -829,7 +842,8 @@
             "product_petsome_collapsible_row_3AApHF",
             "product_petsome_collapsible_row_RFUWjV",
             "product_petsome_collapsible_row_KXBHeX",
-            "product_petsome_collapsible_row_zM8acA"
+            "product_petsome_collapsible_row_zM8acA",
+            "product_petsome_guarantee_UVLUtf"
           ]
         }
       },
