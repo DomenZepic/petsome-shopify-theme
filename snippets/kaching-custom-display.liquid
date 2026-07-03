@@ -153,20 +153,30 @@
     text-align: center;
   }
 
+  /* Recommended tile: always beige/secondary */
   .kaching-tile-wrapper--recommended {
-    background-color: var(--kaching-accent);
+    background-color: var(--kaching-secondary);
   }
 
   .kaching-tile-wrapper--recommended .kaching-tile-wrapper__label {
-    color: {{ block.settings.light_text_color }};
+    color: rgb(var(--color-foreground));
   }
 
+  /* Best tile: black by default, switches to accent when its tile is selected */
   .kaching-tile-wrapper--best {
     background-color: #0e1111;
   }
 
   .kaching-tile-wrapper--best .kaching-tile-wrapper__label {
     color: #ffffff;
+  }
+
+  .kaching-tile-wrapper--best:has(.kaching-tile--selected) {
+    background-color: var(--kaching-accent);
+  }
+
+  .kaching-tile-wrapper--best:has(.kaching-tile--selected) .kaching-tile-wrapper__label {
+    color: {{ block.settings.light_text_color }};
   }
 
   .kaching-tile {
@@ -185,8 +195,8 @@
   }
 
   .kaching-tile-wrapper--recommended .kaching-tile {
-    border-color: var(--kaching-accent);
-    background-color: color-mix(in srgb, var(--kaching-accent) 20%, white);
+    border-color: var(--kaching-secondary);
+    background-color: #ffffff;
   }
 
   .kaching-tile-wrapper--best .kaching-tile {
@@ -194,6 +204,7 @@
     background-color: #ffffff;
   }
 
+  /* Selected tile: always accent color, regardless of which tier */
   .kaching-tile--selected {
     border-color: var(--kaching-accent) !important;
     background-color: color-mix(in srgb, var(--kaching-accent) 20%, white) !important;
