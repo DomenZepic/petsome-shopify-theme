@@ -725,50 +725,86 @@
               },
               "blocks": {}
             },
-            "de158e68-5d0d-4819-a625-e2dabdff87d1": {
-              "type": "collapsible-row",
+            "product_petsome_collapsible_row_44HGEd": {
+              "type": "product_petsome-collapsible-row",
+              "name": "Petsome: Collapsible row",
               "settings": {
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Opis izdelka",
-                "heading_size": "medium",
-                "icon": "",
-                "filled_icon": false,
-                "collapse_icon": "carret",
-                "collapse_icon_style": "standard",
-                "collapse_icon_radius": 15,
-                "animation_speed": 0.4,
-                "border_type": "bottom",
-                "border_thickness": 1,
-                "border_style": "solid",
-                "corner_radius": 8,
-                "enable_custom_style": false,
-                "heading_padding_vertical": 12,
-                "heading_padding_horizontal": 10,
-                "content_padding_vertical": 10,
-                "content_padding_horizontal": 10,
-                "closed_state_border": "#dddddd",
-                "closed_state_header_bg": "#f9f9f9",
-                "closed_state_header_text": "#121212",
-                "closed_state_row_icon": "#121212",
-                "closed_state_collapse_icon": "#121212",
-                "closed_state_collapse_icon_solid": "#ffffff",
-                "closed_state_collapse_bg": "#121212",
-                "closed_state_content_bg": "#f9f9f9",
-                "closed_state_content_text": "#121212",
-                "open_colors_on_hover": true,
-                "open_state_border": "#d5aeea",
-                "open_state_header_bg": "#fefaff",
-                "open_state_header_text": "#000000",
-                "open_state_row_icon": "#6d388b",
-                "open_state_collapse_icon": "#121212",
-                "open_state_collapse_icon_solid": "#ffffff",
-                "open_state_collapse_bg": "#6d388b",
-                "open_state_content_bg": "#fefaff",
-                "open_state_content_text": "#121212",
-                "content": "<p>alsjdoasjdojasoajsdojasojaodjas</p>",
+                "content": "<p>asdasdsaasdsadsadsad</p>",
                 "page": "",
-                "margin_top": 24,
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "product_petsome_collapsible_row_9kVyQR": {
+              "type": "product_petsome-collapsible-row",
+              "name": "Petsome: Collapsible row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Prednosti MobiMixa",
+                "content": "<p>asdasdsaasdsadsadsad</p>",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "product_petsome_collapsible_row_3AApHF": {
+              "type": "product_petsome-collapsible-row",
+              "name": "Petsome: Collapsible row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Kako deluje MobiMix?",
+                "content": "<p>asdasdsaasdsadsadsad</p>",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "product_petsome_collapsible_row_RFUWjV": {
+              "type": "product_petsome-collapsible-row",
+              "name": "Petsome: Collapsible row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Sestavine",
+                "content": "<p>asdasdsaasdsadsadsad</p>",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "product_petsome_collapsible_row_KXBHeX": {
+              "type": "product_petsome-collapsible-row",
+              "name": "Petsome: Collapsible row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Odmerjanje",
+                "content": "<p>asdasdsaasdsadsadsad</p>",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "product_petsome_collapsible_row_zM8acA": {
+              "type": "product_petsome-collapsible-row",
+              "name": "Petsome: Collapsible row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Študije",
+                "content": "<p>asdasdsaasdsadsadsad</p>",
+                "page": "",
+                "margin_top": 0,
                 "margin_bottom": 0
               },
               "blocks": {}
@@ -788,7 +824,12 @@
             "product_petsome_professional_review_BGLaVX",
             "e7a28cbe-03cb-4c9d-a2c4-0e3e76ffb3e5",
             "description",
-            "de158e68-5d0d-4819-a625-e2dabdff87d1"
+            "product_petsome_collapsible_row_44HGEd",
+            "product_petsome_collapsible_row_9kVyQR",
+            "product_petsome_collapsible_row_3AApHF",
+            "product_petsome_collapsible_row_RFUWjV",
+            "product_petsome_collapsible_row_KXBHeX",
+            "product_petsome_collapsible_row_zM8acA"
           ]
         }
       },
