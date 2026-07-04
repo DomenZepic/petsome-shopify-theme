@@ -363,8 +363,10 @@ if (!customElements.get('kaching-custom-display')) {
     renderTiles(tilesData) {
       this.tilesContainer.innerHTML = '';
 
-      tilesData.forEach(({ tier, imageUrl, price, valid, validationMessage, dosage }) => {
-        const badgeStyle = this.badgeStyleFor(tier.badgeText);
+      tilesData.forEach(({ tier, imageUrl, price, valid, validationMessage, dosage }, index) => {
+        const position = index + 1;
+        const badgeStyle = this.dataset[`tier${position}Style`] || 'none';
+        const badgeLabel = this.dataset[`tier${position}Label`] || '';
         const isSelected = tier.id === (this.selectedDealBarId || this.preselectedDealBarId);
 
         const dosageLines = [];
@@ -393,14 +395,14 @@ if (!customElements.get('kaching-custom-display')) {
         `;
 
         let wrapperEl;
-        if (badgeStyle === 'none') {
+        if (badgeStyle === 'none' || !badgeLabel) {
           wrapperEl = document.createElement('div');
           wrapperEl.innerHTML = tileHtml;
         } else {
           wrapperEl = document.createElement('div');
           wrapperEl.className = `kaching-tile-wrapper kaching-tile-wrapper--${badgeStyle}`;
           wrapperEl.innerHTML = `
-            <p class="kaching-tile-wrapper__label">${tier.badgeText}</p>
+            <p class="kaching-tile-wrapper__label">${badgeLabel}</p>
             ${tileHtml}
           `;
         }
@@ -459,17 +461,6 @@ if (!customElements.get('kaching-custom-display')) {
           `;
         })
         .join('');
-    }
-
-    badgeStyleFor(badgeText) {
-      if (!badgeText) return 'none';
-      const normalized = badgeText.toLowerCase();
-      if (normalized.includes('največji') || normalized.includes('prihranek')) return 'best';
-      // Any other non-empty badge text (including "Priporočeno") falls
-      // back to the secondary-colored wrapper - there's no third wrapper
-      // style in the design, so an arbitrary merchant-entered badge still
-      // gets a visible treatment instead of being silently dropped.
-      return 'recommended';
     }
 
     async handleTileClick(tier) {

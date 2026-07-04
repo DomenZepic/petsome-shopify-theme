@@ -389,6 +389,14 @@
     data-capsules-per-package="{{ block.settings.capsules_per_package }}"
     data-capsules-per-day-by-size="{{ block.settings.capsules_per_day_by_size }}"
     data-product-title="{{ product.title | escape }}"
+    data-tier-1-style="{{ block.settings.tier_1_style | default: 'none' }}"
+    data-tier-1-label="{{ block.settings.tier_1_label | escape }}"
+    data-tier-2-style="{{ block.settings.tier_2_style | default: 'none' }}"
+    data-tier-2-label="{{ block.settings.tier_2_label | escape }}"
+    data-tier-3-style="{{ block.settings.tier_3_style | default: 'none' }}"
+    data-tier-3-label="{{ block.settings.tier_3_label | escape }}"
+    data-tier-4-style="{{ block.settings.tier_4_style | default: 'none' }}"
+    data-tier-4-label="{{ block.settings.tier_4_label | escape }}"
   >
     <div class="kaching-custom-display__inner">
       <div class="kaching-custom-display__top">
