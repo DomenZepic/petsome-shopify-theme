@@ -366,7 +366,7 @@ if (!customElements.get('kaching-custom-display')) {
       tilesData.forEach(({ tier, imageUrl, price, valid, validationMessage, dosage }, index) => {
         const position = index + 1;
         const badgeStyle = this.dataset[`tier${position}Style`] || 'none';
-        const badgeLabel = tier.badgeText || '';
+        const badgeLabel = tier.label || tier.badgeText || '';
         const isSelected = tier.id === (this.selectedDealBarId || this.preselectedDealBarId);
 
         const dosageLines = [];
