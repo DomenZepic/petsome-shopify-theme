@@ -583,7 +583,7 @@
           "heading_text": "Košarica",
           "heading_alignment": "flex-start",
           "heading_size": 26,
-          "display_count_bubble": false,
+          "display_count_bubble": true,
           "count_bubble_position": "after",
           "count_bubble_size": 24,
           "count_bubble_bg_color": "#2e2a39",
