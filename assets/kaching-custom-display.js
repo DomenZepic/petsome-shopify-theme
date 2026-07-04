@@ -366,7 +366,7 @@ if (!customElements.get('kaching-custom-display')) {
       tilesData.forEach(({ tier, imageUrl, price, valid, validationMessage, dosage }, index) => {
         const position = index + 1;
         const badgeStyle = this.dataset[`tier${position}Style`] || 'none';
-        const badgeLabel = this.dataset[`tier${position}Label`] || '';
+        const badgeLabel = tier.badgeText || '';
         const isSelected = tier.id === (this.selectedDealBarId || this.preselectedDealBarId);
 
         const dosageLines = [];
@@ -410,7 +410,7 @@ if (!customElements.get('kaching-custom-display')) {
         const tileButton = wrapperEl.querySelector('.kaching-tile');
         tileButton.addEventListener('click', () => this.handleTileClick(tier));
 
-        if (badgeStyle === 'none') {
+        if (badgeStyle === 'none' || !badgeLabel) {
           this.tilesContainer.appendChild(tileButton);
         } else {
           this.tilesContainer.appendChild(wrapperEl);
