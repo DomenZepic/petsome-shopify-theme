@@ -721,14 +721,6 @@
               },
               "blocks": {}
             },
-            "description": {
-              "type": "product_description",
-              "settings": {
-                "margin_top": 24,
-                "margin_bottom": 24
-              },
-              "blocks": {}
-            },
             "product_petsome_collapsible_row_44HGEd": {
               "type": "product_petsome-collapsible-row",
               "name": "Petsome: Collapsible row",
@@ -840,7 +832,6 @@
             "payment_badges_jpEXd3",
             "product_petsome_professional_review_BGLaVX",
             "e7a28cbe-03cb-4c9d-a2c4-0e3e76ffb3e5",
-            "description",
             "product_petsome_collapsible_row_44HGEd",
             "product_petsome_collapsible_row_9kVyQR",
             "product_petsome_collapsible_row_3AApHF",
