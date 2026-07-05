@@ -1328,6 +1328,7 @@
         "kicker_text": "ARTROREGEN FORMULA",
         "heading": "<p>Zakaj 8 sestavin in ne samo 2?</p>",
         "description": "<p>Večina dodatkov cilja en problem. ArtroRegen Formula cilja tri — hkrati. To ni slučajnost. To je razlog, zakaj tista kapsula iz zoološkege vrta ni delala. In zakaj ta dela.</p>",
+        "pattern_image": "shopify://shop_images/paw_background.png",
         "background_color": "#e8d6c5",
         "kicker_background": "#e0b58d",
         "card_background": "#ffffff",
@@ -1371,6 +1372,7 @@
         "story_2",
         "story_3"
       ],
+      "disabled": true,
       "settings": {
         "heading": "<p>Dokazi so v rezultatih</p>",
         "description": "<p>Pomagali smo že več kot 10.000 psom po vsej Evropi. Tukaj je nekaj njihovih zgodb.</p>",
@@ -1393,6 +1395,7 @@
       "block_order": [
         "badge_4JraCr"
       ],
+      "disabled": true,
       "settings": {
         "heading": "<p>Proizvedeno v skladu z najvišjimi standardi</p>",
         "description": "<p>MobiMix je izdelan v skladu z najvišjimi evropskimi standardi. Vsaka sestavina in vsak odmerek sta neodvisno testirana, brez nepotrebnih dodatkov in polnil.</p>",
@@ -1402,6 +1405,7 @@
         "button_background_color": "#0e1111",
         "button_text_color": "#ffffff",
         "background_color": "#e8d6c5",
+        "pattern_image": "shopify://shop_images/paw_background.png",
         "padding_top": 80,
         "padding_bottom": 80
       }
