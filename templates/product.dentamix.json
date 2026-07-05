@@ -680,6 +680,7 @@
             },
             "e7a28cbe-03cb-4c9d-a2c4-0e3e76ffb3e5": {
               "type": "product_sticky-atc",
+              "disabled": true,
               "settings": {
                 "display_when": "after_scroll",
                 "display_pixels": 500,
@@ -688,7 +689,7 @@
                 "title": "",
                 "subtitle": "",
                 "function": "add_to_cart",
-                "button_label": "Add to cart",
+                "button_label": "Dodaj v košarico",
                 "enable_custom_btn_color": false,
                 "custom_btn_color": "#dd1d1d",
                 "icon_scale": 120,
