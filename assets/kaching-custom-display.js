@@ -442,21 +442,26 @@ if (!customElements.get('kaching-custom-display')) {
       this.giftsContainer.innerHTML = visibleGifts
         .map((gift) => {
           const unlocked = selectedBarPosition >= gift.unlockAtBar;
+          const badge = gift.comparePrice
+            ? `<div class="kaching-gift__badge">
+                <span>FREE</span>
+                <span class="kaching-gift__badge-price">${this.formatMoney(gift.comparePrice)}</span>
+              </div>`
+            : '';
           const image = gift.image
-            ? `<img class="kaching-gift__image" src="${gift.image}" alt="" loading="lazy">`
+            ? `<div class="kaching-gift__image-wrapper">
+                <img class="kaching-gift__image" src="${gift.image}" alt="" loading="lazy">
+                ${badge}
+              </div>`
             : `<span class="kaching-gift__icon"><span class="material-icon material-symbols-outlined">${gift.icon || 'redeem'}</span></span>`;
           const title = unlocked
             ? `<span class="kaching-gift__title">${gift.title}</span>`
             : `<span class="kaching-gift__title">${gift.lockedTitle || 'Locked'}</span>`;
-          const priceEl = gift.comparePrice
-            ? `<span class="kaching-gift__compare-price">${this.formatMoney(gift.comparePrice)}</span>`
-            : '';
 
           return `
             <div class="kaching-gift${unlocked ? ' kaching-gift--unlocked' : ''}">
               ${image}
               ${title}
-              ${priceEl}
             </div>
           `;
         })
