@@ -96,6 +96,7 @@
         },
         "product_card_FpGJMR": {
           "type": "product_card",
+          "disabled": true,
           "settings": {
             "product": "allergymix-starter-pack",
             "custom_description": "Pomirjena koža, manj srbenja in sijoča dlaka, od znotraj.",
