@@ -1504,6 +1504,7 @@
     },
     "petsome_professional_reviews_BkgaUN": {
       "type": "petsome-professional-reviews",
+      "disabled": true,
       "name": "Petsome: Expert reviews",
       "settings": {
         "heading": "<p>Preverjeno v praksi – s strani strokovnjakov in lastnikov psov</p>",
