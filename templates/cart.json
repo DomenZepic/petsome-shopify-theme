@@ -12,6 +12,8 @@
     "cart-items": {
       "type": "main-cart-items",
       "settings": {
+        "bundle_title_suffix": "+ [BUNDLE]",
+        "bundle_show_images": false,
         "padding_top": 0,
         "padding_bottom": 24
       }
@@ -22,7 +24,11 @@
         "dec6ac13-eef3-4b4c-900a-e550eb977500": {
           "type": "discount_field",
           "disabled": true,
-          "settings": {}
+          "settings": {
+            "placeholder": "Enter discount code",
+            "btn_label": "ADD",
+            "error_msg": "Please enter a discount code!"
+          }
         },
         "subtotal": {
           "type": "subtotal",
@@ -39,68 +45,10 @@
         "buttons"
       ],
       "settings": {}
-    },
-    "featured-collection": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "You may also like",
-        "heading_size": "h2",
-        "description": "",
-        "show_description": false,
-        "description_style": "body",
-        "color_scheme": "background-1",
-        "collection": "all",
-        "products_to_show": 4,
-        "show_view_all": true,
-        "view_all_style": "solid",
-        "image_ratio": "square",
-        "show_secondary_image": false,
-        "show_vendor": false,
-        "show_rating": false,
-        "enable_quick_add": false,
-        "columns_desktop": 4,
-        "columns_mobile": "2",
-        "padding_top": 100,
-        "padding_bottom": 100
-      }
-    },
-    "newsletter": {
-      "type": "newsletter",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading_size": "h1"
-          }
-        },
-        "paragraph": {
-          "type": "paragraph",
-          "settings": {
-            "text": "<p>Join our email list for exclusive offers and the latest news. </p>"
-          }
-        },
-        "email-form": {
-          "type": "email_form",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "heading",
-        "paragraph",
-        "email-form"
-      ],
-      "settings": {
-        "color_scheme": "background-2",
-        "full_width": true,
-        "padding_top": 68,
-        "padding_bottom": 52
-      }
     }
   },
   "order": [
     "cart-items",
-    "cart-footer",
-    "featured-collection",
-    "newsletter"
+    "cart-footer"
   ]
 }
