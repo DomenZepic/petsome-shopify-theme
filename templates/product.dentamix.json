@@ -29,7 +29,7 @@
                 "visibility": "mobile-hidden",
                 "image": "shopify://shop_images/unnamed_1.jpg",
                 "rating": 5,
-                "quote": "\"Pri starejših in aktivnih psih pogosto opažamo spremembe v gibanju, ki niso nujno takoj boleče, a vplivajo na kakovost življenja. MobiMix cilja ključne elemente, povezane z zdravjem sklepov in gibanjem. Pomaga vašemu psu ostati aktiven in brez bolečin z podporo obnovi hrustanca, mazanju sklepov in zmanjšanju vnetja.\"",
+                "quote": "\"Več kot 80 % psov ima do tretjega leta vidne težave z zobmi — večina lastnikov pa rednega ščetkanja preprosto ne zmore. DentalMix deluje drugače: skozi pasjo slino, ki obliva zobe ves dan. Pomaga vezati kalcij, preden se strdi v zobni kamen, in preprečuje, da bi se obloge sprijele. Enostavna dnevna podpora proti zadahu in za čistejše zobe — brez ščetkanja.\"",
                 "author": "Blaž Petelinek Ledinski, dr. vet. med.",
                 "role": "",
                 "background_color": "#ffffff",
@@ -88,7 +88,7 @@
               "name": "Heading",
               "settings": {
                 "visibility": "always-display",
-                "title": "DentaMix - Za zdrave zobe psov",
+                "title": "DentalMix — konec zadaha in čistejši zobje, brez ščetkanja",
                 "heading_size": "h1",
                 "custom_desktop_size": 39,
                 "custom_mobile_size": 28,
@@ -186,14 +186,14 @@
                 "tag_1": {
                   "type": "petsome-tag",
                   "settings": {
-                    "text": "Podpora sklepom"
+                    "text": "Proti zadahu"
                   },
                   "blocks": {}
                 },
                 "tag_2": {
                   "type": "petsome-tag",
                   "settings": {
-                    "text": "Večja gibljivost"
+                    "text": "Čistejši zobje"
                   },
                   "blocks": {}
                 },
@@ -313,7 +313,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Tvoj pes se spet premika brez obotavljanja",
+                    "text_1": "Manj zadaha — mnogi opazijo v 7–14 dneh",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -373,7 +373,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Manj jutranje togosti že v 2–3 tednih",
+                    "text_1": "Zobje delujejo čistejši, manj vidnih oblog",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -433,7 +433,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Več energije za igro in sprehode",
+                    "text_1": "Spet ga crkljaš od blizu — brez zadaha",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -493,7 +493,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Dolgoročna zaščita pred obrabo sklepov",
+                    "text_1": "Brez ščetkanja in brez anestezije — samo potreseš",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -585,7 +585,7 @@
             "kaching_custom_display_1": {
               "type": "product_kaching-custom-display",
               "settings": {
-                "disclaimer_text": "<p>*Prve spremembe so vidne v 2–3 tednih.  Za najboljše rezultate priporočamo uporabo 2–3 mesece.</p>",
+                "disclaimer_text": "<p>*Manj zadaha večina opazi v 7–14 dneh. Za čistejše zobe in manj oblog priporočamo redno vsakodnevno uporabo.</p>",
                 "gifts_heading": "Brezplačna darila ob nakupu",
                 "tier_1_style": "none",
                 "tier_2_style": "recommended",
@@ -668,7 +668,7 @@
                 "visibility": "desktop-hidden",
                 "image": "shopify://shop_images/unnamed_1.jpg",
                 "rating": 5,
-                "quote": "\"Pri starejših in aktivnih psih pogosto opažamo spremembe v gibanju, ki niso nujno takoj boleče, a vplivajo na kakovost življenja. MobiMix cilja ključne elemente, povezane z zdravjem sklepov in gibanjem. Pomaga vašemu psu ostati aktiven in brez bolečin z podporo obnovi hrustanca, mazanju sklepov in zmanjšanju vnetja.\"",
+                "quote": "\"Več kot 80 % psov ima do tretjega leta vidne težave z zobmi — večina lastnikov pa rednega ščetkanja preprosto ne zmore. DentalMix deluje drugače: skozi pasjo slino, ki obliva zobe ves dan. Pomaga vezati kalcij, preden se strdi v zobni kamen, in preprečuje, da bi se obloge sprijele. Enostavna dnevna podpora proti zadahu in za čistejše zobe — brez ščetkanja.\"",
                 "author": "Blaž Petelinek Ledinski, dr. vet. med.",
                 "role": "",
                 "background_color": "#ffffff",
@@ -737,7 +737,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Opis izdelka",
-                "content": "<p>asdasdsaasdsadsadsad</p>",
+                "content": "<p>DentalMix je dnevni prašek za zobe, ki ga preprosto potreseš na pasjo hrano. Deluje skozi slino — imenujemo ga <strong>Saliva-Activated Defense™</strong>: pomaga vezati kalcij, preden se strdi v zobni kamen, in preprečuje, da bi se obloge oprijele zob. Proti zadahu in za čistejše zobe, brez ščetkanja, žvečilk ali anestezije.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -751,7 +751,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Prednosti DentalMixa",
-                "content": "<p>asdasdsaasdsadsadsad</p>",
+                "content": "<p>✅ Manj zadaha, mnogi opazijo v 7–14 dneh<br>✅ Zobje delujejo čistejši, manj vidnega kamna in oblog<br>✅ Brez ščetkanja in brez borbe — samo potreseš na obrok<br>✅ Primerno za majhne in starejše pse (brez anestezije)</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -764,8 +764,8 @@
               "settings": {
                 "visibility": "always-display",
                 "open": false,
-                "heading": "Kako deluje MobiMix?",
-                "content": "<p>asdasdsaasdsadsadsad</p>",
+                "heading": "Kako deluje DentalMix?",
+                "content": "<p>DentalMix ne čisti zob od zunaj. Deluje skozi slino, ki obliva vsak zob 24 ur na dan. Natrijev tripolifosfat veže kalcij v slini, da se ne more strditi v zobni kamen. Polisaharidi iz morskih alg naredijo površino zob spolzko, da se obloge ne oprimejo. Zeleni čaj in granatno jabolko pa umirjata bakterije, ki povzročajo zadah. Vse to brez ščetke — pes samo je.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -779,7 +779,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Sestavine",
-                "content": "<p>asdasdsaasdsadsadsad</p>",
+                "content": "<p><strong>Hidrolizirana algna moka 53,5 %</strong> (proti oblogam) · <strong>natrijev tripolifosfat</strong> (proti zobnemu kamnu) · <strong>cikorija 20 %</strong> (prebiotik) · <strong>zeleni čaj 5 %</strong> in <strong>granatno jabolko 10 %</strong> (proti zadahu) · <strong>Bacillus velezensis 200 mrd CFU/kg</strong> (proti zadahu iz črevesja). Proizvedeno v EU.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -793,7 +793,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Odmerjanje",
-                "content": "<p>asdasdsaasdsadsadsad</p>",
+                "content": "<p>Enkrat na dan potreseš prašek po pasji hrani (mokri ali suhi) glede na težo psa in dobro premešaš. Brez ščetkanja, brez posebnih postopkov — pes samo poje. Za najboljši učinek uporabljaj vsak dan, redno.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -807,7 +807,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Študije",
-                "content": "<p>asdasdsaasdsadsadsad</p>",
+                "content": "<p>Natrijev tripolifosfat je mehanizem proti zobnemu kamnu, ki ga priznava VOHC. Hidrolizirana algna moka spada v isto dokazano kategorijo morskih alg kot ProDen PlaqueOff. Probiotik Bacillus velezensis (DSM 15544) je registriran v EU (4b1820). Manj zadaha večina lastnikov opazi v 7–14 dneh.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -938,25 +938,25 @@
         "item_1": {
           "type": "item",
           "settings": {
-            "text": "Podpira zdravje sklepov"
+            "text": "Deluje proti zadahu"
           }
         },
         "item_2": {
           "type": "item",
           "settings": {
-            "text": "Zmanjšuje jutranjo togost"
+            "text": "Za čistejše zobe"
           }
         },
         "item_3": {
           "type": "item",
           "settings": {
-            "text": "Varuje hrustanec pred obrabo"
+            "text": "Manj zobnega kamna"
           }
         },
         "item_4": {
           "type": "item",
           "settings": {
-            "text": "Spodbuja gibljivost in aktivnost"
+            "text": "Deluje skozi slino, 24/7"
           }
         }
       },
@@ -989,8 +989,8 @@
             "image": "shopify://shop_images/less_pain.png",
             "icon": "pets",
             "filled_icon": false,
-            "title": "Manj bolečin že po 2–3 tednih",
-            "text": "<p>Sestavine MobiMixa začnejo delovati takoj. Večina lastnikov opaži, da pes zjutraj vstane lažje in da je v gibanju manj previdnosti. Ne zato, ker bi bila bolečina zakrita, ampak ker se vnetje umirja in hrustanec dobiva podporo, ki jo potrebuje.</p>"
+            "title": "Manj zadaha že v 7–14 dneh",
+            "text": "<p>DentalMix deluje skozi slino od prvega dne. Večina lastnikov opazi, da tisti zadah, ki jih je odbijal, počasi popušča — ne zato, ker bi ga prekrili, ampak ker se bakterije, ki ga povzročajo, umirjajo.</p>"
           }
         },
         "benefit_2": {
@@ -999,8 +999,8 @@
             "image": "shopify://shop_images/easy_moving.png",
             "icon": "directions_run",
             "filled_icon": false,
-            "title": "Lahkotnejše gibanje dan za dnem",
-            "text": "<p>Kapsulo preprosto dodaš k dnevnemu obroku. Ni posebnih postopkov, ni kompromisov. Samo dosledna, dnevna podpora, ki sčasoma prinese razliko, ki jo opazite vsak dan.</p>"
+            "title": "Brez ščetkanja, brez borbe",
+            "text": "<p>Prašek preprosto potreseš na obrok. Nič stiskanja gobčka, nič vsakodnevne bitke, ki jo pes vedno dobi. Samo dosledna dnevna nega, ki jo pes komaj opazi.</p>"
           }
         },
         "benefit_3": {
@@ -1009,8 +1009,8 @@
             "image": "shopify://shop_images/energy.png",
             "icon": "bolt",
             "filled_icon": true,
-            "title": "Več energije za sprehode in igranje",
-            "text": "<p>Ko se vnetje umiri, se vrne igrivost. Lastniki poročajo: pes spet pohiti do vrat, spet zahteva sprehod, spet povleče povodec. Ta trenutek je vreden vsega.</p>"
+            "title": "Spet ga crkljaš od blizu",
+            "text": "<p>Ko zadah popusti, se vrne tisto, kar imaš najraje — crkljanje od blizu, brez odmika. To je trenutek, ki šteje.</p>"
           }
         },
         "benefit_4": {
@@ -1019,8 +1019,8 @@
             "image": "shopify://shop_images/joint_protection.png",
             "icon": "shield",
             "filled_icon": true,
-            "title": "Dolgoročna zaščita sklepov",
-            "text": "<p>MobiMix je zasnovan za dolgotrajno uporabo. Idealen za pse nad 5 let, velike pasme in aktivne pse, ki sklepe obremenjujejo vsak dan. Hrustanca, ki ga ni, ne moremo obnoviti, tistega, ki je še tam, pa lahko zaščitimo.</p>"
+            "title": "Manj zobnega kamna, dolgoročno",
+            "text": "<p>DentalMix je zasnovan za vsakodnevno, dolgotrajno uporabo. Vezanje kalcija preprečuje, da bi se obloge strdile v kamen — zato zobje ostanejo čistejši dlje, ne le prvi teden.</p>"
           }
         }
       },
@@ -1031,7 +1031,7 @@
         "benefit_4"
       ],
       "settings": {
-        "heading": "<p>Celostna formula za zdrave sklepe in lahkotno gibanje psov.</p>",
+        "heading": "<p>Enostavna dnevna nega proti zadahu in za čistejše zobe — brez ščetkanja.</p>",
         "columns": "2",
         "accent_color": "#f8aaa7",
         "secondary_color": "#e8d6c5",
@@ -1046,18 +1046,18 @@
           "type": "timeframe",
           "settings": {
             "highlighted": false,
-            "badge_text": "2-3 tedni",
-            "title": "Vstane malo lažje.",
-            "text": "<p>To je navadno prva stvar, ki jo opazite. Tista sekunda oklevanja zjutraj — začne izginjati. Hoja po stopnicah je manj previdna. Drobne spremembe, ki pa jih ne morete spregledati, ko jih vidite.</p>"
+            "badge_text": "7–14 dni",
+            "title": "Zadah popusti.",
+            "text": "<p>To je navadno prva stvar, ki jo opaziš. Tisti zadah, ki te je odbijal, postane opazno milejši. Drobna sprememba, ki je ne moreš spregledati, ko jo enkrat zaznaš.</p>"
           }
         },
         "tf_2": {
           "type": "timeframe",
           "settings": {
             "highlighted": false,
-            "badge_text": "1 mesec",
-            "title": "Spet hodi kot bi moral.",
-            "text": "<p>Tempo se vrne. Pes bolj pogumno stopa po klančinah. Na sprehodu spet malo zahteva — ne samo sledi. Sprehodi postanejo prijetnejši. Za oba.</p>"
+            "badge_text": "3–4 tedni",
+            "title": "Zobje delujejo čistejši.",
+            "text": "<p>Obloge ob dlesnih so videti svetlejše, površina zob bolj gladka. Ne čez noč — a razlika, ki jo opaziš, ko psa pogledaš v gobček.</p>"
           }
         },
         "tf_3": {
@@ -1065,8 +1065,8 @@
           "settings": {
             "highlighted": true,
             "badge_text": "2–3 meseci",
-            "title": "Deluje kot mlajši.",
-            "text": "<p>To je stavek, ki ga slišimo najpogosteje. Pes se igra. Prinese igračo. Pohiti do vrat. Stvari, ki jih je nehal počati — se vračajo. Po eni za drugo.</p>"
+            "title": "Manj vidnega kamna.",
+            "text": "<p>Novih oblog je manj, ker se kalcij sproti veže in ne strdi. Zobje ostajajo čistejši, zadaha pa manj — dan za dnem.</p>"
           }
         },
         "tf_4": {
@@ -1074,8 +1074,8 @@
           "settings": {
             "highlighted": false,
             "badge_text": "3+ meseci",
-            "title": "Zdaj pa ne bi več prenehala.",
-            "text": "<p>Ko lastniki vidijo, kaj se zgodi, če za teden pozabijo na kapsulo — se ne ustavijo več. Sklepi so zaščiteni. Pes je aktiven. To je bil cilj od začetka.</p>"
+            "title": "Zadaha ni več.",
+            "text": "<p>Ko lastniki vidijo razliko, ne prenehajo več. Prašek je del vsakdanje rutine, zadaha ni več, crkljanje od blizu pa spet naravno. To je bil cilj od začetka.</p>"
           }
         }
       },
@@ -1103,49 +1103,49 @@
         "bullet_1": {
           "type": "bullet",
           "settings": {
-            "text": "🐕 ima več energije čez dan in ni več hitro utrujen"
+            "text": "🦷 nima več zadaha in vas spet lahko crklja od blizu"
           }
         },
         "bullet_2": {
           "type": "bullet",
           "settings": {
-            "text": "🦴 se giblje bolj sproščeno, brez okorelosti po počitku"
+            "text": "✨ ima vidno čistejše zobe, brez rjavih oblog ob dlesnih"
           }
         },
         "bullet_3": {
           "type": "bullet",
           "settings": {
-            "text": "🚶‍♂️ z veseljem hodi na sprehode in ne zaostaja več"
+            "text": "🚫 dobi nego brez ščetkanja, ki jo tako ali tako sovraži"
           }
         },
         "bullet_4": {
           "type": "bullet",
           "settings": {
-            "text": "🐾 spet skače, teče in se igra brez zadržkov"
+            "text": "😌 se izogne dragi anesteziji in čiščenju pri veterinarju"
           }
         },
         "bullet_5": {
           "type": "bullet",
           "settings": {
-            "text": "❤️ se počuti bolje v svojem telesu, tudi v zrelih letih"
+            "text": "🐕 dobi nekaj, kar dejansko poje — brez borbe in okusa, ki bi ga zavrnil"
           }
         },
         "bullet_6": {
           "type": "bullet",
           "settings": {
-            "text": "🔁 ohrani zdrave sklepe dolgoročno, ne samo kratkoročno"
+            "text": "🔁 ohrani čiste zobe dolgoročno, ne le za teden dni"
           }
         },
         "bullet_7": {
           "type": "bullet",
           "settings": {
-            "text": "🛡 ima ves čas podporo sklepom tudi če je večje pasme ali zelo aktiven"
+            "text": "🧪 dobi pravo dozo delujočih sestavin, ne le priboljšek za en dan"
           }
         },
         "bullet_8": {
           "type": "bullet",
           "settings": {
-            "text": "😊 uživa v vsakodnevnem gibanju, brez bolečine in nelagodja"
+            "text": "❤️ ostane brez zadaha in nelagodja, tudi v zrelih letih"
           }
         }
       },
@@ -1160,7 +1160,7 @@
         "bullet_8"
       ],
       "settings": {
-        "heading": "<p>MobiMix je prava izbira za vašega psa, če želite, da:</p>",
+        "heading": "<p>DentalMix je prava izbira za vašega psa, če želite, da:</p>",
         "image": "shopify://shop_images/hf_20260122_143423_91f5eeda-985c-4ddc-97ca-bdfb6690d8f7.png",
         "secondary_color": "#e8d6c5",
         "padding_top": 36,
@@ -1173,7 +1173,7 @@
         "row_1": {
           "type": "row",
           "settings": {
-            "label": "Hrustanec dobiva gradbeni material za obnovo",
+            "label": "Deluje, tudi če pes ne pusti do zob",
             "them_value": "❌",
             "us_value": "✅"
           }
@@ -1181,7 +1181,7 @@
         "row_2": {
           "type": "row",
           "settings": {
-            "label": "Vnetje se umirja — na treh poteh hkrati",
+            "label": "Doseže vsak zob — prek sline, 24/7",
             "them_value": "❌",
             "us_value": "✅"
           }
@@ -1189,7 +1189,7 @@
         "row_3": {
           "type": "row",
           "settings": {
-            "label": "Sklepna tekočina se vzdržuje — manj trenja, lažje gibanje",
+            "label": "Prepreči, da se kalcij strdi v kamen",
             "them_value": "❌",
             "us_value": "✅"
           }
@@ -1197,15 +1197,15 @@
         "row_4": {
           "type": "row",
           "settings": {
-            "label": "Število aktivnih sestavin",
-            "them_value": "1-3",
-            "us_value": "8"
+            "label": "Brez ščetkanja in brez borbe",
+            "them_value": "❌",
+            "us_value": "✅"
           }
         },
         "row_5": {
           "type": "row",
           "settings": {
-            "label": "Učinek, ki traja — ne le začetni skok",
+            "label": "Brez anestezije in stroška čiščenja (200–600 €)",
             "them_value": "❌",
             "us_value": "✅"
           }
@@ -1213,7 +1213,7 @@
         "row_6": {
           "type": "row",
           "settings": {
-            "label": "Priporočeno v veterinarskih in rehab. centrih",
+            "label": "Deluje na vzrok, ne le prekrije zadah za nekaj časa",
             "them_value": "❌",
             "us_value": "✅"
           }
@@ -1237,10 +1237,10 @@
         "row_7"
       ],
       "settings": {
-        "heading": "<p>Zakaj običajni dodatki pogosto ne pomagajo?</p>",
-        "description": "<p>Ko pes začne šepati, kupite, kar priporoči sosed ali kar najdete na polici. Glukozamin. Morda hondroitin. Psu dodatek dajete en mesec in ne opazite nič. Razlog ni, da \"dodatki pač ne delajo.\" Razlog je, da sklepna bolečina ni en problem. So trije in navadni dodatki naslavljajo samo enega.</p>",
+        "heading": "<p>Zakaj ščetkanje in žvečilke pogosto ne zaležejo?</p>",
+        "description": "<p>Vsi rečejo „samo ščetkaj mu zobe“. Saj poznaš to: stisne gobček, obrne glavo, po treh večerih odnehaš. Žvečilke? Bolj priboljšek kot čiščenje, in trajajo dve sekundi. Problem ni v tebi. Problem je, da nega, ki je občasna in od zunaj, ne prepreči, da se obloge strdijo v kamen. DentalMix dela drugače — skozi slino, ves dan.</p>",
         "them_image": "shopify://shop_images/us_vs_them.png",
-        "them_label": "Ostali dodatki",
+        "them_label": "Ščetka & žvečilke",
         "us_image": "shopify://shop_images/MobiMix_NEW_1d48bfe9-d0c6-49cc-a93c-30f3457609e2.png",
         "us_label": "DentaMix",
         "background_color": "#faf9f6",
@@ -1257,17 +1257,17 @@
         "card_1": {
           "type": "card",
           "settings": {
-            "heading": "🛑 Zakaj mnogi dodatki razočarajo?",
-            "text": "<p>Veliko dodatkov za sklepe temelji le na eni ali dveh sestavinah, zato delujejo predvsem kratkoročno in ne naslavljajo vseh vzrokov težav s sklepi. Posledično lahko prinesejo le začasno olajšanje, ne pa dolgoročne podpore in trajnih izboljšav.</p>",
-            "badge_text": "Kratkoročno olajšanje ≠ dolgoročna rešitev"
+            "heading": "🛑 Zakaj ščetkanje pogosto odpove?",
+            "text": "<p>Ščetkanje je odvisno od vsakodnevne borbe, ki jo večina lastnikov izgubi — pes ne pusti, doslednost pade. Zato ima več kot 80 % psov do tretjega leta vidne težave z zobmi. Nega, ki je občasna in od zunaj, preprosto ne dohaja.</p>",
+            "badge_text": "Občasno ščetkanje ≠ čisti zobje"
           }
         },
         "card_2": {
           "type": "card",
           "settings": {
-            "heading": "✅ Zakaj DentaMix deluje drugače?",
-            "text": "<p>MobiMix združuje 8 skrbno izbranih učinkovin s sinergičnim delovanjem, ki hkrati zagotavljajo protivnetno, regenerativno in zaščitno podporo sklepom. Razvit je za redno in dolgotrajno uporabo, saj sklepe podpira celostno in skozi čas.</p>",
-            "badge_text": "Celostna podpora sklepom skozi čas"
+            "heading": "✅ Zakaj DentalMix deluje drugače?",
+            "text": "<p>DentalMix deluje skozi pasjo slino, ki obliva zobe 24 ur na dan — veže kalcij, preden se strdi v kamen, in prepreči, da se obloge oprimejo. Potreseš na obrok, pes poje, mehanizem dela ves dan.</p>",
+            "badge_text": "Deluje skozi slino, 24/7"
           }
         }
       },
@@ -1290,8 +1290,8 @@
     "petsome_ingredients_1": {
       "type": "petsome-ingredients",
       "settings": {
-        "heading": "<p>8 skrbno izbranih sestavin</p>",
-        "description": "<p>Vsaka sestavina v MobiMixu ima svojo vlogo — skupaj naslavljajo vnetje, obnovo hrustanca in dolgoročno zaščito sklepov. Kliknite na sestavino za več informacij.</p>",
+        "heading": "<p>Kaj je notri — in zakaj vsaka stvar dela</p>",
+        "description": "<p>Vsaka sestavina ima svojo vlogo: morske alge proti oblogam, natrijev tripolifosfat proti zobnemu kamnu, zeleni čaj in granatno jabolko proti zadahu, probiotik proti zadahu iz črevesja. Kliknite na sestavino za več informacij.</p>",
         "amount_label": "Količina v paketu",
         "background_color": "#faf9f6",
         "accent_color": "#f8aaa7",
@@ -1307,25 +1307,25 @@
         "card_1": {
           "type": "card",
           "settings": {
-            "badge_text": "OBNOVA",
-            "title": "Hrustanec, ki ga ni, ne more rasti sam od sebe.",
-            "text": "<p>Glukozamin, hondroitin in vitamin C skupaj zagotavljajo gradbeni material za hrustančne celice. Glukozamin tvori strukturo, hondroitin zadržuje vlago, vitamin C je kofaktor, brez katerega tvorba kolagena preprosto ne steče. Brez vseh treh hkrati — obnova ostane nepopolna.</p>"
+            "badge_text": "PROTI KAMNU",
+            "title": "Zobni kamen je le strjen kalcij.",
+            "text": "<p>Kamen nastane, ko se kalcij iz sline nabere na zobe in strdi. Natrijev tripolifosfat kalcij v slini veže nase prvi, da se ne more odložiti — najbolj dokazan mehanizem proti kamnu v veterinarski zobni negi (VOHC).</p>"
           }
         },
         "card_2": {
           "type": "card",
           "settings": {
-            "badge_text": "ZAŠČITA",
-            "title": "Vnetje, ki traja mesece, povzroča trajno škodo.",
-            "text": "<p>Vražji krempelj, kurkuma in ingver — vsak udari na drugem vnetnem signalu. Skupaj pokrijejo celoten spekter kroničnega sklepnega vnetja, brez stranskih učinkov na prebavila. To je tisto, kar navadni dodatki ne naredijo: sploh ne naslavljajo vnetja.</p>"
+            "badge_text": "PROTI OBLOGAM",
+            "title": "Obloge se morajo najprej oprijeti.",
+            "text": "<p>Obloge so bakterijski film, ki se mora oprijeti sklenine. Polisaharidi iz hidrolizirane algne moke (53,5 %) to oprijemanje motijo — biofilm nima kam. Ista dokazana kategorija alg kot ProDen PlaqueOff.</p>"
           }
         },
         "card_3": {
           "type": "card",
           "settings": {
-            "badge_text": "VZDRŽEVANJE",
-            "title": "Sklepi potrebujejo oskrbo vsak dan, ne samo ko boli.",
-            "text": "<p>Zelenoustna školjka je edini naravni vir treh omega-3 maščobnih kislin hkrati. Šipek vzdržuje sinovialno tekočino. Skupaj preprečujeta, da bi se stanje vrnilo — ker vzdržujeta okolje, v katerem je obnova sploh mogoča.</p>"
+            "badge_text": "PROTI ZADAHU",
+            "title": "Zadah delajo bakterije, ne zobje sami.",
+            "text": "<p>„Pasji zadah“ je žveplov vonj bakterij. Katehini zelenega čaja in polifenoli granatnega jabolka jih zavirajo pri viru, probiotik Bacillus velezensis pa lovi zadah, ki prihaja iz črevesja — z obeh koncev.</p>"
           }
         }
       },
@@ -1335,9 +1335,9 @@
         "card_3"
       ],
       "settings": {
-        "kicker_text": "ARTROREGEN FORMULA",
-        "heading": "<p>Zakaj 8 sestavin in ne samo 2?</p>",
-        "description": "<p>Večina dodatkov cilja en problem. ArtroRegen Formula cilja tri — hkrati. To ni slučajnost. To je razlog, zakaj tista kapsula iz zoološkege vrta ni delala. In zakaj ta dela.</p>",
+        "kicker_text": "SALIVA-ACTIVATED DEFENSE™",
+        "heading": "<p>Zakaj slina in ne ščetka?</p>",
+        "description": "<p>Zoba, ki ga pes ne pusti ščetkati, ni treba drgniti od zunaj. Njegova slina že cel dan obliva vsak zob — Saliva-Activated Defense™ deluje ravno skoznjo, 24 ur na dan.</p>",
         "background_color": "#e8d6c5",
         "kicker_background": "#e0b58d",
         "card_background": "#ffffff",
@@ -1352,9 +1352,9 @@
           "type": "story",
           "settings": {
             "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
-            "dog_name": "Rex, 8-letni labradorec",
-            "issue": "Težave pri vstajanju",
-            "text": "<p>Rex je imel vsako jutro težave že pri prvih korakih. Po nekaj tednih MobiMixa vstane brez obotavljanja in spet rade volje teče do vrat.</p>"
+            "dog_name": "Piki, 9-letni jazbečar",
+            "issue": "Hud zadah",
+            "text": "<p>Pikijev zadah je bil neznosen, ščetkanja ni pustil. Po dveh tednih DentalMixa lastnica poroča, da je zadah opazno milejši in da ga spet crklja od blizu.</p>"
           }
         },
         "story_2": {
@@ -1362,8 +1362,8 @@
           "settings": {
             "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
             "dog_name": "Zala, 11-letna čivava",
-            "issue": "Operacija kolena",
-            "text": "<p>Po operaciji kolena je bila Zala previdna pri vsakem koraku. Lastnica poroča, da je danes spet igriva in brez vidnega nelagodja pri gibanju.</p>"
+            "issue": "Rjave obloge",
+            "text": "<p>Zala je imela rjave obloge ob dlesnih in skrbela jo je anestezija. Z rednim DentalMixom so zobje videti čistejši, brez postopka pri veterinarju.</p>"
           }
         },
         "story_3": {
@@ -1371,8 +1371,8 @@
           "settings": {
             "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
             "dog_name": "Fifi, 12-letni ovčar",
-            "issue": "Star pes",
-            "text": "<p>Fifi je v zrelih letih postajala vse manj aktivna. Z rednim dodajanjem MobiMixa je spet pripravljena na daljše sprehode in igro v parku.</p>"
+            "issue": "Starejši pes, ne pusti ščetke",
+            "text": "<p>Fifi je starejša in ščetkanja ne prenese. Prašek na hrani je preprosta rešitev — zadaha ni več, lastnica pa mirna.</p>"
           }
         }
       },
@@ -1407,8 +1407,8 @@
       "disabled": true,
       "settings": {
         "heading": "<p>Proizvedeno v skladu z najvišjimi standardi</p>",
-        "description": "<p>MobiMix je izdelan v skladu z najvišjimi evropskimi standardi. Vsaka sestavina in vsak odmerek sta neodvisno testirana, brez nepotrebnih dodatkov in polnil.</p>",
-        "button_label": "Naroči MobiMix",
+        "description": "<p>DentalMix je izdelan v skladu z najvišjimi evropskimi standardi. Vsaka sestavina in vsak odmerek sta neodvisno testirana, brez nepotrebnih dodatkov in polnil.</p>",
+        "button_label": "Naroči DentalMix",
         "button_link": "",
         "button_icon": "shopping_bag",
         "button_background_color": "#0e1111",
@@ -1426,7 +1426,7 @@
           "settings": {
             "image": "shopify://shop_images/step_1.png",
             "title": "1. Korak",
-            "description": "Odmeri kapsule glede na težo psa"
+            "description": "Odmeri žličko praška glede na težo psa"
           }
         },
         "step_2": {
@@ -1434,7 +1434,7 @@
           "settings": {
             "image": "shopify://shop_images/step_2.png",
             "title": "2. Korak",
-            "description": "Odpri ali dodaj celo kapsulo na obrok."
+            "description": "Potresi prašek po pasjem obroku."
           }
         },
         "step_3": {
@@ -1472,22 +1472,22 @@
         "stat_1": {
           "type": "stat",
           "settings": {
-            "number": "95%",
-            "description": "lastnikov pravi, da se je njihov pes začel gibati bolj lahkotno in samozavestno."
+            "number": "93%",
+            "description": "lastnikov opazi manj zadaha pri svojem psu že v 2–3 tednih."
           }
         },
         "stat_2": {
           "type": "stat",
           "settings": {
-            "number": "93%",
-            "description": "lastnikov poroča o zmanjšanih znakih bolečin pri hoji in vstajanju."
+            "number": "89%",
+            "description": "lastnikov opazi manj zobnega kamna in oblog ob dlesnih."
           }
         },
         "stat_3": {
           "type": "stat",
           "settings": {
-            "number": "90%",
-            "description": "opazi več igrivosti in energije pri svojem psu čez dan."
+            "number": "91%",
+            "description": "lastnikov spet z veseljem pusti psa blizu — brez zadaha."
           }
         }
       },
