@@ -735,7 +735,7 @@
               "name": "Petsome: Collapsible row",
               "settings": {
                 "visibility": "always-display",
-                "open": false,
+                "open": true,
                 "heading": "Opis izdelka",
                 "content": "<p>DentalMix je dnevni prašek za zobe, ki ga preprosto potreseš na pasjo hrano. Deluje skozi slino — imenujemo ga <strong>Saliva-Activated Defense™</strong>: pomaga vezati kalcij, preden se strdi v zobni kamen, in preprečuje, da bi se obloge oprijele zob. Proti zadahu in za čistejše zobe, brez ščetkanja, žvečilk ali anestezije.</p>",
                 "page": "",
@@ -751,7 +751,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Prednosti DentalMixa",
-                "content": "<p>✅ Manj zadaha, mnogi opazijo v 7–14 dneh<br>✅ Zobje delujejo čistejši, manj vidnega kamna in oblog<br>✅ Brez ščetkanja in brez borbe — samo potreseš na obrok<br>✅ Primerno za majhne in starejše pse (brez anestezije)</p>",
+                "content": "<p>✅ Manj zadaha, mnogi opazijo v 7–14 dneh<br/>✅ Zobje delujejo čistejši, manj vidnega kamna in oblog<br/>✅ Brez ščetkanja in brez borbe — samo potreseš na obrok<br/>✅ Primerno za majhne in starejše pse (brez anestezije)</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
