@@ -33,24 +33,11 @@
             "width_desktop": 3,
             "width_mobile": "2"
           }
-        },
-        "1c647602-cc00-4009-a058-976435c8ee9e": {
-          "type": "link_list",
-          "settings": {
-            "heading": "Quick links",
-            "block_headings_font_size": 1,
-            "menu": "footer",
-            "font_size": 14,
-            "menu_items_font": "body",
-            "width_desktop": 4,
-            "width_mobile": "1"
-          }
         }
       },
       "block_order": [
         "fc645871-d789-4cfa-8584-4f8a29b6ce92",
-        "text_KU3Twd",
-        "1c647602-cc00-4009-a058-976435c8ee9e"
+        "text_KU3Twd"
       ],
       "settings": {
         "color_scheme": "accent-1",
