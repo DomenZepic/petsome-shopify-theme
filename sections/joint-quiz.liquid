@@ -1,0 +1,97 @@
+{{ 'joint-quiz.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign code = section.settings.discount_code | default: 'SPREHOD5'
+  assign pct = section.settings.discount_pct | default: 5
+  assign prod = section.settings.product
+  unless prod
+    assign prod = all_products['mobimix']
+  endunless
+  assign purl = '/products/mobimix'
+  if prod != blank
+    assign purl = prod.url
+  endif
+  assign disc_url = '/discount/' | append: code | append: '?redirect=' | append: purl
+  assign mult = 100 | minus: pct
+-%}
+
+<div id="psq">
+  <div class="q-topbar">
+    <div class="q-logo">{{ section.settings.brand | default: shop.name }}</div>
+    <div class="q-ptrack"><div class="q-pfill" id="psq-pfill"></div></div>
+  </div>
+  <div class="q-wrap"><div id="psq-screen"></div></div>
+</div>
+
+<script>
+  window.PetsomeQuiz = {
+    brand: {{ section.settings.brand | default: shop.name | json }},
+    productUrl: {{ disc_url | json }},
+    productTitle: {{ prod.title | default: 'MobiMix' | json }},
+    productImage: {% if prod.featured_image %}{{ prod.featured_image | image_url: width: 160 | json }}{% else %}""{% endif %},
+    discountCode: {{ code | json }},
+    discountPct: {{ pct | json }}
+    {%- if section.settings.show_price and prod != blank -%}
+      , priceOld: {{ prod.price | money | json }},
+      priceNew: {{ prod.price | times: mult | divided_by: 100 | money | json }}
+    {%- endif -%}
+  };
+</script>
+<script src="{{ 'joint-quiz.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Kviz gibljivosti",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Izdelek in ponudba"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Priporočeni izdelek",
+      "info": "Če je prazno, se uporabi izdelek 'mobimix'."
+    },
+    {
+      "type": "text",
+      "id": "discount_code",
+      "label": "Koda za popust",
+      "default": "SPREHOD5",
+      "info": "Ustvarite jo tudi v Shopify → Popusti. Doda se samodejno prek /discount/ povezave."
+    },
+    {
+      "type": "range",
+      "id": "discount_pct",
+      "label": "Odstotek popusta",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Prikaži ceno v ponudbi",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Blagovna znamka"
+    },
+    {
+      "type": "text",
+      "id": "brand",
+      "label": "Ime v glavi kviza",
+      "default": "Petsome"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Kviz gibljivosti"
+    }
+  ]
+}
+{% endschema %}

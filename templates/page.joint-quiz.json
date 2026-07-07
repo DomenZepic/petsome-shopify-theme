@@ -1,0 +1,23 @@
+{
+  "sections": {
+    "hide": {
+      "type": "hide-header-footer",
+      "settings": {
+        "hide_header": true,
+        "hide_announcements": true,
+        "hide_footer": true
+      }
+    },
+    "quiz": {
+      "type": "joint-quiz",
+      "settings": {
+        "product": "",
+        "discount_code": "SPREHOD5",
+        "discount_pct": 5,
+        "show_price": true,
+        "brand": "Petsome"
+      }
+    }
+  },
+  "order": ["hide", "quiz"]
+}
