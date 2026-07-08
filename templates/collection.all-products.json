@@ -1,13 +1,16 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "petsome-collection-hero": {
       "type": "petsome-collection-hero",
-      "settings": {}
-    },
-    "petsome-collection-bundles": {
-      "type": "petsome-collection-bundles",
-      "blocks": {},
-      "block_order": [],
       "settings": {}
     },
     "main-collection-banner": {
@@ -76,5 +79,5 @@
       }
     }
   },
-  "order": ["petsome-collection-hero", "petsome-collection-bundles", "main-collection-banner", "main-collection-product-grid"]
+  "order": ["petsome-collection-hero", "main-collection-banner", "main-collection-product-grid"]
 }
