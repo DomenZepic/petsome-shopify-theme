@@ -178,28 +178,37 @@
           "type": "bundle_card",
           "settings": {
             "product": "1x-mobimix-1",
-            "tag_text": ""
+            "tag_text": "444",
+            "capsules_per_package": 90,
+            "capsules_per_day_by_size": "1, 2, 3",
+            "price_per_day_text": "[price_per_day]/day"
           }
         },
         "bundle_card_CtiG7Y": {
           "type": "bundle_card",
           "settings": {
             "product": "2x-mobimix-1",
-            "tag_text": "Prihrani 20%"
+            "tag_text": "Prihrani 20%",
+            "capsules_per_day_by_size": "",
+            "price_per_day_text": "[price_per_day]/day"
           }
         },
         "bundle_card_AEWgRW": {
           "type": "bundle_card",
           "settings": {
             "product": "3x-mobimix",
-            "tag_text": "Prihrani 25%"
+            "tag_text": "Prihrani 25%",
+            "capsules_per_day_by_size": "",
+            "price_per_day_text": "[price_per_day]/day"
           }
         },
         "bundle_card_kx3jNN": {
           "type": "bundle_card",
           "settings": {
             "product": "6x-mobimix",
-            "tag_text": "Prihrani 30%"
+            "tag_text": "Prihrani 30%",
+            "capsules_per_day_by_size": "",
+            "price_per_day_text": "[price_per_day]/day"
           }
         }
       },
