@@ -177,45 +177,29 @@
         "bundle_card_fJfBB3": {
           "type": "bundle_card",
           "settings": {
-            "product": "1x-mobimix",
-            "tag_text": "",
-            "tag_style": "solid",
-            "tag_color": "#F8AAA7",
-            "tag_color_2": "#F47671",
-            "tag_text_color": "#FAF9F6"
+            "product": "1x-mobimix-1",
+            "tag_text": ""
           }
         },
         "bundle_card_CtiG7Y": {
           "type": "bundle_card",
           "settings": {
-            "product": "2x-mobimix",
-            "tag_text": "Prihrani 20%",
-            "tag_style": "solid",
-            "tag_color": "#F8AAA7",
-            "tag_color_2": "#F47671",
-            "tag_text_color": "#FAF9F6"
+            "product": "2x-mobimix-1",
+            "tag_text": "Prihrani 20%"
           }
         },
         "bundle_card_AEWgRW": {
           "type": "bundle_card",
           "settings": {
-            "product": "3x-mobimix-1x-brezplacno-darilo",
-            "tag_text": "Prihrani 25%",
-            "tag_style": "solid",
-            "tag_color": "#F8AAA7",
-            "tag_color_2": "#F47671",
-            "tag_text_color": "#FAF9F6"
+            "product": "3x-mobimix",
+            "tag_text": "Prihrani 25%"
           }
         },
         "bundle_card_kx3jNN": {
           "type": "bundle_card",
           "settings": {
-            "product": "dentalmix-starter-pack",
-            "tag_text": "Prihrani 30%",
-            "tag_style": "solid",
-            "tag_color": "#F8AAA7",
-            "tag_color_2": "#F47671",
-            "tag_text_color": "#FAF9F6"
+            "product": "6x-mobimix",
+            "tag_text": "Prihrani 30%"
           }
         }
       },
@@ -229,7 +213,11 @@
       "settings": {
         "heading": "<p>Omogoči svojemu psu lažje gibanje</p>",
         "button_label": "Dodaj v košarico",
-        "background_color": "#FEF6F6",
+        "background_color": "#fef6f6",
+        "tag_style": "solid",
+        "tag_color": "#f8aaa7",
+        "tag_color_2": "#f47671",
+        "tag_text_color": "#faf9f6",
         "padding_top": 64,
         "padding_bottom": 64
       }
