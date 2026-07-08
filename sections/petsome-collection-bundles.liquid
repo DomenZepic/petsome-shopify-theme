@@ -37,10 +37,17 @@
     background-color: {{ section.settings.background_color }};
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} * {
+    box-sizing: border-box;
   }
 
   #petsome-collection-bundles-{{ section.id }} .petsome-collection-bundles__inner {
     max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
     padding: 0 var(--petsome-padding-x);
     display: flex;
@@ -132,6 +139,16 @@
     margin: 0;
   }
 
+  @media screen and (max-width: 749px) {
+    #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__name {
+      font-size: 2rem;
+    }
+
+    #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__sizes-label {
+      font-size: 1.2rem;
+    }
+  }
+
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__size-select-wrapper {
     position: relative;
     width: 100%;
@@ -201,7 +218,7 @@
     width: 100%;
     background-color: #3b2f2f;
     color: #ffffff;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 700;
     line-height: 1.5;
     padding: 12px 24px;
