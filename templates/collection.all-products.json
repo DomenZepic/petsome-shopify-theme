@@ -1,0 +1,74 @@
+{
+  "sections": {
+    "petsome-collection-hero": {
+      "type": "petsome-collection-hero",
+      "settings": {}
+    },
+    "main-collection-banner": {
+      "type": "main-collection-banner",
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": true,
+        "color_scheme": "background-1"
+      },
+      "disabled": true
+    },
+    "main-collection-product-grid": {
+      "type": "main-collection-product-grid",
+      "custom_css": [],
+      "settings": {
+        "products_per_page": 20,
+        "columns_desktop": 4,
+        "stretch_cards": false,
+        "columns_mobile": "2",
+        "image_ratio": "adapt",
+        "show_secondary_image": true,
+        "badges": "regular",
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": true,
+        "button_funcionality": "add-to-cart",
+        "button_label": "Go to product",
+        "swatches_option_name": "",
+        "swatches_position": "top",
+        "swatches_desktop_size": 36,
+        "swatches_mobile_size": 24,
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "facets_vertical_open_rows": "first",
+        "facets_swatches_options": "",
+        "facets_swatches_radius": 100,
+        "facets_pills_options": "",
+        "facets_pills_color": "accent-1",
+        "facets_pills_inactive_bg_opacity": 4,
+        "facets_pills_inactive_border_width": 1,
+        "facets_pills_inactive_border_opacity": 30,
+        "facets_pills_radius": 100,
+        "facets_price_color": "accent-1",
+        "facets_price_price_position": "top",
+        "facets_price_btn_style": "outline",
+        "facets_price_btn_border_width": 3,
+        "active_buttons_text": "[value]",
+        "active_buttons_text_color": "text",
+        "active_buttons_bg_type": "overlay",
+        "active_buttons_bg_color": "text",
+        "active_buttons_bg_opacity": 4,
+        "active_buttons_border_width": 1,
+        "active_buttons_border_color": "text",
+        "active_buttons_border_opacity": 40,
+        "facets_drawer_open_mode": "accordion",
+        "facets_drawer_open_rows": "none",
+        "facets_drawer_separator_opacity": 5,
+        "facets_drawer_sticky_button": "after_scrolling",
+        "facets_drawer_sticky_button_color": "accent-1",
+        "facets_drawer_sticky_button_text_color": "#ffffff",
+        "facets_drawer_sticky_button_bg_color": "#dd1d1d",
+        "facets_drawer_sticky_button_radius": 100,
+        "enable_sorting": true,
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": ["petsome-collection-hero", "main-collection-banner", "main-collection-product-grid"]
+}

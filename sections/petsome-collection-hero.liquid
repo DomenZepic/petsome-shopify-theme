@@ -1,0 +1,263 @@
+{% comment %}
+  Petsome: Collection hero. Two-column top-of-collection banner - rating
+  badge, heading and text on the left, a square rounded image on the right.
+  Stacks (image below content) on mobile. Generic/reusable across any
+  collection template.
+{% endcomment %}
+<style>
+  #petsome-collection-hero-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-collection-hero-{{ section.id }} .petsome-collection-hero__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  #petsome-collection-hero-{{ section.id }} .petsome-collection-hero__content {
+    flex: 1 0 0;
+    min-width: 0;
+    max-width: 690px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  #petsome-collection-hero-{{ section.id }} .petsome-collection-hero__text {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #petsome-collection-hero-{{ section.id }} .petsome-collection-hero__rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #petsome-collection-hero-{{ section.id }} .petsome-collection-hero__rating-img {
+    height: 22px;
+    width: auto;
+  }
+
+  #petsome-collection-hero-{{ section.id }} .petsome-collection-hero__rating-text {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #3b2f2f;
+    line-height: 1.3;
+  }
+
+  #petsome-collection-hero-{{ section.id }} .petsome-collection-hero__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 800;
+    font-size: 4rem;
+    line-height: 1.3;
+    color: #0e1111;
+    margin: 0;
+  }
+
+  #petsome-collection-hero-{{ section.id }} .petsome-collection-hero__heading p {
+    margin: 0;
+  }
+
+  #petsome-collection-hero-{{ section.id }} .petsome-collection-hero__text-body {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: #0e1111;
+    margin: 0;
+  }
+
+  #petsome-collection-hero-{{ section.id }} .petsome-collection-hero__text-body p {
+    margin: 0;
+  }
+
+  #petsome-collection-hero-{{ section.id }} .petsome-collection-hero__image-wrapper {
+    flex: 1 0 0;
+    min-width: 0;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: {{ section.settings.image_background_color }};
+  }
+
+  #petsome-collection-hero-{{ section.id }} .petsome-collection-hero__image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-collection-hero-{{ section.id }} .petsome-collection-hero__inner {
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    #petsome-collection-hero-{{ section.id }} .petsome-collection-hero__content {
+      max-width: 100%;
+      align-items: center;
+      text-align: center;
+    }
+
+    #petsome-collection-hero-{{ section.id }} .petsome-collection-hero__rating {
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    #petsome-collection-hero-{{ section.id }} .petsome-collection-hero__heading {
+      font-size: 3.2rem;
+    }
+
+    #petsome-collection-hero-{{ section.id }} .petsome-collection-hero__image-wrapper {
+      width: 100%;
+    }
+  }
+</style>
+
+<div id="petsome-collection-hero-{{ section.id }}" class="petsome-collection-hero">
+  <div class="petsome-collection-hero__inner">
+    <div class="petsome-collection-hero__content">
+      <div class="petsome-collection-hero__text">
+        {%- if section.settings.rating_image != blank or section.settings.rating_text != blank -%}
+          <div class="petsome-collection-hero__rating">
+            {%- if section.settings.rating_image != blank -%}
+              <img
+                class="petsome-collection-hero__rating-img"
+                src="{{ section.settings.rating_image | image_url: height: 44 }}"
+                alt=""
+                width="{{ section.settings.rating_image.width }}"
+                height="{{ section.settings.rating_image.height }}"
+                loading="lazy"
+              >
+            {%- endif -%}
+            {%- if section.settings.rating_text != blank -%}
+              <span class="petsome-collection-hero__rating-text">{{ section.settings.rating_text }}</span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <div class="petsome-collection-hero__heading">{{ section.settings.heading }}</div>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.text != blank -%}
+        <div class="petsome-collection-hero__text-body">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+    {%- if section.settings.image != blank -%}
+      <div class="petsome-collection-hero__image-wrapper">
+        <img
+          src="{{ section.settings.image | image_url: width: 1200 }}"
+          alt="{{ section.settings.image.alt | escape }}"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+          loading="eager"
+          fetchpriority="high"
+        >
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Petsome: Collection hero",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Rating badge"
+    },
+    {
+      "type": "image_picker",
+      "id": "rating_image",
+      "label": "Rating image",
+      "info": "E.g. a star-rating graphic exported as PNG/WebP."
+    },
+    {
+      "type": "text",
+      "id": "rating_text",
+      "label": "Rating text",
+      "default": "Zaupa nam več kot 2.000 lastnikov psov"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Dvigujemo standarde pasjih življenj</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Petsome izdelki so izdelani iz naravnih sestavin, ki vašemu psu zagotavljajo najboljše pogoje za zdravo življenje.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Recommended square image, e.g. 1200 × 1200px."
+    },
+    {
+      "type": "color",
+      "id": "image_background_color",
+      "label": "Image fallback background",
+      "info": "Shown while the image loads or if no image is set.",
+      "default": "#D08989"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 120,
+      "step": 8,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#EDE9DE"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Collection hero"
+    }
+  ]
+}
+{% endschema %}
