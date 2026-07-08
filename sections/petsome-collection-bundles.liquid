@@ -1,18 +1,30 @@
 {% comment %}
   Petsome: Collection bundles. Heading above a row of product cards (image,
-  name, price/compare-at price, optional discount tag, add-to-cart button)
-  - one card per block, each pointing at its own bundle product (e.g. a
-  1x/2x/3x/6x pack, each a separate product set up by the merchant). Add to
-  cart uses the theme's native <product-form> + add-to-cart-form pattern
-  (see snippets/buy-buttons.liquid, snippets/card-product.liquid) so it
-  triggers the same cart drawer/notification JS as every other product
-  form. Background and discount-tag colors (solid or gradient) are
+  name, price/compare-at price, optional discount tag, price-per-day copy,
+  add-to-cart button) - one card per block, each pointing at its own bundle
+  product (e.g. a 1x/2x/3x/6x pack, each a separate product set up by the
+  merchant). Quantity is fixed per card (baked into which product it links
+  to); if that product has its own size variant (option1, e.g. Small/
+  Medium/Large - same convention as the main product page), the card shows
+  an inline size-pill selector so the customer can still pick a size
+  without leaving the collection page. Selecting a pill updates the hidden
+  variant id, price/compare-price, discount tag text, and price-per-day
+  copy client-side (see the script block below) - the add-to-cart form
+  always submits whatever variant id is currently in that hidden input, so
+  there's no drift between the selected pill and what gets added to cart.
+
+  Add to cart uses the theme's native <product-form> + add-to-cart-form
+  pattern (see snippets/buy-buttons.liquid, snippets/card-product.liquid)
+  so it triggers the same cart drawer/notification JS as every other
+  product form. Background and discount-tag colors (solid or gradient) are
   section-wide settings rather than tied to a single product's metafields,
-  since this section spans several distinct products. The tag only shows
-  on a card when that product's variant actually has a compare-at price
-  higher than its price - grid column count auto-scales to the number of
-  cards (up to 4 per row; a 5th+ card wraps to a new row at the same
-  column width as the row above, since grid-template-columns stays fixed).
+  since this section spans several distinct products. The tag and
+  price-per-day line are computed per size (mirroring the price-per-day
+  formula in snippets/product-variant-options.liquid) and only show when
+  there's real data to back them (compare-at price set / capsules-per-day
+  config present). Grid column count auto-scales to the number of cards
+  (up to 4 per row; a 5th+ card wraps to a new row at the same column
+  width as the row above, since grid-template-columns stays fixed).
 {% endcomment %}
 {%- liquid
   assign petsome_bundles_desktop_cols = section.blocks.size | at_most: 4
@@ -106,6 +118,37 @@
     margin: 0;
   }
 
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__sizes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__size-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    border-radius: 999px;
+    border: 1px solid #3b2f2f;
+    background-color: transparent;
+    color: #3b2f2f;
+    font-size: 1.4rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__size-pill.is-selected {
+    background-color: #3b2f2f;
+    color: #ffffff;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__size-pill[data-available="false"] {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__prices {
     display: flex;
     align-items: center;
@@ -123,6 +166,11 @@
     font-size: 2rem;
     color: #565858;
     text-decoration: line-through;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__ppd {
+    font-size: 1.3rem;
+    color: #565858;
   }
 
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__button {
@@ -169,8 +217,35 @@
         {%- for block in section.blocks -%}
           {%- liquid
             assign bundle_product = block.settings.product
-            assign variant = bundle_product.selected_or_first_available_variant
+            assign default_variant = bundle_product.selected_or_first_available_variant
             assign product_form_id = 'petsome-bundle-' | append: section.id | append: '-' | append: block.id
+            assign button_label = section.settings.button_label | default: 'Dodaj v košarico'
+            assign sold_out_label = 'products.product.sold_out' | t
+
+            assign show_size_pills = false
+            if bundle_product.variants.size > 1 and bundle_product.options_with_values.size > 0
+              assign show_size_pills = true
+              assign size_option = bundle_product.options_with_values.first
+              assign pill_values = size_option.values
+            endif
+
+            assign capsules_per_package = block.settings.capsules_per_package | times: 1.0
+            assign capsules_per_day_arr = block.settings.capsules_per_day_by_size | split: ','
+            assign capsules_per_day_arr_size = capsules_per_day_arr | size
+
+            assign valid_capsules_config = false
+            if capsules_per_package > 0 and capsules_per_day_arr_size > 0
+              if show_size_pills and capsules_per_day_arr_size == pill_values.size
+                assign valid_capsules_config = true
+              elsif show_size_pills == false
+                assign valid_capsules_config = true
+              endif
+            endif
+
+            assign default_price_copy = default_variant.price | money
+            assign default_compare_copy = ''
+            assign default_tag_copy = ''
+            assign default_ppd_copy = ''
           -%}
           <div class="petsome-bundle-card" {{ block.shopify_attributes }}>
             <div class="petsome-bundle-card__image-wrapper">
@@ -183,32 +258,181 @@
                   loading="lazy"
                 >
               {%- endif -%}
-              {%- if block.settings.tag_text != blank and variant.compare_at_price > variant.price -%}
-                <span
-                  class="petsome-bundle-card__tag"
-                  style="
-                    color: {{ section.settings.tag_text_color }};
-                    {%- if section.settings.tag_style == 'gradient' -%}
-                      background: linear-gradient(180deg, {{ section.settings.tag_color }} 0%, {{ section.settings.tag_color_2 }} 100%);
-                    {%- else -%}
-                      background-color: {{ section.settings.tag_color }};
-                    {%- endif -%}
-                  "
-                >
-                  {{ block.settings.tag_text }}
-                </span>
-              {%- endif -%}
+              <span
+                class="petsome-bundle-card__tag"
+                data-bundle-tag
+                style="
+                  {%- if default_tag_copy == blank -%}display: none;{%- endif -%}
+                  color: {{ section.settings.tag_text_color }};
+                  {%- if section.settings.tag_style == 'gradient' -%}
+                    background: linear-gradient(180deg, {{ section.settings.tag_color }} 0%, {{ section.settings.tag_color_2 }} 100%);
+                  {%- else -%}
+                    background-color: {{ section.settings.tag_color }};
+                  {%- endif -%}
+                "
+              >{{ default_tag_copy }}</span>
             </div>
 
             {%- if bundle_product != blank -%}
               <p class="petsome-bundle-card__name">{{ bundle_product.title }}</p>
 
+              {%- if show_size_pills -%}
+                <div class="petsome-bundle-card__sizes" role="radiogroup" aria-label="{{ size_option.name | escape }}">
+                  {%- for value in pill_values -%}
+                    {%- liquid
+                      assign this_variant = bundle_product.variants | where: 'option1', value | first
+                      assign this_price = this_variant.price
+                      assign this_compare = this_variant.compare_at_price
+                      assign this_price_copy = this_price | money
+                      assign this_compare_copy = ''
+                      assign this_amount_saved = 0
+                      assign this_amount_saved_rounded = 0
+                      assign this_percentage_saved = 0
+                      if this_compare > this_price
+                        assign this_compare_copy = this_compare | money
+                        assign this_amount_saved = this_compare | minus: this_price
+                        assign this_amount_saved_rounded = this_amount_saved | divided_by: 100.0 | round | times: 100
+                        assign this_percentage_saved = this_amount_saved | times: 100.0 | divided_by: this_compare | floor
+                      endif
+
+                      assign this_days_supply = 0
+                      assign this_price_per_day = 0
+                      assign this_months_supply = 0
+                      if valid_capsules_config
+                        assign this_capsules_per_day = capsules_per_day_arr[forloop.index0] | strip | times: 1.0
+                        if this_capsules_per_day > 0
+                          assign this_days_supply = capsules_per_package | divided_by: this_capsules_per_day
+                          assign this_price_per_day = this_price | times: 1.0 | divided_by: this_days_supply
+                          assign this_months_supply_raw = this_days_supply | divided_by: 30.0 | round: 4
+                          assign this_months_supply_rounded = this_months_supply_raw | round
+                          if this_months_supply_raw == this_months_supply_rounded
+                            assign this_months_supply = this_months_supply_rounded
+                          else
+                            assign this_months_supply = this_months_supply_raw | round: 1
+                          endif
+                        endif
+                      endif
+
+                      assign this_tag_copy = ''
+                      if block.settings.tag_text != blank and this_compare > this_price
+                        capture this_tag_copy
+                          render 'text-with-price',
+                            text: block.settings.tag_text,
+                            price: this_price,
+                            compare_price: this_compare,
+                            amount_saved: this_amount_saved,
+                            amount_saved_rounded: this_amount_saved_rounded,
+                            percentage_saved: this_percentage_saved
+                        endcapture
+                      endif
+
+                      assign this_ppd_copy = ''
+                      if block.settings.price_per_day_text != blank and this_days_supply > 0
+                        capture this_ppd_copy
+                          render 'text-with-price',
+                            text: block.settings.price_per_day_text,
+                            price: this_price,
+                            compare_price: this_compare,
+                            days_supply: this_days_supply,
+                            months_supply: this_months_supply,
+                            price_per_day: this_price_per_day,
+                            total_capsules: capsules_per_package
+                        endcapture
+                      endif
+
+                      assign this_selected = false
+                      if this_variant.id == default_variant.id
+                        assign this_selected = true
+                        assign default_price_copy = this_price_copy
+                        assign default_compare_copy = this_compare_copy
+                        assign default_tag_copy = this_tag_copy
+                        assign default_ppd_copy = this_ppd_copy
+                      endif
+                    -%}
+                    <button
+                      type="button"
+                      role="radio"
+                      class="petsome-bundle-card__size-pill{% if this_selected %} is-selected{% endif %}"
+                      aria-checked="{{ this_selected }}"
+                      data-variant-id="{{ this_variant.id }}"
+                      data-available="{{ this_variant.available }}"
+                      data-price="{{ this_price_copy }}"
+                      data-compare-price="{{ this_compare_copy }}"
+                      data-tag-text="{{ this_tag_copy | escape }}"
+                      data-ppd-copy="{{ this_ppd_copy | escape }}"
+                    >{{ value }}</button>
+                  {%- endfor -%}
+                </div>
+              {%- else -%}
+                {%- liquid
+                  assign default_compare_copy = ''
+                  assign default_amount_saved_rounded = 0
+                  if default_variant.compare_at_price > default_variant.price
+                    assign default_compare_copy = default_variant.compare_at_price | money
+                    assign default_amount_saved = default_variant.compare_at_price | minus: default_variant.price
+                    assign default_amount_saved_rounded = default_amount_saved | divided_by: 100.0 | round | times: 100
+                    assign default_percentage_saved = default_amount_saved | times: 100.0 | divided_by: default_variant.compare_at_price | floor
+                  endif
+
+                  assign default_days_supply = 0
+                  assign default_price_per_day = 0
+                  assign default_months_supply = 0
+                  if valid_capsules_config
+                    assign default_capsules_per_day = capsules_per_day_arr[0] | strip | times: 1.0
+                    if default_capsules_per_day > 0
+                      assign default_days_supply = capsules_per_package | divided_by: default_capsules_per_day
+                      assign default_price_per_day = default_variant.price | times: 1.0 | divided_by: default_days_supply
+                      assign default_months_supply_raw = default_days_supply | divided_by: 30.0 | round: 4
+                      assign default_months_supply_rounded = default_months_supply_raw | round
+                      if default_months_supply_raw == default_months_supply_rounded
+                        assign default_months_supply = default_months_supply_rounded
+                      else
+                        assign default_months_supply = default_months_supply_raw | round: 1
+                      endif
+                    endif
+                  endif
+
+                  if block.settings.tag_text != blank and default_variant.compare_at_price > default_variant.price
+                    capture default_tag_copy
+                      render 'text-with-price',
+                        text: block.settings.tag_text,
+                        price: default_variant.price,
+                        compare_price: default_variant.compare_at_price,
+                        amount_saved: default_amount_saved,
+                        amount_saved_rounded: default_amount_saved_rounded,
+                        percentage_saved: default_percentage_saved
+                    endcapture
+                  endif
+
+                  if block.settings.price_per_day_text != blank and default_days_supply > 0
+                    capture default_ppd_copy
+                      render 'text-with-price',
+                        text: block.settings.price_per_day_text,
+                        price: default_variant.price,
+                        compare_price: default_variant.compare_at_price,
+                        days_supply: default_days_supply,
+                        months_supply: default_months_supply,
+                        price_per_day: default_price_per_day,
+                        total_capsules: capsules_per_package
+                    endcapture
+                  endif
+                -%}
+              {%- endif -%}
+
               <div class="petsome-bundle-card__prices">
-                <span class="petsome-bundle-card__price">{{ variant.price | money }}</span>
-                {%- if variant.compare_at_price > variant.price -%}
-                  <span class="petsome-bundle-card__compare-price">{{ variant.compare_at_price | money }}</span>
-                {%- endif -%}
+                <span class="petsome-bundle-card__price" data-bundle-price>{{ default_price_copy }}</span>
+                <span
+                  class="petsome-bundle-card__compare-price"
+                  data-bundle-compare-price
+                  {%- if default_compare_copy == blank %} style="display: none;"{% endif %}
+                >{{ default_compare_copy }}</span>
               </div>
+
+              <span
+                class="petsome-bundle-card__ppd"
+                data-bundle-ppd
+                {%- if default_ppd_copy == blank %} style="display: none;"{% endif %}
+              >{{ default_ppd_copy }}</span>
 
               <product-form id="product-form-{{ product_form_id }}">
                 {%- form 'product',
@@ -219,20 +443,23 @@
                   data-type: 'add-to-cart-form'
                 -%}
                   <div class="hidden product-form__variants" id="product-form-{{ product_form_id }}__variants" data-values=""></div>
-                  <input type="hidden" name="id" value="{{ variant.id }}" class="product-variant-id">
+                  <input type="hidden" name="id" value="{{ default_variant.id }}" class="product-variant-id">
                   <button
                     type="submit"
                     name="add"
                     class="petsome-bundle-card__button product-form__submit"
-                    {% if variant.available == false %}
+                    data-bundle-submit
+                    data-label-available="{{ button_label | escape }}"
+                    data-label-soldout="{{ sold_out_label | escape }}"
+                    {% if default_variant.available == false %}
                       disabled
                     {% endif %}
                   >
-                    <span>
-                      {%- if variant.available -%}
-                        {{ section.settings.button_label | default: 'Dodaj v košarico' }}
+                    <span data-bundle-button-label>
+                      {%- if default_variant.available -%}
+                        {{ button_label }}
                       {%- else -%}
-                        {{ 'products.product.sold_out' | t }}
+                        {{ sold_out_label }}
                       {%- endif -%}
                     </span>
                     {% render 'material-icon', icon: 'arrow_forward' %}
@@ -246,6 +473,89 @@
     {%- endif -%}
   </div>
 </div>
+
+<script>
+  (function () {
+    var root = document.getElementById('petsome-collection-bundles-{{ section.id }}');
+    if (!root) return;
+
+    var cards = root.querySelectorAll('.petsome-bundle-card');
+
+    cards.forEach(function (card) {
+      var pills = card.querySelectorAll('.petsome-bundle-card__size-pill');
+      if (!pills.length) return;
+
+      var variantInput = card.querySelector('.product-variant-id');
+      var priceEl = card.querySelector('[data-bundle-price]');
+      var comparePriceEl = card.querySelector('[data-bundle-compare-price]');
+      var tagEl = card.querySelector('[data-bundle-tag]');
+      var ppdEl = card.querySelector('[data-bundle-ppd]');
+      var submitBtn = card.querySelector('[data-bundle-submit]');
+      var submitLabel = card.querySelector('[data-bundle-button-label]');
+
+      pills.forEach(function (pill) {
+        pill.addEventListener('click', function () {
+          var data = pill.dataset;
+
+          if (variantInput) {
+            variantInput.value = data.variantId;
+            variantInput.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+
+          if (priceEl) {
+            priceEl.textContent = data.price || '';
+          }
+
+          if (comparePriceEl) {
+            if (data.comparePrice) {
+              comparePriceEl.textContent = data.comparePrice;
+              comparePriceEl.style.display = '';
+            } else {
+              comparePriceEl.textContent = '';
+              comparePriceEl.style.display = 'none';
+            }
+          }
+
+          if (tagEl) {
+            if (data.tagText) {
+              tagEl.textContent = data.tagText;
+              tagEl.style.display = '';
+            } else {
+              tagEl.textContent = '';
+              tagEl.style.display = 'none';
+            }
+          }
+
+          if (ppdEl) {
+            if (data.ppdCopy) {
+              ppdEl.textContent = data.ppdCopy;
+              ppdEl.style.display = '';
+            } else {
+              ppdEl.textContent = '';
+              ppdEl.style.display = 'none';
+            }
+          }
+
+          if (submitBtn) {
+            var available = data.available === 'true';
+            submitBtn.disabled = !available;
+            if (submitLabel) {
+              submitLabel.textContent = available
+                ? submitBtn.getAttribute('data-label-available')
+                : submitBtn.getAttribute('data-label-soldout');
+            }
+          }
+
+          pills.forEach(function (p) {
+            var selected = p === pill;
+            p.setAttribute('aria-checked', selected ? 'true' : 'false');
+            p.classList.toggle('is-selected', selected);
+          });
+        });
+      });
+    });
+  })();
+</script>
 
 {% schema %}
 {
@@ -281,7 +591,7 @@
     },
     {
       "type": "paragraph",
-      "content": "A card's tag only shows when that product's variant actually has a compare-at price set (and the card's own \"Tag text\" isn't blank)."
+      "content": "A card's tag only shows when the selected size's variant actually has a compare-at price set (and the card's own \"Tag text\" isn't blank). Tag text supports [percentage_saved] and [amount_saved] tokens, recalculated per selected size."
     },
     {
       "type": "select",
@@ -346,7 +656,7 @@
           "type": "product",
           "id": "product",
           "label": "Product",
-          "info": "The card's image, name, price and add-to-cart button all come from this product - e.g. a \"2x MobiMix\" bundle product."
+          "info": "The card's image, name, price and add-to-cart button all come from this product - e.g. a \"2x MobiMix\" bundle product. If this product has more than one variant, its first option (e.g. dog size) is shown as a size picker on the card - that option must be Size for this to work correctly."
         },
         {
           "type": "header",
@@ -356,7 +666,34 @@
           "type": "text",
           "id": "tag_text",
           "label": "Tag text",
-          "info": "Only shown when this product's variant has a compare-at price set. Leave blank to always hide the tag, e.g. for the 1x card."
+          "info": "Recalculated per selected size - only shown when that size's variant has a compare-at price set. Supports [percentage_saved] and [amount_saved] tokens. Leave blank to always hide the tag, e.g. for the 1x card."
+        },
+        {
+          "type": "header",
+          "content": "Price per day"
+        },
+        {
+          "type": "paragraph",
+          "content": "Optional - mirrors the price-per-day calculation on the product page. Leave \"Units per package\" at 0 to hide this line entirely."
+        },
+        {
+          "type": "number",
+          "id": "capsules_per_package",
+          "label": "Units per package",
+          "info": "Total capsules/units in this specific pack size (e.g. 60). This card's quantity is fixed, so no separate quantity input is needed here."
+        },
+        {
+          "type": "text",
+          "id": "capsules_per_day_by_size",
+          "label": "Units per day, by size",
+          "info": "Comma-separated, one value per size in the same order as the linked product's size options (e.g. \"1,2,3\" for Small,Medium,Large). Must match the number of sizes or the price-per-day line is hidden."
+        },
+        {
+          "type": "text",
+          "id": "price_per_day_text",
+          "label": "Price-per-day text",
+          "default": "[price_per_day]/day",
+          "info": "Supports [price_per_day], [days_supply], [months_supply], [total_capsules] tokens. Leave blank to hide this line."
         }
       ]
     }
