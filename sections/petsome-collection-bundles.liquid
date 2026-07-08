@@ -6,12 +6,22 @@
   cart uses the theme's native <product-form> + add-to-cart-form pattern
   (see snippets/buy-buttons.liquid, snippets/card-product.liquid) so it
   triggers the same cart drawer/notification JS as every other product
-  form. Background and discount-tag colors (solid or gradient) are set per
-  block/section rather than tied to a single product's metafields, since
-  this section spans several distinct products.
+  form. Background and discount-tag colors (solid or gradient) are
+  section-wide settings rather than tied to a single product's metafields,
+  since this section spans several distinct products. The tag only shows
+  on a card when that product's variant actually has a compare-at price
+  higher than its price - grid column count auto-scales to the number of
+  cards (up to 4 per row; a 5th+ card wraps to a new row at the same
+  column width as the row above, since grid-template-columns stays fixed).
 {% endcomment %}
+{%- liquid
+  assign petsome_bundles_desktop_cols = section.blocks.size | at_most: 4
+  assign petsome_bundles_mobile_cols = section.blocks.size | at_most: 2
+-%}
 <style>
   #petsome-collection-bundles-{{ section.id }} {
+    --pcb-cols-desktop: {{ petsome_bundles_desktop_cols }};
+    --pcb-cols-mobile: {{ petsome_bundles_mobile_cols }};
     background-color: {{ section.settings.background_color }};
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -42,14 +52,14 @@
 
   #petsome-collection-bundles-{{ section.id }} .petsome-collection-bundles__grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(var(--pcb-cols-desktop), 1fr);
     gap: 24px;
     width: 100%;
   }
 
   @media screen and (max-width: 989px) {
     #petsome-collection-bundles-{{ section.id }} .petsome-collection-bundles__grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(var(--pcb-cols-mobile), 1fr);
       gap: 16px;
     }
   }
@@ -173,15 +183,15 @@
                   loading="lazy"
                 >
               {%- endif -%}
-              {%- if block.settings.tag_text != blank -%}
+              {%- if block.settings.tag_text != blank and variant.compare_at_price > variant.price -%}
                 <span
                   class="petsome-bundle-card__tag"
                   style="
-                    color: {{ block.settings.tag_text_color }};
-                    {%- if block.settings.tag_style == 'gradient' -%}
-                      background: linear-gradient(180deg, {{ block.settings.tag_color }} 0%, {{ block.settings.tag_color_2 }} 100%);
+                    color: {{ section.settings.tag_text_color }};
+                    {%- if section.settings.tag_style == 'gradient' -%}
+                      background: linear-gradient(180deg, {{ section.settings.tag_color }} 0%, {{ section.settings.tag_color_2 }} 100%);
                     {%- else -%}
-                      background-color: {{ block.settings.tag_color }};
+                      background-color: {{ section.settings.tag_color }};
                     {%- endif -%}
                   "
                 >
@@ -267,6 +277,43 @@
     },
     {
       "type": "header",
+      "content": "Discount tag"
+    },
+    {
+      "type": "paragraph",
+      "content": "A card's tag only shows when that product's variant actually has a compare-at price set (and the card's own \"Tag text\" isn't blank)."
+    },
+    {
+      "type": "select",
+      "id": "tag_style",
+      "label": "Tag background style",
+      "options": [
+        { "value": "solid", "label": "Solid color" },
+        { "value": "gradient", "label": "Gradient" }
+      ],
+      "default": "solid"
+    },
+    {
+      "type": "color",
+      "id": "tag_color",
+      "label": "Tag color (or gradient start)",
+      "default": "#F8AAA7"
+    },
+    {
+      "type": "color",
+      "id": "tag_color_2",
+      "label": "Tag gradient end",
+      "info": "Only used when the background style is set to gradient.",
+      "default": "#F47671"
+    },
+    {
+      "type": "color",
+      "id": "tag_text_color",
+      "label": "Tag text color",
+      "default": "#FAF9F6"
+    },
+    {
+      "type": "header",
       "content": "Padding"
     },
     {
@@ -309,36 +356,7 @@
           "type": "text",
           "id": "tag_text",
           "label": "Tag text",
-          "info": "Leave blank to hide the tag entirely, e.g. for the 1x card."
-        },
-        {
-          "type": "select",
-          "id": "tag_style",
-          "label": "Tag background style",
-          "options": [
-            { "value": "solid", "label": "Solid color" },
-            { "value": "gradient", "label": "Gradient" }
-          ],
-          "default": "solid"
-        },
-        {
-          "type": "color",
-          "id": "tag_color",
-          "label": "Tag color (or gradient start)",
-          "default": "#F8AAA7"
-        },
-        {
-          "type": "color",
-          "id": "tag_color_2",
-          "label": "Tag gradient end",
-          "info": "Only used when the background style is set to gradient.",
-          "default": "#F47671"
-        },
-        {
-          "type": "color",
-          "id": "tag_text_color",
-          "label": "Tag text color",
-          "default": "#FAF9F6"
+          "info": "Only shown when this product's variant has a compare-at price set. Leave blank to always hide the tag, e.g. for the 1x card."
         }
       ]
     }
