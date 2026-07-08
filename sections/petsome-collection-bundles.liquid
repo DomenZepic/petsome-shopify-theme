@@ -6,12 +6,12 @@
   merchant). Quantity is fixed per card (baked into which product it links
   to); if that product has its own size variant (option1, e.g. Small/
   Medium/Large - same convention as the main product page), the card shows
-  an inline size-pill selector so the customer can still pick a size
-  without leaving the collection page. Selecting a pill updates the hidden
+  an inline size dropdown so the customer can still pick a size without
+  leaving the collection page. Changing the dropdown updates the hidden
   variant id, price/compare-price, discount tag text, and price-per-day
   copy client-side (see the script block below) - the add-to-cart form
   always submits whatever variant id is currently in that hidden input, so
-  there's no drift between the selected pill and what gets added to cart.
+  there's no drift between the selected size and what gets added to cart.
 
   Add to cart uses the theme's native <product-form> + add-to-cart-form
   pattern (see snippets/buy-buttons.liquid, snippets/card-product.liquid)
@@ -132,39 +132,40 @@
     margin: 0;
   }
 
-  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__sizes-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__size-select-wrapper {
+    position: relative;
     width: 100%;
   }
 
-  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__size-pill {
-    flex: 1 0 0;
-    min-width: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 16px;
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__size-select {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    padding: 12px 40px 12px 16px;
     border-radius: 12px;
     border: 2px solid #e7e7e7;
     background-color: #ffffff;
     color: #3b2f2f;
     font-size: 1.6rem;
     font-weight: 700;
-    text-align: center;
+    font-family: inherit;
     cursor: pointer;
   }
 
-  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__size-pill.is-selected {
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__size-select:focus {
+    outline: none;
     border-color: {{ section.settings.size_selected_color }};
-    background-color: color-mix(in srgb, {{ section.settings.size_selected_color }} 20%, white);
   }
 
-  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__size-pill[data-available="false"] {
-    opacity: 0.4;
-    cursor: not-allowed;
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__size-select-arrow {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
     pointer-events: none;
+    color: #3b2f2f;
   }
 
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__prices {
@@ -235,11 +236,11 @@
             assign button_label = section.settings.button_label | default: 'Dodaj v košarico'
             assign sold_out_label = 'products.product.sold_out' | t
 
-            assign show_size_pills = false
+            assign show_size_selector = false
             if bundle_product.variants.size > 1 and bundle_product.options_with_values.size > 0
-              assign show_size_pills = true
+              assign show_size_selector = true
               assign size_option = bundle_product.options_with_values.first
-              assign pill_values = size_option.values
+              assign size_values = size_option.values
             endif
 
             assign capsules_per_package = block.settings.capsules_per_package | times: 1.0
@@ -248,9 +249,9 @@
 
             assign valid_capsules_config = false
             if capsules_per_package > 0 and capsules_per_day_arr_size > 0
-              if show_size_pills and capsules_per_day_arr_size == pill_values.size
+              if show_size_selector and capsules_per_day_arr_size == size_values.size
                 assign valid_capsules_config = true
-              elsif show_size_pills == false
+              elsif show_size_selector == false
                 assign valid_capsules_config = true
               endif
             endif
@@ -289,10 +290,10 @@
             {%- if bundle_product != blank -%}
               <p class="petsome-bundle-card__name">{{ bundle_product.title }}</p>
 
-              {%- capture size_pills_html -%}
-              {%- if show_size_pills -%}
-                <div class="petsome-bundle-card__sizes-row" role="radiogroup" aria-label="{{ size_option.name | escape }}">
-                  {%- for value in pill_values -%}
+              {%- capture size_select_html -%}
+              {%- if show_size_selector -%}
+                <select class="petsome-bundle-card__size-select" data-bundle-size-select aria-label="{{ size_option.name | escape }}">
+                  {%- for value in size_values -%}
                     {%- liquid
                       assign this_variant = bundle_product.variants | where: 'option1', value | first
                       assign this_price = this_variant.price
@@ -350,20 +351,18 @@
                         assign default_ppd_copy = this_ppd_copy
                       endif
                     -%}
-                    <button
-                      type="button"
-                      role="radio"
-                      class="petsome-bundle-card__size-pill{% if this_selected %} is-selected{% endif %}"
-                      aria-checked="{{ this_selected }}"
-                      data-variant-id="{{ this_variant.id }}"
+                    <option
+                      value="{{ this_variant.id }}"
+                      {%- if this_selected %} selected{% endif %}
+                      {%- if this_variant.available == false %} disabled{% endif %}
                       data-available="{{ this_variant.available }}"
                       data-price="{{ this_price_copy }}"
                       data-compare-price="{{ this_compare_copy }}"
                       data-tag-text="{{ this_tag_copy | escape }}"
                       data-ppd-copy="{{ this_ppd_copy | escape }}"
-                    >{{ value }}</button>
+                    >{{ value }}</option>
                   {%- endfor -%}
-                </div>
+                </select>
               {%- else -%}
                 {%- liquid
                   assign default_compare_copy = ''
@@ -424,12 +423,17 @@
                 {%- if default_ppd_copy == blank %} style="display: none;"{% endif %}
               >{{ default_ppd_copy }}</span>
 
-              {%- if show_size_pills -%}
+              {%- if show_size_selector -%}
                 <div class="petsome-bundle-card__sizes">
                   {%- if section.settings.size_selector_label != blank -%}
                     <p class="petsome-bundle-card__sizes-label">{{ section.settings.size_selector_label }}</p>
                   {%- endif -%}
-                  {{ size_pills_html }}
+                  <div class="petsome-bundle-card__size-select-wrapper">
+                    {{ size_select_html }}
+                    <svg class="petsome-bundle-card__size-select-arrow" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
                 </div>
               {%- endif -%}
 
@@ -481,8 +485,8 @@
     var cards = root.querySelectorAll('.petsome-bundle-card');
 
     cards.forEach(function (card) {
-      var pills = card.querySelectorAll('.petsome-bundle-card__size-pill');
-      if (!pills.length) return;
+      var select = card.querySelector('[data-bundle-size-select]');
+      if (!select) return;
 
       var variantInput = card.querySelector('.product-variant-id');
       var priceEl = card.querySelector('[data-bundle-price]');
@@ -492,65 +496,58 @@
       var submitBtn = card.querySelector('[data-bundle-submit]');
       var submitLabel = card.querySelector('[data-bundle-button-label]');
 
-      pills.forEach(function (pill) {
-        pill.addEventListener('click', function () {
-          var data = pill.dataset;
+      select.addEventListener('change', function () {
+        var option = select.options[select.selectedIndex];
+        var data = option.dataset;
 
-          if (variantInput) {
-            variantInput.value = data.variantId;
-            variantInput.dispatchEvent(new Event('change', { bubbles: true }));
+        if (variantInput) {
+          variantInput.value = select.value;
+          variantInput.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+
+        if (priceEl) {
+          priceEl.textContent = data.price || '';
+        }
+
+        if (comparePriceEl) {
+          if (data.comparePrice) {
+            comparePriceEl.textContent = data.comparePrice;
+            comparePriceEl.style.display = '';
+          } else {
+            comparePriceEl.textContent = '';
+            comparePriceEl.style.display = 'none';
           }
+        }
 
-          if (priceEl) {
-            priceEl.textContent = data.price || '';
+        if (tagEl) {
+          if (data.tagText) {
+            tagEl.textContent = data.tagText;
+            tagEl.style.display = '';
+          } else {
+            tagEl.textContent = '';
+            tagEl.style.display = 'none';
           }
+        }
 
-          if (comparePriceEl) {
-            if (data.comparePrice) {
-              comparePriceEl.textContent = data.comparePrice;
-              comparePriceEl.style.display = '';
-            } else {
-              comparePriceEl.textContent = '';
-              comparePriceEl.style.display = 'none';
-            }
+        if (ppdEl) {
+          if (data.ppdCopy) {
+            ppdEl.textContent = data.ppdCopy;
+            ppdEl.style.display = '';
+          } else {
+            ppdEl.textContent = '';
+            ppdEl.style.display = 'none';
           }
+        }
 
-          if (tagEl) {
-            if (data.tagText) {
-              tagEl.textContent = data.tagText;
-              tagEl.style.display = '';
-            } else {
-              tagEl.textContent = '';
-              tagEl.style.display = 'none';
-            }
+        if (submitBtn) {
+          var available = data.available === 'true';
+          submitBtn.disabled = !available;
+          if (submitLabel) {
+            submitLabel.textContent = available
+              ? submitBtn.getAttribute('data-label-available')
+              : submitBtn.getAttribute('data-label-soldout');
           }
-
-          if (ppdEl) {
-            if (data.ppdCopy) {
-              ppdEl.textContent = data.ppdCopy;
-              ppdEl.style.display = '';
-            } else {
-              ppdEl.textContent = '';
-              ppdEl.style.display = 'none';
-            }
-          }
-
-          if (submitBtn) {
-            var available = data.available === 'true';
-            submitBtn.disabled = !available;
-            if (submitLabel) {
-              submitLabel.textContent = available
-                ? submitBtn.getAttribute('data-label-available')
-                : submitBtn.getAttribute('data-label-soldout');
-            }
-          }
-
-          pills.forEach(function (p) {
-            var selected = p === pill;
-            p.setAttribute('aria-checked', selected ? 'true' : 'false');
-            p.classList.toggle('is-selected', selected);
-          });
-        });
+        }
       });
     });
   })();
@@ -579,7 +576,7 @@
       "id": "size_selector_label",
       "label": "Size selector label",
       "default": "Izberite težo psa:",
-      "info": "Shown above the size pills on cards that have more than one size. Leave blank to hide the label."
+      "info": "Shown above the size dropdown on cards that have more than one size. Leave blank to hide the label."
     },
     {
       "type": "header",
@@ -594,8 +591,8 @@
     {
       "type": "color",
       "id": "size_selected_color",
-      "label": "Selected size highlight",
-      "info": "Used as the border color and a soft tinted background for the currently selected size.",
+      "label": "Size selector focus color",
+      "info": "Border color shown when the size dropdown is focused.",
       "default": "#E8D6C5"
     },
     {
