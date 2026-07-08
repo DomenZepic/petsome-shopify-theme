@@ -286,7 +286,7 @@
                   "timer_text": "<strong>Izdelki so rezervirani še [timer]</strong>",
                   "timer_duration": 300,
                   "font_size": "1.2",
-                  "color_scheme": "inverse",
+                  "color_scheme": "accent-1",
                   "margin_top": 0,
                   "margin_bottom": 15
                 },
