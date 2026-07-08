@@ -179,9 +179,9 @@
           "settings": {
             "product": "1x-mobimix-1",
             "tag_text": "444",
-            "capsules_per_package": 90,
+            "capsules_per_package": 0,
             "capsules_per_day_by_size": "1, 2, 3",
-            "price_per_day_text": "[price_per_day]/day"
+            "price_per_day_text": "[price_per_day]/dan"
           }
         },
         "bundle_card_CtiG7Y": {
