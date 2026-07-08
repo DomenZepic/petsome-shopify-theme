@@ -316,27 +316,14 @@
                       assign this_tag_copy = ''
                       if block.settings.tag_text != blank and this_compare > this_price
                         capture this_tag_copy
-                          render 'text-with-price',
-                            text: block.settings.tag_text,
-                            price: this_price,
-                            compare_price: this_compare,
-                            amount_saved: this_amount_saved,
-                            amount_saved_rounded: this_amount_saved_rounded,
-                            percentage_saved: this_percentage_saved
+                          render 'text-with-price', text: block.settings.tag_text, price: this_price, compare_price: this_compare, amount_saved: this_amount_saved, amount_saved_rounded: this_amount_saved_rounded, percentage_saved: this_percentage_saved
                         endcapture
                       endif
 
                       assign this_ppd_copy = ''
                       if block.settings.price_per_day_text != blank and this_days_supply > 0
                         capture this_ppd_copy
-                          render 'text-with-price',
-                            text: block.settings.price_per_day_text,
-                            price: this_price,
-                            compare_price: this_compare,
-                            days_supply: this_days_supply,
-                            months_supply: this_months_supply,
-                            price_per_day: this_price_per_day,
-                            total_capsules: capsules_per_package
+                          render 'text-with-price', text: block.settings.price_per_day_text, price: this_price, compare_price: this_compare, days_supply: this_days_supply, months_supply: this_months_supply, price_per_day: this_price_per_day, total_capsules: capsules_per_package
                         endcapture
                       endif
 
@@ -394,26 +381,13 @@
 
                   if block.settings.tag_text != blank and default_variant.compare_at_price > default_variant.price
                     capture default_tag_copy
-                      render 'text-with-price',
-                        text: block.settings.tag_text,
-                        price: default_variant.price,
-                        compare_price: default_variant.compare_at_price,
-                        amount_saved: default_amount_saved,
-                        amount_saved_rounded: default_amount_saved_rounded,
-                        percentage_saved: default_percentage_saved
+                      render 'text-with-price', text: block.settings.tag_text, price: default_variant.price, compare_price: default_variant.compare_at_price, amount_saved: default_amount_saved, amount_saved_rounded: default_amount_saved_rounded, percentage_saved: default_percentage_saved
                     endcapture
                   endif
 
                   if block.settings.price_per_day_text != blank and default_days_supply > 0
                     capture default_ppd_copy
-                      render 'text-with-price',
-                        text: block.settings.price_per_day_text,
-                        price: default_variant.price,
-                        compare_price: default_variant.compare_at_price,
-                        days_supply: default_days_supply,
-                        months_supply: default_months_supply,
-                        price_per_day: default_price_per_day,
-                        total_capsules: capsules_per_package
+                      render 'text-with-price', text: block.settings.price_per_day_text, price: default_variant.price, compare_price: default_variant.compare_at_price, days_supply: default_days_supply, months_supply: default_months_supply, price_per_day: default_price_per_day, total_capsules: capsules_per_package
                     endcapture
                   endif
                 -%}
