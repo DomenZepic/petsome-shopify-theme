@@ -206,39 +206,33 @@
   }
 
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    align-self: stretch;
-    width: 100%;
-    min-height: 0;
-    height: auto;
-    background-color: #3b2f2f;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 700;
-    line-height: 1.2;
-    padding: 8px 16px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+    align-self: stretch !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    max-height: 40px !important;
+    height: auto !important;
+    background-color: #3b2f2f !important;
+    color: #ffffff !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    line-height: 1.2 !important;
+    padding: 4px 6px !important;
+    border-radius: 8px !important;
+    border: none !important;
+    cursor: pointer !important;
   }
 
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__button .material-icon {
-    font-size: 16px;
+    font-size: 14px !important;
   }
 
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__button[disabled] {
     opacity: 0.5;
     cursor: not-allowed;
-  }
-
-  @media screen and (max-width: 749px) {
-    #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__button {
-      font-size: 12px;
-      padding: 6px 4px;
-    }
   }
 </style>
 
