@@ -113,13 +113,13 @@
     padding: 4px 12px;
     border-radius: 999px;
     font-weight: 700;
-    font-size: 1.2rem;
+    font-size: 12px;
   }
 
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__name {
     font-family: var(--font-heading-family);
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 20px;
     line-height: 1.4;
     color: #3b2f2f;
     margin: 0;
@@ -134,14 +134,14 @@
 
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__sizes-label {
     font-weight: 700;
-    font-size: 1.6rem;
+    font-size: 16px;
     color: #3b2f2f;
     margin: 0;
   }
 
   @media screen and (max-width: 749px) {
     #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__sizes-label {
-      font-size: 1.2rem;
+      font-size: 12px;
     }
   }
 
@@ -159,7 +159,7 @@
     border: 2px solid #e7e7e7;
     background-color: #ffffff;
     color: #3b2f2f;
-    font-size: 1.3rem;
+    font-size: 13px;
     font-weight: 700;
     font-family: inherit;
     cursor: pointer;
@@ -189,19 +189,19 @@
 
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__price {
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 20px;
     color: #3b2f2f;
   }
 
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__compare-price {
     font-weight: 500;
-    font-size: 2rem;
+    font-size: 20px;
     color: #565858;
     text-decoration: line-through;
   }
 
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__ppd {
-    font-size: 1.3rem;
+    font-size: 13px;
     color: #565858;
   }
 
@@ -214,7 +214,7 @@
     width: 100%;
     background-color: #3b2f2f;
     color: #ffffff;
-    font-size: 1.4rem;
+    font-size: 14px;
     font-weight: 700;
     line-height: 1.5;
     padding: 8px 16px;
@@ -224,12 +224,19 @@
   }
 
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__button .material-icon {
-    font-size: 1.6rem;
+    font-size: 16px;
   }
 
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__button[disabled] {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__button {
+      font-size: 12px;
+      padding: 6px 4px;
+    }
   }
 </style>
 
