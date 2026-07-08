@@ -222,7 +222,9 @@
       "settings": {
         "heading": "<p>Omogoči svojemu psu lažje gibanje</p>",
         "button_label": "Dodaj v košarico",
+        "size_selector_label": "Izberite težo psa:",
         "background_color": "#fef6f6",
+        "size_selected_color": "#e8d6c5",
         "tag_style": "solid",
         "tag_color": "#f8aaa7",
         "tag_color_2": "#f47671",
@@ -237,7 +239,7 @@
         "bundle_card_XRrK6D": {
           "type": "bundle_card",
           "settings": {
-            "product": "1x-mobimix-1",
+            "product": "1x-dentalmix",
             "tag_text": "444",
             "capsules_per_package": 0,
             "capsules_per_day_by_size": "1, 2, 3",
@@ -247,7 +249,7 @@
         "bundle_card_g8Nhxx": {
           "type": "bundle_card",
           "settings": {
-            "product": "2x-mobimix-1",
+            "product": "2x-dentalmix",
             "tag_text": "Prihrani 20%",
             "capsules_per_day_by_size": "",
             "price_per_day_text": "[price_per_day]/day"
@@ -256,7 +258,7 @@
         "bundle_card_DqTwHw": {
           "type": "bundle_card",
           "settings": {
-            "product": "3x-mobimix",
+            "product": "3x-dentalmix",
             "tag_text": "Prihrani 25%",
             "capsules_per_day_by_size": "",
             "price_per_day_text": "[price_per_day]/day"
@@ -265,7 +267,7 @@
         "bundle_card_kNfQEb": {
           "type": "bundle_card",
           "settings": {
-            "product": "6x-mobimix",
+            "product": "6x-dentalmix",
             "tag_text": "Prihrani 30%",
             "capsules_per_day_by_size": "",
             "price_per_day_text": "[price_per_day]/day"
@@ -282,7 +284,9 @@
       "settings": {
         "heading": "<p>Omogoči svojemu psu boljšo dentalno higieno</p>",
         "button_label": "Dodaj v košarico",
-        "background_color": "#FAF9F6",
+        "size_selector_label": "Izberite težo psa:",
+        "background_color": "#faf9f6",
+        "size_selected_color": "#e8d6c5",
         "tag_style": "solid",
         "tag_color": "#f8aaa7",
         "tag_color_2": "#f47671",
