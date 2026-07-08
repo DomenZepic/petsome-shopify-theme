@@ -13,14 +13,18 @@
       "type": "petsome-collection-hero",
       "settings": {}
     },
+    "petsome-collection-bundles": {
+      "type": "petsome-collection-bundles",
+      "settings": {}
+    },
     "main-collection-banner": {
       "type": "main-collection-banner",
+      "disabled": true,
       "settings": {
         "show_collection_description": true,
         "show_collection_image": true,
         "color_scheme": "background-1"
-      },
-      "disabled": true
+      }
     },
     "main-collection-product-grid": {
       "type": "main-collection-product-grid",
@@ -79,5 +83,10 @@
       }
     }
   },
-  "order": ["petsome-collection-hero", "main-collection-banner", "main-collection-product-grid"]
+  "order": [
+    "petsome-collection-hero",
+    "petsome-collection-bundles",
+    "main-collection-banner",
+    "main-collection-product-grid"
+  ]
 }
