@@ -1,0 +1,359 @@
+{% comment %}
+  Petsome: Collection bundles. Heading above a row of product cards (image,
+  name, price/compare-at price, optional discount tag, add-to-cart button)
+  - one card per block, each pointing at its own bundle product (e.g. a
+  1x/2x/3x/6x pack, each a separate product set up by the merchant). Add to
+  cart uses the theme's native <product-form> + add-to-cart-form pattern
+  (see snippets/buy-buttons.liquid, snippets/card-product.liquid) so it
+  triggers the same cart drawer/notification JS as every other product
+  form. Background and discount-tag colors (solid or gradient) are set per
+  block/section rather than tied to a single product's metafields, since
+  this section spans several distinct products.
+{% endcomment %}
+<style>
+  #petsome-collection-bundles-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-collection-bundles__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-collection-bundles__heading {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: var(--petsome-heading-size);
+    color: rgb(var(--color-foreground));
+    margin: 0;
+    text-align: center;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-collection-bundles__heading p {
+    margin: 0;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-collection-bundles__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 989px) {
+    #petsome-collection-bundles-{{ section.id }} .petsome-collection-bundles__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #ffffff;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__tag {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    display: inline-flex;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 1.2rem;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__name {
+    font-family: var(--font-heading-family);
+    font-weight: 700;
+    font-size: 2.4rem;
+    line-height: 1.4;
+    color: #3b2f2f;
+    margin: 0;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__prices {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__price {
+    font-weight: 700;
+    font-size: 2rem;
+    color: #3b2f2f;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__compare-price {
+    font-weight: 500;
+    font-size: 2rem;
+    color: #565858;
+    text-decoration: line-through;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    align-self: flex-start;
+    background-color: #3b2f2f;
+    color: #ffffff;
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.5;
+    padding: 8px 24px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__button .material-icon {
+    font-size: 2rem;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__button {
+      align-self: stretch;
+    }
+  }
+</style>
+
+<div id="petsome-collection-bundles-{{ section.id }}" class="petsome-collection-bundles">
+  <div class="petsome-collection-bundles__inner">
+    {%- if section.settings.heading != blank -%}
+      <div class="petsome-collection-bundles__heading">{{ section.settings.heading }}</div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="petsome-collection-bundles__grid">
+        {%- for block in section.blocks -%}
+          {%- liquid
+            assign bundle_product = block.settings.product
+            assign variant = bundle_product.selected_or_first_available_variant
+            assign product_form_id = 'petsome-bundle-' | append: section.id | append: '-' | append: block.id
+          -%}
+          <div class="petsome-bundle-card" {{ block.shopify_attributes }}>
+            <div class="petsome-bundle-card__image-wrapper">
+              {%- if bundle_product != blank and bundle_product.featured_image != blank -%}
+                <img
+                  src="{{ bundle_product.featured_image | image_url: width: 800 }}"
+                  alt="{{ bundle_product.featured_image.alt | default: bundle_product.title | escape }}"
+                  width="{{ bundle_product.featured_image.width }}"
+                  height="{{ bundle_product.featured_image.height }}"
+                  loading="lazy"
+                >
+              {%- endif -%}
+              {%- if block.settings.tag_text != blank -%}
+                <span
+                  class="petsome-bundle-card__tag"
+                  style="
+                    color: {{ block.settings.tag_text_color }};
+                    {%- if block.settings.tag_style == 'gradient' -%}
+                      background: linear-gradient(180deg, {{ block.settings.tag_color }} 0%, {{ block.settings.tag_color_2 }} 100%);
+                    {%- else -%}
+                      background-color: {{ block.settings.tag_color }};
+                    {%- endif -%}
+                  "
+                >
+                  {{ block.settings.tag_text }}
+                </span>
+              {%- endif -%}
+            </div>
+
+            {%- if bundle_product != blank -%}
+              <p class="petsome-bundle-card__name">{{ bundle_product.title }}</p>
+
+              <div class="petsome-bundle-card__prices">
+                <span class="petsome-bundle-card__price">{{ variant.price | money }}</span>
+                {%- if variant.compare_at_price > variant.price -%}
+                  <span class="petsome-bundle-card__compare-price">{{ variant.compare_at_price | money }}</span>
+                {%- endif -%}
+              </div>
+
+              <product-form id="product-form-{{ product_form_id }}">
+                {%- form 'product',
+                  bundle_product,
+                  id: product_form_id,
+                  class: 'form',
+                  novalidate: 'novalidate',
+                  data-type: 'add-to-cart-form'
+                -%}
+                  <div class="hidden product-form__variants" id="product-form-{{ product_form_id }}__variants" data-values=""></div>
+                  <input type="hidden" name="id" value="{{ variant.id }}" class="product-variant-id">
+                  <button
+                    type="submit"
+                    name="add"
+                    class="petsome-bundle-card__button product-form__submit"
+                    {% if variant.available == false %}
+                      disabled
+                    {% endif %}
+                  >
+                    <span>
+                      {%- if variant.available -%}
+                        {{ section.settings.button_label | default: 'Dodaj v košarico' }}
+                      {%- else -%}
+                        {{ 'products.product.sold_out' | t }}
+                      {%- endif -%}
+                    </span>
+                    {% render 'material-icon', icon: 'arrow_forward' %}
+                  </button>
+                {%- endform -%}
+              </product-form>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Petsome: Bundles",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Omogoči svojemu psu lažje gibanje</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Add to cart button label",
+      "default": "Dodaj v košarico"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#FEF6F6"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bundle_card",
+      "name": "Bundle card",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product",
+          "info": "The card's image, name, price and add-to-cart button all come from this product - e.g. a \"2x MobiMix\" bundle product."
+        },
+        {
+          "type": "header",
+          "content": "Discount tag"
+        },
+        {
+          "type": "text",
+          "id": "tag_text",
+          "label": "Tag text",
+          "info": "Leave blank to hide the tag entirely, e.g. for the 1x card.",
+          "default": ""
+        },
+        {
+          "type": "select",
+          "id": "tag_style",
+          "label": "Tag background style",
+          "options": [
+            { "value": "solid", "label": "Solid color" },
+            { "value": "gradient", "label": "Gradient" }
+          ],
+          "default": "solid"
+        },
+        {
+          "type": "color",
+          "id": "tag_color",
+          "label": "Tag color (or gradient start)",
+          "default": "#F8AAA7"
+        },
+        {
+          "type": "color",
+          "id": "tag_color_2",
+          "label": "Tag gradient end",
+          "info": "Only used when the background style is set to gradient.",
+          "default": "#F47671"
+        },
+        {
+          "type": "color",
+          "id": "tag_text_color",
+          "label": "Tag text color",
+          "default": "#FAF9F6"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome: Bundles",
+      "blocks": [
+        { "type": "bundle_card" },
+        { "type": "bundle_card", "settings": { "tag_text": "Prihrani 20%" } },
+        { "type": "bundle_card", "settings": { "tag_text": "Prihrani 25%" } },
+        { "type": "bundle_card", "settings": { "tag_text": "Prihrani 30%" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
