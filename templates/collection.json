@@ -165,10 +165,73 @@
         "heading": "<p>Dvigujemo standarde pasjih življenj</p>",
         "text": "<p>Petsome izdelki so izdelani iz naravnih sestavin, ki vašemu psu zagotavljajo najboljše pogoje za zdravo življenje.</p>",
         "image": "shopify://shop_images/prava_izbira-img.png",
-        "image_background_color": "#D08989",
+        "image_background_color": "#d08989",
         "padding_top": 40,
         "padding_bottom": 40,
-        "background_color": "#EDE9DE"
+        "background_color": "#ede9de"
+      }
+    },
+    "petsome_collection_bundles_wpqMww": {
+      "type": "petsome-collection-bundles",
+      "blocks": {
+        "bundle_card_fJfBB3": {
+          "type": "bundle_card",
+          "settings": {
+            "product": "1x-mobimix",
+            "tag_text": "",
+            "tag_style": "solid",
+            "tag_color": "#F8AAA7",
+            "tag_color_2": "#F47671",
+            "tag_text_color": "#FAF9F6"
+          }
+        },
+        "bundle_card_CtiG7Y": {
+          "type": "bundle_card",
+          "settings": {
+            "product": "2x-mobimix",
+            "tag_text": "Prihrani 20%",
+            "tag_style": "solid",
+            "tag_color": "#F8AAA7",
+            "tag_color_2": "#F47671",
+            "tag_text_color": "#FAF9F6"
+          }
+        },
+        "bundle_card_AEWgRW": {
+          "type": "bundle_card",
+          "settings": {
+            "product": "3x-mobimix-1x-brezplacno-darilo",
+            "tag_text": "Prihrani 25%",
+            "tag_style": "solid",
+            "tag_color": "#F8AAA7",
+            "tag_color_2": "#F47671",
+            "tag_text_color": "#FAF9F6"
+          }
+        },
+        "bundle_card_kx3jNN": {
+          "type": "bundle_card",
+          "settings": {
+            "product": "dentalmix-starter-pack",
+            "tag_text": "Prihrani 30%",
+            "tag_style": "solid",
+            "tag_color": "#F8AAA7",
+            "tag_color_2": "#F47671",
+            "tag_text_color": "#FAF9F6"
+          }
+        }
+      },
+      "block_order": [
+        "bundle_card_fJfBB3",
+        "bundle_card_CtiG7Y",
+        "bundle_card_AEWgRW",
+        "bundle_card_kx3jNN"
+      ],
+      "name": "Petsome: Bundles",
+      "settings": {
+        "heading": "<p>Omogoči svojemu psu lažje gibanje</p>",
+        "button_label": "Dodaj v košarico",
+        "background_color": "#FEF6F6",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     }
   },
@@ -176,6 +239,7 @@
     "main-collection-banner",
     "main-collection-product-grid",
     "collage",
-    "petsome_collection_hero_HHTRzf"
+    "petsome_collection_hero_HHTRzf",
+    "petsome_collection_bundles_wpqMww"
   ]
 }
