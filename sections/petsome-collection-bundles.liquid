@@ -120,27 +120,45 @@
 
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__sizes {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__sizes-label {
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: #3b2f2f;
+    margin: 0;
+  }
+
+  #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__sizes-row {
+    display: flex;
+    align-items: center;
     gap: 8px;
+    width: 100%;
   }
 
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__size-pill {
+    flex: 1 0 0;
+    min-width: 0;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 4px 12px;
-    border-radius: 999px;
-    border: 1px solid #3b2f2f;
-    background-color: transparent;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 2px solid #e7e7e7;
+    background-color: #ffffff;
     color: #3b2f2f;
-    font-size: 1.4rem;
-    font-weight: 500;
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-align: center;
     cursor: pointer;
   }
 
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__size-pill.is-selected {
-    background-color: #3b2f2f;
-    color: #ffffff;
+    border-color: {{ section.settings.size_selected_color }};
+    background-color: color-mix(in srgb, {{ section.settings.size_selected_color }} 20%, white);
   }
 
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__size-pill[data-available="false"] {
@@ -178,13 +196,14 @@
     align-items: center;
     justify-content: center;
     gap: 4px;
-    align-self: flex-start;
+    align-self: stretch;
+    width: 100%;
     background-color: #3b2f2f;
     color: #ffffff;
     font-size: 1.6rem;
     font-weight: 700;
     line-height: 1.5;
-    padding: 8px 24px;
+    padding: 12px 24px;
     border-radius: 8px;
     border: none;
     cursor: pointer;
@@ -197,12 +216,6 @@
   #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__button[disabled] {
     opacity: 0.5;
     cursor: not-allowed;
-  }
-
-  @media screen and (max-width: 749px) {
-    #petsome-collection-bundles-{{ section.id }} .petsome-bundle-card__button {
-      align-self: stretch;
-    }
   }
 </style>
 
@@ -276,8 +289,9 @@
             {%- if bundle_product != blank -%}
               <p class="petsome-bundle-card__name">{{ bundle_product.title }}</p>
 
+              {%- capture size_pills_html -%}
               {%- if show_size_pills -%}
-                <div class="petsome-bundle-card__sizes" role="radiogroup" aria-label="{{ size_option.name | escape }}">
+                <div class="petsome-bundle-card__sizes-row" role="radiogroup" aria-label="{{ size_option.name | escape }}">
                   {%- for value in pill_values -%}
                     {%- liquid
                       assign this_variant = bundle_product.variants | where: 'option1', value | first
@@ -353,6 +367,7 @@
               {%- else -%}
                 {%- liquid
                   assign default_compare_copy = ''
+                  assign default_amount_saved = 0
                   assign default_amount_saved_rounded = 0
                   if default_variant.compare_at_price > default_variant.price
                     assign default_compare_copy = default_variant.compare_at_price | money
@@ -392,6 +407,7 @@
                   endif
                 -%}
               {%- endif -%}
+              {%- endcapture -%}
 
               <div class="petsome-bundle-card__prices">
                 <span class="petsome-bundle-card__price" data-bundle-price>{{ default_price_copy }}</span>
@@ -407,6 +423,15 @@
                 data-bundle-ppd
                 {%- if default_ppd_copy == blank %} style="display: none;"{% endif %}
               >{{ default_ppd_copy }}</span>
+
+              {%- if show_size_pills -%}
+                <div class="petsome-bundle-card__sizes">
+                  {%- if section.settings.size_selector_label != blank -%}
+                    <p class="petsome-bundle-card__sizes-label">{{ section.settings.size_selector_label }}</p>
+                  {%- endif -%}
+                  {{ size_pills_html }}
+                </div>
+              {%- endif -%}
 
               <product-form id="product-form-{{ product_form_id }}">
                 {%- form 'product',
@@ -550,6 +575,13 @@
       "default": "Dodaj v košarico"
     },
     {
+      "type": "text",
+      "id": "size_selector_label",
+      "label": "Size selector label",
+      "default": "Izberite težo psa:",
+      "info": "Shown above the size pills on cards that have more than one size. Leave blank to hide the label."
+    },
+    {
       "type": "header",
       "content": "Colors"
     },
@@ -558,6 +590,13 @@
       "id": "background_color",
       "label": "Section background",
       "default": "#FEF6F6"
+    },
+    {
+      "type": "color",
+      "id": "size_selected_color",
+      "label": "Selected size highlight",
+      "info": "Used as the border color and a soft tinted background for the currently selected size.",
+      "default": "#E8D6C5"
     },
     {
       "type": "header",
