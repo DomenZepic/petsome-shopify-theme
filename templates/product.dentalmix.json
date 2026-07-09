@@ -1041,30 +1041,30 @@
         "padding_bottom": 36
       }
     },
-    "petsome_benefits_1": {
+    "petsome_benefits_7H3yrt": {
       "type": "petsome-benefits",
       "blocks": {
-        "benefit_1": {
+        "benefit_t6H3CY": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/hf_20260709_180050_5364ff55-580a-43f9-9c7a-5dc24168dd95.png",
+            "image": "shopify://shop_images/hf_20260709_182705_61b08430-0bb6-4e61-844d-e3cddbacd2d2.png",
             "icon": "pets",
             "filled_icon": false,
             "title": "Manj zadaha že v 7–14 dneh",
             "text": "<p>DentalMix deluje skozi slino od prvega dne. Večina lastnikov opazi, da tisti zadah, ki jih je odbijal, počasi popušča — ne zato, ker bi ga prekrili, ampak ker se bakterije, ki ga povzročajo, umirjajo.</p>"
           }
         },
-        "benefit_2": {
+        "benefit_wK33E8": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/easy_moving.png",
+            "image": "shopify://shop_images/hf_20260709_190328_9e06e438-fa32-48d3-9e3c-fdb3e405526b.png",
             "icon": "directions_run",
             "filled_icon": false,
             "title": "Brez ščetkanja, brez borbe",
             "text": "<p>Prašek preprosto potreseš na obrok. Nič stiskanja gobčka, nič vsakodnevne bitke, ki jo pes vedno dobi. Samo dosledna dnevna nega, ki jo pes komaj opazi.</p>"
           }
         },
-        "benefit_3": {
+        "benefit_RpwKGJ": {
           "type": "benefit",
           "settings": {
             "image": "shopify://shop_images/hf_20260709_180016_bbaa73f9-3aab-4980-a5a7-4cdc6680f767.png",
@@ -1074,10 +1074,10 @@
             "text": "<p>Ko zadah popusti, se vrne tisto, kar imaš najraje — crkljanje od blizu, brez odmika. To je trenutek, ki šteje.</p>"
           }
         },
-        "benefit_4": {
+        "benefit_Q674nP": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/joint_protection.png",
+            "image": "shopify://shop_images/hf_20260709_190433_b72c1c33-4f5d-43ed-a438-fb50be355b7a.png",
             "icon": "shield",
             "filled_icon": true,
             "title": "Manj zobnega kamna, dolgoročno",
@@ -1086,10 +1086,10 @@
         }
       },
       "block_order": [
-        "benefit_1",
-        "benefit_2",
-        "benefit_3",
-        "benefit_4"
+        "benefit_t6H3CY",
+        "benefit_wK33E8",
+        "benefit_RpwKGJ",
+        "benefit_Q674nP"
       ],
       "settings": {
         "heading": "<p>Enostavna dnevna nega proti zadahu in za čistejše zobe — brez ščetkanja.</p>",
@@ -1479,6 +1479,50 @@
         "padding_bottom": 80
       }
     },
+    "petsome_before_after_py3yxf": {
+      "type": "petsome-before-after",
+      "blocks": {
+        "story_zam3gr": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260709_191847_47f9a875-2a81-4321-ab1a-0928235e472e.png",
+            "dog_name": "Piki, 9-letni maltežan",
+            "issue": "Rjavi zobje in hud zadah",
+            "text": "<p>Pikijev zadah je bil neznosen, ščetkanja ni pustil. Po dveh tednih DentalMixa lastnica poroča, da je zadah opazno milejši in da ga spet crklja od blizu. Tudi zobje so bolj beli.</p>"
+          }
+        },
+        "story_VneA77": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_90_23d1c325-2ca9-408a-adbc-21cf722c055a.webp",
+            "dog_name": "Rosa, 11-letna maltežanka",
+            "issue": "Rjave obloge",
+            "text": "<p>Rosa je imela rjave obloge ob dlesnih in skrbela jo je anestezija. Z rednim DentalMixom so zobje videti čistejši, brez postopka pri veterinarju.</p>"
+          }
+        },
+        "story_Prgkhk": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/image00004_db7b8cc8-6684-47d2-980a-96f678167a77.png",
+            "dog_name": "Dante, 12-letni ovčar",
+            "issue": "Starejši pes, ne pusti ščetke",
+            "text": "<p>Dante je starejši ovčar in ščetkanja ne prenese. Prašek na hrani je preprosta rešitev — zadaha ni več, lastnica pa mirna.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "story_zam3gr",
+        "story_VneA77",
+        "story_Prgkhk"
+      ],
+      "settings": {
+        "heading": "<p>Dokazi so v rezultatih</p>",
+        "description": "<p>Pomagali smo že več kot 10.000 psom po vsej Evropi. Tukaj je nekaj njihovih zgodb.</p>",
+        "border_color": "#e8d6c5",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
     "petsome_how_to_use_1": {
       "type": "petsome-how-to-use",
       "blocks": {
@@ -1701,7 +1745,7 @@
   "order": [
     "main",
     "petsome_rotating_bullets_1",
-    "petsome_benefits_1",
+    "petsome_benefits_7H3yrt",
     "petsome_timeframe_1",
     "petsome_checklist_1",
     "petsome_comparison_1",
@@ -1710,6 +1754,7 @@
     "petsome_mechanism_1",
     "petsome_before_after_1",
     "petsome_certificates_1",
+    "petsome_before_after_py3yxf",
     "petsome_how_to_use_1",
     "petsome_stats_1",
     "petsome_professional_reviews_BkgaUN",
