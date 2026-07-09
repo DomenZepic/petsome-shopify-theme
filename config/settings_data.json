@@ -420,6 +420,7 @@
               "cart_product_upsells_EmHKnm": {
                 "type": "cart_product-upsells",
                 "name": "Product upsells",
+                "disabled": true,
                 "settings": {
                   "position": "footer",
                   "display": "globally",
