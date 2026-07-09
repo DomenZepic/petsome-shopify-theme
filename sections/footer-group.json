@@ -17,8 +17,9 @@
         "fc645871-d789-4cfa-8584-4f8a29b6ce92": {
           "type": "image",
           "settings": {
+            "image": "shopify://shop_images/Logo_cc9e4809-610d-4e12-9861-949378c4b8de.png",
             "image_width": 100,
-            "alignment": "center",
+            "alignment": "",
             "url": "",
             "width_desktop": 4,
             "width_mobile": "2"
@@ -33,15 +34,28 @@
             "width_desktop": 3,
             "width_mobile": "2"
           }
+        },
+        "link_list_ahJbeA": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Izdelki",
+            "block_headings_font_size": 1,
+            "menu": "footer",
+            "font_size": 14,
+            "menu_items_font": "body",
+            "width_desktop": 3,
+            "width_mobile": "2"
+          }
         }
       },
       "block_order": [
         "fc645871-d789-4cfa-8584-4f8a29b6ce92",
-        "text_KU3Twd"
+        "text_KU3Twd",
+        "link_list_ahJbeA"
       ],
       "settings": {
-        "color_scheme": "accent-1",
-        "custom_colors_background": "#121212",
+        "color_scheme": "custom",
+        "custom_colors_background": "#3B2F2F",
         "custom_gradient_background": "",
         "custom_colors_text": "#ffffff",
         "custom_colors_solid_button_background": "#ffffff",
