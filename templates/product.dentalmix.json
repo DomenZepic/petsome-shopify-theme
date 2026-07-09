@@ -1047,7 +1047,7 @@
         "benefit_1": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/less_pain.png",
+            "image": "shopify://shop_images/hf_20260709_180050_5364ff55-580a-43f9-9c7a-5dc24168dd95.png",
             "icon": "pets",
             "filled_icon": false,
             "title": "Manj zadaha že v 7–14 dneh",
@@ -1067,7 +1067,7 @@
         "benefit_3": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/energy.png",
+            "image": "shopify://shop_images/hf_20260709_180016_bbaa73f9-3aab-4980-a5a7-4cdc6680f767.png",
             "icon": "bolt",
             "filled_icon": true,
             "title": "Spet ga crkljaš od blizu",
@@ -1607,6 +1607,7 @@
       "blocks": {
         "loox_reviews_loox_dynamic_section_dAPRGq": {
           "type": "shopify://apps/loox-reviews/blocks/loox-dynamic-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "disabled": true,
           "settings": {
             "reviews_to_display": "",
             "default_tab": "automatic",
