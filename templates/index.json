@@ -13,14 +13,14 @@
       "type": "petsome-home-hero",
       "name": "Petsome: Home hero",
       "settings": {
-        "desktop_image": "shopify://shop_images/b90130e470fed4280999848ffcbc6db37b038fcc.png",
+        "desktop_image": "shopify://shop_images/hf_20260709_184233_76bf0169-4c0b-42f3-b1da-2634c18cce03_1_1.png",
         "mobile_image": "shopify://shop_images/Hero_Image.png",
         "rating_text": "Zaupa nam več kot 2.000 lastnikov psov",
         "heading": "<p>Za boljše življenje ljubljenčkov</p>",
         "subline": "<p>Naravna podpora sklepom za aktivno in brezbolečinsko gibanje.</p>",
-        "cta_label": "Preizkusi MobiMix",
-        "cta_url": "shopify://products/mobimix",
-        "min_height": 560,
+        "cta_label": "Razišči Petsome izdelke",
+        "cta_url": "shopify://collections/vsi-izdelki",
+        "min_height": 700,
         "padding_top": 64,
         "padding_bottom": 64,
         "background_color": "#e8d6c5"
