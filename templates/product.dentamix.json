@@ -88,7 +88,7 @@
               "name": "Heading",
               "settings": {
                 "visibility": "always-display",
-                "title": "DentalMix — konec zadaha in čistejši zobje, brez ščetkanja",
+                "title": "DentalMix — dodatek za zobe in zadah psov",
                 "heading_size": "h1",
                 "custom_desktop_size": 39,
                 "custom_mobile_size": 28,
@@ -986,7 +986,7 @@
         "benefit_1": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/less_pain.png",
+            "image": "shopify://shop_images/hf_20260709_182705_61b08430-0bb6-4e61-844d-e3cddbacd2d2.png",
             "icon": "pets",
             "filled_icon": false,
             "title": "Manj zadaha že v 7–14 dneh",
@@ -996,7 +996,7 @@
         "benefit_2": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/easy_moving.png",
+            "image": "shopify://shop_images/hf_20260709_190328_9e06e438-fa32-48d3-9e3c-fdb3e405526b.png",
             "icon": "directions_run",
             "filled_icon": false,
             "title": "Brez ščetkanja, brez borbe",
@@ -1006,7 +1006,7 @@
         "benefit_3": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/energy.png",
+            "image": "shopify://shop_images/hf_20260709_180016_bbaa73f9-3aab-4980-a5a7-4cdc6680f767.png",
             "icon": "bolt",
             "filled_icon": true,
             "title": "Spet ga crkljaš od blizu",
@@ -1016,7 +1016,7 @@
         "benefit_4": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/joint_protection.png",
+            "image": "shopify://shop_images/hf_20260709_190433_b72c1c33-4f5d-43ed-a438-fb50be355b7a.png",
             "icon": "shield",
             "filled_icon": true,
             "title": "Manj zobnega kamna, dolgoročno",
@@ -1161,7 +1161,7 @@
       ],
       "settings": {
         "heading": "<p>DentalMix je prava izbira za vašega psa, če želite, da:</p>",
-        "image": "shopify://shop_images/hf_20260122_143423_91f5eeda-985c-4ddc-97ca-bdfb6690d8f7.png",
+        "image": "shopify://shop_images/Untitled_design_90_23d1c325-2ca9-408a-adbc-21cf722c055a.webp",
         "secondary_color": "#e8d6c5",
         "padding_top": 36,
         "padding_bottom": 36
@@ -1239,10 +1239,10 @@
       "settings": {
         "heading": "<p>Zakaj ščetkanje in žvečilke pogosto ne zaležejo?</p>",
         "description": "<p>Vsi rečejo „samo ščetkaj mu zobe“. Saj poznaš to: stisne gobček, obrne glavo, po treh večerih odnehaš. Žvečilke? Bolj priboljšek kot čiščenje, in trajajo dve sekundi. Problem ni v tebi. Problem je, da nega, ki je občasna in od zunaj, ne prepreči, da se obloge strdijo v kamen. DentalMix dela drugače — skozi slino, ves dan.</p>",
-        "them_image": "shopify://shop_images/us_vs_them.png",
+        "them_image": "shopify://shop_images/process-img-before_2x_dcd95c8c-d2ab-4668-982f-7c6785762947.jpg",
         "them_label": "Ščetka & žvečilke",
         "us_image": "shopify://shop_images/MobiMix_NEW_1d48bfe9-d0c6-49cc-a93c-30f3457609e2.png",
-        "us_label": "DentaMix",
+        "us_label": "DentalMix",
         "background_color": "#faf9f6",
         "accent_color": "#f8aaa7",
         "accent_color_dark": "#f47671",
@@ -1351,28 +1351,28 @@
         "story_1": {
           "type": "story",
           "settings": {
-            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
-            "dog_name": "Piki, 9-letni jazbečar",
-            "issue": "Hud zadah",
-            "text": "<p>Pikijev zadah je bil neznosen, ščetkanja ni pustil. Po dveh tednih DentalMixa lastnica poroča, da je zadah opazno milejši in da ga spet crklja od blizu.</p>"
+            "image": "shopify://shop_images/hf_20260709_191847_47f9a875-2a81-4321-ab1a-0928235e472e.png",
+            "dog_name": "Piki, 9-letni maltežan",
+            "issue": "Rjavi zobje in hud zadah",
+            "text": "<p>Pikijev zadah je bil neznosen, ščetkanja ni pustil. Po dveh tednih DentalMixa lastnica poroča, da je zadah opazno milejši in da ga spet crklja od blizu. Tudi zobje so bolj beli.</p>"
           }
         },
         "story_2": {
           "type": "story",
           "settings": {
-            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
-            "dog_name": "Zala, 11-letna čivava",
+            "image": "shopify://shop_images/Untitled_design_90_23d1c325-2ca9-408a-adbc-21cf722c055a.webp",
+            "dog_name": "Rosa, 11-letna maltežanka",
             "issue": "Rjave obloge",
-            "text": "<p>Zala je imela rjave obloge ob dlesnih in skrbela jo je anestezija. Z rednim DentalMixom so zobje videti čistejši, brez postopka pri veterinarju.</p>"
+            "text": "<p>Rosa je imela rjave obloge ob dlesnih in skrbela jo je anestezija. Z rednim DentalMixom so zobje videti čistejši, brez postopka pri veterinarju.</p>"
           }
         },
         "story_3": {
           "type": "story",
           "settings": {
-            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
-            "dog_name": "Fifi, 12-letni ovčar",
+            "image": "shopify://shop_images/image00004_db7b8cc8-6684-47d2-980a-96f678167a77.png",
+            "dog_name": "Dante, 12-letni ovčar",
             "issue": "Starejši pes, ne pusti ščetke",
-            "text": "<p>Fifi je starejša in ščetkanja ne prenese. Prašek na hrani je preprosta rešitev — zadaha ni več, lastnica pa mirna.</p>"
+            "text": "<p>Dante je starejši ovčar in ščetkanja ne prenese. Prašek na hrani je preprosta rešitev — zadaha ni več, lastnica pa mirna.</p>"
           }
         }
       },
@@ -1381,7 +1381,6 @@
         "story_2",
         "story_3"
       ],
-      "disabled": true,
       "settings": {
         "heading": "<p>Dokazi so v rezultatih</p>",
         "description": "<p>Pomagali smo že več kot 10.000 psom po vsej Evropi. Tukaj je nekaj njihovih zgodb.</p>",
@@ -1546,6 +1545,7 @@
       "blocks": {
         "loox_reviews_loox_dynamic_section_dAPRGq": {
           "type": "shopify://apps/loox-reviews/blocks/loox-dynamic-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "disabled": true,
           "settings": {
             "reviews_to_display": "",
             "default_tab": "automatic",
