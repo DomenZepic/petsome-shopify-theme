@@ -1,0 +1,1660 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "Gallery": {
+          "type": "main-product_gallery",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "media-gallery": {
+              "type": "main-product_media-gallery",
+              "settings": {},
+              "blocks": {}
+            },
+            "product_petsome_professional_review_8WgTtM": {
+              "type": "product_petsome-professional-review",
+              "name": "Petsome: Expert review",
+              "settings": {
+                "visibility": "mobile-hidden",
+                "image": "shopify://shop_images/unnamed_1.jpg",
+                "rating": 5,
+                "quote": "\"Več kot 80 % psov ima do tretjega leta vidne težave z zobmi — večina lastnikov pa rednega ščetkanja preprosto ne zmore. DentalMix deluje drugače: skozi pasjo slino, ki obliva zobe ves dan. Pomaga vezati kalcij, preden se strdi v zobni kamen, in preprečuje, da bi se obloge sprijele. Enostavna dnevna podpora proti zadahu in za čistejše zobe — brez ščetkanja.\"",
+                "author": "Blaž Petelinek Ledinski, dr. vet. med.",
+                "role": "",
+                "background_color": "#ffffff",
+                "star_color": "#ffcc00",
+                "margin_top": 24,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "media-gallery",
+            "product_petsome_professional_review_8WgTtM"
+          ]
+        },
+        "Details": {
+          "type": "main-product_details",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "a6eb81db-40e4-43e0-972f-32db010a4a56": {
+              "type": "rating-stars",
+              "settings": {
+                "visibility": "always-display",
+                "rating": 4.8,
+                "star_color": "#ffcc00",
+                "bg_stars_style": "full",
+                "bg_star_color": "#ececec",
+                "label": "4.8 / 5 (2.000+ zadovoljnih lastnikov)",
+                "size": 12,
+                "scroll_id": "#shopify-section-template--30518464872773__17827582468bb08a41",
+                "alignment": "flex-start",
+                "width": "fit_content",
+                "bg_type": "none",
+                "bg_color": "#f4e1ff",
+                "bg_gradient": "linear-gradient(135deg, rgba(232, 220, 255, 1) 0%, rgba(255, 220, 232, 1) 100%)",
+                "bg_opacity": 100,
+                "border_thickness": 0,
+                "border_color": "#000000",
+                "border_style": "solid",
+                "corner_radius": 30,
+                "enable_shadow": false,
+                "shadow_color": "#000000",
+                "shadow_opacity": 15,
+                "shadow_horizontal_offset": 0,
+                "shadow_vertical_offset": 10,
+                "shadow_blur": 20,
+                "shadow_spread": 0,
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "heading_HDTL7R": {
+              "type": "heading",
+              "name": "Heading",
+              "settings": {
+                "visibility": "always-display",
+                "title": "DentalMix — konec zadaha in čistejši zobje, brez ščetkanja",
+                "heading_size": "h1",
+                "custom_desktop_size": 39,
+                "custom_mobile_size": 28,
+                "alignment": "left",
+                "mobile_alignment": "mobile-left",
+                "enable_custom_color": false,
+                "custom_color": "#ff0000",
+                "title_highlight_1": "solid-color",
+                "title_highlight_1_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                "title_highlight_1_bg-color": "#f9efff",
+                "title_highlight_1_color": "#6d388b",
+                "highlighted-1_border_radius": 8,
+                "highlighted-1_border_width": 0,
+                "highlighted-1_border": "solid",
+                "highlighted-1_border_color": "#6d388b",
+                "highlighted-1_padding-block": 0.3,
+                "highlighted-1_padding-inline": 0.3,
+                "title_highlight_1_underline-thickness": 2,
+                "title_highlight_1_underline-color": "#6d388b",
+                "title_highlight_1_underline-color--gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                "title_highlight_1_underline-color-position": 25,
+                "title_highlight_1_handwritten-color": "#6d388b",
+                "title_highlight_1_handwritten-stroke-width": 3,
+                "title_highlight_1_handwritten-position": 60,
+                "title_highlight_2": "none",
+                "highlight_2_keep_italic": false,
+                "title_highlight_2_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                "title_highlight_2_bg-color": "#f9efff",
+                "title_highlight_2_color": "#6d388b",
+                "highlighted-2_border_radius": 8,
+                "highlighted-2_border_width": 0,
+                "highlighted-2_border": "solid",
+                "highlighted-2_border_color": "#6d388b",
+                "highlighted-2_padding-block": 0.3,
+                "highlighted-2_padding-inline": 0.3,
+                "title_highlight_2_underline-thickness": 2,
+                "title_highlight_2_underline-color": "#6d388b",
+                "title_highlight_2_underline-color--gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                "title_highlight_2_underline-color-position": 25,
+                "title_highlight_2_handwritten-color": "#6d388b",
+                "title_highlight_2_handwritten-stroke-width": 3,
+                "title_highlight_2_handwritten-position": 60,
+                "text_animation": "none",
+                "split_type": "chars",
+                "split_delay": 30,
+                "split_duration": 600,
+                "split_y_offset": 40,
+                "split_animate_on_scroll": true,
+                "shiny_speed": 5,
+                "shiny_on_scroll": false,
+                "blur_type": "words",
+                "blur_direction": "top",
+                "blur_delay": 200,
+                "blur_duration": 350,
+                "blur_animate_on_scroll": true,
+                "highlight_bold_only": false,
+                "remove_bold_styling": false,
+                "highlight_color": "#ffd1dc",
+                "highlight_height": 40,
+                "highlight_position": 10,
+                "highlighter_underline_color": "#000000",
+                "highlighter_underline_thickness": 2,
+                "highlighter_underline_offset": 0,
+                "highlighter_strike_color": "#ff0000",
+                "highlighter_strike_thickness": 2,
+                "highlighter_strike_offset": 0,
+                "highlighter_animation_duration": 800,
+                "highlighter_animation_delay": 200,
+                "highlighter_animate_on_scroll": false,
+                "typing_speed": 50,
+                "typing_initial_delay": 0,
+                "typing_pause_duration": 2000,
+                "typing_deleting_speed": 30,
+                "typing_loop": true,
+                "typing_show_cursor": true,
+                "typing_cursor_character": "|",
+                "typing_cursor_blink_duration": 500,
+                "typing_hide_cursor_while_typing": false,
+                "typing_start_on_visible": false,
+                "typing_reverse_mode": false,
+                "margin_top": 0,
+                "margin_bottom": 15
+              },
+              "blocks": {}
+            },
+            "petsome_tags_1": {
+              "type": "product_petsome-tags",
+              "settings": {
+                "accent_color": "#f8aaa7",
+                "accent_color_dark": "#f47671",
+                "margin_top": 0,
+                "margin_bottom": 15
+              },
+              "blocks": {
+                "tag_1": {
+                  "type": "petsome-tag",
+                  "settings": {
+                    "text": "Proti zadahu"
+                  },
+                  "blocks": {}
+                },
+                "tag_2": {
+                  "type": "petsome-tag",
+                  "settings": {
+                    "text": "Čistejši zobje"
+                  },
+                  "blocks": {}
+                },
+                "tag_3": {
+                  "type": "petsome-tag",
+                  "settings": {
+                    "text": "Veterinarsko podprto"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "tag_1",
+                "tag_2",
+                "tag_3"
+              ]
+            },
+            "container_product_jaMkrK": {
+              "type": "container--product",
+              "name": "Container",
+              "settings": {
+                "visibility": "always-display",
+                "desktop_direction": "vertical",
+                "desktop_horizontal_grid": "flex",
+                "desktop_flex_wrap": false,
+                "desktop_horizontal_grid_items": 3,
+                "desktop_horizontal_flex_type": "space-between",
+                "desktop_horizontal_vertical_align": "center",
+                "desktop_horizontal_spacing": 20,
+                "desktop_disable_margins": true,
+                "mobile_direction": "vertical",
+                "mobile_horizontal_grid": "flex",
+                "mobile_flex_wrap": false,
+                "mobile_horizontal_grid_items": 3,
+                "mobile_horizontal_flex_type": "space-between",
+                "mobile_horizontal_vertical_align": "center",
+                "mobile_horizontal_spacing": 20,
+                "mobile_disable_margins": true,
+                "bg_type": "none",
+                "bg_color": "#f4e1ff",
+                "bg_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                "bg_opacity": 100,
+                "border_width": 0,
+                "border": "solid",
+                "border_color_type": "solid",
+                "border_color": "#6d388b",
+                "border_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                "border_opacity": 100,
+                "enable_shadow": false,
+                "shadow_color": "#000000",
+                "shadow_opacity": 15,
+                "shadow_horizontal_offset": 2,
+                "shadow_vertical_offset": 6,
+                "shadow_spread": 0,
+                "shadow_blur": 16,
+                "round_corners_equally": true,
+                "border_radius": 12,
+                "border_radius_top_left": 12,
+                "border_radius_top_right": 12,
+                "border_radius_bottom_right": 12,
+                "border_radius_bottom_left": 12,
+                "vertical_desktop_padding": 15,
+                "horizontal_desktop_padding": 15,
+                "vertical_mobile_padding": 12,
+                "horizontal_mobile_padding": 12,
+                "media_background": "none",
+                "media_background_fit": "cover",
+                "background_desktop_width": 300,
+                "background_mobile_width": 200,
+                "media_background_vertical_align": "center",
+                "media_background_horizontal_align": "right",
+                "media_bg_opacity": 100,
+                "margin_top": 15,
+                "margin_bottom": 15
+              },
+              "blocks": {
+                "text_with_icon_KkgDUA": {
+                  "type": "text-with-icon",
+                  "name": "Text with icon",
+                  "settings": {
+                    "visibility": "always-display",
+                    "mobile_text_size": 16,
+                    "desktop_text_size": 16,
+                    "alignment": "left",
+                    "mobile_alignment": "left",
+                    "text_color_type": "solid",
+                    "text_color": "#0e1111",
+                    "text_color_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "font_family": "body",
+                    "icon_scale": 120,
+                    "icon_color_type": "solid",
+                    "icon_color": "#121212",
+                    "icon_color_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "width": "100%",
+                    "direction": "horizontal",
+                    "column_gap": 3,
+                    "styling_container": "container",
+                    "bg_type": "none",
+                    "bg_color": "#f4e1ff",
+                    "bg_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "bg_opacity": 100,
+                    "border_width": 0,
+                    "border": "solid",
+                    "border_color_type": "solid",
+                    "border_color": "#6d388b",
+                    "border_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "border_opacity": 100,
+                    "enable_shadow": false,
+                    "shadow_color": "#000000",
+                    "shadow_opacity": 15,
+                    "shadow_horizontal_offset": 0,
+                    "shadow_vertical_offset": 10,
+                    "shadow_spread": 0,
+                    "shadow_blur": 20,
+                    "border_radius": 50,
+                    "vertical_desktop_padding": 15,
+                    "horizontal_desktop_padding": 15,
+                    "vertical_mobile_padding": 12,
+                    "horizontal_mobile_padding": 12,
+                    "text_1": "Manj zadaha — mnogi opazijo v 7–14 dneh",
+                    "icon_1": "check_circle",
+                    "filled_icon_1": true,
+                    "text_2": "",
+                    "icon_2": "check_circle",
+                    "filled_icon_2": false,
+                    "text_3": "",
+                    "icon_3": "check_circle",
+                    "filled_icon_3": false,
+                    "text_4": "",
+                    "icon_4": "check_circle",
+                    "filled_icon_4": false,
+                    "margin_top": 0,
+                    "margin_bottom": 3
+                  },
+                  "blocks": {}
+                },
+                "text_with_icon_jXkKqG": {
+                  "type": "text-with-icon",
+                  "name": "Text with icon",
+                  "settings": {
+                    "visibility": "always-display",
+                    "mobile_text_size": 16,
+                    "desktop_text_size": 16,
+                    "alignment": "left",
+                    "mobile_alignment": "left",
+                    "text_color_type": "solid",
+                    "text_color": "#0e1111",
+                    "text_color_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "font_family": "body",
+                    "icon_scale": 120,
+                    "icon_color_type": "solid",
+                    "icon_color": "#121212",
+                    "icon_color_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "width": "100%",
+                    "direction": "horizontal",
+                    "column_gap": 3,
+                    "styling_container": "container",
+                    "bg_type": "none",
+                    "bg_color": "#f4e1ff",
+                    "bg_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "bg_opacity": 100,
+                    "border_width": 0,
+                    "border": "solid",
+                    "border_color_type": "solid",
+                    "border_color": "#6d388b",
+                    "border_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "border_opacity": 100,
+                    "enable_shadow": false,
+                    "shadow_color": "#000000",
+                    "shadow_opacity": 15,
+                    "shadow_horizontal_offset": 0,
+                    "shadow_vertical_offset": 10,
+                    "shadow_spread": 0,
+                    "shadow_blur": 20,
+                    "border_radius": 50,
+                    "vertical_desktop_padding": 15,
+                    "horizontal_desktop_padding": 15,
+                    "vertical_mobile_padding": 12,
+                    "horizontal_mobile_padding": 12,
+                    "text_1": "Zobje delujejo čistejši, manj vidnih oblog",
+                    "icon_1": "check_circle",
+                    "filled_icon_1": true,
+                    "text_2": "",
+                    "icon_2": "check_circle",
+                    "filled_icon_2": false,
+                    "text_3": "",
+                    "icon_3": "check_circle",
+                    "filled_icon_3": false,
+                    "text_4": "",
+                    "icon_4": "check_circle",
+                    "filled_icon_4": false,
+                    "margin_top": 0,
+                    "margin_bottom": 3
+                  },
+                  "blocks": {}
+                },
+                "text_with_icon_8CJNqP": {
+                  "type": "text-with-icon",
+                  "name": "Text with icon",
+                  "settings": {
+                    "visibility": "always-display",
+                    "mobile_text_size": 16,
+                    "desktop_text_size": 16,
+                    "alignment": "left",
+                    "mobile_alignment": "left",
+                    "text_color_type": "solid",
+                    "text_color": "#0e1111",
+                    "text_color_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "font_family": "body",
+                    "icon_scale": 120,
+                    "icon_color_type": "solid",
+                    "icon_color": "#121212",
+                    "icon_color_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "width": "100%",
+                    "direction": "horizontal",
+                    "column_gap": 3,
+                    "styling_container": "container",
+                    "bg_type": "none",
+                    "bg_color": "#f4e1ff",
+                    "bg_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "bg_opacity": 100,
+                    "border_width": 0,
+                    "border": "solid",
+                    "border_color_type": "solid",
+                    "border_color": "#6d388b",
+                    "border_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "border_opacity": 100,
+                    "enable_shadow": false,
+                    "shadow_color": "#000000",
+                    "shadow_opacity": 15,
+                    "shadow_horizontal_offset": 0,
+                    "shadow_vertical_offset": 10,
+                    "shadow_spread": 0,
+                    "shadow_blur": 20,
+                    "border_radius": 50,
+                    "vertical_desktop_padding": 15,
+                    "horizontal_desktop_padding": 15,
+                    "vertical_mobile_padding": 12,
+                    "horizontal_mobile_padding": 12,
+                    "text_1": "Spet ga crkljaš od blizu — brez zadaha",
+                    "icon_1": "check_circle",
+                    "filled_icon_1": true,
+                    "text_2": "",
+                    "icon_2": "check_circle",
+                    "filled_icon_2": false,
+                    "text_3": "",
+                    "icon_3": "check_circle",
+                    "filled_icon_3": false,
+                    "text_4": "",
+                    "icon_4": "check_circle",
+                    "filled_icon_4": false,
+                    "margin_top": 0,
+                    "margin_bottom": 3
+                  },
+                  "blocks": {}
+                },
+                "text_with_icon_zBWh3d": {
+                  "type": "text-with-icon",
+                  "name": "Text with icon",
+                  "settings": {
+                    "visibility": "always-display",
+                    "mobile_text_size": 16,
+                    "desktop_text_size": 16,
+                    "alignment": "left",
+                    "mobile_alignment": "left",
+                    "text_color_type": "solid",
+                    "text_color": "#0e1111",
+                    "text_color_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "font_family": "body",
+                    "icon_scale": 120,
+                    "icon_color_type": "solid",
+                    "icon_color": "#121212",
+                    "icon_color_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "width": "100%",
+                    "direction": "horizontal",
+                    "column_gap": 3,
+                    "styling_container": "container",
+                    "bg_type": "none",
+                    "bg_color": "#f4e1ff",
+                    "bg_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "bg_opacity": 100,
+                    "border_width": 0,
+                    "border": "solid",
+                    "border_color_type": "solid",
+                    "border_color": "#6d388b",
+                    "border_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "border_opacity": 100,
+                    "enable_shadow": false,
+                    "shadow_color": "#000000",
+                    "shadow_opacity": 15,
+                    "shadow_horizontal_offset": 0,
+                    "shadow_vertical_offset": 10,
+                    "shadow_spread": 0,
+                    "shadow_blur": 20,
+                    "border_radius": 50,
+                    "vertical_desktop_padding": 15,
+                    "horizontal_desktop_padding": 15,
+                    "vertical_mobile_padding": 12,
+                    "horizontal_mobile_padding": 12,
+                    "text_1": "Brez ščetkanja in brez anestezije — samo potreseš",
+                    "icon_1": "check_circle",
+                    "filled_icon_1": true,
+                    "text_2": "",
+                    "icon_2": "check_circle",
+                    "filled_icon_2": false,
+                    "text_3": "",
+                    "icon_3": "check_circle",
+                    "filled_icon_3": false,
+                    "text_4": "",
+                    "icon_4": "check_circle",
+                    "filled_icon_4": false,
+                    "margin_top": 0,
+                    "margin_bottom": 15
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_with_icon_KkgDUA",
+                "text_with_icon_jXkKqG",
+                "text_with_icon_8CJNqP",
+                "text_with_icon_zBWh3d"
+              ]
+            },
+            "kaching_bundles_app_block_1": {
+              "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
+              "settings": {
+                "product": "{{closest.product}}",
+                "manual_deal_block_id": ""
+              }
+            },
+            "5fcc0428-e768-4cb7-bea3-eb0274198dd1": {
+              "type": "product_product-variant-picker-block",
+              "settings": {
+                "picker_types": "pills",
+                "skip_unavailable": false,
+                "custom_labels": "Izberite težo psa:",
+                "labels_size": 16,
+                "labels_font": "body-bold",
+                "labels_color": "text",
+                "labels_custom_color": "#dd1d1d",
+                "show_label_lines": false,
+                "labels_alignment": "flex-start",
+                "labels_line_color": "text",
+                "labels_line_custom_color": "#dd1d1d",
+                "labels_line_thickness": 2,
+                "show_step_indicator": false,
+                "step_indicator_size": 22,
+                "step_indicator_bg_color": "#000000",
+                "step_indicator_text_color": "#ffffff",
+                "step_indicator_corner_radius": 60,
+                "append": "option_1_label_container",
+                "swatches_size": "medium",
+                "swatches_custom_colors": "disabled",
+                "swatches_custom_colors_list": "#000000, #6D388B, #0000FF, #FFCC00",
+                "full_width_dropdowns": false,
+                "breaks_style": "normal",
+                "breaks_headline": "BUNDLE & SAVE",
+                "breaks_prices_layout": "price-first-vertical",
+                "breaks_display_selected_indicator": true,
+                "breaks_border_radius": 10,
+                "breaks_border_width": 2,
+                "breaks_color_scheme": "accent-1",
+                "breaks_vertical_items_align": "flex-start",
+                "breaks_badges": "[empty], Most popular, [empty]",
+                "breaks_badge_style": "1",
+                "breaks_badge_color": "accent-1",
+                "breaks_displayed_images": "none",
+                "breaks_custom_images": "",
+                "breaks_image_width": 70,
+                "breaks_space_images": true,
+                "breaks_vertical_images_position": "top",
+                "breaks_labels": "[name], [name], [name]",
+                "breaks_benefits": "[empty], Free Shipping, Free Shipping",
+                "breaks_benefit_position": "top",
+                "breaks_benefit_style": "outlined",
+                "breaks_benefit_color": "accent-1",
+                "breaks_captions": "Variant 1 caption, Variant 2 caption, Variant 3 caption",
+                "breaks_price_texts": "[price], [price], [price]",
+                "breaks_compare_price_texts": "[compare_price], [compare_price], [compare_price]",
+                "breaks_capsules_per_package": 0,
+                "breaks_capsules_per_day_by_size": "1, 2, 3",
+                "breaks_package_quantities": "1, 2, 3",
+                "margin_top": 15,
+                "margin_bottom": 15
+              },
+              "blocks": {}
+            },
+            "kaching_custom_display_1": {
+              "type": "product_kaching-custom-display",
+              "settings": {
+                "disclaimer_text": "<p>*Manj zadaha večina opazi v 7–14 dneh. Za čistejše zobe in manj oblog priporočamo redno vsakodnevno uporabo.</p>",
+                "gifts_heading": "Brezplačna darila ob nakupu",
+                "tier_1_style": "none",
+                "tier_2_style": "recommended",
+                "tier_3_style": "best",
+                "tier_4_style": "none",
+                "accent_color": "#f8aaa7",
+                "accent_color_dark": "#f47671",
+                "secondary_color": "#e8d6c5",
+                "light_text_color": "#faf9f6",
+                "capsules_per_package": 90,
+                "capsules_per_day_by_size": "1, 2, 3",
+                "margin_top": 15,
+                "margin_bottom": 15
+              },
+              "blocks": {}
+            },
+            "product_petsome_shipping_info_Jcitpf": {
+              "type": "product_petsome-shipping-info",
+              "name": "Petsome: Shipping info",
+              "settings": {
+                "icon": "local_shipping",
+                "text": "<p>Predviden čas dostave: <strong>2-3 dni</strong></p>",
+                "margin_top": 0,
+                "margin_bottom": 12
+              },
+              "blocks": {}
+            },
+            "buy_buttons": {
+              "type": "product_buy-buttons",
+              "settings": {
+                "show_dynamic_checkout": false,
+                "skip_cart": false,
+                "atc_append": "left",
+                "atc_append_heights": "stretch-quantity",
+                "uppercase_text": true,
+                "icon_scale": 120,
+                "icon_spacing": 10,
+                "atc_custom_label": "Dodaj v košarico",
+                "atc_label_size": 18,
+                "atc_label_2": "",
+                "atc_label_2_size": 12,
+                "atc_label_2_font": "body",
+                "atc_label_2_uppercase": false,
+                "atc_lines_spacing": 3,
+                "atc_button_padding_y": 8,
+                "display_price": true,
+                "price_position": "right",
+                "price_separator": "-",
+                "enable_custom_color": false,
+                "custom_color": "#53af01",
+                "custom_text_color": "#ffffff",
+                "icon_1_attach": "both",
+                "icon_2_attach": "both",
+                "enable_secondary_btn": false,
+                "secondary_btn_label": "Buy It Now",
+                "secondary_btn_enable_custom_color": false,
+                "secondary_btn_custom_color": "#dd1d1d",
+                "margin_top": 12,
+                "margin_bottom": 3
+              },
+              "blocks": {}
+            },
+            "payment_badges_jpEXd3": {
+              "type": "payment-badges",
+              "name": "Payment badges",
+              "settings": {
+                "visibility": "always-display",
+                "enabled_payment_types": "",
+                "width_desktop": 38,
+                "width_mobile": 38,
+                "margin_top": 15,
+                "margin_bottom": 15
+              },
+              "blocks": {}
+            },
+            "product_petsome_professional_review_BGLaVX": {
+              "type": "product_petsome-professional-review",
+              "name": "Petsome: Expert review",
+              "settings": {
+                "visibility": "desktop-hidden",
+                "image": "shopify://shop_images/unnamed_1.jpg",
+                "rating": 5,
+                "quote": "\"Več kot 80 % psov ima do tretjega leta vidne težave z zobmi — večina lastnikov pa rednega ščetkanja preprosto ne zmore. DentalMix deluje drugače: skozi pasjo slino, ki obliva zobe ves dan. Pomaga vezati kalcij, preden se strdi v zobni kamen, in preprečuje, da bi se obloge sprijele. Enostavna dnevna podpora proti zadahu in za čistejše zobe — brez ščetkanja.\"",
+                "author": "Blaž Petelinek Ledinski, dr. vet. med.",
+                "role": "",
+                "background_color": "#ffffff",
+                "star_color": "#ffcc00",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "e7a28cbe-03cb-4c9d-a2c4-0e3e76ffb3e5": {
+              "type": "product_sticky-atc",
+              "disabled": true,
+              "settings": {
+                "display_when": "after_scroll",
+                "display_pixels": 500,
+                "display_percent": 50,
+                "color_scheme": "background-1",
+                "title": "",
+                "subtitle": "",
+                "function": "add_to_cart",
+                "button_label": "Dodaj v košarico",
+                "enable_custom_btn_color": false,
+                "custom_btn_color": "#dd1d1d",
+                "icon_scale": 120,
+                "star_color": "#ffcc00",
+                "stars_label": "(xxxx Reviews)",
+                "picker_type": "combined",
+                "desktop_layout": "full",
+                "desktop_max_width": 850,
+                "desktop_show_image": true,
+                "desktop_show_title": true,
+                "desktop_show_subtitle": true,
+                "desktop_rating_stars": false,
+                "desktop_show_price": true,
+                "desktop_show_sale_badge": true,
+                "desktop_variant_picker": true,
+                "desktop_full_button_width": false,
+                "desktop_show_price_in_button": false,
+                "desktop_transparent_bg": false,
+                "mobile_layout": "full",
+                "mobile_show_image": false,
+                "mobile_show_title": true,
+                "mobile_show_subtitle": true,
+                "mobile_rating_stars": false,
+                "mobile_show_price": true,
+                "mobile_show_sale_badge": false,
+                "mobile_variant_picker": false,
+                "mobile_full_button_width": false,
+                "mobile_show_price_in_button": false,
+                "mobile_transparent_bg": false
+              },
+              "blocks": {}
+            },
+            "description": {
+              "type": "product_description",
+              "settings": {
+                "margin_top": 24,
+                "margin_bottom": 24
+              },
+              "blocks": {}
+            },
+            "product_petsome_collapsible_row_44HGEd": {
+              "type": "product_petsome-collapsible-row",
+              "name": "Petsome: Collapsible row",
+              "settings": {
+                "visibility": "always-display",
+                "open": true,
+                "heading": "Kaj je DentalMix?",
+                "content": "<p>DentalMix je dnevni prašek za zobe, ki ga preprosto potreseš na pasjo hrano. Deluje skozi slino — imenujemo ga <strong>Saliva-Activated Defense™</strong>: pomaga vezati kalcij, preden se strdi v zobni kamen, in preprečuje, da bi se obloge oprijele zob. Proti zadahu in za čistejše zobe, brez ščetkanja, žvečilk ali anestezije.</p>",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "product_petsome_collapsible_row_9kVyQR": {
+              "type": "product_petsome-collapsible-row",
+              "name": "Petsome: Collapsible row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Prednosti DentalMixa",
+                "content": "<p>✅ Manj zadaha, mnogi opazijo v 7–14 dneh<br/>✅ Zobje delujejo čistejši, manj vidnega kamna in oblog<br/>✅ Brez ščetkanja in brez borbe — samo potreseš na obrok<br/>✅ Primerno za majhne in starejše pse (brez anestezije)</p>",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "product_petsome_collapsible_row_3AApHF": {
+              "type": "product_petsome-collapsible-row",
+              "name": "Petsome: Collapsible row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Kako deluje DentalMix?",
+                "content": "<p>DentalMix ne čisti zob od zunaj. Deluje skozi slino, ki obliva vsak zob 24 ur na dan. Natrijev tripolifosfat veže kalcij v slini, da se ne more strditi v zobni kamen. Polisaharidi iz morskih alg naredijo površino zob spolzko, da se obloge ne oprimejo. Zeleni čaj in granatno jabolko pa umirjata bakterije, ki povzročajo zadah. Vse to brez ščetke — pes samo je.</p>",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "product_petsome_collapsible_row_RFUWjV": {
+              "type": "product_petsome-collapsible-row",
+              "name": "Petsome: Collapsible row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Sestavine",
+                "content": "<p><strong>Hidrolizirana algna moka 53,5 %</strong> (proti oblogam) · <strong>natrijev tripolifosfat</strong> (proti zobnemu kamnu) · <strong>cikorija 20 %</strong> (prebiotik) · <strong>zeleni čaj 5 %</strong> in <strong>granatno jabolko 10 %</strong> (proti zadahu) · <strong>Bacillus velezensis 200 mrd CFU/kg</strong> (proti zadahu iz črevesja). Proizvedeno v EU.</p>",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "product_petsome_collapsible_row_KXBHeX": {
+              "type": "product_petsome-collapsible-row",
+              "name": "Petsome: Collapsible row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Odmerjanje",
+                "content": "<p>Enkrat na dan potreseš prašek po pasji hrani (mokri ali suhi) glede na težo psa in dobro premešaš. Brez ščetkanja, brez posebnih postopkov — pes samo poje. Za najboljši učinek uporabljaj vsak dan, redno.</p>",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "product_petsome_collapsible_row_zM8acA": {
+              "type": "product_petsome-collapsible-row",
+              "name": "Petsome: Collapsible row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Študije",
+                "content": "<p>Natrijev tripolifosfat je mehanizem proti zobnemu kamnu, ki ga priznava VOHC. Hidrolizirana algna moka spada v isto dokazano kategorijo morskih alg kot ProDen PlaqueOff. Probiotik Bacillus velezensis (DSM 15544) je registriran v EU (4b1820). Manj zadaha večina lastnikov opazi v 7–14 dneh.</p>",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "product_petsome_guarantee_UVLUtf": {
+              "type": "product_petsome-guarantee",
+              "name": "Petsome: Guarantee",
+              "settings": {
+                "image": "shopify://shop_images/Guarantee.png",
+                "text": "<p>Pri Petsome želimo, da vsak DentaMix ljubljenčku izboljša stanje zob. Če ste v dvomih, ali je ta izdelek za vašega ljubljenčka - ni panike. Vaše naročilo je zaščiteno z 60-dnevno garancijo vračila denarja. Brez slabe vesti.</p>",
+                "background_color": "#e8d6c5",
+                "border_color": "#b6a87c",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "a6eb81db-40e4-43e0-972f-32db010a4a56",
+            "heading_HDTL7R",
+            "petsome_tags_1",
+            "container_product_jaMkrK",
+            "kaching_bundles_app_block_1",
+            "5fcc0428-e768-4cb7-bea3-eb0274198dd1",
+            "kaching_custom_display_1",
+            "product_petsome_shipping_info_Jcitpf",
+            "buy_buttons",
+            "payment_badges_jpEXd3",
+            "product_petsome_professional_review_BGLaVX",
+            "e7a28cbe-03cb-4c9d-a2c4-0e3e76ffb3e5",
+            "description",
+            "product_petsome_collapsible_row_44HGEd",
+            "product_petsome_collapsible_row_9kVyQR",
+            "product_petsome_collapsible_row_3AApHF",
+            "product_petsome_collapsible_row_RFUWjV",
+            "product_petsome_collapsible_row_KXBHeX",
+            "product_petsome_collapsible_row_zM8acA",
+            "product_petsome_guarantee_UVLUtf"
+          ]
+        }
+      },
+      "custom_css": [],
+      "settings": {
+        "display_id": false,
+        "enable_sticky_info": true,
+        "color_scheme": "background-1",
+        "pattern_bg": "none",
+        "pattern_color": "#6d388b",
+        "pattern_size": 20,
+        "pattern_thickness": 2,
+        "pattern_angle": 45,
+        "pattern_opacity_mode": "low",
+        "pattern_opacity_low": 7,
+        "pattern_opacity_normal": 80,
+        "enable_breadcrumbs": false,
+        "breadcrumbs_position": "above_first_block",
+        "breadcrumbs_mode": "hybrid",
+        "breadcrumbs_show_home": true,
+        "breadcrumbs_home_label": "Home",
+        "breadcrumbs_show_product": false,
+        "breadcrumbs_separator": "›",
+        "breadcrumbs_desktop_text_size": 13,
+        "breadcrumbs_mobile_text_size": 12,
+        "breadcrumbs_font": "body",
+        "breadcrumbs_text_color": "text",
+        "breadcrumbs_custom_color": "#dd1d1d",
+        "breadcrumbs_alignment": "left",
+        "breadcrumbs_bottom_margin": 14,
+        "display_variant_image_first": false,
+        "disable_prepend": true,
+        "hide_variants": false,
+        "variant_image_filtering": "none",
+        "image_zoom_desktop": "none",
+        "hover_zoom_style": "inline",
+        "image_zoom_mobile": "none",
+        "thumbnails_ratio": "square",
+        "arrows_color_scheme": "inverse",
+        "transparent_arrows": false,
+        "dots_color_scheme": "inverse",
+        "video_player": "play_btn",
+        "enable_video_looping": false,
+        "autoplay_videos_pause_btn": false,
+        "video_sound_btn": false,
+        "video_timeline": false,
+        "play_btn_color_scheme": "accent-1",
+        "sound_btn_color_scheme": "inverse",
+        "video_fullscreen_btn": false,
+        "fullscreen_btn_color_scheme": "inverse",
+        "timeline_color": "accent-1",
+        "media_size": "small",
+        "media_position": "left",
+        "gallery_layout": "thumbnail_slider",
+        "desktop_thumbnails_position": "bottom",
+        "desktop_thumbnails_count": 5,
+        "desktop_vertical_thumbnails_width": 16,
+        "desktop_vertical_thumbnails_hide_arrows": false,
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "desktop_arrows_position": "hidden",
+        "mobile_media_corner_radius": 0,
+        "mobile_spacing_pixels": 0,
+        "mobile_arrows_position": "sides",
+        "mobile_pagination": "dots_overlay",
+        "mobile_thumbnails_position": "hidden",
+        "mobile_thumbnails_count": 5,
+        "mobile_vertical_thumbnails_width": 22,
+        "mobile_vertical_thumbnails_hide_arrows": true,
+        "mobile_scroll_padding_percentage": 0,
+        "mobile_scroll_padding_pixels": 0,
+        "enable_mobile_outher_spacing": false,
+        "mobile_slides_container_width": 100,
+        "mobile_slides_inner_width": 100,
+        "trust_badge_position": "top-right",
+        "badge_display_on": "all",
+        "badge_size_percentage": 20,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 16,
+        "desktop_padding_top": 36,
+        "desktop_padding_bottom": 36
+      }
+    },
+    "petsome_rotating_bullets_1": {
+      "type": "petsome-rotating-bullets",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "text": "Deluje proti zadahu"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "text": "Za čistejše zobe"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "text": "Manj zobnega kamna"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "text": "Deluje skozi slino, 24/7"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ],
+      "settings": {
+        "speed": 30,
+        "direction": "left",
+        "pause_on_hover": true,
+        "background_color": "#faf9f6",
+        "text_color": "#565858",
+        "text_size": 16,
+        "dot_color": "#F8AAA7",
+        "dot_size": 20,
+        "item_spacing": 32,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "petsome_benefits_1": {
+      "type": "petsome-benefits",
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/less_pain.png",
+            "icon": "pets",
+            "filled_icon": false,
+            "title": "Manj zadaha že v 7–14 dneh",
+            "text": "<p>DentalMix deluje skozi slino od prvega dne. Večina lastnikov opazi, da tisti zadah, ki jih je odbijal, počasi popušča — ne zato, ker bi ga prekrili, ampak ker se bakterije, ki ga povzročajo, umirjajo.</p>"
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/easy_moving.png",
+            "icon": "directions_run",
+            "filled_icon": false,
+            "title": "Brez ščetkanja, brez borbe",
+            "text": "<p>Prašek preprosto potreseš na obrok. Nič stiskanja gobčka, nič vsakodnevne bitke, ki jo pes vedno dobi. Samo dosledna dnevna nega, ki jo pes komaj opazi.</p>"
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/energy.png",
+            "icon": "bolt",
+            "filled_icon": true,
+            "title": "Spet ga crkljaš od blizu",
+            "text": "<p>Ko zadah popusti, se vrne tisto, kar imaš najraje — crkljanje od blizu, brez odmika. To je trenutek, ki šteje.</p>"
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/joint_protection.png",
+            "icon": "shield",
+            "filled_icon": true,
+            "title": "Manj zobnega kamna, dolgoročno",
+            "text": "<p>DentalMix je zasnovan za vsakodnevno, dolgotrajno uporabo. Vezanje kalcija preprečuje, da bi se obloge strdile v kamen — zato zobje ostanejo čistejši dlje, ne le prvi teden.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4"
+      ],
+      "settings": {
+        "heading": "<p>Enostavna dnevna nega proti zadahu in za čistejše zobe — brez ščetkanja.</p>",
+        "columns": "2",
+        "accent_color": "#f8aaa7",
+        "secondary_color": "#e8d6c5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "petsome_timeframe_1": {
+      "type": "petsome-timeframe",
+      "blocks": {
+        "tf_1": {
+          "type": "timeframe",
+          "settings": {
+            "highlighted": false,
+            "badge_text": "7–14 dni",
+            "title": "Zadah popusti.",
+            "text": "<p>To je navadno prva stvar, ki jo opaziš. Tisti zadah, ki te je odbijal, postane opazno milejši. Drobna sprememba, ki je ne moreš spregledati, ko jo enkrat zaznaš.</p>"
+          }
+        },
+        "tf_2": {
+          "type": "timeframe",
+          "settings": {
+            "highlighted": false,
+            "badge_text": "3–4 tedni",
+            "title": "Zobje delujejo čistejši.",
+            "text": "<p>Obloge ob dlesnih so videti svetlejše, površina zob bolj gladka. Ne čez noč — a razlika, ki jo opaziš, ko psa pogledaš v gobček.</p>"
+          }
+        },
+        "tf_3": {
+          "type": "timeframe",
+          "settings": {
+            "highlighted": true,
+            "badge_text": "2–3 meseci",
+            "title": "Manj vidnega kamna.",
+            "text": "<p>Novih oblog je manj, ker se kalcij sproti veže in ne strdi. Zobje ostajajo čistejši, zadaha pa manj — dan za dnem.</p>"
+          }
+        },
+        "tf_4": {
+          "type": "timeframe",
+          "settings": {
+            "highlighted": false,
+            "badge_text": "3+ meseci",
+            "title": "Zadaha ni več.",
+            "text": "<p>Ko lastniki vidijo razliko, ne prenehajo več. Prašek je del vsakdanje rutine, zadaha ni več, crkljanje od blizu pa spet naravno. To je bil cilj od začetka.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "tf_1",
+        "tf_2",
+        "tf_3",
+        "tf_4"
+      ],
+      "settings": {
+        "heading": "<p>Kaj se zgodi, ko vaš pes začne z DentalMixom?</p>",
+        "subheading": "Vsak pes je drugačen. A večina lastnikov opazi prve spremembe hitreje, kot so pričakovali.",
+        "columns": "4",
+        "background_color": "#faf9f6",
+        "accent_color": "#f8aaa7",
+        "accent_color_dark": "#f47671",
+        "secondary_color": "#e8d6c5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "petsome_checklist_1": {
+      "type": "petsome-checklist",
+      "blocks": {
+        "bullet_1": {
+          "type": "bullet",
+          "settings": {
+            "text": "🦷 nima več zadaha in vas spet lahko crklja od blizu"
+          }
+        },
+        "bullet_2": {
+          "type": "bullet",
+          "settings": {
+            "text": "✨ ima vidno čistejše zobe, brez rjavih oblog ob dlesnih"
+          }
+        },
+        "bullet_3": {
+          "type": "bullet",
+          "settings": {
+            "text": "🚫 dobi nego brez ščetkanja, ki jo tako ali tako sovraži"
+          }
+        },
+        "bullet_4": {
+          "type": "bullet",
+          "settings": {
+            "text": "😌 se izogne dragi anesteziji in čiščenju pri veterinarju"
+          }
+        },
+        "bullet_5": {
+          "type": "bullet",
+          "settings": {
+            "text": "🐕 dobi nekaj, kar dejansko poje — brez borbe in okusa, ki bi ga zavrnil"
+          }
+        },
+        "bullet_6": {
+          "type": "bullet",
+          "settings": {
+            "text": "🔁 ohrani čiste zobe dolgoročno, ne le za teden dni"
+          }
+        },
+        "bullet_7": {
+          "type": "bullet",
+          "settings": {
+            "text": "🧪 dobi pravo dozo delujočih sestavin, ne le priboljšek za en dan"
+          }
+        },
+        "bullet_8": {
+          "type": "bullet",
+          "settings": {
+            "text": "❤️ ostane brez zadaha in nelagodja, tudi v zrelih letih"
+          }
+        }
+      },
+      "block_order": [
+        "bullet_1",
+        "bullet_2",
+        "bullet_3",
+        "bullet_4",
+        "bullet_5",
+        "bullet_6",
+        "bullet_7",
+        "bullet_8"
+      ],
+      "settings": {
+        "heading": "<p>DentalMix je prava izbira za vašega psa, če želite, da:</p>",
+        "image": "shopify://shop_images/hf_20260122_143423_91f5eeda-985c-4ddc-97ca-bdfb6690d8f7.png",
+        "secondary_color": "#e8d6c5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "petsome_comparison_1": {
+      "type": "petsome-comparison",
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Deluje, tudi če pes ne pusti do zob",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Doseže vsak zob — prek sline, 24/7",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Prepreči, da se kalcij strdi v kamen",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Brez ščetkanja in brez borbe",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Brez anestezije in stroška čiščenja (200–600 €)",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "label": "Deluje na vzrok, ne le prekrije zadah za nekaj časa",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_7": {
+          "type": "row",
+          "settings": {
+            "label": "Formulirano in proizvedeno v EU",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6",
+        "row_7"
+      ],
+      "settings": {
+        "heading": "<p>Zakaj ščetkanje in žvečilke pogosto ne zaležejo?</p>",
+        "description": "<p>Vsi rečejo „samo ščetkaj mu zobe“. Saj poznaš to: stisne gobček, obrne glavo, po treh večerih odnehaš. Žvečilke? Bolj priboljšek kot čiščenje, in trajajo dve sekundi. Problem ni v tebi. Problem je, da nega, ki je občasna in od zunaj, ne prepreči, da se obloge strdijo v kamen. DentalMix dela drugače — skozi slino, ves dan.</p>",
+        "them_image": "shopify://shop_images/us_vs_them.png",
+        "them_label": "Ščetka & žvečilke",
+        "us_image": "shopify://shop_images/MobiMix_NEW_1d48bfe9-d0c6-49cc-a93c-30f3457609e2.png",
+        "us_label": "DentaMix",
+        "background_color": "#faf9f6",
+        "accent_color": "#f8aaa7",
+        "accent_color_dark": "#f47671",
+        "secondary_color": "#e8d6c5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "petsome_explainer_1": {
+      "type": "petsome-explainer",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "heading": "🛑 Zakaj ščetkanje pogosto odpove?",
+            "text": "<p>Ščetkanje je odvisno od vsakodnevne borbe, ki jo večina lastnikov izgubi — pes ne pusti, doslednost pade. Zato ima več kot 80 % psov do tretjega leta vidne težave z zobmi. Nega, ki je občasna in od zunaj, preprosto ne dohaja.</p>",
+            "badge_text": "Občasno ščetkanje ≠ čisti zobje"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "heading": "✅ Zakaj DentalMix deluje drugače?",
+            "text": "<p>DentalMix deluje skozi pasjo slino, ki obliva zobe 24 ur na dan — veže kalcij, preden se strdi v kamen, in prepreči, da se obloge oprimejo. Potreseš na obrok, pes poje, mehanizem dela ves dan.</p>",
+            "badge_text": "Deluje skozi slino, 24/7"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/2dd3df11ba896ac16b47bbb251e809585011a8f3.jpg",
+        "button_label": "Naroči DentaMix",
+        "button_link": "",
+        "button_icon": "shopping_bag",
+        "button_background_color": "#0e1111",
+        "button_text_color": "#ffffff",
+        "secondary_color": "#e8d6c5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "petsome_ingredients_1": {
+      "type": "petsome-ingredients",
+      "settings": {
+        "heading": "<p>Kaj je notri — in zakaj vsaka stvar dela</p>",
+        "description": "<p>Vsaka sestavina ima svojo vlogo: morske alge proti oblogam, natrijev tripolifosfat proti zobnemu kamnu, zeleni čaj in granatno jabolko proti zadahu, probiotik proti zadahu iz črevesja. Kliknite na sestavino za več informacij.</p>",
+        "amount_label": "Količina v paketu",
+        "background_color": "#faf9f6",
+        "accent_color": "#f8aaa7",
+        "accent_color_dark": "#f47671",
+        "secondary_color": "#e8d6c5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "petsome_mechanism_1": {
+      "type": "petsome-mechanism",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "badge_text": "PROTI KAMNU",
+            "title": "Zobni kamen je le strjen kalcij.",
+            "text": "<p>Kamen nastane, ko se kalcij iz sline nabere na zobe in strdi. Natrijev tripolifosfat kalcij v slini veže nase prvi, da se ne more odložiti — najbolj dokazan mehanizem proti kamnu v veterinarski zobni negi (VOHC).</p>"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "badge_text": "PROTI OBLOGAM",
+            "title": "Obloge se morajo najprej oprijeti.",
+            "text": "<p>Obloge so bakterijski film, ki se mora oprijeti sklenine. Polisaharidi iz hidrolizirane algne moke (53,5 %) to oprijemanje motijo — biofilm nima kam. Ista dokazana kategorija alg kot ProDen PlaqueOff.</p>"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "badge_text": "PROTI ZADAHU",
+            "title": "Zadah delajo bakterije, ne zobje sami.",
+            "text": "<p>„Pasji zadah“ je žveplov vonj bakterij. Katehini zelenega čaja in polifenoli granatnega jabolka jih zavirajo pri viru, probiotik Bacillus velezensis pa lovi zadah, ki prihaja iz črevesja — z obeh koncev.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3"
+      ],
+      "settings": {
+        "kicker_text": "SALIVA-ACTIVATED DEFENSE™",
+        "heading": "<p>Zakaj slina in ne ščetka?</p>",
+        "description": "<p>Zoba, ki ga pes ne pusti ščetkati, ni treba drgniti od zunaj. Njegova slina že cel dan obliva vsak zob — Saliva-Activated Defense™ deluje ravno skoznjo, 24 ur na dan.</p>",
+        "background_color": "#e8d6c5",
+        "kicker_background": "#e0b58d",
+        "card_background": "#ffffff",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "petsome_before_after_1": {
+      "type": "petsome-before-after",
+      "blocks": {
+        "story_1": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "dog_name": "Piki, 9-letni jazbečar",
+            "issue": "Hud zadah",
+            "text": "<p>Pikijev zadah je bil neznosen, ščetkanja ni pustil. Po dveh tednih DentalMixa lastnica poroča, da je zadah opazno milejši in da ga spet crklja od blizu.</p>"
+          }
+        },
+        "story_2": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "dog_name": "Zala, 11-letna čivava",
+            "issue": "Rjave obloge",
+            "text": "<p>Zala je imela rjave obloge ob dlesnih in skrbela jo je anestezija. Z rednim DentalMixom so zobje videti čistejši, brez postopka pri veterinarju.</p>"
+          }
+        },
+        "story_3": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "dog_name": "Fifi, 12-letni ovčar",
+            "issue": "Starejši pes, ne pusti ščetke",
+            "text": "<p>Fifi je starejša in ščetkanja ne prenese. Prašek na hrani je preprosta rešitev — zadaha ni več, lastnica pa mirna.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "story_1",
+        "story_2",
+        "story_3"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "<p>Dokazi so v rezultatih</p>",
+        "description": "<p>Pomagali smo že več kot 10.000 psom po vsej Evropi. Tukaj je nekaj njihovih zgodb.</p>",
+        "border_color": "#e8d6c5",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "petsome_certificates_1": {
+      "type": "petsome-certificates",
+      "blocks": {
+        "badge_4JraCr": {
+          "type": "badge",
+          "settings": {
+            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "label": ""
+          }
+        }
+      },
+      "block_order": [
+        "badge_4JraCr"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "<p>Proizvedeno v skladu z najvišjimi standardi</p>",
+        "description": "<p>DentalMix je izdelan v skladu z najvišjimi evropskimi standardi. Vsaka sestavina in vsak odmerek sta neodvisno testirana, brez nepotrebnih dodatkov in polnil.</p>",
+        "button_label": "Naroči DentalMix",
+        "button_link": "",
+        "button_icon": "shopping_bag",
+        "button_background_color": "#0e1111",
+        "button_text_color": "#ffffff",
+        "background_color": "#e8d6c5",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "petsome_how_to_use_1": {
+      "type": "petsome-how-to-use",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/step_1.png",
+            "title": "1. Korak",
+            "description": "Odmeri žličko praška glede na težo psa"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/step_2.png",
+            "title": "2. Korak",
+            "description": "Potresi prašek po pasjem obroku."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/step_3.png",
+            "title": "3. Korak",
+            "description": "Zmešaj z obrokom."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/step_4.png",
+            "title": "4. Korak",
+            "description": "Ponavljaj vsak dan in opazuj razliko."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "settings": {
+        "heading": "<p>Ena rutina. Vsak dan. To je vse.</p>",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "petsome_stats_1": {
+      "type": "petsome-stats",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "93%",
+            "description": "lastnikov opazi manj zadaha pri svojem psu že v 2–3 tednih."
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "89%",
+            "description": "lastnikov opazi manj zobnega kamna in oblog ob dlesnih."
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "91%",
+            "description": "lastnikov spet z veseljem pusti psa blizu — brez zadaha."
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3"
+      ],
+      "settings": {
+        "background_color": "#e8d6c5",
+        "number_color": "#f47671",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "petsome_professional_reviews_BkgaUN": {
+      "type": "petsome-professional-reviews",
+      "disabled": true,
+      "name": "Petsome: Expert reviews",
+      "settings": {
+        "heading": "<p>Preverjeno v praksi – s strani strokovnjakov in lastnikov psov</p>",
+        "background_color": "#faf9f6",
+        "star_color": "#ffcc00",
+        "max_lines": 4,
+        "read_more_label": "Preberi več",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "petsome_rotating_logos_1": {
+      "type": "petsome-rotating-logos",
+      "settings": {
+        "speed": 30,
+        "direction": "left",
+        "pause_on_hover": true,
+        "background_color": "#faf9f6",
+        "logo_height": 72,
+        "item_spacing": 24,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "petsome_customer_reviews_1": {
+      "type": "petsome-customer-reviews",
+      "settings": {
+        "rating_value": "4.7",
+        "heading": "<p>Zaupa nam že več kot 2.000 lastnikov po vsej Evropi</p>",
+        "card_color": "#e8d6c5",
+        "star_color": "#ffcc00",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "17827582468bb08a41": {
+      "type": "apps",
+      "blocks": {
+        "loox_reviews_loox_dynamic_section_dAPRGq": {
+          "type": "shopify://apps/loox-reviews/blocks/loox-dynamic-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "settings": {
+            "reviews_to_display": "",
+            "default_tab": "automatic",
+            "only_photos": false,
+            "aggregated": false,
+            "limit": 5,
+            "hide_thumbnails": false,
+            "maxwidth": 1080,
+            "is_sample": true
+          }
+        }
+      },
+      "block_order": [
+        "loox_reviews_loox_dynamic_section_dAPRGq"
+      ],
+      "settings": {
+        "display_id": false,
+        "include_margins": true
+      }
+    },
+    "petsome_faq_1": {
+      "type": "petsome-faq",
+      "settings": {
+        "heading": "<p>Pogosta vprašanja</p>",
+        "background_color": "#faf9f6",
+        "item_color": "#e8d6c5",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "display_id": false,
+        "title": "You may also like",
+        "title_highlight_1": "solid-color",
+        "title_highlight_1_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_1_bg-color": "#f9efff",
+        "title_highlight_1_color": "#6d388b",
+        "highlighted-1_border_radius": 8,
+        "highlighted-1_border_width": 0,
+        "highlighted-1_border": "solid",
+        "highlighted-1_border_color": "#6d388b",
+        "highlighted-1_padding-block": 0.3,
+        "highlighted-1_padding-inline": 0.3,
+        "title_highlight_1_underline-thickness": 2,
+        "title_highlight_1_underline-color": "#6d388b",
+        "title_highlight_1_underline-color--gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_1_underline-color-position": 25,
+        "title_highlight_1_handwritten-color": "#6d388b",
+        "title_highlight_1_handwritten-stroke-width": 3,
+        "title_highlight_1_handwritten-position": 60,
+        "title_highlight_2": "none",
+        "title_highlight_2_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_2_bg-color": "#f9efff",
+        "title_highlight_2_color": "#6d388b",
+        "highlighted-2_border_radius": 8,
+        "highlighted-2_border_width": 0,
+        "highlighted-2_border": "solid",
+        "highlighted-2_border_color": "#6d388b",
+        "highlighted-2_padding-block": 0.3,
+        "highlighted-2_padding-inline": 0.3,
+        "title_highlight_2_underline-thickness": 2,
+        "title_highlight_2_underline-color": "#6d388b",
+        "title_highlight_2_underline-color--gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_2_underline-color-position": 25,
+        "title_highlight_2_handwritten-color": "#6d388b",
+        "title_highlight_2_handwritten-stroke-width": 3,
+        "title_highlight_2_handwritten-position": 60,
+        "heading_size": "h2",
+        "custom_desktop_size": 39,
+        "custom_mobile_size": 28,
+        "products_to_show": 4,
+        "stretch_cards": false,
+        "columns_desktop": 4,
+        "color_scheme": "background-1",
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "button_funcionality": "add-to-cart",
+        "button_label": "Go to product",
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 24
+      }
+    }
+  },
+  "order": [
+    "main",
+    "petsome_rotating_bullets_1",
+    "petsome_benefits_1",
+    "petsome_timeframe_1",
+    "petsome_checklist_1",
+    "petsome_comparison_1",
+    "petsome_explainer_1",
+    "petsome_ingredients_1",
+    "petsome_mechanism_1",
+    "petsome_before_after_1",
+    "petsome_certificates_1",
+    "petsome_how_to_use_1",
+    "petsome_stats_1",
+    "petsome_professional_reviews_BkgaUN",
+    "petsome_rotating_logos_1",
+    "petsome_customer_reviews_1",
+    "17827582468bb08a41",
+    "petsome_faq_1",
+    "related-products"
+  ]
+}
