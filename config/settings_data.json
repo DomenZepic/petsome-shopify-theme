@@ -434,10 +434,7 @@
                   "stacking": "row",
                   "accent_color": "accent-1",
                   "color_scheme": "background-1",
-                  "product_list": [
-                    "allergymix-starter-pack",
-                    "dentalmix-starter-pack"
-                  ],
+                  "product_list": [],
                   "collection": "",
                   "prdouct_1_preselected": false,
                   "product_1_desc": "",
