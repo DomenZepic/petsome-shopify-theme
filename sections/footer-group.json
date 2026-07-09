@@ -14,33 +14,30 @@
     "footer": {
       "type": "footer",
       "blocks": {
-        "fc645871-d789-4cfa-8584-4f8a29b6ce92": {
-          "type": "image",
+        "brand_information_nMgYRz": {
+          "type": "brand_information",
           "settings": {
-            "image": "shopify://shop_images/Logo_cc9e4809-610d-4e12-9861-949378c4b8de.png",
-            "image_width": 100,
-            "alignment": "",
-            "url": "",
-            "width_desktop": 4,
+            "show_social": true,
+            "width_desktop": 3,
             "width_mobile": "2"
           }
         },
         "text_KU3Twd": {
           "type": "text",
           "settings": {
-            "heading": "Petsome",
+            "heading": "O podjetju",
             "block_headings_font_size": 1,
             "subtext": "<p>©️2025 EuroSystem d.o.o.<br/>Zavčeva ulica 38, Ptuj, Slovenia<br/><a href=\"mailto:info@petsome.si\" title=\"mailto:info@petsome.si\"><span style=\"text-decoration:underline\">info@petsome.si<br/></span></a><a href=\"tel:00386070893956\" target=\"_blank\">+386 (0)70 893 956</a></p>",
             "width_desktop": 3,
             "width_mobile": "2"
           }
         },
-        "link_list_ahJbeA": {
+        "link_list_kWBeWD": {
           "type": "link_list",
           "settings": {
-            "heading": "Izdelki",
+            "heading": "Petsome izdelki",
             "block_headings_font_size": 1,
-            "menu": "footer",
+            "menu": "petsome-izdelki",
             "font_size": 14,
             "menu_items_font": "body",
             "width_desktop": 3,
@@ -49,9 +46,9 @@
         }
       },
       "block_order": [
-        "fc645871-d789-4cfa-8584-4f8a29b6ce92",
+        "brand_information_nMgYRz",
         "text_KU3Twd",
-        "link_list_ahJbeA"
+        "link_list_kWBeWD"
       ],
       "settings": {
         "color_scheme": "custom",
@@ -70,7 +67,7 @@
         "pattern_opacity_low": 7,
         "pattern_opacity_normal": 80,
         "enable_follow_on_shop": false,
-        "show_social": true,
+        "show_social": false,
         "enable_country_selector": true,
         "enable_language_selector": true,
         "payment_enable": true,
