@@ -19,7 +19,7 @@
         "heading": "<p>Za boljše življenje ljubljenčkov</p>",
         "subline": "<p>Naravna podpora sklepom za aktivno in brezbolečinsko gibanje.</p>",
         "cta_label": "Preizkusi MobiMix",
-        "cta_url": "shopify://products/mobimix-test",
+        "cta_url": "shopify://products/mobimix",
         "min_height": 560,
         "padding_top": 64,
         "padding_bottom": 64,
@@ -81,7 +81,7 @@
         "product_card_pmYjXA": {
           "type": "product_card",
           "settings": {
-            "product": "mobimix-test",
+            "product": "mobimix",
             "custom_description": "Naravna podpora hrustancu in sklepom za pse vseh starosti.",
             "cta_label": "Razišči"
           }
