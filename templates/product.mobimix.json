@@ -1417,7 +1417,7 @@
         "step_1": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/step_1.png",
+            "image": "shopify://shop_images/MobiMix_Step_1.png",
             "title": "1. Korak",
             "description": "Odmeri kapsule glede na težo psa"
           }
@@ -1425,7 +1425,7 @@
         "step_2": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/step_2.png",
+            "image": "shopify://shop_images/MobiMix_Step_2.png",
             "title": "2. Korak",
             "description": "Odpri ali dodaj celo kapsulo na obrok."
           }
@@ -1433,7 +1433,7 @@
         "step_3": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/step_3.png",
+            "image": "shopify://shop_images/MobiMix_Step_3.png",
             "title": "3. Korak",
             "description": "Zmešaj z obrokom."
           }
@@ -1441,7 +1441,7 @@
         "step_4": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/step_4.png",
+            "image": "shopify://shop_images/MobiMix_Step_4.png",
             "title": "4. Korak",
             "description": "Ponavljaj vsak dan in opazuj razliko."
           }
