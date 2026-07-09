@@ -120,18 +120,47 @@
       "content": "Dosage / supply math"
     },
     {
+      "type": "select",
+      "id": "product_type",
+      "label": "Product type",
+      "info": "Determines whether dosage captions are worded/measured in capsules or grams. Supply math is identical either way.",
+      "options": [
+        { "value": "capsules", "label": "Capsules" },
+        { "value": "powder", "label": "Powder" }
+      ],
+      "default": "capsules"
+    },
+    {
       "type": "number",
       "id": "capsules_per_package",
       "label": "Capsules per package",
       "info": "0 disables the dosage/supply captions.",
-      "default": 90
+      "default": 90,
+      "visible_if": "{{ block.settings.product_type == 'capsules' }}"
     },
     {
       "type": "text",
       "id": "capsules_per_day_by_size",
       "label": "Capsules per day, by size option value",
       "info": "One number per size option value, comma-separated, in the same order as the size option's values.",
-      "default": "1, 2, 3"
+      "default": "1, 2, 3",
+      "visible_if": "{{ block.settings.product_type == 'capsules' }}"
+    },
+    {
+      "type": "number",
+      "id": "grams_per_package",
+      "label": "Grams per package",
+      "info": "0 disables the dosage/supply captions.",
+      "default": 90,
+      "visible_if": "{{ block.settings.product_type == 'powder' }}"
+    },
+    {
+      "type": "text",
+      "id": "grams_per_day_by_size",
+      "label": "Grams per day, by size option value",
+      "info": "One number per size option value, comma-separated, in the same order as the size option's values.",
+      "default": "1, 2, 3",
+      "visible_if": "{{ block.settings.product_type == 'powder' }}"
     },
     {
       "type": "header",

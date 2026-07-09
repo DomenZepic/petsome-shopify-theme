@@ -14,6 +14,14 @@
   assign accent_color = product.metafields.custom.product_accent_color.value | default: block.settings.accent_color
   assign accent_color_dark = product.metafields.custom.product_accent_color_dark.value | default: block.settings.accent_color_dark
   assign secondary_color = product.metafields.custom.product_secondary_color.value | default: block.settings.secondary_color
+
+  assign kaching_product_type = block.settings.product_type | default: 'capsules'
+  assign kaching_amount_per_package = block.settings.capsules_per_package
+  assign kaching_amount_per_day_by_size = block.settings.capsules_per_day_by_size
+  if kaching_product_type == 'powder'
+    assign kaching_amount_per_package = block.settings.grams_per_package
+    assign kaching_amount_per_day_by_size = block.settings.grams_per_day_by_size
+  endif
 -%}
 <style>
   kaching-bundle {
@@ -386,8 +394,9 @@
     id="kaching-custom-display-{{ section.id }}-{{ block.id }}"
     class="kaching-custom-display"
     data-section="{{ section.id }}"
-    data-capsules-per-package="{{ block.settings.capsules_per_package }}"
-    data-capsules-per-day-by-size="{{ block.settings.capsules_per_day_by_size }}"
+    data-product-type="{{ kaching_product_type }}"
+    data-capsules-per-package="{{ kaching_amount_per_package }}"
+    data-capsules-per-day-by-size="{{ kaching_amount_per_day_by_size }}"
     data-product-title="{{ product.title | escape }}"
     data-tier1-style="{{ block.settings.tier_1_style | default: 'none' }}"
     data-tier2-style="{{ block.settings.tier_2_style | default: 'recommended' }}"

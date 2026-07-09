@@ -3,6 +3,7 @@ if (!customElements.get('kaching-custom-display')) {
     connectedCallback() {
       this.sectionId = this.dataset.section;
       this.productTitle = this.dataset.productTitle || '';
+      this.productType = this.dataset.productType || 'capsules';
       this.capsulesPerPackage = parseFloat(this.dataset.capsulesPerPackage) || 0;
       this.capsulesPerDayBySize = (this.dataset.capsulesPerDayBySize || '')
         .split(',')
@@ -371,7 +372,8 @@ if (!customElements.get('kaching-custom-display')) {
 
         const dosageLines = [];
         if (dosage) {
-          dosageLines.push(`${dosage.monthsSupply}-mesečna zaloga (${dosage.totalCapsules} kapsul)`);
+          const unitLabel = this.productType === 'powder' ? 'g' : 'kapsul';
+          dosageLines.push(`${dosage.monthsSupply}-mesečna zaloga (${dosage.totalCapsules} ${unitLabel})`);
           dosageLines.push(`${this.formatMoney(price / (dosage.daysSupply || 1))} / dan`);
         } else if (tier.subtitle) {
           dosageLines.push(tier.subtitle);
