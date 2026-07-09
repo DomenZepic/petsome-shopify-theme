@@ -28,9 +28,9 @@
         "text_KU3Twd": {
           "type": "text",
           "settings": {
-            "heading": "Heading",
+            "heading": "Petsome",
             "block_headings_font_size": 1,
-            "subtext": "<p>Share contact information, store details, and brand content with your customers.</p>",
+            "subtext": "<p>©️2025 EuroSystem d.o.o.<br/>Zavčeva ulica 38, Ptuj, Slovenia<br/><a href=\"mailto:info@petsome.si\" title=\"mailto:info@petsome.si\"><span style=\"text-decoration:underline\">info@petsome.si<br/></span></a><a href=\"tel:00386070893956\" target=\"_blank\">+386 (0)70 893 956</a></p>",
             "width_desktop": 3,
             "width_mobile": "2"
           }
