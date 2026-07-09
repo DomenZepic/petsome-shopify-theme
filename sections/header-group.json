@@ -192,7 +192,7 @@
                   "type": "header-drawer_menu",
                   "name": "Menu",
                   "settings": {
-                    "menu": "header-meni",
+                    "menu": "header-meni-mobile",
                     "font": "body",
                     "active_highlight": "none",
                     "font_size": 16,
