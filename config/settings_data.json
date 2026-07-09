@@ -180,6 +180,7 @@
     "show_vendor": false,
     "show_cart_note": false,
     "cart_drawer_collection": "",
+    "continue_shopping_url": "shopify://collections/vsi-izdelki",
     "country_list_function": "block",
     "country_list": "",
     "cart_icon": "bag_2",
