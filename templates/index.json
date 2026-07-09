@@ -196,7 +196,7 @@
       ],
       "name": "Petsome: Home reviews",
       "settings": {
-        "trustpilot_label": "Excellent",
+        "trustpilot_label": "",
         "heading": "<p>Več kot 2.000 psov. Ena skupna zgodba.</p>",
         "subline": "",
         "logo_speed": 30,
