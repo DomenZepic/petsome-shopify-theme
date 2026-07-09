@@ -729,7 +729,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Opis izdelka",
-                "content": "<p>asdasdsaasdsadsadsad</p>",
+                "content": "<ul><li><strong>Zelenoustna školjka – </strong>Bogata z omega-3 maščobnimi kislinami in glikozaminoglikani, zmanjšuje vnetja, blaži bolečine in obnavlja sklepni hrustanec. </li><li><strong>Obnova sklepnega hrustanca – </strong>Glukozamin in hondroitin sodelujeta pri gradnji in obnovi hrustanca, kar zmanjšuje obrabo sklepov in povečuje njihovo prožnost. Ta kombinacija je idealna za aktivne pse in tiste, ki že kažejo znake staranja. </li><li><strong>Protivnetno delovanje – </strong>Kurkuma, ingver in vražji krempelj so močne naravne protivnetne sestavine, ki zmanjšujejo oteklino in bolečino v sklepih ter omogočajo lažje gibanje. </li><li><strong>Zaščita sklepov pred poškodbami – </strong>Vitamin C in šipek zagotavljata močno antioksidativno zaščito, ki zmanjšuje oksidativni stres in preprečuje nadaljnje poškodbe sklepnega tkiva. </li><li><strong>Naravno blaženje bolečin – </strong>Vražji krempelj poleg protivnetnega delovanja deluje tudi kot naravno sredstvo za blaženje bolečin, kar prispeva k boljšemu počutju psa. </li><li><strong>Izboljšanje gibljivosti – </strong>Sestavine Mobimixa sodelujejo pri obnovi in krepitvi sklepov, kar omogoča boljšo gibljivost in fleksibilnost.</li></ul>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -743,7 +743,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Prednosti MobiMixa",
-                "content": "<p>asdasdsaasdsadsadsad</p>",
+                "content": "<ul><li><strong>Naravne sestavine, ki delujejo – </strong>Mobimix vsebuje skrbno izbrane naravne sestavine, kot so zelenoustna školjka, glukozamin, hondroitin, vražji krempelj, kurkuma, ingver, šipek in vitamin C, ki skupaj podpirajo zdravje sklepov in izboljšujejo gibljivost. </li><li><strong>Dokazani učinki – </strong>Lastniki poročajo o vidnem izboljšanju gibljivosti psov že v prvih tednih uporabe. Mobimix pomaga zmanjšati vnetje, bolečine in togost sklepov. </li><li><strong>Podpora pri staranju psov – </strong>Idealen za starejše pse in pse z aktivnim življenjskim slogom, ki potrebujejo dodatno podporo za sklepe. </li><li><strong>Prilagodljivo odmerjanje – </strong>Mobimix je v obliki kapsul, ki jih lahko prilagodite glede na velikost in potrebe psa – kapsulo lahko odprete in vsebino preprosto zmešate s hrano. </li><li><strong>Brez umetnih dodatkov – </strong>100 % naravno, brez umetnih barvil, konzervansov ali polnil – samo najboljše za vašega psa. </li><li><strong>Izdelano v Sloveniji</strong> – Podprite lokalno proizvodnjo! Mobimix je razvit in izdelan v Sloveniji, z mislijo na kakovost in učinkovitost. </li><li><strong>Celovita nega sklepov</strong> – Mobimix pomaga obnoviti hrustanec, zmanjšati vnetja in izboljšati gibljivost – vse v enem izdelku. </li><li><strong>Primerno za vse pasme in starosti – </strong>Naj bo vaš pes mladič, odrasel ali starejši, Mobimix je primeren za vse pasme in velikosti psov. </li><li><strong>Varen in preizkušen</strong> – Temelji na znanstvenih dognanjih in je razvit pod nadzorom strokovnjakov. </li><li><strong>Vidni rezultati</strong> – Več kot 1.000 zadovoljnih lastnikov psov je že opazilo razliko. </li></ul>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -757,7 +757,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Kako deluje MobiMix?",
-                "content": "<p>asdasdsaasdsadsadsad</p>",
+                "content": "<ul><li><strong>Zelenoustna školjka – </strong>Bogata z omega-3 maščobnimi kislinami in glikozaminoglikani, zmanjšuje vnetja, blaži bolečine in obnavlja sklepni hrustanec. </li><li><strong>Obnova sklepnega hrustanca – </strong>Glukozamin in hondroitin sodelujeta pri gradnji in obnovi hrustanca, kar zmanjšuje obrabo sklepov in povečuje njihovo prožnost. Ta kombinacija je idealna za aktivne pse in tiste, ki že kažejo znake staranja. </li><li><strong>Protivnetno delovanje – </strong>Kurkuma, ingver in vražji krempelj so močne naravne protivnetne sestavine, ki zmanjšujejo oteklino in bolečino v sklepih ter omogočajo lažje gibanje. </li><li><strong>Zaščita sklepov pred poškodbami – </strong>Vitamin C in šipek zagotavljata močno antioksidativno zaščito, ki zmanjšuje oksidativni stres in preprečuje nadaljnje poškodbe sklepnega tkiva. </li><li><strong>Naravno blaženje bolečin – </strong>Vražji krempelj poleg protivnetnega delovanja deluje tudi kot naravno sredstvo za blaženje bolečin, kar prispeva k boljšemu počutju psa. </li><li><strong>Izboljšanje gibljivosti – </strong>Sestavine Mobimixa sodelujejo pri obnovi in krepitvi sklepov, kar omogoča boljšo gibljivost in fleksibilnost.</li></ul>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -771,7 +771,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Sestavine",
-                "content": "<p>asdasdsaasdsadsadsad</p>",
+                "content": "<ul><li>Zelenoustna školjka</li><li>Glukozamin in hondroitin</li><li>Vražji krempelj</li><li>Kurkuma</li><li>Izvleček ingverjeve korenine</li><li>Izvleček šipka</li><li>Vitamin C</li></ul>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -785,7 +785,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Odmerjanje",
-                "content": "<p>asdasdsaasdsadsadsad</p>",
+                "content": "<p><strong>Priporočen dnevni vnos (3 mesece ali do izboljšanja stanja):</strong> </p><p>Mačke: 1/2 – 1 kapsula </p><p>Majhni psi (do 10 kg): 1 kapsula </p><p>Srednje veliki psi (11-24kg): 2 kapsuli </p><p>Veliki psi (25-40kg): 3 kapsule </p><p>Zelo veliki psi (več kot 41 kg): 4 kapsule </p><p><br/></p><p><strong>Vzdrževalni in preventivni vnos:</strong> </p><p>Do 20kg: 1 – 2 kapsule </p><p>Nad 20kg: 2 kapsuli </p><p><br/></p><p>Po treh mesecih jemanja oziroma po izboljšanju stanja, je potreben prehod na vzdrževalni vnos ali po potrebi ponoviti kuro. V primeru preobčutljivosti ali težav pri hranjenju se kapsulo lahko odpre, vsebino pa strese med dnevni obrok. Kapsulo v tem primeru zavržete. </p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -799,7 +799,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Študije",
-                "content": "<p>asdasdsaasdsadsadsad</p>",
+                "content": "<p><strong>Tiffany Linn Bierer3 and Linh M. Bui Waltham USA, Vernon, CA: Improvement of Arthritic Signs in Dogs Fed Green-Lipped Mussel (Perna canaliculus)</strong></p><p>“Podatki iz študije kažejo, da je GLM prašek učinkovit pri zmanjševanju znakov artritisa pri psih, bodisi, ko se neposredno posuje na standardno prehrano, bodisi, ko je vključen v obdelane priboljške ali glavne obroke. Po šestih tednih dopolnjevanja z GLM so se skupne ocene artritisa, bolečin v sklepih in oteklin bistveno zmanjšale. GLM vsebuje omega-3 maščobne kisline, ki zmanjšujejo vnetja, brez škodljivih učinkov na prebavni sistem ali strjevanje krvi, kar daje prednost pred mnogimi nesteroidnimi protivnetnimi zdravili. Prehransko dopolnjevanje z GLM lahko pripomore k obvladovanju artritičnih težav pri psih in zmanjša potrebo po običajnem zdravljenju.”</p><p><strong>Grainne McCarthy a,*, James O’Donovan b, Boyd Jones a, Hester McAllister c, Michael Seed d, Carmel Mooney: Randomised double-blind, positive-controlled trial to assess the efficacy of glucosamine/chondroitin sulfate for the treatment of dogs with osteoarthritis</strong></p><p>To poročilo je prvo, ki dokazuje, da se klinični znaki osteoartritisa pri psih znatno izboljšajo po 70 dneh zdravljenja z glukozamin hidrokloridom in hondroitin sulfatom. Čeprav so bili v prejšnjih študijah rezultati pri nekaterih dodatkih manj izraziti, so v tej študiji izboljšanja v bolečini in splošnem stanju postala pomembna po 70 dneh, kar kaže na dolgoročno učinkovitost tega zdravljenja.  </p><p><strong>Efficacy of Turmeric for Treatment of Osteoarthritis: A Systematic Review and Meta-Analysis of Experimental Animal Model Studies Stacey Sheahan VMD, MS-TCVM</strong></p><p>Ta sistematični pregled in meta-analiza sta pokazala, da ima kurkuma/kurkumin obetavne terapevtske učinke pri zdravljenju osteoartritisa (OA). Zmanjšuje vnetne citokine, kot sta TNF-α in IL-1β, ter ščiti hrustanec pred degeneracijo. Klinične študije na domačih ljubljenčkih, predvsem psih, so potrebne za dodatno raziskovanje učinkov kurkume pri zdravljenju OA. Kurkuma se lahko uporablja kot del širšega zdravljenja v okviru tradicionalne kitajske veterinarske medicine.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
