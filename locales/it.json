@@ -803,5 +803,15 @@
         "two": "Ricerca: trovati così tanti risultati: %{count} per »%{terms}«"
       }
     }
+  },
+  "customer_accounts": {
+    "orders": {
+      "order_list": {
+        "items": {
+          "few": "N. di elementi: {{count}}",
+          "two": "N. di elementi: {{count}}"
+        }
+      }
+    }
   }
 }
