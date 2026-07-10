@@ -745,6 +745,48 @@
             "two": "La sede più vicina con i tuoi prodotti dista più di %{distance} da %{location}"
           }
         }
+      },
+      "split_delivery": {
+        "inventory_issue_banner": {
+          "remove_item": {
+            "few": "rimuovi i pezzi",
+            "two": "rimuovi i pezzi"
+          },
+          "ship_separately": {
+            "few": "Inviali separatamente",
+            "two": "Inviali separatamente"
+          },
+          "heading": {
+            "cannot_be_picked_up": {
+              "few": "Impossibile ritirare %{count} pezzi",
+              "two": "Impossibile ritirare %{count} pezzi"
+            },
+            "cannot_be_shipped": {
+              "few": "Impossibile spedire %{count} pezzi",
+              "two": "Impossibile spedire %{count} pezzi"
+            }
+          },
+          "pick_them_up_in_store": {
+            "few": "Ritirali in negozio",
+            "two": "Ritirali in negozio"
+          },
+          "remove_item_only": {
+            "few": "Rimuovi i pezzi",
+            "two": "Rimuovi i pezzi"
+          }
+        },
+        "pickup_items_count": {
+          "few": "Ritira i prodotti (%{count})",
+          "two": "Ritira i prodotti (%{count})"
+        },
+        "ship_items_count": {
+          "few": "Spedisci i prodotti (%{count})",
+          "two": "Spedisci i prodotti (%{count})"
+        },
+        "items_count": {
+          "few": "%{count} pezzi",
+          "two": "%{count} pezzi"
+        }
       }
     }
   }
