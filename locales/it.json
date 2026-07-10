@@ -544,6 +544,22 @@
         "discount_order_stacking": {
           "few": "Sconti sull'ordine",
           "two": "Sconti sull'ordine"
+        },
+        "subtotal_label_with_quantity": {
+          "few": "Subtotale prodotti: %{count}",
+          "two": "Subtotale prodotti: %{count}"
+        },
+        "number_items": {
+          "few": "N. articoli: %{count}",
+          "two": "N. articoli: %{count}"
+        },
+        "view_all_items": {
+          "few": "Mostra tutti gli articoli: %{count}",
+          "two": "Mostra tutti gli articoli: %{count}"
+        },
+        "pickup_unavailable_banner_title": {
+          "few": "I tuoi articoli non sono disponibili in nessun negozio",
+          "two": "I tuoi articoli non sono disponibili in nessun negozio"
         }
       }
     }
