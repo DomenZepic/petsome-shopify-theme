@@ -286,6 +286,51 @@
             "two": ", zatim toliko plaćanja: %{count} po %{total_price}"
           }
         }
+      },
+      "contextual_availability": {
+        "title": {
+          "two": "Proizvodi nisu dostupni"
+        },
+        "products_not_available": {
+          "two": "Ovi će proizvodi biti uklonjeni iz vaše košarice jer nisu dostupni u vašoj državi/regiji."
+        },
+        "all_products_in_cart_unavailable": {
+          "two": "Ovi proizvodi nisu dostupni u vašoj državi/regiji."
+        }
+      },
+      "throttle": {
+        "estimated_wait_time": {
+          "two": "Predviđeno vrijeme čekanja: {{count}} min"
+        }
+      },
+      "deliverability": {
+        "not_deliverable": {
+          "title": {
+            "two": "Dostava nije dostupna za više proizvoda (%{count})"
+          },
+          "message": {
+            "two": "Ovi će proizvodi biti uklonjeni iz vaše košarice jer za vašu adresu nije dostupan nijedan način dostave."
+          }
+        }
+      },
+      "pickup_point": {
+        "paginator": {
+          "header": {
+            "two": "Prikazano %{first}–%{last} od ukupno mjesta preuzimanja: %{count}"
+          },
+          "selected_pickup_point_label": {
+            "two": "%{pickup_point_index} od ukupno mjesta preuzimanja: %{count}"
+          },
+          "selected_page": {
+            "two": "%{first}–%{last} od ukupno mjesta preuzimanja: %{count}"
+          }
+        },
+        "number_of_pickup_points_near_location": {
+          "two": "Više mjesta preuzimanja (%{count}) u blizini vaše lokacije"
+        },
+        "pickup_unavailable_banner_title": {
+          "two": "Za vaše artikle nije dostupno nijedno mjesto preuzimanja"
+        }
       }
     }
   }
