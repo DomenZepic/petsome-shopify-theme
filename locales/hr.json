@@ -331,6 +331,16 @@
         "pickup_unavailable_banner_title": {
           "two": "Za vaše artikle nije dostupno nijedno mjesto preuzimanja"
         }
+      },
+      "notice_banner": {
+        "validation_errors_banner": {
+          "heading": {
+            "two": "Došlo je do pogreške {{count}} :"
+          },
+          "errors_in_section": {
+            "two": "{{count}} pogreška u odjeljku {{section}}"
+          }
+        }
       }
     }
   }
