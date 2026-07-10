@@ -445,6 +445,18 @@
             }
           }
         }
+      },
+      "draft_order_details": {
+        "payment_status": {
+          "pending": {
+            "banner_overdue": {
+              "two": "Vaše plaćanje kasni {{count}} dni"
+            },
+            "banner_due": {
+              "two": "Rok za vaše plaćanje je za {{count}} dni"
+            }
+          }
+        }
       }
     }
   }
