@@ -437,10 +437,11 @@
       }
     },
     "order_details": {
-      "image_gallery": {
-        "load_more_items": {
-          "two": "Prikaži još {{count}} kosov"
-        }
+      "subtotal_label_with_quantity": {
+        "two": "Međuzbroj · Br. proizvoda: {{count}}"
+      },
+      "discount_order_stacking": {
+        "two": "Popusti pri narudžbi"
       }
     }
   }
