@@ -500,5 +500,14 @@
         }
       }
     }
+  },
+  "sections": {
+    "header": {
+      "announcement": "Obavijest",
+      "menu": "Izbornik",
+      "cart_count": {
+        "one": "{{ count }} artikel"
+      }
+    }
   }
 }
