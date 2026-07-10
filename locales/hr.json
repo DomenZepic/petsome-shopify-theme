@@ -162,6 +162,14 @@
         "saved_address_option_description": {
           "two": "Imate {{count}} spremljenih adresa."
         }
+      },
+      "order_summary": {
+        "pickup_unavailable_banner_title_with_country": {
+          "two": "U državi %{country} nema trgovine u kojoj bi ovi proizvodi bili dostupni"
+        },
+        "discount_code_applied_count": {
+          "two": "Prikaži %{count} popusta"
+        }
       }
     }
   }
