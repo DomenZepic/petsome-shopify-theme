@@ -183,6 +183,23 @@
         },
         "order_edit_banner_items_added": {
           "two": "Dodano: %{count}"
+        },
+        "crypto_payment_method": {
+          "cashback_descriptor": {
+            "two": "Povrat novca primit ćete nakon %{count} dana"
+          }
+        },
+        "discount_show_more_warnings": {
+          "two": "Prikaži %{count} više"
+        },
+        "discount_codes_removed_summary": {
+          "two": "Br. uklonjenih kodova za popust: %{count}"
+        },
+        "discount_codes_modified_summary": {
+          "two": "Br. promijenjenih kodova za popust: %{count}"
+        },
+        "discount_codes_removed_or_modified_summary": {
+          "two": "Br. uklonjenih ili promijenjenih kodova za popust: %{count}"
         }
       }
     }
