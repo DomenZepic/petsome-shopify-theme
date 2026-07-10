@@ -168,6 +168,23 @@
           "per_item": {
             "two": "%{price} za toliko artikala: %{count}"
           }
+        },
+        "expand_component_information": {
+          "two": "Prikaži artikle (%{count})"
+        },
+        "collapse_component_information": {
+          "two": "Sakrij artikle (%{count})"
+        },
+        "discount_discovery": {
+          "merchandise_quantity_label": {
+            "two": "Br. artikala: %{count}"
+          }
+        },
+        "discount_title_stacking": {
+          "two": "Popusti"
+        },
+        "discount_order_stacking": {
+          "two": "Popusti pri narudžbi"
         }
       }
     }
