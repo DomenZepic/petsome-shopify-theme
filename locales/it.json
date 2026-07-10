@@ -796,6 +796,12 @@
           "two": "Altro"
         }
       }
+    },
+    "page_titles": {
+      "search_results": {
+        "few": "Ricerca: trovati così tanti risultati: %{count} per »%{terms}«",
+        "two": "Ricerca: trovati così tanti risultati: %{count} per »%{terms}«"
+      }
     }
   }
 }
