@@ -94,8 +94,72 @@
         "label": "Količina",
         "input_label": "Količina za {{ product }}",
         "increase": "Povećaj količinu za {{ product }}",
-        "decrease": "Smanji količinu za {{ product }}"
-      }
+        "decrease": "Smanji količinu za {{ product }}",
+        "minimum_of": "Najmanje {{ quantity }}",
+        "maximum_of": "Najviše {{ quantity }}",
+        "multiples_of": "Koraci po {{ quantity }}",
+        "in_cart_html": "<span class=\"quantity-cart\">{{ quantity }}</span> u košarici"
+      },
+      "pickup_availability": {
+        "view_store_info": "Pogledajte informacije o trgovini",
+        "check_other_stores": "Provjerite dostupnost u drugim trgovinama",
+        "pick_up_available": "Preuzimanje dostupno",
+        "pick_up_available_at_html": "Preuzimanje dostupno u <span class=\"color-foreground\">{{ location_name }}</span>",
+        "pick_up_unavailable_at_html": "Preuzimanje trenutačno nije dostupno u <span class=\"color-foreground\">{{ location_name }}</span>",
+        "unavailable": "Dostupnost preuzimanja nije bilo moguće učitati",
+        "refresh": "Osvježi"
+      },
+      "price": {
+        "from_price_html": "Od {{ price }}",
+        "regular_price": "Redovna cijena",
+        "sale_price": "Akcijska cijena",
+        "unit_price": "Jedinična cijena"
+      },
+      "share": "Podijeli ovaj proizvod",
+      "sold_out": "Rasprodano",
+      "unavailable": "Nije dostupno",
+      "vendor": "Prodavatelj",
+      "value_unavailable": "{{ option_value }} - Nije dostupno",
+      "variant_sold_out_or_unavailable": "Varijanta je rasprodana ili nije dostupna",
+      "video_exit_message": "{{ title }} otvara video preko cijelog zaslona u istom prozoru.",
+      "view_full_details": "Pogledaj sve pojedinosti",
+      "xr_button": "Pogledaj u svom prostoru",
+      "xr_button_label": "Pogledaj u svom prostoru, stavka se učitava u prozoru proširene stvarnosti",
+      "include_taxes": "PDV uključen.",
+      "shipping_policy_html": "<a href=\"{{ link }}\">Dostava</a> se obračunava pri završetku kupnje."
+    },
+    "modal": {
+      "label": "Galerija medija"
+    },
+    "facets": {
+      "apply": "Primijeni",
+      "clear": "Očisti",
+      "clear_all": "Ukloni sve",
+      "from": "Od",
+      "filter_and_sort": "Filtriraj i razvrstaj",
+      "filter_by_label": "Filtriraj:",
+      "filter_button": "Filtriraj",
+      "filters_selected": {
+        "one": "{{ count }} odabrano",
+        "other": "{{ count }} odabranih"
+      },
+      "filter_selected_accessibility": "{{ type }} ({{ count }} filtera odabrano)",
+      "show_more": "Prikaži više",
+      "show_less": "Prikaži manje",
+      "max_price": "Najviša cijena je {{ price }}",
+      "product_count": {
+        "one": "{{ product_count }} od {{ count }} proizvoda",
+        "other": "{{ product_count }} od {{ count }} proizvoda"
+      },
+      "product_count_simple": {
+        "one": "{{ count }} proizvod",
+        "other": "{{ count }} proizvoda"
+      },
+      "reset": "Poništi",
+      "sort_button": "Razvrstaj",
+      "sort_by_label": "Razvrstaj po:",
+      "to": "Do",
+      "clear_filter": "Ukloni filtar"
     }
   },
   "shopify": {
