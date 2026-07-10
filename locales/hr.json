@@ -436,12 +436,15 @@
         }
       }
     },
-    "order_details": {
-      "subtotal_label_with_quantity": {
-        "two": "Međuzbroj · Br. proizvoda: {{count}}"
-      },
-      "discount_order_stacking": {
-        "two": "Popusti pri narudžbi"
+    "B2B": {
+      "orders": {
+        "draft_order_list": {
+          "pending_tab_accessibility_label": {
+            "pending_orders": {
+              "two": "Imate narudžbe na čekanju: {{count}}"
+            }
+          }
+        }
       }
     }
   }
