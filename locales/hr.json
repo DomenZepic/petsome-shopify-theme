@@ -201,6 +201,11 @@
         "discount_codes_removed_or_modified_summary": {
           "two": "Br. uklonjenih ili promijenjenih kodova za popust: %{count}"
         }
+      },
+      "thank_you": {
+        "login_reorder_link_text": {
+          "two": "kupite i ove proizvode"
+        }
       }
     }
   }
