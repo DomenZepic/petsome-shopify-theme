@@ -705,6 +705,46 @@
           "few": "Nessun punto di ritiro disponibile per i tuoi articoli",
           "two": "Nessun punto di ritiro disponibile per i tuoi articoli"
         }
+      },
+      "notice_banner": {
+        "validation_errors_banner": {
+          "heading": {
+            "few": "Si è verificato l'errore {{count}} :",
+            "two": "Si è verificato l'errore {{count}} :"
+          },
+          "errors_in_section": {
+            "few": "{{count}}  nella sezione {{section}}",
+            "two": "{{count}}  nella sezione {{section}}"
+          }
+        }
+      },
+      "review_address_modal": {
+        "subtitle": {
+          "few": "Questo ordine sarà inviato all'indirizzo indicato da {{merchant}}. Seleziona l'indirizzo di consegna.",
+          "two": "Questo ordine sarà inviato all'indirizzo indicato da {{merchant}}. Seleziona l'indirizzo di consegna."
+        }
+      },
+      "local_pickup": {
+        "location_information": {
+          "few": "Nelle tue vicinanze ci sono così tante sedi (%{count}) con disponibilità sufficiente",
+          "two": "Nelle tue vicinanze ci sono così tante sedi (%{count}) con disponibilità sufficiente"
+        },
+        "paginator": {
+          "label": {
+            "few": "%{first} – %{last} di %{count} negozi",
+            "two": "%{first} – %{last} di %{count} negozi"
+          }
+        },
+        "reveal_more_label": {
+          "few": "Mostra altre sedi (%{count})",
+          "two": "Mostra altre sedi (%{count})"
+        },
+        "all_stores_far_away": {
+          "title_with_item": {
+            "few": "La sede più vicina con i tuoi prodotti dista più di %{distance} da %{location}",
+            "two": "La sede più vicina con i tuoi prodotti dista più di %{distance} da %{location}"
+          }
+        }
       }
     }
   }
