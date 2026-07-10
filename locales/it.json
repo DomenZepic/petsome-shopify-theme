@@ -649,20 +649,6 @@
           "few": "Uno o più articoli che hai aggiunto non vengono spediti nella tua località. Se desideri completare l'acquisto, rimuovili oppure contatta il negozio.",
           "two": "Uno o più articoli che hai aggiunto non vengono spediti nella tua località. Se desideri completare l'acquisto, rimuovili oppure contatta il negozio."
         }
-      },
-      "order_payment_collection": {
-        "changes_summary": {
-          "added": {
-            "two": "Aggiunto: %{count}",
-            "few": "Aggiunto: %{count}"
-          }
-        }
-      },
-      "open_graph_meta_tag": {
-        "title_with_products": {
-          "few": "Acquisto del prodotto %{product_name} e di %{count} altri prodotti",
-          "two": "Acquisto del prodotto %{product_name} e di %{count} altri prodotti"
-        }
       }
     }
   }
