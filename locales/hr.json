@@ -346,6 +346,44 @@
         "remove_items_action": {
           "two": "uklonite nedostupne artikle"
         }
+      },
+      "remote_merchandise_only": {
+        "detail_item_label": {
+          "two": "Br. artikla: {{count}}"
+        }
+      },
+      "split_delivery": {
+        "inventory_issue_banner": {
+          "remove_item": {
+            "two": "ukloni komade"
+          },
+          "ship_separately": {
+            "two": "Pošalji ih odvojeno"
+          },
+          "heading": {
+            "cannot_be_picked_up": {
+              "two": "%{count} komada nije moguće preuzeti"
+            },
+            "cannot_be_shipped": {
+              "two": "%{count} komada nije moguće poslati"
+            }
+          },
+          "pick_them_up_in_store": {
+            "two": "Preuzmi ih u trgovini"
+          },
+          "remove_item_only": {
+            "two": "Ukloni komade"
+          }
+        },
+        "pickup_items_count": {
+          "two": "Preuzmite proizvode (%{count})"
+        },
+        "ship_items_count": {
+          "two": "Pošaljite proizvode (%{count})"
+        },
+        "items_count": {
+          "two": "%{count} komada"
+        }
       }
     }
   }
