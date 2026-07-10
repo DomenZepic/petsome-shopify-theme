@@ -492,6 +492,13 @@
       "mapClusterTitle": {
         "two": "Skupina s toliko oznaka: {{number}}"
       }
+    },
+    "date": {
+      "humanize": {
+        "lessThanOneHourAgo": {
+          "two": "prije {{count}} min"
+        }
+      }
     }
   }
 }
