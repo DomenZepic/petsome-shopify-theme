@@ -205,6 +205,18 @@
       "thank_you": {
         "login_reorder_link_text": {
           "two": "kupite i ove proizvode"
+        },
+        "gift_card_confirmation_by_text_typ": {
+          "two": "Za nekoliko minuta primit ćete tekstualnu poruku s darovnim bonovima."
+        },
+        "gift_card_confirmation_by_email_typ": {
+          "two": "Za nekoliko minuta primit ćete e-poruku s darovnim bonovima."
+        },
+        "gift_card_email_title": {
+          "two": "Darovni bonovi poslani su putem e-pošte"
+        },
+        "gift_card_text_title": {
+          "two": "Darovni bonovi poslani su putem tekstualne poruke"
         }
       }
     }
