@@ -846,6 +846,51 @@
       "tracking_number": "Broj za praćenje",
       "subtotal": "Međuzbroj",
       "total_duties": "Carine"
+    },
+    "orders": {
+      "title": "Povijest narudžbi",
+      "order_number": "Narudžba",
+      "order_number_link": "Broj narudžbe {{ number }}",
+      "date": "Datum",
+      "payment_status": "Status plaćanja",
+      "fulfillment_status": "Status ispunjenja",
+      "total": "Ukupno",
+      "none": "Još niste poslali nijednu narudžbu."
+    },
+    "recover_password": {
+      "title": "Poništite lozinku",
+      "subtext": "Poslat ćemo vam e-poštu za poništavanje lozinke",
+      "success": "Poslali smo vam e-poštu s poveznicom za ažuriranje lozinke."
+    },
+    "register": {
+      "title": "Izradi račun",
+      "first_name": "Ime",
+      "last_name": "Prezime",
+      "email": "E-pošta",
+      "password": "Lozinka",
+      "submit": "Izradi"
+    },
+    "reset_password": {
+      "title": "Poništite lozinku računa",
+      "subtext": "Unesite novu lozinku",
+      "password": "Lozinka",
+      "password_confirm": "Potvrdite lozinku",
+      "submit": "Poništite lozinku"
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title": "Ovdje je vaša darovna kartica u vrijednosti {{ value }} za {{ shop }}!",
+      "subtext": "Vaša darovna kartica",
+      "gift_card_code": "Kod darovne kartice",
+      "shop_link": "Nastavi s kupnjom",
+      "remaining_html": "Preostalo {{ balance }}",
+      "add_to_apple_wallet": "Dodaj u Apple Wallet",
+      "qr_image_alt": "QR kod — skenirajte za iskorištavanje darovne kartice",
+      "copy_code": "Kopiraj kod",
+      "expired": "Isteklo",
+      "copy_code_success": "Kod je uspješno kopiran",
+      "print_gift_card": "Ispis"
     }
   }
 }
