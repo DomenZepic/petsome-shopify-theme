@@ -177,6 +177,9 @@
         },
         "card_fields_unavailable_html": {
           "two": "Plaćanja kreditnim i debitnim karticama trenutačno nisu dostupna.<br><a href=\"%{current_url}\">Osvježite ovu stranicu</a> ili pokušajte s drugim načinom plaćanja."
+        },
+        "expired_cards_info": {
+          "two": "Broj isteklih kartica: %{count}; možete ih pregledati na svom računu, gdje ih je također moguće uređivati."
         }
       }
     }
