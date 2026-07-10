@@ -498,7 +498,47 @@
             "week": {
               "few": "ogni tante settimane: %{count}",
               "two": "ogni tante settimane: %{count}"
+            },
+            "month": {
+              "few": "ogni tanti mesi: %{count}",
+              "two": "ogni tanti mesi: %{count}"
+            },
+            "year": {
+              "few": "ogni tanti anni: %{count}",
+              "two": "ogni tanti anni: %{count}"
             }
+          },
+          "first_n_order_free": {
+            "few": "Primi ordini gratuiti (%{count})",
+            "two": "Primi ordini gratuiti (%{count})"
+          },
+          "free_for_first_n_order": {
+            "few": "Per i primi ordini (%{count})",
+            "two": "Per i primi ordini (%{count})"
+          },
+          "free_shipping_cycles": {
+            "few": "Consegna gratuita per più di %{count} consegne",
+            "two": "Consegna gratuita per più di %{count} consegne"
+          },
+          "free_shipping_cycles_delivery_not_included": {
+            "few": "Consegna gratuita per %{count} consegne",
+            "two": "Consegna gratuita per %{count} consegne"
+          },
+          "first_n_order_free_with_cycle": {
+            "few": "Consegna gratuita per più di %{count} consegne, poi %{recurring_order_shipping_price}",
+            "two": "Consegna gratuita per più di %{count} consegne, poi %{recurring_order_shipping_price}"
+          },
+          "first_n_order_free_with_cycle_delivery_not_included": {
+            "few": "Consegna gratuita per %{count} consegne, poi %{recurring_order_shipping_price}",
+            "two": "Consegna gratuita per %{count} consegne, poi %{recurring_order_shipping_price}"
+          },
+          "max_cycles_base_shipping": {
+            "few": "più di %{count} consegne per %{shipping_price} ciascuna",
+            "two": "più di %{count} consegne per %{shipping_price} ciascuna"
+          },
+          "max_cycles_base_shipping_delivery_not_included": {
+            "few": "più di %{count} consegne per %{shipping_price} ciascuna",
+            "two": "più di %{count} consegne per %{shipping_price} ciascuna"
           }
         }
       }
