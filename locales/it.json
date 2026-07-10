@@ -649,6 +649,38 @@
           "few": "Uno o più articoli che hai aggiunto non vengono spediti nella tua località. Se desideri completare l'acquisto, rimuovili oppure contatta il negozio.",
           "two": "Uno o più articoli che hai aggiunto non vengono spediti nella tua località. Se desideri completare l'acquisto, rimuovili oppure contatta il negozio."
         }
+      },
+      "contextual_availability": {
+        "title": {
+          "few": "I prodotti non sono disponibili",
+          "two": "I prodotti non sono disponibili"
+        },
+        "products_not_available": {
+          "few": "Questi prodotti saranno rimossi dal tuo carrello perché non sono disponibili nel tuo paese/regione.",
+          "two": "Questi prodotti saranno rimossi dal tuo carrello perché non sono disponibili nel tuo paese/regione."
+        },
+        "all_products_in_cart_unavailable": {
+          "few": "Questi prodotti non sono disponibili nel tuo paese/regione.",
+          "two": "Questi prodotti non sono disponibili nel tuo paese/regione."
+        }
+      },
+      "throttle": {
+        "estimated_wait_time": {
+          "few": "Tempo di attesa previsto: {{count}} min",
+          "two": "Tempo di attesa previsto: {{count}} min"
+        }
+      },
+      "deliverability": {
+        "not_deliverable": {
+          "title": {
+            "few": "La consegna non è disponibile per più prodotti (%{count})",
+            "two": "La consegna non è disponibile per più prodotti (%{count})"
+          },
+          "message": {
+            "few": "Questi prodotti saranno rimossi dal tuo carrello perché non è disponibile alcun metodo di consegna per il tuo indirizzo.",
+            "two": "Questi prodotti saranno rimossi dal tuo carrello perché non è disponibile alcun metodo di consegna per il tuo indirizzo."
+          }
+        }
       }
     }
   }
