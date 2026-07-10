@@ -341,6 +341,41 @@
             "two": "{{count}} pogreška u odjeljku {{section}}"
           }
         }
+      },
+      "local_pickup": {
+        "location_information_far_away": {
+          "two": "Br. lokacija s vašim proizvodom: %{count}"
+        },
+        "location_nearby": {
+          "two": "U blizini je %{count} lokacija s vašim proizvodom"
+        },
+        "location_nearby_short": {
+          "two": "%{count} obližnjih lokacija s vašim proizvodom"
+        },
+        "location_far_away": {
+          "two": "%{count} lokacija s vašim proizvodom"
+        },
+        "toggle_more_locations": {
+          "two": "Još %{count} lokacija"
+        },
+        "pickup_unavailable_banner_title": {
+          "two": "Nema lokacija s vašim proizvodima"
+        },
+        "pickup_unavailable_banner_title_with_country": {
+          "two": "U državi %{country} nema lokacija s vašim proizvodima"
+        },
+        "location_information_far_away_one_item": {
+          "two": "Dostupno je %{count} lokacija s vašim komadom"
+        },
+        "location_information_far_away_other_items": {
+          "two": "Dostupno je %{count} lokacija s vašim komadima"
+        },
+        "location_nearby_one_item": {
+          "two": "U blizini je %{count} lokacija s vašim komadom"
+        },
+        "location_nearby_other_items": {
+          "two": "U blizini je %{count} lokacija s vašim komadima"
+        }
       }
     }
   }
