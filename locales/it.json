@@ -574,6 +574,14 @@
         "order_covered_by_gift_cards_notice": {
           "two": "L'importo del tuo ordine è coperto da buoni regalo.",
           "few": "L'importo del tuo ordine è coperto da buoni regalo."
+        },
+        "card_fields_unavailable_html": {
+          "two": "I pagamenti con carte di credito e di debito non sono attualmente disponibili.<br><a href=\"%{current_url}\">Aggiorna questa pagina</a> oppure prova con un altro metodo di pagamento.",
+          "few": "I pagamenti con carte di credito e di debito non sono attualmente disponibili.<br><a href=\"%{current_url}\">Aggiorna questa pagina</a> oppure prova con un altro metodo di pagamento."
+        },
+        "expired_cards_info": {
+          "few": "Numero di carte scadute: %{count}; puoi visualizzarle nel tuo account, dove è anche possibile modificarle.",
+          "two": "Numero di carte scadute: %{count}; puoi visualizzarle nel tuo account, dove è anche possibile modificarle."
         }
       }
     }
