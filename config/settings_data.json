@@ -936,6 +936,11 @@
         "type": "shopify://apps/gempages-builder/blocks/embed-gp-script-head/20b379d4-1b20-474c-a6ca-665c331919f3",
         "disabled": false,
         "settings": {}
+      },
+      "1301885682879150564": {
+        "type": "shopify://apps/ez-market-translate/blocks/image_market/25e62a6b-1a25-46e0-b9c2-a9c7b1a95a28",
+        "disabled": false,
+        "settings": {}
       }
     }
   },
