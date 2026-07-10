@@ -143,6 +143,12 @@
         },
         "shipping_method_recurring_shipments_group_title": {
           "two": "Ponavljajuće se pošiljke"
+        },
+        "unbranded_description_with_fulfillment_days": {
+          "two": "Otprema za %{count} radnih dana"
+        },
+        "unbranded_description_with_fulfillment_weeks": {
+          "two": "Otprema za %{count} tjedana"
         }
       }
     }
