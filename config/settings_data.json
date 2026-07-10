@@ -503,6 +503,7 @@
             "blocks": {
               "631b0e34-4299-400e-9f4d-c107c08cce01": {
                 "type": "cart_discount-field",
+                "disabled": true,
                 "settings": {
                   "bottom_separator": true,
                   "placeholder": "Enter discount code",
