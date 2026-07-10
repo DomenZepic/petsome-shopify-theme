@@ -157,6 +157,11 @@
             "two": "Hrpa s toliko oznaka: {{number}}"
           }
         }
+      },
+      "customer_account": {
+        "saved_address_option_description": {
+          "two": "Imate {{count}} spremljenih adresa."
+        }
       }
     }
   }
