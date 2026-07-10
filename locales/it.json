@@ -866,6 +866,18 @@
         "few": "Sconti sull'ordine",
         "two": "Sconti sull'ordine"
       }
+    },
+    "B2B": {
+      "orders": {
+        "draft_order_list": {
+          "pending_tab_accessibility_label": {
+            "pending_orders": {
+              "few": "Hai ordini in sospeso: {{count}}",
+              "two": "Hai ordini in sospeso: {{count}}"
+            }
+          }
+        }
+      }
     }
   }
 }
