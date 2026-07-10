@@ -515,6 +515,14 @@
           "few": "Avete {{count}} shranjenih indirizzi.",
           "two": "Avete {{count}} shranjenih indirizzi."
         }
+      },
+      "order_summary": {
+        "unit_price": {
+          "per_item": {
+            "few": "%{price} per così tanti articoli: %{count}",
+            "two": "%{price} per così tanti articoli: %{count}"
+          }
+        }
       }
     }
   }
