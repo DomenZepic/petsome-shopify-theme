@@ -711,5 +711,87 @@
   "onboarding": {
     "product_title": "Primjer naslova proizvoda",
     "collection_title": "Naziv vaše kolekcije"
+  },
+  "templates": {
+    "search": {
+      "no_results": "Nema rezultata za „{{ terms }}“. Provjerite pravopis ili upotrijebite drugu riječ odnosno izraz.",
+      "page": "Stranica",
+      "products": "Proizvodi",
+      "results_pages_with_count": {
+        "one": "{{ count }} stranica",
+        "other": "{{ count }} stranice"
+      },
+      "results_suggestions_with_count": {
+        "one": "{{ count }} prijedlog",
+        "other": "{{ count }} prijedloga"
+      },
+      "results_products_with_count": {
+        "one": "{{ count }} proizvod",
+        "other": "{{ count }} proizvoda"
+      },
+      "results_with_count": {
+        "one": "{{ count }} rezultat",
+        "other": "{{ count }} rezultata"
+      },
+      "results_with_count_and_term": {
+        "one": "Pronađen je {{ count }} rezultat za „{{ terms }}“",
+        "other": "Pronađeno je {{ count }} rezultata za „{{ terms }}“"
+      },
+      "title": "Rezultati pretraživanja",
+      "search_for": "Pretraživanje za „{{ terms }}“",
+      "suggestions": "Prijedlozi",
+      "pages": "Stranice"
+    },
+    "cart": {
+      "cart": "Košarica"
+    },
+    "contact": {
+      "form": {
+        "title": "Kontaktni obrazac",
+        "name": "Ime",
+        "email": "E-pošta",
+        "phone": "Telefonski broj",
+        "comment": "Poruka",
+        "send": "Pošalji",
+        "post_success": "Hvala na vašoj poruci. Odgovorit ćemo vam što je prije moguće.",
+        "error_heading": "Molimo, ispravite sljedeće:"
+      }
+    },
+    "404": {
+      "title": "Stranica nije pronađena",
+      "subtext": "404"
+    }
+  },
+  "localization": {
+    "country_label": "Država/regija",
+    "language_label": "Jezik",
+    "update_language": "Ažuriraj jezik",
+    "update_country": "Ažuriraj državu/regiju"
+  },
+  "customer": {
+    "account": {
+      "title": "Račun",
+      "details": "Detalji računa",
+      "view_addresses": "Prikaži adrese",
+      "return": "Natrag na detalje računa"
+    },
+    "account_fallback": "Račun",
+    "activate_account": {
+      "title": "Aktivirajte račun",
+      "subtext": "Izradite lozinku za aktivaciju računa.",
+      "password": "Lozinka",
+      "password_confirm": "Potvrdite lozinku",
+      "submit": "Aktivirajte račun",
+      "cancel": "Odbij pozivnicu"
+    },
+    "addresses": {
+      "title": "Adrese",
+      "default": "Zadano",
+      "add_new": "Dodaj novu adresu",
+      "edit_address": "Uredi adresu",
+      "first_name": "Ime",
+      "last_name": "Prezime",
+      "company": "Tvrtka"
+    }
   }
 }
