@@ -232,6 +232,19 @@
         },
         "thank_you_item_label": {
           "two": "Br. artikala: %{count}"
+        },
+        "items_fulfilled_by_store": {
+          "two": "Vaši kupljeni artikli doći će iz drugih trgovina."
+        }
+      },
+      "review": {
+        "blocks": {
+          "pickup_items_at": {
+            "two": "Preuzimanje %{count} artikala u:"
+          },
+          "ship_items_to": {
+            "two": "Pošalji %{count} komada na"
+          }
         }
       }
     }
