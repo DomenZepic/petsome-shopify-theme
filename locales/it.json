@@ -500,14 +500,6 @@
               "two": "ogni tante settimane: %{count}"
             }
           }
-        },
-        "shipping_method_first_shipment_group_title": {
-          "few": "Prime spedizioni",
-          "two": "Prime spedizioni"
-        },
-        "shipping_method_recurring_shipments_group_title": {
-          "few": "Spedizioni ricorrenti",
-          "two": "Spedizioni ricorrenti"
         }
       }
     }
