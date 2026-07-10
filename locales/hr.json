@@ -385,6 +385,13 @@
           "two": "%{count} komada"
         }
       }
+    },
+    "notices": {
+      "order": {
+        "cancel_reason": {
+          "two": "Drugo"
+        }
+      }
     }
   }
 }
