@@ -232,18 +232,20 @@
         },
         "thank_you_item_label": {
           "two": "Br. artikala: %{count}"
-        },
-        "items_fulfilled_by_store": {
-          "two": "Vaši kupljeni artikli doći će iz drugih trgovina."
         }
       },
-      "review": {
-        "blocks": {
-          "pickup_items_at": {
-            "two": "Preuzimanje %{count} artikala u:"
-          },
-          "ship_items_to": {
-            "two": "Pošalji %{count} komada na"
+      "shipping_errors": {
+        "shipping_method_not_available_generic": {
+          "two": "Neke proizvode u vašoj košarici nije moguće poslati na adresu koju ste unijeli. Provjerite adresu i uvjerite se da je ispravna te pokušajte ponovno ili odaberite drugu adresu."
+        },
+        "shipping_method_not_available_updated": {
+          "two": "Jedan ili više artikala koje ste dodali ne šaljemo na vašu lokaciju. Ako želite dovršiti kupnju, uklonite ih ili se obratite trgovini."
+        }
+      },
+      "processing": {
+        "wait": {
+          "medium": {
+            "two": "Vaša narudžba je u obradi. Predviđeno vrijeme čekanja je %{count} min."
           }
         }
       }
