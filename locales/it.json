@@ -522,6 +522,28 @@
             "few": "%{price} per così tanti articoli: %{count}",
             "two": "%{price} per così tanti articoli: %{count}"
           }
+        },
+        "expand_component_information": {
+          "few": "Mostra articoli (%{count})",
+          "two": "Mostra articoli (%{count})"
+        },
+        "collapse_component_information": {
+          "few": "Nascondi articoli (%{count})",
+          "two": "Nascondi articoli (%{count})"
+        },
+        "discount_discovery": {
+          "merchandise_quantity_label": {
+            "few": "N. articoli: %{count}",
+            "two": "N. articoli: %{count}"
+          }
+        },
+        "discount_title_stacking": {
+          "few": "Sconti",
+          "two": "Sconti"
+        },
+        "discount_order_stacking": {
+          "few": "Sconti sull'ordine",
+          "two": "Sconti sull'ordine"
         }
       }
     }
