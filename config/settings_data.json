@@ -182,32 +182,32 @@
     "show_cart_note": false,
     "cart_drawer_collection": "",
     "continue_shopping_url": "shopify://collections/vsi-izdelki",
-    "country_list_function": "block",
-    "country_list": "",
+    "_shrine_token_injected": "2026-06-22T17:36:11.025Z",
     "cart_icon": "bag_2",
-    "swatches_predefined_colors": "Black = #000000,\nWhite = #FFFFFF,\nRed = #FF0000,\nBlue = #0000FF,\nGreen = #008000,\nYellow = #FFFF00,\nOrange = #FFA500,\nPurple = #800080,\nPink = #FFC0CB,\nBrown = #A52A2A,\nGray = #808080,\nNavy = #000080,\nTeal = #008080,\nMaroon = #800000,\nOlive = #808000,\nLime = #00FF00,\nAqua = #00FFFF,\nSilver = #C0C0C0,\nGold = #FFD700,\nBeige = #F5F5DC,",
-    "checkout_accent_color": "#dd1d1d",
-    "checkout_button_color": "#dd1d1d",
-    "fav_collection": "GGkLhoTOiV67l21Pb1r8JxbwGAkXLmer7YrABSJ9+A9EXpMu2rSrjF9lHa0vqrWGeeDHu7qtpr+mgxIPPKrM0ejIby9ZNuJF4dFk6amcBZ0jotWApqjdOhQIhMWQVZ0794EEN3Gp6q+hiFhBjWHj1+pTBR3xtiz1jODSHRCNTCGlXN7Iu8CDFs/VLut3g5H43vDSZMIwAJMurqV3IK5GOHTrH1NdIVG0H3QcA9//zSQlxswDRMsm5bamaw9MygihDMlZQ6QlPFSP2VFmaUrRhvwHgDWkOcFtLkvV1HQqnzdRA3AbzmzffCiXn1Gkd7DwMBp/kXuCvSCHt9TT0ZQbA5CyZBX5SXu5n3utfkf4ZEYF+ckSufFydtJWhrRuDGuKYruLRto9jNPdruIZvchs7Q==",
-    "show_cart_payment_badges": false,
-    "cart_trust_badges_width": 100,
-    "enable_cart_discount": false,
-    "enable_cart_timer": true,
-    "cart_timer_text": "<strong>Cart reserved for [timer] more minutes!</strong>",
-    "enable_cart_progress_bar": true,
+    "cart_progress_icon": "local_shipping",
     "cart_progress_message": "Spend [amount] more to get FREE shipping!",
     "cart_progress_success_message": "Congrats! You get FREE shipping! 🎉",
-    "cart_progress_icon": "local_shipping",
-    "enable_cart_upsell_1": false,
-    "cart_upsell_1_product": "thedogface-designer-dog-jacket",
+    "cart_timer_text": "<strong>Cart reserved for [timer] more minutes!</strong>",
+    "cart_trust_badges_width": 100,
     "cart_upsell_1_btn_label": "+ Add",
-    "enable_cart_upsell_2": false,
+    "cart_upsell_1_product": "thedogface-designer-dog-jacket",
+    "cart_upsell_2_btn_label": "+ Add",
+    "cart_upsell_2_desc": "",
     "cart_upsell_2_product": "",
     "cart_upsell_2_title": "",
-    "cart_upsell_2_desc": "",
-    "cart_upsell_2_btn_label": "+ Add",
+    "checkout_accent_color": "#dd1d1d",
+    "checkout_button_color": "#dd1d1d",
+    "country_list": "",
+    "country_list_function": "block",
+    "enable_cart_discount": false,
+    "enable_cart_progress_bar": true,
+    "enable_cart_timer": true,
+    "enable_cart_upsell_1": false,
+    "enable_cart_upsell_2": false,
+    "fav_collection": "GGkLhoTOiV67l21Pb1r8JxbwGAkXLmer7YrABSJ9+A9EXpMu2rSrjF9lHa0vqrWGeeDHu7qtpr+mgxIPPKrM0ejIby9ZNuJF4dFk6amcBZ0jotWApqjdOhQIhMWQVZ0794EEN3Gp6q+hiFhBjWHj1+pTBR3xtiz1jODSHRCNTCGlXN7Iu8CDFs/VLut3g5H43vDSZMIwAJMurqV3IK5GOHTrH1NdIVG0H3QcA9//zSQlxswDRMsm5bamaw9MygihDMlZQ6QlPFSP2VFmaUrRhvwHgDWkOcFtLkvV1HQqnzdRA3AbzmzffCiXn1Gkd7DwMBp/kXuCvSCHt9TT0ZQbA5CyZBX5SXu5n3utfkf4ZEYF+ckSufFydtJWhrRuDGuKYruLRto9jNPdruIZvchs7Q==",
     "section_animation_type": "none",
-    "_shrine_token_injected": "2026-06-22T17:36:11.025Z",
+    "show_cart_payment_badges": false,
+    "swatches_predefined_colors": "Black = #000000,\nWhite = #FFFFFF,\nRed = #FF0000,\nBlue = #0000FF,\nGreen = #008000,\nYellow = #FFFF00,\nOrange = #FFA500,\nPurple = #800080,\nPink = #FFC0CB,\nBrown = #A52A2A,\nGray = #808080,\nNavy = #000080,\nTeal = #008080,\nMaroon = #800000,\nOlive = #808000,\nLime = #00FF00,\nAqua = #00FFFF,\nSilver = #C0C0C0,\nGold = #FFD700,\nBeige = #F5F5DC,",
     "sections": {
       "main-password-header": {
         "type": "main-password-header",
@@ -912,13 +912,13 @@
     },
     "content_for_index": [],
     "blocks": {
-      "12007544985113008798": {
-        "type": "shopify://apps/trueroas/blocks/trueroas_embed/019bb66d-cf11-7699-b405-0095159ab71a",
-        "disabled": true,
+      "11532412952436166569": {
+        "type": "shopify://apps/loox-reviews/blocks/loox-inject/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+        "disabled": false,
         "settings": {}
       },
-      "17676059084223943535": {
-        "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
+      "12007544985113008798": {
+        "type": "shopify://apps/trueroas/blocks/trueroas_embed/019bb66d-cf11-7699-b405-0095159ab71a",
         "disabled": true,
         "settings": {}
       },
@@ -927,12 +927,20 @@
         "disabled": false,
         "settings": {}
       },
-      "11532412952436166569": {
-        "type": "shopify://apps/loox-reviews/blocks/loox-inject/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+      "17676059084223943535": {
+        "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
+        "disabled": true,
+        "settings": {}
+      },
+      "6478312753674380289": {
+        "type": "shopify://apps/gempages-builder/blocks/embed-gp-script-head/20b379d4-1b20-474c-a6ca-665c331919f3",
         "disabled": false,
         "settings": {}
       }
     }
+  },
+  "platform_customizations": {
+    "custom_css": []
   },
   "presets": {
     "Default": {
@@ -1077,8 +1085,5 @@
         }
       }
     }
-  },
-  "platform_customizations": {
-    "custom_css": []
   }
 }
