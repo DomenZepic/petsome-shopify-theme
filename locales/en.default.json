@@ -113,6 +113,14 @@
     "product_title": "Primer naslova izdelka",
     "collection_title": "Ime vaše kolekcije"
   },
+  "kaching_custom_display": {
+    "unavailable": "Ni na voljo",
+    "savings_prefix": "Prihraniš {{ amount }}",
+    "dosage_supply": "{{ months }}-mesečna zaloga ({{ amount }} {{ unit }})",
+    "dosage_unit_capsules": "kapsul",
+    "dosage_unit_powder": "g",
+    "price_per_day": "{{ amount }} / dan"
+  },
   "products": {
     "product": {
       "add_to_cart": "Dodaj v košarico",

@@ -712,6 +712,14 @@
     "product_title": "Primjer naslova proizvoda",
     "collection_title": "Naziv vaše kolekcije"
   },
+  "kaching_custom_display": {
+    "unavailable": "Nije dostupno",
+    "savings_prefix": "Uštedite {{ amount }}",
+    "dosage_supply": "Zaliha za {{ months }} mjeseci ({{ amount }} {{ unit }})",
+    "dosage_unit_capsules": "kapsula",
+    "dosage_unit_powder": "g",
+    "price_per_day": "{{ amount }} / dan"
+  },
   "templates": {
     "search": {
       "no_results": "Nema rezultata za „{{ terms }}“. Provjerite pravopis ili upotrijebite drugu riječ odnosno izraz.",

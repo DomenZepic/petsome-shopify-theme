@@ -4,6 +4,14 @@ if (!customElements.get('kaching-custom-display')) {
       this.sectionId = this.dataset.section;
       this.productTitle = this.dataset.productTitle || '';
       this.productType = this.dataset.productType || 'capsules';
+      this.i18n = {
+        unavailable: this.dataset.i18nUnavailable || 'Unavailable',
+        savingsPrefix: this.dataset.i18nSavingsPrefix || 'Save {{ amount }}',
+        dosageSupply: this.dataset.i18nDosageSupply || '{{ months }}-month supply ({{ amount }} {{ unit }})',
+        dosageUnitCapsules: this.dataset.i18nDosageUnitCapsules || 'capsules',
+        dosageUnitPowder: this.dataset.i18nDosageUnitPowder || 'g',
+        pricePerDay: this.dataset.i18nPricePerDay || '{{ amount }} / day',
+      };
       this.capsulesPerPackage = parseFloat(this.dataset.capsulesPerPackage) || 0;
       this.capsulesPerDayBySize = (this.dataset.capsulesPerDayBySize || '')
         .split(',')
@@ -243,7 +251,7 @@ if (!customElements.get('kaching-custom-display')) {
         price: this.computeFallbackPrice(tier, variant),
         comparePrice: basePrice != null ? basePrice * tier.quantity : null,
         valid: available,
-        validationMessage: available ? null : 'Unavailable',
+        validationMessage: available ? null : this.i18n.unavailable,
         dosage: this.computeDosage(tier, sizeIndex),
       }));
 
@@ -332,6 +340,13 @@ if (!customElements.get('kaching-custom-display')) {
       }
     }
 
+    t(template, tokens) {
+      return Object.keys(tokens || {}).reduce(
+        (text, key) => text.split(`{{ ${key} }}`).join(tokens[key]),
+        template
+      );
+    }
+
     renderError(message) {
       if (this.tilesContainer) {
         this.tilesContainer.innerHTML = `<p class="kaching-custom-display__error">${message}</p>`;
@@ -357,7 +372,9 @@ if (!customElements.get('kaching-custom-display')) {
 
       this.savingsBadge.hidden = !hasSavings;
       if (hasSavings) {
-        this.savingsBadgeText.textContent = `Prihraniš ${this.formatMoney(selected.comparePrice - selected.price)}`;
+        this.savingsBadgeText.textContent = this.t(this.i18n.savingsPrefix, {
+          amount: this.formatMoney(selected.comparePrice - selected.price),
+        });
       }
     }
 
@@ -372,9 +389,19 @@ if (!customElements.get('kaching-custom-display')) {
 
         const dosageLines = [];
         if (dosage) {
-          const unitLabel = this.productType === 'powder' ? 'g' : 'kapsul';
-          dosageLines.push(`${dosage.monthsSupply}-mesečna zaloga (${dosage.totalCapsules} ${unitLabel})`);
-          dosageLines.push(`${this.formatMoney(price / (dosage.daysSupply || 1))} / dan`);
+          const unitLabel = this.productType === 'powder' ? this.i18n.dosageUnitPowder : this.i18n.dosageUnitCapsules;
+          dosageLines.push(
+            this.t(this.i18n.dosageSupply, {
+              months: dosage.monthsSupply,
+              amount: dosage.totalCapsules,
+              unit: unitLabel,
+            })
+          );
+          dosageLines.push(
+            this.t(this.i18n.pricePerDay, {
+              amount: this.formatMoney(price / (dosage.daysSupply || 1)),
+            })
+          );
         } else if (tier.subtitle) {
           dosageLines.push(tier.subtitle);
         }
@@ -391,7 +418,7 @@ if (!customElements.get('kaching-custom-display')) {
               <span class="kaching-tile__title">${tier.title}</span>
               <span class="kaching-tile__price">${this.formatMoney(price / tier.quantity)}</span>
               ${dosageLines.map((line) => `<span class="kaching-tile__dosage">${line}</span>`).join('')}
-              ${!valid ? `<span class="kaching-tile__unavailable">${validationMessage || 'Unavailable'}</span>` : ''}
+              ${!valid ? `<span class="kaching-tile__unavailable">${validationMessage || this.i18n.unavailable}</span>` : ''}
             </span>
           </button>
         `;

@@ -114,6 +114,14 @@
     "product_title": "Esempio di titolo del prodotto",
     "collection_title": "Nome della collezione"
   },
+  "kaching_custom_display": {
+    "unavailable": "Non disponibile",
+    "savings_prefix": "Risparmi {{ amount }}",
+    "dosage_supply": "Scorta per {{ months }} mesi ({{ amount }} {{ unit }})",
+    "dosage_unit_capsules": "capsule",
+    "dosage_unit_powder": "g",
+    "price_per_day": "{{ amount }} / giorno"
+  },
   "products": {
     "product": {
       "add_to_cart": "Aggiungi al carrello",
