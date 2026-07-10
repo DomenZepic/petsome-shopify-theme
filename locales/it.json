@@ -857,6 +857,14 @@
           "few": "Mostra ancora {{count}} kosov",
           "two": "Mostra ancora {{count}} kosov"
         }
+      },
+      "subtotal_label_with_quantity": {
+        "few": "Subtotale · N. prodotti: {{count}}",
+        "two": "Subtotale · N. prodotti: {{count}}"
+      },
+      "discount_order_stacking": {
+        "few": "Sconti sull'ordine",
+        "two": "Sconti sull'ordine"
       }
     }
   }
