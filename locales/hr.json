@@ -150,6 +150,13 @@
         "unbranded_description_with_fulfillment_weeks": {
           "two": "Otprema za %{count} tjedana"
         }
+      },
+      "general": {
+        "map": {
+          "cluster_title": {
+            "two": "Hrpa s toliko oznaka: {{number}}"
+          }
+        }
       }
     }
   }
