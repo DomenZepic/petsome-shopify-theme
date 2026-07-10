@@ -8,134 +8,184 @@
  * ------------------------------------------------------------
  */
 {
-  "order": [
-    "petsome_home_hero_qEiULw",
-    "petsome_rotating_bullets_4BghPF",
-    "petsome_home_products_XFU4Cx",
-    "petsome_home_reviews_Tx87Xn",
-    "petsome_home_benefits_DicHEd",
-    "petsome_home_brand_story_3Eiyz4"
-  ],
   "sections": {
-    "petsome_home_benefits_DicHEd": {
-      "block_order": [
-        "benefit_VcJcFX",
-        "benefit_YQkCG4",
-        "benefit_e9Ya8w",
-        "benefit_bxiHe7"
-      ],
-      "blocks": {
-        "benefit_VcJcFX": {
-          "settings": {
-            "text": "🐕 ima več energije čez dan in ni več hitro utrujen"
-          },
-          "type": "benefit"
-        },
-        "benefit_YQkCG4": {
-          "settings": {
-            "text": "🦴 se giblje bolj sproščeno, brez okorelosti po počitku"
-          },
-          "type": "benefit"
-        },
-        "benefit_bxiHe7": {
-          "settings": {
-            "text": "🐾 spet skače, teče in se igra brez zadržkov"
-          },
-          "type": "benefit"
-        },
-        "benefit_e9Ya8w": {
-          "settings": {
-            "text": "🦴 se giblje bolj sproščeno, brez okorelosti po počitku"
-          },
-          "type": "benefit"
-        }
-      },
-      "name": "Petsome: Home benefits",
-      "settings": {
-        "background_color": "#f6f2ec",
-        "cta_label": "Razišči Petsome izdelke",
-        "cta_url": "shopify://collections/vsi-izdelki",
-        "heading": "<p>Petsome izdelki so prava izbira za vašega psa, če želite, da:</p>",
-        "image": "shopify://shop_images/image_2.webp",
-        "padding_bottom": 80,
-        "padding_top": 80
-      },
-      "type": "petsome-home-benefits"
-    },
-    "petsome_home_brand_story_3Eiyz4": {
-      "name": "Petsome: Home brand story",
-      "settings": {
-        "author": "<p>Staš Juliano Štampar,<br/>ustanovitelj Petsome</p>",
-        "background_color": "#ffffff",
-        "body": "<p>Ko je naš pes začel počasneje hoditi na sprehode, smo ugotovili, da na trgu primanjkuje resnih, naravnih rešitev. Razvili smo MobiMix — in videli rezultate. Danes širimo to skrb na vsa področja psovega zdravja. Ker vsak pes si zasluži živeti brez bolečine in nelagodja.</p>",
-        "heading": "<p>Zakaj smo ustvarili Petsome</p>",
-        "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
-        "padding_bottom": 80,
-        "padding_top": 80
-      },
-      "type": "petsome-home-brand-story"
-    },
     "petsome_home_hero_qEiULw": {
+      "type": "petsome-home-hero",
       "name": "Petsome: Home hero",
       "settings": {
-        "background_color": "#e8d6c5",
+        "desktop_image": "shopify://shop_images/hf_20260709_184233_76bf0169-4c0b-42f3-b1da-2634c18cce03_1_1.png",
+        "mobile_image": "shopify://shop_images/petsome_hero_mobile.png",
+        "rating_text": "Zaupa nam več kot 2.000 lastnikov psov",
+        "heading": "<p>Za boljše življenje ljubljenčkov</p>",
+        "subline": "<p>Naravna dnevna podpora za srečnega, zdravega in dejavnega ljubljenčka.</p>",
         "cta_label": "Razišči Petsome izdelke",
         "cta_url": "shopify://collections/vsi-izdelki",
-        "desktop_image": "shopify://shop_images/hf_20260709_184233_76bf0169-4c0b-42f3-b1da-2634c18cce03_1_1.png",
-        "heading": "<p>Za boljše življenje ljubljenčkov</p>",
         "min_height": 700,
-        "mobile_image": "shopify://shop_images/petsome_hero_mobile.png",
-        "padding_bottom": 64,
         "padding_top": 64,
-        "rating_text": "Zaupa nam več kot 2.000 lastnikov psov",
-        "subline": "<p>Naravna dnevna podpora za srečnega, zdravega in dejavnega ljubljenčka.</p>"
+        "padding_bottom": 64,
+        "background_color": "#e8d6c5"
+      }
+    },
+    "petsome_rotating_bullets_4BghPF": {
+      "type": "petsome-rotating-bullets",
+      "blocks": {
+        "item_awNxCb": {
+          "type": "item",
+          "settings": {
+            "text": "60-dnevna garancija zadovoljstva"
+          }
+        },
+        "item_iYrC9M": {
+          "type": "item",
+          "settings": {
+            "text": "Brezplačna poštnina nad 80 €"
+          }
+        },
+        "item_FMDVeH": {
+          "type": "item",
+          "settings": {
+            "text": "Veterinarsko podprto"
+          }
+        },
+        "item_iaegNY": {
+          "type": "item",
+          "settings": {
+            "text": "razvito in proizvedeno v EU"
+          }
+        }
       },
-      "type": "petsome-home-hero"
+      "block_order": [
+        "item_awNxCb",
+        "item_iYrC9M",
+        "item_FMDVeH",
+        "item_iaegNY"
+      ],
+      "name": "Petsome: Rotating bullets",
+      "settings": {
+        "speed": 30,
+        "direction": "left",
+        "pause_on_hover": true,
+        "background_color": "#faf9f6",
+        "text_color": "#565858",
+        "text_size": 16,
+        "dot_color": "#E8D6C5",
+        "dot_size": 20,
+        "item_spacing": 48,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     },
     "petsome_home_products_XFU4Cx": {
+      "type": "petsome-home-products",
+      "blocks": {
+        "product_card_pmYjXA": {
+          "type": "product_card",
+          "settings": {
+            "product": "mobimix",
+            "custom_description": "Naravna podpora hrustancu in sklepom za pse vseh starosti.",
+            "cta_label": "Razišči"
+          }
+        },
+        "product_card_T7fGcG": {
+          "type": "product_card",
+          "settings": {
+            "product": "dentalmix",
+            "custom_description": "Svež dih in čiste zobe — brez mučnega čiščenja.",
+            "cta_label": "Razišči"
+          }
+        },
+        "product_card_FpGJMR": {
+          "type": "product_card",
+          "disabled": true,
+          "settings": {
+            "product": "allergymix-starter-pack",
+            "custom_description": "Pomirjena koža, manj srbenja in sijoča dlaka, od znotraj.",
+            "cta_label": "Razišči"
+          }
+        }
+      },
       "block_order": [
         "product_card_pmYjXA",
         "product_card_T7fGcG",
         "product_card_FpGJMR"
       ],
-      "blocks": {
-        "product_card_FpGJMR": {
-          "disabled": true,
-          "settings": {
-            "cta_label": "Razišči",
-            "custom_description": "Pomirjena koža, manj srbenja in sijoča dlaka, od znotraj.",
-            "product": "allergymix-starter-pack"
-          },
-          "type": "product_card"
-        },
-        "product_card_T7fGcG": {
-          "settings": {
-            "cta_label": "Razišči",
-            "custom_description": "Svež dih in čiste zobe — brez mučnega čiščenja.",
-            "product": "dentalmix"
-          },
-          "type": "product_card"
-        },
-        "product_card_pmYjXA": {
-          "settings": {
-            "cta_label": "Razišči",
-            "custom_description": "Naravna podpora hrustancu in sklepom za pse vseh starosti.",
-            "product": "mobimix"
-          },
-          "type": "product_card"
-        }
-      },
       "name": "Petsome: Home products",
       "settings": {
-        "background_color": "#faf9f6",
         "heading": "<p>Naše rešitve za zdravje vašega psa</p>",
-        "padding_bottom": 80,
+        "subline": "<p>Tri ciljne formule. En celostni pristop k zdravju psa.</p>",
+        "background_color": "#faf9f6",
         "padding_top": 40,
-        "subline": "<p>Tri ciljne formule. En celostni pristop k zdravju psa.</p>"
-      },
-      "type": "petsome-home-products"
+        "padding_bottom": 80
+      }
     },
     "petsome_home_reviews_Tx87Xn": {
+      "type": "petsome-home-reviews",
+      "blocks": {
+        "review_iXnEnt": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "body": "\"Maj bi moral biti operiran, žal pa so na isti dan operirali mene. Namreč ima kronično vnetje kolenskih sklepov. Po treh tednih jemanja MobiMixa je Maj čudežno shodil. Veterinarja vprašam, kaj sedaj to pomeni. Veterinar mi odgovori, da nima druge razlage kot da je to božji čudež. Ta božji čudež traja že leto dni in upam, da bo trajal in trajal.\"",
+            "author": "Branko Teršek",
+            "dog": "12-letni ovčar"
+          }
+        },
+        "review_CFh4k7": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "body": "\"Pred dvema letoma in pol sem za svojo 12 let in pol staro psičko iskala dodatek, ki bi pokrival širši spekter. Po priporočilu sem zasledila MobiMix in psički se je stanje v roku enega meseca tako izboljšalo, da je bila sposobna ponovno sama iti po stopničkah. MobiMix me je tako prepričal, da sem ga uvrstila na svoje poličke, in ga od takrat redno priporočam strankam.\"",
+            "author": "Nataša Živko, ZOO AJKA in kinološka sodnica",
+            "dog": "12,5-letna psička",
+            "avatar": "shopify://shop_images/natasa-zivko-tecaj_1.png"
+          }
+        },
+        "review_mT4tj7": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "body": "\"Glede na to, koliko sva z Eliko predelala, so se pojavile določene težave z gibanjem. Ko sva pred dvema letoma začela uporabljati MobiMix, so težave izvenele, kar je zopet pripomoglo k letošnjemu rezultatu na svetovnem prvenstvu. Ker je MobiMix pomagal Eliki, ga preventivno dajem tudi ostalim psom.\"",
+            "author": "Tomaž Režonja, 5x svetovni prvak",
+            "dog": "Elika, svetovna prvakinja v sledenju",
+            "avatar": "shopify://shop_images/image00018.jpg"
+          }
+        },
+        "logo_n4HJVe": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/vg-logo.svg",
+            "label": ""
+          }
+        },
+        "logo_m7Cjkh": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Veterina-Skarica_logo-1-1-200x200_png.webp",
+            "label": ""
+          }
+        },
+        "logo_7KgrHm": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/vet_mlakar_logo_color_animated_1.svg",
+            "label": ""
+          }
+        },
+        "logo_DtXhEW": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/petvet_logo.png",
+            "label": ""
+          }
+        },
+        "logo_NjdVba": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/logo_veterinaria_1.png",
+            "label": ""
+          }
+        }
+      },
       "block_order": [
         "review_iXnEnt",
         "review_CFh4k7",
@@ -146,134 +196,84 @@
         "logo_DtXhEW",
         "logo_NjdVba"
       ],
-      "blocks": {
-        "logo_7KgrHm": {
-          "settings": {
-            "image": "shopify://shop_images/vet_mlakar_logo_color_animated_1.svg",
-            "label": ""
-          },
-          "type": "logo"
-        },
-        "logo_DtXhEW": {
-          "settings": {
-            "image": "shopify://shop_images/petvet_logo.png",
-            "label": ""
-          },
-          "type": "logo"
-        },
-        "logo_NjdVba": {
-          "settings": {
-            "image": "shopify://shop_images/logo_veterinaria_1.png",
-            "label": ""
-          },
-          "type": "logo"
-        },
-        "logo_m7Cjkh": {
-          "settings": {
-            "image": "shopify://shop_images/Veterina-Skarica_logo-1-1-200x200_png.webp",
-            "label": ""
-          },
-          "type": "logo"
-        },
-        "logo_n4HJVe": {
-          "settings": {
-            "image": "shopify://shop_images/vg-logo.svg",
-            "label": ""
-          },
-          "type": "logo"
-        },
-        "review_CFh4k7": {
-          "settings": {
-            "author": "Nataša Živko, ZOO AJKA in kinološka sodnica",
-            "avatar": "shopify://shop_images/natasa-zivko-tecaj_1.png",
-            "body": "\"Pred dvema letoma in pol sem za svojo 12 let in pol staro psičko iskala dodatek, ki bi pokrival širši spekter. Po priporočilu sem zasledila MobiMix in psički se je stanje v roku enega meseca tako izboljšalo, da je bila sposobna ponovno sama iti po stopničkah. MobiMix me je tako prepričal, da sem ga uvrstila na svoje poličke, in ga od takrat redno priporočam strankam.\"",
-            "dog": "12,5-letna psička",
-            "rating": 5
-          },
-          "type": "review"
-        },
-        "review_iXnEnt": {
-          "settings": {
-            "author": "Branko Teršek",
-            "body": "\"Maj bi moral biti operiran, žal pa so na isti dan operirali mene. Namreč ima kronično vnetje kolenskih sklepov. Po treh tednih jemanja MobiMixa je Maj čudežno shodil. Veterinarja vprašam, kaj sedaj to pomeni. Veterinar mi odgovori, da nima druge razlage kot da je to božji čudež. Ta božji čudež traja že leto dni in upam, da bo trajal in trajal.\"",
-            "dog": "12-letni ovčar",
-            "rating": 5
-          },
-          "type": "review"
-        },
-        "review_mT4tj7": {
-          "settings": {
-            "author": "Tomaž Režonja, 5x svetovni prvak",
-            "avatar": "shopify://shop_images/image00018.jpg",
-            "body": "\"Glede na to, koliko sva z Eliko predelala, so se pojavile določene težave z gibanjem. Ko sva pred dvema letoma začela uporabljati MobiMix, so težave izvenele, kar je zopet pripomoglo k letošnjemu rezultatu na svetovnem prvenstvu. Ker je MobiMix pomagal Eliki, ga preventivno dajem tudi ostalim psom.\"",
-            "dog": "Elika, svetovna prvakinja v sledenju",
-            "rating": 5
-          },
-          "type": "review"
-        }
-      },
       "name": "Petsome: Home reviews",
       "settings": {
+        "trustpilot_label": "",
+        "heading": "<p>Več kot 2.000 psov. Ena skupna zgodba.</p>",
+        "subline": "",
+        "logo_speed": 30,
         "background_color": "#e8d6c5",
         "card_color": "#faf9f6",
-        "heading": "<p>Več kot 2.000 psov. Ena skupna zgodba.</p>",
-        "logo_speed": 30,
-        "padding_bottom": 48,
-        "padding_top": 48,
         "star_color": "#ffcc00",
-        "subline": "",
-        "trustpilot_label": ""
-      },
-      "type": "petsome-home-reviews"
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
     },
-    "petsome_rotating_bullets_4BghPF": {
-      "block_order": [
-        "item_awNxCb",
-        "item_iYrC9M",
-        "item_FMDVeH",
-        "item_iaegNY"
-      ],
+    "petsome_home_benefits_DicHEd": {
+      "type": "petsome-home-benefits",
       "blocks": {
-        "item_FMDVeH": {
+        "benefit_VcJcFX": {
+          "type": "benefit",
           "settings": {
-            "text": "Veterinarsko podprto"
-          },
-          "type": "item"
+            "text": "🐕 ima več energije čez dan in ni več hitro utrujen"
+          }
         },
-        "item_awNxCb": {
+        "benefit_YQkCG4": {
+          "type": "benefit",
           "settings": {
-            "text": "60-dnevna garancija zadovoljstva"
-          },
-          "type": "item"
+            "text": "🦴 se giblje bolj sproščeno, brez okorelosti po počitku"
+          }
         },
-        "item_iYrC9M": {
+        "benefit_e9Ya8w": {
+          "type": "benefit",
           "settings": {
-            "text": "Brezplačna poštnina nad 80 €"
-          },
-          "type": "item"
+            "text": "🦴 se giblje bolj sproščeno, brez okorelosti po počitku"
+          }
         },
-        "item_iaegNY": {
+        "benefit_bxiHe7": {
+          "type": "benefit",
           "settings": {
-            "text": "razvito in proizvedeno v EU"
-          },
-          "type": "item"
+            "text": "🐾 spet skače, teče in se igra brez zadržkov"
+          }
         }
       },
-      "name": "Petsome: Rotating bullets",
+      "block_order": [
+        "benefit_VcJcFX",
+        "benefit_YQkCG4",
+        "benefit_e9Ya8w",
+        "benefit_bxiHe7"
+      ],
+      "name": "Petsome: Home benefits",
       "settings": {
-        "background_color": "#faf9f6",
-        "direction": "left",
-        "dot_color": "#E8D6C5",
-        "dot_size": 20,
-        "item_spacing": 48,
-        "padding_bottom": 36,
-        "padding_top": 36,
-        "pause_on_hover": true,
-        "speed": 30,
-        "text_color": "#565858",
-        "text_size": 16
-      },
-      "type": "petsome-rotating-bullets"
+        "heading": "<p>Petsome izdelki so prava izbira za vašega psa, če želite, da:</p>",
+        "image": "shopify://shop_images/image_2.webp",
+        "cta_label": "Razišči Petsome izdelke",
+        "cta_url": "shopify://collections/vsi-izdelki",
+        "background_color": "#f6f2ec",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "petsome_home_brand_story_3Eiyz4": {
+      "type": "petsome-home-brand-story",
+      "name": "Petsome: Home brand story",
+      "settings": {
+        "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+        "heading": "<p>Zakaj smo ustvarili Petsome</p>",
+        "body": "<p>Ko je naš pes začel počasneje hoditi na sprehode, smo ugotovili, da na trgu primanjkuje resnih, naravnih rešitev. Razvili smo MobiMix — in videli rezultate. Danes širimo to skrb na vsa področja psovega zdravja. Ker vsak pes si zasluži živeti brez bolečine in nelagodja.</p>",
+        "author": "<p>Staš Juliano Štampar,<br/>ustanovitelj Petsome</p>",
+        "background_color": "#ffffff",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     }
-  }
+  },
+  "order": [
+    "petsome_home_hero_qEiULw",
+    "petsome_rotating_bullets_4BghPF",
+    "petsome_home_products_XFU4Cx",
+    "petsome_home_reviews_Tx87Xn",
+    "petsome_home_benefits_DicHEd",
+    "petsome_home_brand_story_3Eiyz4"
+  ]
 }

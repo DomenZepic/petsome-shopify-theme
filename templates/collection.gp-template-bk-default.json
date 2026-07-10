@@ -8,6 +8,294 @@
  * ------------------------------------------------------------
  */
 {
+  "sections": {
+    "main-collection-banner": {
+      "type": "main-collection-banner",
+      "disabled": true,
+      "settings": {
+        "show_collection_description": true,
+        "show_collection_image": true,
+        "color_scheme": "background-1"
+      }
+    },
+    "main-collection-product-grid": {
+      "type": "main-collection-product-grid",
+      "disabled": true,
+      "custom_css": [],
+      "settings": {
+        "products_per_page": 20,
+        "columns_desktop": 4,
+        "stretch_cards": false,
+        "columns_mobile": "2",
+        "image_ratio": "adapt",
+        "show_secondary_image": true,
+        "badges": "regular",
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": true,
+        "button_funcionality": "add-to-cart",
+        "button_label": "Go to product",
+        "swatches_option_name": "",
+        "swatches_position": "top",
+        "swatches_desktop_size": 36,
+        "swatches_mobile_size": 24,
+        "enable_filtering": true,
+        "filter_type": "horizontal",
+        "facets_vertical_open_rows": "first",
+        "facets_swatches_options": "",
+        "facets_swatches_radius": 100,
+        "facets_pills_options": "",
+        "facets_pills_color": "accent-1",
+        "facets_pills_inactive_bg_opacity": 4,
+        "facets_pills_inactive_border_width": 1,
+        "facets_pills_inactive_border_opacity": 30,
+        "facets_pills_radius": 100,
+        "facets_price_color": "accent-1",
+        "facets_price_price_position": "top",
+        "facets_price_btn_style": "outline",
+        "facets_price_btn_border_width": 3,
+        "active_buttons_text": "[value]",
+        "active_buttons_text_color": "text",
+        "active_buttons_bg_type": "overlay",
+        "active_buttons_bg_color": "text",
+        "active_buttons_bg_opacity": 4,
+        "active_buttons_border_width": 1,
+        "active_buttons_border_color": "text",
+        "active_buttons_border_opacity": 40,
+        "facets_drawer_open_mode": "accordion",
+        "facets_drawer_open_rows": "none",
+        "facets_drawer_separator_opacity": 5,
+        "facets_drawer_sticky_button": "after_scrolling",
+        "facets_drawer_sticky_button_color": "accent-1",
+        "facets_drawer_sticky_button_text_color": "#ffffff",
+        "facets_drawer_sticky_button_bg_color": "#dd1d1d",
+        "facets_drawer_sticky_button_radius": 100,
+        "enable_sorting": true,
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    },
+    "collage": {
+      "type": "collage",
+      "blocks": {
+        "product": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "second_image": false
+          }
+        },
+        "collection": {
+          "type": "collection",
+          "settings": {
+            "collection": "all"
+          }
+        }
+      },
+      "block_order": [
+        "product",
+        "collection"
+      ],
+      "disabled": true,
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "title": "Multimedia collage",
+        "title_highlight_1": "solid-color",
+        "title_highlight_1_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_1_bg-color": "#f9efff",
+        "title_highlight_1_color": "#6d388b",
+        "highlighted-1_border_radius": 8,
+        "highlighted-1_border_width": 0,
+        "highlighted-1_border": "solid",
+        "highlighted-1_border_color": "#6d388b",
+        "highlighted-1_padding-block": 0.3,
+        "highlighted-1_padding-inline": 0.3,
+        "title_highlight_1_underline-thickness": 2,
+        "title_highlight_1_underline-color": "#6d388b",
+        "title_highlight_1_underline-color--gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_1_underline-color-position": 25,
+        "title_highlight_1_handwritten-color": "#6d388b",
+        "title_highlight_1_handwritten-stroke-width": 3,
+        "title_highlight_1_handwritten-position": 60,
+        "title_highlight_2": "none",
+        "title_highlight_2_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_2_bg-color": "#f9efff",
+        "title_highlight_2_color": "#6d388b",
+        "highlighted-2_border_radius": 8,
+        "highlighted-2_border_width": 0,
+        "highlighted-2_border": "solid",
+        "highlighted-2_border_color": "#6d388b",
+        "highlighted-2_padding-block": 0.3,
+        "highlighted-2_padding-inline": 0.3,
+        "title_highlight_2_underline-thickness": 2,
+        "title_highlight_2_underline-color": "#6d388b",
+        "title_highlight_2_underline-color--gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_2_underline-color-position": 25,
+        "title_highlight_2_handwritten-color": "#6d388b",
+        "title_highlight_2_handwritten-stroke-width": 3,
+        "title_highlight_2_handwritten-position": 60,
+        "heading_size": "h2",
+        "custom_desktop_size": 39,
+        "custom_mobile_size": 28,
+        "desktop_layout": "right",
+        "mobile_layout": "collage",
+        "card_styles": "product-card-wrapper",
+        "color_scheme": "background-1",
+        "custom_colors_background": "#ffffff",
+        "custom_gradient_background": "",
+        "custom_colors_text": "#2e2a39",
+        "pattern_bg": "none",
+        "pattern_color": "#6d388b",
+        "pattern_size": 20,
+        "pattern_thickness": 2,
+        "pattern_angle": 45,
+        "pattern_opacity_mode": "low",
+        "pattern_opacity_low": 7,
+        "pattern_opacity_normal": 80,
+        "padding_top": 16,
+        "padding_bottom": 64
+      }
+    },
+    "petsome_collection_hero_HHTRzf": {
+      "type": "petsome-collection-hero",
+      "name": "Petsome: Collection hero",
+      "settings": {
+        "rating_text": "Zaupa nam več kot 2.000 lastnikov psov",
+        "heading": "<p>Dvigujemo standarde pasjih življenj</p>",
+        "text": "<p>Petsome izdelki so izdelani iz naravnih sestavin, ki vašemu psu zagotavljajo najboljše pogoje za zdravo življenje.</p>",
+        "image": "shopify://shop_images/prava_izbira-img.png",
+        "image_background_color": "#d08989",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "background_color": "#ede9de"
+      }
+    },
+    "petsome_collection_bundles_wpqMww": {
+      "type": "petsome-collection-bundles",
+      "blocks": {
+        "bundle_card_fJfBB3": {
+          "type": "bundle_card",
+          "settings": {
+            "product": "1x-mobimix-1",
+            "tag_text": "444",
+            "capsules_per_package": 0,
+            "capsules_per_day_by_size": "1, 2, 3",
+            "price_per_day_text": "[price_per_day]/dan"
+          }
+        },
+        "bundle_card_CtiG7Y": {
+          "type": "bundle_card",
+          "settings": {
+            "product": "2x-mobimix-1",
+            "tag_text": "Prihrani 20%",
+            "capsules_per_day_by_size": "",
+            "price_per_day_text": "[price_per_day]/day"
+          }
+        },
+        "bundle_card_AEWgRW": {
+          "type": "bundle_card",
+          "settings": {
+            "product": "3x-mobimix",
+            "tag_text": "Prihrani 25%",
+            "capsules_per_day_by_size": "",
+            "price_per_day_text": "[price_per_day]/day"
+          }
+        },
+        "bundle_card_kx3jNN": {
+          "type": "bundle_card",
+          "settings": {
+            "product": "6x-mobimix",
+            "tag_text": "Prihrani 30%",
+            "capsules_per_day_by_size": "",
+            "price_per_day_text": "[price_per_day]/day"
+          }
+        }
+      },
+      "block_order": [
+        "bundle_card_fJfBB3",
+        "bundle_card_CtiG7Y",
+        "bundle_card_AEWgRW",
+        "bundle_card_kx3jNN"
+      ],
+      "name": "Petsome: Bundles",
+      "settings": {
+        "heading": "<p>Omogoči svojemu psu lažje gibanje</p>",
+        "button_label": "Dodaj v košarico",
+        "size_selector_label": "Izberite težo psa:",
+        "background_color": "#fef6f6",
+        "size_selected_color": "#e8d6c5",
+        "tag_style": "solid",
+        "tag_color": "#f8aaa7",
+        "tag_color_2": "#f47671",
+        "tag_text_color": "#faf9f6",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "petsome_collection_bundles_DfCmqc": {
+      "type": "petsome-collection-bundles",
+      "blocks": {
+        "bundle_card_XRrK6D": {
+          "type": "bundle_card",
+          "settings": {
+            "product": "1x-dentalmix",
+            "tag_text": "444",
+            "capsules_per_package": 0,
+            "capsules_per_day_by_size": "1, 2, 3",
+            "price_per_day_text": "[price_per_day]/dan"
+          }
+        },
+        "bundle_card_g8Nhxx": {
+          "type": "bundle_card",
+          "settings": {
+            "product": "2x-dentalmix",
+            "tag_text": "Prihrani 20%",
+            "capsules_per_day_by_size": "",
+            "price_per_day_text": "[price_per_day]/day"
+          }
+        },
+        "bundle_card_DqTwHw": {
+          "type": "bundle_card",
+          "settings": {
+            "product": "3x-dentalmix",
+            "tag_text": "Prihrani 25%",
+            "capsules_per_day_by_size": "",
+            "price_per_day_text": "[price_per_day]/day"
+          }
+        },
+        "bundle_card_kNfQEb": {
+          "type": "bundle_card",
+          "settings": {
+            "product": "6x-dentalmix",
+            "tag_text": "Prihrani 30%",
+            "capsules_per_day_by_size": "",
+            "price_per_day_text": "[price_per_day]/day"
+          }
+        }
+      },
+      "block_order": [
+        "bundle_card_XRrK6D",
+        "bundle_card_g8Nhxx",
+        "bundle_card_DqTwHw",
+        "bundle_card_kNfQEb"
+      ],
+      "name": "Petsome: Bundles",
+      "settings": {
+        "heading": "<p>Omogoči svojemu psu boljšo dentalno higieno</p>",
+        "button_label": "Dodaj v košarico",
+        "size_selector_label": "Izberite težo psa:",
+        "background_color": "#faf9f6",
+        "size_selected_color": "#e8d6c5",
+        "tag_style": "solid",
+        "tag_color": "#f8aaa7",
+        "tag_color_2": "#f47671",
+        "tag_text_color": "#faf9f6",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    }
+  },
   "order": [
     "main-collection-banner",
     "main-collection-product-grid",
@@ -15,293 +303,5 @@
     "petsome_collection_hero_HHTRzf",
     "petsome_collection_bundles_wpqMww",
     "petsome_collection_bundles_DfCmqc"
-  ],
-  "sections": {
-    "collage": {
-      "block_order": [
-        "product",
-        "collection"
-      ],
-      "blocks": {
-        "collection": {
-          "settings": {
-            "collection": "all"
-          },
-          "type": "collection"
-        },
-        "product": {
-          "settings": {
-            "product": "",
-            "second_image": false
-          },
-          "type": "product"
-        }
-      },
-      "disabled": true,
-      "settings": {
-        "card_styles": "product-card-wrapper",
-        "color_scheme": "background-1",
-        "custom_colors_background": "#ffffff",
-        "custom_colors_text": "#2e2a39",
-        "custom_desktop_size": 39,
-        "custom_gradient_background": "",
-        "custom_mobile_size": 28,
-        "desktop_layout": "right",
-        "display_id": false,
-        "heading_size": "h2",
-        "highlighted-1_border": "solid",
-        "highlighted-1_border_color": "#6d388b",
-        "highlighted-1_border_radius": 8,
-        "highlighted-1_border_width": 0,
-        "highlighted-1_padding-block": 0.3,
-        "highlighted-1_padding-inline": 0.3,
-        "highlighted-2_border": "solid",
-        "highlighted-2_border_color": "#6d388b",
-        "highlighted-2_border_radius": 8,
-        "highlighted-2_border_width": 0,
-        "highlighted-2_padding-block": 0.3,
-        "highlighted-2_padding-inline": 0.3,
-        "mobile_layout": "collage",
-        "padding_bottom": 64,
-        "padding_top": 16,
-        "pattern_angle": 45,
-        "pattern_bg": "none",
-        "pattern_color": "#6d388b",
-        "pattern_opacity_low": 7,
-        "pattern_opacity_mode": "low",
-        "pattern_opacity_normal": 80,
-        "pattern_size": 20,
-        "pattern_thickness": 2,
-        "title": "Multimedia collage",
-        "title_highlight_1": "solid-color",
-        "title_highlight_1_bg-color": "#f9efff",
-        "title_highlight_1_color": "#6d388b",
-        "title_highlight_1_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
-        "title_highlight_1_handwritten-color": "#6d388b",
-        "title_highlight_1_handwritten-position": 60,
-        "title_highlight_1_handwritten-stroke-width": 3,
-        "title_highlight_1_underline-color": "#6d388b",
-        "title_highlight_1_underline-color--gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
-        "title_highlight_1_underline-color-position": 25,
-        "title_highlight_1_underline-thickness": 2,
-        "title_highlight_2": "none",
-        "title_highlight_2_bg-color": "#f9efff",
-        "title_highlight_2_color": "#6d388b",
-        "title_highlight_2_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
-        "title_highlight_2_handwritten-color": "#6d388b",
-        "title_highlight_2_handwritten-position": 60,
-        "title_highlight_2_handwritten-stroke-width": 3,
-        "title_highlight_2_underline-color": "#6d388b",
-        "title_highlight_2_underline-color--gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
-        "title_highlight_2_underline-color-position": 25,
-        "title_highlight_2_underline-thickness": 2,
-        "visibility": "always-display"
-      },
-      "type": "collage"
-    },
-    "main-collection-banner": {
-      "disabled": true,
-      "settings": {
-        "color_scheme": "background-1",
-        "show_collection_description": true,
-        "show_collection_image": true
-      },
-      "type": "main-collection-banner"
-    },
-    "main-collection-product-grid": {
-      "custom_css": [],
-      "disabled": true,
-      "settings": {
-        "active_buttons_bg_color": "text",
-        "active_buttons_bg_opacity": 4,
-        "active_buttons_bg_type": "overlay",
-        "active_buttons_border_color": "text",
-        "active_buttons_border_opacity": 40,
-        "active_buttons_border_width": 1,
-        "active_buttons_text": "[value]",
-        "active_buttons_text_color": "text",
-        "badges": "regular",
-        "button_funcionality": "add-to-cart",
-        "button_label": "Go to product",
-        "columns_desktop": 4,
-        "columns_mobile": "2",
-        "enable_filtering": true,
-        "enable_quick_add": true,
-        "enable_sorting": true,
-        "facets_drawer_open_mode": "accordion",
-        "facets_drawer_open_rows": "none",
-        "facets_drawer_separator_opacity": 5,
-        "facets_drawer_sticky_button": "after_scrolling",
-        "facets_drawer_sticky_button_bg_color": "#dd1d1d",
-        "facets_drawer_sticky_button_color": "accent-1",
-        "facets_drawer_sticky_button_radius": 100,
-        "facets_drawer_sticky_button_text_color": "#ffffff",
-        "facets_pills_color": "accent-1",
-        "facets_pills_inactive_bg_opacity": 4,
-        "facets_pills_inactive_border_opacity": 30,
-        "facets_pills_inactive_border_width": 1,
-        "facets_pills_options": "",
-        "facets_pills_radius": 100,
-        "facets_price_btn_border_width": 3,
-        "facets_price_btn_style": "outline",
-        "facets_price_color": "accent-1",
-        "facets_price_price_position": "top",
-        "facets_swatches_options": "",
-        "facets_swatches_radius": 100,
-        "facets_vertical_open_rows": "first",
-        "filter_type": "horizontal",
-        "image_ratio": "adapt",
-        "padding_bottom": 36,
-        "padding_top": 0,
-        "products_per_page": 20,
-        "show_rating": false,
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "stretch_cards": false,
-        "swatches_desktop_size": 36,
-        "swatches_mobile_size": 24,
-        "swatches_option_name": "",
-        "swatches_position": "top"
-      },
-      "type": "main-collection-product-grid"
-    },
-    "petsome_collection_bundles_DfCmqc": {
-      "block_order": [
-        "bundle_card_XRrK6D",
-        "bundle_card_g8Nhxx",
-        "bundle_card_DqTwHw",
-        "bundle_card_kNfQEb"
-      ],
-      "blocks": {
-        "bundle_card_DqTwHw": {
-          "settings": {
-            "capsules_per_day_by_size": "",
-            "price_per_day_text": "[price_per_day]/day",
-            "product": "3x-dentalmix",
-            "tag_text": "Prihrani 25%"
-          },
-          "type": "bundle_card"
-        },
-        "bundle_card_XRrK6D": {
-          "settings": {
-            "capsules_per_day_by_size": "1, 2, 3",
-            "capsules_per_package": 0,
-            "price_per_day_text": "[price_per_day]/dan",
-            "product": "1x-dentalmix",
-            "tag_text": "444"
-          },
-          "type": "bundle_card"
-        },
-        "bundle_card_g8Nhxx": {
-          "settings": {
-            "capsules_per_day_by_size": "",
-            "price_per_day_text": "[price_per_day]/day",
-            "product": "2x-dentalmix",
-            "tag_text": "Prihrani 20%"
-          },
-          "type": "bundle_card"
-        },
-        "bundle_card_kNfQEb": {
-          "settings": {
-            "capsules_per_day_by_size": "",
-            "price_per_day_text": "[price_per_day]/day",
-            "product": "6x-dentalmix",
-            "tag_text": "Prihrani 30%"
-          },
-          "type": "bundle_card"
-        }
-      },
-      "name": "Petsome: Bundles",
-      "settings": {
-        "background_color": "#faf9f6",
-        "button_label": "Dodaj v košarico",
-        "heading": "<p>Omogoči svojemu psu boljšo dentalno higieno</p>",
-        "padding_bottom": 64,
-        "padding_top": 64,
-        "size_selected_color": "#e8d6c5",
-        "size_selector_label": "Izberite težo psa:",
-        "tag_color": "#f8aaa7",
-        "tag_color_2": "#f47671",
-        "tag_style": "solid",
-        "tag_text_color": "#faf9f6"
-      },
-      "type": "petsome-collection-bundles"
-    },
-    "petsome_collection_bundles_wpqMww": {
-      "block_order": [
-        "bundle_card_fJfBB3",
-        "bundle_card_CtiG7Y",
-        "bundle_card_AEWgRW",
-        "bundle_card_kx3jNN"
-      ],
-      "blocks": {
-        "bundle_card_AEWgRW": {
-          "settings": {
-            "capsules_per_day_by_size": "",
-            "price_per_day_text": "[price_per_day]/day",
-            "product": "3x-mobimix",
-            "tag_text": "Prihrani 25%"
-          },
-          "type": "bundle_card"
-        },
-        "bundle_card_CtiG7Y": {
-          "settings": {
-            "capsules_per_day_by_size": "",
-            "price_per_day_text": "[price_per_day]/day",
-            "product": "2x-mobimix-1",
-            "tag_text": "Prihrani 20%"
-          },
-          "type": "bundle_card"
-        },
-        "bundle_card_fJfBB3": {
-          "settings": {
-            "capsules_per_day_by_size": "1, 2, 3",
-            "capsules_per_package": 0,
-            "price_per_day_text": "[price_per_day]/dan",
-            "product": "1x-mobimix-1",
-            "tag_text": "444"
-          },
-          "type": "bundle_card"
-        },
-        "bundle_card_kx3jNN": {
-          "settings": {
-            "capsules_per_day_by_size": "",
-            "price_per_day_text": "[price_per_day]/day",
-            "product": "6x-mobimix",
-            "tag_text": "Prihrani 30%"
-          },
-          "type": "bundle_card"
-        }
-      },
-      "name": "Petsome: Bundles",
-      "settings": {
-        "background_color": "#fef6f6",
-        "button_label": "Dodaj v košarico",
-        "heading": "<p>Omogoči svojemu psu lažje gibanje</p>",
-        "padding_bottom": 64,
-        "padding_top": 64,
-        "size_selected_color": "#e8d6c5",
-        "size_selector_label": "Izberite težo psa:",
-        "tag_color": "#f8aaa7",
-        "tag_color_2": "#f47671",
-        "tag_style": "solid",
-        "tag_text_color": "#faf9f6"
-      },
-      "type": "petsome-collection-bundles"
-    },
-    "petsome_collection_hero_HHTRzf": {
-      "name": "Petsome: Collection hero",
-      "settings": {
-        "background_color": "#ede9de",
-        "heading": "<p>Dvigujemo standarde pasjih življenj</p>",
-        "image": "shopify://shop_images/prava_izbira-img.png",
-        "image_background_color": "#d08989",
-        "padding_bottom": 40,
-        "padding_top": 40,
-        "rating_text": "Zaupa nam več kot 2.000 lastnikov psov",
-        "text": "<p>Petsome izdelki so izdelani iz naravnih sestavin, ki vašemu psu zagotavljajo najboljše pogoje za zdravo življenje.</p>"
-      },
-      "type": "petsome-collection-hero"
-    }
-  }
+  ]
 }
