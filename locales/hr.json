@@ -454,8 +454,34 @@
             },
             "banner_due": {
               "two": "Rok za vaše plaćanje je za {{count}} dni"
+            },
+            "banner_overdue_for_single_fulfillment": {
+              "two": "Vaše plaćanje u vrijednosti {{amount}} kasni {{count}} ddana. {{link}}"
             }
           }
+        }
+      }
+    },
+    "errors": {
+      "banner_title": {
+        "two": "Došlo je do {{count}} pogreške"
+      }
+    },
+    "payment_methods": {
+      "add_payment_method": {
+        "subscription_contracts": {
+          "more_items": {
+            "two": "Još toliko proizvoda: {{count}}"
+          },
+          "product_count": {
+            "two": "Br. proizvoda: {{count}}"
+          }
+        },
+        "updating_contracts": {
+          "two": "Ažuriranje ugovora za pretplatu ({{count}}) ..."
+        },
+        "contracts_updated": {
+          "two": "Uspješno ažurirani ugovori za pretplatu ({{count}})"
         }
       }
     }
