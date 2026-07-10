@@ -569,6 +569,12 @@
           "few": "Mostra %{count} sconti",
           "two": "Mostra %{count} sconti"
         }
+      },
+      "payment": {
+        "order_covered_by_gift_cards_notice": {
+          "two": "L'importo del tuo ordine è coperto da buoni regalo.",
+          "few": "L'importo del tuo ordine è coperto da buoni regalo."
+        }
       }
     }
   }
