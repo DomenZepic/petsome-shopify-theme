@@ -840,6 +840,22 @@
         "gift_resend_failure": {
           "few": "Si è verificato un problema durante il reinvio dei buoni regalo. Riprova o contattaci.",
           "two": "Si è verificato un problema durante il reinvio dei buoni regalo. Riprova o contattaci."
+        },
+        "tracking_number": {
+          "few": "Numeri di tracciamento",
+          "two": "Numeri di tracciamento"
+        },
+        "gift_card_resend_button": {
+          "few": "Invia nuovamente i buoni regalo",
+          "two": "Invia nuovamente i buoni regalo"
+        }
+      }
+    },
+    "order_details": {
+      "image_gallery": {
+        "load_more_items": {
+          "few": "Mostra ancora {{count}} kosov",
+          "two": "Mostra ancora {{count}} kosov"
         }
       }
     }
