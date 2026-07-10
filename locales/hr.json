@@ -70,5 +70,30 @@
       "inventory_low_stock": "Niska zaliha",
       "inventory_low_stock_show_count": "Niska zaliha: preostalo {{ quantity }}"
     }
+  },
+  "shopify": {
+    "checkout": {
+      "shipping": {
+        "estimated_delivery_date": {
+          "two": "%{count} radnih dana"
+        },
+        "other_method": {
+          "two": "%{count} drugih načina je dostupno od"
+        },
+        "subscription_delivery_description": {
+          "prepaid_delivery_frequency": {
+            "two": "za toliko pošiljki: %{count}"
+          },
+          "subscription_delivery_frequency": {
+            "day": {
+              "two": "svakih toliko dana: %{count}"
+            },
+            "week": {
+              "two": "svakih toliko tjedana: %{count}"
+            }
+          }
+        }
+      }
+    }
   }
 }
