@@ -506,8 +506,84 @@
       "announcement": "Obavijest",
       "menu": "Izbornik",
       "cart_count": {
-        "one": "{{ count }} artikel"
+        "one": "{{ count }} artikel",
+        "other": "{{ count }} artikala"
       }
+    },
+    "cart": {
+      "title": "Vaša košarica",
+      "caption": "Artikli u košarici",
+      "remove_title": "Ukloni {{ title }}",
+      "subtotal": "Međuzbroj",
+      "new_subtotal": "Novi međuzbroj",
+      "note": "Posebne upute za narudžbu",
+      "checkout": "Nastavi na plaćanje",
+      "empty": "Vaša košarica je prazna",
+      "cart_error": "Došlo je do pogreške pri ažuriranju košarice. Molimo, pokušajte ponovno.",
+      "cart_quantity_error_html": "U košaricu možete dodati samo {{ quantity }} ovog artikla.",
+      "taxes_and_shipping_policy_at_checkout_html": "Porezi i <a href=\"{{ link }}\">dostava</a> izračunavaju se pri završetku kupnje",
+      "taxes_included_but_shipping_at_checkout": "PDV uključen, dostava se izračunava pri završetku kupnje",
+      "taxes_included_and_shipping_policy_html": "PDV uključen. <a href=\"{{ link }}\">Dostava</a> se izračunava pri završetku kupnje.",
+      "taxes_and_shipping_at_checkout": "Porezi i dostava izračunavaju se pri završetku kupnje",
+      "headings": {
+        "product": "Proizvod",
+        "price": "Cijena",
+        "total": "Ukupno",
+        "quantity": "Količina",
+        "image": "Slika proizvoda"
+      },
+      "update": "Ažuriraj",
+      "login": {
+        "title": "Imate račun?",
+        "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">Prijavite se</a> za brži završetak kupnje."
+      }
+    },
+    "footer": {
+      "payment": "Načini plaćanja"
+    },
+    "featured_blog": {
+      "view_all": "Pogledaj sve",
+      "onboarding_title": "Objava na blogu",
+      "onboarding_content": "Sažetak vaše blog objave za kupce"
+    },
+    "featured_collection": {
+      "view_all": "Pogledaj sve",
+      "view_all_label": "Pogledaj sve proizvode u kolekciji {{ collection_name }}"
+    },
+    "collection_list": {
+      "view_all": "Pogledaj sve"
+    },
+    "collection_template": {
+      "empty": "Nema pronađenih proizvoda",
+      "title": "Kolekcija",
+      "use_fewer_filters_html": "Upotrijebite manje filtara ili <a class=\"{{ class }}\" href=\"{{ link }}\">uklonite sve</a>"
+    },
+    "video": {
+      "load_video": "Učitaj video: {{ description }}"
+    },
+    "slideshow": {
+      "load_slide": "Učitaj slajd",
+      "previous_slideshow": "Prethodni slajd",
+      "next_slideshow": "Sljedeći slajd",
+      "pause_slideshow": "Zaustavi dijaprojekciju",
+      "play_slideshow": "Pokreni dijaprojekciju",
+      "carousel": "Vrtuljak",
+      "slide": "Slajd"
+    },
+    "page": {
+      "title": "Naslov stranice"
     }
+  },
+  "newsletter": {
+    "label": "E-pošta",
+    "success": "Hvala na prijavi!",
+    "button_label": "Pretplati se"
+  },
+  "accessibility": {
+    "skip_to_text": "Preskoči na sadržaj",
+    "skip_to_product_info": "Preskoči na informacije o proizvodu",
+    "close": "Zatvori",
+    "unit_price_separator": "za",
+    "vendor": "Prodavač:"
   }
 }
