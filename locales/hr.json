@@ -398,5 +398,14 @@
         "two": "Pretraživanje: pronađeno toliko rezultata: %{count} za »%{terms}«"
       }
     }
+  },
+  "customer_accounts": {
+    "orders": {
+      "order_list": {
+        "items": {
+          "two": "Br. elemenata: {{count}}"
+        }
+      }
+    }
   }
 }
