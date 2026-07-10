@@ -223,6 +223,15 @@
         },
         "gift_card_resend_failure": {
           "two": "Došlo je do poteškoće pri ponovnom slanju poklon bonova. Pokušajte ponovno ili nas kontaktirajte."
+        },
+        "thank_you_unconfirmed_items_heading": {
+          "two": "Neki artikli nisu potvrđeni"
+        },
+        "thank_you_unconfirmed_items_description": {
+          "two": "Vaš račun nije terećen"
+        },
+        "thank_you_item_label": {
+          "two": "Br. artikala: %{count}"
         }
       }
     }
