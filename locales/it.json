@@ -614,6 +614,30 @@
         "login_reorder_link_text": {
           "two": "acquista anche questi prodotti",
           "few": "acquista anche questi prodotti"
+        },
+        "gift_card_confirmation_by_text_typ": {
+          "few": "Tra qualche minuto riceverai un messaggio di testo con i buoni regalo.",
+          "two": "Tra qualche minuto riceverai un messaggio di testo con i buoni regalo."
+        },
+        "gift_card_confirmation_by_email_typ": {
+          "few": "Tra qualche minuto riceverai un'e-mail con i buoni regalo.",
+          "two": "Tra qualche minuto riceverai un'e-mail con i buoni regalo."
+        },
+        "gift_card_email_title": {
+          "few": "I buoni regalo sono stati inviati via e-mail",
+          "two": "I buoni regalo sono stati inviati via e-mail"
+        },
+        "gift_card_text_title": {
+          "few": "I buoni regalo sono stati inviati tramite messaggio di testo",
+          "two": "I buoni regalo sono stati inviati tramite messaggio di testo"
+        },
+        "gift_card_resent_confirmation": {
+          "few": "I buoni regalo sono stati inviati di nuovo.",
+          "two": "I buoni regalo sono stati inviati nuovamente."
+        },
+        "gift_card_resend_failure": {
+          "few": "Si è verificato un problema durante il nuovo invio dei buoni regalo. Riprova o contattaci.",
+          "two": "Si è verificato un problema durante il nuovo invio dei buoni regalo. Riprova o contattaci."
         }
       }
     }
