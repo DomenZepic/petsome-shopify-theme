@@ -473,5 +473,35 @@
       "copy_code_success": "Codice copiato correttamente",
       "print_gift_card": "Stampa"
     }
+  },
+  "shopify": {
+    "checkout": {
+      "shipping": {
+        "estimated_delivery_date": {
+          "two": "%{count} giorni lavorativi",
+          "few": "%{count} giorni lavorativi"
+        },
+        "other_method": {
+          "two": "%{count} altri modi sono disponibili da",
+          "few": "%{count} altri modi sono disponibili da"
+        },
+        "subscription_delivery_description": {
+          "prepaid_delivery_frequency": {
+            "few": "per così tante spedizioni: %{count}",
+            "two": "per così tante spedizioni: %{count}"
+          },
+          "subscription_delivery_frequency": {
+            "day": {
+              "few": "ogni tanti giorni: %{count}",
+              "two": "ogni tanti giorni: %{count}"
+            },
+            "week": {
+              "few": "ogni tante settimane: %{count}",
+              "two": "ogni tante settimane: %{count}"
+            }
+          }
+        }
+      }
+    }
   }
 }
