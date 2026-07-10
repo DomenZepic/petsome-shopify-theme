@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "general": {
     "password_page": {
@@ -162,8 +171,8 @@
       "variant_sold_out_or_unavailable": "Variante esaurita o non disponibile",
       "inventory_in_stock": "Disponibile",
       "inventory_in_stock_show_count": "{{ quantity }} disponibile/i",
-      "inventory_low_stock": "Scorte ridotte",
-      "inventory_low_stock_show_count": "Scorte ridotte: ne restano {{ quantity }}",
+      "inventory_low_stock": "Scorte in esaurimento",
+      "inventory_low_stock_show_count": "Scorte in esaurimento: {{ quantity }} rimaste",
       "inventory_out_of_stock": "Esaurito",
       "inventory_out_of_stock_continue_selling": "Disponibile",
       "sku": "SKU"
