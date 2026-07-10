@@ -162,6 +162,13 @@
         "saved_address_option_description": {
           "two": "Imate {{count}} spremljenih adresa."
         }
+      },
+      "order_summary": {
+        "unit_price": {
+          "per_item": {
+            "two": "%{price} za toliko artikala: %{count}"
+          }
+        }
       }
     }
   }
