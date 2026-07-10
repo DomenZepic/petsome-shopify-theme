@@ -816,6 +816,30 @@
         "delivered_description_gift_card": {
           "few": "I buoni regalo sono stati inviati tramite e-mail.",
           "two": "I buoni regalo sono stati inviati tramite e-mail."
+        },
+        "gift_card_label": {
+          "few": "Buoni regalo",
+          "two": "Buoni regalo"
+        },
+        "confirmed_gift_card_additional_description": {
+          "few": "Ogni carta regalo sarà inviata in un'e-mail separata.",
+          "two": "Ogni carta regalo sarà inviata in un'e-mail separata."
+        },
+        "delivered_description_gift_card_text": {
+          "few": "Inviamo i buoni regalo tramite messaggio di testo.",
+          "two": "Inviamo i buoni regalo tramite messaggio di testo."
+        },
+        "confirmed_gift_card_additional_description_text": {
+          "few": "Ogni buono regalo sarà inviato in un messaggio di testo separato.",
+          "two": "Ogni buono regalo sarà inviato in un messaggio di testo separato."
+        },
+        "gift_resend_success": {
+          "few": "Il buono regalo è stato inviato di nuovo",
+          "two": "Il buono regalo è stato inviato di nuovo"
+        },
+        "gift_resend_failure": {
+          "few": "Si è verificato un problema durante il reinvio dei buoni regalo. Riprova o contattaci.",
+          "two": "Si è verificato un problema durante il reinvio dei buoni regalo. Riprova o contattaci."
         }
       }
     }
