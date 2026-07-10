@@ -137,6 +137,12 @@
           "prepaid_order_no_cycle_delivery_not_included": {
             "two": "%{shipping_price} za %{count} dostava (%{per_delivery_cost}), nakon čega slijedi %{recurring_order_shipping_price}"
           }
+        },
+        "shipping_method_first_shipment_group_title": {
+          "two": "Prve pošiljke"
+        },
+        "shipping_method_recurring_shipments_group_title": {
+          "two": "Ponavljajuće se pošiljke"
         }
       }
     }
