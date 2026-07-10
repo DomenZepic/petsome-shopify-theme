@@ -866,6 +866,46 @@
         "few": "Sconti sull'ordine",
         "two": "Sconti sull'ordine"
       }
+    },
+    "B2B": {
+      "draft_order_details": {
+        "payment_status": {
+          "pending": {
+            "banner_overdue_for_single_fulfillment": {
+              "few": "Il tuo pagamento del valore di {{amount}} è in ritardo {{count}} dni. {{link}}",
+              "two": "Il tuo pagamento del valore di {{amount}} è in ritardo {{count}} dni. {{link}}"
+            }
+          }
+        }
+      }
+    },
+    "errors": {
+      "banner_title": {
+        "few": "Si è verificato un {{count}} napak",
+        "two": "Si è verificato un {{count}} napak"
+      }
+    },
+    "payment_methods": {
+      "add_payment_method": {
+        "subscription_contracts": {
+          "more_items": {
+            "few": "Ancora prodotti: {{count}}",
+            "two": "Ancora prodotti: {{count}}"
+          },
+          "product_count": {
+            "few": "N. prodotti: {{count}}",
+            "two": "N. prodotti: {{count}}"
+          }
+        },
+        "updating_contracts": {
+          "few": "Aggiornamento dei contratti di abbonamento ({{count}}) ...",
+          "two": "Aggiornamento dei contratti di abbonamento ({{count}}) ..."
+        },
+        "contracts_updated": {
+          "few": "Contratti di abbonamento aggiornati con successo ({{count}})",
+          "two": "Contratti di abbonamento aggiornati con successo ({{count}})"
+        }
+      }
     }
   }
 }
