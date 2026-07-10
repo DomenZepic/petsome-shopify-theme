@@ -582,6 +582,32 @@
         "expired_cards_info": {
           "few": "Numero di carte scadute: %{count}; puoi visualizzarle nel tuo account, dove è anche possibile modificarle.",
           "two": "Numero di carte scadute: %{count}; puoi visualizzarle nel tuo account, dove è anche possibile modificarle."
+        },
+        "order_edit_banner_items_added": {
+          "few": "Aggiunto: %{count}",
+          "two": "Aggiunto: %{count}"
+        },
+        "crypto_payment_method": {
+          "cashback_descriptor": {
+            "few": "Riceverai il rimborso dopo %{count} giorni",
+            "two": "Riceverai il rimborso dopo %{count} giorni"
+          }
+        },
+        "discount_show_more_warnings": {
+          "few": "Mostra altri %{count}",
+          "two": "Mostra altri %{count}"
+        },
+        "discount_codes_removed_summary": {
+          "few": "N. di codici sconto rimossi: %{count}",
+          "two": "N. di codici sconto rimossi: %{count}"
+        },
+        "discount_codes_modified_summary": {
+          "few": "N. di codici sconto modificati: %{count}",
+          "two": "N. di codici sconto modificati: %{count}"
+        },
+        "discount_codes_removed_or_modified_summary": {
+          "few": "N. di codici sconto rimossi o modificati: %{count}",
+          "two": "N. di codici sconto rimossi o modificati: %{count}"
         }
       }
     }
