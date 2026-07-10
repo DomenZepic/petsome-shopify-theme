@@ -1,0 +1,68 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "general": {
+    "password_page": {
+      "login_form_heading": "Unesite lozinku za pristup trgovini:",
+      "login_password_button": "Uđite s lozinkom",
+      "login_form_password_label": "Lozinka",
+      "login_form_password_placeholder": "Vaša lozinka",
+      "login_form_error": "Pogrešna lozinka!",
+      "login_form_submit": "Uđi",
+      "admin_link_html": "Jeste li vlasnik trgovine? <a href=\"/admin\" class=\"link underlined-link\">Prijavite se ovdje</a>",
+      "powered_by_shopify_html": "Ova će trgovina raditi na platformi {{ shopify }}"
+    },
+    "social": {
+      "alt_text": {
+        "share_on_facebook": "Podijeli na Facebooku",
+        "share_on_twitter": "Tvitaj na Twitteru",
+        "share_on_pinterest": "Prikvači na Pinterestu"
+      },
+      "links": {
+        "twitter": "Twitter",
+        "facebook": "Facebook",
+        "pinterest": "Pinterest",
+        "instagram": "Instagram",
+        "tumblr": "Tumblr",
+        "snapchat": "Snapchat",
+        "youtube": "YouTube",
+        "vimeo": "Vimeo",
+        "tiktok": "TikTok"
+      }
+    },
+    "continue_shopping": "Nastavi kupovinu",
+    "pagination": {
+      "label": "Stranice",
+      "page": "Stranica {{ number }}",
+      "next": "Sljedeća stranica",
+      "previous": "Prethodna stranica"
+    },
+    "search": {
+      "search": "Pretraživanje",
+      "reset": "Očisti pojam za pretraživanje"
+    },
+    "cart": {
+      "view": "Prikaži košaricu ({{ count }})",
+      "view_empty_cart": "Prikaži košaricu",
+      "item_added": "Artikl dodan u košaricu"
+    },
+    "share": {
+      "close": "Zatvori dijeljenje",
+      "copy_to_clipboard": "Kopiraj poveznicu",
+      "success_message": "Poveznica kopirana u međuspremnik"
+    },
+    "slider": {
+      "of": "od",
+      "next_slide": "Klizač desno",
+      "previous_slide": "Klizač lijevo",
+      "name": "Klizač"
+    }
+  }
+}
