@@ -248,6 +248,13 @@
             "two": "Vaša narudžba je u obradi. Predviđeno vrijeme čekanja je %{count} min."
           }
         }
+      },
+      "order_payment_collection": {
+        "changes_summary": {
+          "added": {
+            "two": "Dodano: %{count}"
+          }
+        }
       }
     }
   }
