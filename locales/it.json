@@ -745,12 +745,6 @@
             "two": "La sede più vicina con i tuoi prodotti dista più di %{distance} da %{location}"
           }
         }
-      },
-      "merchandise_unavailable_in_buyer_location": {
-        "remove_items_action": {
-          "few": "rimuovete gli articoli non disponibili",
-          "two": "rimuovete gli articoli non disponibili"
-        }
       }
     }
   }
