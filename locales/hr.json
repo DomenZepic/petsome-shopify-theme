@@ -435,6 +435,13 @@
           "two": "Ponovno pošalji darovne bonove"
         }
       }
+    },
+    "order_details": {
+      "image_gallery": {
+        "load_more_items": {
+          "two": "Prikaži još {{count}} kosov"
+        }
+      }
     }
   }
 }
