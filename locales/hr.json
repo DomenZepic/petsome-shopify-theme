@@ -170,6 +170,14 @@
         "discount_code_applied_count": {
           "two": "Prikaži %{count} popusta"
         }
+      },
+      "payment": {
+        "order_covered_by_gift_cards_notice": {
+          "two": "Iznos vaše narudžbe pokriven je darovnim bonovima."
+        },
+        "card_fields_unavailable_html": {
+          "two": "Plaćanja kreditnim i debitnim karticama trenutačno nisu dostupna.<br><a href=\"%{current_url}\">Osvježite ovu stranicu</a> ili pokušajte s drugim načinom plaćanja."
+        }
       }
     }
   }
