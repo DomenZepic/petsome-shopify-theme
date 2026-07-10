@@ -68,7 +68,34 @@
   "products": {
     "product": {
       "inventory_low_stock": "Niska zaliha",
-      "inventory_low_stock_show_count": "Niska zaliha: preostalo {{ quantity }}"
+      "inventory_low_stock_show_count": "Niska zaliha: preostalo {{ quantity }}",
+      "add_to_cart": "Dodaj u košaricu",
+      "choose_options": "Odaberi mogućnosti",
+      "choose_product_options": "Odaberi mogućnosti za {{ product_name }}",
+      "description": "Opis",
+      "inventory_in_stock": "Na zalihi",
+      "inventory_in_stock_show_count": "{{ quantity }} na zalihi",
+      "inventory_out_of_stock": "Nema na zalihi",
+      "inventory_out_of_stock_continue_selling": "Na zalihi",
+      "sku": "SKU",
+      "on_sale": "Akcija",
+      "product_variants": "Varijante proizvoda",
+      "media": {
+        "gallery_viewer": "Galerija",
+        "load_image": "Učitaj sliku {{ index }} v galeriji",
+        "load_model": "Učitaj 3D model {{ index }} v galeriji",
+        "load_video": "Reproduciraj video {{ index }} v galeriji",
+        "image_available": "Slika {{ index }} je dostupna u galeriji",
+        "open_media": "Otvori medij {{ index }} v modalnom prozoru",
+        "play_model": "Pokreni 3D preglednik",
+        "play_video": "Reproduciraj video"
+      },
+      "quantity": {
+        "label": "Količina",
+        "input_label": "Količina za {{ product }}",
+        "increase": "Povećaj količinu za {{ product }}",
+        "decrease": "Smanji količinu za {{ product }}"
+      }
     }
   },
   "shopify": {
@@ -584,6 +611,41 @@
     "skip_to_product_info": "Preskoči na informacije o proizvodu",
     "close": "Zatvori",
     "unit_price_separator": "za",
-    "vendor": "Prodavač:"
+    "vendor": "Prodavač:",
+    "error": "Pogreška",
+    "refresh_page": "Odabir je pokrenuo potpuno osvježavanje stranice.",
+    "link_messages": {
+      "new_window": "Otvara se u novom prozoru.",
+      "external": "Otvara vanjsku web-stranicu."
+    },
+    "loading": "Učitavanje...",
+    "total_reviews": "ukupno ocjena",
+    "star_reviews_info": "{{ rating_value }} od {{ rating_max }} zvjezdica",
+    "collapsible_content_title": "Zlonamjeran sadržaj",
+    "complementary_products": "Komplementarni proizvodi"
+  },
+  "blogs": {
+    "article": {
+      "blog": "Blog",
+      "read_more_title": "Pročitajte više: {{ title }}",
+      "comments": {
+        "one": "{{ count }} komentar",
+        "other": "{{ count }} komentara"
+      },
+      "moderated": "Imajte na umu da komentari moraju biti odobreni prije nego što budu objavljeni.",
+      "comment_form_title": "Ostavite komentar",
+      "name": "Ime",
+      "email": "E-pošta",
+      "message": "Komentar",
+      "post": "Objavi komentar",
+      "back_to_blog": "Natrag na blog",
+      "share": "Podijeli ovaj članak",
+      "success": "Vaš komentar je uspješno objavljen! Hvala!",
+      "success_moderated": "Vaš komentar je uspješno poslan. Objavit ćemo ga uskoro jer je naš blog moderiran."
+    }
+  },
+  "onboarding": {
+    "product_title": "Primjer naslova proizvoda",
+    "collection_title": "Naziv vaše kolekcije"
   }
 }
