@@ -341,6 +341,11 @@
             "two": "{{count}} pogreška u odjeljku {{section}}"
           }
         }
+      },
+      "merchandise_unavailable_in_buyer_location": {
+        "remove_items_action": {
+          "two": "uklonite nedostupne artikle"
+        }
       }
     }
   }
