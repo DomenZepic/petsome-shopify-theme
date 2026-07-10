@@ -484,6 +484,14 @@
           "two": "Uspješno ažurirani ugovori za pretplatu ({{count}})"
         }
       }
+    },
+    "ui_components": {
+      "autocompleteOptionsAvailable": {
+        "two": "Br. proizvoda koji su dostupni: {{count}}"
+      },
+      "mapClusterTitle": {
+        "two": "Skupina s toliko oznaka: {{number}}"
+      }
     }
   }
 }
