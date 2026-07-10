@@ -120,7 +120,8 @@
     "dosage_supply": "Scorta per {{ months }} mesi ({{ amount }} {{ unit }})",
     "dosage_unit_capsules": "capsule",
     "dosage_unit_powder": "g",
-    "price_per_day": "{{ amount }} / giorno"
+    "price_per_day": "{{ amount }} / giorno",
+    "gifts_heading_default": "🎁 Regali gratuiti per acquisti più grandi"
   },
   "products": {
     "product": {

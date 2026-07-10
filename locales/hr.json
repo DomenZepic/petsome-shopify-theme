@@ -718,7 +718,8 @@
     "dosage_supply": "Zaliha za {{ months }} mjeseci ({{ amount }} {{ unit }})",
     "dosage_unit_capsules": "kapsula",
     "dosage_unit_powder": "g",
-    "price_per_day": "{{ amount }} / dan"
+    "price_per_day": "{{ amount }} / dan",
+    "gifts_heading_default": "🎁 Besplatni pokloni uz veću kupnju"
   },
   "templates": {
     "search": {

@@ -22,6 +22,11 @@
     assign kaching_amount_per_package = block.settings.grams_per_package
     assign kaching_amount_per_day_by_size = block.settings.grams_per_day_by_size
   endif
+
+  assign kaching_gifts_heading = block.settings.gifts_heading
+  if kaching_gifts_heading == blank
+    assign kaching_gifts_heading = 'kaching_custom_display.gifts_heading_default' | t
+  endif
 -%}
 <style>
   kaching-bundle {
@@ -432,8 +437,8 @@
         {%- endif -%}
       </div>
       <div class="kaching-custom-display__gifts" hidden>
-        {% if block.settings.gifts_heading != blank %}
-          <p class="kaching-custom-display__gifts-heading">{{ block.settings.gifts_heading }}</p>
+        {% if block.settings.hide_gifts_heading != true and kaching_gifts_heading != blank %}
+          <p class="kaching-custom-display__gifts-heading">{{ kaching_gifts_heading }}</p>
         {% endif %}
         <div class="kaching-custom-display__gifts-list" data-gifts-container></div>
       </div>

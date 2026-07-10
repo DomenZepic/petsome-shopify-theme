@@ -119,7 +119,8 @@
     "dosage_supply": "{{ months }}-mesečna zaloga ({{ amount }} {{ unit }})",
     "dosage_unit_capsules": "kapsul",
     "dosage_unit_powder": "g",
-    "price_per_day": "{{ amount }} / dan"
+    "price_per_day": "{{ amount }} / dan",
+    "gifts_heading_default": "🎁 Brezplačna darila ob večjem nakupu"
   },
   "products": {
     "product": {
