@@ -788,6 +788,14 @@
           "two": "%{count} pezzi"
         }
       }
+    },
+    "notices": {
+      "order": {
+        "cancel_reason": {
+          "few": "Altro",
+          "two": "Altro"
+        }
+      }
     }
   }
 }
