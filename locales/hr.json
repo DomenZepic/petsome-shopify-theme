@@ -217,6 +217,12 @@
         },
         "gift_card_text_title": {
           "two": "Darovni bonovi poslani su putem tekstualne poruke"
+        },
+        "gift_card_resent_confirmation": {
+          "two": "Poklon bonovi su ponovno poslani."
+        },
+        "gift_card_resend_failure": {
+          "two": "Došlo je do poteškoće pri ponovnom slanju poklon bonova. Pokušajte ponovno ili nas kontaktirajte."
         }
       }
     }
