@@ -180,6 +180,9 @@
         },
         "expired_cards_info": {
           "two": "Broj isteklih kartica: %{count}; možete ih pregledati na svom računu, gdje ih je također moguće uređivati."
+        },
+        "order_edit_banner_items_added": {
+          "two": "Dodano: %{count}"
         }
       }
     }
