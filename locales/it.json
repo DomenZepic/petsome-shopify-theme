@@ -681,6 +681,30 @@
             "two": "Questi prodotti saranno rimossi dal tuo carrello perché non è disponibile alcun metodo di consegna per il tuo indirizzo."
           }
         }
+      },
+      "pickup_point": {
+        "paginator": {
+          "header": {
+            "few": "Visualizzazione di %{first}–%{last} punti di ritiro su un totale di: %{count}",
+            "two": "Visualizzazione di %{first}–%{last} punti di ritiro su un totale di: %{count}"
+          },
+          "selected_pickup_point_label": {
+            "few": "%{pickup_point_index} punti di ritiro su un totale di: %{count}",
+            "two": "%{pickup_point_index} punti di ritiro su un totale di: %{count}"
+          },
+          "selected_page": {
+            "few": "%{first}–%{last} punti di ritiro su un totale di: %{count}",
+            "two": "%{first}–%{last} punti di ritiro su un totale di: %{count}"
+          }
+        },
+        "number_of_pickup_points_near_location": {
+          "few": "Più punti di ritiro (%{count}) vicino alla tua posizione",
+          "two": "Più punti di ritiro (%{count}) vicino alla tua posizione"
+        },
+        "pickup_unavailable_banner_title": {
+          "few": "Nessun punto di ritiro disponibile per i tuoi articoli",
+          "two": "Nessun punto di ritiro disponibile per i tuoi articoli"
+        }
       }
     }
   }
