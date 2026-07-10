@@ -609,6 +609,12 @@
           "few": "N. di codici sconto rimossi o modificati: %{count}",
           "two": "N. di codici sconto rimossi o modificati: %{count}"
         }
+      },
+      "thank_you": {
+        "login_reorder_link_text": {
+          "two": "acquista anche questi prodotti",
+          "few": "acquista anche questi prodotti"
+        }
       }
     }
   }
