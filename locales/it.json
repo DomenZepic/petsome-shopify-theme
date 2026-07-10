@@ -501,6 +501,14 @@
             }
           }
         }
+      },
+      "general": {
+        "map": {
+          "cluster_title": {
+            "few": "Una gru con così tante etichette: {{number}}",
+            "two": "Una gru con così tante etichette: {{number}}"
+          }
+        }
       }
     }
   }
