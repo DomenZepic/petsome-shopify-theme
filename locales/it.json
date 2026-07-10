@@ -811,6 +811,12 @@
           "few": "N. di elementi: {{count}}",
           "two": "N. di elementi: {{count}}"
         }
+      },
+      "order_status": {
+        "delivered_description_gift_card": {
+          "few": "I buoni regalo sono stati inviati tramite e-mail.",
+          "two": "I buoni regalo sono stati inviati tramite e-mail."
+        }
       }
     }
   }
