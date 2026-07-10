@@ -638,6 +638,22 @@
         "gift_card_resend_failure": {
           "few": "Si è verificato un problema durante il nuovo invio dei buoni regalo. Riprova o contattaci.",
           "two": "Si è verificato un problema durante il nuovo invio dei buoni regalo. Riprova o contattaci."
+        },
+        "items_fulfilled_by_store": {
+          "few": "Gli articoli acquistati arriveranno da altri negozi.",
+          "two": "Gli articoli acquistati arriveranno da altri negozi."
+        }
+      },
+      "review": {
+        "blocks": {
+          "pickup_items_at": {
+            "few": "Ritiro di %{count} articoli presso:",
+            "two": "Ritiro di %{count} articoli presso:"
+          },
+          "ship_items_to": {
+            "few": "Invia %{count} pezzi a",
+            "two": "Invia %{count} pezzi a"
+          }
         }
       }
     }
