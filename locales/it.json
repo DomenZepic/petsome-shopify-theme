@@ -509,6 +509,12 @@
             "two": "Una gru con così tante etichette: {{number}}"
           }
         }
+      },
+      "customer_account": {
+        "saved_address_option_description": {
+          "few": "Avete {{count}} shranjenih indirizzi.",
+          "two": "Avete {{count}} shranjenih indirizzi."
+        }
       }
     }
   }
