@@ -111,6 +111,44 @@ if (!customElements.get('kaching-custom-display')) {
       }
     }
 
+    // Kaching's own multi-language deal text (translated natively in the
+    // Kaching app) lives in a separate static <script id="kaching-bundles-
+    // translations"> blob - a list of { locale, translations: { dealBlocks:
+    // { <dealId>: { "<original text>": "<translated text>" } } } }. The
+    // static deal-settings blob we read in readDealSettings() is only ever
+    // in the deal's original/default language, so any text sourced from it
+    // (e.g. the progressive-gifts title) needs a lookup here to actually
+    // show translated on non-default-locale storefronts. The same source
+    // string maps to the same translation across every dealBlock entry, so
+    // there's no need to match this page's specific deal - the first hit
+    // for the current locale is used.
+    translateFromKaching(sourceText) {
+      if (!sourceText) return null;
+
+      if (this._kachingTranslations === undefined) {
+        const el = document.getElementById('kaching-bundles-translations');
+        try {
+          this._kachingTranslations = el ? JSON.parse(el.textContent) : null;
+        } catch (error) {
+          this._kachingTranslations = null;
+        }
+      }
+
+      if (!Array.isArray(this._kachingTranslations)) return null;
+
+      const locale = (document.documentElement.lang || '').split('-')[0].toLowerCase();
+      const entry = this._kachingTranslations.find((item) => item.locale === locale);
+      const dealBlocks = entry && entry.translations && entry.translations.dealBlocks;
+      if (!dealBlocks) return null;
+
+      for (const blockId in dealBlocks) {
+        if (Object.prototype.hasOwnProperty.call(dealBlocks[blockId], sourceText)) {
+          return dealBlocks[blockId][sourceText];
+        }
+      }
+      return null;
+    }
+
     readDealBars() {
       const settings = this.readDealSettings();
       if (!settings) return [];
@@ -134,7 +172,7 @@ if (!customElements.get('kaching-custom-display')) {
 
     resolveGiftDisplay(gift) {
       if (gift.giftType === 'shipping') {
-        return { title: gift.title, image: null, icon: 'local_shipping' };
+        return { title: this.translateFromKaching(gift.title) || gift.title, image: null, icon: 'local_shipping' };
       }
       if (gift.productGID) {
         const numericId = gift.productGID.split('/').pop();
@@ -150,7 +188,8 @@ if (!customElements.get('kaching-custom-display')) {
           }
         }
       }
-      return { title: gift.title === '{{product}}' ? 'Gift' : gift.title, image: null, icon: 'redeem' };
+      const fallbackTitle = gift.title === '{{product}}' ? 'Gift' : gift.title;
+      return { title: this.translateFromKaching(fallbackTitle) || fallbackTitle, image: null, icon: 'redeem' };
     }
 
     collectGifts() {
@@ -177,7 +216,7 @@ if (!customElements.get('kaching-custom-display')) {
           image: display.image,
           icon: display.icon,
           comparePrice: gift.comparePrice || null,
-          lockedTitle: gift.lockedTitle,
+          lockedTitle: this.translateFromKaching(gift.lockedTitle) || gift.lockedTitle,
           unlockAtBar: gift.unlockAtBar,
         };
       });
@@ -384,7 +423,8 @@ if (!customElements.get('kaching-custom-display')) {
       tilesData.forEach(({ tier, imageUrl, price, valid, validationMessage, dosage }, index) => {
         const position = index + 1;
         const badgeStyle = this.dataset[`tier${position}Style`] || 'none';
-        const badgeLabel = tier.label || tier.badgeText || '';
+        const rawBadgeLabel = tier.label || tier.badgeText || '';
+        const badgeLabel = this.translateFromKaching(rawBadgeLabel) || rawBadgeLabel;
         const isSelected = tier.id === (this.selectedDealBarId || this.preselectedDealBarId);
 
         const dosageLines = [];
@@ -415,7 +455,7 @@ if (!customElements.get('kaching-custom-display')) {
           >
             <span class="kaching-tile__image" aria-hidden="true"${imageUrl ? ` style="background-image:url('${imageUrl}')"` : ''}></span>
             <span class="kaching-tile__content">
-              <span class="kaching-tile__title">${tier.title}</span>
+              <span class="kaching-tile__title">${this.translateFromKaching(tier.title) || tier.title}</span>
               <span class="kaching-tile__price">${this.formatMoney(price / tier.quantity)}</span>
               ${dosageLines.map((line) => `<span class="kaching-tile__dosage">${line}</span>`).join('')}
               ${!valid ? `<span class="kaching-tile__unavailable">${validationMessage || this.i18n.unavailable}</span>` : ''}
@@ -460,7 +500,7 @@ if (!customElements.get('kaching-custom-display')) {
 
       const headingEl = this.querySelector('.kaching-custom-display__gifts-heading');
       if (headingEl && this.giftsTitle) {
-        headingEl.textContent = this.giftsTitle;
+        headingEl.textContent = this.translateFromKaching(this.giftsTitle) || this.giftsTitle;
       }
 
       const selectedBarPosition = this.getSelectedBarPosition();
