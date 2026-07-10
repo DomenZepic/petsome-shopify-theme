@@ -392,6 +392,11 @@
           "two": "Drugo"
         }
       }
+    },
+    "page_titles": {
+      "search_results": {
+        "two": "Pretraživanje: pronađeno toliko rezultata: %{count} za »%{terms}«"
+      }
     }
   }
 }
