@@ -560,6 +560,14 @@
         "pickup_unavailable_banner_title": {
           "few": "I tuoi articoli non sono disponibili in nessun negozio",
           "two": "I tuoi articoli non sono disponibili in nessun negozio"
+        },
+        "pickup_unavailable_banner_title_with_country": {
+          "few": "Nel paese %{country} non ci sono negozi in cui questi prodotti siano disponibili",
+          "two": "Nel paese %{country} non ci sono negozi in cui questi prodotti siano disponibili"
+        },
+        "discount_code_applied_count": {
+          "few": "Mostra %{count} sconti",
+          "two": "Mostra %{count} sconti"
         }
       }
     }
