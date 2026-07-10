@@ -90,7 +90,37 @@
             },
             "week": {
               "two": "svakih toliko tjedana: %{count}"
+            },
+            "month": {
+              "two": "svakih toliko mjeseci: %{count}"
+            },
+            "year": {
+              "two": "svakih toliko godina: %{count}"
             }
+          },
+          "first_n_order_free": {
+            "two": "Prve narudžbe besplatne (%{count})"
+          },
+          "free_for_first_n_order": {
+            "two": "Za prve narudžbe (%{count})"
+          },
+          "free_shipping_cycles": {
+            "two": "Besplatna dostava za %{count} dostava više"
+          },
+          "free_shipping_cycles_delivery_not_included": {
+            "two": "Besplatna dostava za %{count} dostava"
+          },
+          "first_n_order_free_with_cycle": {
+            "two": "Besplatna dostava za %{count} dostava više, zatim %{recurring_order_shipping_price}"
+          },
+          "first_n_order_free_with_cycle_delivery_not_included": {
+            "two": "Besplatna dostava za %{count} dostave, zatim %{recurring_order_shipping_price}"
+          },
+          "max_cycles_base_shipping": {
+            "two": "%{count} dostava više za %{shipping_price} svaki"
+          },
+          "max_cycles_base_shipping_delivery_not_included": {
+            "two": "%{count} dostava više za %{shipping_price} svaki"
           }
         }
       }
