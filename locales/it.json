@@ -906,6 +906,16 @@
           "two": "Contratti di abbonamento aggiornati con successo ({{count}})"
         }
       }
+    },
+    "ui_components": {
+      "autocompleteOptionsAvailable": {
+        "few": "N. di prodotti disponibili: {{count}}",
+        "two": "N. di prodotti disponibili: {{count}}"
+      },
+      "mapClusterTitle": {
+        "few": "Gru con così tante etichette: {{number}}",
+        "two": "Gru con così tante etichette: {{number}}"
+      }
     }
   }
 }
