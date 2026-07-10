@@ -405,6 +405,11 @@
         "items": {
           "two": "Br. elemenata: {{count}}"
         }
+      },
+      "order_status": {
+        "delivered_description_gift_card": {
+          "two": "Poklon bonovi poslani su putem e-pošte."
+        }
       }
     }
   }
