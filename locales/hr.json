@@ -409,6 +409,30 @@
       "order_status": {
         "delivered_description_gift_card": {
           "two": "Poklon bonovi poslani su putem e-pošte."
+        },
+        "gift_card_label": {
+          "two": "Poklon bonovi"
+        },
+        "confirmed_gift_card_additional_description": {
+          "two": "Svaka poklon kartica bit će poslana u zasebnoj e-poruci."
+        },
+        "delivered_description_gift_card_text": {
+          "two": "Poklon bonove šaljemo putem tekstualne poruke."
+        },
+        "confirmed_gift_card_additional_description_text": {
+          "two": "Svaki poklon bon bit će poslan u zasebnoj tekstualnoj poruci."
+        },
+        "gift_resend_success": {
+          "two": "Poklon bon je ponovno poslan"
+        },
+        "gift_resend_failure": {
+          "two": "Došlo je do problema pri ponovnom slanju poklon bonova. Pokušajte ponovno ili nas kontaktirajte."
+        },
+        "tracking_number": {
+          "two": "Brojevi za praćenje"
+        },
+        "gift_card_resend_button": {
+          "two": "Ponovno pošalji darovne bonove"
         }
       }
     }
