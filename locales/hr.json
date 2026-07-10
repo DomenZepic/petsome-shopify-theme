@@ -255,6 +255,37 @@
             "two": "Dodano: %{count}"
           }
         }
+      },
+      "open_graph_meta_tag": {
+        "title_with_products": {
+          "two": "Kupnja proizvoda %{product_name} i %{count} drugih proizvoda"
+        }
+      },
+      "subscriptions": {
+        "recurring_totals_with_policies": {
+          "first_cycles": {
+            "two": "Prva plaćanja (%{count}) u iznosima %{total_price}"
+          }
+        },
+        "recurring_total_intervals": {
+          "day": {
+            "two": "%{count} dana"
+          },
+          "week": {
+            "two": "%{count} tj."
+          },
+          "month": {
+            "two": "%{count} mj."
+          },
+          "year": {
+            "two": "%{count} god."
+          }
+        },
+        "recurring_totals_with_initial_order_shipping_discount_with_policies": {
+          "first_cycles": {
+            "two": ", zatim toliko plaćanja: %{count} po %{total_price}"
+          }
+        }
       }
     }
   }
