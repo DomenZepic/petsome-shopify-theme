@@ -744,6 +744,50 @@
             "few": "La sede più vicina con i tuoi prodotti dista più di %{distance} da %{location}",
             "two": "La sede più vicina con i tuoi prodotti dista più di %{distance} da %{location}"
           }
+        },
+        "location_information_far_away": {
+          "few": "N. di località con il tuo prodotto: %{count}",
+          "two": "N. di località con il tuo prodotto: %{count}"
+        },
+        "location_nearby": {
+          "few": "Nelle vicinanze ci sono %{count} località con il tuo prodotto",
+          "two": "Nelle vicinanze ci sono %{count} località con il tuo prodotto"
+        },
+        "location_nearby_short": {
+          "few": "%{count} località vicine con il tuo prodotto",
+          "two": "%{count} località vicine con il tuo prodotto"
+        },
+        "location_far_away": {
+          "few": "%{count} località con il tuo prodotto",
+          "two": "%{count} località con il tuo prodotto"
+        },
+        "toggle_more_locations": {
+          "few": "Altre %{count} località",
+          "two": "Altre %{count} località"
+        },
+        "pickup_unavailable_banner_title": {
+          "few": "Non ci sono località con i tuoi prodotti",
+          "two": "Non ci sono località con i tuoi prodotti"
+        },
+        "pickup_unavailable_banner_title_with_country": {
+          "few": "Nel paese %{country} non ci sono località con i tuoi prodotti",
+          "two": "Nel paese %{country} non ci sono località con i tuoi prodotti"
+        },
+        "location_information_far_away_one_item": {
+          "few": "Sono disponibili %{count} località con il tuo articolo",
+          "two": "Sono disponibili %{count} località con il tuo articolo"
+        },
+        "location_information_far_away_other_items": {
+          "few": "Sono disponibili %{count} località con i tuoi articoli",
+          "two": "Sono disponibili %{count} località con i tuoi articoli"
+        },
+        "location_nearby_one_item": {
+          "few": "Nelle vicinanze ci sono %{count} località con il tuo articolo",
+          "two": "Nelle vicinanze ci sono %{count} località con il tuo articolo"
+        },
+        "location_nearby_other_items": {
+          "few": "Nelle vicinanze ci sono %{count} località con i tuoi articoli",
+          "two": "Nelle vicinanze ci sono %{count} località con i tuoi articoli"
         }
       }
     }
