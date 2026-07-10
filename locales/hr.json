@@ -121,6 +121,21 @@
           },
           "max_cycles_base_shipping_delivery_not_included": {
             "two": "%{count} dostava više za %{shipping_price} svaki"
+          },
+          "prepaid_free_shipping_with_cycles": {
+            "two": "Besplatna dostava za prvih %{cycle}, nakon čega slijedi %{recurring_order_shipping_price}"
+          },
+          "prepaid_order_one_cycle": {
+            "two": "%{shipping_price} za još %{count} dostava (%{per_delivery_cost})"
+          },
+          "prepaid_order_one_cycle_delivery_not_included": {
+            "two": "%{shipping_price} za %{count} dostave (%{per_delivery_cost})"
+          },
+          "prepaid_order_no_cycle": {
+            "two": "%{shipping_price} za još %{count} dostava (%{per_delivery_cost}), nakon čega slijedi %{recurring_order_shipping_price}"
+          },
+          "prepaid_order_no_cycle_delivery_not_included": {
+            "two": "%{shipping_price} za %{count} dostava (%{per_delivery_cost}), nakon čega slijedi %{recurring_order_shipping_price}"
           }
         }
       }
