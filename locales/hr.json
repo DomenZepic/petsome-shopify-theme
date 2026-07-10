@@ -64,5 +64,11 @@
       "previous_slide": "Klizač lijevo",
       "name": "Klizač"
     }
+  },
+  "products": {
+    "product": {
+      "inventory_low_stock": "Niska zaliha",
+      "inventory_low_stock_show_count": "Niska zaliha: preostalo {{ quantity }}"
+    }
   }
 }
