@@ -586,6 +586,8 @@
               "type": "product_kaching-custom-display",
               "settings": {
                 "disclaimer_text": "<p>*Prve spremembe so vidne v 2–3 tednih.  Za najboljše rezultate priporočamo uporabo 2–3 mesece.</p>",
+                "gifts_heading": "",
+                "hide_gifts_heading": false,
                 "tier_1_style": "none",
                 "tier_2_style": "recommended",
                 "tier_3_style": "best",
@@ -594,8 +596,11 @@
                 "accent_color_dark": "#f47671",
                 "secondary_color": "#e8d6c5",
                 "light_text_color": "#faf9f6",
+                "product_type": "capsules",
                 "capsules_per_package": 90,
                 "capsules_per_day_by_size": "1, 2, 3",
+                "grams_per_package": 90,
+                "grams_per_day_by_size": "1, 2, 3",
                 "margin_top": 15,
                 "margin_bottom": 15
               },
@@ -1266,7 +1271,7 @@
         "card_2"
       ],
       "settings": {
-        "image": "shopify://shop_images/2dd3df11ba896ac16b47bbb251e809585011a8f3.jpg",
+        "image": "shopify://shop_images/hf_20260324_090023_9eac1bcd-6ab4-48cb-84f0-f40b13f453d6.jpg",
         "button_label": "Naroči MobiMix",
         "button_link": "",
         "button_icon": "shopping_bag",
