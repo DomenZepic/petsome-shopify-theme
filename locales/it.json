@@ -844,6 +844,32 @@
           "few": "%{count} pezzi",
           "two": "%{count} pezzi"
         }
+      },
+      "stock": {
+        "unshippable_product": {
+          "header": {
+            "few": "La consegna non è disponibile per più prodotti (%{count})",
+            "two": "La consegna non è disponibile per più prodotti (%{count})"
+          },
+          "message": {
+            "few": "Questi prodotti saranno rimossi dal tuo carrello perché non è disponibile alcun metodo di consegna per il tuo indirizzo.",
+            "two": "Questi prodotti saranno rimossi dal tuo carrello perché non è disponibile alcun metodo di consegna per il tuo indirizzo."
+          }
+        },
+        "item_label": {
+          "few": "N. articoli: {{count}}",
+          "two": "N. articoli: {{count}}"
+        },
+        "unfulfillable_product": {
+          "message": {
+            "few": "%{delivery_method} non è più disponibile per questi articoli.",
+            "two": "%{delivery_method} non è più disponibile per questi articoli."
+          },
+          "default_message": {
+            "few": "Il metodo di consegna selezionato non è più disponibile per questi articoli.",
+            "two": "Il metodo di consegna selezionato non è più disponibile per questi articoli."
+          }
+        }
       }
     },
     "notices": {
