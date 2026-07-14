@@ -357,6 +357,9 @@
         },
         "thank_you_item_label": {
           "two": "Br. artikala: %{count}"
+        },
+        "items_fulfilled_by_store": {
+          "two": "Vaši kupljeni artikli doći će iz drugih trgovina."
         }
       },
       "shipping_errors": {
@@ -528,6 +531,13 @@
           },
           "default_message": {
             "two": "Odabrani način dostave više nije dostupan za ove artikle."
+          }
+        }
+      },
+      "review": {
+        "blocks": {
+          "pickup_items_at": {
+            "two": "Preuzimanje %{count} proizvoda u:"
           }
         }
       }
