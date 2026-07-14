@@ -543,6 +543,24 @@
             "two": "Pošalji %{count} komada na"
           }
         }
+      },
+      "review_address_modal": {
+        "subtitle": {
+          "two": "Ova narudžba bit će poslana na adresu koju navodi {{merchant}}. Odaberite adresu za dostavu."
+        }
+      },
+      "local_pickup": {
+        "location_information": {
+          "two": "U vašoj blizini je toliko lokacija (%{count}) s dovoljnom zalihom"
+        },
+        "paginator": {
+          "label": {
+            "two": "%{first} – %{last} od %{count} trgovina"
+          }
+        },
+        "reveal_more_label": {
+          "two": "Prikaži dodatne lokacije (%{count})"
+        }
       }
     },
     "notices": {
