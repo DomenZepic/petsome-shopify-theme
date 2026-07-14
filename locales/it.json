@@ -1180,5 +1180,51 @@
         }
       }
     }
+  },
+  "gempages": {
+    "Carousel": {
+      "no_slider": "Nessuno slider"
+    },
+    "CarouselV3": {
+      "no_slider": "Nessuno slider"
+    },
+    "Newsletter": {
+      "err_msg_default": "Impossibile inviare l'email. Per favore riprova più tardi.",
+      "success_msg_default": "Grazie per esserti iscritto"
+    },
+    "IconListV2": {
+      "icons_not_found": "Icone non trovate"
+    },
+    "IconList": {
+      "icons_not_found": "Icone non trovate"
+    },
+    "IconListHoz": {
+      "icons_not_found": "Icone non trovate"
+    },
+    "Product": {
+      "product_not_found": "Prodotto non trovato"
+    },
+    "ProductList": {
+      "product_not_found": "Prodotto non trovato!",
+      "no_products_found": "Nessun prodotto trovato!",
+      "no_related_products": "Nessun prodotto correlato!"
+    },
+    "ProductListV3": {
+      "product_not_found": "Prodotto non trovato!",
+      "no_products_found": "Nessun prodotto trovato!",
+      "no_related_products": "Nessun prodotto correlato!"
+    },
+    "ProductTitle": {
+      "product_not_found": "Prodotto non trovato"
+    },
+    "ProductVariants": {
+      "please_select": "Seleziona un'opzione"
+    },
+    "StockCounter": {
+      "let_buy_now": "<mark>AFFRETTATI!</mark> ACQUISTA ORA"
+    },
+    "Breadcrumb": {
+      "home": "Home"
+    }
   }
 }
