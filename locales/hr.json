@@ -583,6 +583,33 @@
         },
         "pickup_unavailable_banner_title": {
           "two": "Nema lokacija s vašim proizvodima"
+        },
+        "pickup_unavailable_banner_title_with_country": {
+          "two": "U državi %{country} nema lokacija s vašim proizvodima"
+        },
+        "location_information_far_away_one_item": {
+          "two": "Dostupno je %{count} lokacija s vašim komadom"
+        },
+        "location_information_far_away_other_items": {
+          "two": "Dostupno je %{count} lokacija s vašim komadima"
+        },
+        "location_nearby_one_item": {
+          "two": "U blizini je %{count} lokacija s vašim komadom"
+        },
+        "location_nearby_other_items": {
+          "two": "U blizini je %{count} lokacija s vašim komadima"
+        },
+        "location_nearby_short_one_item": {
+          "two": "%{count} obližnjih lokacija s vašim komadom"
+        },
+        "location_nearby_short_other_items": {
+          "two": "%{count} obližnjih lokacija s vašim komadima"
+        },
+        "location_far_away_one_item": {
+          "two": "%{count} lokacija s vašim komadom"
+        },
+        "location_far_away_other_items": {
+          "two": "%{count} lokacija s vašim komadima"
         }
       }
     },
