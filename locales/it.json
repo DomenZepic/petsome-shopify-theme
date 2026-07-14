@@ -920,6 +920,32 @@
           "few": "Acquisto del prodotto %{product_name} e di altri prodotti %{count}",
           "two": "Acquisto del prodotto %{product_name} e di altri prodotti %{count}"
         }
+      },
+      "subscriptions": {
+        "recurring_totals_with_policies": {
+          "first_cycles": {
+            "few": "Primi pagamenti (%{count}) negli importi di %{total_price}",
+            "two": "Primi pagamenti (%{count}) negli importi di %{total_price}"
+          }
+        },
+        "recurring_total_intervals": {
+          "day": {
+            "few": "%{count} giorni",
+            "two": "%{count} giorni"
+          },
+          "week": {
+            "few": "%{count} sett.",
+            "two": "%{count} sett."
+          },
+          "month": {
+            "few": "%{count} mesi",
+            "two": "%{count} mesi"
+          },
+          "year": {
+            "few": "%{count} anni",
+            "two": "%{count} anni"
+          }
+        }
       }
     },
     "notices": {
