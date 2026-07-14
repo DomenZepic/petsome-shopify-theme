@@ -1111,6 +1111,14 @@
             "banner_overdue_for_single_fulfillment": {
               "few": "Il tuo pagamento del valore di {{amount}} è in ritardo {{count}} dni. {{link}}",
               "two": "Il tuo pagamento del valore di {{amount}} è in ritardo {{count}} dni. {{link}}"
+            },
+            "banner_overdue": {
+              "few": "Il tuo pagamento è in ritardo di {{count}} dni",
+              "two": "Il tuo pagamento è in ritardo di {{count}} dni"
+            },
+            "banner_due": {
+              "few": "La scadenza del tuo pagamento è tra {{count}} dni",
+              "two": "La scadenza del tuo pagamento è tra {{count}} dni"
             }
           }
         }
