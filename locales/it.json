@@ -898,6 +898,14 @@
             "two": "Invia %{count} pezzi a"
           }
         }
+      },
+      "processing": {
+        "wait": {
+          "medium": {
+            "two": "Il tuo ordine è in elaborazione. Il tempo di attesa previsto è di %{count} min.",
+            "few": "Il tuo ordine è in elaborazione. Il tempo di attesa previsto è di %{count} min."
+          }
+        }
       }
     },
     "notices": {
