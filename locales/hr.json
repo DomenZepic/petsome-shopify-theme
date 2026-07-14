@@ -726,6 +726,13 @@
           "two": "prije {{count}} min"
         }
       }
+    },
+    "order_details": {
+      "image_gallery": {
+        "load_more_items": {
+          "two": "Prikaži još {{count}} kosov"
+        }
+      }
     }
   },
   "sections": {
