@@ -265,6 +265,35 @@
           "per_item": {
             "two": "%{price} za toliko artikala: %{count}"
           }
+        },
+        "expand_component_information": {
+          "two": "Prikaži artikle (%{count})"
+        },
+        "collapse_component_information": {
+          "two": "Sakrij artikle (%{count})"
+        },
+        "discount_discovery": {
+          "merchandise_quantity_label": {
+            "two": "Br. artikala: %{count}"
+          }
+        },
+        "discount_title_stacking": {
+          "two": "Popusti"
+        },
+        "discount_order_stacking": {
+          "two": "Popusti pri narudžbi"
+        },
+        "subtotal_label_with_quantity": {
+          "two": "Međuzbroj proizvoda: %{count}"
+        },
+        "number_items": {
+          "two": "Br. artikala: %{count}"
+        },
+        "view_all_items": {
+          "two": "Prikaz svih artikala: %{count}"
+        },
+        "pickup_unavailable_banner_title": {
+          "two": "Vaši artikli nisu dostupni ni u jednoj trgovini"
         }
       },
       "payment": {
