@@ -560,6 +560,29 @@
         },
         "reveal_more_label": {
           "two": "Prikaži dodatne lokacije (%{count})"
+        },
+        "all_stores_far_away": {
+          "title_with_item": {
+            "two": "Najbliža lokacija s vašim proizvodima udaljena je više od %{distance} od %{location}"
+          }
+        },
+        "location_information_far_away": {
+          "two": "Broj lokacija s vašim proizvodom: %{count}"
+        },
+        "location_nearby": {
+          "two": "U blizini je %{count} lokacija s vašim proizvodom"
+        },
+        "location_nearby_short": {
+          "two": "%{count} obližnjih lokacija s vašim proizvodom"
+        },
+        "location_far_away": {
+          "two": "%{count} lokacija s vašim proizvodom"
+        },
+        "toggle_more_locations": {
+          "two": "Još %{count} lokacija"
+        },
+        "pickup_unavailable_banner_title": {
+          "two": "Nema lokacija s vašim proizvodima"
         }
       }
     },
