@@ -538,6 +538,9 @@
         "blocks": {
           "pickup_items_at": {
             "two": "Preuzimanje %{count} proizvoda u:"
+          },
+          "ship_items_to": {
+            "two": "Pošalji %{count} komada na"
           }
         }
       }
