@@ -1018,6 +1018,12 @@
           "few": "rimuovere gli articoli non disponibili",
           "two": "rimuovere gli articoli non disponibili"
         }
+      },
+      "remote_merchandise_only": {
+        "detail_item_label": {
+          "few": "N. articolo: {{count}}",
+          "two": "N. articolo: {{count}}"
+        }
       }
     },
     "notices": {
