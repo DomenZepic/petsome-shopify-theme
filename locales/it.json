@@ -906,6 +906,20 @@
             "few": "Il tuo ordine è in elaborazione. Il tempo di attesa previsto è di %{count} min."
           }
         }
+      },
+      "order_payment_collection": {
+        "changes_summary": {
+          "added": {
+            "two": "Aggiunto: %{count}",
+            "few": "Aggiunto: %{count}"
+          }
+        }
+      },
+      "open_graph_meta_tag": {
+        "title_with_products": {
+          "few": "Acquisto del prodotto %{product_name} e di altri prodotti %{count}",
+          "two": "Acquisto del prodotto %{product_name} e di altri prodotti %{count}"
+        }
       }
     },
     "notices": {
