@@ -549,6 +549,14 @@
             "few": "più di %{count} consegne a %{shipping_price} ciascuna",
             "two": "più di %{count} consegne a %{shipping_price} ciascuna"
           }
+        },
+        "unbranded_description_with_fulfillment_days": {
+          "few": "Spedizione in %{count} giorni lavorativi",
+          "two": "Spedizione in %{count} giorni lavorativi"
+        },
+        "unbranded_description_with_fulfillment_weeks": {
+          "few": "Spedizione in %{count} settimane",
+          "two": "Spedizione in %{count} settimane"
         }
       },
       "general": {
