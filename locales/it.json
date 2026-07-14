@@ -1171,6 +1171,14 @@
         "few": "Gru con così tante etichette: {{number}}",
         "two": "Gru con così tante etichette: {{number}}"
       }
+    },
+    "date": {
+      "humanize": {
+        "lessThanOneHourAgo": {
+          "few": "pred {{count}} min",
+          "two": "pred {{count}} min"
+        }
+      }
     }
   }
 }
