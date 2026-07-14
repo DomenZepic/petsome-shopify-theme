@@ -695,6 +695,10 @@
         "gift_card_resend_failure": {
           "few": "Si è verificato un problema durante il nuovo invio dei buoni regalo. Riprova o contattaci.",
           "two": "Si è verificato un problema durante il nuovo invio dei buoni regalo. Riprova o contattaci."
+        },
+        "thank_you_unconfirmed_items_heading": {
+          "few": "Alcuni articoli non sono confermati",
+          "two": "Alcuni articoli non sono confermati"
         }
       },
       "shipping_errors": {
