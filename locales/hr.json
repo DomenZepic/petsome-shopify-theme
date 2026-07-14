@@ -260,6 +260,11 @@
         },
         "discount_code_applied_count": {
           "two": "Prikaži %{count} popusta"
+        },
+        "unit_price": {
+          "per_item": {
+            "two": "%{price} za toliko artikala: %{count}"
+          }
         }
       },
       "payment": {
