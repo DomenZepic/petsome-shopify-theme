@@ -843,7 +843,40 @@
           "two": "Non ci sono località con i tuoi prodotti"
         },
         "pickup_unavailable_banner_title_with_country": {
-          "few": "Nel paese %{country} non ci sono località con i tuoi prodotti"
+          "few": "Nel paese %{country} non ci sono località con i tuoi prodotti",
+          "two": "Nel paese %{country} non ci sono località con i tuoi prodotti"
+        },
+        "location_information_far_away_one_item": {
+          "few": "Sono disponibili %{count} località con il tuo articolo",
+          "two": "Sono disponibili %{count} località con il tuo articolo"
+        },
+        "location_information_far_away_other_items": {
+          "few": "Sono disponibili %{count} località con i tuoi articoli",
+          "two": "Sono disponibili %{count} località con i tuoi articoli"
+        },
+        "location_nearby_one_item": {
+          "few": "Nelle vicinanze ci sono %{count} località con il tuo articolo",
+          "two": "Nelle vicinanze ci sono %{count} località con il tuo articolo"
+        },
+        "location_nearby_other_items": {
+          "few": "Nelle vicinanze ci sono %{count} località con i tuoi articoli",
+          "two": "Nelle vicinanze ci sono %{count} località con i tuoi articoli"
+        },
+        "location_nearby_short_one_item": {
+          "few": "%{count} località vicine con il tuo articolo",
+          "two": "%{count} località vicine con il tuo articolo"
+        },
+        "location_nearby_short_other_items": {
+          "few": "%{count} località vicine con i tuoi articoli",
+          "two": "%{count} località vicine con i tuoi articoli"
+        },
+        "location_far_away_one_item": {
+          "few": "%{count} località con il tuo articolo",
+          "two": "%{count} località con il tuo articolo"
+        },
+        "location_far_away_other_items": {
+          "few": "%{count} località con i tuoi articoli",
+          "two": "%{count} località con i tuoi articoli"
         }
       },
       "split_delivery": {
