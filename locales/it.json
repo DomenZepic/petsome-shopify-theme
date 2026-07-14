@@ -945,6 +945,12 @@
             "few": "%{count} anni",
             "two": "%{count} anni"
           }
+        },
+        "recurring_totals_with_initial_order_shipping_discount_with_policies": {
+          "first_cycles": {
+            "few": ", poi così tanti pagamenti: %{count} per %{total_price}",
+            "two": ", poi così tanti pagamenti: %{count} per %{total_price}"
+          }
         }
       }
     },
