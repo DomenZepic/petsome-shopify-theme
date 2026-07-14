@@ -475,6 +475,27 @@
         "items_count": {
           "two": "%{count} komada"
         }
+      },
+      "stock": {
+        "unshippable_product": {
+          "header": {
+            "two": "Dostava nije dostupna za više proizvoda (%{count})"
+          },
+          "message": {
+            "two": "Ovi proizvodi bit će uklonjeni iz vaše košarice jer za vašu adresu nije dostupan nijedan način dostave."
+          }
+        },
+        "item_label": {
+          "two": "Br. artikala: {{count}}"
+        },
+        "unfulfillable_product": {
+          "message": {
+            "two": "%{delivery_method} više nije dostupan za ove artikle."
+          },
+          "default_message": {
+            "two": "Odabrani način dostave više nije dostupan za ove artikle."
+          }
+        }
       }
     },
     "notices": {
