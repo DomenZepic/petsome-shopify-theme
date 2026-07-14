@@ -699,6 +699,18 @@
         "thank_you_unconfirmed_items_heading": {
           "few": "Alcuni articoli non sono confermati",
           "two": "Alcuni articoli non sono confermati"
+        },
+        "thank_you_unconfirmed_items_description": {
+          "few": "Il tuo conto non è stato addebitato",
+          "two": "Il tuo conto non è stato addebitato"
+        },
+        "thank_you_item_label": {
+          "few": "N. articoli: %{count}",
+          "two": "N. articoli: %{count}"
+        },
+        "items_fulfilled_by_store": {
+          "few": "Gli articoli acquistati arriveranno da altri negozi.",
+          "two": "Gli articoli acquistati arriveranno da altri negozi."
         }
       },
       "shipping_errors": {
@@ -872,6 +884,18 @@
           "default_message": {
             "few": "Il metodo di consegna selezionato non è più disponibile per questi articoli.",
             "two": "Il metodo di consegna selezionato non è più disponibile per questi articoli."
+          }
+        }
+      },
+      "review": {
+        "blocks": {
+          "pickup_items_at": {
+            "few": "Ritiro di %{count} articoli in:",
+            "two": "Ritiro di %{count} articoli in:"
+          },
+          "ship_items_to": {
+            "few": "Invia %{count} pezzi a",
+            "two": "Invia %{count} pezzi a"
           }
         }
       }
