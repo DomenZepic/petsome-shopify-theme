@@ -1012,6 +1012,12 @@
             "two": ", poi così tanti pagamenti: %{count} per %{total_price}"
           }
         }
+      },
+      "merchandise_unavailable_in_buyer_location": {
+        "remove_items_action": {
+          "few": "rimuovere gli articoli non disponibili",
+          "two": "rimuovere gli articoli non disponibili"
+        }
       }
     },
     "notices": {
