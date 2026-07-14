@@ -1050,5 +1050,51 @@
       "copy_code_success": "Kod je uspješno kopiran",
       "print_gift_card": "Ispis"
     }
+  },
+  "gempages": {
+    "Carousel": {
+      "no_slider": "Bez klizača"
+    },
+    "CarouselV3": {
+      "no_slider": "Bez klizača"
+    },
+    "Newsletter": {
+      "err_msg_default": "Nije moguće poslati e-poštu. Molimo pokušajte ponovno kasnije.",
+      "success_msg_default": "Hvala na pretplati"
+    },
+    "IconListV2": {
+      "icons_not_found": "Ikone nisu pronađene"
+    },
+    "IconList": {
+      "icons_not_found": "Ikone nisu pronađene"
+    },
+    "IconListHoz": {
+      "icons_not_found": "Ikone nisu pronađene"
+    },
+    "Product": {
+      "product_not_found": "Proizvod nije pronađen"
+    },
+    "ProductList": {
+      "product_not_found": "Proizvod nije pronađen!",
+      "no_products_found": "Nisu pronađeni proizvodi!",
+      "no_related_products": "Nema povezanih proizvoda!"
+    },
+    "ProductListV3": {
+      "product_not_found": "Proizvod nije pronađen!",
+      "no_products_found": "Nisu pronađeni proizvodi!",
+      "no_related_products": "Nema povezanih proizvoda!"
+    },
+    "ProductTitle": {
+      "product_not_found": "Proizvod nije pronađen"
+    },
+    "ProductVariants": {
+      "please_select": "Molimo odaberite opciju"
+    },
+    "StockCounter": {
+      "let_buy_now": "<mark>POŽURITE!</mark> KUPITE ODMAH"
+    },
+    "Breadcrumb": {
+      "home": "Početna"
+    }
   }
 }
