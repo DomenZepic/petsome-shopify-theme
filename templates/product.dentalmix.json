@@ -193,7 +193,7 @@
                 "tag_2": {
                   "type": "petsome-tag",
                   "settings": {
-                    "text": "Čistejši zobje"
+                    "text": "Za čistejše zobe"
                   },
                   "blocks": {}
                 },
@@ -313,7 +313,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Zmanjša slab zadah",
+                    "text_1": "Pomaga zmanjšati neprijeten zadah",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -373,7 +373,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Zobje imajo manj vidnih oblog in zobnega kamna",
+                    "text_1": "Pomaga zmanjšati vidne zobne oblog in nastajanje zobnega kamna",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -433,7 +433,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Znanstveno zasnovano z močnim kompleksom aktivnih sestavin",
+                    "text_1": "Znanstveno zasnovana formula z močnim kompleksom aktivnih sestavin",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -493,7 +493,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Za čiste zobe in vsakodnevno nego zob",
+                    "text_1": "Za čistejše zobe in vsakodnevno nego ustne votline",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -553,7 +553,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Brez ščetkanja in brez anestezije — samo potreseš",
+                    "text_1": "Brez ščetkanja in brez anestezije",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -646,7 +646,7 @@
             "kaching_custom_display_1": {
               "type": "product_kaching-custom-display",
               "settings": {
-                "disclaimer_text": "<p>*Manj zadaha večina opazi v 7–14 dneh. Za čistejše zobe in manj oblog priporočamo redno vsakodnevno uporabo.</p>",
+                "disclaimer_text": "<p>*Večina lastnikov prve spremembe pri zadahu opazi v 7–14 dneh. Za čistejše zobe in manj oblog priporočamo redno vsakodnevno uporabo.</p>",
                 "gifts_heading": "",
                 "hide_gifts_heading": false,
                 "tier_1_style": "none",
@@ -672,7 +672,7 @@
               "name": "Petsome: Shipping info",
               "settings": {
                 "icon": "local_shipping",
-                "text": "<p>Predviden čas dostave: <strong>2-3 dni</strong></p>",
+                "text": "<p>Predviden čas dostave: <strong>2-3 delovne dni</strong></p>",
                 "margin_top": 0,
                 "margin_bottom": 12
               },
@@ -733,7 +733,7 @@
                 "visibility": "desktop-hidden",
                 "image": "shopify://shop_images/unnamed_1.jpg",
                 "rating": 5,
-                "quote": "\"Več kot 80 % psov ima do tretjega leta vidne težave z zobmi — večina lastnikov pa rednega ščetkanja preprosto ne zmore. DentalMix deluje drugače: skozi pasjo slino, ki obliva zobe ves dan. Pomaga vezati kalcij, preden se strdi v zobni kamen, in preprečuje, da bi se obloge sprijele. Enostavna dnevna podpora proti zadahu in za čistejše zobe — brez ščetkanja.\"",
+                "quote": "\"Več kot 80 % psov ima do tretjega leta vidne težave z zobmi, večina lastnikov pa jim zob preprosto ne uspe redno ščetkati. DentalMix deluje drugače, saj se njegove sestavine aktivirajo skozi slino, ki ves dan obliva zobe. Pomaga vezati kalcij, preden se ta strdi v zobni kamen, in otežuje oprijem zobnih oblog. Tako na preprost način pomaga pri zadahu in ohranjanju čistejših zob brez ščetkanja\"",
                 "author": "Blaž Petelinek Ledinski, dr. vet. med.",
                 "role": "",
                 "background_color": "#ffffff",
@@ -802,7 +802,7 @@
                 "visibility": "always-display",
                 "open": true,
                 "heading": "Kaj je DentalMix?",
-                "content": "<p>DentalMix je dnevni prašek za zobe, ki ga preprosto potreseš na pasjo hrano. Deluje skozi slino — imenujemo ga <strong>Saliva-Activated Defense™</strong>: pomaga vezati kalcij, preden se strdi v zobni kamen, in preprečuje, da bi se obloge oprijele zob. Proti zadahu in za čistejše zobe, brez ščetkanja, žvečilk ali anestezije.</p>",
+                "content": "<p>DentalMix je prašek za vsakodnevno nego pasjih zob, ki ga preprosto potreseš po hrani. Deluje skozi slino. Ta način delovanja imenujemo <strong>Saliva-Activated Defense™</strong>. Pomaga vezati kalcij, preden se ta strdi v zobni kamen, in otežuje oprijem zobnih oblog. Pomaga pri zadahu in ohranjanju čistejših zob, pri tem pa ščetkanje ni potrebno.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -816,7 +816,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Prednosti DentalMixa",
-                "content": "<p>✅ Manj zadaha, mnogi opazijo v 7–14 dneh<br/>✅ Zobje delujejo čistejši, manj vidnega kamna in oblog<br/>✅ Brez ščetkanja in brez borbe — samo potreseš na obrok<br/>✅ Primerno za vse pasme in starosti psov</p>",
+                "content": "<p>✅ Manj zadaha. Mnogi lastniki prve spremembe opazijo v 7–14 dneh.<br/>✅ Vidno čistejši zobje ter manj zobnih oblog in zobnega kamna<br/>✅Brez ščetkanja in pregovarjanja. Prašek samo potreseš po obroku.<br/>✅ Primerno za vse pasme in starosti psov</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -830,7 +830,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Kako deluje DentalMix?",
-                "content": "<p>DentalMix ne čisti zob od zunaj. Deluje skozi slino, ki obliva vsak zob 24 ur na dan. Natrijev tripolifosfat veže kalcij v slini, da se ne more strditi v zobni kamen. Polisaharidi iz morskih alg naredijo površino zob spolzko, da se obloge ne oprimejo. Zeleni čaj in granatno jabolko pa umirjata bakterije, ki povzročajo zadah. Vse to brez ščetke — pes samo je.</p>",
+                "content": "<p>DentalMix zob ne čisti z drgnjenjem. Deluje skozi slino, ki ves dan obliva vsak zob. Natrijev tripolifosfat veže kalcij v slini in tako pomaga preprečevati njegovo nalaganje na zobeh. Polisaharidi iz morskih alg otežujejo oprijem zobnih oblog. Zeleni čaj in granatno jabolko pomagata pri bakterijah, ki povzročajo neprijeten zadah. Prašek samo potreseš po hrani, pes pa ga zaužije skupaj z obrokom.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -858,7 +858,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Odmerjanje",
-                "content": "<p>Enkrat na dan potreseš prašek po pasji hrani (mokri ali suhi) glede na težo psa in dobro premešaš. Brez ščetkanja, brez posebnih postopkov — pes samo poje. Za najboljši učinek uporabljaj vsak dan, redno.</p>",
+                "content": "<p>Enkrat na dan potresi priporočeno količino praška po mokri ali suhi hrani in dobro premešaj. Količino prilagodi teži psa. Za najboljše rezultate DentalMix uporabljaj vsak dan.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -872,7 +872,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Študije",
-                "content": "<p>Natrijev tripolifosfat je mehanizem proti zobnemu kamnu, ki ga priznava VOHC. Hidrolizirana algna moka spada v isto dokazano kategorijo morskih alg kot ProDen PlaqueOff. Probiotik Bacillus velezensis (DSM 15544) je registriran v EU (4b1820). Manj zadaha večina lastnikov opazi v 7–14 dneh.</p>",
+                "content": "<p>Natrijev tripolifosfat se uporablja v izdelkih za pomoč pri nadzoru zobnega kamna. Hidrolizirana algna moka spada v isto kategorijo morskih alg, ki se uporabljajo tudi v drugih znanih izdelkih za nego pasjih zob. Probiotik Bacillus velezensis DSM 15544 je registriran v EU pod oznako 4b1820. Večina lastnikov prve spremembe pri zadahu opazi v 7–14 dneh.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -884,7 +884,7 @@
               "name": "Petsome: Guarantee",
               "settings": {
                 "image": "shopify://shop_images/Guarantee.png",
-                "text": "<p>Pri Petsome želimo, da vsak DentaMix ljubljenčku izboljša stanje zob. Če ste v dvomih, ali je ta izdelek za vašega ljubljenčka - ni panike. Vaše naročilo je zaščiteno z 60-dnevno garancijo vračila denarja. Brez slabe vesti.</p>",
+                "text": "<p>Želimo, da je nakup DentalMixa zate brez skrbi. Če z izdelkom ne boš zadovoljen, lahko v 60 dneh zahtevaš vračilo kupnine.</p>",
                 "background_color": "#e8d6c5",
                 "border_color": "#b6a87c",
                 "margin_top": 0,
@@ -1055,7 +1055,7 @@
             "icon": "pets",
             "filled_icon": false,
             "title": "Manj zadaha že v 7–14 dneh",
-            "text": "<p>DentalMix deluje skozi slino od prvega dne. Večina lastnikov opazi, da tisti zadah, ki jih je odbijal, počasi popušča — ne zato, ker bi ga prekrili, ampak ker se bakterije, ki ga povzročajo, umirjajo.</p>"
+            "text": "<p>DentalMix začne delovati skozi slino že od prve uporabe. Večina lastnikov najprej opazi, da je neprijeten zadah postopoma manj izrazit. Ne gre samo za prekrivanje vonja, saj sestavine pomagajo pri bakterijah, ki ga povzročajo.</p>"
           }
         },
         "benefit_wK33E8": {
@@ -1065,7 +1065,7 @@
             "icon": "directions_run",
             "filled_icon": false,
             "title": "Brez ščetkanja, brez borbe",
-            "text": "<p>Prašek preprosto potreseš na obrok. Nič stiskanja gobčka, nič vsakodnevne bitke, ki jo pes vedno dobi. Samo dosledna dnevna nega, ki jo pes komaj opazi.</p>"
+            "text": "<p>Prašek preprosto potreseš po obroku. Psu ni treba odpirati gobčka ali ga vsak dan prepričevati v ščetkanje. DentalMix tako hitro postane del njegove običajne rutine.</p>"
           }
         },
         "benefit_RpwKGJ": {
@@ -1075,7 +1075,7 @@
             "icon": "bolt",
             "filled_icon": true,
             "title": "Spet ga crkljaš od blizu",
-            "text": "<p>Ko zadah popusti, se vrne tisto, kar imaš najraje — crkljanje od blizu, brez odmika. To je trenutek, ki šteje.</p>"
+            "text": "<p>Ko je zadah manj izrazit, je tudi bližina prijetnejša. Brez umikanja glave, ko se ti pes približa obrazu.</p>"
           }
         },
         "benefit_Q674nP": {
@@ -1084,8 +1084,8 @@
             "image": "shopify://shop_images/hf_20260709_190433_b72c1c33-4f5d-43ed-a438-fb50be355b7a.png",
             "icon": "shield",
             "filled_icon": true,
-            "title": "Manj zobnega kamna, dolgoročno",
-            "text": "<p>DentalMix je zasnovan za vsakodnevno, dolgotrajno uporabo. Vezanje kalcija preprečuje, da bi se obloge strdile v kamen — zato zobje ostanejo čistejši dlje, ne le prvi teden.</p>"
+            "title": "Manj zobnega kamna pri redni uporabi",
+            "text": "<p>DentalMix je namenjen redni in dolgotrajni uporabi. Pomaga vezati kalcij v slini, preden se ta začne nalagati in strjevati na zobeh. Zato pomaga ohranjati zobe čistejše tudi na dolgi rok.</p>"
           }
         }
       },
@@ -1112,8 +1112,8 @@
           "settings": {
             "highlighted": false,
             "badge_text": "7–14 dni",
-            "title": "Zadah popusti.",
-            "text": "<p>To je navadno prva stvar, ki jo opaziš. Tisti zadah, ki te je odbijal, postane opazno milejši. Drobna sprememba, ki je ne moreš spregledati, ko jo enkrat zaznaš.</p>"
+            "title": "Zadah postane manj izrazit.",
+            "text": "<p>To je običajno prva sprememba, ki jo lastniki opazijo. Neprijeten zadah se začne postopoma zmanjševati.<br/><br/></p>"
           }
         },
         "tf_2": {
@@ -1121,8 +1121,8 @@
           "settings": {
             "highlighted": false,
             "badge_text": "3–4 tedni",
-            "title": "Zobje delujejo čistejši.",
-            "text": "<p>Obloge ob dlesnih so videti svetlejše, površina zob bolj gladka. Ne čez noč — a razlika, ki jo opaziš, ko psa pogledaš v gobček.</p>"
+            "title": "Zobje so videti čistejši.",
+            "text": "<p>Obloge ob dlesnih so lahko videti svetlejše, površina zob pa čistejša. Sprememba ni čez noč, vendar jo pri redni uporabi lažje opaziš.</p>"
           }
         },
         "tf_3": {
@@ -1130,8 +1130,8 @@
           "settings": {
             "highlighted": true,
             "badge_text": "2–3 meseci",
-            "title": "Manj vidnega kamna.",
-            "text": "<p>Novih oblog je manj, ker se kalcij sproti veže in ne strdi. Zobje ostajajo čistejši, zadaha pa manj — dan za dnem.</p>"
+            "title": "Manj novih oblog.",
+            "text": "<p>Ob redni uporabi se lahko začne nabirati manj novih oblog. Zobje ostajajo čistejši, zadah pa manj izrazit.</p>"
           }
         },
         "tf_4": {
@@ -1139,8 +1139,8 @@
           "settings": {
             "highlighted": false,
             "badge_text": "3+ meseci",
-            "title": "Zadaha ni več.",
-            "text": "<p>Ko lastniki vidijo razliko, ne prenehajo več. Prašek je del vsakdanje rutine, zadaha ni več, crkljanje od blizu pa spet naravno. To je bil cilj od začetka.</p>"
+            "title": "DentalMix postane del vsakodnevne rutine.",
+            "text": "<p>Za dolgoročne rezultate je pomembna redna uporaba. Tako pomagaš ohranjati čistejše zobe in prijetnejši zadah tudi v prihodnje.</p>"
           }
         }
       },
@@ -1151,8 +1151,8 @@
         "tf_4"
       ],
       "settings": {
-        "heading": "<p>Kaj se zgodi, ko vaš pes začne z DentalMixom?</p>",
-        "subheading": "Vsak pes je drugačen. A večina lastnikov opazi prve spremembe hitreje, kot so pričakovali.",
+        "heading": "<p><strong>Kaj lahko opaziš, ko pes začne uporabljati DentalMix?</strong></p>",
+        "subheading": "Vsak pes je drugačen, zato se lahko hitrost rezultatov razlikuje. Najpogosteje lastniki najprej opazijo spremembo pri zadahu.",
         "columns": "4",
         "background_color": "#faf9f6",
         "accent_color": "#f8aaa7",
@@ -1168,19 +1168,19 @@
         "bullet_1": {
           "type": "bullet",
           "settings": {
-            "text": "🦷 nima več zadaha in vas spet lahko crklja od blizu"
+            "text": "🦷 ima manj neprijetnega zadaha"
           }
         },
         "bullet_2": {
           "type": "bullet",
           "settings": {
-            "text": "✨ ima vidno čistejše zobe, brez rjavih oblog ob dlesnih"
+            "text": "✨ ima vidno čistejše zobe in manj oblog ob dlesnih"
           }
         },
         "bullet_3": {
           "type": "bullet",
           "settings": {
-            "text": "🚫 dobi nego brez ščetkanja, ki jo tako ali tako sovraži"
+            "text": "🚫 dobi vsakodnevno nego brez ščetkanja"
           }
         },
         "bullet_4": {
@@ -1192,13 +1192,13 @@
         "bullet_5": {
           "type": "bullet",
           "settings": {
-            "text": "🐕 dobi nekaj, kar dejansko poje — brez borbe in okusa, ki bi ga zavrnil"
+            "text": "🐕 prašek zaužije skupaj z običajnim obrokom"
           }
         },
         "bullet_6": {
           "type": "bullet",
           "settings": {
-            "text": "🔁 ohrani čiste zobe dolgoročno, ne le za teden dni"
+            "text": "🔁 se na njegovih zobeh nabira manj novih oblog"
           }
         },
         "bullet_7": {
@@ -1210,7 +1210,7 @@
         "bullet_8": {
           "type": "bullet",
           "settings": {
-            "text": "❤️ ostane brez zadaha in nelagodja, tudi v zrelih letih"
+            "text": "❤️ ohranja dobro ustno higieno tudi v zrelejših letih"
           }
         }
       },
@@ -1225,7 +1225,7 @@
         "bullet_8"
       ],
       "settings": {
-        "heading": "<p>DentalMix je prava izbira za vašega psa, če želite, da:</p>",
+        "heading": "<p>DentalMix je prava izbira za vašega psa, če želiš, da:</p>",
         "image": "shopify://shop_images/hf_20260709_175850_4aefcfa9-fdd1-40cb-b6ad-a1c404bf54a1.png",
         "secondary_color": "#e8d6c5",
         "padding_top": 36,
@@ -1238,7 +1238,7 @@
         "row_1": {
           "type": "row",
           "settings": {
-            "label": "Deluje, tudi če pes ne pusti do zob",
+            "label": "Deluje tudi pri psu, ki ne dovoli ščetkanja",
             "them_value": "❌",
             "us_value": "✅"
           }
@@ -1246,7 +1246,7 @@
         "row_2": {
           "type": "row",
           "settings": {
-            "label": "Doseže vsak zob — prek sline, 24/7",
+            "label": "S slino doseže vse zobe",
             "them_value": "❌",
             "us_value": "✅"
           }
@@ -1278,7 +1278,7 @@
         "row_6": {
           "type": "row",
           "settings": {
-            "label": "Deluje na vzrok, ne le prekrije zadah za nekaj časa",
+            "label": "Pomaga pri vzroku neprijetnega zadaha in ga ne le začasno prekrije",
             "them_value": "❌",
             "us_value": "✅"
           }
@@ -1303,7 +1303,7 @@
       ],
       "settings": {
         "heading": "<p>Zakaj ščetkanje in žvečilke pogosto ne zaležejo?</p>",
-        "description": "<p>Vsi rečejo „samo ščetkaj mu zobe“. Saj poznaš to: stisne gobček, obrne glavo, po treh večerih odnehaš. Žvečilke? Bolj priboljšek kot čiščenje, in trajajo dve sekundi. Problem ni v tebi. Problem je, da nega, ki je občasna in od zunaj, ne prepreči, da se obloge strdijo v kamen. DentalMix dela drugače — skozi slino, ves dan.</p>",
+        "description": "<p>Pogost nasvet je, da psu preprosto ščetkaš zobe. V praksi veliko psov tega ne dovoli. Obrnejo glavo, zaprejo gobček in po nekaj dneh večina lastnikov obupa. Tudi žvečilke pogosto izginejo v nekaj sekundah. Težava torej ni v tebi, ampak v tem, da je takšno nego težko izvajati vsak dan. DentalMix se uporablja drugače. Potreseš ga po hrani, sestavine pa nato delujejo skozi slino.</p>",
         "them_image": "shopify://shop_images/hf_20260709_193501_e3cfb511-d26f-4214-9c28-296f3c4f2980_1.png",
         "them_label": "Ščetka & žvečilke",
         "us_image": "shopify://shop_images/1x_DentalMix_-_no_bg.png",
@@ -1323,7 +1323,7 @@
           "type": "card",
           "settings": {
             "heading": "🛑 Zakaj ščetkanje pogosto odpove?",
-            "text": "<p>Ščetkanje je odvisno od vsakodnevne borbe, ki jo večina lastnikov izgubi — pes ne pusti, doslednost pade. Zato ima več kot 80 % psov do tretjega leta vidne težave z zobmi. Nega, ki je občasna in od zunaj, preprosto ne dohaja.</p>",
+            "text": "<p>Ščetkanje deluje samo, če ga izvajaš redno, vendar ga veliko psov ne dovoli. Ko ščetkanje ni dosledno, se obloge še naprej nabirajo. Občasno ščetkanje zato pogosto ni dovolj za vsakodnevno vzdrževanje zob.</p><p>Občasno ščetkanje ni enako redni negi zob.</p>",
             "badge_text": "Občasno ščetkanje ≠ čisti zobje"
           }
         },
@@ -1331,7 +1331,7 @@
           "type": "card",
           "settings": {
             "heading": "✅ Zakaj DentalMix deluje drugače?",
-            "text": "<p>DentalMix deluje skozi pasjo slino, ki obliva zobe 24 ur na dan — veže kalcij, preden se strdi v kamen, in prepreči, da se obloge oprimejo. Potreseš na obrok, pes poje, mehanizem dela ves dan.</p>",
+            "text": "<p>DentalMix deluje skozi pasjo slino, ki ves dan obliva zobe. Pomaga vezati kalcij, preden se ta začne nalagati na zobeh, in otežuje oprijem zobnih oblog. Prašek samo potreseš po obroku, pes pa ga zaužije skupaj s hrano.</p>",
             "badge_text": "Deluje skozi slino, 24/7"
           }
         }
@@ -1356,7 +1356,7 @@
       "type": "petsome-ingredients",
       "settings": {
         "heading": "<p>Kaj je notri — in zakaj vsaka stvar dela</p>",
-        "description": "<p>Vsaka sestavina ima svojo vlogo: morske alge proti oblogam, natrijev tripolifosfat proti zobnemu kamnu, zeleni čaj in granatno jabolko proti zadahu, probiotik proti zadahu iz črevesja. Kliknite na sestavino za več informacij.</p>",
+        "description": "<p>Vsaka sestavina ima svojo vlogo. Morske alge pomagajo pri zobnih oblogah, natrijev tripolifosfat pri nastajanju zobnega kamna, zeleni čaj in granatno jabolko pri neprijetnem zadahu, cikorija in probiotik pa podpirata prebavno ravnovesje. Za več informacij klikni posamezno sestavino.</p>",
         "amount_label": "Količina v paketu",
         "background_color": "#faf9f6",
         "accent_color": "#f8aaa7",
@@ -1373,8 +1373,8 @@
           "type": "card",
           "settings": {
             "badge_text": "PROTI KAMNU",
-            "title": "Zobni kamen je le strjen kalcij.",
-            "text": "<p>Kamen nastane, ko se kalcij iz sline nabere na zobe in strdi. Natrijev tripolifosfat kalcij v slini veže nase prvi, da se ne more odložiti — najbolj dokazan mehanizem proti kamnu v veterinarski zobni negi (VOHC).</p>"
+            "title": "Zobni kamen nastane iz mineralov v slini.",
+            "text": "<p>Ko se minerali iz sline nabirajo na zobeh, se lahko sčasoma strdijo v zobni kamen. Natrijev tripolifosfat pomaga vezati kalcij v slini, preden se ta odloži na zobeh. Ta mehanizem se uporablja tudi v izdelkih za veterinarsko nego zob.</p>"
           }
         },
         "card_2": {
@@ -1382,15 +1382,15 @@
           "settings": {
             "badge_text": "PROTI OBLOGAM",
             "title": "Obloge se morajo najprej oprijeti.",
-            "text": "<p>Obloge so bakterijski film, ki se mora oprijeti sklenine. Polisaharidi iz hidrolizirane algne moke (53,5 %) to oprijemanje motijo — biofilm nima kam. Ista dokazana kategorija alg kot ProDen PlaqueOff.</p>"
+            "text": "<p>Zobne obloge so bakterijski film, ki se oprime zobne sklenine. Polisaharidi iz hidrolizirane algne moke otežujejo ta oprijem in s tem pomagajo zmanjševati nastajanje novih oblog.</p>"
           }
         },
         "card_3": {
           "type": "card",
           "settings": {
             "badge_text": "PROTI ZADAHU",
-            "title": "Zadah delajo bakterije, ne zobje sami.",
-            "text": "<p>„Pasji zadah“ je žveplov vonj bakterij. Katehini zelenega čaja in polifenoli granatnega jabolka jih zavirajo pri viru, probiotik Bacillus velezensis pa lovi zadah, ki prihaja iz črevesja — z obeh koncev.</p>"
+            "title": "Neprijeten zadah povzročajo bakterije.",
+            "text": "<p>Neprijeten pasji zadah pogosto povzročajo spojine, ki jih tvorijo bakterije. Katehini zelenega čaja in polifenoli granatnega jabolka pomagajo pri teh bakterijah, Bacillus velezensis pa podpira ravnovesje črevesne mikrobiote.</p>"
           }
         }
       },
@@ -1402,7 +1402,7 @@
       "settings": {
         "kicker_text": "SALIVA-ACTIVATED DEFENSE™",
         "heading": "<p>Zakaj slina in ne ščetka?</p>",
-        "description": "<p>Zoba, ki ga pes ne pusti ščetkati, ni treba drgniti od zunaj. Njegova slina že cel dan obliva vsak zob — Saliva-Activated Defense™ deluje ravno skoznjo, 24 ur na dan.</p>",
+        "description": "<p>Zob, ki jih pes ne pusti ščetkati, ni treba čistiti s ščetko. Njegova slina ves dan obliva vsak zob, zato Saliva-Activated Defense™ deluje neposredno skozi njo.</p>",
         "background_color": "#e8d6c5",
         "kicker_background": "#e0b58d",
         "card_background": "#ffffff",
