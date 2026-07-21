@@ -1,0 +1,1656 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "Gallery": {
+          "type": "main-product_gallery",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "media-gallery": {
+              "type": "main-product_media-gallery",
+              "settings": {},
+              "blocks": {}
+            },
+            "product_petsome_professional_review_8WgTtM": {
+              "type": "product_petsome-professional-review",
+              "name": "Petsome: Expert review",
+              "settings": {
+                "visibility": "mobile-hidden",
+                "image": "shopify://shop_images/unnamed_1.jpg",
+                "rating": 5,
+                "quote": "\"Pri starejših in aktivnih psih pogosto opažamo spremembe v gibanju, ki niso nujno takoj boleče, a vplivajo na kakovost življenja. MobiMix cilja ključne elemente, povezane z zdravjem sklepov in gibanjem. Pomaga vašemu psu ostati aktiven in brez bolečin z podporo obnovi hrustanca, mazanju sklepov in zmanjšanju vnetja.\"",
+                "author": "Blaž Petelinek Ledinski",
+                "role": "dr. vet. med.",
+                "background_color": "#ffffff",
+                "star_color": "#ffcc00",
+                "margin_top": 24,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "media-gallery",
+            "product_petsome_professional_review_8WgTtM"
+          ]
+        },
+        "Details": {
+          "type": "main-product_details",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "a6eb81db-40e4-43e0-972f-32db010a4a56": {
+              "type": "rating-stars",
+              "settings": {
+                "visibility": "always-display",
+                "rating": 4.8,
+                "star_color": "#ffcc00",
+                "bg_stars_style": "full",
+                "bg_star_color": "#ececec",
+                "label": "4.8 / 5 (2.000+ zadovoljnih lastnikov)",
+                "size": 12,
+                "scroll_id": "#shopify-section-template--30518464872773__17827582468bb08a41",
+                "alignment": "flex-start",
+                "width": "fit_content",
+                "bg_type": "none",
+                "bg_color": "#f4e1ff",
+                "bg_gradient": "linear-gradient(135deg, rgba(232, 220, 255, 1) 0%, rgba(255, 220, 232, 1) 100%)",
+                "bg_opacity": 100,
+                "border_thickness": 0,
+                "border_color": "#000000",
+                "border_style": "solid",
+                "corner_radius": 30,
+                "enable_shadow": false,
+                "shadow_color": "#000000",
+                "shadow_opacity": 15,
+                "shadow_horizontal_offset": 0,
+                "shadow_vertical_offset": 10,
+                "shadow_blur": 20,
+                "shadow_spread": 0,
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "heading_HDTL7R": {
+              "type": "heading",
+              "name": "Heading",
+              "settings": {
+                "visibility": "always-display",
+                "title": "MobiMix - Dodatek za sklepe psov",
+                "heading_size": "h1",
+                "custom_desktop_size": 39,
+                "custom_mobile_size": 28,
+                "alignment": "left",
+                "mobile_alignment": "mobile-left",
+                "enable_custom_color": false,
+                "custom_color": "#ff0000",
+                "title_highlight_1": "solid-color",
+                "title_highlight_1_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                "title_highlight_1_bg-color": "#f9efff",
+                "title_highlight_1_color": "#6d388b",
+                "highlighted-1_border_radius": 8,
+                "highlighted-1_border_width": 0,
+                "highlighted-1_border": "solid",
+                "highlighted-1_border_color": "#6d388b",
+                "highlighted-1_padding-block": 0.3,
+                "highlighted-1_padding-inline": 0.3,
+                "title_highlight_1_underline-thickness": 2,
+                "title_highlight_1_underline-color": "#6d388b",
+                "title_highlight_1_underline-color--gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                "title_highlight_1_underline-color-position": 25,
+                "title_highlight_1_handwritten-color": "#6d388b",
+                "title_highlight_1_handwritten-stroke-width": 3,
+                "title_highlight_1_handwritten-position": 60,
+                "title_highlight_2": "none",
+                "highlight_2_keep_italic": false,
+                "title_highlight_2_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                "title_highlight_2_bg-color": "#f9efff",
+                "title_highlight_2_color": "#6d388b",
+                "highlighted-2_border_radius": 8,
+                "highlighted-2_border_width": 0,
+                "highlighted-2_border": "solid",
+                "highlighted-2_border_color": "#6d388b",
+                "highlighted-2_padding-block": 0.3,
+                "highlighted-2_padding-inline": 0.3,
+                "title_highlight_2_underline-thickness": 2,
+                "title_highlight_2_underline-color": "#6d388b",
+                "title_highlight_2_underline-color--gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                "title_highlight_2_underline-color-position": 25,
+                "title_highlight_2_handwritten-color": "#6d388b",
+                "title_highlight_2_handwritten-stroke-width": 3,
+                "title_highlight_2_handwritten-position": 60,
+                "text_animation": "none",
+                "split_type": "chars",
+                "split_delay": 30,
+                "split_duration": 600,
+                "split_y_offset": 40,
+                "split_animate_on_scroll": true,
+                "shiny_speed": 5,
+                "shiny_on_scroll": false,
+                "blur_type": "words",
+                "blur_direction": "top",
+                "blur_delay": 200,
+                "blur_duration": 350,
+                "blur_animate_on_scroll": true,
+                "highlight_bold_only": false,
+                "remove_bold_styling": false,
+                "highlight_color": "#ffd1dc",
+                "highlight_height": 40,
+                "highlight_position": 10,
+                "highlighter_underline_color": "#000000",
+                "highlighter_underline_thickness": 2,
+                "highlighter_underline_offset": 0,
+                "highlighter_strike_color": "#ff0000",
+                "highlighter_strike_thickness": 2,
+                "highlighter_strike_offset": 0,
+                "highlighter_animation_duration": 800,
+                "highlighter_animation_delay": 200,
+                "highlighter_animate_on_scroll": false,
+                "typing_speed": 50,
+                "typing_initial_delay": 0,
+                "typing_pause_duration": 2000,
+                "typing_deleting_speed": 30,
+                "typing_loop": true,
+                "typing_show_cursor": true,
+                "typing_cursor_character": "|",
+                "typing_cursor_blink_duration": 500,
+                "typing_hide_cursor_while_typing": false,
+                "typing_start_on_visible": false,
+                "typing_reverse_mode": false,
+                "margin_top": 0,
+                "margin_bottom": 15
+              },
+              "blocks": {}
+            },
+            "petsome_tags_1": {
+              "type": "product_petsome-tags",
+              "settings": {
+                "accent_color": "#f8aaa7",
+                "accent_color_dark": "#f47671",
+                "margin_top": 0,
+                "margin_bottom": 15
+              },
+              "blocks": {
+                "tag_1": {
+                  "type": "petsome-tag",
+                  "settings": {
+                    "text": "Podpora sklepom"
+                  },
+                  "blocks": {}
+                },
+                "tag_2": {
+                  "type": "petsome-tag",
+                  "settings": {
+                    "text": "Večja gibljivost"
+                  },
+                  "blocks": {}
+                },
+                "tag_3": {
+                  "type": "petsome-tag",
+                  "settings": {
+                    "text": "Veterinarsko podprto"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "tag_1",
+                "tag_2",
+                "tag_3"
+              ]
+            },
+            "container_product_jaMkrK": {
+              "type": "container--product",
+              "name": "Container",
+              "settings": {
+                "visibility": "always-display",
+                "desktop_direction": "vertical",
+                "desktop_horizontal_grid": "flex",
+                "desktop_flex_wrap": false,
+                "desktop_horizontal_grid_items": 3,
+                "desktop_horizontal_flex_type": "space-between",
+                "desktop_horizontal_vertical_align": "center",
+                "desktop_horizontal_spacing": 20,
+                "desktop_disable_margins": true,
+                "mobile_direction": "vertical",
+                "mobile_horizontal_grid": "flex",
+                "mobile_flex_wrap": false,
+                "mobile_horizontal_grid_items": 3,
+                "mobile_horizontal_flex_type": "space-between",
+                "mobile_horizontal_vertical_align": "center",
+                "mobile_horizontal_spacing": 20,
+                "mobile_disable_margins": true,
+                "bg_type": "none",
+                "bg_color": "#f4e1ff",
+                "bg_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                "bg_opacity": 100,
+                "border_width": 0,
+                "border": "solid",
+                "border_color_type": "solid",
+                "border_color": "#6d388b",
+                "border_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                "border_opacity": 100,
+                "enable_shadow": false,
+                "shadow_color": "#000000",
+                "shadow_opacity": 15,
+                "shadow_horizontal_offset": 2,
+                "shadow_vertical_offset": 6,
+                "shadow_spread": 0,
+                "shadow_blur": 16,
+                "round_corners_equally": true,
+                "border_radius": 12,
+                "border_radius_top_left": 12,
+                "border_radius_top_right": 12,
+                "border_radius_bottom_right": 12,
+                "border_radius_bottom_left": 12,
+                "vertical_desktop_padding": 15,
+                "horizontal_desktop_padding": 15,
+                "vertical_mobile_padding": 12,
+                "horizontal_mobile_padding": 12,
+                "media_background": "none",
+                "media_background_fit": "cover",
+                "background_desktop_width": 300,
+                "background_mobile_width": 200,
+                "media_background_vertical_align": "center",
+                "media_background_horizontal_align": "right",
+                "media_bg_opacity": 100,
+                "margin_top": 15,
+                "margin_bottom": 15
+              },
+              "blocks": {
+                "text_with_icon_KkgDUA": {
+                  "type": "text-with-icon",
+                  "name": "Text with icon",
+                  "settings": {
+                    "visibility": "always-display",
+                    "mobile_text_size": 16,
+                    "desktop_text_size": 16,
+                    "alignment": "left",
+                    "mobile_alignment": "left",
+                    "text_color_type": "solid",
+                    "text_color": "#0e1111",
+                    "text_color_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "font_family": "body",
+                    "icon_scale": 120,
+                    "icon_color_type": "solid",
+                    "icon_color": "#121212",
+                    "icon_color_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "width": "100%",
+                    "direction": "horizontal",
+                    "column_gap": 3,
+                    "styling_container": "container",
+                    "bg_type": "none",
+                    "bg_color": "#f4e1ff",
+                    "bg_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "bg_opacity": 100,
+                    "border_width": 0,
+                    "border": "solid",
+                    "border_color_type": "solid",
+                    "border_color": "#6d388b",
+                    "border_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "border_opacity": 100,
+                    "enable_shadow": false,
+                    "shadow_color": "#000000",
+                    "shadow_opacity": 15,
+                    "shadow_horizontal_offset": 0,
+                    "shadow_vertical_offset": 10,
+                    "shadow_spread": 0,
+                    "shadow_blur": 20,
+                    "border_radius": 50,
+                    "vertical_desktop_padding": 15,
+                    "horizontal_desktop_padding": 15,
+                    "vertical_mobile_padding": 12,
+                    "horizontal_mobile_padding": 12,
+                    "text_1": "Tvoj pes se spet premika brez obotavljanja",
+                    "icon_1": "check_circle",
+                    "filled_icon_1": true,
+                    "text_2": "",
+                    "icon_2": "check_circle",
+                    "filled_icon_2": false,
+                    "text_3": "",
+                    "icon_3": "check_circle",
+                    "filled_icon_3": false,
+                    "text_4": "",
+                    "icon_4": "check_circle",
+                    "filled_icon_4": false,
+                    "margin_top": 0,
+                    "margin_bottom": 3
+                  },
+                  "blocks": {}
+                },
+                "text_with_icon_jXkKqG": {
+                  "type": "text-with-icon",
+                  "name": "Text with icon",
+                  "settings": {
+                    "visibility": "always-display",
+                    "mobile_text_size": 16,
+                    "desktop_text_size": 16,
+                    "alignment": "left",
+                    "mobile_alignment": "left",
+                    "text_color_type": "solid",
+                    "text_color": "#0e1111",
+                    "text_color_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "font_family": "body",
+                    "icon_scale": 120,
+                    "icon_color_type": "solid",
+                    "icon_color": "#121212",
+                    "icon_color_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "width": "100%",
+                    "direction": "horizontal",
+                    "column_gap": 3,
+                    "styling_container": "container",
+                    "bg_type": "none",
+                    "bg_color": "#f4e1ff",
+                    "bg_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "bg_opacity": 100,
+                    "border_width": 0,
+                    "border": "solid",
+                    "border_color_type": "solid",
+                    "border_color": "#6d388b",
+                    "border_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "border_opacity": 100,
+                    "enable_shadow": false,
+                    "shadow_color": "#000000",
+                    "shadow_opacity": 15,
+                    "shadow_horizontal_offset": 0,
+                    "shadow_vertical_offset": 10,
+                    "shadow_spread": 0,
+                    "shadow_blur": 20,
+                    "border_radius": 50,
+                    "vertical_desktop_padding": 15,
+                    "horizontal_desktop_padding": 15,
+                    "vertical_mobile_padding": 12,
+                    "horizontal_mobile_padding": 12,
+                    "text_1": "Manj jutranje togosti že v 2–3 tednih",
+                    "icon_1": "check_circle",
+                    "filled_icon_1": true,
+                    "text_2": "",
+                    "icon_2": "check_circle",
+                    "filled_icon_2": false,
+                    "text_3": "",
+                    "icon_3": "check_circle",
+                    "filled_icon_3": false,
+                    "text_4": "",
+                    "icon_4": "check_circle",
+                    "filled_icon_4": false,
+                    "margin_top": 0,
+                    "margin_bottom": 3
+                  },
+                  "blocks": {}
+                },
+                "text_with_icon_8CJNqP": {
+                  "type": "text-with-icon",
+                  "name": "Text with icon",
+                  "settings": {
+                    "visibility": "always-display",
+                    "mobile_text_size": 16,
+                    "desktop_text_size": 16,
+                    "alignment": "left",
+                    "mobile_alignment": "left",
+                    "text_color_type": "solid",
+                    "text_color": "#0e1111",
+                    "text_color_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "font_family": "body",
+                    "icon_scale": 120,
+                    "icon_color_type": "solid",
+                    "icon_color": "#121212",
+                    "icon_color_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "width": "100%",
+                    "direction": "horizontal",
+                    "column_gap": 3,
+                    "styling_container": "container",
+                    "bg_type": "none",
+                    "bg_color": "#f4e1ff",
+                    "bg_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "bg_opacity": 100,
+                    "border_width": 0,
+                    "border": "solid",
+                    "border_color_type": "solid",
+                    "border_color": "#6d388b",
+                    "border_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "border_opacity": 100,
+                    "enable_shadow": false,
+                    "shadow_color": "#000000",
+                    "shadow_opacity": 15,
+                    "shadow_horizontal_offset": 0,
+                    "shadow_vertical_offset": 10,
+                    "shadow_spread": 0,
+                    "shadow_blur": 20,
+                    "border_radius": 50,
+                    "vertical_desktop_padding": 15,
+                    "horizontal_desktop_padding": 15,
+                    "vertical_mobile_padding": 12,
+                    "horizontal_mobile_padding": 12,
+                    "text_1": "Več energije za igro in sprehode",
+                    "icon_1": "check_circle",
+                    "filled_icon_1": true,
+                    "text_2": "",
+                    "icon_2": "check_circle",
+                    "filled_icon_2": false,
+                    "text_3": "",
+                    "icon_3": "check_circle",
+                    "filled_icon_3": false,
+                    "text_4": "",
+                    "icon_4": "check_circle",
+                    "filled_icon_4": false,
+                    "margin_top": 0,
+                    "margin_bottom": 3
+                  },
+                  "blocks": {}
+                },
+                "text_with_icon_zBWh3d": {
+                  "type": "text-with-icon",
+                  "name": "Text with icon",
+                  "settings": {
+                    "visibility": "always-display",
+                    "mobile_text_size": 16,
+                    "desktop_text_size": 16,
+                    "alignment": "left",
+                    "mobile_alignment": "left",
+                    "text_color_type": "solid",
+                    "text_color": "#0e1111",
+                    "text_color_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "font_family": "body",
+                    "icon_scale": 120,
+                    "icon_color_type": "solid",
+                    "icon_color": "#121212",
+                    "icon_color_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "width": "100%",
+                    "direction": "horizontal",
+                    "column_gap": 3,
+                    "styling_container": "container",
+                    "bg_type": "none",
+                    "bg_color": "#f4e1ff",
+                    "bg_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "bg_opacity": 100,
+                    "border_width": 0,
+                    "border": "solid",
+                    "border_color_type": "solid",
+                    "border_color": "#6d388b",
+                    "border_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "border_opacity": 100,
+                    "enable_shadow": false,
+                    "shadow_color": "#000000",
+                    "shadow_opacity": 15,
+                    "shadow_horizontal_offset": 0,
+                    "shadow_vertical_offset": 10,
+                    "shadow_spread": 0,
+                    "shadow_blur": 20,
+                    "border_radius": 50,
+                    "vertical_desktop_padding": 15,
+                    "horizontal_desktop_padding": 15,
+                    "vertical_mobile_padding": 12,
+                    "horizontal_mobile_padding": 12,
+                    "text_1": "Dolgoročna zaščita pred obrabo sklepov",
+                    "icon_1": "check_circle",
+                    "filled_icon_1": true,
+                    "text_2": "",
+                    "icon_2": "check_circle",
+                    "filled_icon_2": false,
+                    "text_3": "",
+                    "icon_3": "check_circle",
+                    "filled_icon_3": false,
+                    "text_4": "",
+                    "icon_4": "check_circle",
+                    "filled_icon_4": false,
+                    "margin_top": 0,
+                    "margin_bottom": 15
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_with_icon_KkgDUA",
+                "text_with_icon_jXkKqG",
+                "text_with_icon_8CJNqP",
+                "text_with_icon_zBWh3d"
+              ]
+            },
+            "kaching_bundles_app_block_1": {
+              "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
+              "settings": {
+                "product": "{{closest.product}}",
+                "manual_deal_block_id": ""
+              }
+            },
+            "5fcc0428-e768-4cb7-bea3-eb0274198dd1": {
+              "type": "product_product-variant-picker-block",
+              "settings": {
+                "picker_types": "pills",
+                "skip_unavailable": false,
+                "custom_labels": "Izberite težo psa:",
+                "labels_size": 16,
+                "labels_font": "body-bold",
+                "labels_color": "text",
+                "labels_custom_color": "#dd1d1d",
+                "show_label_lines": false,
+                "labels_alignment": "flex-start",
+                "labels_line_color": "text",
+                "labels_line_custom_color": "#dd1d1d",
+                "labels_line_thickness": 2,
+                "show_step_indicator": false,
+                "step_indicator_size": 22,
+                "step_indicator_bg_color": "#000000",
+                "step_indicator_text_color": "#ffffff",
+                "step_indicator_corner_radius": 60,
+                "append": "option_1_label_container",
+                "swatches_size": "medium",
+                "swatches_custom_colors": "disabled",
+                "swatches_custom_colors_list": "#000000, #6D388B, #0000FF, #FFCC00",
+                "full_width_dropdowns": false,
+                "breaks_style": "normal",
+                "breaks_headline": "BUNDLE & SAVE",
+                "breaks_prices_layout": "price-first-vertical",
+                "breaks_display_selected_indicator": true,
+                "breaks_border_radius": 10,
+                "breaks_border_width": 2,
+                "breaks_color_scheme": "accent-1",
+                "breaks_vertical_items_align": "flex-start",
+                "breaks_badges": "[empty], Most popular, [empty]",
+                "breaks_badge_style": "1",
+                "breaks_badge_color": "accent-1",
+                "breaks_displayed_images": "none",
+                "breaks_custom_images": "",
+                "breaks_image_width": 70,
+                "breaks_space_images": true,
+                "breaks_vertical_images_position": "top",
+                "breaks_labels": "[name], [name], [name]",
+                "breaks_benefits": "[empty], Free Shipping, Free Shipping",
+                "breaks_benefit_position": "top",
+                "breaks_benefit_style": "outlined",
+                "breaks_benefit_color": "accent-1",
+                "breaks_captions": "Variant 1 caption, Variant 2 caption, Variant 3 caption",
+                "breaks_price_texts": "[price], [price], [price]",
+                "breaks_compare_price_texts": "[compare_price], [compare_price], [compare_price]",
+                "breaks_capsules_per_package": 0,
+                "breaks_capsules_per_day_by_size": "1, 2, 3",
+                "breaks_package_quantities": "1, 2, 3",
+                "margin_top": 15,
+                "margin_bottom": 15
+              },
+              "blocks": {}
+            },
+            "kaching_custom_display_1": {
+              "type": "product_kaching-custom-display",
+              "settings": {
+                "disclaimer_text": "<p>*Prve spremembe so vidne v 2–3 tednih.  Za najboljše rezultate priporočamo uporabo 2–3 mesece.</p>",
+                "gifts_heading": "",
+                "hide_gifts_heading": false,
+                "tier_1_style": "none",
+                "tier_2_style": "recommended",
+                "tier_3_style": "best",
+                "tier_4_style": "none",
+                "accent_color": "#f8aaa7",
+                "accent_color_dark": "#f47671",
+                "secondary_color": "#e8d6c5",
+                "light_text_color": "#faf9f6",
+                "product_type": "capsules",
+                "capsules_per_package": 90,
+                "capsules_per_day_by_size": "1, 2, 3",
+                "grams_per_package": 90,
+                "grams_per_day_by_size": "1, 2, 3",
+                "margin_top": 15,
+                "margin_bottom": 15
+              },
+              "blocks": {}
+            },
+            "product_petsome_shipping_info_Jcitpf": {
+              "type": "product_petsome-shipping-info",
+              "name": "Petsome: Shipping info",
+              "settings": {
+                "icon": "local_shipping",
+                "text": "<p>Predviden čas dostave: <strong>2-3 dni</strong></p>",
+                "margin_top": 0,
+                "margin_bottom": 12
+              },
+              "blocks": {}
+            },
+            "buy_buttons": {
+              "type": "product_buy-buttons",
+              "settings": {
+                "show_dynamic_checkout": false,
+                "skip_cart": false,
+                "atc_append": "left",
+                "atc_append_heights": "stretch-quantity",
+                "uppercase_text": true,
+                "icon_scale": 120,
+                "icon_spacing": 10,
+                "atc_custom_label": "Dodaj v košarico",
+                "atc_label_size": 18,
+                "atc_label_2": "",
+                "atc_label_2_size": 12,
+                "atc_label_2_font": "body",
+                "atc_label_2_uppercase": false,
+                "atc_lines_spacing": 3,
+                "atc_button_padding_y": 8,
+                "display_price": true,
+                "price_position": "right",
+                "price_separator": "-",
+                "enable_custom_color": false,
+                "custom_color": "#53af01",
+                "custom_text_color": "#ffffff",
+                "icon_1_attach": "both",
+                "icon_2_attach": "both",
+                "enable_secondary_btn": false,
+                "secondary_btn_label": "Buy It Now",
+                "secondary_btn_enable_custom_color": false,
+                "secondary_btn_custom_color": "#dd1d1d",
+                "margin_top": 12,
+                "margin_bottom": 3
+              },
+              "blocks": {}
+            },
+            "payment_badges_jpEXd3": {
+              "type": "payment-badges",
+              "name": "Payment badges",
+              "settings": {
+                "visibility": "always-display",
+                "enabled_payment_types": "",
+                "width_desktop": 38,
+                "width_mobile": 38,
+                "margin_top": 15,
+                "margin_bottom": 15
+              },
+              "blocks": {}
+            },
+            "product_petsome_professional_review_BGLaVX": {
+              "type": "product_petsome-professional-review",
+              "name": "Petsome: Expert review",
+              "settings": {
+                "visibility": "desktop-hidden",
+                "image": "shopify://shop_images/unnamed_1.jpg",
+                "rating": 5,
+                "quote": "\"Pri starejših in aktivnih psih pogosto opažamo spremembe v gibanju, ki niso nujno takoj boleče, a vplivajo na kakovost življenja. MobiMix cilja ključne elemente, povezane z zdravjem sklepov in gibanjem. Pomaga vašemu psu ostati aktiven in brez bolečin z podporo obnovi hrustanca, mazanju sklepov in zmanjšanju vnetja.\"",
+                "author": "Blaž Petelinek Ledinski, dr. vet. med.",
+                "role": "",
+                "background_color": "#ffffff",
+                "star_color": "#ffcc00",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "e7a28cbe-03cb-4c9d-a2c4-0e3e76ffb3e5": {
+              "type": "product_sticky-atc",
+              "disabled": true,
+              "settings": {
+                "display_when": "after_scroll",
+                "display_pixels": 500,
+                "display_percent": 50,
+                "color_scheme": "background-1",
+                "title": "",
+                "subtitle": "",
+                "function": "add_to_cart",
+                "button_label": "Add to cart",
+                "enable_custom_btn_color": false,
+                "custom_btn_color": "#dd1d1d",
+                "icon_scale": 120,
+                "star_color": "#ffcc00",
+                "stars_label": "(xxxx Reviews)",
+                "picker_type": "combined",
+                "desktop_layout": "full",
+                "desktop_max_width": 850,
+                "desktop_show_image": true,
+                "desktop_show_title": true,
+                "desktop_show_subtitle": true,
+                "desktop_rating_stars": false,
+                "desktop_show_price": true,
+                "desktop_show_sale_badge": true,
+                "desktop_variant_picker": true,
+                "desktop_full_button_width": false,
+                "desktop_show_price_in_button": false,
+                "desktop_transparent_bg": false,
+                "mobile_layout": "full",
+                "mobile_show_image": false,
+                "mobile_show_title": true,
+                "mobile_show_subtitle": true,
+                "mobile_rating_stars": false,
+                "mobile_show_price": true,
+                "mobile_show_sale_badge": false,
+                "mobile_variant_picker": false,
+                "mobile_full_button_width": false,
+                "mobile_show_price_in_button": false,
+                "mobile_transparent_bg": false
+              },
+              "blocks": {}
+            },
+            "product_petsome_collapsible_row_44HGEd": {
+              "type": "product_petsome-collapsible-row",
+              "name": "Petsome: Collapsible row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Opis izdelka",
+                "content": "<ul><li><strong>Zelenoustna školjka – </strong>Bogata z omega-3 maščobnimi kislinami in glikozaminoglikani, zmanjšuje vnetja, blaži bolečine in obnavlja sklepni hrustanec. </li><li><strong>Obnova sklepnega hrustanca – </strong>Glukozamin in hondroitin sodelujeta pri gradnji in obnovi hrustanca, kar zmanjšuje obrabo sklepov in povečuje njihovo prožnost. Ta kombinacija je idealna za aktivne pse in tiste, ki že kažejo znake staranja. </li><li><strong>Protivnetno delovanje – </strong>Kurkuma, ingver in vražji krempelj so močne naravne protivnetne sestavine, ki zmanjšujejo oteklino in bolečino v sklepih ter omogočajo lažje gibanje. </li><li><strong>Zaščita sklepov pred poškodbami – </strong>Vitamin C in šipek zagotavljata močno antioksidativno zaščito, ki zmanjšuje oksidativni stres in preprečuje nadaljnje poškodbe sklepnega tkiva. </li><li><strong>Naravno blaženje bolečin – </strong>Vražji krempelj poleg protivnetnega delovanja deluje tudi kot naravno sredstvo za blaženje bolečin, kar prispeva k boljšemu počutju psa. </li><li><strong>Izboljšanje gibljivosti – </strong>Sestavine Mobimixa sodelujejo pri obnovi in krepitvi sklepov, kar omogoča boljšo gibljivost in fleksibilnost.</li></ul>",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "product_petsome_collapsible_row_9kVyQR": {
+              "type": "product_petsome-collapsible-row",
+              "name": "Petsome: Collapsible row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Prednosti MobiMixa",
+                "content": "<ul><li><strong>Naravne sestavine, ki delujejo – </strong>Mobimix vsebuje skrbno izbrane naravne sestavine, kot so zelenoustna školjka, glukozamin, hondroitin, vražji krempelj, kurkuma, ingver, šipek in vitamin C, ki skupaj podpirajo zdravje sklepov in izboljšujejo gibljivost. </li><li><strong>Dokazani učinki – </strong>Lastniki poročajo o vidnem izboljšanju gibljivosti psov že v prvih tednih uporabe. Mobimix pomaga zmanjšati vnetje, bolečine in togost sklepov. </li><li><strong>Podpora pri staranju psov – </strong>Idealen za starejše pse in pse z aktivnim življenjskim slogom, ki potrebujejo dodatno podporo za sklepe. </li><li><strong>Prilagodljivo odmerjanje – </strong>Mobimix je v obliki kapsul, ki jih lahko prilagodite glede na velikost in potrebe psa – kapsulo lahko odprete in vsebino preprosto zmešate s hrano. </li><li><strong>Brez umetnih dodatkov – </strong>100 % naravno, brez umetnih barvil, konzervansov ali polnil – samo najboljše za vašega psa. </li><li><strong>Izdelano v Sloveniji</strong> – Podprite lokalno proizvodnjo! Mobimix je razvit in izdelan v Sloveniji, z mislijo na kakovost in učinkovitost. </li><li><strong>Celovita nega sklepov</strong> – Mobimix pomaga obnoviti hrustanec, zmanjšati vnetja in izboljšati gibljivost – vse v enem izdelku. </li><li><strong>Primerno za vse pasme in starosti – </strong>Naj bo vaš pes mladič, odrasel ali starejši, Mobimix je primeren za vse pasme in velikosti psov. </li><li><strong>Varen in preizkušen</strong> – Temelji na znanstvenih dognanjih in je razvit pod nadzorom strokovnjakov. </li><li><strong>Vidni rezultati</strong> – Več kot 1.000 zadovoljnih lastnikov psov je že opazilo razliko. </li></ul>",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "product_petsome_collapsible_row_3AApHF": {
+              "type": "product_petsome-collapsible-row",
+              "name": "Petsome: Collapsible row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Kako deluje MobiMix?",
+                "content": "<ul><li><strong>Zelenoustna školjka – </strong>Bogata z omega-3 maščobnimi kislinami in glikozaminoglikani, zmanjšuje vnetja, blaži bolečine in obnavlja sklepni hrustanec. </li><li><strong>Obnova sklepnega hrustanca – </strong>Glukozamin in hondroitin sodelujeta pri gradnji in obnovi hrustanca, kar zmanjšuje obrabo sklepov in povečuje njihovo prožnost. Ta kombinacija je idealna za aktivne pse in tiste, ki že kažejo znake staranja. </li><li><strong>Protivnetno delovanje – </strong>Kurkuma, ingver in vražji krempelj so močne naravne protivnetne sestavine, ki zmanjšujejo oteklino in bolečino v sklepih ter omogočajo lažje gibanje. </li><li><strong>Zaščita sklepov pred poškodbami – </strong>Vitamin C in šipek zagotavljata močno antioksidativno zaščito, ki zmanjšuje oksidativni stres in preprečuje nadaljnje poškodbe sklepnega tkiva. </li><li><strong>Naravno blaženje bolečin – </strong>Vražji krempelj poleg protivnetnega delovanja deluje tudi kot naravno sredstvo za blaženje bolečin, kar prispeva k boljšemu počutju psa. </li><li><strong>Izboljšanje gibljivosti – </strong>Sestavine Mobimixa sodelujejo pri obnovi in krepitvi sklepov, kar omogoča boljšo gibljivost in fleksibilnost.</li></ul>",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "product_petsome_collapsible_row_RFUWjV": {
+              "type": "product_petsome-collapsible-row",
+              "name": "Petsome: Collapsible row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Sestavine",
+                "content": "<ul><li>Zelenoustna školjka</li><li>Glukozamin in hondroitin</li><li>Vražji krempelj</li><li>Kurkuma</li><li>Izvleček ingverjeve korenine</li><li>Izvleček šipka</li><li>Vitamin C</li></ul>",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "product_petsome_collapsible_row_KXBHeX": {
+              "type": "product_petsome-collapsible-row",
+              "name": "Petsome: Collapsible row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Odmerjanje",
+                "content": "<p><strong>Priporočen dnevni vnos (3 mesece ali do izboljšanja stanja):</strong> </p><p>Mačke: 1/2 – 1 kapsula </p><p>Majhni psi (do 10 kg): 1 kapsula </p><p>Srednje veliki psi (11-24kg): 2 kapsuli </p><p>Veliki psi (25-40kg): 3 kapsule </p><p>Zelo veliki psi (več kot 41 kg): 4 kapsule </p><p><br/></p><p><strong>Vzdrževalni in preventivni vnos:</strong> </p><p>Do 20kg: 1 – 2 kapsule </p><p>Nad 20kg: 2 kapsuli </p><p><br/></p><p>Po treh mesecih jemanja oziroma po izboljšanju stanja, je potreben prehod na vzdrževalni vnos ali po potrebi ponoviti kuro. V primeru preobčutljivosti ali težav pri hranjenju se kapsulo lahko odpre, vsebino pa strese med dnevni obrok. Kapsulo v tem primeru zavržete. </p>",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "product_petsome_collapsible_row_zM8acA": {
+              "type": "product_petsome-collapsible-row",
+              "name": "Petsome: Collapsible row",
+              "settings": {
+                "visibility": "always-display",
+                "open": false,
+                "heading": "Študije",
+                "content": "<p><strong>Tiffany Linn Bierer3 and Linh M. Bui Waltham USA, Vernon, CA: Improvement of Arthritic Signs in Dogs Fed Green-Lipped Mussel (Perna canaliculus)</strong></p><p>“Podatki iz študije kažejo, da je GLM prašek učinkovit pri zmanjševanju znakov artritisa pri psih, bodisi, ko se neposredno posuje na standardno prehrano, bodisi, ko je vključen v obdelane priboljške ali glavne obroke. Po šestih tednih dopolnjevanja z GLM so se skupne ocene artritisa, bolečin v sklepih in oteklin bistveno zmanjšale. GLM vsebuje omega-3 maščobne kisline, ki zmanjšujejo vnetja, brez škodljivih učinkov na prebavni sistem ali strjevanje krvi, kar daje prednost pred mnogimi nesteroidnimi protivnetnimi zdravili. Prehransko dopolnjevanje z GLM lahko pripomore k obvladovanju artritičnih težav pri psih in zmanjša potrebo po običajnem zdravljenju.”</p><p><strong>Grainne McCarthy a,*, James O’Donovan b, Boyd Jones a, Hester McAllister c, Michael Seed d, Carmel Mooney: Randomised double-blind, positive-controlled trial to assess the efficacy of glucosamine/chondroitin sulfate for the treatment of dogs with osteoarthritis</strong></p><p>To poročilo je prvo, ki dokazuje, da se klinični znaki osteoartritisa pri psih znatno izboljšajo po 70 dneh zdravljenja z glukozamin hidrokloridom in hondroitin sulfatom. Čeprav so bili v prejšnjih študijah rezultati pri nekaterih dodatkih manj izraziti, so v tej študiji izboljšanja v bolečini in splošnem stanju postala pomembna po 70 dneh, kar kaže na dolgoročno učinkovitost tega zdravljenja.  </p><p><strong>Efficacy of Turmeric for Treatment of Osteoarthritis: A Systematic Review and Meta-Analysis of Experimental Animal Model Studies Stacey Sheahan VMD, MS-TCVM</strong></p><p>Ta sistematični pregled in meta-analiza sta pokazala, da ima kurkuma/kurkumin obetavne terapevtske učinke pri zdravljenju osteoartritisa (OA). Zmanjšuje vnetne citokine, kot sta TNF-α in IL-1β, ter ščiti hrustanec pred degeneracijo. Klinične študije na domačih ljubljenčkih, predvsem psih, so potrebne za dodatno raziskovanje učinkov kurkume pri zdravljenju OA. Kurkuma se lahko uporablja kot del širšega zdravljenja v okviru tradicionalne kitajske veterinarske medicine.</p>",
+                "page": "",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            },
+            "product_petsome_guarantee_UVLUtf": {
+              "type": "product_petsome-guarantee",
+              "name": "Petsome: Guarantee",
+              "settings": {
+                "image": "shopify://shop_images/Guarantee.png",
+                "text": "<p>Pri Petsome želimo, da vsak MobiMix ljubljenčku izboljša gibanje. Če ste v dvomih, ali je ta izdelek za vašega ljubljenčka - ni panike. Vaše naročilo je zaščiteno z 60-dnevno garancijo vračila denarja. Brez slabe vesti.</p>",
+                "background_color": "#e8d6c5",
+                "border_color": "#b6a87c",
+                "margin_top": 0,
+                "margin_bottom": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "a6eb81db-40e4-43e0-972f-32db010a4a56",
+            "heading_HDTL7R",
+            "petsome_tags_1",
+            "container_product_jaMkrK",
+            "kaching_bundles_app_block_1",
+            "5fcc0428-e768-4cb7-bea3-eb0274198dd1",
+            "kaching_custom_display_1",
+            "product_petsome_shipping_info_Jcitpf",
+            "buy_buttons",
+            "payment_badges_jpEXd3",
+            "product_petsome_professional_review_BGLaVX",
+            "e7a28cbe-03cb-4c9d-a2c4-0e3e76ffb3e5",
+            "product_petsome_collapsible_row_44HGEd",
+            "product_petsome_collapsible_row_9kVyQR",
+            "product_petsome_collapsible_row_3AApHF",
+            "product_petsome_collapsible_row_RFUWjV",
+            "product_petsome_collapsible_row_KXBHeX",
+            "product_petsome_collapsible_row_zM8acA",
+            "product_petsome_guarantee_UVLUtf"
+          ]
+        }
+      },
+      "custom_css": [],
+      "settings": {
+        "display_id": false,
+        "enable_sticky_info": true,
+        "color_scheme": "background-1",
+        "pattern_bg": "none",
+        "pattern_color": "#6d388b",
+        "pattern_size": 20,
+        "pattern_thickness": 2,
+        "pattern_angle": 45,
+        "pattern_opacity_mode": "low",
+        "pattern_opacity_low": 7,
+        "pattern_opacity_normal": 80,
+        "enable_breadcrumbs": false,
+        "breadcrumbs_position": "above_first_block",
+        "breadcrumbs_mode": "hybrid",
+        "breadcrumbs_show_home": true,
+        "breadcrumbs_home_label": "Home",
+        "breadcrumbs_show_product": false,
+        "breadcrumbs_separator": "›",
+        "breadcrumbs_desktop_text_size": 13,
+        "breadcrumbs_mobile_text_size": 12,
+        "breadcrumbs_font": "body",
+        "breadcrumbs_text_color": "text",
+        "breadcrumbs_custom_color": "#dd1d1d",
+        "breadcrumbs_alignment": "left",
+        "breadcrumbs_bottom_margin": 14,
+        "display_variant_image_first": false,
+        "disable_prepend": true,
+        "hide_variants": false,
+        "variant_image_filtering": "none",
+        "image_zoom_desktop": "none",
+        "hover_zoom_style": "inline",
+        "image_zoom_mobile": "none",
+        "thumbnails_ratio": "square",
+        "arrows_color_scheme": "inverse",
+        "transparent_arrows": false,
+        "dots_color_scheme": "inverse",
+        "video_player": "play_btn",
+        "enable_video_looping": false,
+        "autoplay_videos_pause_btn": false,
+        "video_sound_btn": false,
+        "video_timeline": false,
+        "play_btn_color_scheme": "accent-1",
+        "sound_btn_color_scheme": "inverse",
+        "video_fullscreen_btn": false,
+        "fullscreen_btn_color_scheme": "inverse",
+        "timeline_color": "accent-1",
+        "media_size": "small",
+        "media_position": "left",
+        "gallery_layout": "thumbnail_slider",
+        "desktop_thumbnails_position": "bottom",
+        "desktop_thumbnails_count": 5,
+        "desktop_vertical_thumbnails_width": 16,
+        "desktop_vertical_thumbnails_hide_arrows": false,
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "desktop_arrows_position": "hidden",
+        "mobile_media_corner_radius": 0,
+        "mobile_spacing_pixels": 0,
+        "mobile_arrows_position": "sides",
+        "mobile_pagination": "dots_overlay",
+        "mobile_thumbnails_position": "hidden",
+        "mobile_thumbnails_count": 5,
+        "mobile_vertical_thumbnails_width": 22,
+        "mobile_vertical_thumbnails_hide_arrows": true,
+        "mobile_scroll_padding_percentage": 0,
+        "mobile_scroll_padding_pixels": 0,
+        "enable_mobile_outher_spacing": false,
+        "mobile_slides_container_width": 100,
+        "mobile_slides_inner_width": 100,
+        "trust_badge_position": "top-right",
+        "badge_display_on": "all",
+        "badge_size_percentage": 20,
+        "mobile_padding_top": 0,
+        "mobile_padding_bottom": 16,
+        "desktop_padding_top": 36,
+        "desktop_padding_bottom": 36
+      }
+    },
+    "petsome_rotating_bullets_1": {
+      "type": "petsome-rotating-bullets",
+      "blocks": {
+        "item_1": {
+          "type": "item",
+          "settings": {
+            "text": "Podpira zdravje sklepov"
+          }
+        },
+        "item_2": {
+          "type": "item",
+          "settings": {
+            "text": "Zmanjšuje jutranjo togost"
+          }
+        },
+        "item_3": {
+          "type": "item",
+          "settings": {
+            "text": "Varuje hrustanec pred obrabo"
+          }
+        },
+        "item_4": {
+          "type": "item",
+          "settings": {
+            "text": "Spodbuja gibljivost in aktivnost"
+          }
+        }
+      },
+      "block_order": [
+        "item_1",
+        "item_2",
+        "item_3",
+        "item_4"
+      ],
+      "settings": {
+        "speed": 30,
+        "direction": "left",
+        "pause_on_hover": true,
+        "background_color": "#faf9f6",
+        "text_color": "#565858",
+        "text_size": 16,
+        "dot_color": "#F8AAA7",
+        "dot_size": 20,
+        "item_spacing": 32,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "petsome_benefits_1": {
+      "type": "petsome-benefits",
+      "blocks": {
+        "benefit_1": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/less_pain.png",
+            "icon": "pets",
+            "filled_icon": false,
+            "title": "Manj bolečin že po 2–3 tednih",
+            "text": "<p>Sestavine MobiMixa začnejo delovati takoj. Večina lastnikov opaži, da pes zjutraj vstane lažje in da je v gibanju manj previdnosti. Ne zato, ker bi bila bolečina zakrita, ampak ker se vnetje umirja in hrustanec dobiva podporo, ki jo potrebuje.</p>"
+          }
+        },
+        "benefit_2": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/easy_moving.png",
+            "icon": "directions_run",
+            "filled_icon": false,
+            "title": "Lahkotnejše gibanje dan za dnem",
+            "text": "<p>Kapsulo preprosto dodaš k dnevnemu obroku. Ni posebnih postopkov, ni kompromisov. Samo dosledna, dnevna podpora, ki sčasoma prinese razliko, ki jo opazite vsak dan.</p>"
+          }
+        },
+        "benefit_3": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/energy.png",
+            "icon": "bolt",
+            "filled_icon": true,
+            "title": "Več energije za sprehode in igranje",
+            "text": "<p>Ko se vnetje umiri, se vrne igrivost. Lastniki poročajo: pes spet pohiti do vrat, spet zahteva sprehod, spet povleče povodec. Ta trenutek je vreden vsega.</p>"
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/joint_protection.png",
+            "icon": "shield",
+            "filled_icon": true,
+            "title": "Dolgoročna zaščita sklepov",
+            "text": "<p>MobiMix je zasnovan za dolgotrajno uporabo. Idealen za pse nad 5 let, velike pasme in aktivne pse, ki sklepe obremenjujejo vsak dan. Hrustanca, ki ga ni, ne moremo obnoviti, tistega, ki je še tam, pa lahko zaščitimo.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4"
+      ],
+      "settings": {
+        "heading": "<p>Celostna formula za zdrave sklepe in lahkotno gibanje psov.</p>",
+        "columns": "2",
+        "accent_color": "#f8aaa7",
+        "secondary_color": "#e8d6c5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "petsome_timeframe_1": {
+      "type": "petsome-timeframe",
+      "blocks": {
+        "tf_1": {
+          "type": "timeframe",
+          "settings": {
+            "highlighted": false,
+            "badge_text": "2-3 tedni",
+            "title": "Vstane malo lažje.",
+            "text": "<p>To je navadno prva stvar, ki jo opazite. Tista sekunda oklevanja zjutraj — začne izginjati. Hoja po stopnicah je manj previdna. Drobne spremembe, ki pa jih ne morete spregledati, ko jih vidite.</p>"
+          }
+        },
+        "tf_2": {
+          "type": "timeframe",
+          "settings": {
+            "highlighted": false,
+            "badge_text": "1 mesec",
+            "title": "Spet hodi kot bi moral.",
+            "text": "<p>Tempo se vrne. Pes bolj pogumno stopa po klančinah. Na sprehodu spet malo zahteva — ne samo sledi. Sprehodi postanejo prijetnejši. Za oba.</p>"
+          }
+        },
+        "tf_3": {
+          "type": "timeframe",
+          "settings": {
+            "highlighted": true,
+            "badge_text": "2–3 meseci",
+            "title": "Deluje kot mlajši.",
+            "text": "<p>To je stavek, ki ga slišimo najpogosteje. Pes se igra. Prinese igračo. Pohiti do vrat. Stvari, ki jih je nehal počati — se vračajo. Po eni za drugo.</p>"
+          }
+        },
+        "tf_4": {
+          "type": "timeframe",
+          "settings": {
+            "highlighted": false,
+            "badge_text": "3+ meseci",
+            "title": "Zdaj pa ne bi več prenehala.",
+            "text": "<p>Ko lastniki vidijo, kaj se zgodi, če za teden pozabijo na kapsulo — se ne ustavijo več. Sklepi so zaščiteni. Pes je aktiven. To je bil cilj od začetka.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "tf_1",
+        "tf_2",
+        "tf_3",
+        "tf_4"
+      ],
+      "settings": {
+        "heading": "<p>Kaj se zgodi, ko vaš pes začne z MobiMixom?</p>",
+        "subheading": "Vsak pes je drugačen. A večina lastnikov opazi prve spremembe hitreje, kot so pričakovali.",
+        "columns": "4",
+        "background_color": "#faf9f6",
+        "accent_color": "#f8aaa7",
+        "accent_color_dark": "#f47671",
+        "secondary_color": "#e8d6c5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "petsome_checklist_1": {
+      "type": "petsome-checklist",
+      "blocks": {
+        "bullet_1": {
+          "type": "bullet",
+          "settings": {
+            "text": "🐕 ima več energije čez dan in ni več hitro utrujen"
+          }
+        },
+        "bullet_2": {
+          "type": "bullet",
+          "settings": {
+            "text": "🦴 se giblje bolj sproščeno, brez okorelosti po počitku"
+          }
+        },
+        "bullet_3": {
+          "type": "bullet",
+          "settings": {
+            "text": "🚶‍♂️ z veseljem hodi na sprehode in ne zaostaja več"
+          }
+        },
+        "bullet_4": {
+          "type": "bullet",
+          "settings": {
+            "text": "🐾 spet skače, teče in se igra brez zadržkov"
+          }
+        },
+        "bullet_5": {
+          "type": "bullet",
+          "settings": {
+            "text": "❤️ se počuti bolje v svojem telesu, tudi v zrelih letih"
+          }
+        },
+        "bullet_6": {
+          "type": "bullet",
+          "settings": {
+            "text": "🔁 ohrani zdrave sklepe dolgoročno, ne samo kratkoročno"
+          }
+        },
+        "bullet_7": {
+          "type": "bullet",
+          "settings": {
+            "text": "🛡 ima ves čas podporo sklepom tudi če je večje pasme ali zelo aktiven"
+          }
+        },
+        "bullet_8": {
+          "type": "bullet",
+          "settings": {
+            "text": "😊 uživa v vsakodnevnem gibanju, brez bolečine in nelagodja"
+          }
+        }
+      },
+      "block_order": [
+        "bullet_1",
+        "bullet_2",
+        "bullet_3",
+        "bullet_4",
+        "bullet_5",
+        "bullet_6",
+        "bullet_7",
+        "bullet_8"
+      ],
+      "settings": {
+        "heading": "<p>MobiMix je prava izbira za vašega psa, če želite, da:</p>",
+        "image": "shopify://shop_images/hf_20260122_143423_91f5eeda-985c-4ddc-97ca-bdfb6690d8f7.png",
+        "secondary_color": "#e8d6c5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "petsome_comparison_1": {
+      "type": "petsome-comparison",
+      "blocks": {
+        "row_1": {
+          "type": "row",
+          "settings": {
+            "label": "Hrustanec dobiva gradbeni material za obnovo",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_2": {
+          "type": "row",
+          "settings": {
+            "label": "Vnetje se umirja — na treh poteh hkrati",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_3": {
+          "type": "row",
+          "settings": {
+            "label": "Sklepna tekočina se vzdržuje — manj trenja, lažje gibanje",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_4": {
+          "type": "row",
+          "settings": {
+            "label": "Število aktivnih sestavin",
+            "them_value": "1-3",
+            "us_value": "8"
+          }
+        },
+        "row_5": {
+          "type": "row",
+          "settings": {
+            "label": "Učinek, ki traja — ne le začetni skok",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_6": {
+          "type": "row",
+          "settings": {
+            "label": "Priporočeno v veterinarskih in rehab. centrih",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_7": {
+          "type": "row",
+          "settings": {
+            "label": "Formulirano in proizvedeno v EU",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        }
+      },
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3",
+        "row_4",
+        "row_5",
+        "row_6",
+        "row_7"
+      ],
+      "settings": {
+        "heading": "<p>Zakaj običajni dodatki pogosto ne pomagajo?</p>",
+        "description": "<p>Ko pes začne šepati, kupite, kar priporoči sosed ali kar najdete na polici. Glukozamin. Morda hondroitin. Psu dodatek dajete en mesec in ne opazite nič. Razlog ni, da \"dodatki pač ne delajo.\" Razlog je, da sklepna bolečina ni en problem. So trije in navadni dodatki naslavljajo samo enega.</p>",
+        "them_image": "shopify://shop_images/us_vs_them.png",
+        "them_label": "Ostali dodatki",
+        "us_image": "shopify://shop_images/MobiMix_NEW_1d48bfe9-d0c6-49cc-a93c-30f3457609e2.png",
+        "us_label": "MobiMix",
+        "background_color": "#faf9f6",
+        "accent_color": "#f8aaa7",
+        "accent_color_dark": "#f47671",
+        "secondary_color": "#e8d6c5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "petsome_explainer_1": {
+      "type": "petsome-explainer",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "heading": "🛑 Zakaj mnogi dodatki razočarajo?",
+            "text": "<p>Veliko dodatkov za sklepe temelji le na eni ali dveh sestavinah, zato delujejo predvsem kratkoročno in ne naslavljajo vseh vzrokov težav s sklepi. Posledično lahko prinesejo le začasno olajšanje, ne pa dolgoročne podpore in trajnih izboljšav.</p>",
+            "badge_text": "Kratkoročno olajšanje ≠ dolgoročna rešitev"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "heading": "✅ Zakaj MobiMix deluje drugače?",
+            "text": "<p>MobiMix združuje 8 skrbno izbranih učinkovin s sinergičnim delovanjem, ki hkrati zagotavljajo protivnetno, regenerativno in zaščitno podporo sklepom. Razvit je za redno in dolgotrajno uporabo, saj sklepe podpira celostno in skozi čas.</p>",
+            "badge_text": "Celostna podpora sklepom skozi čas"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/hf_20260324_090023_9eac1bcd-6ab4-48cb-84f0-f40b13f453d6.jpg",
+        "button_label": "Naroči MobiMix",
+        "button_link": "",
+        "button_icon": "shopping_bag",
+        "button_background_color": "#0e1111",
+        "button_text_color": "#ffffff",
+        "secondary_color": "#e8d6c5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "petsome_ingredients_1": {
+      "type": "petsome-ingredients",
+      "settings": {
+        "heading": "<p>8 skrbno izbranih sestavin</p>",
+        "description": "<p>Vsaka sestavina v MobiMixu ima svojo vlogo — skupaj naslavljajo vnetje, obnovo hrustanca in dolgoročno zaščito sklepov. Kliknite na sestavino za več informacij.</p>",
+        "amount_label": "Količina v paketu",
+        "background_color": "#faf9f6",
+        "accent_color": "#f8aaa7",
+        "accent_color_dark": "#f47671",
+        "secondary_color": "#e8d6c5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "petsome_mechanism_1": {
+      "type": "petsome-mechanism",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "badge_text": "OBNOVA",
+            "title": "Hrustanec, ki ga ni, ne more rasti sam od sebe.",
+            "text": "<p>Glukozamin, hondroitin in vitamin C skupaj zagotavljajo gradbeni material za hrustančne celice. Glukozamin tvori strukturo, hondroitin zadržuje vlago, vitamin C je kofaktor, brez katerega tvorba kolagena preprosto ne steče. Brez vseh treh hkrati — obnova ostane nepopolna.</p>"
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "badge_text": "ZAŠČITA",
+            "title": "Vnetje, ki traja mesece, povzroča trajno škodo.",
+            "text": "<p>Vražji krempelj, kurkuma in ingver — vsak udari na drugem vnetnem signalu. Skupaj pokrijejo celoten spekter kroničnega sklepnega vnetja, brez stranskih učinkov na prebavila. To je tisto, kar navadni dodatki ne naredijo: sploh ne naslavljajo vnetja.</p>"
+          }
+        },
+        "card_3": {
+          "type": "card",
+          "settings": {
+            "badge_text": "VZDRŽEVANJE",
+            "title": "Sklepi potrebujejo oskrbo vsak dan, ne samo ko boli.",
+            "text": "<p>Zelenoustna školjka je edini naravni vir treh omega-3 maščobnih kislin hkrati. Šipek vzdržuje sinovialno tekočino. Skupaj preprečujeta, da bi se stanje vrnilo — ker vzdržujeta okolje, v katerem je obnova sploh mogoča.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2",
+        "card_3"
+      ],
+      "settings": {
+        "kicker_text": "ARTROREGEN FORMULA",
+        "heading": "<p>Zakaj 8 sestavin in ne samo 2?</p>",
+        "description": "<p>Večina dodatkov cilja en problem. ArtroRegen Formula cilja tri — hkrati. To ni slučajnost. To je razlog, zakaj tista kapsula iz zoološkege vrta ni delala. In zakaj ta dela.</p>",
+        "pattern_image": "shopify://shop_images/paw_background.png",
+        "background_color": "#e8d6c5",
+        "kicker_background": "#e0b58d",
+        "card_background": "#ffffff",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "petsome_before_after_1": {
+      "type": "petsome-before-after",
+      "blocks": {
+        "story_1": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "dog_name": "Rex, 8-letni labradorec",
+            "issue": "Težave pri vstajanju",
+            "text": "<p>Rex je imel vsako jutro težave že pri prvih korakih. Po nekaj tednih MobiMixa vstane brez obotavljanja in spet rade volje teče do vrat.</p>"
+          }
+        },
+        "story_2": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "dog_name": "Zala, 11-letna čivava",
+            "issue": "Operacija kolena",
+            "text": "<p>Po operaciji kolena je bila Zala previdna pri vsakem koraku. Lastnica poroča, da je danes spet igriva in brez vidnega nelagodja pri gibanju.</p>"
+          }
+        },
+        "story_3": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "dog_name": "Fifi, 12-letni ovčar",
+            "issue": "Star pes",
+            "text": "<p>Fifi je v zrelih letih postajala vse manj aktivna. Z rednim dodajanjem MobiMixa je spet pripravljena na daljše sprehode in igro v parku.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "story_1",
+        "story_2",
+        "story_3"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "<p>Dokazi so v rezultatih</p>",
+        "description": "<p>Pomagali smo že več kot 10.000 psom po vsej Evropi. Tukaj je nekaj njihovih zgodb.</p>",
+        "border_color": "#e8d6c5",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "petsome_certificates_1": {
+      "type": "petsome-certificates",
+      "blocks": {
+        "badge_4JraCr": {
+          "type": "badge",
+          "settings": {
+            "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
+            "label": ""
+          }
+        }
+      },
+      "block_order": [
+        "badge_4JraCr"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "<p>Proizvedeno v skladu z najvišjimi standardi</p>",
+        "description": "<p>MobiMix je izdelan v skladu z najvišjimi evropskimi standardi. Vsaka sestavina in vsak odmerek sta neodvisno testirana, brez nepotrebnih dodatkov in polnil.</p>",
+        "button_label": "Naroči MobiMix",
+        "button_link": "",
+        "button_icon": "shopping_bag",
+        "button_background_color": "#0e1111",
+        "button_text_color": "#ffffff",
+        "background_color": "#e8d6c5",
+        "pattern_image": "shopify://shop_images/paw_background.png",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "petsome_how_to_use_1": {
+      "type": "petsome-how-to-use",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/MobiMix_Step_1.png",
+            "title": "1. Korak",
+            "description": "Odmeri kapsule glede na težo psa"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/MobiMix_Step_2.png",
+            "title": "2. Korak",
+            "description": "Odpri ali dodaj celo kapsulo na obrok."
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/MobiMix_Step_3.png",
+            "title": "3. Korak",
+            "description": "Zmešaj z obrokom."
+          }
+        },
+        "step_4": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/MobiMix_Step_4.png",
+            "title": "4. Korak",
+            "description": "Ponavljaj vsak dan in opazuj razliko."
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "settings": {
+        "heading": "<p>Ena rutina. Vsak dan. To je vse.</p>",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "petsome_stats_1": {
+      "type": "petsome-stats",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "95%",
+            "description": "lastnikov pravi, da se je njihov pes začel gibati bolj lahkotno in samozavestno."
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "93%",
+            "description": "lastnikov poroča o zmanjšanih znakih bolečin pri hoji in vstajanju."
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "90%",
+            "description": "opazi več igrivosti in energije pri svojem psu čez dan."
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3"
+      ],
+      "settings": {
+        "background_color": "#e8d6c5",
+        "number_color": "#f47671",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "petsome_professional_reviews_BkgaUN": {
+      "type": "petsome-professional-reviews",
+      "name": "Petsome: Expert reviews",
+      "settings": {
+        "heading": "<p>Preverjeno v praksi – s strani strokovnjakov in lastnikov psov</p>",
+        "background_color": "#faf9f6",
+        "star_color": "#ffcc00",
+        "max_lines": 4,
+        "read_more_label": "Preberi več",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "petsome_rotating_logos_1": {
+      "type": "petsome-rotating-logos",
+      "settings": {
+        "speed": 30,
+        "direction": "left",
+        "pause_on_hover": true,
+        "background_color": "#faf9f6",
+        "logo_height": 72,
+        "item_spacing": 24,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "petsome_customer_reviews_1": {
+      "type": "petsome-customer-reviews",
+      "settings": {
+        "rating_value": "4.7",
+        "heading": "<p>Zaupa nam že več kot 2.000 lastnikov po vsej Evropi</p>",
+        "card_color": "#e8d6c5",
+        "star_color": "#ffcc00",
+        "padding_top": 64,
+        "padding_bottom": 64
+      }
+    },
+    "17827582468bb08a41": {
+      "type": "apps",
+      "blocks": {
+        "loox_reviews_loox_dynamic_section_dAPRGq": {
+          "type": "shopify://apps/loox-reviews/blocks/loox-dynamic-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "settings": {
+            "reviews_to_display": "",
+            "default_tab": "automatic",
+            "only_photos": false,
+            "aggregated": false,
+            "limit": 5,
+            "hide_thumbnails": false,
+            "maxwidth": 1080,
+            "is_sample": true
+          }
+        }
+      },
+      "block_order": [
+        "loox_reviews_loox_dynamic_section_dAPRGq"
+      ],
+      "settings": {
+        "display_id": false,
+        "include_margins": true
+      }
+    },
+    "petsome_faq_1": {
+      "type": "petsome-faq",
+      "settings": {
+        "heading": "<p>Pogosta vprašanja</p>",
+        "background_color": "#faf9f6",
+        "item_color": "#e8d6c5",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "disabled": true,
+      "settings": {
+        "display_id": false,
+        "title": "You may also like",
+        "title_highlight_1": "solid-color",
+        "title_highlight_1_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_1_bg-color": "#f9efff",
+        "title_highlight_1_color": "#6d388b",
+        "highlighted-1_border_radius": 8,
+        "highlighted-1_border_width": 0,
+        "highlighted-1_border": "solid",
+        "highlighted-1_border_color": "#6d388b",
+        "highlighted-1_padding-block": 0.3,
+        "highlighted-1_padding-inline": 0.3,
+        "title_highlight_1_underline-thickness": 2,
+        "title_highlight_1_underline-color": "#6d388b",
+        "title_highlight_1_underline-color--gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_1_underline-color-position": 25,
+        "title_highlight_1_handwritten-color": "#6d388b",
+        "title_highlight_1_handwritten-stroke-width": 3,
+        "title_highlight_1_handwritten-position": 60,
+        "title_highlight_2": "none",
+        "title_highlight_2_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_2_bg-color": "#f9efff",
+        "title_highlight_2_color": "#6d388b",
+        "highlighted-2_border_radius": 8,
+        "highlighted-2_border_width": 0,
+        "highlighted-2_border": "solid",
+        "highlighted-2_border_color": "#6d388b",
+        "highlighted-2_padding-block": 0.3,
+        "highlighted-2_padding-inline": 0.3,
+        "title_highlight_2_underline-thickness": 2,
+        "title_highlight_2_underline-color": "#6d388b",
+        "title_highlight_2_underline-color--gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_2_underline-color-position": 25,
+        "title_highlight_2_handwritten-color": "#6d388b",
+        "title_highlight_2_handwritten-stroke-width": 3,
+        "title_highlight_2_handwritten-position": 60,
+        "heading_size": "h2",
+        "custom_desktop_size": 39,
+        "custom_mobile_size": 28,
+        "products_to_show": 4,
+        "stretch_cards": false,
+        "columns_desktop": 4,
+        "color_scheme": "background-1",
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_quick_add": false,
+        "button_funcionality": "add-to-cart",
+        "button_label": "Go to product",
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 24
+      }
+    }
+  },
+  "order": [
+    "main",
+    "petsome_rotating_bullets_1",
+    "petsome_benefits_1",
+    "petsome_timeframe_1",
+    "petsome_checklist_1",
+    "petsome_comparison_1",
+    "petsome_explainer_1",
+    "petsome_ingredients_1",
+    "petsome_mechanism_1",
+    "petsome_before_after_1",
+    "petsome_certificates_1",
+    "petsome_how_to_use_1",
+    "petsome_stats_1",
+    "petsome_professional_reviews_BkgaUN",
+    "petsome_rotating_logos_1",
+    "petsome_customer_reviews_1",
+    "17827582468bb08a41",
+    "petsome_faq_1",
+    "related-products"
+  ]
+}
