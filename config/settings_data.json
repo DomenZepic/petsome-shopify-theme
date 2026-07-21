@@ -984,6 +984,11 @@
         "settings": {
           "version": "v3"
         }
+      },
+      "5877711596357593266": {
+        "type": "shopify://apps/kaching-popup/blocks/popup/e910a01f-bb85-45d8-92ef-3667265465b1",
+        "disabled": false,
+        "settings": {}
       }
     }
   },
