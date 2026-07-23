@@ -186,8 +186,8 @@
         "image": "shopify://shop_images/hf_20260713_165719_3d2d789b-0b91-400e-b9ae-5854d33e0906.png",
         "footnote": "<p>Every dog is different. Any change in week one is simply the body adjusting — not a cleanse, not a laxative.</p>",
         "background_color": "#ede4d3",
-        "accent_color": "#F8AAA7",
-        "accent_color_dark": "#F8AAA7",
+        "accent_color": "#f8aaa7",
+        "accent_color_dark": "#f8aaa7",
         "secondary_color": "#e8d6c5",
         "padding_top": 64,
         "padding_bottom": 64
@@ -233,21 +233,33 @@
     "offer": {
       "type": "petsome-ld-offer",
       "settings": {
+        "product": "mobimix",
         "weight_label": "Choose your dog's weight:",
         "atc_label": "Add to cart",
         "show_payment_icons": true,
+        "disclaimer_text": "<p>*First changes are visible in 2-3 weeks. For best results we recommend 2-3 months of use.</p>",
+        "gifts_heading": "",
+        "hide_gifts_heading": false,
         "tier_1_style": "none",
         "tier_2_style": "recommended",
         "tier_3_style": "best",
         "tier_4_style": "none",
         "background_color": "#fdfbf7",
+        "accent_color": "#f8aaa7",
+        "accent_color_dark": "#f47671",
+        "secondary_color": "#e8d6c5",
+        "light_text_color": "#faf9f6",
         "atc_background": "#0e1111",
         "atc_text_color": "#ffffff",
         "product_type": "capsules",
         "capsules_per_package": 90,
         "capsules_per_day_by_size": "1, 2, 3",
+        "grams_per_package": 90,
+        "grams_per_day_by_size": "1, 2, 3",
         "padding_top": 40,
-        "padding_bottom": 56
+        "padding_bottom": 56,
+        "margin_top": 0,
+        "margin_bottom": 0
       }
     }
   },
