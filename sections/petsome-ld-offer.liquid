@@ -1,0 +1,508 @@
+{% comment %}
+  Petsome Ld: Offer - a PAGE-hostable version of the product offer (Kaching
+  bundle tiles + weight selector + gifts + add to cart), for landing pages that
+  live on /pages/ instead of /products/.
+
+  How it works (per Kaching's own "custom placement" docs): the Kaching engine
+  is mounted as <kaching-bundle product-id="..."> inside a <form action="/cart/add">
+  with a submit button. That gives Kaching a product context and a form to submit,
+  even though this isn't a product page. Our existing custom UI + JS
+  (snippets/kaching-custom-display.liquid + assets/kaching-custom-display.js) are
+  reused UNCHANGED - this section just renders that snippet with `block: section`
+  and an explicit `product:` (the one picked below), and supplies the
+  <form>, the <kaching-bundle> engine, the weight selector, and the ATC button
+  that the custom UI expects to find on the page.
+
+  Requirements:
+  - Pick a product below that has a Kaching Bundles deal configured for it.
+  - The weight selector is built from that product's FIRST option (e.g. dog weight).
+{% endcomment %}
+{%- liquid
+  assign offer_product = section.settings.product
+  assign weight_option = offer_product.options_with_values[0]
+  assign first_variant = offer_product.selected_or_first_available_variant
+-%}
+<style>
+  #petsome-ld-offer-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    font-family: var(--font-body-family);
+  }
+
+  #petsome-ld-offer-{{ section.id }} * {
+    font-family: var(--font-body-family);
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__inner {
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* Weight selector */
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__weight-label {
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: rgb(var(--color-foreground));
+    margin: 0 0 4px;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__weights {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 12px;
+  }
+
+  @media screen and (max-width: 559px) {
+    #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__weights {
+      grid-auto-flow: row;
+      grid-template-columns: 1fr;
+    }
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__weight {
+    position: relative;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__weight input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__weight label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    padding: 8px 16px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: rgb(var(--color-foreground));
+    background-color: #ffffff;
+    border: 2px solid #e7e7e7;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__weight input:checked + label {
+    border-color: var(--kaching-accent, #f8aaa7);
+    background-color: color-mix(in srgb, var(--kaching-accent, #f8aaa7) 18%, white);
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__weight input:disabled + label {
+    opacity: 0.4;
+    cursor: not-allowed;
+    text-decoration: line-through;
+  }
+
+  /* Add to cart */
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__atc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 56px;
+    padding: 16px 24px;
+    border: none;
+    border-radius: 12px;
+    background-color: {{ section.settings.atc_background }};
+    color: {{ section.settings.atc_text_color }};
+    font-weight: 700;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__atc:hover {
+    opacity: 0.94;
+  }
+
+  /* Payment icons */
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__payments {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__payments svg {
+    width: 38px;
+    height: auto;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__notice {
+    padding: 16px;
+    border: 1px dashed #b7b8b8;
+    border-radius: 12px;
+    font-size: 1.4rem;
+    color: rgba(var(--color-foreground), 0.75);
+    text-align: center;
+  }
+</style>
+
+<a id="offer" class="petsome-ld-offer__anchor" aria-hidden="true"></a>
+<div id="petsome-ld-offer-{{ section.id }}" class="petsome-ld-offer">
+  <div class="petsome-ld-offer__inner">
+    {%- if offer_product == blank -%}
+      <div class="petsome-ld-offer__notice">
+        Select a product for this offer in the theme editor. It must have a Kaching Bundles deal configured.
+      </div>
+    {%- else -%}
+      <form
+        action="{{ routes.cart_add_url }}"
+        method="post"
+        enctype="multipart/form-data"
+        class="petsome-ld-offer__form"
+      >
+        {%- comment -%} Kaching engine (hidden by the custom-display CSS), gives Kaching its product + form context {%- endcomment -%}
+        <kaching-bundle product-id="{{ offer_product.id }}"></kaching-bundle>
+
+        {%- comment -%} Variant id submitted to /cart/add; kept in sync with the weight selector below {%- endcomment -%}
+        <input type="hidden" name="id" value="{{ first_variant.id }}" data-offer-variant-id>
+
+        {%- comment -%}
+          Weight selector - the custom-display JS looks this up by
+          id="variant-selects-<section.id>", reads the variants JSON, and
+          listens to the radio inputs (value = option1).
+        {%- endcomment -%}
+        {%- if weight_option and weight_option.values.size > 0 -%}
+          <div id="variant-selects-{{ section.id }}">
+            <script type="application/json">{{ offer_product.variants | json }}</script>
+            {%- if section.settings.weight_label != blank -%}
+              <p class="petsome-ld-offer__weight-label">{{ section.settings.weight_label }}</p>
+            {%- endif -%}
+            <div class="petsome-ld-offer__weights">
+              {%- for value in weight_option.values -%}
+                {%- assign v = offer_product.variants | where: 'option1', value | first -%}
+                <div class="petsome-ld-offer__weight">
+                  <input
+                    type="radio"
+                    id="weight-{{ section.id }}-{{ forloop.index }}"
+                    name="weight-{{ section.id }}"
+                    value="{{ value | escape }}"
+                    data-variant-id="{{ v.id }}"
+                    {% if forloop.first %}checked{% endif %}
+                    {% unless v.available %}disabled{% endunless %}
+                  >
+                  <label for="weight-{{ section.id }}-{{ forloop.index }}">{{ value }}</label>
+                </div>
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- else -%}
+          <div id="variant-selects-{{ section.id }}">
+            <script type="application/json">{{ offer_product.variants | json }}</script>
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Our custom bundle tiles + gifts UI, reused unchanged {%- endcomment -%}
+        {% render 'kaching-custom-display', block: section, section: section, product: offer_product %}
+
+        <button type="submit" class="petsome-ld-offer__atc">
+          {{ section.settings.atc_label | default: 'Add to cart' }}
+        </button>
+
+        {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+          <div class="petsome-ld-offer__payments">
+            {%- for type in shop.enabled_payment_types -%}
+              {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </form>
+
+      <script>
+        (function () {
+          var root = document.getElementById('petsome-ld-offer-{{ section.id }}');
+          if (!root) return;
+          var hidden = root.querySelector('[data-offer-variant-id]');
+          var radios = root.querySelectorAll('#variant-selects-{{ section.id }} input[type="radio"]');
+          radios.forEach(function (radio) {
+            radio.addEventListener('change', function () {
+              if (radio.checked && radio.dataset.variantId && hidden) {
+                hidden.value = radio.dataset.variantId;
+              }
+            });
+          });
+        })();
+      </script>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Petsome Ld: Offer",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Offer product",
+      "info": "Must have a Kaching Bundles deal configured for it. The weight selector is built from this product's first option."
+    },
+    {
+      "type": "text",
+      "id": "weight_label",
+      "label": "Weight selector label",
+      "default": "Choose your dog's weight:"
+    },
+    {
+      "type": "text",
+      "id": "atc_label",
+      "label": "Add to cart button label",
+      "default": "Add to cart"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Disclaimer & gifts"
+    },
+    {
+      "type": "richtext",
+      "id": "disclaimer_text",
+      "label": "Disclaimer text",
+      "info": "Shown below the package tiles. Leave blank to hide.",
+      "default": "<p>*First changes are visible in 2-3 weeks. For best results we recommend 2-3 months of use.</p>"
+    },
+    {
+      "type": "text",
+      "id": "gifts_heading",
+      "label": "Gifts heading override",
+      "info": "Leave blank to use the translatable default heading (editable per language in Settings > Languages > Theme)."
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_gifts_heading",
+      "label": "Hide gifts heading",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Tier colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "Color of the label strip above each tier by position (1st = smallest quantity, last = largest). Label text is pulled from Kaching. 'None' hides the strip for that tier."
+    },
+    {
+      "type": "select",
+      "id": "tier_1_style",
+      "label": "Tier 1 color",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "recommended", "label": "Beige" },
+        { "value": "best", "label": "Black" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "select",
+      "id": "tier_2_style",
+      "label": "Tier 2 color",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "recommended", "label": "Beige" },
+        { "value": "best", "label": "Black" }
+      ],
+      "default": "recommended"
+    },
+    {
+      "type": "select",
+      "id": "tier_3_style",
+      "label": "Tier 3 color",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "recommended", "label": "Beige" },
+        { "value": "best", "label": "Black" }
+      ],
+      "default": "best"
+    },
+    {
+      "type": "select",
+      "id": "tier_4_style",
+      "label": "Tier 4 color",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "recommended", "label": "Beige" },
+        { "value": "best", "label": "Black" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "If the product has a \"Product accent color\" / \"Product secondary color\" metafield set, that value is used instead of the colors below - these only apply as a fallback when the metafield is blank."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#FDFBF7"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color (fallback)",
+      "info": "Used for the savings badge gradient and the \"best savings\" tile/badge.",
+      "default": "#f8aaa7"
+    },
+    {
+      "type": "color",
+      "id": "accent_color_dark",
+      "label": "Accent color dark / gradient end (fallback)",
+      "default": "#f47671"
+    },
+    {
+      "type": "color",
+      "id": "secondary_color",
+      "label": "Secondary color (fallback)",
+      "info": "Used for the \"recommended\" tile/badge, the selected-tile highlight, and the gifts panel.",
+      "default": "#e8d6c5"
+    },
+    {
+      "type": "color",
+      "id": "light_text_color",
+      "label": "Light text color",
+      "default": "#FAF9F6"
+    },
+    {
+      "type": "color",
+      "id": "atc_background",
+      "label": "Add to cart background",
+      "default": "#0e1111"
+    },
+    {
+      "type": "color",
+      "id": "atc_text_color",
+      "label": "Add to cart text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "header",
+      "content": "Dosage / supply math"
+    },
+    {
+      "type": "select",
+      "id": "product_type",
+      "label": "Product type",
+      "info": "Determines whether dosage captions are worded/measured in capsules or grams. Supply math is identical either way.",
+      "options": [
+        { "value": "capsules", "label": "Capsules" },
+        { "value": "powder", "label": "Powder" }
+      ],
+      "default": "capsules"
+    },
+    {
+      "type": "number",
+      "id": "capsules_per_package",
+      "label": "Capsules per package",
+      "info": "0 disables the dosage/supply captions.",
+      "default": 90,
+      "visible_if": "{{ section.settings.product_type == 'capsules' }}"
+    },
+    {
+      "type": "text",
+      "id": "capsules_per_day_by_size",
+      "label": "Capsules per day, by size option value",
+      "info": "One number per size option value, comma-separated, in the same order as the size option's values.",
+      "default": "1, 2, 3",
+      "visible_if": "{{ section.settings.product_type == 'capsules' }}"
+    },
+    {
+      "type": "number",
+      "id": "grams_per_package",
+      "label": "Grams per package",
+      "info": "0 disables the dosage/supply captions.",
+      "default": 90,
+      "visible_if": "{{ section.settings.product_type == 'powder' }}"
+    },
+    {
+      "type": "text",
+      "id": "grams_per_day_by_size",
+      "label": "Grams per day, by size option value",
+      "info": "One number per size option value, comma-separated, in the same order as the size option's values.",
+      "default": "1, 2, 3",
+      "visible_if": "{{ section.settings.product_type == 'powder' }}"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Tiles margin top",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Tiles margin bottom",
+      "min": 0,
+      "max": 45,
+      "step": 3,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome Ld: Offer"
+    }
+  ]
+}
+{% endschema %}

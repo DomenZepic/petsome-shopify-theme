@@ -229,6 +229,26 @@
         "padding_top": 48,
         "padding_bottom": 48
       }
+    },
+    "offer": {
+      "type": "petsome-ld-offer",
+      "settings": {
+        "weight_label": "Choose your dog's weight:",
+        "atc_label": "Add to cart",
+        "show_payment_icons": true,
+        "tier_1_style": "none",
+        "tier_2_style": "recommended",
+        "tier_3_style": "best",
+        "tier_4_style": "none",
+        "background_color": "#fdfbf7",
+        "atc_background": "#0e1111",
+        "atc_text_color": "#ffffff",
+        "product_type": "capsules",
+        "capsules_per_package": 90,
+        "capsules_per_day_by_size": "1, 2, 3",
+        "padding_top": 40,
+        "padding_bottom": 56
+      }
     }
   },
   "order": [
@@ -237,6 +257,7 @@
     "hero",
     "reasons",
     "timeline",
-    "stats"
+    "stats",
+    "offer"
   ]
 }
