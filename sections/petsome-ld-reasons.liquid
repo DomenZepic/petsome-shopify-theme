@@ -1,26 +1,24 @@
 {% comment %}
-  Petsome: Reasons - the flagship "N reasons why" storytelling section for
-  landing pages / marketing-angle tests. A header (eyebrow + heading +
-  subheading) followed by repeatable "reason" blocks, each with an optional
-  number, tag pill, image, icon, title, description and per-reason CTA.
+  Petsome Ld: Reasons - the flagship "N reasons why" storytelling section for
+  landing pages (the "Ld" family). A header (eyebrow + heading + subheading)
+  followed by repeatable "reason" blocks, each with an optional number, tag
+  pill, image, icon, title, description and per-reason CTA.
 
   Two layouts, switchable per instance from the theme editor:
-    - "Alternating rows": full-width editorial rows, image/text sides swap
-      every other reason. Best for storytelling.
-    - "Card grid": compact 2/3-up cards. Best for scannable, above-the-fold.
+    - "Alternating rows": full-width editorial rows, image/text sides swap.
+    - "Card grid": compact 2/3-up cards.
 
-  Fully generic/reusable: no hardcoded copy in Liquid, every string is a
-  merchant setting so translation apps (Translate & Adapt / Weglot / Langify)
-  pick them up automatically. Accent/secondary colors default to the
-  product's "Product accent color" / "Product secondary color" metafields
-  when set, falling back to this section's own color settings otherwise.
+  Uses the BODY font everywhere (no heading font) so the whole landing page
+  reads as one consistent style. Fully settings-driven so translation apps
+  pick up all copy. Accent/secondary colors default to the product's
+  metafields when set, falling back to this section's own color settings.
 {% endcomment %}
 {%- liquid
   assign accent_color = product.metafields.custom.product_accent_color.value | default: section.settings.accent_color
   assign secondary_color = product.metafields.custom.product_secondary_color.value | default: section.settings.secondary_color
 -%}
 <style>
-  #petsome-reasons-{{ section.id }} {
+  #petsome-ld-reasons-{{ section.id }} {
     --pr-accent: {{ accent_color }};
     --pr-secondary: {{ secondary_color }};
     --pr-accent-tint: color-mix(in srgb, var(--pr-accent) 16%, white);
@@ -28,62 +26,67 @@
     background-color: {{ section.settings.background_color }};
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
+    font-family: var(--font-body-family);
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reasons__inner {
+  #petsome-ld-reasons-{{ section.id }} * {
+    font-family: var(--font-body-family);
+  }
+
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__inner {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--petsome-padding-x);
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reasons__header {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__header {
     text-align: center;
     max-width: 760px;
-    margin: 0 auto 40px;
+    margin: 0 auto 48px;
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reasons__eyebrow {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__eyebrow {
     display: inline-block;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--pr-accent);
     margin: 0 0 12px;
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reasons__heading {
-    font-family: var(--font-heading-family);
-    font-weight: 700;
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__heading {
+    font-weight: 800;
     font-size: var(--petsome-heading-size);
+    line-height: 1.2;
     color: rgb(var(--color-foreground));
     margin: 0;
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reasons__heading p {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__heading p {
     margin: 0;
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reasons__subheading {
-    font-size: 1.7rem;
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__subheading {
+    font-size: 1.8rem;
     line-height: 1.5;
-    color: rgb(var(--color-foreground));
-    margin: 12px 0 0;
+    color: rgba(var(--color-foreground), 0.65);
+    margin: 16px 0 0;
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reasons__subheading p {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__subheading p {
     margin: 0;
   }
 
   /* ---------- Shared reason pieces ---------- */
-  #petsome-reasons-{{ section.id }} .petsome-reason__eyebrow-row {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__eyebrow-row {
     display: flex;
     align-items: center;
     gap: 12px;
     margin-bottom: 14px;
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reason__number {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__number {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -93,13 +96,12 @@
     border-radius: 50%;
     border: 2px solid var(--pr-accent);
     background-color: var(--pr-accent-tint);
-    font-family: var(--font-heading-family);
     font-weight: 800;
     font-size: 2rem;
     color: var(--pr-accent);
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reason__tag {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__tag {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -112,8 +114,8 @@
     color: rgb(var(--color-foreground));
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reason__tag .material-icon,
-  #petsome-reasons-{{ section.id }} .petsome-reason__tag img {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__tag .material-icon,
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__tag img {
     width: 18px;
     height: 18px;
     font-size: 18px;
@@ -121,8 +123,7 @@
     color: var(--pr-accent);
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reason__title {
-    font-family: var(--font-heading-family);
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__title {
     font-weight: 700;
     font-size: 2.4rem;
     line-height: 1.25;
@@ -130,22 +131,22 @@
     margin: 0 0 10px;
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reason__text {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__text {
     font-size: 1.6rem;
     line-height: 1.6;
     color: rgb(var(--color-foreground));
     margin: 0;
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reason__text p {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__text p {
     margin: 0 0 10px;
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reason__text p:last-child {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__text p:last-child {
     margin-bottom: 0;
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reason__cta {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__cta {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -156,23 +157,23 @@
     text-decoration: none;
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reason__cta .material-icon {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__cta .material-icon {
     font-size: 1.8rem;
     transition: transform 0.2s ease;
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reason__cta:hover .material-icon {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__cta:hover .material-icon {
     transform: translateX(4px);
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reason__media {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__media {
     position: relative;
     border-radius: 20px;
     overflow: hidden;
     background-color: var(--pr-secondary-tint);
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reason__media img {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__media img {
     display: block;
     width: 100%;
     height: 100%;
@@ -180,35 +181,35 @@
   }
 
   /* ---------- Layout: Alternating rows ---------- */
-  #petsome-reasons-{{ section.id }} .petsome-reasons--rows {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--rows {
     display: flex;
     flex-direction: column;
     gap: 72px;
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reasons--rows .petsome-reason {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--rows .petsome-ld-reason {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 56px;
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reasons--rows .petsome-reason:nth-child(even) .petsome-reason__media {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--rows .petsome-ld-reason:nth-child(even) .petsome-ld-reason__media {
     order: 2;
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reasons--rows .petsome-reason__media {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--rows .petsome-ld-reason__media {
     aspect-ratio: 4 / 3;
   }
 
   /* ---------- Layout: Card grid ---------- */
-  #petsome-reasons-{{ section.id }} .petsome-reasons--grid {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--grid {
     display: grid;
     grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
     gap: 24px;
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reasons--grid .petsome-reason {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--grid .petsome-ld-reason {
     display: flex;
     flex-direction: column;
     border: 1px solid var(--pr-secondary);
@@ -217,87 +218,86 @@
     background-color: #ffffff;
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reasons--grid .petsome-reason__media {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--grid .petsome-ld-reason__media {
     border-radius: 0;
     aspect-ratio: 3 / 2;
   }
 
-  #petsome-reasons-{{ section.id }} .petsome-reasons--grid .petsome-reason__body {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--grid .petsome-ld-reason__body {
     padding: 24px;
     display: flex;
     flex-direction: column;
     flex: 1;
   }
 
-  /* When there's no image in grid mode, still keep a tidy top */
-  #petsome-reasons-{{ section.id }} .petsome-reasons--grid .petsome-reason--no-media .petsome-reason__body {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--grid .petsome-ld-reason--no-media .petsome-ld-reason__body {
     padding-top: 28px;
   }
 
   /* ---------- Mobile ---------- */
   @media screen and (max-width: 989px) {
-    #petsome-reasons-{{ section.id }} .petsome-reasons--grid {
+    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--grid {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media screen and (max-width: 749px) {
-    #petsome-reasons-{{ section.id }} .petsome-reasons__header {
+    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__header {
       margin-bottom: 32px;
     }
 
-    #petsome-reasons-{{ section.id }} .petsome-reasons--rows {
+    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--rows {
       gap: 48px;
     }
 
-    #petsome-reasons-{{ section.id }} .petsome-reasons--rows .petsome-reason {
+    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--rows .petsome-ld-reason {
       grid-template-columns: 1fr;
       gap: 20px;
     }
 
-    #petsome-reasons-{{ section.id }} .petsome-reasons--rows .petsome-reason:nth-child(even) .petsome-reason__media {
+    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--rows .petsome-ld-reason:nth-child(even) .petsome-ld-reason__media {
       order: 0;
     }
 
-    #petsome-reasons-{{ section.id }} .petsome-reasons--grid {
+    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--grid {
       grid-template-columns: 1fr;
     }
 
-    #petsome-reasons-{{ section.id }} .petsome-reason__number {
+    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__number {
       width: 42px;
       height: 42px;
       font-size: 1.8rem;
     }
 
-    #petsome-reasons-{{ section.id }} .petsome-reason__title {
+    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__title {
       font-size: 2.1rem;
     }
   }
 </style>
 
 {%- if section.blocks.size > 0 -%}
-  {%- assign layout_class = 'petsome-reasons--rows' -%}
+  {%- assign layout_class = 'petsome-ld-reasons--rows' -%}
   {%- if section.settings.layout == 'grid' -%}
-    {%- assign layout_class = 'petsome-reasons--grid' -%}
+    {%- assign layout_class = 'petsome-ld-reasons--grid' -%}
   {%- endif -%}
 
-  <div id="petsome-reasons-{{ section.id }}" class="petsome-reasons">
-    <div class="petsome-reasons__inner">
+  <div id="petsome-ld-reasons-{{ section.id }}" class="petsome-ld-reasons">
+    <div class="petsome-ld-reasons__inner">
       {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.subheading != blank -%}
-        <div class="petsome-reasons__header">
+        <div class="petsome-ld-reasons__header">
           {%- if section.settings.eyebrow != blank -%}
-            <span class="petsome-reasons__eyebrow">{{ section.settings.eyebrow }}</span>
+            <span class="petsome-ld-reasons__eyebrow">{{ section.settings.eyebrow }}</span>
           {%- endif -%}
           {%- if section.settings.heading != blank -%}
-            <div class="petsome-reasons__heading">{{ section.settings.heading }}</div>
+            <div class="petsome-ld-reasons__heading">{{ section.settings.heading }}</div>
           {%- endif -%}
           {%- if section.settings.subheading != blank -%}
-            <div class="petsome-reasons__subheading">{{ section.settings.subheading }}</div>
+            <div class="petsome-ld-reasons__subheading">{{ section.settings.subheading }}</div>
           {%- endif -%}
         </div>
       {%- endif -%}
 
-      <div class="petsome-reasons__list {{ layout_class }}">
+      <div class="petsome-ld-reasons__list {{ layout_class }}">
         {%- for block in section.blocks -%}
           {%- liquid
             assign has_media = false
@@ -310,11 +310,11 @@
             endif
           -%}
           <div
-            class="petsome-reason{% unless has_media %} petsome-reason--no-media{% endunless %}"
+            class="petsome-ld-reason{% unless has_media %} petsome-ld-reason--no-media{% endunless %}"
             {{ block.shopify_attributes }}
           >
             {%- if has_media -%}
-              <div class="petsome-reason__media">
+              <div class="petsome-ld-reason__media">
                 <img
                   src="{{ block.settings.image | image_url: width: 1200 }}"
                   alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
@@ -325,17 +325,17 @@
               </div>
             {%- endif -%}
 
-            <div class="petsome-reason__body">
+            <div class="petsome-ld-reason__body">
               {%- if section.settings.show_numbers or has_tag -%}
-                <div class="petsome-reason__eyebrow-row">
+                <div class="petsome-ld-reason__eyebrow-row">
                   {%- if section.settings.show_numbers -%}
-                    <span class="petsome-reason__number">
+                    <span class="petsome-ld-reason__number">
                       {%- assign n = forloop.index -%}
                       {%- if n < 10 -%}0{%- endif -%}{{ n }}
                     </span>
                   {%- endif -%}
                   {%- if has_tag -%}
-                    <span class="petsome-reason__tag">
+                    <span class="petsome-ld-reason__tag">
                       {%- if block.settings.custom_icon != blank -%}
                         <img src="{{ block.settings.custom_icon | image_url: width: 36 }}" alt="">
                       {%- elsif block.settings.icon != blank -%}
@@ -348,13 +348,13 @@
               {%- endif -%}
 
               {%- if block.settings.title != blank -%}
-                <p class="petsome-reason__title">{{ block.settings.title }}</p>
+                <p class="petsome-ld-reason__title">{{ block.settings.title }}</p>
               {%- endif -%}
               {%- if block.settings.text != blank -%}
-                <div class="petsome-reason__text">{{ block.settings.text }}</div>
+                <div class="petsome-ld-reason__text">{{ block.settings.text }}</div>
               {%- endif -%}
               {%- if block.settings.cta_label != blank and block.settings.cta_url != blank -%}
-                <a href="{{ block.settings.cta_url }}" class="petsome-reason__cta">
+                <a href="{{ block.settings.cta_url }}" class="petsome-ld-reason__cta">
                   {{ block.settings.cta_label }}
                   {% render 'material-icon', icon: 'arrow_forward' %}
                 </a>
@@ -369,7 +369,7 @@
 
 {% schema %}
 {
-  "name": "Petsome: Reasons",
+  "name": "Petsome Ld: Reasons",
   "tag": "section",
   "class": "section",
   "settings": [
@@ -539,7 +539,7 @@
   ],
   "presets": [
     {
-      "name": "Petsome: Reasons",
+      "name": "Petsome Ld: Reasons",
       "blocks": [
         { "type": "reason" },
         { "type": "reason" },

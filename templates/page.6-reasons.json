@@ -29,7 +29,7 @@
       }
     },
     "hero": {
-      "type": "petsome-home-hero",
+      "type": "petsome-ld-hero",
       "settings": {
         "rating_text": "Trusted by 2,000+ dog owners across Europe",
         "heading": "<p>6 reasons your dog's body will love it</p>",
@@ -43,7 +43,7 @@
       }
     },
     "reasons": {
-      "type": "petsome-reasons",
+      "type": "petsome-ld-reasons",
       "blocks": {
         "reason_1": {
           "type": "reason",
@@ -191,7 +191,7 @@
       }
     },
     "stats": {
-      "type": "petsome-stats",
+      "type": "petsome-ld-stats",
       "blocks": {
         "stat_1": {
           "type": "stat",

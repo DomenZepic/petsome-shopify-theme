@@ -1,0 +1,171 @@
+{% comment %}
+  Petsome Ld: Stats - landing-page stat band (the "Ld" family). A tinted row of
+  repeatable "stat" blocks (a big number + a short description), 3-up on desktop
+  collapsing to a stack on mobile. Uses the BODY font everywhere so the whole
+  landing page reads as one consistent style. The big number uses its own accent
+  color; both it and the background default to the product's metafields when set.
+{% endcomment %}
+{%- liquid
+  assign secondary_color = product.metafields.custom.product_secondary_color.value | default: section.settings.background_color
+  assign number_color = product.metafields.custom.product_accent_color_dark.value | default: section.settings.number_color
+-%}
+<style>
+  #petsome-ld-stats-{{ section.id }} {
+    --ps-secondary: {{ secondary_color }};
+    --ps-number: {{ number_color }};
+    background-color: var(--ps-secondary);
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    font-family: var(--font-body-family);
+  }
+
+  #petsome-ld-stats-{{ section.id }} * {
+    font-family: var(--font-body-family);
+  }
+
+  #petsome-ld-stats-{{ section.id }} p {
+    margin: 0;
+  }
+
+  #petsome-ld-stats-{{ section.id }} .petsome-ld-stats__inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+    display: flex;
+    gap: 40px;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-ld-stats-{{ section.id }} .petsome-ld-stats__inner {
+      flex-direction: column;
+    }
+  }
+
+  #petsome-ld-stats-{{ section.id }} .petsome-ld-stat {
+    flex: 1 0 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    text-align: center;
+  }
+
+  #petsome-ld-stats-{{ section.id }} .petsome-ld-stat__number {
+    font-weight: 800;
+    font-size: 4.8rem;
+    line-height: 1.2;
+    color: var(--ps-number);
+    margin: 0;
+  }
+
+  #petsome-ld-stats-{{ section.id }} .petsome-ld-stat__description {
+    font-size: 1.6rem;
+    line-height: 1.5;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+</style>
+
+{%- if section.blocks.size > 0 -%}
+  <div id="petsome-ld-stats-{{ section.id }}" class="petsome-ld-stats">
+    <div class="petsome-ld-stats__inner">
+      {%- for block in section.blocks -%}
+        <div class="petsome-ld-stat" {{ block.shopify_attributes }}>
+          {%- if block.settings.number != blank -%}
+            <p class="petsome-ld-stat__number">{{ block.settings.number }}</p>
+          {%- endif -%}
+          {%- if block.settings.description != blank -%}
+            <p class="petsome-ld-stat__description">{{ block.settings.description }}</p>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Petsome Ld: Stats",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "If the product has \"Product secondary color\" / \"Product accent color (gradient end)\" metafields set, those values are used instead of the colors below - these only apply as a fallback when the metafields are blank."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color (fallback)",
+      "default": "#E8D6C5"
+    },
+    {
+      "type": "color",
+      "id": "number_color",
+      "label": "Stat number color (fallback)",
+      "info": "The big number uses its own accent color, distinct from regular text.",
+      "default": "#F47671"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number / percentage",
+          "default": "95%"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "Describe what this stat means."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome Ld: Stats",
+      "blocks": [
+        { "type": "stat" },
+        { "type": "stat" },
+        { "type": "stat" }
+      ]
+    }
+  ]
+}
+{% endschema %}
