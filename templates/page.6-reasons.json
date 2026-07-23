@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hide_chrome": {
@@ -12,8 +21,9 @@
       "type": "petsome-ld-header",
       "settings": {
         "logo_width": 150,
+        "logo_link": "",
         "show_border": true,
-        "background_color": "#FDFBF7",
+        "background_color": "#fdfbf7",
         "padding_top": 20,
         "padding_bottom": 20
       }
@@ -29,7 +39,7 @@
         "min_height": 520,
         "padding_top": 64,
         "padding_bottom": 64,
-        "background_color": "#E8D6C5"
+        "background_color": "#e8d6c5"
       }
     },
     "reasons": {
@@ -38,55 +48,79 @@
         "reason_1": {
           "type": "reason",
           "settings": {
+            "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png",
             "tag": "Joints",
             "icon": "pets",
+            "filled_icon": false,
             "title": "Easier movement, day after day",
-            "text": "<p>Glucosamine and omega-3s help cushion the joints, so stairs, walks and jumping back onto the couch feel less like hard work.</p>"
+            "text": "<p>Glucosamine and omega-3s help cushion the joints, so stairs, walks and jumping back onto the couch feel less like hard work.</p>",
+            "cta_label": "",
+            "cta_url": ""
           }
         },
         "reason_2": {
           "type": "reason",
           "settings": {
+            "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png",
             "tag": "Digestion",
             "icon": "eco",
+            "filled_icon": false,
             "title": "A calmer, happier gut",
-            "text": "<p>Prebiotic fibre feeds the good bacteria, helping firm up stools and settle a sensitive tummy — no more guessing after every meal.</p>"
+            "text": "<p>Prebiotic fibre feeds the good bacteria, helping firm up stools and settle a sensitive tummy — no more guessing after every meal.</p>",
+            "cta_label": "",
+            "cta_url": ""
           }
         },
         "reason_3": {
           "type": "reason",
           "settings": {
+            "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png",
             "tag": "Coat",
             "icon": "auto_awesome",
+            "filled_icon": false,
             "title": "A shinier, fuller coat",
-            "text": "<p>Zinc, biotin and essential fats work from the inside out for a softer coat and less shedding on the sofa.</p>"
+            "text": "<p>Zinc, biotin and essential fats work from the inside out for a softer coat and less shedding on the sofa.</p>",
+            "cta_label": "",
+            "cta_url": ""
           }
         },
         "reason_4": {
           "type": "reason",
           "settings": {
+            "image": "shopify://shop_images/hf_20260715_183826_c908ba8d-6a6a-4516-a1c5-72f1ec0df3d4.png",
             "tag": "Calm",
             "icon": "spa",
+            "filled_icon": false,
             "title": "More settled, less on edge",
-            "text": "<p>Gentle adaptogens take the edge off everyday stress — car rides, visitors and thunderstorms feel a little less dramatic.</p>"
+            "text": "<p>Gentle adaptogens take the edge off everyday stress — car rides, visitors and thunderstorms feel a little less dramatic.</p>",
+            "cta_label": "",
+            "cta_url": ""
           }
         },
         "reason_5": {
           "type": "reason",
           "settings": {
+            "image": "shopify://shop_images/hf_20260713_165343_fa82d984-8de5-433f-88d2-3d5047daa731.png",
             "tag": "Immunity",
             "icon": "health_and_safety",
+            "filled_icon": false,
             "title": "Quiet support for the immune system",
-            "text": "<p>Antioxidants and functional mushrooms help the body do what it already does — just with a bit more backup.</p>"
+            "text": "<p>Antioxidants and functional mushrooms help the body do what it already does — just with a bit more backup.</p>",
+            "cta_label": "",
+            "cta_url": ""
           }
         },
         "reason_6": {
           "type": "reason",
           "settings": {
+            "image": "shopify://shop_images/hf_20260713_163447_2d99eb36-2604-4301-adaf-5d2fc17329e7.png",
             "tag": "Simplicity",
             "icon": "restaurant",
+            "filled_icon": false,
             "title": "One scoop replaces the whole shelf",
-            "text": "<p>Everything in a single tasty scoop over food. No pill battles, no five different tubs — just one step at breakfast.</p>"
+            "text": "<p>Everything in a single tasty scoop over food. No pill battles, no five different tubs — just one step at breakfast.</p>",
+            "cta_label": "",
+            "cta_url": ""
           }
         }
       },
@@ -105,7 +139,9 @@
         "layout": "rows",
         "columns": "3",
         "show_numbers": true,
-        "background_color": "#FDFBF7",
+        "background_color": "#fdfbf7",
+        "accent_color": "#f8aaa7",
+        "secondary_color": "#e8d6c5",
         "padding_top": 56,
         "padding_bottom": 56
       }
@@ -144,10 +180,12 @@
         "eyebrow": "The first 7 days",
         "heading": "<p>What is actually happening inside</p>",
         "subheading": "<p>A slow gut and years of routine leave the whole system feeling sluggish. Here's how most owners describe their dog's first week.</p>",
+        "image": "shopify://shop_images/hf_20260713_165719_3d2d789b-0b91-400e-b9ae-5854d33e0906.png",
         "footnote": "<p>Every dog is different. Any change in week one is simply the body adjusting — not a cleanse, not a laxative.</p>",
-        "background_color": "#EDE4D3",
-        "accent_color": "#E8853F",
-        "accent_color_dark": "#D46A2A",
+        "background_color": "#ede4d3",
+        "accent_color": "#e8853f",
+        "accent_color_dark": "#d46a2a",
+        "secondary_color": "#e8d6c5",
         "padding_top": 64,
         "padding_bottom": 64
       }
@@ -183,8 +221,8 @@
         "stat_3"
       ],
       "settings": {
-        "background_color": "#E8D6C5",
-        "number_color": "#F47671",
+        "background_color": "#e8d6c5",
+        "number_color": "#f47671",
         "padding_top": 48,
         "padding_bottom": 48
       }
