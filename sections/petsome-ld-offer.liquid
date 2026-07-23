@@ -161,7 +161,7 @@
   <div class="petsome-ld-offer__inner">
     {%- if offer_product == blank -%}
       <div class="petsome-ld-offer__notice">
-        Select a product for this offer in the theme editor. It must have a Kaching Bundles deal configured.
+        Select a product for this offer in the theme editor, then add the "Kaching Bundles" app block inside this section (Add block &rarr; Apps) and set its product to the same one. The product must have a Kaching Bundles deal configured.
       </div>
     {%- else -%}
       <form
@@ -170,8 +170,21 @@
         enctype="multipart/form-data"
         class="petsome-ld-offer__form"
       >
-        {%- comment -%} Kaching engine (hidden by the custom-display CSS), gives Kaching its product + form context {%- endcomment -%}
-        <kaching-bundle product-id="{{ offer_product.id }}"></kaching-bundle>
+        {%- comment -%}
+          Kaching engine (hidden by the custom-display CSS). The Kaching Bundles
+          APP BLOCK - added by the merchant into this section - is what
+          server-renders the deal-settings blob our custom UI reads. Set that
+          app block's product to the same product picked in this section.
+          The bare <kaching-bundle> tag is only a fallback and won't carry deal
+          data on its own.
+        {%- endcomment -%}
+        {%- if section.blocks.size > 0 -%}
+          {%- for block in section.blocks -%}
+            {%- render block -%}
+          {%- endfor -%}
+        {%- else -%}
+          <kaching-bundle product-id="{{ offer_product.id }}"></kaching-bundle>
+        {%- endif -%}
 
         {%- comment -%} Variant id submitted to /cart/add; kept in sync with the weight selector below {%- endcomment -%}
         <input type="hidden" name="id" value="{{ first_variant.id }}" data-offer-variant-id>
@@ -498,6 +511,9 @@
       "unit": "px",
       "default": 0
     }
+  ],
+  "blocks": [
+    { "type": "@app" }
   ],
   "presets": [
     {
