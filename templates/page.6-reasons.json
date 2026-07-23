@@ -39,7 +39,10 @@
         "min_height": 520,
         "padding_top": 64,
         "padding_bottom": 64,
-        "background_color": "#e8d6c5"
+        "background_color": "#e8d6c5",
+        "text_color": "#3b2f2f",
+        "button_background": "#3b2f2f",
+        "button_text_color": "#ffffff"
       }
     },
     "reasons": {
@@ -183,8 +186,8 @@
         "image": "shopify://shop_images/hf_20260713_165719_3d2d789b-0b91-400e-b9ae-5854d33e0906.png",
         "footnote": "<p>Every dog is different. Any change in week one is simply the body adjusting — not a cleanse, not a laxative.</p>",
         "background_color": "#ede4d3",
-        "accent_color": "#e8853f",
-        "accent_color_dark": "#d46a2a",
+        "accent_color": "#F8AAA7",
+        "accent_color_dark": "#F8AAA7",
         "secondary_color": "#e8d6c5",
         "padding_top": 64,
         "padding_bottom": 64
