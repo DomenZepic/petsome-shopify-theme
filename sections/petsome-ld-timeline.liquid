@@ -1,0 +1,452 @@
+{% comment %}
+  Petsome Ld: Timeline - a landing-page-only "what happens in the first X days"
+  section. Left: a single visual. Right: a vertical numbered timeline (node +
+  connector line) of "step" cards, each with a badge pill and a bold-lead
+  description. Centered header above, italic footnote below.
+
+  Dedicated to landing pages (the "Ld" family) so it can be styled/tested
+  independently of the store's shared sections. Uses the BODY font everywhere
+  (no heading font) per brief. Fully settings-driven so translation apps pick
+  up all copy. Accent/secondary colors default to the product's metafields
+  when set, falling back to this section's own color settings otherwise.
+{% endcomment %}
+{%- liquid
+  assign accent_color = product.metafields.custom.product_accent_color.value | default: section.settings.accent_color
+  assign accent_color_dark = product.metafields.custom.product_accent_color_dark.value | default: section.settings.accent_color_dark
+  assign secondary_color = product.metafields.custom.product_secondary_color.value | default: section.settings.secondary_color
+-%}
+<style>
+  #petsome-ld-timeline-{{ section.id }} {
+    --ldt-accent: {{ accent_color }};
+    {%- if accent_color_dark != blank -%}
+      --ldt-accent-dark: {{ accent_color_dark }};
+    {%- else -%}
+      --ldt-accent-dark: color-mix(in srgb, var(--ldt-accent) 70%, black);
+    {%- endif -%}
+    --ldt-secondary: {{ secondary_color }};
+    --ldt-accent-tint: color-mix(in srgb, var(--ldt-accent) 16%, white);
+    background-color: {{ section.settings.background_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    font-family: var(--font-body-family);
+  }
+
+  #petsome-ld-timeline-{{ section.id }} * {
+    font-family: var(--font-body-family);
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+  }
+
+  /* ---------- Header ---------- */
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__header {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 48px;
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__eyebrow {
+    display: inline-block;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ldt-accent);
+    margin: 0 0 12px;
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__heading {
+    font-weight: 800;
+    font-size: 4.4rem;
+    line-height: 1.1;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__heading p {
+    margin: 0;
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__subheading {
+    font-size: 1.8rem;
+    line-height: 1.5;
+    color: rgba(var(--color-foreground), 0.65);
+    margin: 16px 0 0;
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__subheading p {
+    margin: 0;
+  }
+
+  /* ---------- Body: image + steps ---------- */
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__body {
+    display: grid;
+    grid-template-columns: 0.85fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__media {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: var(--ldt-accent-tint);
+    aspect-ratio: 4 / 5;
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-step {
+    display: grid;
+    grid-template-columns: 48px 1fr;
+    gap: 20px;
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-step__rail {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-step__node {
+    position: relative;
+    z-index: 1;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 2rem;
+    color: {{ section.settings.background_color }};
+    background: linear-gradient(180deg, var(--ldt-accent) 0%, var(--ldt-accent-dark) 100%);
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-step:not(:last-child) .petsome-ld-step__rail::after {
+    content: "";
+    position: absolute;
+    top: 48px;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    background-color: color-mix(in srgb, var(--ldt-accent) 35%, white);
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-step__card {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 22px 26px;
+    box-shadow: 0 10px 30px rgba(var(--color-foreground), 0.06);
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-step__badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 100px;
+    background-color: var(--ldt-accent-tint);
+    color: var(--ldt-accent-dark);
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-step__text {
+    font-size: 1.7rem;
+    line-height: 1.55;
+    color: rgb(var(--color-foreground));
+    margin: 0;
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-step__text p {
+    margin: 0;
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-step__text strong {
+    font-weight: 700;
+  }
+
+  /* ---------- Footnote ---------- */
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__footnote {
+    max-width: 760px;
+    margin: 28px 0 0;
+    font-size: 1.5rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: rgba(var(--color-foreground), 0.6);
+  }
+
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__footnote p {
+    margin: 0;
+  }
+
+  /* Footnote aligns under the steps column on desktop */
+  #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__footnote--inline {
+    grid-column: 2;
+  }
+
+  /* ---------- Mobile ---------- */
+  @media screen and (max-width: 989px) {
+    #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__heading {
+      font-size: 3.4rem;
+    }
+
+    #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__body {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__media {
+      aspect-ratio: 16 / 10;
+      max-height: 360px;
+    }
+
+    #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__footnote--inline {
+      grid-column: auto;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__header {
+      margin-bottom: 32px;
+    }
+
+    #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__heading {
+      font-size: 2.8rem;
+    }
+
+    #petsome-ld-timeline-{{ section.id }} .petsome-ld-step {
+      grid-template-columns: 40px 1fr;
+      gap: 14px;
+    }
+
+    #petsome-ld-timeline-{{ section.id }} .petsome-ld-step__node {
+      width: 40px;
+      height: 40px;
+      font-size: 1.7rem;
+    }
+
+    #petsome-ld-timeline-{{ section.id }} .petsome-ld-step:not(:last-child) .petsome-ld-step__rail::after {
+      top: 40px;
+    }
+
+    #petsome-ld-timeline-{{ section.id }} .petsome-ld-step__card {
+      padding: 18px 20px;
+    }
+  }
+</style>
+
+<div id="petsome-ld-timeline-{{ section.id }}" class="petsome-ld-timeline">
+  <div class="petsome-ld-timeline__inner">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.subheading != blank -%}
+      <div class="petsome-ld-timeline__header">
+        {%- if section.settings.eyebrow != blank -%}
+          <span class="petsome-ld-timeline__eyebrow">{{ section.settings.eyebrow }}</span>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <div class="petsome-ld-timeline__heading">{{ section.settings.heading }}</div>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <div class="petsome-ld-timeline__subheading">{{ section.settings.subheading }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="petsome-ld-timeline__body">
+      <div class="petsome-ld-timeline__media">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 1200 }}"
+            alt="{{ section.settings.image.alt | escape }}"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="petsome-ld-timeline__steps">
+          {%- for block in section.blocks -%}
+            <div class="petsome-ld-step" {{ block.shopify_attributes }}>
+              <div class="petsome-ld-step__rail">
+                <span class="petsome-ld-step__node">{{ forloop.index }}</span>
+              </div>
+              <div class="petsome-ld-step__card">
+                {%- if block.settings.badge_text != blank -%}
+                  <span class="petsome-ld-step__badge">{{ block.settings.badge_text }}</span>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <div class="petsome-ld-step__text">{{ block.settings.text }}</div>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.footnote != blank -%}
+        <div class="petsome-ld-timeline__footnote petsome-ld-timeline__footnote--inline">
+          {{ section.settings.footnote }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Petsome Ld: Timeline",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow (small label above heading)",
+      "default": "The first 7 days"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>What is actually happening inside</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "header",
+      "content": "Visual"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Shown on the left. Recommended a tall/portrait image (approx 4:5)."
+    },
+    {
+      "type": "header",
+      "content": "Footnote"
+    },
+    {
+      "type": "richtext",
+      "id": "footnote",
+      "label": "Footnote (italic disclaimer)",
+      "default": "<p>Every dog is different. Any change in the first week is simply the body adjusting.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "If the product has \"Product accent color\" / \"Product secondary color\" metafields set, those values are used instead of the colors below - these only apply as a fallback when the metafields are blank."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#EDE4D3"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color (fallback)",
+      "info": "Used for numbers, badges and the connector line.",
+      "default": "#E8853F"
+    },
+    {
+      "type": "color",
+      "id": "accent_color_dark",
+      "label": "Accent color dark / gradient end (fallback)",
+      "info": "Darker end of the number circle gradient. Auto-darkened from the accent color if left blank everywhere.",
+      "default": "#D46A2A"
+    },
+    {
+      "type": "color",
+      "id": "secondary_color",
+      "label": "Secondary color (fallback)",
+      "default": "#E8D6C5"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "badge_text",
+          "label": "Badge",
+          "default": "Days 1-2"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "info": "Start with a bold lead-in using the Bold (B) button, then the description.",
+          "default": "<p><strong>The gut wakes up.</strong> The prebiotic fibre gets to work. Many owners notice easier digestion within a day or two.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome Ld: Timeline",
+      "blocks": [
+        { "type": "step" },
+        { "type": "step" },
+        { "type": "step" }
+      ]
+    }
+  ]
+}
+{% endschema %}

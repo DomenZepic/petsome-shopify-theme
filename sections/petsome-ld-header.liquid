@@ -1,0 +1,149 @@
+{% comment %}
+  Petsome Ld: Header - a minimal landing-page header: just a logo, centered.
+  Meant to be used together with the "Hide Header and/or Footer" section so the
+  page is otherwise headless/footerless. Falls back to the theme logo
+  (settings.logo) when no section logo is set, and to the shop name as text.
+  Uses the BODY font per the landing-page brief.
+{% endcomment %}
+{%- liquid
+  assign logo = section.settings.logo | default: settings.logo
+-%}
+<style>
+  #petsome-ld-header-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    {%- if section.settings.show_border -%}
+      border-bottom: 1px solid color-mix(in srgb, rgb(var(--color-foreground)) 12%, transparent);
+    {%- endif -%}
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    font-family: var(--font-body-family);
+  }
+
+  #petsome-ld-header-{{ section.id }} .petsome-ld-header__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--petsome-padding-x);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #petsome-ld-header-{{ section.id }} .petsome-ld-header__logo-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  #petsome-ld-header-{{ section.id }} .petsome-ld-header__logo {
+    display: block;
+    width: {{ section.settings.logo_width }}px;
+    max-width: 60vw;
+    height: auto;
+  }
+
+  #petsome-ld-header-{{ section.id }} .petsome-ld-header__name {
+    font-family: var(--font-body-family);
+    font-weight: 700;
+    font-size: 2.2rem;
+    letter-spacing: 0.02em;
+    color: rgb(var(--color-foreground));
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-ld-header-{{ section.id }} .petsome-ld-header__logo {
+      width: {{ section.settings.logo_width | times: 0.8 | round }}px;
+    }
+  }
+</style>
+
+<div id="petsome-ld-header-{{ section.id }}" class="petsome-ld-header">
+  <div class="petsome-ld-header__inner">
+    <a href="{{ section.settings.logo_link | default: routes.root_url }}" class="petsome-ld-header__logo-link">
+      {%- if logo != blank -%}
+        <img
+          class="petsome-ld-header__logo"
+          src="{{ logo | image_url: width: 600 }}"
+          alt="{{ logo.alt | default: shop.name | escape }}"
+          width="{{ logo.width }}"
+          height="{{ logo.height }}"
+          loading="eager"
+        >
+      {%- else -%}
+        <span class="petsome-ld-header__name">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Petsome Ld: Header",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "Optional - falls back to the theme's logo, then the shop name."
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 60,
+      "max": 320,
+      "step": 10,
+      "unit": "px",
+      "default": 150
+    },
+    {
+      "type": "url",
+      "id": "logo_link",
+      "label": "Logo link",
+      "info": "Defaults to the homepage."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border",
+      "label": "Show bottom border",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FDFBF7"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome Ld: Header"
+    }
+  ]
+}
+{% endschema %}

@@ -1,5 +1,23 @@
 {
   "sections": {
+    "hide_chrome": {
+      "type": "hide-header-footer",
+      "settings": {
+        "hide_header": true,
+        "hide_announcements": true,
+        "hide_footer": true
+      }
+    },
+    "ld_header": {
+      "type": "petsome-ld-header",
+      "settings": {
+        "logo_width": 150,
+        "show_border": true,
+        "background_color": "#FDFBF7",
+        "padding_top": 20,
+        "padding_bottom": 20
+      }
+    },
     "hero": {
       "type": "petsome-home-hero",
       "settings": {
@@ -92,47 +110,46 @@
         "padding_bottom": 56
       }
     },
-    "timeframe": {
-      "type": "petsome-timeframe",
+    "timeline": {
+      "type": "petsome-ld-timeline",
       "blocks": {
-        "tf_1": {
-          "type": "timeframe",
+        "step_1": {
+          "type": "step",
           "settings": {
-            "badge_text": "Days 1-3",
-            "title": "Getting started",
-            "text": "<p>Your dog gets used to the taste and the gut begins to adjust. Early days are simply the body settling in.</p>"
+            "badge_text": "Days 1-2",
+            "text": "<p><strong>The gut wakes up.</strong> The prebiotic fibre gets to work. Many owners notice easier, more regular digestion within a day or two.</p>"
           }
         },
-        "tf_2": {
-          "type": "timeframe",
+        "step_2": {
+          "type": "step",
           "settings": {
-            "badge_text": "Week 1-2",
-            "title": "First signs",
-            "text": "<p>Firmer digestion and a bit more spring in everyday movement. Small wins you start to notice.</p>"
+            "badge_text": "Days 3-4",
+            "text": "<p><strong>Mornings feel lighter.</strong> Less of that heavy, sluggish feeling. Energy through the day comes on steadier.</p>"
           }
         },
-        "tf_3": {
-          "type": "timeframe",
+        "step_3": {
+          "type": "step",
           "settings": {
-            "highlighted": true,
-            "badge_text": "Week 3-4",
-            "title": "Hitting its stride",
-            "text": "<p>Coat looks healthier, mood feels steadier, and the daily routine just works. This is where it clicks.</p>"
+            "badge_text": "Days 5-7",
+            "text": "<p><strong>More like themselves.</strong> Less bloating by evening, a calmer tummy, and the daily scoop becomes a habit.</p>"
           }
         }
       },
       "block_order": [
-        "tf_1",
-        "tf_2",
-        "tf_3"
+        "step_1",
+        "step_2",
+        "step_3"
       ],
       "settings": {
-        "heading": "<p>What to expect after you start</p>",
-        "subheading": "Every dog is different — this is a typical rhythm, not a promise.",
-        "columns": "3",
-        "background_color": "#FAF9F6",
-        "padding_top": 48,
-        "padding_bottom": 48
+        "eyebrow": "The first 7 days",
+        "heading": "<p>What is actually happening inside</p>",
+        "subheading": "<p>A slow gut and years of routine leave the whole system feeling sluggish. Here's how most owners describe their dog's first week.</p>",
+        "footnote": "<p>Every dog is different. Any change in week one is simply the body adjusting — not a cleanse, not a laxative.</p>",
+        "background_color": "#EDE4D3",
+        "accent_color": "#E8853F",
+        "accent_color_dark": "#D46A2A",
+        "padding_top": 64,
+        "padding_bottom": 64
       }
     },
     "stats": {
@@ -174,9 +191,11 @@
     }
   },
   "order": [
+    "hide_chrome",
+    "ld_header",
     "hero",
     "reasons",
-    "timeframe",
+    "timeline",
     "stats"
   ]
 }
