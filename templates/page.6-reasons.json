@@ -1,0 +1,182 @@
+{
+  "sections": {
+    "hero": {
+      "type": "petsome-home-hero",
+      "settings": {
+        "rating_text": "Trusted by 2,000+ dog owners across Europe",
+        "heading": "<p>6 reasons your dog's body will love it</p>",
+        "subline": "<p>One daily scoop that supports joints, digestion, coat and calm — not six different supplements.</p>",
+        "cta_label": "See the offer",
+        "cta_url": "#offer",
+        "min_height": 520,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "background_color": "#E8D6C5"
+      }
+    },
+    "reasons": {
+      "type": "petsome-reasons",
+      "blocks": {
+        "reason_1": {
+          "type": "reason",
+          "settings": {
+            "tag": "Joints",
+            "icon": "pets",
+            "title": "Easier movement, day after day",
+            "text": "<p>Glucosamine and omega-3s help cushion the joints, so stairs, walks and jumping back onto the couch feel less like hard work.</p>"
+          }
+        },
+        "reason_2": {
+          "type": "reason",
+          "settings": {
+            "tag": "Digestion",
+            "icon": "eco",
+            "title": "A calmer, happier gut",
+            "text": "<p>Prebiotic fibre feeds the good bacteria, helping firm up stools and settle a sensitive tummy — no more guessing after every meal.</p>"
+          }
+        },
+        "reason_3": {
+          "type": "reason",
+          "settings": {
+            "tag": "Coat",
+            "icon": "auto_awesome",
+            "title": "A shinier, fuller coat",
+            "text": "<p>Zinc, biotin and essential fats work from the inside out for a softer coat and less shedding on the sofa.</p>"
+          }
+        },
+        "reason_4": {
+          "type": "reason",
+          "settings": {
+            "tag": "Calm",
+            "icon": "spa",
+            "title": "More settled, less on edge",
+            "text": "<p>Gentle adaptogens take the edge off everyday stress — car rides, visitors and thunderstorms feel a little less dramatic.</p>"
+          }
+        },
+        "reason_5": {
+          "type": "reason",
+          "settings": {
+            "tag": "Immunity",
+            "icon": "health_and_safety",
+            "title": "Quiet support for the immune system",
+            "text": "<p>Antioxidants and functional mushrooms help the body do what it already does — just with a bit more backup.</p>"
+          }
+        },
+        "reason_6": {
+          "type": "reason",
+          "settings": {
+            "tag": "Simplicity",
+            "icon": "restaurant",
+            "title": "One scoop replaces the whole shelf",
+            "text": "<p>Everything in a single tasty scoop over food. No pill battles, no five different tubs — just one step at breakfast.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "reason_1",
+        "reason_2",
+        "reason_3",
+        "reason_4",
+        "reason_5",
+        "reason_6"
+      ],
+      "settings": {
+        "eyebrow": "6 reasons",
+        "heading": "<p>6 reasons your dog's body will love it</p>",
+        "subheading": "<p>Real, everyday changes you can actually notice — not a long list of ingredients.</p>",
+        "layout": "rows",
+        "columns": "3",
+        "show_numbers": true,
+        "background_color": "#FDFBF7",
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "timeframe": {
+      "type": "petsome-timeframe",
+      "blocks": {
+        "tf_1": {
+          "type": "timeframe",
+          "settings": {
+            "badge_text": "Days 1-3",
+            "title": "Getting started",
+            "text": "<p>Your dog gets used to the taste and the gut begins to adjust. Early days are simply the body settling in.</p>"
+          }
+        },
+        "tf_2": {
+          "type": "timeframe",
+          "settings": {
+            "badge_text": "Week 1-2",
+            "title": "First signs",
+            "text": "<p>Firmer digestion and a bit more spring in everyday movement. Small wins you start to notice.</p>"
+          }
+        },
+        "tf_3": {
+          "type": "timeframe",
+          "settings": {
+            "highlighted": true,
+            "badge_text": "Week 3-4",
+            "title": "Hitting its stride",
+            "text": "<p>Coat looks healthier, mood feels steadier, and the daily routine just works. This is where it clicks.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "tf_1",
+        "tf_2",
+        "tf_3"
+      ],
+      "settings": {
+        "heading": "<p>What to expect after you start</p>",
+        "subheading": "Every dog is different — this is a typical rhythm, not a promise.",
+        "columns": "3",
+        "background_color": "#FAF9F6",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "stats": {
+      "type": "petsome-stats",
+      "blocks": {
+        "stat_1": {
+          "type": "stat",
+          "settings": {
+            "number": "2,000+",
+            "description": "Dog owners across Europe"
+          }
+        },
+        "stat_2": {
+          "type": "stat",
+          "settings": {
+            "number": "9 in 10",
+            "description": "Would recommend to a friend"
+          }
+        },
+        "stat_3": {
+          "type": "stat",
+          "settings": {
+            "number": "90 days",
+            "description": "Money-back guarantee"
+          }
+        }
+      },
+      "block_order": [
+        "stat_1",
+        "stat_2",
+        "stat_3"
+      ],
+      "settings": {
+        "background_color": "#E8D6C5",
+        "number_color": "#F47671",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "reasons",
+    "timeframe",
+    "stats"
+  ]
+}
