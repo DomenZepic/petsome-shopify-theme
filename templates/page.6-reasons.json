@@ -232,6 +232,18 @@
     },
     "offer": {
       "type": "petsome-ld-offer",
+      "blocks": {
+        "kaching_bundles_app_block_Kh7wtC": {
+          "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
+          "settings": {
+            "product": "{{section.settings.product}}",
+            "manual_deal_block_id": ""
+          }
+        }
+      },
+      "block_order": [
+        "kaching_bundles_app_block_Kh7wtC"
+      ],
       "settings": {
         "product": "mobimix",
         "weight_label": "Choose your dog's weight:",
