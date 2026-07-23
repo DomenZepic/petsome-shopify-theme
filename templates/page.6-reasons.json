@@ -20,7 +20,7 @@
     "ld_header": {
       "type": "petsome-ld-header",
       "settings": {
-        "logo_width": 150,
+        "logo_width": 90,
         "logo_link": "",
         "show_border": true,
         "background_color": "#fdfbf7",
