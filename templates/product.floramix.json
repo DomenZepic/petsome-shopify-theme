@@ -29,9 +29,9 @@
                 "visibility": "mobile-hidden",
                 "image": "shopify://shop_images/unnamed_1.jpg",
                 "rating": 5,
-                "quote": "\"Pri starejših in aktivnih psih pogosto opažamo spremembe v gibanju, ki niso nujno takoj boleče, a vplivajo na kakovost življenja. MobiMix cilja ključne elemente, povezane z zdravjem sklepov in gibanjem. Pomaga vašemu psu ostati aktiven in brez bolečin z podporo obnovi hrustanca, mazanju sklepov in zmanjšanju vnetja.\"",
-                "author": "Blaž Petelinek Ledinski",
-                "role": "dr. vet. med.",
+                "quote": "\"Praskanje, lizanje tačk in ponavljajoče se težave s kožo pri psih pogosto niso težava kože same. Pogosto izvirajo iz porušenega ravnovesja v črevesju in iz imunskega odziva, ki se nanj pretirano odzove. FloraMix je zasnovan tako, da hkrati podpira vse tri člene te verige — črevesno floro, imunski odziv ter kožo in dlako. Prav zato je smiselna izbira pri psih, ki se na navadne probiotike odzovejo le delno.\"",
+                "author": "Blaž Petelinek Ledinski, dr. vet. med.",
+                "role": "",
                 "background_color": "#ffffff",
                 "star_color": "#ffcc00",
                 "margin_top": 24,
@@ -88,7 +88,7 @@
               "name": "Heading",
               "settings": {
                 "visibility": "always-display",
-                "title": "MobiMix - Dodatek za sklepe psov",
+                "title": "FloraMix — Napredni probiotik za kožo, dlako in črevesje",
                 "heading_size": "h1",
                 "custom_desktop_size": 39,
                 "custom_mobile_size": 28,
@@ -186,14 +186,14 @@
                 "tag_1": {
                   "type": "petsome-tag",
                   "settings": {
-                    "text": "Podpora sklepom"
+                    "text": "Za kožo in dlako"
                   },
                   "blocks": {}
                 },
                 "tag_2": {
                   "type": "petsome-tag",
                   "settings": {
-                    "text": "Večja gibljivost"
+                    "text": "Podpora črevesju"
                   },
                   "blocks": {}
                 },
@@ -313,7 +313,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Tvoj pes se spet premika brez obotavljanja",
+                    "text_1": "Za pse, ki se praskajo, ližejo tačke ali stresajo z glavo",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -373,7 +373,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Manj jutranje togosti že v 2–3 tednih",
+                    "text_1": "Ne le črevesje — podpira tudi imunski odziv in kožo",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -433,7 +433,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Več energije za igro in sprehode",
+                    "text_1": "300 milijard CFU/kg iz dveh EU-registriranih sevov",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -493,7 +493,67 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Dolgoročna zaščita pred obrabo sklepov",
+                    "text_1": "Ena merica na hrano — brez tablet in skrivanja v pašteto",
+                    "icon_1": "check_circle",
+                    "filled_icon_1": true,
+                    "text_2": "",
+                    "icon_2": "check_circle",
+                    "filled_icon_2": false,
+                    "text_3": "",
+                    "icon_3": "check_circle",
+                    "filled_icon_3": false,
+                    "text_4": "",
+                    "icon_4": "check_circle",
+                    "filled_icon_4": false,
+                    "margin_top": 0,
+                    "margin_bottom": 15
+                  },
+                  "blocks": {}
+                },
+                "text_with_icon_FM5NEW": {
+                  "type": "text-with-icon",
+                  "name": "Text with icon",
+                  "settings": {
+                    "visibility": "always-display",
+                    "mobile_text_size": 16,
+                    "desktop_text_size": 16,
+                    "alignment": "left",
+                    "mobile_alignment": "left",
+                    "text_color_type": "solid",
+                    "text_color": "#0e1111",
+                    "text_color_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "font_family": "body",
+                    "icon_scale": 120,
+                    "icon_color_type": "solid",
+                    "icon_color": "#121212",
+                    "icon_color_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "width": "100%",
+                    "direction": "horizontal",
+                    "column_gap": 3,
+                    "styling_container": "container",
+                    "bg_type": "none",
+                    "bg_color": "#f4e1ff",
+                    "bg_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "bg_opacity": 100,
+                    "border_width": 0,
+                    "border": "solid",
+                    "border_color_type": "solid",
+                    "border_color": "#6d388b",
+                    "border_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+                    "border_opacity": 100,
+                    "enable_shadow": false,
+                    "shadow_color": "#000000",
+                    "shadow_opacity": 15,
+                    "shadow_horizontal_offset": 0,
+                    "shadow_vertical_offset": 10,
+                    "shadow_spread": 0,
+                    "shadow_blur": 20,
+                    "border_radius": 50,
+                    "vertical_desktop_padding": 15,
+                    "horizontal_desktop_padding": 15,
+                    "vertical_mobile_padding": 12,
+                    "horizontal_mobile_padding": 12,
+                    "text_1": "Prebava pogosto v 1–2 tednih, dlaka v 6–8 tednih",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -515,6 +575,7 @@
                 "text_with_icon_KkgDUA",
                 "text_with_icon_jXkKqG",
                 "text_with_icon_8CJNqP",
+                "text_with_icon_FM5NEW",
                 "text_with_icon_zBWh3d"
               ]
             },
@@ -585,7 +646,7 @@
             "kaching_custom_display_1": {
               "type": "product_kaching-custom-display",
               "settings": {
-                "disclaimer_text": "<p>*Prve spremembe so vidne v 2–3 tednih.  Za najboljše rezultate priporočamo uporabo 2–3 mesece.</p>",
+                "disclaimer_text": "<p>*Prebava se pri večini uredi v 1–2 tednih, manj praskanja v 3–4 tednih, dlaka in koža v 6–8 tednih. Za pošteno oceno priporočamo vsaj 8 tednov redne uporabe.</p>",
                 "gifts_heading": "",
                 "hide_gifts_heading": false,
                 "tier_1_style": "none",
@@ -596,11 +657,11 @@
                 "accent_color_dark": "#f47671",
                 "secondary_color": "#e8d6c5",
                 "light_text_color": "#faf9f6",
-                "product_type": "capsules",
+                "product_type": "powder",
                 "capsules_per_package": 90,
                 "capsules_per_day_by_size": "1, 2, 3",
-                "grams_per_package": 90,
-                "grams_per_day_by_size": "1, 2, 3",
+                "grams_per_package": 120,
+                "grams_per_day_by_size": "1.33, 2.67, 4",
                 "margin_top": 15,
                 "margin_bottom": 15
               },
@@ -672,7 +733,7 @@
                 "visibility": "desktop-hidden",
                 "image": "shopify://shop_images/unnamed_1.jpg",
                 "rating": 5,
-                "quote": "\"Pri starejših in aktivnih psih pogosto opažamo spremembe v gibanju, ki niso nujno takoj boleče, a vplivajo na kakovost življenja. MobiMix cilja ključne elemente, povezane z zdravjem sklepov in gibanjem. Pomaga vašemu psu ostati aktiven in brez bolečin z podporo obnovi hrustanca, mazanju sklepov in zmanjšanju vnetja.\"",
+                "quote": "\"Praskanje, lizanje tačk in ponavljajoče se težave s kožo pri psih pogosto niso težava kože same. Pogosto izvirajo iz porušenega ravnovesja v črevesju in iz imunskega odziva, ki se nanj pretirano odzove. FloraMix je zasnovan tako, da hkrati podpira vse tri člene te verige — črevesno floro, imunski odziv ter kožo in dlako. Prav zato je smiselna izbira pri psih, ki se na navadne probiotike odzovejo le delno.\"",
                 "author": "Blaž Petelinek Ledinski, dr. vet. med.",
                 "role": "",
                 "background_color": "#ffffff",
@@ -693,7 +754,7 @@
                 "title": "",
                 "subtitle": "",
                 "function": "add_to_cart",
-                "button_label": "Add to cart",
+                "button_label": "Dodaj v košarico",
                 "enable_custom_btn_color": false,
                 "custom_btn_color": "#dd1d1d",
                 "icon_scale": 120,
@@ -731,9 +792,9 @@
               "name": "Petsome: Collapsible row",
               "settings": {
                 "visibility": "always-display",
-                "open": false,
-                "heading": "Opis izdelka",
-                "content": "<ul><li><strong>Zelenoustna školjka – </strong>Bogata z omega-3 maščobnimi kislinami in glikozaminoglikani, zmanjšuje vnetja, blaži bolečine in obnavlja sklepni hrustanec. </li><li><strong>Obnova sklepnega hrustanca – </strong>Glukozamin in hondroitin sodelujeta pri gradnji in obnovi hrustanca, kar zmanjšuje obrabo sklepov in povečuje njihovo prožnost. Ta kombinacija je idealna za aktivne pse in tiste, ki že kažejo znake staranja. </li><li><strong>Protivnetno delovanje – </strong>Kurkuma, ingver in vražji krempelj so močne naravne protivnetne sestavine, ki zmanjšujejo oteklino in bolečino v sklepih ter omogočajo lažje gibanje. </li><li><strong>Zaščita sklepov pred poškodbami – </strong>Vitamin C in šipek zagotavljata močno antioksidativno zaščito, ki zmanjšuje oksidativni stres in preprečuje nadaljnje poškodbe sklepnega tkiva. </li><li><strong>Naravno blaženje bolečin – </strong>Vražji krempelj poleg protivnetnega delovanja deluje tudi kot naravno sredstvo za blaženje bolečin, kar prispeva k boljšemu počutju psa. </li><li><strong>Izboljšanje gibljivosti – </strong>Sestavine Mobimixa sodelujejo pri obnovi in krepitvi sklepov, kar omogoča boljšo gibljivost in fleksibilnost.</li></ul>",
+                "open": true,
+                "heading": "Kaj je FloraMix?",
+                "content": "<p>FloraMix je dnevni prašek, ki ga potreseš na pasjo hrano. Namenjen je psom, ki se praskajo, ližejo tačke, stresajo z glavo ali imajo medlo dlako in neurejeno prebavo.</p><p>Deluje po mehanizmu <strong>TriAxis Reset™</strong>: hkrati podpira črevesno floro, imunski odziv ter kožo in dlako — ne le prvega člena verige, kot navadni probiotični priboljški. 120 g, ena merica na dan pri psu do 15 kg.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -746,8 +807,8 @@
               "settings": {
                 "visibility": "always-display",
                 "open": false,
-                "heading": "Prednosti MobiMixa",
-                "content": "<ul><li><strong>Naravne sestavine, ki delujejo – </strong>Mobimix vsebuje skrbno izbrane naravne sestavine, kot so zelenoustna školjka, glukozamin, hondroitin, vražji krempelj, kurkuma, ingver, šipek in vitamin C, ki skupaj podpirajo zdravje sklepov in izboljšujejo gibljivost. </li><li><strong>Dokazani učinki – </strong>Lastniki poročajo o vidnem izboljšanju gibljivosti psov že v prvih tednih uporabe. Mobimix pomaga zmanjšati vnetje, bolečine in togost sklepov. </li><li><strong>Podpora pri staranju psov – </strong>Idealen za starejše pse in pse z aktivnim življenjskim slogom, ki potrebujejo dodatno podporo za sklepe. </li><li><strong>Prilagodljivo odmerjanje – </strong>Mobimix je v obliki kapsul, ki jih lahko prilagodite glede na velikost in potrebe psa – kapsulo lahko odprete in vsebino preprosto zmešate s hrano. </li><li><strong>Brez umetnih dodatkov – </strong>100 % naravno, brez umetnih barvil, konzervansov ali polnil – samo najboljše za vašega psa. </li><li><strong>Izdelano v Sloveniji</strong> – Podprite lokalno proizvodnjo! Mobimix je razvit in izdelan v Sloveniji, z mislijo na kakovost in učinkovitost. </li><li><strong>Celovita nega sklepov</strong> – Mobimix pomaga obnoviti hrustanec, zmanjšati vnetja in izboljšati gibljivost – vse v enem izdelku. </li><li><strong>Primerno za vse pasme in starosti – </strong>Naj bo vaš pes mladič, odrasel ali starejši, Mobimix je primeren za vse pasme in velikosti psov. </li><li><strong>Varen in preizkušen</strong> – Temelji na znanstvenih dognanjih in je razvit pod nadzorom strokovnjakov. </li><li><strong>Vidni rezultati</strong> – Več kot 1.000 zadovoljnih lastnikov psov je že opazilo razliko. </li></ul>",
+                "heading": "Prednosti FloraMixa",
+                "content": "<p>✅ Naslovi vse tri člene verige: črevesje, imunski odziv, koža<br/>✅ 300 milijard CFU/kg iz dveh EU-registriranih sevov (4b1705ii, 4b1820)<br/>✅ Deklarirane doze: cink 2.600 mg/kg, biotin 895.000 µg/kg, vitamin C 16.450 mg/kg<br/>✅ Omega-3 iz krilove moke (22,44 %) v fosfolipidni obliki<br/>✅ Prašek namesto tablet — brez borbe in skrivanja v hrano<br/>✅ Brez arome, brez barvil, brez nepotrebnih polnil</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -760,8 +821,8 @@
               "settings": {
                 "visibility": "always-display",
                 "open": false,
-                "heading": "Kako deluje MobiMix?",
-                "content": "<ul><li><strong>Zelenoustna školjka – </strong>Bogata z omega-3 maščobnimi kislinami in glikozaminoglikani, zmanjšuje vnetja, blaži bolečine in obnavlja sklepni hrustanec. </li><li><strong>Obnova sklepnega hrustanca – </strong>Glukozamin in hondroitin sodelujeta pri gradnji in obnovi hrustanca, kar zmanjšuje obrabo sklepov in povečuje njihovo prožnost. Ta kombinacija je idealna za aktivne pse in tiste, ki že kažejo znake staranja. </li><li><strong>Protivnetno delovanje – </strong>Kurkuma, ingver in vražji krempelj so močne naravne protivnetne sestavine, ki zmanjšujejo oteklino in bolečino v sklepih ter omogočajo lažje gibanje. </li><li><strong>Zaščita sklepov pred poškodbami – </strong>Vitamin C in šipek zagotavljata močno antioksidativno zaščito, ki zmanjšuje oksidativni stres in preprečuje nadaljnje poškodbe sklepnega tkiva. </li><li><strong>Naravno blaženje bolečin – </strong>Vražji krempelj poleg protivnetnega delovanja deluje tudi kot naravno sredstvo za blaženje bolečin, kar prispeva k boljšemu počutju psa. </li><li><strong>Izboljšanje gibljivosti – </strong>Sestavine Mobimixa sodelujejo pri obnovi in krepitvi sklepov, kar omogoča boljšo gibljivost in fleksibilnost.</li></ul>",
+                "heading": "Kako deluje FloraMix?",
+                "content": "<p>Praskanje se ne začne na koži. Ko se v črevesju poruši ravnovesje, postane črevesna stena bolj prepustna. Imunski sistem to prebere kot alarm in pretirano odreagira — in prav ta reakcija je tisto, kar se na koncu pokaže na koži. Probiotik pomaga prvemu členu te verige. Drugi teče naprej sam od sebe. Zato se praskanje vrne.</p><p><strong>TriAxis Reset™</strong> naslovi vse tri hkrati: cikorija, dva EU-registrirana seva in kolostrum za črevesje; Sophora japonica, beta-glukani iz inaktiviranega kvasa in kurkuma za imunski odziv; omega-3 iz krila, cink in biotin za kožo in dlako.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -774,8 +835,8 @@
               "settings": {
                 "visibility": "always-display",
                 "open": false,
-                "heading": "Sestavine",
-                "content": "<ul><li>Zelenoustna školjka</li><li>Glukozamin in hondroitin</li><li>Vražji krempelj</li><li>Kurkuma</li><li>Izvleček ingverjeve korenine</li><li>Izvleček šipka</li><li>Vitamin C</li></ul>",
+                "heading": "Sestava (celotna deklaracija)",
+                "content": "<p><strong>Sestava:</strong> prah korenin cikorije, krilova moka 22,44 %, inaktivirani kvas (12.1.5), kolostrum 13,3 %, Sophora japonica 5 %, mačeha (Viola tricolor, v prahu) 3,33 %, proizvodi iz predelave zelišč (Curcuma longa) 3,33 %, maltodekstrin, inaktivirani Lactobacillus plantarum CECT 9161, maltodekstrin, inaktivirani Lactobacillus helveticus HA-122.</p><p><strong>Dodatki (na kg) — prehranski:</strong> vitamin E (3a700) 2.500 mg/kg, biotin (3a880) 895.000 µg/kg, vitamin C, askorbinska kislina (3a300) 16.450 mg/kg, cinkov kelat glicina hidrata (trdna oblika) — cink (3b607) 2.600 mg/kg.<br/><strong>Zootehnični:</strong> Enterococcus lactis NCIMB 10415 (4b1705ii) 200.000.000.000 CFU/kg, Bacillus velezensis DSM 15544 (4b1820) 100.000.000.000 CFU/kg.</p><p><strong>Analitske sestavine:</strong> surove beljakovine 18,97 %, surove maščobe 6,88 %, surova vlaknina 2,1 %, surovi pepel 4,75 %.</p><p><strong>Neto količina:</strong> 120 g · Dopolnilna krmna mešanica za pse · Razvito v Sloveniji, izdelano v EU.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -788,8 +849,8 @@
               "settings": {
                 "visibility": "always-display",
                 "open": false,
-                "heading": "Odmerjanje",
-                "content": "<p><strong>Priporočen dnevni vnos (3 mesece ali do izboljšanja stanja):</strong> </p><p>Mačke: 1/2 – 1 kapsula </p><p>Majhni psi (do 10 kg): 1 kapsula </p><p>Srednje veliki psi (11-24kg): 2 kapsuli </p><p>Veliki psi (25-40kg): 3 kapsule </p><p>Zelo veliki psi (več kot 41 kg): 4 kapsule </p><p><br/></p><p><strong>Vzdrževalni in preventivni vnos:</strong> </p><p>Do 20kg: 1 – 2 kapsule </p><p>Nad 20kg: 2 kapsuli </p><p><br/></p><p>Po treh mesecih jemanja oziroma po izboljšanju stanja, je potreben prehod na vzdrževalni vnos ali po potrebi ponoviti kuro. V primeru preobčutljivosti ali težav pri hranjenju se kapsulo lahko odpre, vsebino pa strese med dnevni obrok. Kapsulo v tem primeru zavržete. </p>",
+                "heading": "Odmerjanje in uporaba",
+                "content": "<p><strong>Priporočena uporaba (3 meseci):</strong><br/>1–15 kg: 1 merica dnevno<br/>15–30 kg: 2 merici dnevno<br/>30+ kg: 3 merice dnevno</p><p>Dnevno količino zmešaj s hrano — lahko jo razdeliš med obroke. Poskrbi, da ima pes ves čas dostop do sveže pitne vode.</p><p><strong>Opozorila z deklaracije:</strong> dopolnilna krmna mešanica ne nadomešča uravnotežene prehrane. Če pes prejema zdravila, se pred uporabo posvetuj z veterinarjem. Izdelka ne dajaj med brejostjo ali laktacijo. Shranjuj v temnem in suhem prostoru pri sobni temperaturi, po vsaki uporabi dobro zapri.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -802,8 +863,8 @@
               "settings": {
                 "visibility": "always-display",
                 "open": false,
-                "heading": "Študije",
-                "content": "<p><strong>Tiffany Linn Bierer3 and Linh M. Bui Waltham USA, Vernon, CA: Improvement of Arthritic Signs in Dogs Fed Green-Lipped Mussel (Perna canaliculus)</strong></p><p>“Podatki iz študije kažejo, da je GLM prašek učinkovit pri zmanjševanju znakov artritisa pri psih, bodisi, ko se neposredno posuje na standardno prehrano, bodisi, ko je vključen v obdelane priboljške ali glavne obroke. Po šestih tednih dopolnjevanja z GLM so se skupne ocene artritisa, bolečin v sklepih in oteklin bistveno zmanjšale. GLM vsebuje omega-3 maščobne kisline, ki zmanjšujejo vnetja, brez škodljivih učinkov na prebavni sistem ali strjevanje krvi, kar daje prednost pred mnogimi nesteroidnimi protivnetnimi zdravili. Prehransko dopolnjevanje z GLM lahko pripomore k obvladovanju artritičnih težav pri psih in zmanjša potrebo po običajnem zdravljenju.”</p><p><strong>Grainne McCarthy a,*, James O’Donovan b, Boyd Jones a, Hester McAllister c, Michael Seed d, Carmel Mooney: Randomised double-blind, positive-controlled trial to assess the efficacy of glucosamine/chondroitin sulfate for the treatment of dogs with osteoarthritis</strong></p><p>To poročilo je prvo, ki dokazuje, da se klinični znaki osteoartritisa pri psih znatno izboljšajo po 70 dneh zdravljenja z glukozamin hidrokloridom in hondroitin sulfatom. Čeprav so bili v prejšnjih študijah rezultati pri nekaterih dodatkih manj izraziti, so v tej študiji izboljšanja v bolečini in splošnem stanju postala pomembna po 70 dneh, kar kaže na dolgoročno učinkovitost tega zdravljenja.  </p><p><strong>Efficacy of Turmeric for Treatment of Osteoarthritis: A Systematic Review and Meta-Analysis of Experimental Animal Model Studies Stacey Sheahan VMD, MS-TCVM</strong></p><p>Ta sistematični pregled in meta-analiza sta pokazala, da ima kurkuma/kurkumin obetavne terapevtske učinke pri zdravljenju osteoartritisa (OA). Zmanjšuje vnetne citokine, kot sta TNF-α in IL-1β, ter ščiti hrustanec pred degeneracijo. Klinične študije na domačih ljubljenčkih, predvsem psih, so potrebne za dodatno raziskovanje učinkov kurkume pri zdravljenju OA. Kurkuma se lahko uporablja kot del širšega zdravljenja v okviru tradicionalne kitajske veterinarske medicine.</p>",
+                "heading": "Zakaj EU-registrirana seva?",
+                "content": "<p>Enterococcus lactis NCIMB 10415 (4b1705ii) in Bacillus velezensis DSM 15544 (4b1820) sta v EU registrirana zootehnična dodatka za stabilizacijo črevesne flore. To pomeni, da sta šla skozi regulatorno presojo, ne le skozi marketinško besedilo. Skupaj prispevata 300 milijard CFU na kilogram.</p><p>Poleg njiju FloraMix vsebuje še dva inaktivirana seva — Lactobacillus plantarum CECT 9161 in Lactobacillus helveticus HA-122. To so postbiotiki: ker niso živi, jim ni treba preživeti želodčne kisline in so stabilni ves rok trajanja.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -815,7 +876,7 @@
               "name": "Petsome: Guarantee",
               "settings": {
                 "image": "shopify://shop_images/Guarantee.png",
-                "text": "<p>Pri Petsome želimo, da vsak MobiMix ljubljenčku izboljša gibanje. Če ste v dvomih, ali je ta izdelek za vašega ljubljenčka - ni panike. Vaše naročilo je zaščiteno z 60-dnevno garancijo vračila denarja. Brez slabe vesti.</p>",
+                "text": "<p>Pri Petsome želimo, da vsaka merica FloraMixa nekaj spremeni. Če ste v dvomih, ali je ta izdelek za vašega ljubljenčka — ni panike. Vaše naročilo je zaščiteno s 60-dnevno garancijo vračila denarja. Brez slabe vesti.</p>",
                 "background_color": "#e8d6c5",
                 "border_color": "#b6a87c",
                 "margin_top": 0,
@@ -933,25 +994,25 @@
         "item_1": {
           "type": "item",
           "settings": {
-            "text": "Podpira zdravje sklepov"
+            "text": "Za pse, ki se veliko praskajo"
           }
         },
         "item_2": {
           "type": "item",
           "settings": {
-            "text": "Zmanjšuje jutranjo togost"
+            "text": "Podpira umirjen videz kože"
           }
         },
         "item_3": {
           "type": "item",
           "settings": {
-            "text": "Varuje hrustanec pred obrabo"
+            "text": "Sijoča dlaka od znotraj"
           }
         },
         "item_4": {
           "type": "item",
           "settings": {
-            "text": "Spodbuja gibljivost in aktivnost"
+            "text": "300 mrd CFU/kg · 2 EU-registrirana seva"
           }
         }
       },
@@ -984,8 +1045,8 @@
             "image": "shopify://shop_images/less_pain.png",
             "icon": "pets",
             "filled_icon": false,
-            "title": "Manj bolečin že po 2–3 tednih",
-            "text": "<p>Sestavine MobiMixa začnejo delovati takoj. Večina lastnikov opaži, da pes zjutraj vstane lažje in da je v gibanju manj previdnosti. Ne zato, ker bi bila bolečina zakrita, ampak ker se vnetje umirja in hrustanec dobiva podporo, ki jo potrebuje.</p>"
+            "title": "Praskanje, ki se vsak večer začne znova",
+            "text": "<p>Prvi znak, ki ga lastniki opazijo, praviloma ni koža, ampak prebava: trdnejše blato, manj napenjanja, manj jedenja trave. Šele nato se umiri koža in praskanja je manj. To ni naključje — to je vrstni red, po katerem veriga sploh deluje.</p>"
           }
         },
         "benefit_2": {
@@ -994,8 +1055,8 @@
             "image": "shopify://shop_images/easy_moving.png",
             "icon": "directions_run",
             "filled_icon": false,
-            "title": "Lahkotnejše gibanje dan za dnem",
-            "text": "<p>Kapsulo preprosto dodaš k dnevnemu obroku. Ni posebnih postopkov, ni kompromisov. Samo dosledna, dnevna podpora, ki sčasoma prinese razliko, ki jo opazite vsak dan.</p>"
+            "title": "Lizanje tačk, ki ga slišiš ob dveh zjutraj",
+            "text": "<p>Tisti zvok ponoči in rjavi madeži med prsti. Ko se imunski odziv umirja, se umirja tudi koža na tačkah. Večina lastnikov opisuje, da postanejo najprej tišje noči — šele nato je razlika vidna tudi podnevi.</p>"
           }
         },
         "benefit_3": {
@@ -1004,8 +1065,8 @@
             "image": "shopify://shop_images/energy.png",
             "icon": "bolt",
             "filled_icon": true,
-            "title": "Več energije za sprehode in igranje",
-            "text": "<p>Ko se vnetje umiri, se vrne igrivost. Lastniki poročajo: pes spet pohiti do vrat, spet zahteva sprehod, spet povleče povodec. Ta trenutek je vreden vsega.</p>"
+            "title": "Medla dlaka in dlaka po vsem stanovanju",
+            "text": "<p>Omega-3 iz krilove moke, cink v kelatni obliki in biotin prispevajo k normalnemu stanju kože in dlake. To je sprememba, ki je ni treba razlagati — dlako opazijo drugi ljudje, ne le ti.</p>"
           }
         },
         "benefit_4": {
@@ -1014,8 +1075,8 @@
             "image": "shopify://shop_images/joint_protection.png",
             "icon": "shield",
             "filled_icon": true,
-            "title": "Dolgoročna zaščita sklepov",
-            "text": "<p>MobiMix je zasnovan za dolgotrajno uporabo. Idealen za pse nad 5 let, velike pasme in aktivne pse, ki sklepe obremenjujejo vsak dan. Hrustanca, ki ga ni, ne moremo obnoviti, tistega, ki je še tam, pa lahko zaščitimo.</p>"
+            "title": "Uredi se za dva tedna, potem se vrne",
+            "text": "<p>Najpogostejša pritožba tega trga. Razlog je, da je naslovljen samo en člen verige. FloraMix podpira vse tri hkrati — črevesje, imunski odziv in kožo — zato umirjenost lažje zdrži tudi potem, ko mine prvi mesec.</p>"
           }
         }
       },
@@ -1026,7 +1087,7 @@
         "benefit_4"
       ],
       "settings": {
-        "heading": "<p>Celostna formula za zdrave sklepe in lahkotno gibanje psov.</p>",
+        "heading": "<p>Za pse, ki se praskajo, ližejo tačke in imajo medlo dlako — in za lastnike, ki so poskusili že vse.</p>",
         "columns": "2",
         "accent_color": "#f8aaa7",
         "secondary_color": "#e8d6c5",
@@ -1041,27 +1102,27 @@
           "type": "timeframe",
           "settings": {
             "highlighted": false,
-            "badge_text": "2-3 tedni",
-            "title": "Vstane malo lažje.",
-            "text": "<p>To je navadno prva stvar, ki jo opazite. Tista sekunda oklevanja zjutraj — začne izginjati. Hoja po stopnicah je manj previdna. Drobne spremembe, ki pa jih ne morete spregledati, ko jih vidite.</p>"
+            "badge_text": "1–2 tedna",
+            "title": "Prebava se umiri.",
+            "text": "<p>Trdnejše blato, manj napenjanja, manj jedenja trave. To je prvi znak, da črevesna flora dobiva podporo — in praviloma prva stvar, ki jo lastnik opazi. Koža pride kasneje.</p>"
           }
         },
         "tf_2": {
           "type": "timeframe",
           "settings": {
             "highlighted": false,
-            "badge_text": "1 mesec",
-            "title": "Spet hodi kot bi moral.",
-            "text": "<p>Tempo se vrne. Pes bolj pogumno stopa po klančinah. Na sprehodu spet malo zahteva — ne samo sledi. Sprehodi postanejo prijetnejši. Za oba.</p>"
+            "badge_text": "3–4 tedni",
+            "title": "Praskanja je manj.",
+            "text": "<p>Tisto praskanje pred spanjem postane redkejše. Manj lizanja tačk, manj stresanja z glavo. Koža je videti manj rdeča. Tu se veriga začne umirjati na drugem, imunskem členu.</p>"
           }
         },
         "tf_3": {
           "type": "timeframe",
           "settings": {
             "highlighted": true,
-            "badge_text": "2–3 meseci",
-            "title": "Deluje kot mlajši.",
-            "text": "<p>To je stavek, ki ga slišimo najpogosteje. Pes se igra. Prinese igračo. Pohiti do vrat. Stvari, ki jih je nehal počati — se vračajo. Po eni za drugo.</p>"
+            "badge_text": "6–8 tednov",
+            "title": "Dlaka se spremeni.",
+            "text": "<p>Gostejša na otip, bolj sijoča na svetlobi, manj dlake po kavču. To je najbolj vidna sprememba in tista, ki jo opazijo tudi drugi ljudje, ne le ti.</p>"
           }
         },
         "tf_4": {
@@ -1069,8 +1130,8 @@
           "settings": {
             "highlighted": false,
             "badge_text": "3+ meseci",
-            "title": "Zdaj pa ne bi več prenehala.",
-            "text": "<p>Ko lastniki vidijo, kaj se zgodi, če za teden pozabijo na kapsulo — se ne ustavijo več. Sklepi so zaščiteni. Pes je aktiven. To je bil cilj od začetka.</p>"
+            "title": "Umirjenost zdrži.",
+            "text": "<p>Cilj ni epizoda miru, ampak stanje, ki ostane. Ker so podprte vse tri osi hkrati, se stvari ne vrnejo takoj, ko mine prvi lonček. To je razlika med rešitvijo in premorom.</p>"
           }
         }
       },
@@ -1081,8 +1142,8 @@
         "tf_4"
       ],
       "settings": {
-        "heading": "<p>Kaj se zgodi, ko vaš pes začne z MobiMixom?</p>",
-        "subheading": "Vsak pes je drugačen. A večina lastnikov opazi prve spremembe hitreje, kot so pričakovali.",
+        "heading": "<p>Kaj se zgodi, ko vaš pes začne s FloraMixom?</p>",
+        "subheading": "Vsak pes je drugačen. A vrstni red sprememb je skoraj vedno enak — in ni tisti, ki ga pričakujete.",
         "columns": "4",
         "background_color": "#faf9f6",
         "accent_color": "#f8aaa7",
@@ -1098,49 +1159,49 @@
         "bullet_1": {
           "type": "bullet",
           "settings": {
-            "text": "🐕 ima več energije čez dan in ni več hitro utrujen"
+            "text": "🐾 se manj praska in liže tačke — tudi ponoči"
           }
         },
         "bullet_2": {
           "type": "bullet",
           "settings": {
-            "text": "🦴 se giblje bolj sproščeno, brez okorelosti po počitku"
+            "text": "✨ ima dlako, ki je gostejša in bolj sijoča"
           }
         },
         "bullet_3": {
           "type": "bullet",
           "settings": {
-            "text": "🚶‍♂️ z veseljem hodi na sprehode in ne zaostaja več"
+            "text": "🦻 manj stresa z glavo in praska po ušesih"
           }
         },
         "bullet_4": {
           "type": "bullet",
           "settings": {
-            "text": "🐾 spet skače, teče in se igra brez zadržkov"
+            "text": "💩 ima urejeno prebavo, trdnejše blato in manj napenjanja"
           }
         },
         "bullet_5": {
           "type": "bullet",
           "settings": {
-            "text": "❤️ se počuti bolje v svojem telesu, tudi v zrelih letih"
+            "text": "🌱 dobi podporo tudi na imunskem členu, ne le v črevesju"
           }
         },
         "bullet_6": {
           "type": "bullet",
           "settings": {
-            "text": "🔁 ohrani zdrave sklepe dolgoročno, ne samo kratkoročno"
+            "text": "🥄 dobi vse v eni merici namesto štirih različnih dodatkov"
           }
         },
         "bullet_7": {
           "type": "bullet",
           "settings": {
-            "text": "🛡 ima ves čas podporo sklepom tudi če je večje pasme ali zelo aktiven"
+            "text": "📋 dobi deklarirane doze cinka, biotina in vitaminov, ne le seznam sestavin"
           }
         },
         "bullet_8": {
           "type": "bullet",
           "settings": {
-            "text": "😊 uživa v vsakodnevnem gibanju, brez bolečine in nelagodja"
+            "text": "🔁 ohrani umirjeno kožo dolgoročno, ne le dokler traja en lonček"
           }
         }
       },
@@ -1155,7 +1216,7 @@
         "bullet_8"
       ],
       "settings": {
-        "heading": "<p>MobiMix je prava izbira za vašega psa, če želite, da:</p>",
+        "heading": "<p>FloraMix je prava izbira za vašega psa, če želite, da:</p>",
         "image": "shopify://shop_images/hf_20260122_143423_91f5eeda-985c-4ddc-97ca-bdfb6690d8f7.png",
         "secondary_color": "#e8d6c5",
         "padding_top": 36,
@@ -1168,15 +1229,15 @@
         "row_1": {
           "type": "row",
           "settings": {
-            "label": "Hrustanec dobiva gradbeni material za obnovo",
-            "them_value": "❌",
+            "label": "Podpira ravnovesje črevesne flore",
+            "them_value": "✅",
             "us_value": "✅"
           }
         },
         "row_2": {
           "type": "row",
           "settings": {
-            "label": "Vnetje se umirja — na treh poteh hkrati",
+            "label": "Naslovi tudi imunski člen (Sophora japonica, kolostrum, beta-glukani)",
             "them_value": "❌",
             "us_value": "✅"
           }
@@ -1184,7 +1245,7 @@
         "row_3": {
           "type": "row",
           "settings": {
-            "label": "Sklepna tekočina se vzdržuje — manj trenja, lažje gibanje",
+            "label": "Poskrbi tudi za kožo in dlako (krill, cink, biotin)",
             "them_value": "❌",
             "us_value": "✅"
           }
@@ -1192,15 +1253,15 @@
         "row_4": {
           "type": "row",
           "settings": {
-            "label": "Število aktivnih sestavin",
-            "them_value": "1-3",
-            "us_value": "8"
+            "label": "Deklarirana količina CFU na kg",
+            "them_value": "❌",
+            "us_value": "300 mrd"
           }
         },
         "row_5": {
           "type": "row",
           "settings": {
-            "label": "Učinek, ki traja — ne le začetni skok",
+            "label": "EU-registrirana zootehnična seva (4b1705ii, 4b1820)",
             "them_value": "❌",
             "us_value": "✅"
           }
@@ -1208,7 +1269,7 @@
         "row_6": {
           "type": "row",
           "settings": {
-            "label": "Priporočeno v veterinarskih in rehab. centrih",
+            "label": "Deklarirane doze cinka, biotina in vitaminov",
             "them_value": "❌",
             "us_value": "✅"
           }
@@ -1216,7 +1277,7 @@
         "row_7": {
           "type": "row",
           "settings": {
-            "label": "Formulirano in proizvedeno v EU",
+            "label": "Prašek brez arome in polnil — ne priboljšek",
             "them_value": "❌",
             "us_value": "✅"
           }
@@ -1232,12 +1293,12 @@
         "row_7"
       ],
       "settings": {
-        "heading": "<p>Zakaj običajni dodatki pogosto ne pomagajo?</p>",
-        "description": "<p>Ko pes začne šepati, kupite, kar priporoči sosed ali kar najdete na polici. Glukozamin. Morda hondroitin. Psu dodatek dajete en mesec in ne opazite nič. Razlog ni, da \"dodatki pač ne delajo.\" Razlog je, da sklepna bolečina ni en problem. So trije in navadni dodatki naslavljajo samo enega.</p>",
+        "heading": "<p>Zakaj sam probiotik pogosto ne zadošča?</p>",
+        "description": "<p>Zgodba je pravilna: veliko se res začne v črevesju. Zato si mu dala probiotični priboljšek. Prebava se je uredila — praskanje pa se je vrnilo. Razlog ni, da probiotiki ne delajo. Razlog je, da je srbenje veriga treh členov, probiotik pa pomaga samo prvemu. Drugi člen, imunski, teče naprej sam od sebe.</p>",
         "them_image": "shopify://shop_images/us_vs_them.png",
-        "them_label": "Ostali dodatki",
+        "them_label": "Navadni probiotični priboljški",
         "us_image": "shopify://shop_images/MobiMix_NEW_1d48bfe9-d0c6-49cc-a93c-30f3457609e2.png",
-        "us_label": "MobiMix",
+        "us_label": "FloraMix",
         "background_color": "#faf9f6",
         "accent_color": "#f8aaa7",
         "accent_color_dark": "#f47671",
@@ -1252,17 +1313,17 @@
         "card_1": {
           "type": "card",
           "settings": {
-            "heading": "🛑 Zakaj mnogi dodatki razočarajo?",
-            "text": "<p>Veliko dodatkov za sklepe temelji le na eni ali dveh sestavinah, zato delujejo predvsem kratkoročno in ne naslavljajo vseh vzrokov težav s sklepi. Posledično lahko prinesejo le začasno olajšanje, ne pa dolgoročne podpore in trajnih izboljšav.</p>",
-            "badge_text": "Kratkoročno olajšanje ≠ dolgoročna rešitev"
+            "heading": "🛑 Zakaj se praskanje vedno vrne?",
+            "text": "<p>Ker se srbenje ne konča v črevesju — tam se začne. Prepustna črevesna stena spusti skozi, kar ne bi smelo. Imunski sistem to prebere kot alarm in pretirano odreagira. Koža vzplamti. Probiotik pomaga prvemu členu verige, drugi pa teče naprej sam — in ko nehaš, se vse skupaj vrne.</p>",
+            "badge_text": "Urejeno črevesje ≠ umirjena koža"
           }
         },
         "card_2": {
           "type": "card",
           "settings": {
-            "heading": "✅ Zakaj MobiMix deluje drugače?",
-            "text": "<p>MobiMix združuje 8 skrbno izbranih učinkovin s sinergičnim delovanjem, ki hkrati zagotavljajo protivnetno, regenerativno in zaščitno podporo sklepom. Razvit je za redno in dolgotrajno uporabo, saj sklepe podpira celostno in skozi čas.</p>",
-            "badge_text": "Celostna podpora sklepom skozi čas"
+            "heading": "✅ Zakaj FloraMix deluje drugače?",
+            "text": "<p>TriAxis Reset™ naslovi vse tri člene hkrati: črevesje s cikorijo, dvema EU-registriranima sevoma in kolostrumom; imunski odziv s Sophoro japonico, beta-glukani iz kvasa in kurkumo; kožo in dlako z omega-3 iz krila, cinkom in biotinom. Ena merica na hrano, vsak dan.</p>",
+            "badge_text": "Tri osi hkrati, ne le črevesje"
           }
         }
       },
@@ -1272,7 +1333,7 @@
       ],
       "settings": {
         "image": "shopify://shop_images/hf_20260324_090023_9eac1bcd-6ab4-48cb-84f0-f40b13f453d6.jpg",
-        "button_label": "Naroči MobiMix",
+        "button_label": "Naroči FloraMix",
         "button_link": "",
         "button_icon": "shopping_bag",
         "button_background_color": "#0e1111",
@@ -1285,8 +1346,8 @@
     "petsome_ingredients_1": {
       "type": "petsome-ingredients",
       "settings": {
-        "heading": "<p>8 skrbno izbranih sestavin</p>",
-        "description": "<p>Vsaka sestavina v MobiMixu ima svojo vlogo — skupaj naslavljajo vnetje, obnovo hrustanca in dolgoročno zaščito sklepov. Kliknite na sestavino za več informacij.</p>",
+        "heading": "<p>Kaj je notri — in na kateri osi dela</p>",
+        "description": "<p>Dvanajst sestavin, razporejenih po treh oseh: štiri za črevesje, štiri za imunski odziv, štiri za kožo in dlako. Vsaka s količino z deklaracije, ne le z imenom. Kliknite na sestavino za več.</p>",
         "amount_label": "Količina v paketu",
         "background_color": "#faf9f6",
         "accent_color": "#f8aaa7",
@@ -1302,25 +1363,25 @@
         "card_1": {
           "type": "card",
           "settings": {
-            "badge_text": "OBNOVA",
-            "title": "Hrustanec, ki ga ni, ne more rasti sam od sebe.",
-            "text": "<p>Glukozamin, hondroitin in vitamin C skupaj zagotavljajo gradbeni material za hrustančne celice. Glukozamin tvori strukturo, hondroitin zadržuje vlago, vitamin C je kofaktor, brez katerega tvorba kolagena preprosto ne steče. Brez vseh treh hkrati — obnova ostane nepopolna.</p>"
+            "badge_text": "ČREVESJE",
+            "title": "Tam se začne — ne konča.",
+            "text": "<p>Cikorijev inulin nahrani koristne bakterije, dva EU-registrirana seva (skupaj 300 milijard CFU/kg) podpirata ravnovesje črevesne flore, kolostrum pa prispeva k celovitosti črevesne stene. To je temelj — in tu se večina izdelkov ustavi.</p>"
           }
         },
         "card_2": {
           "type": "card",
           "settings": {
-            "badge_text": "ZAŠČITA",
-            "title": "Vnetje, ki traja mesece, povzroča trajno škodo.",
-            "text": "<p>Vražji krempelj, kurkuma in ingver — vsak udari na drugem vnetnem signalu. Skupaj pokrijejo celoten spekter kroničnega sklepnega vnetja, brez stranskih učinkov na prebavila. To je tisto, kar navadni dodatki ne naredijo: sploh ne naslavljajo vnetja.</p>"
+            "badge_text": "IMUNSKI ODZIV",
+            "title": "Člen, ki ga nihče ne naslovi.",
+            "text": "<p>Ko stena postane bolj prepustna, se imunski sistem pretirano odzove — in prav ta odziv je tisto, kar se pokaže kot praskanje. Sophora japonica je naraven vir rutina in kvercetina, inaktivirani kvas prispeva beta-glukane, kolostrum imunske faktorje, kurkuma pa kurkuminoide. To je razlog, zakaj sam probiotik ni dovolj.</p>"
           }
         },
         "card_3": {
           "type": "card",
           "settings": {
-            "badge_text": "VZDRŽEVANJE",
-            "title": "Sklepi potrebujejo oskrbo vsak dan, ne samo ko boli.",
-            "text": "<p>Zelenoustna školjka je edini naravni vir treh omega-3 maščobnih kislin hkrati. Šipek vzdržuje sinovialno tekočino. Skupaj preprečujeta, da bi se stanje vrnilo — ker vzdržujeta okolje, v katerem je obnova sploh mogoča.</p>"
+            "badge_text": "KOŽA IN DLAKA",
+            "title": "Da se vidi, ne le čuti.",
+            "text": "<p>Omega-3 iz krilove moke je v fosfolipidni obliki, cink v kelatni (2.600 mg/kg), biotin 895.000 µg/kg, mačeha pa je tradicionalna zeliščna podpora koži. Skupaj prispevajo k normalnemu stanju kože in dlake — k tistemu, kar lastnik dejansko vidi.</p>"
           }
         }
       },
@@ -1330,9 +1391,9 @@
         "card_3"
       ],
       "settings": {
-        "kicker_text": "ARTROREGEN FORMULA",
-        "heading": "<p>Zakaj 8 sestavin in ne samo 2?</p>",
-        "description": "<p>Večina dodatkov cilja en problem. ArtroRegen Formula cilja tri — hkrati. To ni slučajnost. To je razlog, zakaj tista kapsula iz zoološkege vrta ni delala. In zakaj ta dela.</p>",
+        "kicker_text": "TRIAXIS RESET™",
+        "heading": "<p>Uredila si črevesje. Zakaj se še vedno praska?</p>",
+        "description": "<p>Ker se srbenje ne konča v črevesju — tam se začne. Teče kot veriga treh členov: prepustna črevesna stena spusti skozi, kar ne bi smelo; imunski sistem to prebere kot alarm in pretirano odreagira; koža vzplamti. Probiotik pomaga prvemu členu. Drugi teče naprej sam. <strong>TriAxis Reset™ naslovi vse tri hkrati</strong> — zato umirjenost zdrži, namesto da se vrne.</p>",
         "pattern_image": "shopify://shop_images/paw_background.png",
         "background_color": "#e8d6c5",
         "kicker_background": "#e0b58d",
@@ -1348,27 +1409,27 @@
           "type": "story",
           "settings": {
             "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
-            "dog_name": "Rex, 8-letni labradorec",
-            "issue": "Težave pri vstajanju",
-            "text": "<p>Rex je imel vsako jutro težave že pri prvih korakih. Po nekaj tednih MobiMixa vstane brez obotavljanja in spet rade volje teče do vrat.</p>"
+            "dog_name": "Rio, 4-letni francoski buldog",
+            "issue": "Lizanje tačk ponoči",
+            "text": "<p>Rio si je tačke lizal vsako noč, med prsti je imel rjave madeže. Lastnica poroča, da se je najprej uredila prebava, po treh tednih pa so noči postale opazno tišje.</p>"
           }
         },
         "story_2": {
           "type": "story",
           "settings": {
             "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
-            "dog_name": "Zala, 11-letna čivava",
-            "issue": "Operacija kolena",
-            "text": "<p>Po operaciji kolena je bila Zala previdna pri vsakem koraku. Lastnica poroča, da je danes spet igriva in brez vidnega nelagodja pri gibanju.</p>"
+            "dog_name": "Maša, 6-letna labradorka",
+            "issue": "Praskanje in medla dlaka",
+            "text": "<p>Maša se je praskala vsak večer, dlaka je bila medla in je izpadala. Po dveh mesecih rednega FloraMixa je dlaka po besedah lastnice gostejša in bolj sijoča, praskanja pa je manj.</p>"
           }
         },
         "story_3": {
           "type": "story",
           "settings": {
             "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
-            "dog_name": "Fifi, 12-letni ovčar",
-            "issue": "Star pes",
-            "text": "<p>Fifi je v zrelih letih postajala vse manj aktivna. Z rednim dodajanjem MobiMixa je spet pripravljena na daljše sprehode in igro v parku.</p>"
+            "dog_name": "Ari, 5-letni zlati prinašalec",
+            "issue": "Stresanje z glavo, ponavljajoče se težave z ušesi",
+            "text": "<p>Ari je nenehno stresal z glavo in praskal po ušesih. Lastnica je pred tem poskusila že tri različne dodatke. S FloraMixom poroča o mirnejših večerih in manj praskanja.</p>"
           }
         }
       },
@@ -1403,8 +1464,8 @@
       "disabled": true,
       "settings": {
         "heading": "<p>Proizvedeno v skladu z najvišjimi standardi</p>",
-        "description": "<p>MobiMix je izdelan v skladu z najvišjimi evropskimi standardi. Vsaka sestavina in vsak odmerek sta neodvisno testirana, brez nepotrebnih dodatkov in polnil.</p>",
-        "button_label": "Naroči MobiMix",
+        "description": "<p>FloraMix je razvit v Sloveniji in izdelan v EU, po evropskih standardih za dopolnilno krmo. Oba probiotična seva sta EU-registrirana zootehnična dodatka (4b1705ii in 4b1820) — to pomeni, da sta šla skozi regulatorno presojo, ne le skozi marketing. Brez arome, brez barvil, brez nepotrebnih polnil.</p>",
+        "button_label": "Naroči FloraMix",
         "button_link": "",
         "button_icon": "shopping_bag",
         "button_background_color": "#0e1111",
@@ -1423,7 +1484,7 @@
           "settings": {
             "image": "shopify://shop_images/MobiMix_Step_1.png",
             "title": "1. Korak",
-            "description": "Odmeri kapsule glede na težo psa"
+            "description": "Odmeri: 1 merica do 15 kg, 2 merici 15–30 kg, 3 merice nad 30 kg."
           }
         },
         "step_2": {
@@ -1431,7 +1492,7 @@
           "settings": {
             "image": "shopify://shop_images/MobiMix_Step_2.png",
             "title": "2. Korak",
-            "description": "Odpri ali dodaj celo kapsulo na obrok."
+            "description": "Potresi po običajnem obroku — mokrem ali suhem."
           }
         },
         "step_3": {
@@ -1439,7 +1500,7 @@
           "settings": {
             "image": "shopify://shop_images/MobiMix_Step_3.png",
             "title": "3. Korak",
-            "description": "Zmešaj z obrokom."
+            "description": "Na kratko premešaj, da se prime hrane."
           }
         },
         "step_4": {
@@ -1447,7 +1508,7 @@
           "settings": {
             "image": "shopify://shop_images/MobiMix_Step_4.png",
             "title": "4. Korak",
-            "description": "Ponavljaj vsak dan in opazuj razliko."
+            "description": "Ponavljaj vsak dan. Prebava prva, koža in dlaka za njo."
           }
         }
       },
@@ -1458,7 +1519,7 @@
         "step_4"
       ],
       "settings": {
-        "heading": "<p>Ena rutina. Vsak dan. To je vse.</p>",
+        "heading": "<p>Ena merica na dan. To je vse.</p>",
         "padding_top": 80,
         "padding_bottom": 80
       }
@@ -1469,22 +1530,22 @@
         "stat_1": {
           "type": "stat",
           "settings": {
-            "number": "95%",
-            "description": "lastnikov pravi, da se je njihov pes začel gibati bolj lahkotno in samozavestno."
+            "number": "300 mrd",
+            "description": "CFU na kilogram iz dveh EU-registriranih sevov (4b1705ii in 4b1820)."
           }
         },
         "stat_2": {
           "type": "stat",
           "settings": {
-            "number": "93%",
-            "description": "lastnikov poroča o zmanjšanih znakih bolečin pri hoji in vstajanju."
+            "number": "3 osi",
+            "description": "črevesje, imunski odziv in koža — naslovljene hkrati, ne po vrsti."
           }
         },
         "stat_3": {
           "type": "stat",
           "settings": {
-            "number": "90%",
-            "description": "opazi več igrivosti in energije pri svojem psu čez dan."
+            "number": "90 dni",
+            "description": "toliko traja en lonček pri psu do 15 kg — ena merica na dan."
           }
         }
       },
@@ -1511,7 +1572,8 @@
         "read_more_label": "Preberi več",
         "padding_top": 80,
         "padding_bottom": 80
-      }
+      },
+      "disabled": true
     },
     "petsome_rotating_logos_1": {
       "type": "petsome-rotating-logos",
@@ -1535,7 +1597,8 @@
         "star_color": "#ffcc00",
         "padding_top": 64,
         "padding_bottom": 64
-      }
+      },
+      "disabled": true
     },
     "17827582468bb08a41": {
       "type": "apps",
@@ -1577,7 +1640,7 @@
       "disabled": true,
       "settings": {
         "display_id": false,
-        "title": "You may also like",
+        "title": "Morda ti bo všeč",
         "title_highlight_1": "solid-color",
         "title_highlight_1_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
         "title_highlight_1_bg-color": "#f9efff",
@@ -1625,7 +1688,7 @@
         "show_rating": false,
         "enable_quick_add": false,
         "button_funcionality": "add-to-cart",
-        "button_label": "Go to product",
+        "button_label": "Poglej izdelek",
         "columns_mobile": "2",
         "padding_top": 36,
         "padding_bottom": 24
