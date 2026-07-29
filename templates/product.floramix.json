@@ -1640,7 +1640,7 @@
       "disabled": true,
       "settings": {
         "display_id": false,
-        "title": "Morda ti bo všeč",
+        "title": "You may also like",
         "title_highlight_1": "solid-color",
         "title_highlight_1_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
         "title_highlight_1_bg-color": "#f9efff",
@@ -1688,7 +1688,7 @@
         "show_rating": false,
         "enable_quick_add": false,
         "button_funcionality": "add-to-cart",
-        "button_label": "Poglej izdelek",
+        "button_label": "Go to product",
         "columns_mobile": "2",
         "padding_top": 36,
         "padding_bottom": 24
