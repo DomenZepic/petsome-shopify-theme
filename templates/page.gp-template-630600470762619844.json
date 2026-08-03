@@ -132,14 +132,8 @@
     },
     "gp_section_630600470897230788": {
       "settings": {
-        "checksum": "c42f323150a700d0108c0592683a3845396d2cd6deb03c6745ac87bcf627669f_1_1_1_0__1",
+        "checksum": "9a1e93dfa37e354684b108047e0ed3662d7c1decf46f8922a54674542667ef93_1_1_1_0__1",
         "gg-7zg6nQ8__text": "<p>✓ 60-dnevna garancija vračila denarja</p>",
-        "gg4fTydfLy-_errorMessage": "Cannot add product to cart",
-        "gg4fTydfLy-_label": "Dodaj v košarico",
-        "gg4fTydfLy-_outOfStockLabel": "Out of stock",
-        "gg4fTydfLy-_successMessage": "Add product to cart successfully",
-        "gg4fTydfLy-_unavailableLabel": "Unavailable",
-        "gg4fTydfLy-_variantSelectionRequiredMessage": "Please select a variant to add product to cart",
         "gg68LW7g9zb_text": "<p>Odlično ocenjeno na Trustpilot</p>",
         "gg8uIBVPrhn_label": "<p><strong>Preveri omejeno ponudbo</strong></p>",
         "ggIS520pPx1_srcSet_desktop_src": "https://cdn.shopify.com/s/files/1/0970/1284/2821/files/hf_20260803_115634_8ccce700-0bc5-43f7-8e8c-fbc772958b7f.png",
@@ -155,7 +149,8 @@
         "ggnNtHPn0YZ_text": "<p>✓ Laboratorijsko testirano</p>",
         "ggvTj6nHAOr_text": "<p><span style=\"color:#121212;\">Pravi dodatek za sklepe naslovi <strong>vnetje, hrustanec in oksidativni stres.&nbsp;</strong></span></p><p>&nbsp;</p><p><span style=\"color:#121212;\">Težava je, da večina izdelkov, ki se prodajajo kot dodatki za sklepe, tega nikoli ni bila sposobna.&nbsp;</span></p><p>&nbsp;</p><p><span style=\"color:#121212;\">Spodaj ti pokažem kako l<strong>očiš pravega od ostalih brez da bi jih preplačeval.</strong></span></p>",
         "ggxaWaPgIzS_text": "7 razlogov, zakaj večina dodatkov za pasje sklepe ne deluje (in zakaj je MobiMix drugačen)",
-        "ggyzTmZL7ii_srcSet_desktop_src": "https://cdn.shopify.com/s/files/1/0970/1284/2821/files/Mountaindrop_Shilajit_Rated_With_4.8_Stars_On_Trustpilot.jpg"
+        "ggyzTmZL7ii_srcSet_desktop_src": "https://cdn.shopify.com/s/files/1/0970/1284/2821/files/Mountaindrop_Shilajit_Rated_With_4.8_Stars_On_Trustpilot.jpg",
+        "section_preload": "true"
       },
       "type": "gp-section-630600470897230788"
     },
@@ -187,7 +182,8 @@
         "checksum": "8dfc440c2e0cd6e1b426a6336fa17b2da58ba8a54c79944c7db7ec37b62cb327_1_1_1_0__1",
         "gg5wXVcq7nq_label": "<p><strong>KUPI 2 DOBIŠ 1 GRATIS</strong></p>",
         "ggFxlPnj5w4_srcSet_desktop_src": "https://cdn.shopify.com/s/files/1/0970/1284/2821/files/Logo.png",
-        "ggKw980xgLp_text": "<p>POPUST ZA NOVE STRANKE:</p>"
+        "ggKw980xgLp_text": "<p>POPUST ZA NOVE STRANKE:</p>",
+        "section_preload": "true"
       },
       "type": "gp-section-630604157740384816"
     },
