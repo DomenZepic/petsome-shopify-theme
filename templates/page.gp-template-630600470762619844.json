@@ -252,7 +252,7 @@
     },
     "gp_section_631194577331552856": {
       "settings": {
-        "checksum": "ddad5dcca06ce70a9e0c776457f344ea1c9eb7ecbde40947e2740d28741777b7_1_1_1_0__1",
+        "checksum": "3ff9a631d523e7c2f862e20945ed37554f03c33db25f6ad74232823f642e680c_1_1_1_0__1",
         "gg1Ar9nYQGv_text": "<p><span style=\"color:#E5E5E5;\"><strong><u>4,7 / 5 (1356+ mnenj)</u></strong></span></p>",
         "gg3b4a6GwzH_srcSet_desktop_src": "https://cdn.shopify.com/s/files/1/0970/1284/2821/files/MobiMix_odmerjanje.png",
         "gg8mLH3-tU9_errorMessage": "Cannot add product to cart",
@@ -279,11 +279,18 @@
         "ggiPtBDqRDt_text": "<p><strong>2 + 1 GRATIS &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;● &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;OMEJENA POLETNA PONUDBA</strong></p>"
       },
       "type": "gp-section-631194685544596263"
+    },
+    "gp_section_631226345946350213": {
+      "settings": {
+        "checksum": "9edb0bfc90e0aeb1bf58568bc6bf17c4e0934e4c09b9e21732f1639c3882434b_1_1_1_0__1"
+      },
+      "type": "gp-section-631226345946350213"
     }
   },
   "order": [
     "gp_section_630600470896903108",
     "gp_section_630600470897230788",
+    "gp_section_631226345946350213",
     "gp_section_630604157740384816",
     "gp_section_630606791696187952",
     "gp_section_630600470896837572",
