@@ -848,5 +848,53 @@
         customElements.define('cart-discount-block', CartDiscountBlock);
       }
     </script>
-  {%- capture ecom_footer_content -%}{%- render 'ecom_footer' -%}{%- endcapture -%}{%- unless ecom_footer_content contains 'Liquid error' -%}{{ ecom_footer_content }}{%- endunless -%}</body>
+  {%- capture ecom_footer_content -%}{%- render 'ecom_footer' -%}{%- endcapture -%}{%- unless ecom_footer_content contains 'Liquid error' -%}{{ ecom_footer_content }}{%- endunless -%}
+<script>
+  (function() {
+    let gfBtns = document.querySelectorAll('div[data-label="(P) Cart Button"] [data-ajaxcart="1"][data-cbto="custom"] button.gf_add-to-cart');
+    console.log(gfBtns)
+    gfBtns.forEach(e => {
+      e.addEventListener("click", function(e) {
+        e.preventDefault();
+        this.cartNotification = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
+        console.log(this.cartNotification)
+        const config = fetchConfig('javascript');
+        config.headers['X-Requested-With'] = 'XMLHttpRequest';
+        delete config.headers['Content-Type'];
+        const formData = new FormData(this.form);
+        if (this.cartNotification){
+          formData.append('sections', this.cartNotification.getSectionsToRender().map((section) => section.id));
+          formData.append('sections_url', window.location.pathname);
+          this.cartNotification.setActiveElement(document.activeElement);
+        }
+        config.body = formData;
+        fetch(`${routes.cart_add_url}`, config).then((response) => response.json()).then((response) => {
+          if (response.status) {
+            return;
+          }
+
+           if(!response.sections){
+             fetch(`${Shopify.routes.root}?section_id=cart-drawer`).then(response1 => response1.text()).then(result1 => {                  
+               fetch(`${Shopify.routes.root}?section_id=cart-icon-bubble`).then(response2 => response2.text()).then(result2 => {
+                  response.sections = {'cart-drawer': result1,'cart-icon-bubble': result2};
+                   console.log(response)
+             
+                  this.cartNotification.renderContents(response);
+                  this.cartNotification.classList.remove('is-empty');        
+               })    
+             })
+           }else{
+             console.log(response)
+             this.cartNotification.renderContents(response);
+             this.cartNotification.classList.remove('is-empty');
+           }
+          
+        }).catch((e) => {
+          console.error(e);
+        }).finally(() => {});
+      });
+    });
+  })();
+</script>
+</body>
 </html>
