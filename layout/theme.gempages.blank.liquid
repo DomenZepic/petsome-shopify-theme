@@ -530,10 +530,11 @@
       {{ 'accessibility.skip_to_text' | t }}
     </a>
 
+  <div style="display:none;">
     <sticky-group-manager>
       {% sections 'header-group' %}
     </sticky-group-manager>
-
+  </div>
     {%- if settings.cart_type == 'drawer' -%}
       {%- section 'cart-drawer' -%}
     {%- endif -%}
@@ -545,7 +546,10 @@
     {% section 'promo-popup' %}
     {% section 'scroll-to-top-btn' %}
     {% section 'global-music-player' %}
+
+     <div style="display:none;">
     {% sections 'footer-group' %}
+     </div>
 
     <ul hidden>
       <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
