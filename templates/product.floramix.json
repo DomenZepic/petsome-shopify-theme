@@ -553,7 +553,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Probiotik + kvercetin + omega-3 iz krila + kolostrum",
+                    "text_1": "Triple Biotic Complex — pro, pre in postbiotik v enem prašku",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -794,7 +794,7 @@
                 "visibility": "always-display",
                 "open": true,
                 "heading": "Kaj je FloraMix?",
-                "content": "<p>FloraMix je dnevni prašek, ki ga potreseš na pasjo hrano. Namenjen je psom, ki se praskajo, ližejo tačke, stresajo z glavo ali imajo medlo dlako, mehko blato ali napenjanje.</p><p>Deluje po mehanizmu <strong>TriAxis Reset™</strong>: hkrati podpira črevesno floro, imunski odziv ter kožo in dlako — ne le prvega člena verige, kot navadni probiotični priboljški. 120 g, ena merica na dan pri psu do 15 kg.</p>",
+                "content": "<p>FloraMix je dnevni prašek, ki ga potreseš na pasjo hrano. Namenjen je psom, ki se praskajo, ližejo tačke, stresajo z glavo ali imajo medlo dlako, mehko blato ali napenjanje.</p><p>Deluje po mehanizmu <strong>Triple Biotic Complex</strong>: hkrati podpira črevesno floro, imunski odziv ter kožo in dlako — ne le prvega člena verige, kot navadni probiotični priboljški. 120 g, ena merica na dan pri psu do 15 kg.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -863,8 +863,8 @@
               "settings": {
                 "visibility": "always-display",
                 "open": false,
-                "heading": "Zakaj EU-registrirana seva?",
-                "content": "<p>Enterococcus lactis NCIMB 10415 (4b1705ii) in Bacillus velezensis DSM 15544 (4b1820) sta v EU registrirana zootehnična dodatka za stabilizacijo črevesne flore. To pomeni, da sta šla skozi regulatorno presojo, ne le skozi marketinško besedilo. Skupaj prispevata 300 milijard CFU na kilogram.</p><p>Poleg njiju FloraMix vsebuje še dva inaktivirana seva — Lactobacillus plantarum CECT 9161 in Lactobacillus helveticus HA-122. To so postbiotiki: ker niso živi, jim ni treba preživeti želodčne kisline in so stabilni ves rok trajanja.</p>",
+                "heading": "Kaj je Triple Biotic Complex?",
+                "content": "<p><strong>Trije biotiki namesto enega.</strong> Večina probiotičnih priboljškov ima samo živo bakterijo. FloraMix ima vse tri člene, ki delujejo skupaj:</p><p><strong>Probiotik</strong> — dve živi kulturi, <em>Enterococcus lactis</em> NCIMB 10415 in <em>Bacillus velezensis</em> DSM 15544. Obe sta v EU registrirana zootehnična dodatka za stabilizacijo črevesne flore, torej sta šli skozi regulatorno presojo, ne le skozi marketinško besedilo.</p><p><strong>Prebiotik</strong> — cikorijev koren, največja sestavina v formuli. To je hrana za koristne bakterije; brez nje se žive kulture težje obdržijo.</p><p><strong>Postbiotik</strong> — <em>Lactobacillus plantarum</em> CECT 9161 in <em>Lactobacillus helveticus</em> HA-122, oba inaktivirana. Ker nista živa, jima ni treba preživeti želodčne kisline in sta stabilna ves rok trajanja.</p><p>Zato na lončku piše <strong>TRIPLE BIOTIC COMPLEX</strong> — in to lahko preveriš na deklaraciji.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -1322,7 +1322,7 @@
           "type": "card",
           "settings": {
             "heading": "✅ Zakaj FloraMix deluje drugače?",
-            "text": "<p>TriAxis Reset™ naslovi vse tri člene hkrati: črevesje s cikorijo, dvema EU-registriranima sevoma in kolostrumom; imunski odziv s Sophoro japonico, beta-glukani iz kvasa in kurkumo; kožo in dlako z omega-3 iz krila, cinkom in biotinom. Ena merica na hrano, vsak dan.</p>",
+            "text": "<p>Triple Biotic Complex naslovi vse tri člene hkrati: črevesje s cikorijo, dvema EU-registriranima sevoma in kolostrumom; imunski odziv s Sophoro japonico, beta-glukani iz kvasa in kurkumo; kožo in dlako z omega-3 iz krila, cinkom in biotinom. Ena merica na hrano, vsak dan.</p>",
             "badge_text": "Tri osi hkrati, ne le črevesje"
           }
         }
@@ -1391,9 +1391,9 @@
         "card_3"
       ],
       "settings": {
-        "kicker_text": "TRIAXIS RESET™",
+        "kicker_text": "TRIPLE BIOTIC COMPLEX",
         "heading": "<p>Črevesje je urejeno. Zakaj se pes še vedno praska?</p>",
-        "description": "<p>Ker se srbenje ne konča v črevesju — tam se začne. Teče kot veriga treh členov: prepustna črevesna stena spusti skozi, kar ne bi smelo; imunski sistem to prebere kot alarm in pretirano odreagira; koža vzplamti. Probiotik pomaga prvemu členu. Drugi teče naprej sam. <strong>TriAxis Reset™ naslovi vse tri hkrati</strong> — zato umirjenost zdrži, namesto da se vrne.</p>",
+        "description": "<p>Ker se srbenje ne konča v črevesju — tam se začne. Teče kot veriga treh členov: prepustna črevesna stena spusti skozi, kar ne bi smelo; imunski sistem to prebere kot alarm in pretirano odreagira; koža vzplamti. Probiotik pomaga prvemu členu. Drugi teče naprej sam. <strong>Triple Biotic Complex naslovi vse tri hkrati</strong> — zato umirjenost zdrži, namesto da se vrne.</p>",
         "pattern_image": "shopify://shop_images/paw_background.png",
         "background_color": "#e8d6c5",
         "kicker_background": "#e0b58d",
