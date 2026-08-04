@@ -525,7 +525,12 @@
     {% if is_rtl %}
       data-rtl="true"
     {% endif %}
-  ><main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
+  >
+    <sticky-group-manager>
+      {% sections 'header-group' %}
+    </sticky-group-manager>
+    
+    <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
   
