@@ -88,7 +88,7 @@
               "name": "Heading",
               "settings": {
                 "visibility": "always-display",
-                "title": "FloraMix — ena najmočnejših probiotičnih formul v EU",
+                "title": "FloraMix — več kot probiotik. Za kožo, dlako in prebavo.",
                 "heading_size": "h1",
                 "custom_desktop_size": 39,
                 "custom_mobile_size": 28,
@@ -186,21 +186,21 @@
                 "tag_1": {
                   "type": "petsome-tag",
                   "settings": {
-                    "text": "Za kožo in dlako"
+                    "text": "Koža in dlaka"
                   },
                   "blocks": {}
                 },
                 "tag_2": {
                   "type": "petsome-tag",
                   "settings": {
-                    "text": "Podpora črevesju"
+                    "text": "Prebava"
                   },
                   "blocks": {}
                 },
                 "tag_3": {
                   "type": "petsome-tag",
                   "settings": {
-                    "text": "Veterinarsko podprto"
+                    "text": "Imunski odziv"
                   },
                   "blocks": {}
                 }
@@ -313,7 +313,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Za pse, ki se praskajo, ližejo tačke ali stresajo z glavo",
+                    "text_1": "Za pse, ki se praskajo, ližejo tačke, imajo medlo dlako ali mehko blato",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -553,7 +553,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Prebava pogosto v 1–2 tednih, dlaka v 6–8 tednih",
+                    "text_1": "Prebava pogosto v 1–2 tednih, koža v 3–4, dlaka v 6–8",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -794,7 +794,7 @@
                 "visibility": "always-display",
                 "open": true,
                 "heading": "Kaj je FloraMix?",
-                "content": "<p>FloraMix je dnevni prašek, ki ga potreseš na pasjo hrano. Namenjen je psom, ki se praskajo, ližejo tačke, stresajo z glavo ali imajo medlo dlako in neurejeno prebavo.</p><p>Deluje po mehanizmu <strong>TriAxis Reset™</strong>: hkrati podpira črevesno floro, imunski odziv ter kožo in dlako — ne le prvega člena verige, kot navadni probiotični priboljški. 120 g, ena merica na dan pri psu do 15 kg.</p>",
+                "content": "<p>FloraMix je dnevni prašek, ki ga potreseš na pasjo hrano. Namenjen je psom, ki se praskajo, ližejo tačke, stresajo z glavo ali imajo medlo dlako, mehko blato ali napenjanje.</p><p>Deluje po mehanizmu <strong>TriAxis Reset™</strong>: hkrati podpira črevesno floro, imunski odziv ter kožo in dlako — ne le prvega člena verige, kot navadni probiotični priboljški. 120 g, ena merica na dan pri psu do 15 kg.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -850,7 +850,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Odmerjanje in uporaba",
-                "content": "<p><strong>Priporočena uporaba (3 meseci):</strong><br/>1–15 kg: 1 merica dnevno<br/>15–30 kg: 2 merici dnevno<br/>30+ kg: 3 merice dnevno</p><p>Dnevno količino zmešaj s hrano — lahko jo razdeliš med obroke. Poskrbi, da ima pes ves čas dostop do sveže pitne vode.</p><p><strong>Opozorila z deklaracije:</strong> dopolnilna krmna mešanica ne nadomešča uravnotežene prehrane. Če pes prejema zdravila, se pred uporabo posvetuj z veterinarjem. Izdelka ne dajaj med brejostjo ali laktacijo. Shranjuj v temnem in suhem prostoru pri sobni temperaturi, po vsaki uporabi dobro zapri.</p>",
+                "content": "<p><strong>Priporočena uporaba (3 meseci):</strong><br/>1–15 kg: 1 merica dnevno<br/>15–30 kg: 2 merici dnevno<br/>30+ kg: 3 merice dnevno</p><p>Dnevno količino zmešaj s hrano — lahko jo razdeliš med obroke. Poskrbi, da ima pes ves čas dostop do sveže pitne vode.</p><p><strong>Opozorila z deklaracije:</strong> dopolnilna krmna mešanica ne nadomešča uravnotežene prehrane. Če pes prejema zdravila, se pred uporabo posvetuj z veterinarjem. Izdelka ne dajaj med brejostjo ali laktacijo. Shranjuj v temnem in suhem prostoru pri sobni temperaturi, po vsaki uporabi dobro zapri.</p><p><strong>Pomembno:</strong> pri nenadni ali dlje trajajoči driski, bruhanju ali krvi v blatu se najprej posvetuj z veterinarjem. FloraMix je dnevna podpora, ne nadomestilo za veterinarsko obravnavo.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -1087,7 +1087,7 @@
         "benefit_4"
       ],
       "settings": {
-        "heading": "<p>Za pse, ki se praskajo, ližejo tačke in imajo medlo dlako.</p>",
+        "heading": "<p>Za pse, ki se praskajo, ližejo tačke, imajo medlo dlako ali neurejeno prebavo.</p>",
         "columns": "2",
         "accent_color": "#f8aaa7",
         "secondary_color": "#e8d6c5",
