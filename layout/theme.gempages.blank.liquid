@@ -526,17 +526,327 @@
       data-rtl="true"
     {% endif %}
   >
-    <div style="display:none;">
+    <a class="skip-to-content-link button visually-hidden" href="#MainContent">
+      {{ 'accessibility.skip_to_text' | t }}
+    </a>
+
     <sticky-group-manager>
       {% sections 'header-group' %}
     </sticky-group-manager>
-  </div>
+
+    {%- if settings.cart_type == 'drawer' -%}
+      {%- section 'cart-drawer' -%}
+    {%- endif -%}
+
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
-  
-   <div style="display: none;">
+
+    {% section 'promo-popup' %}
+    {% section 'scroll-to-top-btn' %}
+    {% section 'global-music-player' %}
     {% sections 'footer-group' %}
-    </div>
-  </body>
+
+    <ul hidden>
+      <li id="a11y-refresh-page-message">{{ 'accessibility.refresh_page' | t }}</li>
+      <li id="a11y-new-window-message">{{ 'accessibility.link_messages.new_window' | t }}</li>
+    </ul>
+
+    <script>
+      window.shopUrl = '{{ request.origin }}';
+      window.routes = {
+        cart_add_url: '{{ routes.cart_add_url }}',
+        cart_change_url: '{{ routes.cart_change_url }}',
+        cart_update_url: '{{ routes.cart_update_url }}',
+        cart_clear_url: '{{ routes.cart_clear_url }}',
+        cart_url: '{{ routes.cart_url }}',
+        predictive_search_url: '{{ routes.predictive_search_url }}',
+      };
+
+      window.cartStrings = {
+        error: `{{ 'sections.cart.cart_error' | t }}`,
+        quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
+      };
+
+      window.variantStrings = {
+        addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+        soldOut: `{{ 'products.product.sold_out' | t }}`,
+        unavailable: `{{ 'products.product.unavailable' | t }}`,
+        unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]' }}`,
+      };
+
+      window.accessibilityStrings = {
+        imageAvailable: `{{ 'products.product.media.image_available' | t: index: '[index]' }}`,
+        shareSuccess: `{{ 'general.share.success_message' | t }}`,
+        pauseSlideshow: `{{ 'sections.slideshow.pause_slideshow' | t }}`,
+        playSlideshow: `{{ 'sections.slideshow.play_slideshow' | t }}`,
+      };
+    </script>
+
+    <script>
+      const productForm = document.querySelector('product-form[data-main="true"]');
+      if (productForm) {
+        document.querySelectorAll('[id^="SectionAtcBtn-"]').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            productForm.handleSubmit(e);
+          })
+        })
+      }
+
+      {% if settings.enable_load_animations %}
+        const stickyAtc = document.querySelector('.sticky-atc');
+        let bottomMargin = 50;
+        if (stickyAtc) bottomMargin += stickyAtc.clientHeight;
+        const shrineAnimationsObserver = new IntersectionObserver(elements => {
+          elements.forEach(element => {
+            if (element.isIntersecting) {
+              element.target.classList.add('animate--shown');
+            } 
+            {% if settings.repeat_section_animations %}
+              else {
+                element.target.classList.remove('animate--shown');
+              }
+            {% endif %}
+          })
+        },  { rootMargin: `0px 0px -${bottomMargin}px 0px` })
+
+        function initAnimations(rootElement = document, isThemeEditorEvent = false) {
+          const elementsToAnimate = rootElement.querySelectorAll('.animate-section');
+          if (elementsToAnimate.length == 0) return;
+
+          
+          elementsToAnimate.forEach(element => {
+            if (isThemeEditorEvent) {
+              element.classList.add('animate--shown');
+              return;
+            } 
+            shrineAnimationsObserver.observe(element);
+          })
+        }
+
+        window.addEventListener('DOMContentLoaded', () => initAnimations());
+        if (Shopify.designMode) {
+          document.addEventListener('shopify:section:load', (event) => initAnimations(event.target, true));
+          document.addEventListener('shopify:section:reorder', () => initAnimations(document, true));
+        }
+      {% endif %}
+    </script>
+
+    <script>
+      (function () {
+        var links = document.links;
+        for (let i = 0; i < links.length; i++) {
+          if (links[i].hostname !== window.location.hostname) {
+            links[i].target = '_blank';
+            links[i].rel = 'noreferrer noopener';
+          }
+        }
+      })();
+    </script>
+
+    {% if settings.disable_inspect %}
+      <style>
+        * {
+          -webkit-user-select: none;
+          -webkit-touch-callout: none;
+          user-select: none;
+        }
+        input, textarea, select {
+          -webkit-user-select: text !important;
+          -webkit-touch-callout: default !important;
+          user-select: text !important;
+        }
+      </style>
+      <script>
+        window.addEventListener('contextmenu', (e) => {
+          e.preventDefault();
+        });
+        document.addEventListener('selectstart', (e) => {
+          e.preventDefault();
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+          document.querySelectorAll('img').forEach((img) => {
+            img.addEventListener('dragstart', function (e) {
+              e.preventDefault();
+            });
+          });
+        });
+        function ctrlShiftKey(e, keyCode) {
+          return e.ctrlKey && e.shiftKey && e.keyCode === keyCode.charCodeAt(0);
+        }
+        document.addEventListener('keydown', function (e) {
+          if (
+            event.keyCode === 123 ||
+            ctrlShiftKey(e, 'I') ||
+            ctrlShiftKey(e, 'J') ||
+            ctrlShiftKey(e, 'C') ||
+            (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0))
+          ) {
+            e.preventDefault();
+          }
+        });
+      </script>
+    {% endif %}
+    {% if settings.display_store_languages %}
+      {% render 'enabled-languages-modal' %}
+    {% endif %}
+    <script>
+      class CartDiscountBlock extends HTMLElement {
+        static pendingSuccess = false;
+
+        constructor() {
+          super();
+          this.form = this.querySelector('.cart-discount-form');
+          this.input = this.querySelector('input[name="cart-discount-field"]');
+          this.submitBtn = this.querySelector('.cart-discount-form__submit');
+          this.spinner = this.querySelector('.cart-discount-form__submit .loading-overlay__spinner');
+          this.submitLabel = this.querySelector('.cart-discount-form__submit-label');
+          this.errorEmpty = this.querySelector('.cart-discount-form__error--empty');
+          this.errorInvalid = this.querySelector('.cart-discount-form__error--invalid');
+          this.errorDuplicate = this.querySelector('.cart-discount-form__error--duplicate');
+          this.successMsg = this.querySelector('.cart-discount-form__success');
+          this.submitting = false;
+
+          this.hideErrors();
+          if (this.form) this.form.addEventListener('submit', this.handleSubmit.bind(this));
+          this.addEventListener('click', this.handleClick.bind(this));
+          if (this.input) this.input.addEventListener('input', this.hideErrors.bind(this));
+
+          if (CartDiscountBlock.pendingSuccess) {
+            CartDiscountBlock.pendingSuccess = false;
+            this.showSuccess();
+          }
+        }
+
+        hideErrors() {
+          if (this.errorEmpty) this.errorEmpty.style.display = 'none';
+          if (this.errorInvalid) this.errorInvalid.style.display = 'none';
+          if (this.errorDuplicate) this.errorDuplicate.style.display = 'none';
+        }
+
+        showError(which) {
+          this.hideErrors();
+          const map = { empty: this.errorEmpty, invalid: this.errorInvalid, duplicate: this.errorDuplicate };
+          const target = map[which];
+          if (target) target.style.display = 'block';
+        }
+
+        showSuccess() {
+          if (!this.successMsg || this.dataset.successEnabled !== 'true') return;
+          this.successMsg.style.display = 'block';
+          const duration = parseInt(this.dataset.successDuration, 10) || 2000;
+          clearTimeout(this._successTimer);
+          this._successTimer = setTimeout(() => {
+            if (this.successMsg) this.successMsg.style.display = 'none';
+          }, duration);
+        }
+
+        setLoading(loading) {
+          this.submitting = loading;
+          if (this.submitBtn) {
+            this.submitBtn.disabled = loading;
+            this.submitBtn.classList.toggle('loading', loading);
+          }
+          if (this.spinner) this.spinner.classList.toggle('hidden', !loading);
+          if (this.submitLabel) this.submitLabel.style.visibility = loading ? 'hidden' : '';
+        }
+
+        existingCodes() {
+          const fromAttr = (this.dataset.appliedCodes || '').trim();
+          if (fromAttr) return fromAttr.split(',').map(c => c.trim()).filter(Boolean);
+          return Array.from(this.querySelectorAll('.cart-discount__pill'))
+            .map(p => p.dataset.discountCode)
+            .filter(Boolean);
+        }
+
+        async handleSubmit(event) {
+          event.preventDefault();
+          if (this.submitting) return;
+          this.hideErrors();
+          const code = (this.input.value || '').trim();
+          if (!code) {
+            this.showError('empty');
+            return;
+          }
+          const existing = this.existingCodes();
+          if (existing.some(c => c.toLowerCase() === code.toLowerCase())) {
+            this.showError('duplicate');
+            return;
+          }
+          this.setLoading(true);
+          const allCodes = [...existing, code].join(',');
+          const data = await this.postDiscount(allCodes);
+          if (!data) {
+            this.setLoading(false);
+            return;
+          }
+          const submitted = (data.discount_codes || []).find(d => d.code.toLowerCase() === code.toLowerCase());
+          const applicable = submitted && submitted.applicable !== false;
+          const newApplicableCodes = (data.discount_codes || []).filter(d => d.applicable).map(d => d.code.toLowerCase());
+          const wasNewCodeApplied = newApplicableCodes.length > existing.length;
+          if (!applicable || !wasNewCodeApplied) {
+            this.showError('invalid');
+            this.input.value = '';
+            await this.postDiscount(existing.join(','));
+            this.setLoading(false);
+            return;
+          }
+          this.input.value = '';
+          CartDiscountBlock.pendingSuccess = true;
+          this.refreshCart(data);
+        }
+
+        handleClick(event) {
+          const removeBtn = event.target.closest('.cart-discount__pill-remove');
+          if (!removeBtn) return;
+          event.preventDefault();
+          if (this.submitting) return;
+          const pill = removeBtn.closest('.cart-discount__pill');
+          if (!pill) return;
+          const code = pill.dataset.discountCode;
+          if (code) this.removeDiscount(code);
+        }
+
+        async removeDiscount(code) {
+          this.setLoading(true);
+          const remaining = this.existingCodes().filter(c => c !== code);
+          const data = await this.postDiscount(remaining.join(','));
+          if (data) {
+            this.refreshCart(data);
+          } else {
+            this.setLoading(false);
+          }
+        }
+
+        async postDiscount(discountStr) {
+          try {
+            const res = await fetch('/cart/update.js', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                discount: discountStr,
+                sections: ['cart-drawer', 'cart-icon-bubble']
+              })
+            });
+            if (!res.ok) return null;
+            return await res.json();
+          } catch (err) {
+            return null;
+          }
+        }
+
+        refreshCart(cartData) {
+          const drawer = document.querySelector('cart-drawer');
+          if (drawer && typeof drawer.renderContents === 'function') {
+            drawer.renderContents(cartData);
+            const drawerEl = document.querySelector('cart-drawer.drawer');
+            if (drawerEl) drawerEl.classList.remove('is-empty');
+          }
+        }
+      }
+      if (!customElements.get('cart-discount-block')) {
+        customElements.define('cart-discount-block', CartDiscountBlock);
+      }
+    </script>
+  {%- capture ecom_footer_content -%}{%- render 'ecom_footer' -%}{%- endcapture -%}{%- unless ecom_footer_content contains 'Liquid error' -%}{{ ecom_footer_content }}{%- endunless -%}</body>
 </html>
