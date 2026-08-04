@@ -527,5 +527,10 @@
     {% endif %}
   ><main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
-    </main></body>
+    </main>
+  
+   <div style="display: none;">
+    {% sections 'footer-group' %}
+    </div>
+  </body>
 </html>
