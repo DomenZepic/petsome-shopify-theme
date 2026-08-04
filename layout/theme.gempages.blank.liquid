@@ -526,10 +526,11 @@
       data-rtl="true"
     {% endif %}
   >
+    <div style="display:none;">
     <sticky-group-manager>
       {% sections 'header-group' %}
     </sticky-group-manager>
-    
+  </div>
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
