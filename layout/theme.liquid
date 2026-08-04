@@ -848,38 +848,5 @@
         customElements.define('cart-discount-block', CartDiscountBlock);
       }
     </script>
-  {%- capture ecom_footer_content -%}{%- render 'ecom_footer' -%}{%- endcapture -%}{%- unless ecom_footer_content contains 'Liquid error' -%}{{ ecom_footer_content }}{%- endunless -%}
-<script>
-  (function() {
-    let gfBtns = document.querySelectorAll('gp-product-button[gp-data*="continue-shopping"] button.gp-button-atc');
-    console.log(gfBtns)
-    gfBtns.forEach(e => {
-      e.addEventListener("click", function(e) {
-        e.preventDefault();
-        this.cartNotification = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
-        console.log(this.cartNotification)
-        const config = fetchConfig('javascript');
-        config.headers['X-Requested-With'] = 'XMLHttpRequest';
-        delete config.headers['Content-Type'];
-        const formData = new FormData(this.form);
-        if (this.cartNotification){
-          formData.append('sections', this.cartNotification.getSectionsToRender().map((section) => section.id));
-          formData.append('sections_url', window.location.pathname);
-          this.cartNotification.setActiveElement(document.activeElement);
-        }
-        config.body = formData;
-        fetch(`${routes.cart_update_url}`, config).then((response) => response.json()).then((response) => {
-          if (response.status) {
-            return;
-          }
-          this.cartNotification.renderContents(response);
-          this.cartNotification.classList.remove('is-empty');
-        }).catch((e) => {
-          console.error(e);
-        }).finally(() => {});
-      });
-    });
-  })();
-</script>
-</body>
+  {%- capture ecom_footer_content -%}{%- render 'ecom_footer' -%}{%- endcapture -%}{%- unless ecom_footer_content contains 'Liquid error' -%}{{ ecom_footer_content }}{%- endunless -%}</body>
 </html>
