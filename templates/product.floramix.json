@@ -29,7 +29,7 @@
                 "visibility": "mobile-hidden",
                 "image": "shopify://shop_images/unnamed_1.jpg",
                 "rating": 5,
-                "quote": "\"Neuravnovešena prebava, praskanje in lizanje tačk pri psih pogosto niso tri ločene težave. Pogosto izvirajo iz porušenega ravnovesja v črevesju in iz imunskega odziva, ki se nanj pretirano odzove. FloraMix je zasnovan tako, da hkrati podpira vse tri člene te verige — črevesno floro, imunski odziv ter kožo in dlako. Prav zato je smiselna izbira pri psih, ki se na navadne probiotike odzovejo le delno.\"",
+                "quote": "\"Neurejena prebava, praskanje in lizanje tačk pri psih pogosto niso tri ločene težave. Pogosto so povezani z neravnovesjem v črevesju in imunskim odzivom. FloraMix je zasnovan tako, da hkrati podpira črevesno floro, imunski odziv ter kožo in dlako. Zato je primeren tudi za pse, pri katerih navadni probiotiki ne prinesejo dovolj opazne spremembe.\"",
                 "author": "Blaž Petelinek Ledinski, dr. vet. med.",
                 "role": "",
                 "background_color": "#ffffff",
@@ -88,7 +88,7 @@
               "name": "Heading",
               "settings": {
                 "visibility": "always-display",
-                "title": "FloraMix — več kot probiotik. Za kožo, dlako in prebavo.",
+                "title": "FloraMix – več kot probiotik za kožo, dlako in prebavo",
                 "heading_size": "h1",
                 "custom_desktop_size": 39,
                 "custom_mobile_size": 28,
@@ -186,14 +186,14 @@
                 "tag_1": {
                   "type": "petsome-tag",
                   "settings": {
-                    "text": "Koža in dlaka"
+                    "text": "Prebava"
                   },
                   "blocks": {}
                 },
                 "tag_2": {
                   "type": "petsome-tag",
                   "settings": {
-                    "text": "Prebava"
+                    "text": "Koža in dlaka"
                   },
                   "blocks": {}
                 },
@@ -433,7 +433,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Gostejša in bolj sijoča dlaka, manj dlake po stanovanju",
+                    "text_1": "Gostejša in bolj sijoča dlaka ter manj dlake po stanovanju",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -493,7 +493,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Ena merica na hrano — brez tablet in skrivanja v pašteto",
+                    "text_1": "Triple Biotic Complex: probiotik, prebiotik in postbiotik v enem prašku",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -553,7 +553,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Triple Biotic Complex — pro, pre in postbiotik v enem prašku",
+                    "text_1": "Ena merica na hrano. Brez tablet in skrivanja v pašteto.",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -591,7 +591,7 @@
               "settings": {
                 "picker_types": "pills",
                 "skip_unavailable": false,
-                "custom_labels": "Izberite težo psa:",
+                "custom_labels": "Izberi težo psa:",
                 "labels_size": 16,
                 "labels_font": "body-bold",
                 "labels_color": "text",
@@ -646,7 +646,7 @@
             "kaching_custom_display_1": {
               "type": "product_kaching-custom-display",
               "settings": {
-                "disclaimer_text": "<p>*To so spremembe, ki jih lastniki najpogosteje opazijo. Prebava se pri večini uredi v 1–2 tednih, manj praskanja v 3–4 tednih, dlaka in koža v 6–8 tednih. Vsak pes je drugačen; za pošteno oceno priporočamo vsaj 8 tednov redne uporabe.</p>",
+                "disclaimer_text": "<p>To so spremembe, ki jih lastniki najpogosteje opazijo. Prebava se pri večini začne urejati v 1–2 tednih, manj praskanja lahko opazijo v 3–4 tednih, spremembe na koži in dlaki pa v 6–8 tednih. Vsak pes je drugačen, zato za pošteno oceno priporočamo vsaj 8 tednov redne uporabe.</p>",
                 "gifts_heading": "",
                 "hide_gifts_heading": false,
                 "tier_1_style": "none",
@@ -672,7 +672,7 @@
               "name": "Petsome: Shipping info",
               "settings": {
                 "icon": "local_shipping",
-                "text": "<p>Predviden čas dostave: <strong>2-3 dni</strong></p>",
+                "text": "<p>Predvideni čas dostave: <strong>2–3 delovne dni</strong></p>",
                 "margin_top": 0,
                 "margin_bottom": 12
               },
@@ -733,7 +733,7 @@
                 "visibility": "desktop-hidden",
                 "image": "shopify://shop_images/unnamed_1.jpg",
                 "rating": 5,
-                "quote": "\"Neuravnovešena prebava, praskanje in lizanje tačk pri psih pogosto niso tri ločene težave. Pogosto izvirajo iz porušenega ravnovesja v črevesju in iz imunskega odziva, ki se nanj pretirano odzove. FloraMix je zasnovan tako, da hkrati podpira vse tri člene te verige — črevesno floro, imunski odziv ter kožo in dlako. Prav zato je smiselna izbira pri psih, ki se na navadne probiotike odzovejo le delno.\"",
+                "quote": "\"Neurejena prebava, praskanje in lizanje tačk pri psih pogosto niso tri ločene težave. Pogosto so povezani z neravnovesjem v črevesju in imunskim odzivom. FloraMix je zasnovan tako, da hkrati podpira črevesno floro, imunski odziv ter kožo in dlako. Zato je primeren tudi za pse, pri katerih navadni probiotiki ne prinesejo dovolj opazne spremembe.\"",
                 "author": "Blaž Petelinek Ledinski, dr. vet. med.",
                 "role": "",
                 "background_color": "#ffffff",
@@ -794,7 +794,7 @@
                 "visibility": "always-display",
                 "open": true,
                 "heading": "Kaj je FloraMix?",
-                "content": "<p>FloraMix je dnevni prašek, ki ga potreseš na pasjo hrano. Namenjen je psom, ki se praskajo, ližejo tačke, stresajo z glavo ali imajo medlo dlako, mehko blato ali napenjanje.</p><p>Deluje po mehanizmu <strong>Triple Biotic Complex</strong>: hkrati podpira črevesno floro, imunski odziv ter kožo in dlako — ne le prvega člena verige, kot navadni probiotični priboljški. 120 g, ena merica na dan pri psu do 15 kg.</p>",
+                "content": "<p>FloraMix je prašek za vsakodnevno uporabo, ki ga potreseš po pasji hrani. Namenjen je psom, ki se pogosto praskajo, ližejo tačke, stresajo z glavo ali imajo medlo dlako, mehko blato in napenjanje. Formula <strong>Triple Biotic Complex</strong> podpira črevesno floro, imunski odziv ter kožo in dlako. Pakiranje vsebuje 120 g. Pes do 15 kg potrebuje eno merico na dan.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -808,7 +808,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Prednosti FloraMixa",
-                "content": "<p>✅ Naslovi vse tri člene verige: črevesje, imunski odziv, koža<br/>✅ Probiotik, prebiotik in postbiotik v enem prašku<br/>✅ Kvercetin, omega-3 iz krila in kolostrum — česar v navadnih probiotikih ni<br/>✅ Deklarirane količine cinka, biotina ter vitaminov C in E<br/>✅ Prašek namesto tablet — brez borbe in skrivanja v hrano<br/>✅ Brez arome, brez barvil, brez nepotrebnih polnil</p>",
+                "content": "<p>✅ Podpira vse tri povezane dele: črevesje, imunski odziv ter kožo in dlako<br/>✅ Vsebuje probiotik, prebiotik in postbiotik v enem prašku<br/>✅ Vsebuje kvercetin, omega-3 iz krila in kolostrum<br/>✅ Deklarirane količine cinka, biotina ter vitaminov C in E<br/>✅ Prašek namesto tablet. Brez skrivanja v hrano in pregovarjanja.<br/>✅ Brez dodane arome, barvil in nepotrebnih polnil</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -822,7 +822,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Kako deluje FloraMix?",
-                "content": "<p>Praskanje se ne začne na koži. Ko se v črevesju poruši ravnovesje, postane črevesna stena bolj prepustna. Imunski sistem to prebere kot alarm in pretirano odreagira — in prav ta reakcija je tisto, kar se na koncu pokaže na koži. Probiotik pomaga prvemu členu te verige. Drugi teče naprej sam od sebe. Zato se praskanje vrne.</p><p><strong>Triple Biotic Complex</strong> naslovi vse tri hkrati: cikorija, dva EU-registrirana seva in kolostrum za črevesje; Sophora japonica, beta-glukani iz inaktiviranega kvasa in kurkuma za imunski odziv; omega-3 iz krila, cink in biotin za kožo in dlako.</p>",
+                "content": "<p>Težave s kožo so lahko povezane tudi z dogajanjem v črevesju. Ko je črevesna flora neuravnovešena, se lahko spremeni tudi imunski odziv, kar se pri nekaterih psih pokaže kot praskanje, lizanje tačk ali občutljiva koža.</p><p>FloraMix zato ne vsebuje samo probiotikov. Cikorija, dva EU-registrirana seva in kolostrum podpirajo črevesje. Sophora japonica, beta-glukani iz inaktiviranega kvasa in kurkuma podpirajo imunski odziv. Omega-3 iz krila, cink in biotin pa podpirajo kožo in dlako.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -835,8 +835,8 @@
               "settings": {
                 "visibility": "always-display",
                 "open": false,
-                "heading": "Sestava (celotna deklaracija)",
-                "content": "<p><strong>Sestava:</strong> prah korenin cikorije, krilova moka 22,44 %, inaktivirani kvas (12.1.5), kolostrum 13,3 %, Sophora japonica 5 %, mačeha (Viola tricolor, v prahu) 3,33 %, proizvodi iz predelave zelišč (Curcuma longa) 3,33 %, maltodekstrin, inaktivirani Lactobacillus plantarum CECT 9161, maltodekstrin, inaktivirani Lactobacillus helveticus HA-122.</p><p><strong>Dodatki (na kg) — prehranski:</strong> vitamin E (3a700) 2.500 mg/kg, biotin (3a880) 895.000 µg/kg, vitamin C, askorbinska kislina (3a300) 16.450 mg/kg, cinkov kelat glicina hidrata (trdna oblika) — cink (3b607) 2.600 mg/kg.<br/><strong>Zootehnični:</strong> Enterococcus lactis NCIMB 10415 (4b1705ii) 200.000.000.000 CFU/kg, Bacillus velezensis DSM 15544 (4b1820) 100.000.000.000 CFU/kg.</p><p><strong>Analitske sestavine:</strong> surove beljakovine 18,97 %, surove maščobe 6,88 %, surova vlaknina 2,1 %, surovi pepel 4,75 %.</p><p><strong>Neto količina:</strong> 120 g · Dopolnilna krmna mešanica za pse · Razvito v Sloveniji, izdelano v EU.</p>",
+                "heading": "Sestava – celotna deklaracija",
+                "content": "<p><strong>Sestava:</strong> prah korenin cikorije, krilova moka 22,44 %, inaktivirani kvas (12.1.5), kolostrum 13,3 %, Sophora japonica 5 %, mačeha (Viola tricolor, v prahu) 3,33 %, proizvodi iz predelave zelišč (Curcuma longa) 3,33 %, maltodekstrin, inaktivirani Lactobacillus plantarum CECT 9161, maltodekstrin in inaktivirani Lactobacillus helveticus HA-122.</p><p><strong>Dodatki na kilogram – prehranski dodatki:</strong> vitamin E (3a700) 2.500 mg/kg, biotin (3a880) 895.000 µg/kg, vitamin C oziroma askorbinska kislina (3a300) 16.450 mg/kg ter cinkov kelat glicina hidrata v trdni obliki – cink (3b607) 2.600 mg/kg.</p><p><strong>Zootehnični dodatki:</strong> Enterococcus lactis NCIMB 10415 (4b1705ii) 200.000.000.000 CFU/kg in Bacillus velezensis DSM 15544 (4b1820) 100.000.000.000 CFU/kg.</p><p><strong>Analitske sestavine:</strong> surove beljakovine 18,97 %, surove maščobe 6,88 %, surova vlaknina 2,1 % in surovi pepel 4,75 %. Neto količina: 120 g. Dopolnilna krmna mešanica za pse. Razvito v Sloveniji in izdelano v EU.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -850,7 +850,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Odmerjanje in uporaba",
-                "content": "<p><strong>Priporočena uporaba (3 meseci):</strong><br/>1–15 kg: 1 merica dnevno<br/>15–30 kg: 2 merici dnevno<br/>30+ kg: 3 merice dnevno</p><p>Dnevno količino zmešaj s hrano — lahko jo razdeliš med obroke. Poskrbi, da ima pes ves čas dostop do sveže pitne vode.</p><p><strong>Opozorila z deklaracije:</strong> dopolnilna krmna mešanica ne nadomešča uravnotežene prehrane. Če pes prejema zdravila, se pred uporabo posvetuj z veterinarjem. Izdelka ne dajaj med brejostjo ali laktacijo. Shranjuj v temnem in suhem prostoru pri sobni temperaturi, po vsaki uporabi dobro zapri.</p><p><strong>Pomembno:</strong> pri nenadni ali dlje trajajoči driski, bruhanju ali krvi v blatu se najprej posvetuj z veterinarjem. FloraMix je dnevna podpora, ne nadomestilo za veterinarsko obravnavo.</p>",
+                "content": "<p>Pes od 1 do 15 kg: <strong>1 merica na dan</strong><br/>Pes od 15 do 30 kg: <strong>2 merici na dan</strong><br/>Pes nad 30 kg: <strong>3 merice na dan</strong></p><p>Priporočeno obdobje uporabe je 3 mesece. Dnevno količino zmešaj s hrano. Lahko jo tudi razdeliš med več obrokov. Pes naj ima vedno na voljo svežo pitno vodo.</p><p>Dopolnilna krmna mešanica ne nadomešča uravnotežene prehrane. Če pes prejema zdravila, se pred uporabo posvetuj z veterinarjem. Izdelka ne uporabljaj med brejostjo ali laktacijo. Shranjuj ga v temnem in suhem prostoru pri sobni temperaturi ter embalažo po vsaki uporabi dobro zapri. Ob nenadni ali dolgotrajni driski, bruhanju ali krvi v blatu se najprej posvetuj z veterinarjem. FloraMix je vsakodnevna podpora in ne nadomešča veterinarske obravnave.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -864,7 +864,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Kaj je Triple Biotic Complex?",
-                "content": "<p><strong>Trije biotiki namesto enega.</strong> Večina probiotičnih priboljškov ima samo živo bakterijo. FloraMix ima vse tri člene, ki delujejo skupaj:</p><p><strong>Probiotik</strong> — dve živi kulturi, <em>Enterococcus lactis</em> NCIMB 10415 in <em>Bacillus velezensis</em> DSM 15544. Obe sta v EU registrirana zootehnična dodatka za stabilizacijo črevesne flore, torej sta šli skozi regulatorno presojo, ne le skozi marketinško besedilo.</p><p><strong>Prebiotik</strong> — cikorijev koren, največja sestavina v formuli. To je hrana za koristne bakterije; brez nje se žive kulture težje obdržijo.</p><p><strong>Postbiotik</strong> — <em>Lactobacillus plantarum</em> CECT 9161 in <em>Lactobacillus helveticus</em> HA-122, oba inaktivirana. Ker nista živa, jima ni treba preživeti želodčne kisline in sta stabilna ves rok trajanja.</p><p>Zato na lončku piše <strong>TRIPLE BIOTIC COMPLEX</strong> — in to lahko preveriš na deklaraciji.</p>",
+                "content": "<p>Triple Biotic Complex združuje tri vrste podpore, ki se med seboj dopolnjujejo:</p><p><strong>Probiotika:</strong> <em>Enterococcus lactis</em> NCIMB 10415 in <em>Bacillus velezensis</em> DSM 15544. Oba sta v EU registrirana zootehnična dodatka za stabilizacijo črevesne flore.</p><p><strong>Prebiotik:</strong> cikorijev koren, ki je hrana za koristne bakterije v črevesju.</p><p><strong>Postbiotika:</strong> inaktivirana <em>Lactobacillus plantarum</em> CECT 9161 in <em>Lactobacillus helveticus</em> HA-122. Ker nista živa, sta stabilna ves rok uporabe izdelka.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -876,7 +876,7 @@
               "name": "Petsome: Guarantee",
               "settings": {
                 "image": "shopify://shop_images/Guarantee.png",
-                "text": "<p>Pri Petsome želimo, da vsaka merica FloraMixa nekaj spremeni. Če ste v dvomih, ali je ta izdelek za vašega ljubljenčka — ni panike. Vaše naročilo je zaščiteno s 60-dnevno garancijo vračila denarja. Brez slabe vesti.</p>",
+                "text": "<p>Želimo, da je nakup FloraMixa zate brez skrbi. Če z izdelkom ne boš zadovoljen, lahko v 60 dneh zahtevaš vračilo kupnine.</p>",
                 "background_color": "#e8d6c5",
                 "border_color": "#b6a87c",
                 "margin_top": 0,
@@ -1000,19 +1000,19 @@
         "item_2": {
           "type": "item",
           "settings": {
-            "text": "Podpira umirjen videz kože"
+            "text": "Podpira zdrav videz kože"
           }
         },
         "item_3": {
           "type": "item",
           "settings": {
-            "text": "Sijoča dlaka od znotraj"
+            "text": "Za bolj sijočo dlako"
           }
         },
         "item_4": {
           "type": "item",
           "settings": {
-            "text": "300 mrd CFU/kg · 2 EU-registrirana seva"
+            "text": "300 milijard CFU/kg iz dveh EU-registriranih sevov"
           }
         }
       },
@@ -1046,7 +1046,7 @@
             "icon": "pets",
             "filled_icon": false,
             "title": "Praskanje, ki se vsak večer začne znova",
-            "text": "<p>Prvi znak, ki ga lastniki opazijo, praviloma ni koža, ampak prebava: trdnejše blato, manj napenjanja, manj jedenja trave. Šele nato se umiri koža in praskanja je manj. To ni naključje — to je vrstni red, po katerem veriga sploh deluje.</p>"
+            "text": "<p>Pri mnogih psih lastniki najprej opazijo spremembo pri prebavi: trdnejše blato, manj napenjanja in manj jedenja trave. Spremembe na koži se običajno pokažejo pozneje. Zato je pri FloraMixu pomembna redna uporaba in dovolj časa.</p>"
           }
         },
         "benefit_2": {
@@ -1055,8 +1055,8 @@
             "image": "shopify://shop_images/easy_moving.png",
             "icon": "directions_run",
             "filled_icon": false,
-            "title": "Lizanje tačk, ki ga slišiš ob dveh zjutraj",
-            "text": "<p>Tisti zvok ponoči in rjavi madeži med prsti. Ko se imunski odziv umirja, se umirja tudi koža na tačkah. Večina lastnikov opisuje, da postanejo najprej tišje noči — šele nato je razlika vidna tudi podnevi.</p>"
+            "title": "Lizanje tačk, ki ga slišiš sredi noči",
+            "text": "<p>Ponavljajoče se lizanje tačk je lahko zelo nadležno za psa in lastnika. Ko se podpre prebavo, imunski odziv in kožo, lahko lizanje sčasoma postane manj pogosto. Prve spremembe lastniki pogosto opazijo ponoči, ko je pes mirnejši.</p>"
           }
         },
         "benefit_3": {
@@ -1066,7 +1066,7 @@
             "icon": "bolt",
             "filled_icon": true,
             "title": "Medla dlaka in dlaka po vsem stanovanju",
-            "text": "<p>Omega-3 iz krilove moke, cink v kelatni obliki in biotin prispevajo k normalnemu stanju kože in dlake. To je sprememba, ki je ni treba razlagati — dlako opazijo drugi ljudje, ne le ti.</p>"
+            "text": "<p>Omega-3 iz krilove moke, cink v kelatni obliki in biotin prispevajo k ohranjanju zdrave kože in dlake. Pri redni uporabi je lahko dlaka videti bolj gosta in sijoča, izpadanje pa manj izrazito.</p>"
           }
         },
         "benefit_4": {
@@ -1075,8 +1075,8 @@
             "image": "shopify://shop_images/joint_protection.png",
             "icon": "shield",
             "filled_icon": true,
-            "title": "Zakaj se pri mnogih psih vrne po nekaj tednih",
-            "text": "<p>Najpogostejša pritožba tega trga. Razlog je, da je naslovljen samo en člen verige. FloraMix podpira vse tri hkrati — črevesje, imunski odziv in kožo — zato umirjenost lažje zdrži tudi po prvem mesecu.</p>"
+            "title": "Zakaj navaden probiotik včasih ni dovolj",
+            "text": "<p>Navadni probiotik podpira predvsem črevesje. FloraMix poleg črevesne flore podpira tudi imunski odziv ter kožo in dlako. Zato je formula širše zastavljena in ni namenjena samo prebavi.</p>"
           }
         }
       },
@@ -1103,8 +1103,8 @@
           "settings": {
             "highlighted": false,
             "badge_text": "1–2 tedna",
-            "title": "Prebava se umiri.",
-            "text": "<p>Trdnejše blato, manj napenjanja, manj jedenja trave. To je prvi znak, da črevesna flora dobiva podporo — in praviloma prva stvar, ki jo lastnik opazi. Koža pride kasneje.</p>"
+            "title": "Prebava je lahko mirnejša.",
+            "text": "<p>Blato je lahko trdnejše, napenjanja je manj, pes pa lahko redkeje je travo. To je pogosto prva sprememba, ki jo lastniki opazijo.</p>"
           }
         },
         "tf_2": {
@@ -1112,8 +1112,8 @@
           "settings": {
             "highlighted": false,
             "badge_text": "3–4 tedni",
-            "title": "Praskanja je manj.",
-            "text": "<p>Tisto praskanje pred spanjem postane redkejše. Manj lizanja tačk, manj stresanja z glavo. Koža je videti manj rdeča. Tu se veriga začne umirjati na drugem, imunskem členu.</p>"
+            "title": "Praskanje je lahko manj pogosto.",
+            "text": "<p>Praskanje pred spanjem, lizanje tačk in stresanje z glavo se lahko začnejo umirjati. Spremembe so postopne, zato je pomembna vsakodnevna uporaba.</p>"
           }
         },
         "tf_3": {
@@ -1121,17 +1121,17 @@
           "settings": {
             "highlighted": true,
             "badge_text": "6–8 tednov",
-            "title": "Dlaka se spremeni.",
-            "text": "<p>Gostejša na otip, bolj sijoča na svetlobi, manj dlake po kavču. To je najbolj vidna sprememba in tista, ki jo opazijo tudi drugi ljudje, ne le ti.</p>"
+            "title": "Dlaka je lahko videti bolj zdrava.",
+            "text": "<p>Dlaka je lahko bolj sijoča in gostejša na otip, po stanovanju pa je je lahko manj. To je običajno sprememba, ki potrebuje največ časa.</p>"
           }
         },
         "tf_4": {
           "type": "timeframe",
           "settings": {
             "highlighted": false,
-            "badge_text": "3+ meseci",
-            "title": "Umirjenost zdrži.",
-            "text": "<p>Cilj ni epizoda miru, ampak stanje, ki ostane. Ker so podprte vse tri osi hkrati, se stvari ne vrnejo takoj, ko mine prvi lonček. To je razlika med rešitvijo in premorom.</p>"
+            "badge_text": "3 mesece in več",
+            "title": "Rezultate pomaga ohranjati redna uporaba.",
+            "text": "<p>Cilj redne uporabe je dolgoročna podpora prebavi, imunskemu odzivu ter koži in dlaki. Rezultati se med psi razlikujejo.</p>"
           }
         }
       },
@@ -1142,8 +1142,8 @@
         "tf_4"
       ],
       "settings": {
-        "heading": "<p>Kaj se zgodi, ko vaš pes začne s FloraMixom?</p>",
-        "subheading": "Vsak pes je drugačen. A vrstni red sprememb je skoraj vedno enak — in ni tisti, ki ga pričakujete.",
+        "heading": "<p>Kaj lahko opaziš, ko pes začne uporabljati FloraMix?</p>",
+        "subheading": "Vsak pes je drugačen, zato se lahko hitrost sprememb razlikuje. Pri večini se najprej spremeni prebava, nato praskanje, spremembe na dlaki pa običajno potrebujejo največ časa.",
         "columns": "4",
         "background_color": "#faf9f6",
         "accent_color": "#f8aaa7",
@@ -1159,49 +1159,49 @@
         "bullet_1": {
           "type": "bullet",
           "settings": {
-            "text": "🐾 se manj praska in liže tačke — tudi ponoči"
+            "text": "🐾 se manj praska in liže tačke, tudi ponoči"
           }
         },
         "bullet_2": {
           "type": "bullet",
           "settings": {
-            "text": "✨ ima dlako, ki je gostejša in bolj sijoča"
+            "text": "✨ ima gostejšo in bolj sijočo dlako"
           }
         },
         "bullet_3": {
           "type": "bullet",
           "settings": {
-            "text": "🦻 manj stresa z glavo in praska po ušesih"
+            "text": "🦻 manj pogosto stresa z glavo in se praska po ušesih"
           }
         },
         "bullet_4": {
           "type": "bullet",
           "settings": {
-            "text": "💩 ima urejeno prebavo, trdnejše blato in manj napenjanja"
+            "text": "💩 ima bolj urejeno prebavo, trdnejše blato in manj napenjanja"
           }
         },
         "bullet_5": {
           "type": "bullet",
           "settings": {
-            "text": "🌱 dobi podporo tudi na imunskem členu, ne le v črevesju"
+            "text": "🌱 dobi podporo za črevesje, imunski odziv ter kožo in dlako"
           }
         },
         "bullet_6": {
           "type": "bullet",
           "settings": {
-            "text": "🥄 dobi vse v eni merici namesto štirih različnih dodatkov"
+            "text": "🥄 dobi več sestavin v eni dnevni merici"
           }
         },
         "bullet_7": {
           "type": "bullet",
           "settings": {
-            "text": "📋 dobi deklarirane doze cinka, biotina in vitaminov, ne le seznam sestavin"
+            "text": "📋 dobi deklarirane količine cinka, biotina ter vitaminov C in E"
           }
         },
         "bullet_8": {
           "type": "bullet",
           "settings": {
-            "text": "🔁 ohrani umirjeno kožo dolgoročno, ne le dokler traja en lonček"
+            "text": "🔁 ima dolgoročno podporo za kožo in prebavo"
           }
         }
       },
@@ -1216,7 +1216,7 @@
         "bullet_8"
       ],
       "settings": {
-        "heading": "<p>FloraMix je prava izbira za vašega psa, če želite, da:</p>",
+        "heading": "<p>FloraMix je primerna izbira za tvojega psa, če želiš, da:</p>",
         "image": "shopify://shop_images/hf_20260122_143423_91f5eeda-985c-4ddc-97ca-bdfb6690d8f7.png",
         "secondary_color": "#e8d6c5",
         "padding_top": 36,
@@ -1237,7 +1237,7 @@
         "row_2": {
           "type": "row",
           "settings": {
-            "label": "Prebiotik — cikorijev koren",
+            "label": "Prebiotik iz cikorijevega korena",
             "them_value": "❌",
             "us_value": "✅"
           }
@@ -1245,7 +1245,7 @@
         "row_3": {
           "type": "row",
           "settings": {
-            "label": "Postbiotika — dva inaktivirana seva",
+            "label": "Dva inaktivirana seva oziroma postbiotika",
             "them_value": "❌",
             "us_value": "✅"
           }
@@ -1253,8 +1253,8 @@
         "row_4": {
           "type": "row",
           "settings": {
-            "label": "Kvercetin (Sophora japonica)",
-            "them_value": "0 mg",
+            "label": "Sophora japonica kot vir rutina in kvercetina",
+            "them_value": "❌",
             "us_value": "✅"
           }
         },
@@ -1262,7 +1262,7 @@
           "type": "row",
           "settings": {
             "label": "Omega-3 iz krila",
-            "them_value": "0 mg",
+            "them_value": "❌",
             "us_value": "✅"
           }
         },
@@ -1270,14 +1270,14 @@
           "type": "row",
           "settings": {
             "label": "Kolostrum",
-            "them_value": "0 mg",
+            "them_value": "❌",
             "us_value": "✅"
           }
         },
         "row_7": {
           "type": "row",
           "settings": {
-            "label": "Prašek brez arome in polnil — ne priboljšek",
+            "label": "Prašek brez dodane arome in barvil",
             "them_value": "❌",
             "us_value": "✅"
           }
@@ -1293,8 +1293,8 @@
         "row_7"
       ],
       "settings": {
-        "heading": "<p>Kaj je v navadnem probiotiku in kaj v FloraMixu</p>",
-        "description": "<p>Veliko se res začne v črevesju — zato so probiotični priboljški smiselni. Ampak srbenje je veriga treh členov, probiotik pa podpira samo prvega. Drugi, imunski, teče naprej sam. Zato se prebava uredi, praskanje pa ne.</p><p><strong>Razlika ni v tem, da imamo česa več. Razlika je v tem, da tega sploh nimajo.</strong></p>",
+        "heading": "<p>Kaj je v navadnem probiotiku in kaj v FloraMixu?</p>",
+        "description": "<p>Veliko težav se lahko začne v črevesju, zato so probiotiki smiselna podpora. Vendar navadni probiotični izdelek običajno podpira predvsem črevesno floro. FloraMix je širše zastavljen, saj poleg črevesja podpira tudi imunski odziv ter kožo in dlako.</p>",
         "them_image": "shopify://shop_images/us_vs_them.png",
         "them_label": "Navadni probiotični priboljški",
         "us_image": "shopify://shop_images/hf_20260410_165922_35163d71-e03b-4543-bb9f-034c80ee9cf9.png",
@@ -1313,17 +1313,17 @@
         "card_1": {
           "type": "card",
           "settings": {
-            "heading": "🛑 Zakaj se praskanje vedno vrne?",
-            "text": "<p>Ker se srbenje ne konča v črevesju — tam se začne. Prepustna črevesna stena spusti skozi, kar ne bi smelo. Imunski sistem to prebere kot alarm in pretirano odreagira. Koža vzplamti. Probiotik pomaga prvemu členu verige, drugi pa teče naprej sam — in ko podpore zmanjka, se vse skupaj vrne.</p>",
-            "badge_text": "Urejeno črevesje ≠ umirjena koža"
+            "heading": "Zakaj se težave lahko vrnejo?",
+            "text": "<p>Ker podpora samo enemu delu pogosto ni dovolj. Črevesje, imunski odziv ter koža in dlaka so med seboj povezani. Če podpreš samo črevesje, ni nujno, da bo to dovolj tudi za kožo.</p>",
+            "badge_text": "Urejena prebava še ne pomeni nujno mirne kože."
           }
         },
         "card_2": {
           "type": "card",
           "settings": {
-            "heading": "✅ Zakaj FloraMix deluje drugače?",
-            "text": "<p>Triple Biotic Complex naslovi vse tri člene hkrati: črevesje s cikorijo, dvema EU-registriranima sevoma in kolostrumom; imunski odziv s Sophoro japonico, beta-glukani iz kvasa in kurkumo; kožo in dlako z omega-3 iz krila, cinkom in biotinom. Ena merica na hrano, vsak dan.</p>",
-            "badge_text": "Tri osi hkrati, ne le črevesje"
+            "heading": "Zakaj FloraMix deluje drugače?",
+            "text": "<p>FloraMix podpira vse tri povezane dele. Cikorija, dva EU-registrirana seva in kolostrum podpirajo črevesje. Sophora japonica, beta-glukani iz kvasa in kurkuma podpirajo imunski odziv. Omega-3 iz krila, cink in biotin pa podpirajo kožo in dlako. Prašek enkrat na dan potreseš po hrani.</p>",
+            "badge_text": "Tri vrste podpore v eni dnevni merici."
           }
         }
       },
@@ -1346,8 +1346,8 @@
     "petsome_ingredients_1": {
       "type": "petsome-ingredients",
       "settings": {
-        "heading": "<p>Kaj je notri — in na kateri osi dela</p>",
-        "description": "<p>Dvanajst sestavin, razporejenih po treh oseh: štiri za črevesje, štiri za imunski odziv, štiri za kožo in dlako. Vsaka s količino z deklaracije, ne le z imenom. Kliknite na sestavino za več.</p>",
+        "heading": "<p>Kaj je v FloraMixu in čemu je namenjeno?</p>",
+        "description": "<p>Sestavine so razdeljene v tri skupine: podpora črevesju, imunskemu odzivu ter koži in dlaki. Pri vsaki sestavini je navedena tudi količina iz deklaracije. Klikni posamezno sestavino za več informacij.</p>",
         "amount_label": "Količina v paketu",
         "background_color": "#faf9f6",
         "accent_color": "#f8aaa7",
@@ -1364,24 +1364,24 @@
           "type": "card",
           "settings": {
             "badge_text": "ČREVESJE",
-            "title": "Tam se začne — ne konča.",
-            "text": "<p>Cikorijev inulin nahrani koristne bakterije, dva EU-registrirana seva (skupaj 300 milijard CFU/kg) podpirata ravnovesje črevesne flore, kolostrum pa prispeva k celovitosti črevesne stene. To je temelj — in tu se večina izdelkov ustavi.</p>"
+            "title": "Tu se začne podpora prebavi.",
+            "text": "<p>Cikorijev inulin je prebiotik in hrana za koristne bakterije. Dva EU-registrirana seva skupaj zagotavljata 300 milijard CFU/kg ter podpirata ravnovesje črevesne flore. Kolostrum dopolnjuje podporo črevesju.</p>"
           }
         },
         "card_2": {
           "type": "card",
           "settings": {
             "badge_text": "IMUNSKI ODZIV",
-            "title": "Člen, ki ga nihče ne naslovi.",
-            "text": "<p>Ko stena postane bolj prepustna, se imunski sistem pretirano odzove — in prav ta odziv je tisto, kar se pokaže kot praskanje. Sophora japonica je naraven vir rutina in kvercetina, inaktivirani kvas prispeva beta-glukane, kolostrum imunske faktorje, kurkuma pa kurkuminoide. To je razlog, zakaj sam probiotik ni dovolj.</p>"
+            "title": "Podpora tudi drugemu delu povezave.",
+            "text": "<p>Sophora japonica je naraven vir rutina in kvercetina. Inaktivirani kvas vsebuje beta-glukane, kolostrum naravno prisotne imunske dejavnike, kurkuma pa kurkuminoide. Skupaj dopolnjujejo podporo imunskemu odzivu.</p>"
           }
         },
         "card_3": {
           "type": "card",
           "settings": {
             "badge_text": "KOŽA IN DLAKA",
-            "title": "Da se vidi, ne le čuti.",
-            "text": "<p>Omega-3 iz krilove moke je v fosfolipidni obliki, cink v kelatni (2.600 mg/kg), biotin 895.000 µg/kg, mačeha pa je tradicionalna zeliščna podpora koži. Skupaj prispevajo k normalnemu stanju kože in dlake — k tistemu, kar lastnik dejansko vidi.</p>"
+            "title": "Podpora, ki se sčasoma tudi vidi.",
+            "text": "<p>Omega-3 iz krilove moke so v fosfolipidni obliki. Formula vsebuje tudi cink v kelatni obliki, biotin in mačeho. Te sestavine prispevajo k ohranjanju zdrave kože in dlake.</p>"
           }
         }
       },
@@ -1392,8 +1392,8 @@
       ],
       "settings": {
         "kicker_text": "TRIPLE BIOTIC COMPLEX",
-        "heading": "<p>Črevesje je urejeno. Zakaj se pes še vedno praska?</p>",
-        "description": "<p>Ker se srbenje ne konča v črevesju — tam se začne. Teče kot veriga treh členov: prepustna črevesna stena spusti skozi, kar ne bi smelo; imunski sistem to prebere kot alarm in pretirano odreagira; koža vzplamti. Probiotik pomaga prvemu členu. Drugi teče naprej sam. <strong>Triple Biotic Complex naslovi vse tri hkrati</strong> — zato umirjenost zdrži, namesto da se vrne.</p>",
+        "heading": "<p>Prebava je bolj urejena. Zakaj se pes še vedno praska?</p>",
+        "description": "<p>Ker težave s kožo niso vedno povezane samo s črevesno floro. Probiotik podpira črevesje, vendar je lahko potrebna tudi dodatna podpora imunskemu odzivu ter koži in dlaki. <strong>Triple Biotic Complex</strong> zato združuje probiotik, prebiotik in postbiotik, FloraMix pa jim dodaja še sestavine za imunski odziv ter kožo in dlako.</p>",
         "pattern_image": "shopify://shop_images/paw_background.png",
         "background_color": "#e8d6c5",
         "kicker_background": "#e0b58d",
@@ -1463,8 +1463,8 @@
       ],
       "disabled": true,
       "settings": {
-        "heading": "<p>Proizvedeno v skladu z najvišjimi standardi</p>",
-        "description": "<p>FloraMix je razvit v Sloveniji in izdelan v EU, po evropskih standardih za dopolnilno krmo. Oba probiotična seva sta EU-registrirana zootehnična dodatka (4b1705ii in 4b1820) — to pomeni, da sta šla skozi regulatorno presojo, ne le skozi marketing. Brez arome, brez barvil, brez nepotrebnih polnil.</p>",
+        "heading": "<p>Razvito v Sloveniji in izdelano v EU</p>",
+        "description": "<p>FloraMix je razvit v Sloveniji in izdelan v EU v skladu z evropskimi standardi za dopolnilno krmo. Oba probiotična seva sta v EU registrirana zootehnična dodatka z oznakama 4b1705ii in 4b1820. Formula je brez dodane arome, barvil in nepotrebnih polnil.</p>",
         "button_label": "Naroči FloraMix",
         "button_link": "",
         "button_icon": "shopping_bag",
@@ -1483,32 +1483,32 @@
           "type": "step",
           "settings": {
             "image": "shopify://shop_images/MobiMix_Step_1.png",
-            "title": "1. Korak",
-            "description": "Odmeri: 1 merica do 15 kg, 2 merici 15–30 kg, 3 merice nad 30 kg."
+            "title": "1. korak",
+            "description": "Odmeri ustrezno količino: 1 merico za psa do 15 kg, 2 merici za psa od 15 do 30 kg in 3 merice za psa nad 30 kg."
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
             "image": "shopify://shop_images/MobiMix_Step_2.png",
-            "title": "2. Korak",
-            "description": "Potresi po običajnem obroku — mokrem ali suhem."
+            "title": "2. korak",
+            "description": "Prašek potresi po običajnem mokrem ali suhem obroku."
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
             "image": "shopify://shop_images/MobiMix_Step_3.png",
-            "title": "3. Korak",
-            "description": "Na kratko premešaj, da se prime hrane."
+            "title": "3. korak",
+            "description": "Na kratko premešaj, da se prašek oprime hrane."
           }
         },
         "step_4": {
           "type": "step",
           "settings": {
             "image": "shopify://shop_images/MobiMix_Step_4.png",
-            "title": "4. Korak",
-            "description": "Ponavljaj vsak dan. Prebava prva, koža in dlaka za njo."
+            "title": "4. korak",
+            "description": "Postopek ponovi vsak dan. Spremembe pri prebavi se običajno pokažejo prej kot spremembe na koži in dlaki."
           }
         }
       },
@@ -1519,7 +1519,7 @@
         "step_4"
       ],
       "settings": {
-        "heading": "<p>Ena merica na dan. To je vse.</p>",
+        "heading": "<p>Ena dnevna merica za psa do 15 kg. To je vse.</p>",
         "padding_top": 80,
         "padding_bottom": 80
       }
@@ -1530,22 +1530,22 @@
         "stat_1": {
           "type": "stat",
           "settings": {
-            "number": "300 mrd",
-            "description": "CFU na kilogram iz dveh EU-registriranih sevov (4b1705ii in 4b1820)."
+            "number": "300 milijard",
+            "description": "CFU/kg iz dveh EU-registriranih sevov z oznakama 4b1705ii in 4b1820."
           }
         },
         "stat_2": {
           "type": "stat",
           "settings": {
-            "number": "3 osi",
-            "description": "črevesje, imunski odziv in koža — naslovljene hkrati, ne po vrsti."
+            "number": "3 področja",
+            "description": "podpore: črevesje, imunski odziv ter koža in dlaka."
           }
         },
         "stat_3": {
           "type": "stat",
           "settings": {
-            "number": "90 dni",
-            "description": "toliko traja en lonček pri psu do 15 kg — ena merica na dan."
+            "number": "Do 90 dni",
+            "description": "uporabe iz enega pakiranja pri psu do 15 kg ob eni merici na dan."
           }
         }
       },
@@ -1592,7 +1592,7 @@
       "type": "petsome-customer-reviews",
       "settings": {
         "rating_value": "4.7",
-        "heading": "<p>Zaupa nam že več kot 2.000 lastnikov po vsej Evropi</p>",
+        "heading": "<p>Rezultati govorijo sami zase</p>",
         "card_color": "#e8d6c5",
         "star_color": "#ffcc00",
         "padding_top": 64,
