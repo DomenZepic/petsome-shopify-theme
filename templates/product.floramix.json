@@ -1042,7 +1042,7 @@
         "benefit_1": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/less_pain.png",
+            "image": "shopify://shop_images/FloraMix_benefits.png",
             "icon": "pets",
             "filled_icon": false,
             "title": "Praskanje, ki se vsak večer začne znova",
@@ -1217,7 +1217,7 @@
       ],
       "settings": {
         "heading": "<p>FloraMix je primerna izbira za tvojega psa, če želiš, da:</p>",
-        "image": "shopify://shop_images/hf_20260122_143423_91f5eeda-985c-4ddc-97ca-bdfb6690d8f7.png",
+        "image": "shopify://shop_images/FloraMix_checklist.png",
         "secondary_color": "#e8d6c5",
         "padding_top": 36,
         "padding_bottom": 36
@@ -1297,7 +1297,7 @@
         "description": "<p>Veliko težav se začne v črevesju, zato so probiotiki smiselna podpora. Vendar navaden probiotični izdelek podpira samo črevesno floro. FloraMix gre naprej: poleg črevesja podpira tudi imunski odziv ter kožo in dlako.</p>",
         "them_image": "shopify://shop_images/us_vs_them.png",
         "them_label": "Navadni probiotični priboljški",
-        "us_image": "shopify://shop_images/hf_20260410_165922_35163d71-e03b-4543-bb9f-034c80ee9cf9.png",
+        "us_image": "shopify://shop_images/FloraMix_1x_no_bg.png",
         "us_label": "FloraMix",
         "background_color": "#faf9f6",
         "accent_color": "#f8aaa7",
@@ -1482,7 +1482,7 @@
         "step_1": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/MobiMix_Step_1.png",
+            "image": "shopify://shop_images/FloraMix_Step_4.png",
             "title": "1. korak",
             "description": "Odmeri ustrezno količino: 1 merico za psa do 15 kg, 2 merici za psa od 15 do 30 kg in 3 merice za psa nad 30 kg."
           }
