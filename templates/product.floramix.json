@@ -1307,42 +1307,6 @@
         "padding_bottom": 36
       }
     },
-    "petsome_explainer_1": {
-      "type": "petsome-explainer",
-      "blocks": {
-        "card_1": {
-          "type": "card",
-          "settings": {
-            "heading": "Zakaj se praskanje vrne?",
-            "text": "<p>Ker podpora samo enemu delu ni dovolj. Črevesje, imunski odziv ter koža in dlaka so povezani. Če podpreš samo črevesje, koža ostane brez podpore — in praskanje se vrne.</p>",
-            "badge_text": "Urejena prebava še ne pomeni mirne kože."
-          }
-        },
-        "card_2": {
-          "type": "card",
-          "settings": {
-            "heading": "Zakaj FloraMix deluje drugače?",
-            "text": "<p>FloraMix podpira vse tri povezane dele. Cikorija, dva EU-registrirana seva in kolostrum podpirajo črevesje. Sophora japonica, beta-glukani iz kvasa in kurkuma podpirajo imunski odziv. Omega-3 iz krila, cink in biotin pa podpirajo kožo in dlako. Prašek enkrat na dan potreseš po hrani.</p>",
-            "badge_text": "Tri vrste podpore v eni dnevni merici."
-          }
-        }
-      },
-      "block_order": [
-        "card_1",
-        "card_2"
-      ],
-      "settings": {
-        "image": "shopify://shop_images/FloraMix_explainer_split.png",
-        "button_label": "Naroči FloraMix",
-        "button_link": "",
-        "button_icon": "shopping_bag",
-        "button_background_color": "#0e1111",
-        "button_text_color": "#ffffff",
-        "secondary_color": "#e8d6c5",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "petsome_ingredients_1": {
       "type": "petsome-ingredients",
       "settings": {
@@ -1524,6 +1488,42 @@
         "padding_bottom": 80
       }
     },
+    "petsome_explainer_1": {
+      "type": "petsome-explainer",
+      "blocks": {
+        "card_1": {
+          "type": "card",
+          "settings": {
+            "heading": "Zakaj se praskanje vrne?",
+            "text": "<p>Ker podpora samo enemu delu ni dovolj. Črevesje, imunski odziv ter koža in dlaka so povezani. Če podpreš samo črevesje, koža ostane brez podpore — in praskanje se vrne.</p>",
+            "badge_text": "Urejena prebava še ne pomeni mirne kože."
+          }
+        },
+        "card_2": {
+          "type": "card",
+          "settings": {
+            "heading": "Zakaj FloraMix deluje drugače?",
+            "text": "<p>FloraMix podpira vse tri povezane dele. Cikorija, dva EU-registrirana seva in kolostrum podpirajo črevesje. Sophora japonica, beta-glukani iz kvasa in kurkuma podpirajo imunski odziv. Omega-3 iz krila, cink in biotin pa podpirajo kožo in dlako. Prašek enkrat na dan potreseš po hrani.</p>",
+            "badge_text": "Tri vrste podpore v eni dnevni merici."
+          }
+        }
+      },
+      "block_order": [
+        "card_1",
+        "card_2"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/FloraMix_explainer_split.png",
+        "button_label": "Naroči FloraMix",
+        "button_link": "",
+        "button_icon": "shopping_bag",
+        "button_background_color": "#0e1111",
+        "button_text_color": "#ffffff",
+        "secondary_color": "#e8d6c5",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "petsome_stats_1": {
       "type": "petsome-stats",
       "blocks": {
@@ -1702,12 +1702,12 @@
     "petsome_timeframe_1",
     "petsome_checklist_1",
     "petsome_comparison_1",
-    "petsome_explainer_1",
     "petsome_ingredients_1",
     "petsome_mechanism_1",
     "petsome_before_after_1",
     "petsome_certificates_1",
     "petsome_how_to_use_1",
+    "petsome_explainer_1",
     "petsome_stats_1",
     "petsome_professional_reviews_BkgaUN",
     "petsome_rotating_logos_1",
