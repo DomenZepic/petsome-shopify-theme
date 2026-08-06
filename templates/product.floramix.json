@@ -1042,7 +1042,7 @@
         "benefit_1": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/FloraMix_benefits.png",
+            "image": "shopify://shop_images/FloraMix_praskanje.png",
             "icon": "pets",
             "filled_icon": false,
             "title": "Praskanje, ki se vsak večer začne znova",
@@ -1052,7 +1052,7 @@
         "benefit_2": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/easy_moving.png",
+            "image": "shopify://shop_images/FloraMix_lizanje_tack.png",
             "icon": "directions_run",
             "filled_icon": false,
             "title": "Lizanje tačk, ki ga slišiš sredi noči",
@@ -1062,7 +1062,7 @@
         "benefit_3": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/energy.png",
+            "image": "shopify://shop_images/FloraMix_benefits.png",
             "icon": "bolt",
             "filled_icon": true,
             "title": "Medla dlaka in dlaka po vsem stanovanju",
@@ -1072,7 +1072,7 @@
         "benefit_4": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/joint_protection.png",
+            "image": "shopify://shop_images/FloraMix_graf.png",
             "icon": "shield",
             "filled_icon": true,
             "title": "Zakaj navaden probiotik ni dovolj",
@@ -1332,7 +1332,7 @@
         "card_2"
       ],
       "settings": {
-        "image": "shopify://shop_images/hf_20260324_090023_9eac1bcd-6ab4-48cb-84f0-f40b13f453d6.jpg",
+        "image": "shopify://shop_images/FloraMix_explainer_split.png",
         "button_label": "Naroči FloraMix",
         "button_link": "",
         "button_icon": "shopping_bag",
@@ -1482,7 +1482,7 @@
         "step_1": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/FloraMix_Step_4.png",
+            "image": "shopify://shop_images/FloraMix_Step_1.png",
             "title": "1. korak",
             "description": "Odmeri ustrezno količino: 1 merico za psa do 15 kg, 2 merici za psa od 15 do 30 kg in 3 merice za psa nad 30 kg."
           }
@@ -1490,7 +1490,7 @@
         "step_2": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/MobiMix_Step_2.png",
+            "image": "shopify://shop_images/FloraMix_Step_2.png",
             "title": "2. korak",
             "description": "Prašek potresi po običajnem mokrem ali suhem obroku."
           }
@@ -1498,7 +1498,7 @@
         "step_3": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/MobiMix_Step_3.png",
+            "image": "shopify://shop_images/FloraMix_Step_3.png",
             "title": "3. korak",
             "description": "Na kratko premešaj, da se prašek oprime hrane."
           }
@@ -1506,7 +1506,7 @@
         "step_4": {
           "type": "step",
           "settings": {
-            "image": "shopify://shop_images/MobiMix_Step_4.png",
+            "image": "shopify://shop_images/FloraMix_Step_4.png",
             "title": "4. korak",
             "description": "Postopek ponovi vsak dan. Spremembe pri prebavi opaziš prej kot spremembe na koži in dlaki."
           }
