@@ -58,7 +58,7 @@
                 "star_color": "#ffcc00",
                 "bg_stars_style": "full",
                 "bg_star_color": "#ececec",
-                "label": "4.8 / 5 (2.000+ zadovoljnih lastnikov)",
+                "label": "4,8 / 5 (2.000+ zadovoljnih lastnikov)",
                 "size": 12,
                 "scroll_id": "#shopify-section-template--30518464872773__17827582468bb08a41",
                 "alignment": "flex-start",
@@ -646,7 +646,7 @@
             "kaching_custom_display_1": {
               "type": "product_kaching-custom-display",
               "settings": {
-                "disclaimer_text": "<p>To so spremembe, ki jih lastniki najpogosteje opazijo. Prebava se pri večini začne urejati v 1–2 tednih, manj praskanja lahko opazijo v 3–4 tednih, spremembe na koži in dlaki pa v 6–8 tednih. Vsak pes je drugačen, zato za pošteno oceno priporočamo vsaj 8 tednov redne uporabe.</p>",
+                "disclaimer_text": "<p>To so spremembe, ki jih lastniki najpogosteje opazijo. Prebava se pri večini uredi v 1–2 tednih, praskanja je manj v 3–4 tednih, koža in dlaka se spremenita v 6–8 tednih. Vsak pes je drugačen, zato za pošteno oceno priporočamo vsaj 8 tednov redne uporabe.</p>",
                 "gifts_heading": "",
                 "hide_gifts_heading": false,
                 "tier_1_style": "none",
@@ -822,7 +822,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Kako deluje FloraMix?",
-                "content": "<p>Težave s kožo so lahko povezane tudi z dogajanjem v črevesju. Ko je črevesna flora neuravnovešena, se lahko spremeni tudi imunski odziv, kar se pri nekaterih psih pokaže kot praskanje, lizanje tačk ali občutljiva koža.</p><p>FloraMix zato ne vsebuje samo probiotikov. Cikorija, dva EU-registrirana seva in kolostrum podpirajo črevesje. Sophora japonica, beta-glukani iz inaktiviranega kvasa in kurkuma podpirajo imunski odziv. Omega-3 iz krila, cink in biotin pa podpirajo kožo in dlako.</p>",
+                "content": "<p>Praskanje se pogosto ne začne na koži, ampak v črevesju. Ko je črevesna flora neuravnovešena, se spremeni tudi imunski odziv — in prav to se pri psu pokaže kot praskanje, lizanje tačk in občutljiva koža.</p><p>FloraMix zato ne vsebuje samo probiotikov. Cikorija, dva EU-registrirana seva in kolostrum podpirajo črevesje. Sophora japonica, beta-glukani iz inaktiviranega kvasa in kurkuma podpirajo imunski odziv. Omega-3 iz krila, cink in biotin pa podpirajo kožo in dlako.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -876,7 +876,7 @@
               "name": "Petsome: Guarantee",
               "settings": {
                 "image": "shopify://shop_images/Guarantee.png",
-                "text": "<p>Želimo, da je nakup FloraMixa zate brez skrbi. Če z izdelkom ne boš zadovoljen, lahko v 60 dneh zahtevaš vračilo kupnine.</p>",
+                "text": "<p>Želimo, da je nakup FloraMixa zate brez skrbi. Če izdelek ne bo izpolnil pričakovanj, lahko v 60 dneh zahtevaš vračilo kupnine.</p>",
                 "background_color": "#e8d6c5",
                 "border_color": "#b6a87c",
                 "margin_top": 0,
@@ -1056,7 +1056,7 @@
             "icon": "directions_run",
             "filled_icon": false,
             "title": "Lizanje tačk, ki ga slišiš sredi noči",
-            "text": "<p>Ponavljajoče se lizanje tačk je lahko zelo nadležno za psa in lastnika. Ko se podpre prebavo, imunski odziv in kožo, lahko lizanje sčasoma postane manj pogosto. Prve spremembe lastniki pogosto opazijo ponoči, ko je pes mirnejši.</p>"
+            "text": "<p>Tisti zvok ob dveh zjutraj in rjavi madeži med prsti. Ko podpreš prebavo, imunski odziv in kožo hkrati, je lizanja manj. Najprej postanejo tišje noči, šele nato je razlika vidna tudi podnevi.</p>"
           }
         },
         "benefit_3": {
@@ -1066,7 +1066,7 @@
             "icon": "bolt",
             "filled_icon": true,
             "title": "Medla dlaka in dlaka po vsem stanovanju",
-            "text": "<p>Omega-3 iz krilove moke, cink v kelatni obliki in biotin prispevajo k ohranjanju zdrave kože in dlake. Pri redni uporabi je lahko dlaka videti bolj gosta in sijoča, izpadanje pa manj izrazito.</p>"
+            "text": "<p>Omega-3 iz krilove moke, cink v kelatni obliki in biotin prispevajo k ohranjanju zdrave kože in dlake. Pri redni uporabi je dlaka gostejša na otip in bolj sijoča na svetlobi, dlake po stanovanju pa je manj. To je sprememba, ki jo opazijo tudi drugi ljudje.</p>"
           }
         },
         "benefit_4": {
@@ -1103,8 +1103,8 @@
           "settings": {
             "highlighted": false,
             "badge_text": "1–2 tedna",
-            "title": "Prebava je lahko mirnejša.",
-            "text": "<p>Blato je lahko trdnejše, napenjanja je manj, pes pa lahko redkeje je travo. To je pogosto prva sprememba, ki jo lastniki opazijo.</p>"
+            "title": "Prebava se umiri.",
+            "text": "<p>Trdnejše blato, manj napenjanja, manj jedenja trave. To je prva sprememba, ki jo lastniki opazijo.</p>"
           }
         },
         "tf_2": {
@@ -1112,8 +1112,8 @@
           "settings": {
             "highlighted": false,
             "badge_text": "3–4 tedni",
-            "title": "Praskanje je lahko manj pogosto.",
-            "text": "<p>Praskanje pred spanjem, lizanje tačk in stresanje z glavo se lahko začnejo umirjati. Spremembe so postopne, zato je pomembna vsakodnevna uporaba.</p>"
+            "title": "Praskanja je manj.",
+            "text": "<p>Praskanje pred spanjem, lizanje tačk in stresanje z glavo se umirijo. Spremembe so postopne, zato šteje vsakodnevna uporaba.</p>"
           }
         },
         "tf_3": {
@@ -1121,8 +1121,8 @@
           "settings": {
             "highlighted": true,
             "badge_text": "6–8 tednov",
-            "title": "Dlaka je lahko videti bolj zdrava.",
-            "text": "<p>Dlaka je lahko bolj sijoča in gostejša na otip, po stanovanju pa je je lahko manj. To je običajno sprememba, ki potrebuje največ časa.</p>"
+            "title": "Dlaka se spremeni.",
+            "text": "<p>Gostejša na otip, bolj sijoča na svetlobi, manj dlake po kavču. To je najbolj vidna sprememba in tista, ki potrebuje največ časa.</p>"
           }
         },
         "tf_4": {
@@ -1142,8 +1142,8 @@
         "tf_4"
       ],
       "settings": {
-        "heading": "<p>Kaj lahko opaziš, ko pes začne uporabljati FloraMix?</p>",
-        "subheading": "Vsak pes je drugačen, zato se lahko hitrost sprememb razlikuje. Pri večini se najprej spremeni prebava, nato praskanje, spremembe na dlaki pa običajno potrebujejo največ časa.",
+        "heading": "<p>Kaj opaziš, ko pes začne s FloraMixom?</p>",
+        "subheading": "Vsak pes je drugačen in hitrost sprememb se razlikuje. Vrstni red pa je skoraj vedno enak: najprej prebava, nato praskanje, na koncu dlaka.",
         "columns": "4",
         "background_color": "#faf9f6",
         "accent_color": "#f8aaa7",
@@ -1294,7 +1294,7 @@
       ],
       "settings": {
         "heading": "<p>Kaj je v navadnem probiotiku in kaj v FloraMixu?</p>",
-        "description": "<p>Veliko težav se lahko začne v črevesju, zato so probiotiki smiselna podpora. Vendar navadni probiotični izdelek običajno podpira predvsem črevesno floro. FloraMix je širše zastavljen, saj poleg črevesja podpira tudi imunski odziv ter kožo in dlako.</p>",
+        "description": "<p>Veliko težav se začne v črevesju, zato so probiotiki smiselna podpora. Vendar navaden probiotični izdelek podpira samo črevesno floro. FloraMix gre naprej: poleg črevesja podpira tudi imunski odziv ter kožo in dlako.</p>",
         "them_image": "shopify://shop_images/us_vs_them.png",
         "them_label": "Navadni probiotični priboljški",
         "us_image": "shopify://shop_images/hf_20260410_165922_35163d71-e03b-4543-bb9f-034c80ee9cf9.png",
@@ -1313,7 +1313,7 @@
         "card_1": {
           "type": "card",
           "settings": {
-            "heading": "Zakaj se težave lahko vrnejo?",
+            "heading": "Zakaj se praskanje vrne?",
             "text": "<p>Ker podpora samo enemu delu pogosto ni dovolj. Črevesje, imunski odziv ter koža in dlaka so med seboj povezani. Če podpreš samo črevesje, ni nujno, da bo to dovolj tudi za kožo.</p>",
             "badge_text": "Urejena prebava še ne pomeni nujno mirne kože."
           }
@@ -1393,7 +1393,7 @@
       "settings": {
         "kicker_text": "TRIPLE BIOTIC COMPLEX",
         "heading": "<p>Prebava je bolj urejena. Zakaj se pes še vedno praska?</p>",
-        "description": "<p>Ker težave s kožo niso vedno povezane samo s črevesno floro. Probiotik podpira črevesje, vendar je lahko potrebna tudi dodatna podpora imunskemu odzivu ter koži in dlaki. <strong>Triple Biotic Complex</strong> zato združuje probiotik, prebiotik in postbiotik, FloraMix pa jim dodaja še sestavine za imunski odziv ter kožo in dlako.</p>",
+        "description": "<p>Ker se praskanje ne konča v črevesju — tam se začne. Probiotik podpira črevesje, sam po sebi pa ne naredi dovolj za imunski odziv ter kožo in dlako. <strong>Triple Biotic Complex</strong> zato združuje probiotik, prebiotik in postbiotik, FloraMix pa jim dodaja še sestavine za imunski odziv ter kožo in dlako.</p>",
         "pattern_image": "shopify://shop_images/paw_background.png",
         "background_color": "#e8d6c5",
         "kicker_background": "#e0b58d",
