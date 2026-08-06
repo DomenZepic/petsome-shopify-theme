@@ -822,7 +822,7 @@
                 "visibility": "always-display",
                 "open": false,
                 "heading": "Kako deluje FloraMix?",
-                "content": "<p>Praskanje se pogosto ne začne na koži, ampak v črevesju. Ko je črevesna flora neuravnovešena, se spremeni tudi imunski odziv — in prav to se pri psu pokaže kot praskanje, lizanje tačk in občutljiva koža.</p><p>FloraMix zato ne vsebuje samo probiotikov. Cikorija, dva EU-registrirana seva in kolostrum podpirajo črevesje. Sophora japonica, beta-glukani iz inaktiviranega kvasa in kurkuma podpirajo imunski odziv. Omega-3 iz krila, cink in biotin pa podpirajo kožo in dlako.</p>",
+                "content": "<p>Praskanje se ne začne na koži, ampak v črevesju. Ko je črevesna flora neuravnovešena, se spremeni tudi imunski odziv — in prav to na psu vidiš kot praskanje, lizanje tačk in občutljivo kožo.</p><p>FloraMix zato ne vsebuje samo probiotikov. Cikorija, dva EU-registrirana seva in kolostrum podpirajo črevesje. Sophora japonica, beta-glukani iz inaktiviranega kvasa in kurkuma podpirajo imunski odziv. Omega-3 iz krila, cink in biotin pa podpirajo kožo in dlako.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -1046,7 +1046,7 @@
             "icon": "pets",
             "filled_icon": false,
             "title": "Praskanje, ki se vsak večer začne znova",
-            "text": "<p>Pri mnogih psih lastniki najprej opazijo spremembo pri prebavi: trdnejše blato, manj napenjanja in manj jedenja trave. Spremembe na koži se običajno pokažejo pozneje. Zato je pri FloraMixu pomembna redna uporaba in dovolj časa.</p>"
+            "text": "<p>Prvo, kar opaziš, ni koža — ampak prebava: trdnejše blato, manj napenjanja, manj jedenja trave. Koža pride za tem. To ni naključje, ampak vrstni red, po katerem veriga deluje.</p>"
           }
         },
         "benefit_2": {
@@ -1066,7 +1066,7 @@
             "icon": "bolt",
             "filled_icon": true,
             "title": "Medla dlaka in dlaka po vsem stanovanju",
-            "text": "<p>Omega-3 iz krilove moke, cink v kelatni obliki in biotin prispevajo k ohranjanju zdrave kože in dlake. Pri redni uporabi je dlaka gostejša na otip in bolj sijoča na svetlobi, dlake po stanovanju pa je manj. To je sprememba, ki jo opazijo tudi drugi ljudje.</p>"
+            "text": "<p>Opaziš, da je dlaka gostejša na otip in bolj sijoča na svetlobi, dlake po stanovanju pa je manj. Za tem stojijo omega-3 iz krilove moke, cink v kelatni obliki in biotin, ki prispevajo k ohranjanju zdrave kože in dlake. To je sprememba, ki jo opazijo tudi drugi ljudje, ne le ti.</p>"
           }
         },
         "benefit_4": {
@@ -1075,7 +1075,7 @@
             "image": "shopify://shop_images/joint_protection.png",
             "icon": "shield",
             "filled_icon": true,
-            "title": "Zakaj navaden probiotik včasih ni dovolj",
+            "title": "Zakaj navaden probiotik ni dovolj",
             "text": "<p>Navadni probiotik podpira predvsem črevesje. FloraMix poleg črevesne flore podpira tudi imunski odziv ter kožo in dlako. Zato je formula širše zastavljena in ni namenjena samo prebavi.</p>"
           }
         }
@@ -1130,8 +1130,8 @@
           "settings": {
             "highlighted": false,
             "badge_text": "3 mesece in več",
-            "title": "Rezultate pomaga ohranjati redna uporaba.",
-            "text": "<p>Cilj redne uporabe je dolgoročna podpora prebavi, imunskemu odzivu ter koži in dlaki. Rezultati se med psi razlikujejo.</p>"
+            "title": "Umirjenost ostane.",
+            "text": "<p>Cilj ni teden miru, ampak stanje, ki zdrži. Ker so podprte vse tri osi hkrati, se stvari ne vrnejo takoj, ko poide prvi lonček. To je razlika med rešitvijo in premorom.</p>"
           }
         }
       },
@@ -1143,7 +1143,7 @@
       ],
       "settings": {
         "heading": "<p>Kaj opaziš, ko pes začne s FloraMixom?</p>",
-        "subheading": "Vsak pes je drugačen in hitrost sprememb se razlikuje. Vrstni red pa je skoraj vedno enak: najprej prebava, nato praskanje, na koncu dlaka.",
+        "subheading": "Vrstni red je skoraj vedno enak: najprej prebava, nato praskanje, na koncu dlaka. Hitrost se od psa do psa razlikuje.",
         "columns": "4",
         "background_color": "#faf9f6",
         "accent_color": "#f8aaa7",
@@ -1171,7 +1171,7 @@
         "bullet_3": {
           "type": "bullet",
           "settings": {
-            "text": "🦻 manj pogosto stresa z glavo in se praska po ušesih"
+            "text": "🦻 manj stresa z glavo in se praska po ušesih"
           }
         },
         "bullet_4": {
@@ -1314,8 +1314,8 @@
           "type": "card",
           "settings": {
             "heading": "Zakaj se praskanje vrne?",
-            "text": "<p>Ker podpora samo enemu delu pogosto ni dovolj. Črevesje, imunski odziv ter koža in dlaka so med seboj povezani. Če podpreš samo črevesje, ni nujno, da bo to dovolj tudi za kožo.</p>",
-            "badge_text": "Urejena prebava še ne pomeni nujno mirne kože."
+            "text": "<p>Ker podpora samo enemu delu ni dovolj. Črevesje, imunski odziv ter koža in dlaka so povezani. Če podpreš samo črevesje, koža ostane brez podpore — in praskanje se vrne.</p>",
+            "badge_text": "Urejena prebava še ne pomeni mirne kože."
           }
         },
         "card_2": {
@@ -1380,8 +1380,8 @@
           "type": "card",
           "settings": {
             "badge_text": "KOŽA IN DLAKA",
-            "title": "Podpora, ki se sčasoma tudi vidi.",
-            "text": "<p>Omega-3 iz krilove moke so v fosfolipidni obliki. Formula vsebuje tudi cink v kelatni obliki, biotin in mačeho. Te sestavine prispevajo k ohranjanju zdrave kože in dlake.</p>"
+            "title": "Podpora, ki se vidi.",
+            "text": "<p>Omega-3 iz krilove moke so v fosfolipidni obliki, zraven cink v kelatni obliki, biotin in mačeha. Te sestavine prispevajo k ohranjanju zdrave kože in dlake — na psu to opaziš kot gostejšo in bolj sijočo dlako.</p>"
           }
         }
       },
@@ -1508,7 +1508,7 @@
           "settings": {
             "image": "shopify://shop_images/MobiMix_Step_4.png",
             "title": "4. korak",
-            "description": "Postopek ponovi vsak dan. Spremembe pri prebavi se običajno pokažejo prej kot spremembe na koži in dlaki."
+            "description": "Postopek ponovi vsak dan. Spremembe pri prebavi opaziš prej kot spremembe na koži in dlaki."
           }
         }
       },
