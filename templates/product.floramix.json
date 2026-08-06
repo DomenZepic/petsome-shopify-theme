@@ -493,7 +493,7 @@
                     "horizontal_desktop_padding": 15,
                     "vertical_mobile_padding": 12,
                     "horizontal_mobile_padding": 12,
-                    "text_1": "Triple Biotic Complex: probiotik, prebiotik in postbiotik v enem prašku",
+                    "text_1": "Gut-Activated Defense™: probiotik, prebiotik in postbiotik v enem prašku",
                     "icon_1": "check_circle",
                     "filled_icon_1": true,
                     "text_2": "",
@@ -794,7 +794,7 @@
                 "visibility": "always-display",
                 "open": true,
                 "heading": "Kaj je FloraMix?",
-                "content": "<p>FloraMix je prašek za vsakodnevno uporabo, ki ga potreseš po pasji hrani. Namenjen je psom, ki se pogosto praskajo, ližejo tačke, stresajo z glavo ali imajo medlo dlako, mehko blato in napenjanje. Formula <strong>Triple Biotic Complex</strong> podpira črevesno floro, imunski odziv ter kožo in dlako. Pakiranje vsebuje 120 g. Pes do 15 kg potrebuje eno merico na dan.</p>",
+                "content": "<p>FloraMix je prašek za vsakodnevno uporabo, ki ga potreseš po pasji hrani. Namenjen je psom, ki se pogosto praskajo, ližejo tačke, stresajo z glavo ali imajo medlo dlako, mehko blato in napenjanje. Deluje po mehanizmu <strong>Gut-Activated Defense™</strong>: podpora se sproži v črevesju in gre naprej na imunski odziv ter kožo in dlako. Pakiranje vsebuje 120 g. Pes do 15 kg potrebuje eno merico na dan.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -863,8 +863,8 @@
               "settings": {
                 "visibility": "always-display",
                 "open": false,
-                "heading": "Kaj je Triple Biotic Complex?",
-                "content": "<p>Triple Biotic Complex združuje tri vrste podpore, ki se med seboj dopolnjujejo:</p><p><strong>Probiotika:</strong> <em>Enterococcus lactis</em> NCIMB 10415 in <em>Bacillus velezensis</em> DSM 15544. Oba sta v EU registrirana zootehnična dodatka za stabilizacijo črevesne flore.</p><p><strong>Prebiotik:</strong> cikorijev koren, ki je hrana za koristne bakterije v črevesju.</p><p><strong>Postbiotika:</strong> inaktivirana <em>Lactobacillus plantarum</em> CECT 9161 in <em>Lactobacillus helveticus</em> HA-122. Ker nista živa, sta stabilna ves rok uporabe izdelka.</p>",
+                "heading": "Kaj je Gut-Activated Defense™?",
+                "content": "<p><strong>Gut-Activated Defense™</strong> pomeni, da se podpora sproži v črevesju in od tam teče naprej — na imunski odziv ter na kožo in dlako. Temelj so trije biotiki, ki se med seboj dopolnjujejo:</p><p><strong>Probiotika:</strong> <em>Enterococcus lactis</em> NCIMB 10415 in <em>Bacillus velezensis</em> DSM 15544. Oba sta v EU registrirana zootehnična dodatka za stabilizacijo črevesne flore.</p><p><strong>Prebiotik:</strong> cikorijev koren, ki je hrana za koristne bakterije v črevesju.</p><p><strong>Postbiotika:</strong> inaktivirana <em>Lactobacillus plantarum</em> CECT 9161 in <em>Lactobacillus helveticus</em> HA-122. Ker nista živa, sta stabilna ves rok uporabe izdelka.</p><p>Prav te tri biotike najdeš na lončku pod oznako <strong>TRIPLE BIOTIC COMPLEX</strong> — obrni ga in preveri. Nanje FloraMix dodaja še sestavine za imunski odziv ter kožo in dlako.</p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -1391,9 +1391,9 @@
         "card_3"
       ],
       "settings": {
-        "kicker_text": "TRIPLE BIOTIC COMPLEX",
+        "kicker_text": "GUT-ACTIVATED DEFENSE™",
         "heading": "<p>Prebava je bolj urejena. Zakaj se pes še vedno praska?</p>",
-        "description": "<p>Ker se praskanje ne konča v črevesju — tam se začne. Probiotik podpira črevesje, sam po sebi pa ne naredi dovolj za imunski odziv ter kožo in dlako. <strong>Triple Biotic Complex</strong> zato združuje probiotik, prebiotik in postbiotik, FloraMix pa jim dodaja še sestavine za imunski odziv ter kožo in dlako.</p>",
+        "description": "<p>Ker se praskanje ne konča v črevesju — tam se začne. Probiotik podpira črevesje, sam po sebi pa ne naredi dovolj za imunski odziv ter kožo in dlako. <strong>Gut-Activated Defense™</strong> se sproži v črevesju s tremi biotiki, nato pa gre naprej: na imunski odziv in na kožo in dlako. Vse tri stopnje, ne samo prve.</p>",
         "pattern_image": "shopify://shop_images/paw_background.png",
         "background_color": "#e8d6c5",
         "kicker_background": "#e0b58d",
