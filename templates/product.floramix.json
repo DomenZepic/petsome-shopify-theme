@@ -6,8 +6,7 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */
-{
+ */{
   "sections": {
     "main": {
       "type": "main-product",
@@ -794,7 +793,7 @@
                 "visibility": "always-display",
                 "open": true,
                 "heading": "Kaj je FloraMix?",
-                "content": "<p>FloraMix je prašek za vsakodnevno uporabo, ki ga potreseš po pasji hrani. Namenjen je psom, ki se pogosto praskajo, ližejo tačke, stresajo z glavo ali imajo dlako brez leska, mehko blato in napenjanje. Deluje po mehanizmu <strong>Gut-Activated Defense™</strong>: podpora se sproži v črevesju in gre naprej na imunski odziv ter kožo in dlako. Pakiranje vsebuje 120 g. </p>",
+                "content": "<p>FloraMix je prašek za vsakodnevno uporabo, ki ga potreseš po pasji hrani. Namenjen je psom, ki se pogosto praskajo, ližejo tačke, stresajo z glavo, izgubljajo dlako ali imajo mehko blato in napenjanje. Deluje po mehanizmu <strong>Gut-Activated Defense™</strong>: podpora se sproži v črevesju in gre naprej na imunski odziv ter kožo in dlako. Pakiranje vsebuje 120 g. </p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -1042,7 +1041,7 @@
         "benefit_1": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/FloraMix_praskanje.png",
+            "image": "shopify://shop_images/FloraMix_card_praskanje.jpg",
             "icon": "pets",
             "filled_icon": false,
             "title": "Praskanje, ki se vsak večer začne znova",
@@ -1052,7 +1051,7 @@
         "benefit_2": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/FloraMix_lizanje_tack.png",
+            "image": "shopify://shop_images/FloraMix_card_tacke.jpg",
             "icon": "directions_run",
             "filled_icon": false,
             "title": "Lizanje tačk, ki ga slišiš sredi noči",
@@ -1062,21 +1061,21 @@
         "benefit_3": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/FloraMix_benefits.png",
+            "image": "shopify://shop_images/FloraMix_card_dlaka.jpg",
             "icon": "bolt",
             "filled_icon": true,
-            "title": "Dlaka brez leska in dlake po vsem stanovanju",
-            "text": "<p>Opaziš, da je dlaka gostejša na otip in bolj sijoča na svetlobi, dlake po stanovanju pa je manj. Za tem stojijo omega-3 iz krilove moke, cink v kelatni obliki in biotin, ki prispevajo k ohranjanju zdrave kože in dlake. To je sprememba, ki jo opazijo tudi drugi ljudje, ne le ti.</p>"
+            "title": "Pogosto izpadanje dlake in trda, suha dlaka",
+            "text": "<p>Dlake na kavču, na oblačilih, po vsem stanovanju — in dlaka, ki je na otip groba in suha. Za spremembo stojijo omega-3 iz krilove moke 22,44 %, cink v kelatni obliki in biotin, ki prispevajo k ohranjanju zdrave kože in dlake. To je sprememba, ki jo opazijo tudi drugi, ne le ti.</p>"
           }
         },
         "benefit_4": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/FloraMix_graf.png",
-            "icon": "shield",
+            "image": "shopify://shop_images/FloraMix_card_prebava.jpg",
+            "icon": "eco",
             "filled_icon": true,
-            "title": "Zakaj navaden probiotik ni dovolj",
-            "text": "<p>Navadni probiotik podpira predvsem črevesje. FloraMix poleg črevesne flore podpira tudi imunski odziv ter kožo in dlako. Zato je formula širše zastavljena in ni namenjena samo prebavi.</p>"
+            "title": "Blato, ki se začne trdo in se proti koncu zmehča",
+            "text": "<p>Tisti mesečni krogi driske, drsenje po zadnjici in vsakič nova hrana, ki naj bi to rešila. Cikorijev koren kot prva sestavina na deklaraciji hrani koristne bakterije, 300 milijard CFU na kilogram iz dveh v EU registriranih sevov in dva postbiotika pa podpirajo ravnovesje črevesne mikroflore. Prebava se umiri prva, koža pride za njo.</p>"
           }
         }
       },
@@ -1087,7 +1086,7 @@
         "benefit_4"
       ],
       "settings": {
-        "heading": "<p>Za pse, ki se praskajo, ližejo tačke, imajo dlako brez leska ali neurejeno prebavo.</p>",
+        "heading": "<p>Za pse, ki se praskajo, ližejo tačke, izgubljajo dlako ali imajo neurejeno prebavo.</p>",
         "columns": "2",
         "accent_color": "#f8aaa7",
         "secondary_color": "#e8d6c5",
@@ -1383,8 +1382,8 @@
           "settings": {
             "image": "shopify://shop_images/Kaching-Bundles-igC1PeA1mofml_AY0kJypTCCc.jpg",
             "dog_name": "Maša, 6-letna labradorka",
-            "issue": "Praskanje in dlaka brez leska",
-            "text": "<p>Maša se je praskala vsak večer, dlaka je bila brez leska in je izpadala. Po dveh mesecih rednega FloraMixa je dlaka po besedah lastnice gostejša in bolj sijoča, praskanja pa je manj.</p>"
+            "issue": "Praskanje in izpadanje dlake",
+            "text": "<p>Maša se je praskala vsak večer, dlaka je bila groba in je močno izpadala. Po dveh mesecih rednega FloraMixa je dlaka po besedah lastnice gostejša in bolj sijoča, praskanja pa je manj.</p>"
           }
         },
         "story_3": {
