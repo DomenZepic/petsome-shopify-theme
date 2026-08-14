@@ -1041,41 +1041,41 @@
         "benefit_1": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/FloraMix_card_praskanje.jpg",
+            "image": "shopify://shop_images/FloraMix_card_mir.jpg",
             "icon": "pets",
             "filled_icon": false,
-            "title": "Praskanje, ki se vsak večer začne znova",
-            "text": "<p>Prvo, kar opaziš, ni koža — ampak prebava: trdnejše blato, manj napenjanja, manj jedenja trave. Koža pride za tem. To ni naključje, ampak vrstni red, po katerem veriga deluje.</p>"
+            "title": "Manj praskanja že v 2–4 tednih",
+            "text": "<p>FloraMix začne pri črevesju, kjer se veriga začne. Večina lastnikov najprej opazi, da je večernega praskanja manj in da so noči mirnejše. Ne gre za prekrivanje srbenja, ampak za podporo črevesju, imunskemu odzivu in koži hkrati.</p>"
           }
         },
         "benefit_2": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/FloraMix_card_tacke.jpg",
+            "image": "shopify://shop_images/FloraMix_Step_2.png",
             "icon": "directions_run",
             "filled_icon": false,
-            "title": "Lizanje tačk, ki ga slišiš sredi noči",
-            "text": "<p>Tisti zvok ob dveh zjutraj in rjavi madeži med prsti. Ko podpreš prebavo, imunski odziv in kožo hkrati, je lizanja manj. Najprej postanejo tišje noči, šele nato je razlika vidna tudi podnevi.</p>"
+            "title": "Potreseš po obroku in to je vse",
+            "text": "<p>Prašek preprosto potreseš po običajnem obroku, odmerek pa prilagodiš teži psa. Ni tablet, ni prepričevanja, ni posebnih postopkov. FloraMix tako hitro postane del njegove vsakdanje rutine.</p>"
           }
         },
         "benefit_3": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/FloraMix_card_dlaka.jpg",
+            "image": "shopify://shop_images/FloraMix_card_spanje.jpg",
             "icon": "bolt",
             "filled_icon": true,
-            "title": "Pogosto izpadanje dlake in trda, suha dlaka",
-            "text": "<p>Dlake na kavču, na oblačilih, po vsem stanovanju — in dlaka, ki je na otip groba in suha. Za spremembo stojijo omega-3 iz krilove moke 22,44 %, cink v kelatni obliki in biotin, ki prispevajo k ohranjanju zdrave kože in dlake. To je sprememba, ki jo opazijo tudi drugi, ne le ti.</p>"
+            "title": "Spet noč brez praskanja",
+            "text": "<p>Ko srbenje popusti, se umirijo tudi noči. Ni več tistega zvoka ob dveh zjutraj in lizanja tačk, ki te zbudi. Tišina je pogosto prva stvar, ki jo opaziš.</p>"
           }
         },
         "benefit_4": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/FloraMix_card_prebava.jpg",
-            "icon": "eco",
+            "image": "shopify://shop_images/FloraMix_sijoca_dlaka.png",
+            "icon": "shield",
             "filled_icon": true,
-            "title": "Blato, ki se začne trdo in se proti koncu zmehča",
-            "text": "<p>Tisti mesečni krogi driske, drsenje po zadnjici in vsakič nova hrana, ki naj bi to rešila. Cikorijev koren kot prva sestavina na deklaraciji hrani koristne bakterije, 300 milijard CFU na kilogram iz dveh v EU registriranih sevov in dva postbiotika pa podpirajo ravnovesje črevesne mikroflore. Prebava se umiri prva, koža pride za njo.</p>"
+            "title": "Trdnejša prebava in gostejša dlaka na dolgi rok",
+            "text": "<p>FloraMix je namenjen redni in dolgotrajni uporabi. Cikorijev koren, 300 milijard CFU na kilogram iz dveh v EU registriranih sevov in dva postbiotika podpirajo ravnovesje črevesne mikroflore, ki je osnova za kožo in dlako. Zato razlika s časom raste.</p>"
           }
         }
       },
@@ -1086,7 +1086,7 @@
         "benefit_4"
       ],
       "settings": {
-        "heading": "<p>Za pse, ki se praskajo, ližejo tačke, izgubljajo dlako ali imajo neurejeno prebavo.</p>",
+        "heading": "<p>Celostna dnevna podpora za kožo, dlako in prebavo — več kot le probiotik.</p>",
         "columns": "2",
         "accent_color": "#f8aaa7",
         "secondary_color": "#e8d6c5",
