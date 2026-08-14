@@ -794,7 +794,7 @@
                 "visibility": "always-display",
                 "open": true,
                 "heading": "Kaj je FloraMix?",
-                "content": "<p>FloraMix je prašek za vsakodnevno uporabo, ki ga potreseš po pasji hrani. Namenjen je psom, ki se pogosto praskajo, ližejo tačke, stresajo z glavo ali imajo medlo dlako, mehko blato in napenjanje. Deluje po mehanizmu <strong>Gut-Activated Defense™</strong>: podpora se sproži v črevesju in gre naprej na imunski odziv ter kožo in dlako. Pakiranje vsebuje 120 g. Pes do 15 kg potrebuje eno merico na dan.</p>",
+                "content": "<p>FloraMix je prašek za vsakodnevno uporabo, ki ga potreseš po pasji hrani. Namenjen je psom, ki se pogosto praskajo, ližejo tačke, stresajo z glavo ali imajo medlo dlako, mehko blato in napenjanje. Deluje po mehanizmu <strong>Gut-Activated Defense™</strong>: podpora se sproži v črevesju in gre naprej na imunski odziv ter kožo in dlako. Pakiranje vsebuje 120 g. </p>",
                 "page": "",
                 "margin_top": 0,
                 "margin_bottom": 0
@@ -1513,7 +1513,7 @@
         "card_2"
       ],
       "settings": {
-        "image": "shopify://shop_images/FloraMix_explainer_split.png",
+        "image": "shopify://shop_images/FloraMix_graf_EN.png",
         "button_label": "Naroči FloraMix",
         "button_link": "",
         "button_icon": "shopping_bag",
