@@ -1044,38 +1044,38 @@
             "image": "shopify://shop_images/FloraMix_card_mir.jpg",
             "icon": "pets",
             "filled_icon": false,
-            "title": "Manj praskanja že v 2–4 tednih",
-            "text": "<p>FloraMix začne pri črevesju, kjer se veriga začne. Večina lastnikov najprej opazi, da je večernega praskanja manj in da so noči mirnejše. Ne gre za prekrivanje srbenja, ampak za podporo črevesju, imunskemu odzivu in koži hkrati.</p>"
+            "title": "Prvi rezultati že v 2–4 tednih",
+            "text": "<p>Manj večernega praskanja, konec lizanja tačk sredi noči, tačke spet svetle namesto rjavkastih, trdnejše blato in mirnejše noči. FloraMix začne pri črevesju, kjer se veriga začne, in podpira črevesje, imunski odziv ter kožo hkrati. Ne gre za prekrivanje srbenja, ampak za podporo celotni verigi.</p>"
           }
         },
         "benefit_2": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/FloraMix_Step_2.png",
+            "image": "shopify://shop_images/FloraMix_card_sprehod.jpg",
             "icon": "directions_run",
             "filled_icon": false,
-            "title": "Potreseš po obroku in to je vse",
-            "text": "<p>Prašek preprosto potreseš po običajnem obroku, odmerek pa prilagodiš teži psa. Ni tablet, ni prepričevanja, ni posebnih postopkov. FloraMix tako hitro postane del njegove vsakdanje rutine.</p>"
+            "title": "Trdnejše blato in mirnejši trebuh",
+            "text": "<p>Blato je trdnejše in bolj enakomerno, napenjanja in kruljenja je manj, sprehodi se končajo brez presenečenj. Za tem stoji cikorijev koren kot prva sestavina na deklaraciji, 300 milijard CFU na kilogram iz dveh v EU registriranih sevov in dva postbiotika. Prašek potreseš po običajnem obroku, odmerek prilagodiš teži psa.</p>"
           }
         },
         "benefit_3": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/FloraMix_card_spanje.jpg",
+            "image": "shopify://shop_images/FloraMix_sijoca_dlaka.png",
             "icon": "bolt",
             "filled_icon": true,
-            "title": "Spet noč brez praskanja",
-            "text": "<p>Ko srbenje popusti, se umirijo tudi noči. Ni več tistega zvoka ob dveh zjutraj in lizanja tačk, ki te zbudi. Tišina je pogosto prva stvar, ki jo opaziš.</p>"
+            "title": "Gostejša dlaka in manj dlak po stanovanju",
+            "text": "<p>Dlaka je gostejša na otip in bolj sijoča na svetlobi, izpadanja je manj — in z njim tudi dlak po kavču in oblačilih. Omega-3 iz krilove moke 22,44 %, cink v kelatni obliki in biotin prispevajo k ohranjanju zdrave kože in dlake. To je sprememba, ki jo opazijo tudi drugi, ne le ti.</p>"
           }
         },
         "benefit_4": {
           "type": "benefit",
           "settings": {
-            "image": "shopify://shop_images/FloraMix_sijoca_dlaka.png",
+            "image": "shopify://shop_images/FloraMix_card_spanje.jpg",
             "icon": "shield",
             "filled_icon": true,
-            "title": "Trdnejša prebava in gostejša dlaka na dolgi rok",
-            "text": "<p>FloraMix je namenjen redni in dolgotrajni uporabi. Cikorijev koren, 300 milijard CFU na kilogram iz dveh v EU registriranih sevov in dva postbiotika podpirajo ravnovesje črevesne mikroflore, ki je osnova za kožo in dlako. Zato razlika s časom raste.</p>"
+            "title": "Cela veriga, ne le črevesje",
+            "text": "<p>Navaden probiotik podpira predvsem črevesje, srbenje pa nastane v imunskem odzivu, ki mu sledi. FloraMix podpira vse tri člene hkrati — črevesje, imunski odziv ter kožo in dlako. Namenjen je redni in dolgotrajni uporabi, zato razlika s časom raste.</p>"
           }
         }
       },
