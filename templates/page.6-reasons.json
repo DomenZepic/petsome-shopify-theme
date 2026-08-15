@@ -168,21 +168,21 @@
         "step_1": {
           "type": "step",
           "settings": {
-            "badge_text": "Days 1-2",
+            "badge_text": "DAY 1-5",
             "text": "<p><strong>The gut wakes up.</strong> The prebiotic fibre gets to work. Many owners notice easier, more regular digestion within a day or two.</p>"
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
-            "badge_text": "Days 3-4",
+            "badge_text": "DAY 6-10",
             "text": "<p><strong>Mornings feel lighter.</strong> Less of that heavy, sluggish feeling. Energy through the day comes on steadier.</p>"
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
-            "badge_text": "Days 5-7",
+            "badge_text": "DAY 10-14",
             "text": "<p><strong>More like themselves.</strong> Less bloating by evening, a calmer tummy, and the daily scoop becomes a habit.</p>"
           }
         }
@@ -193,17 +193,20 @@
         "step_3"
       ],
       "settings": {
-        "eyebrow": "The first 7 days",
-        "heading": "<p>What is actually happening inside</p>",
-        "subheading": "<p>A slow gut and years of routine leave the whole system feeling sluggish. Here's how most owners describe their dog's first week.</p>",
+        "eyebrow": "First 14 days",
+        "heading": "<p>First steps happen fast</p>",
+        "subheading": "<p>A slow gut and years of routine leave the whole system feeling sluggish. Here's how most owners describe their dog's first two weeks.</p>",
         "image": "shopify://shop_images/hf_20260713_165719_3d2d789b-0b91-400e-b9ae-5854d33e0906.png",
-        "footnote": "<p>Every dog is different. Any change in week one is simply the body adjusting — not a cleanse, not a laxative.</p>",
-        "background_color": "#ede4d3",
+        "footnote": "<p>Every dog is different. Any changes you see or don't see in the first week are simply your dog's body adjusting to a better joint pace. This is a dietary supplement, not a treatment.</p>",
+        "background_color": "#fcdddc",
+        "text_color": "#3b2f2f",
         "accent_color": "#f8aaa7",
-        "accent_color_dark": "#f8aaa7",
-        "secondary_color": "#e8d6c5",
-        "padding_top": 64,
-        "padding_bottom": 64
+        "accent_color_dark": "#f47671",
+        "line_color": "#fac3c1",
+        "card_color": "#ffffff",
+        "footnote_color": "#565858",
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     },
     "stats": {
