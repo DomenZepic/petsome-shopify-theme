@@ -91,78 +91,54 @@
           "type": "reason",
           "settings": {
             "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png",
-            "tag": "Joints",
-            "icon": "pets",
-            "filled_icon": false,
-            "title": "Easier movement, day after day",
-            "text": "<p>Glucosamine and omega-3s help cushion the joints, so stairs, walks and jumping back onto the couch feel less like hard work.</p>",
-            "cta_label": "",
-            "cta_url": ""
+            "tag": "It's not your fault",
+            "title": "Reassure it is not their fault for this problem",
+            "text": "<p>Take the blame off the owner before anything else.</p>"
           }
         },
         "reason_2": {
           "type": "reason",
           "settings": {
             "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png",
-            "tag": "Digestion",
-            "icon": "eco",
-            "filled_icon": false,
-            "title": "A calmer, happier gut",
-            "text": "<p>Prebiotic fibre feeds the good bacteria, helping firm up stools and settle a sensitive tummy — no more guessing after every meal.</p>",
-            "cta_label": "",
-            "cta_url": ""
+            "tag": "The real problem",
+            "title": "Explain the problem - why does it happen",
+            "text": "<p>Think \"You are stuck in survival mode\", \"Nobody told you running too much does this to joints\"...</p>"
           }
         },
         "reason_3": {
           "type": "reason",
           "settings": {
             "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png",
-            "tag": "Coat",
-            "icon": "auto_awesome",
-            "filled_icon": false,
-            "title": "A shinier, fuller coat",
-            "text": "<p>Zinc, biotin and essential fats work from the inside out for a softer coat and less shedding on the sofa.</p>",
-            "cta_label": "",
-            "cta_url": ""
+            "tag": "Ingredient highlight 1 (Mechanism)",
+            "title": "Introduce a way out",
+            "text": "<p>This ingredient has been used by xy in wz for 1000s of years. In MobiMix, it supports joints in X way so it doesn't come to Y problem above.</p>"
           }
         },
         "reason_4": {
           "type": "reason",
           "settings": {
             "image": "shopify://shop_images/hf_20260715_183826_c908ba8d-6a6a-4516-a1c5-72f1ec0df3d4.png",
-            "tag": "Calm",
-            "icon": "spa",
-            "filled_icon": false,
-            "title": "More settled, less on edge",
-            "text": "<p>Gentle adaptogens take the edge off everyday stress — car rides, visitors and thunderstorms feel a little less dramatic.</p>",
-            "cta_label": "",
-            "cta_url": ""
+            "tag": "Ingredient highlight 2 (Mechanism 2)",
+            "title": "Remove any other doubt",
+            "text": "<p>This ingredient causes this other problem to go away as well.</p>"
           }
         },
         "reason_5": {
           "type": "reason",
           "settings": {
             "image": "shopify://shop_images/hf_20260713_165343_fa82d984-8de5-433f-88d2-3d5047daa731.png",
-            "tag": "Immunity",
-            "icon": "health_and_safety",
-            "filled_icon": false,
-            "title": "Quiet support for the immune system",
-            "text": "<p>Antioxidants and functional mushrooms help the body do what it already does — just with a bit more backup.</p>",
-            "cta_label": "",
-            "cta_url": ""
+            "tag": "Ingredient highlight 3 (Mechanism 3)",
+            "title": "Present the dream here",
+            "text": "<p>Introduce the dream here: \"For many dog-moms, having a happy, healthy dog is not only about owning a pet. It's about making sure she is capable of taking care of a family member. X ingredient helps your dog regain that agility you were looking for.\"</p>"
           }
         },
         "reason_6": {
           "type": "reason",
           "settings": {
             "image": "shopify://shop_images/hf_20260713_163447_2d99eb36-2604-4301-adaf-5d2fc17329e7.png",
-            "tag": "Simplicity",
-            "icon": "restaurant",
-            "filled_icon": false,
-            "title": "One scoop replaces the whole shelf",
-            "text": "<p>Everything in a single tasty scoop over food. No pill battles, no five different tubs — just one step at breakfast.</p>",
-            "cta_label": "",
-            "cta_url": ""
+            "tag": "Ease of use",
+            "title": "A small thing you can do for your dog every day",
+            "text": "<p>Us vs them: dogs don't want to eat powder, while chews do not help joints at all. MobiMix is easy to use - you just give the capsule to your dog with a small treat and he won't even notice. MobiMix is protected by a 60-day money-back guarantee.</p>"
           }
         }
       },
@@ -175,17 +151,15 @@
         "reason_6"
       ],
       "settings": {
-        "eyebrow": "6 reasons",
-        "heading": "<p>6 reasons your dog's body will love it</p>",
-        "subheading": "<p>Real, everyday changes you can actually notice — not a long list of ingredients.</p>",
-        "layout": "rows",
-        "columns": "3",
         "show_numbers": true,
+        "pad_numbers": true,
+        "number_start": 1,
         "background_color": "#fdfbf7",
-        "accent_color": "#f8aaa7",
-        "secondary_color": "#e8d6c5",
-        "padding_top": 56,
-        "padding_bottom": 56
+        "text_color": "#3b2f2f",
+        "accent_color": "#f04842",
+        "divider_color": "#565858",
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     },
     "timeline": {

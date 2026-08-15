@@ -252,44 +252,18 @@
   /* ---------- Tablet / mobile ---------- */
 
   @media screen and (max-width: 989px) {
+    /* The whole text column stacks above the whole image - no interleaving. */
     #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__inner {
       flex-direction: column;
       align-items: stretch;
-      gap: 20px;
-    }
-
-    /* Lets the text column's children become flex items of .inner, so the
-       image can slot in between the heading and the body copy. */
-    #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__col {
-      display: contents;
+      gap: 40px;
     }
 
     #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__media {
       flex: 0 0 auto;
-      order: 3;
       width: 100%;
       max-width: 580px;
       margin: 0 auto;
-    }
-
-    #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__badge {
-      order: 1;
-    }
-
-    #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__heading {
-      order: 2;
-    }
-
-    #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__body {
-      order: 4;
-    }
-
-    #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__actions {
-      order: 5;
-    }
-
-    #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__gifts {
-      order: 6;
     }
   }
 

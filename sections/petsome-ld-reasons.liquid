@@ -1,368 +1,219 @@
 {% comment %}
-  Petsome Ld: Reasons - the flagship "N reasons why" storytelling section for
-  landing pages (the "Ld" family). A header (eyebrow + heading + subheading)
-  followed by repeatable "reason" blocks, each with an optional number, tag
-  pill, image, icon, title, description and per-reason CTA.
+  Petsome Ld: Reasons - the "N reasons why" storytelling section for landing
+  pages (the "Ld" family). Repeatable "reason" blocks, each an editorial row:
+  copy on the left (auto-numbered label + tag, title, body) and an image on the
+  right, with a hairline divider between rows. Add or remove blocks freely -
+  the numbers renumber themselves from the block order, so there is nothing to
+  keep in sync by hand.
 
-  Two layouts, switchable per instance from the theme editor:
-    - "Alternating rows": full-width editorial rows, image/text sides swap.
-    - "Card grid": compact 2/3-up cards.
+  On mobile each row stacks with the whole text block above its image.
 
   Uses the BODY font everywhere (no heading font) so the whole landing page
   reads as one consistent style. Fully settings-driven so translation apps
-  pick up all copy. Accent/secondary colors default to the product's
-  metafields when set, falling back to this section's own color settings.
+  pick up all copy.
 {% endcomment %}
-{%- liquid
-  assign accent_color = product.metafields.custom.product_accent_color.value | default: section.settings.accent_color
-  assign secondary_color = product.metafields.custom.product_secondary_color.value | default: section.settings.secondary_color
--%}
 <style>
   #petsome-ld-reasons-{{ section.id }} {
-    --pr-accent: {{ accent_color }};
-    --pr-secondary: {{ secondary_color }};
-    --pr-accent-tint: color-mix(in srgb, var(--pr-accent) 16%, white);
-    --pr-secondary-tint: color-mix(in srgb, var(--pr-secondary) 20%, white);
+    --pr-text: {{ section.settings.text_color }};
+    --pr-accent: {{ section.settings.accent_color }};
+    --pr-divider: {{ section.settings.divider_color }};
     background-color: {{ section.settings.background_color }};
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
+    padding: {{ section.settings.padding_top }}px var(--petsome-padding-x) {{ section.settings.padding_bottom }}px;
     font-family: var(--font-body-family);
+    color: var(--pr-text);
   }
 
   #petsome-ld-reasons-{{ section.id }} * {
     font-family: var(--font-body-family);
   }
 
+  #petsome-ld-reasons-{{ section.id }} p {
+    margin: 0;
+  }
+
   #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__inner {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
-    padding: 0 var(--petsome-padding-x);
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
   }
 
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__header {
-    text-align: center;
-    max-width: 760px;
-    margin: 0 auto 48px;
-  }
-
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__eyebrow {
-    display: inline-block;
-    font-size: 1.4rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--pr-accent);
-    margin: 0 0 12px;
-  }
-
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__heading {
-    font-weight: 800;
-    font-size: var(--petsome-heading-size);
-    line-height: 1.2;
-    color: rgb(var(--color-foreground));
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__divider {
+    height: 1px;
+    width: 100%;
+    background-color: var(--pr-divider);
+    opacity: 0.2;
+    border: 0;
     margin: 0;
   }
 
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__heading p {
-    margin: 0;
-  }
-
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__subheading {
-    font-size: 1.8rem;
-    line-height: 1.5;
-    color: rgba(var(--color-foreground), 0.65);
-    margin: 16px 0 0;
-  }
-
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__subheading p {
-    margin: 0;
-  }
-
-  /* ---------- Shared reason pieces ---------- */
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__eyebrow-row {
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 14px;
-  }
-
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__number {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    border: 2px solid var(--pr-accent);
-    background-color: var(--pr-accent-tint);
-    font-weight: 800;
-    font-size: 2rem;
-    color: var(--pr-accent);
-  }
-
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 5px 14px;
-    border-radius: 100px;
-    background-color: var(--pr-secondary-tint);
-    font-size: 1.3rem;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    color: rgb(var(--color-foreground));
-  }
-
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__tag .material-icon,
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__tag img {
-    width: 18px;
-    height: 18px;
-    font-size: 18px;
-    object-fit: contain;
-    color: var(--pr-accent);
-  }
-
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__title {
-    font-weight: 700;
-    font-size: 2.4rem;
-    line-height: 1.25;
-    color: rgb(var(--color-foreground));
-    margin: 0 0 10px;
+    gap: 40px;
   }
 
   #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__text {
-    font-size: 1.6rem;
-    line-height: 1.6;
-    color: rgb(var(--color-foreground));
+    flex: 1 0 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    word-break: break-word;
+  }
+
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.25;
+    color: var(--pr-accent);
+  }
+
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__number {
+    font-size: 3.2rem;
+    font-weight: 900;
+  }
+
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__tag {
+    font-size: 1.8rem;
+    font-weight: 900;
+  }
+
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__title {
+    font-size: 3.2rem;
+    font-weight: 900;
+    line-height: 1.25;
     margin: 0;
   }
 
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__text p {
-    margin: 0 0 10px;
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__body {
+    font-size: 1.7rem;
+    line-height: 1.5;
   }
 
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__text p:last-child {
-    margin-bottom: 0;
-  }
-
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-top: 18px;
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--pr-accent);
-    text-decoration: none;
-  }
-
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__cta .material-icon {
-    font-size: 1.8rem;
-    transition: transform 0.2s ease;
-  }
-
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__cta:hover .material-icon {
-    transform: translateX(4px);
+  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__body p + p {
+    margin-top: 1em;
   }
 
   #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__media {
-    position: relative;
-    border-radius: 20px;
+    flex: 0 1 580px;
+    max-width: 580px;
+    aspect-ratio: 620 / 413;
+    border-radius: 12px;
     overflow: hidden;
-    background-color: var(--pr-secondary-tint);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   }
 
   #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__media img {
-    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
   }
 
-  /* ---------- Layout: Alternating rows ---------- */
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--rows {
-    display: flex;
-    flex-direction: column;
-    gap: 72px;
-  }
-
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--rows .petsome-ld-reason {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 56px;
-  }
-
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--rows .petsome-ld-reason:nth-child(even) .petsome-ld-reason__media {
-    order: 2;
-  }
-
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--rows .petsome-ld-reason__media {
-    aspect-ratio: 4 / 3;
-  }
-
-  /* ---------- Layout: Card grid ---------- */
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--grid {
-    display: grid;
-    grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
-    gap: 24px;
-  }
-
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--grid .petsome-ld-reason {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--pr-secondary);
-    border-radius: 20px;
-    overflow: hidden;
-    background-color: #ffffff;
-  }
-
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--grid .petsome-ld-reason__media {
-    border-radius: 0;
-    aspect-ratio: 3 / 2;
-  }
-
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--grid .petsome-ld-reason__body {
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-
-  #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--grid .petsome-ld-reason--no-media .petsome-ld-reason__body {
-    padding-top: 28px;
-  }
-
-  /* ---------- Mobile ---------- */
   @media screen and (max-width: 989px) {
-    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--grid {
-      grid-template-columns: repeat(2, 1fr);
+    /* The whole text block stacks above its image - no interleaving. */
+    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 24px;
+    }
+
+    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__media {
+      flex: 0 0 auto;
+      width: 100%;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__inner {
+      gap: 48px;
     }
   }
 
   @media screen and (max-width: 749px) {
-    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__header {
-      margin-bottom: 32px;
-    }
-
-    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--rows {
-      gap: 48px;
-    }
-
-    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--rows .petsome-ld-reason {
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-
-    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--rows .petsome-ld-reason:nth-child(even) .petsome-ld-reason__media {
-      order: 0;
-    }
-
-    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons--grid {
-      grid-template-columns: 1fr;
-    }
-
     #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__number {
-      width: 42px;
-      height: 42px;
-      font-size: 1.8rem;
+      font-size: 2.8rem;
+    }
+
+    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__tag {
+      font-size: 1.6rem;
     }
 
     #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__title {
-      font-size: 2.1rem;
+      font-size: 2.4rem;
+    }
+
+    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__body {
+      font-size: 1.6rem;
+    }
+
+    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__label {
+      flex-wrap: wrap;
+      gap: 4px 8px;
     }
   }
 </style>
 
 {%- if section.blocks.size > 0 -%}
-  {%- assign layout_class = 'petsome-ld-reasons--rows' -%}
-  {%- if section.settings.layout == 'grid' -%}
-    {%- assign layout_class = 'petsome-ld-reasons--grid' -%}
-  {%- endif -%}
-
   <div id="petsome-ld-reasons-{{ section.id }}" class="petsome-ld-reasons">
     <div class="petsome-ld-reasons__inner">
-      {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.subheading != blank -%}
-        <div class="petsome-ld-reasons__header">
-          {%- if section.settings.eyebrow != blank -%}
-            <span class="petsome-ld-reasons__eyebrow">{{ section.settings.eyebrow }}</span>
-          {%- endif -%}
-          {%- if section.settings.heading != blank -%}
-            <div class="petsome-ld-reasons__heading">{{ section.settings.heading }}</div>
-          {%- endif -%}
-          {%- if section.settings.subheading != blank -%}
-            <div class="petsome-ld-reasons__subheading">{{ section.settings.subheading }}</div>
-          {%- endif -%}
-        </div>
-      {%- endif -%}
+      {%- for block in section.blocks -%}
+        {%- if forloop.index > 1 -%}
+          <hr class="petsome-ld-reasons__divider">
+        {%- endif -%}
 
-      <div class="petsome-ld-reasons__list {{ layout_class }}">
-        {%- for block in section.blocks -%}
-          {%- liquid
-            assign has_media = false
-            if block.settings.image != blank
-              assign has_media = true
-            endif
-            assign has_tag = false
-            if block.settings.tag != blank or block.settings.icon != blank or block.settings.custom_icon != blank
-              assign has_tag = true
-            endif
-          -%}
-          <div
-            class="petsome-ld-reason{% unless has_media %} petsome-ld-reason--no-media{% endunless %}"
-            {{ block.shopify_attributes }}
-          >
-            {%- if has_media -%}
-              <div class="petsome-ld-reason__media">
-                <img
-                  src="{{ block.settings.image | image_url: width: 1200 }}"
-                  alt="{{ block.settings.image.alt | default: block.settings.title | escape }}"
-                  width="{{ block.settings.image.width }}"
-                  height="{{ block.settings.image.height }}"
-                  loading="lazy"
-                >
+        {%- liquid
+          assign number = forloop.index | plus: section.settings.number_start | minus: 1
+          if section.settings.pad_numbers
+            assign number = number | prepend: '0' | slice: -2, 2
+          endif
+        -%}
+
+        <div class="petsome-ld-reason" {{ block.shopify_attributes }}>
+          <div class="petsome-ld-reason__text">
+            {%- if section.settings.show_numbers or block.settings.tag != blank -%}
+              <div class="petsome-ld-reason__label">
+                {%- if section.settings.show_numbers -%}
+                  <span class="petsome-ld-reason__number">{{ number }}</span>
+                {%- endif -%}
+                {%- if block.settings.tag != blank -%}
+                  <span class="petsome-ld-reason__tag">{{ block.settings.tag }}</span>
+                {%- endif -%}
               </div>
             {%- endif -%}
 
-            <div class="petsome-ld-reason__body">
-              {%- if section.settings.show_numbers or has_tag -%}
-                <div class="petsome-ld-reason__eyebrow-row">
-                  {%- if section.settings.show_numbers -%}
-                    <span class="petsome-ld-reason__number">
-                      {%- assign n = forloop.index -%}
-                      {%- if n < 10 -%}0{%- endif -%}{{ n }}
-                    </span>
-                  {%- endif -%}
-                  {%- if has_tag -%}
-                    <span class="petsome-ld-reason__tag">
-                      {%- if block.settings.custom_icon != blank -%}
-                        <img src="{{ block.settings.custom_icon | image_url: width: 36 }}" alt="">
-                      {%- elsif block.settings.icon != blank -%}
-                        {% render 'material-icon', icon: block.settings.icon, filled: block.settings.filled_icon %}
-                      {%- endif -%}
-                      {%- if block.settings.tag != blank -%}{{ block.settings.tag }}{%- endif -%}
-                    </span>
-                  {%- endif -%}
-                </div>
-              {%- endif -%}
+            {%- if block.settings.title != blank -%}
+              <h2 class="petsome-ld-reason__title">{{ block.settings.title }}</h2>
+            {%- endif -%}
 
-              {%- if block.settings.title != blank -%}
-                <p class="petsome-ld-reason__title">{{ block.settings.title }}</p>
-              {%- endif -%}
-              {%- if block.settings.text != blank -%}
-                <div class="petsome-ld-reason__text">{{ block.settings.text }}</div>
-              {%- endif -%}
-              {%- if block.settings.cta_label != blank and block.settings.cta_url != blank -%}
-                <a href="{{ block.settings.cta_url }}" class="petsome-ld-reason__cta">
-                  {{ block.settings.cta_label }}
-                  {% render 'material-icon', icon: 'arrow_forward' %}
-                </a>
-              {%- endif -%}
-            </div>
+            {%- if block.settings.text != blank -%}
+              <div class="petsome-ld-reason__body rte">{{ block.settings.text }}</div>
+            {%- endif -%}
           </div>
-        {%- endfor -%}
-      </div>
+
+          {%- if block.settings.image != blank -%}
+            <div class="petsome-ld-reason__media">
+              <img
+                src="{{ block.settings.image | image_url: width: 1160 }}"
+                srcset="
+                  {{ block.settings.image | image_url: width: 580 }} 580w,
+                  {{ block.settings.image | image_url: width: 870 }} 870w,
+                  {{ block.settings.image | image_url: width: 1160 }} 1160w
+                "
+                sizes="(min-width: 990px) 580px, min(100vw, 580px)"
+                alt="{{ block.settings.image.alt | escape }}"
+                width="{{ block.settings.image.width }}"
+                height="{{ block.settings.image.height }}"
+                loading="lazy"
+              >
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
     </div>
   </div>
 {%- endif -%}
@@ -375,83 +226,33 @@
   "settings": [
     {
       "type": "header",
-      "content": "Header"
+      "content": "Numbering"
     },
     {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Eyebrow (small label above heading)",
-      "default": "6 reasons"
-    },
-    {
-      "type": "richtext",
-      "id": "heading",
-      "label": "Heading",
-      "default": "<p>6 reasons your dog's body will love it</p>"
-    },
-    {
-      "type": "richtext",
-      "id": "subheading",
-      "label": "Subheading"
-    },
-    {
-      "type": "header",
-      "content": "Layout"
-    },
-    {
-      "type": "select",
-      "id": "layout",
-      "label": "Layout",
-      "options": [
-        { "value": "rows", "label": "Alternating rows (storytelling)" },
-        { "value": "grid", "label": "Card grid (scannable)" }
-      ],
-      "default": "rows"
-    },
-    {
-      "type": "select",
-      "id": "columns",
-      "label": "Columns (grid layout, desktop)",
-      "info": "Only applies when Layout is set to Card grid.",
-      "options": [
-        { "value": "2", "label": "2" },
-        { "value": "3", "label": "3" }
-      ],
-      "default": "3"
+      "type": "paragraph",
+      "content": "Numbers follow the block order automatically - reorder, add or delete reasons and they renumber themselves."
     },
     {
       "type": "checkbox",
       "id": "show_numbers",
-      "label": "Show numbers (01, 02, 03…)",
+      "label": "Show numbers",
       "default": true
     },
     {
-      "type": "header",
-      "content": "Colors"
+      "type": "checkbox",
+      "id": "pad_numbers",
+      "label": "Pad with a leading zero",
+      "info": "01, 02, 03 instead of 1, 2, 3.",
+      "default": true
     },
     {
-      "type": "paragraph",
-      "content": "If the product has a \"Product accent color\" / \"Product secondary color\" metafield set, that value is used instead of the colors below - these only apply as a fallback when the metafield is blank."
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Section background",
-      "default": "#FDFBF7"
-    },
-    {
-      "type": "color",
-      "id": "accent_color",
-      "label": "Accent color (fallback)",
-      "info": "Used for numbers, tags and the reason CTA.",
-      "default": "#F8AAA7"
-    },
-    {
-      "type": "color",
-      "id": "secondary_color",
-      "label": "Secondary color (fallback)",
-      "info": "Used for card borders, tag pills and image backgrounds.",
-      "default": "#E8D6C5"
+      "type": "range",
+      "id": "number_start",
+      "label": "Start numbering at",
+      "min": 1,
+      "max": 20,
+      "step": 1,
+      "default": 1
     },
     {
       "type": "header",
@@ -465,7 +266,7 @@
       "max": 120,
       "step": 4,
       "unit": "px",
-      "default": 56
+      "default": 80
     },
     {
       "type": "range",
@@ -475,7 +276,36 @@
       "max": 120,
       "step": 4,
       "unit": "px",
-      "default": 56
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FDFBF7"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#3B2F2F"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Number and tag",
+      "default": "#F04842"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider",
+      "info": "Shown at 20% opacity.",
+      "default": "#565858"
     }
   ],
   "blocks": [
@@ -484,55 +314,29 @@
       "name": "Reason",
       "settings": [
         {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
           "type": "text",
           "id": "tag",
-          "label": "Tag (small pill label, optional)",
-          "info": "E.g. \"Digestion\", \"Joints\", \"Coat\"."
-        },
-        {
-          "type": "text",
-          "id": "icon",
-          "label": "Tag icon",
-          "info": "Optional. [View all available icons](https://fonts.google.com/icons?icon.set=Material+Symbols&icon.platform=web). Ignored if a custom icon image is set below.",
-          "default": "check_circle"
-        },
-        {
-          "type": "checkbox",
-          "id": "filled_icon",
-          "label": "Filled icon",
-          "default": false
-        },
-        {
-          "type": "image_picker",
-          "id": "custom_icon",
-          "label": "Custom tag icon (optional)"
+          "label": "Tag",
+          "info": "The short label next to the number.",
+          "default": "It's not your fault"
         },
         {
           "type": "text",
           "id": "title",
           "label": "Title",
-          "default": "Reason title"
+          "default": "Reassure it is not their fault for this problem"
         },
         {
           "type": "richtext",
           "id": "text",
-          "label": "Description",
-          "default": "<p>Explain this reason and the benefit for the pet. Keep it concrete and specific.</p>"
+          "label": "Body copy",
+          "default": "<p>Explain this reason in a couple of short paragraphs.</p>"
         },
         {
-          "type": "text",
-          "id": "cta_label",
-          "label": "Link label (optional)"
-        },
-        {
-          "type": "url",
-          "id": "cta_url",
-          "label": "Link URL (optional)"
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image",
+          "info": "Shown at 3:2 (620 × 413). Recommended 1160 × 773px."
         }
       ]
     }
