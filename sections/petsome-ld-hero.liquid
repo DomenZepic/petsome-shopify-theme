@@ -107,7 +107,9 @@
     flex-shrink: 0;
   }
 
-  #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__stars .material-icon {
+  #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__stars .petsome-ld-icon {
+    display: block;
+    flex-shrink: 0;
     font-size: 1.4rem;
     line-height: 1;
     color: var(--ldh-star);
@@ -361,7 +363,7 @@
           {%- if section.settings.show_badge_stars -%}
             <div class="petsome-ld-hero__stars" aria-hidden="true">
               {%- for i in (1..5) -%}
-                {% render 'material-icon', icon: 'star', filled: true %}
+                {% render 'petsome-ld-icon', icon: 'star' %}
               {%- endfor -%}
             </div>
           {%- endif -%}
@@ -395,7 +397,7 @@
                 <div class="petsome-ld-hero__proof">
                   <div class="petsome-ld-hero__stars" aria-hidden="true">
                     {%- for i in (1..5) -%}
-                      {% render 'material-icon', icon: 'star', filled: true %}
+                      {% render 'petsome-ld-icon', icon: 'star' %}
                     {%- endfor -%}
                   </div>
                   <p class="petsome-ld-hero__proof-text">{{ section.settings.proof_text }}</p>

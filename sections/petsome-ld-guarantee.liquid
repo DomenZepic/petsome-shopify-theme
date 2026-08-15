@@ -51,7 +51,9 @@
     word-break: break-word;
   }
 
-  #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__icon .material-icon {
+  #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__icon .petsome-ld-icon {
+    display: block;
+    flex-shrink: 0;
     font-size: 7.5rem;
     color: var(--ldg-icon);
   }
@@ -101,7 +103,7 @@
       gap: 32px;
     }
 
-    #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__icon .material-icon {
+    #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__icon .petsome-ld-icon {
       font-size: 5.6rem;
     }
 
@@ -126,7 +128,7 @@
     <div class="petsome-ld-guarantee__header">
       {%- if section.settings.show_icon -%}
         <span class="petsome-ld-guarantee__icon" aria-hidden="true">
-          {% render 'material-icon', icon: section.settings.icon, filled: true %}
+          {% render 'petsome-ld-icon', icon: section.settings.icon %}
         </span>
       {%- endif -%}
 
@@ -164,10 +166,15 @@
       "default": true
     },
     {
-      "type": "text",
+      "type": "select",
       "id": "icon",
-      "label": "Material icon name",
-      "info": "Any Material Symbols name, e.g. verified_user, shield, workspace_premium.",
+      "label": "Icon",
+      "options": [
+        { "value": "verified_user", "label": "Shield with check" },
+        { "value": "workspace_premium", "label": "Award" },
+        { "value": "local_shipping", "label": "Delivery truck" },
+        { "value": "star", "label": "Star" }
+      ],
       "default": "verified_user"
     },
     {

@@ -1,0 +1,47 @@
+{%- comment -%}
+  Petsome Ld: inline icon.
+
+  The "Ld" sections force the body font on every descendant
+  (`#section-id * { font-family: ... }`), and that selector outranks the
+  `.material-symbols-outlined` rule Google Fonts ships - which would replace the
+  icon font with the body font and leave the raw ligature text on screen
+  ("verified_user" clipped to "ve"). These are the same Material Symbols glyphs
+  as real paths instead, so they cannot be broken by a font rule and need no
+  webfont to load.
+
+  Usage: {% render 'petsome-ld-icon', icon: 'star' %}
+
+  The svg is sized in `em`, so set `font-size` on it (or its parent) to scale it,
+  and `color` to recolour it - exactly like the icon font behaved.
+{%- endcomment -%}
+{%- liquid
+  assign d = ''
+  case icon
+    when 'star'
+      assign d = 'm233-120 65-281L80-590l288-25 112-265 112 265 288 25-218 189 65 281-247-149-247 149Z'
+    when 'add'
+      assign d = 'M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z'
+    when 'close'
+      assign d = 'm256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z'
+    when 'local_shipping'
+      assign d = 'M155-195q-35-35-35-85H40v-440q0-33 23.5-56.5T120-800h560v160h120l120 160v200h-80q0 50-35 85t-85 35q-50 0-85-35t-35-85H360q0 50-35 85t-85 35q-50 0-85-35Zm113.5-56.5Q280-263 280-280t-11.5-28.5Q257-320 240-320t-28.5 11.5Q200-297 200-280t11.5 28.5Q223-240 240-240t28.5-11.5Zm480 0Q760-263 760-280t-11.5-28.5Q737-320 720-320t-28.5 11.5Q680-297 680-280t11.5 28.5Q703-240 720-240t28.5-11.5ZM680-440h170l-90-120h-80v120Z'
+    when 'shopping_bag'
+      assign d = 'M240-80q-33 0-56.5-23.5T160-160v-480q0-33 23.5-56.5T240-720h80q0-66 47-113t113-47q66 0 113 47t47 113h80q33 0 56.5 23.5T800-640v480q0 33-23.5 56.5T720-80H240Zm0-80h480v-480h-80v80q0 17-11.5 28.5T600-520q-17 0-28.5-11.5T560-560v-80H400v80q0 17-11.5 28.5T360-520q-17 0-28.5-11.5T320-560v-80h-80v480Zm160-560h160q0-33-23.5-56.5T480-800q-33 0-56.5 23.5T400-720ZM240-160v-480 480Z'
+    when 'verified_user'
+      assign d = 'm438-338 226-226-57-57-169 169-84-84-57 57 141 141Zm42 258q-139-35-229.5-159.5T160-516v-244l320-120 320 120v244q0 152-90.5 276.5T480-80Z'
+    when 'workspace_premium'
+      assign d = 'm387-412 35-114-92-74h114l36-112 36 112h114l-93 74 35 114-92-71-93 71ZM240-40v-309q-38-42-59-96t-21-115q0-134 93-227t227-93q134 0 227 93t93 227q0 61-21 115t-59 96v309l-240-80-240 80Zm410-350q70-70 70-170t-70-170q-70-70-170-70t-170 70q-70 70-70 170t70 170q70 70 170 70t170-70Z'
+  endcase
+-%}
+{%- if d != blank -%}
+  <svg
+    class="petsome-ld-icon"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 -960 960 960"
+    width="1em"
+    height="1em"
+    fill="currentColor"
+    aria-hidden="true"
+    focusable="false"
+  ><path d="{{ d }}"></path></svg>
+{%- endif -%}

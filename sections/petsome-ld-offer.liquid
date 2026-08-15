@@ -227,7 +227,9 @@
     color: var(--ldo-muted);
   }
 
-  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__delivery .material-icon {
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__delivery .petsome-ld-icon {
+    display: block;
+    flex-shrink: 0;
     font-size: 2.4rem;
   }
 
@@ -252,7 +254,9 @@
     cursor: pointer;
   }
 
-  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__atc .material-icon {
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__atc .petsome-ld-icon {
+    display: block;
+    flex-shrink: 0;
     font-size: 2.4rem;
   }
 
@@ -446,13 +450,13 @@
           <div class="petsome-ld-offer__actions">
             {%- if section.settings.delivery_text != blank -%}
               <div class="petsome-ld-offer__delivery">
-                {% render 'material-icon', icon: 'local_shipping', filled: true %}
+                {% render 'petsome-ld-icon', icon: 'local_shipping' %}
                 {{ section.settings.delivery_text }}
               </div>
             {%- endif -%}
 
             <button type="submit" class="petsome-ld-offer__atc">
-              {% render 'material-icon', icon: 'shopping_bag' %}
+              {% render 'petsome-ld-icon', icon: 'shopping_bag' %}
               <span data-atc-text>{{ section.settings.atc_label | default: 'Add to cart' }}</span>
             </button>
 

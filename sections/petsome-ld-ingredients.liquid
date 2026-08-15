@@ -184,7 +184,9 @@
     justify-content: center;
   }
 
-  #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredient__plus .material-icon {
+  #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredient__plus .petsome-ld-icon {
+    display: block;
+    flex-shrink: 0;
     font-size: 2.4rem;
   }
 
@@ -256,7 +258,9 @@
     padding: 0;
   }
 
-  #petsome-ld-ingredients-modal-{{ section.id }} .petsome-ld-ingredients__modal-close .material-icon {
+  #petsome-ld-ingredients-modal-{{ section.id }} .petsome-ld-ingredients__modal-close .petsome-ld-icon {
+    display: block;
+    flex-shrink: 0;
     font-size: 2rem;
   }
 
@@ -365,7 +369,7 @@
             <span class="petsome-ld-ingredient__footer">
               <span class="petsome-ld-ingredient__name">{{ ingredient.ime.value }}</span>
               <span class="petsome-ld-ingredient__plus" aria-hidden="true">
-                {% render 'material-icon', icon: 'add' %}
+                {% render 'petsome-ld-icon', icon: 'add' %}
               </span>
             </span>
           </button>
@@ -377,7 +381,7 @@
       <div class="petsome-ld-ingredients__modal-backdrop" data-petsome-ingredient-modal-close></div>
       <div class="petsome-ld-ingredients__modal-card" role="dialog" aria-modal="true">
         <button type="button" class="petsome-ld-ingredients__modal-close" data-petsome-ingredient-modal-close aria-label="{{ 'accessibility.close' | t }}">
-          {% render 'material-icon', icon: 'close' %}
+          {% render 'petsome-ld-icon', icon: 'close' %}
         </button>
         <div class="petsome-ld-ingredients__modal-image-wrapper">
           <img data-petsome-ingredient-modal-image src="" alt="" width="350" height="350">
