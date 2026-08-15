@@ -280,6 +280,13 @@
     height: auto;
   }
 
+  /* Jump target for the hero and guarantee buttons (href="#offer"). Sits just
+     outside the section wrapper, so it can't be scoped to the section id. */
+  .petsome-ld-offer__anchor {
+    display: block;
+    scroll-margin-top: 20px;
+  }
+
   #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__notice {
     padding: 16px;
     border: 1px dashed #b7b8b8;

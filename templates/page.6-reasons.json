@@ -278,6 +278,24 @@
         "secondary_color": "#e8d6c5",
         "light_text_color": "#faf9f6"
       }
+    },
+    "guarantee": {
+      "type": "petsome-ld-guarantee",
+      "settings": {
+        "show_icon": true,
+        "icon": "verified_user",
+        "heading": "<p>Try MobiMix risk-free for 60 days</p>",
+        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet arcu ac ipsum mattis elementum. Integer eget enim mollis, sagittis sem a, cursus lacus. Pellentesque vitae neque est.</p>",
+        "cta_label": "START YOUR DOG-TRAINER ROUTINE",
+        "cta_url": "#offer",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#fcdddc",
+        "text_color": "#3b2f2f",
+        "icon_color": "#f8aaa7",
+        "button_background": "#3b2f2f",
+        "button_text_color": "#ffffff"
+      }
     }
   },
   "order": [
@@ -287,6 +305,7 @@
     "reasons",
     "timeline",
     "offer",
-    "ingredients"
+    "ingredients",
+    "guarantee"
   ]
 }

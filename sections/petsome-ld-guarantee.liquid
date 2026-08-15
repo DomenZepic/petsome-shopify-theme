@@ -1,0 +1,270 @@
+{% comment %}
+  Petsome Ld: Guarantee - the closing reassurance block for landing pages (the
+  "Ld" family). A centered shield icon, heading, short paragraph and a single
+  button that jumps back up to the offer.
+
+  The button URL defaults to "#offer", which is the anchor rendered by
+  "Petsome Ld: Offer" - the same target the hero button uses - so both buttons
+  land on the offer without any extra wiring. The theme already sets
+  scroll-behavior: smooth on <html>, so the jump animates.
+
+  Uses the BODY font everywhere so the whole landing page reads as one
+  consistent style.
+{% endcomment %}
+<style>
+  #petsome-ld-guarantee-{{ section.id }} {
+    --ldg-text: {{ section.settings.text_color }};
+    --ldg-icon: {{ section.settings.icon_color }};
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_top }}px var(--petsome-padding-x) {{ section.settings.padding_bottom }}px;
+    font-family: var(--font-body-family);
+    color: var(--ldg-text);
+  }
+
+  #petsome-ld-guarantee-{{ section.id }} * {
+    font-family: var(--font-body-family);
+  }
+
+  #petsome-ld-guarantee-{{ section.id }} p {
+    margin: 0;
+  }
+
+  #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+    padding: 0 76px;
+    text-align: center;
+    word-break: break-word;
+  }
+
+  #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__icon .material-icon {
+    font-size: 7.5rem;
+    color: var(--ldg-icon);
+  }
+
+  #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__heading {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    width: 100%;
+    margin: 0;
+  }
+
+  #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__text {
+    font-size: 1.7rem;
+    line-height: 1.5;
+    width: 100%;
+  }
+
+  #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__text p + p {
+    margin-top: 1em;
+  }
+
+  #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 40px;
+    border-radius: 12px;
+    background-color: {{ section.settings.button_background }};
+    color: {{ section.settings.button_text_color }};
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  }
+
+  @media screen and (max-width: 989px) {
+    #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__header {
+      padding: 0;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__inner {
+      gap: 32px;
+    }
+
+    #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__icon .material-icon {
+      font-size: 5.6rem;
+    }
+
+    #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__heading {
+      font-size: 2.8rem;
+    }
+
+    #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__text {
+      font-size: 1.6rem;
+    }
+
+    #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__cta {
+      align-self: stretch;
+      padding: 18px 20px;
+      font-size: 1.8rem;
+    }
+  }
+</style>
+
+<div id="petsome-ld-guarantee-{{ section.id }}" class="petsome-ld-guarantee">
+  <div class="petsome-ld-guarantee__inner">
+    <div class="petsome-ld-guarantee__header">
+      {%- if section.settings.show_icon -%}
+        <span class="petsome-ld-guarantee__icon" aria-hidden="true">
+          {% render 'material-icon', icon: section.settings.icon, filled: true %}
+        </span>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <div class="petsome-ld-guarantee__heading">{{ section.settings.heading }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <div class="petsome-ld-guarantee__text">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.cta_label != blank -%}
+      <a href="{{ section.settings.cta_url | default: '#offer' }}" class="petsome-ld-guarantee__cta">
+        {{ section.settings.cta_label }}
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Petsome Ld: Guarantee",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "Show icon",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "icon",
+      "label": "Material icon name",
+      "info": "Any Material Symbols name, e.g. verified_user, shield, workspace_premium.",
+      "default": "verified_user"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Try it risk-free for 60 days</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Explain the guarantee in a sentence or two.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Button label",
+      "default": "START YOUR DOG-TRAINER ROUTINE"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Button URL",
+      "info": "Leave as #offer to scroll back up to the offer section on this page."
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FCDDDC"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#3B2F2F"
+    },
+    {
+      "type": "color",
+      "id": "icon_color",
+      "label": "Icon",
+      "default": "#F8AAA7"
+    },
+    {
+      "type": "color",
+      "id": "button_background",
+      "label": "Button background",
+      "default": "#3B2F2F"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome Ld: Guarantee"
+    }
+  ]
+}
+{% endschema %}
