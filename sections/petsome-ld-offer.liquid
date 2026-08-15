@@ -3,54 +3,150 @@
   bundle tiles + weight selector + gifts + add to cart), for landing pages that
   live on /pages/ instead of /products/.
 
-  How it works (per Kaching's own "custom placement" docs): the Kaching engine
-  is mounted as <kaching-bundle product-id="..."> inside a <form action="/cart/add">
-  with a submit button. That gives Kaching a product context and a form to submit,
-  even though this isn't a product page. Our existing custom UI + JS
-  (snippets/kaching-custom-display.liquid + assets/kaching-custom-display.js) are
-  reused UNCHANGED - this section just renders that snippet with `block: section`
-  and an explicit `product:` (the one picked below), and supplies the
-  <form>, the <kaching-bundle> engine, the weight selector, and the ATC button
-  that the custom UI expects to find on the page.
+  Two columns on desktop: a manually-picked product image on the left (sticky
+  while the offer scrolls) and the offer itself on the right - Trustpilot strip,
+  product name, short description, weight picker, the Kaching bundle UI, then
+  delivery estimate, add to cart and payment icons. On mobile the image stacks
+  above the offer.
+
+  How the Kaching part works (per Kaching's own "custom placement" docs): the
+  engine is mounted as <kaching-bundle product-id="..."> inside a
+  <form action="/cart/add"> with a submit button. That gives Kaching a product
+  context and a form to submit, even though this isn't a product page. Our
+  existing custom UI + JS (snippets/kaching-custom-display.liquid +
+  assets/kaching-custom-display.js) are reused UNCHANGED - this section just
+  renders that snippet with `block: section` and an explicit `product:` (the one
+  picked below), and supplies the <form>, the <kaching-bundle> engine, the
+  weight selector, and the ATC button that the custom UI expects to find.
 
   Requirements:
   - Pick a product below that has a Kaching Bundles deal configured for it.
+  - Add the Kaching Bundles app block inside this section (Add block -> Apps).
   - The weight selector is built from that product's FIRST option (e.g. dog weight).
 {% endcomment %}
 {%- liquid
   assign offer_product = section.settings.product
   assign weight_option = offer_product.options_with_values[0]
   assign first_variant = offer_product.selected_or_first_available_variant
+  assign offer_title = section.settings.heading | default: offer_product.title
 -%}
 <style>
   #petsome-ld-offer-{{ section.id }} {
+    --ldo-text: {{ section.settings.text_color }};
+    --ldo-muted: {{ section.settings.muted_text_color }};
+    --ldo-secondary: {{ section.settings.secondary_color }};
     background-color: {{ section.settings.background_color }};
-    padding-top: {{ section.settings.padding_top }}px;
-    padding-bottom: {{ section.settings.padding_bottom }}px;
+    padding: {{ section.settings.padding_top }}px var(--petsome-padding-x) {{ section.settings.padding_bottom }}px;
     font-family: var(--font-body-family);
+    color: var(--ldo-text);
   }
 
   #petsome-ld-offer-{{ section.id }} * {
     font-family: var(--font-body-family);
   }
 
-  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__inner {
-    max-width: 620px;
-    margin: 0 auto;
-    padding: 0 var(--petsome-padding-x);
+  #petsome-ld-offer-{{ section.id }} p {
+    margin: 0;
   }
 
-  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__form {
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 40px;
+  }
+
+  /* ---------- Product image ---------- */
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__media {
+    flex: 1 0 0;
+    min-width: 0;
+    position: sticky;
+    top: 20px;
+    aspect-ratio: 1 / 1;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ---------- Offer column ---------- */
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__info {
+    flex: 1 0 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__intro {
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
 
-  /* Weight selector */
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__intro-head {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__trustpilot {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__trustpilot img {
+    height: 22px;
+    width: auto;
+    display: block;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__trustpilot-text {
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__title {
+    font-family: var(--font-heading-family);
+    font-weight: 800;
+    font-size: 4rem;
+    line-height: 1.1;
+    margin: 0;
+    word-break: break-word;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__description {
+    font-size: 1.7rem;
+    line-height: 1.5;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__description p + p {
+    margin-top: 1em;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__form {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* ---------- Weight selector ---------- */
+
   #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__weight-label {
     font-weight: 700;
     font-size: 1.6rem;
-    color: rgb(var(--color-foreground));
+    line-height: 1.4;
     margin: 0 0 4px;
   }
 
@@ -58,7 +154,7 @@
     display: grid;
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
-    gap: 12px;
+    gap: 8px;
   }
 
   @media screen and (max-width: 559px) {
@@ -84,12 +180,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 56px;
-    padding: 8px 16px;
+    height: 100%;
+    padding: 16px;
     text-align: center;
     font-weight: 700;
     font-size: 1.6rem;
-    color: rgb(var(--color-foreground));
+    line-height: 1.4;
+    color: var(--ldo-text);
     background-color: #ffffff;
     border: 2px solid #e7e7e7;
     border-radius: 12px;
@@ -97,8 +194,13 @@
   }
 
   #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__weight input:checked + label {
-    border-color: var(--kaching-accent, #f8aaa7);
-    background-color: color-mix(in srgb, var(--kaching-accent, #f8aaa7) 18%, white);
+    border-color: var(--ldo-secondary);
+    background-color: color-mix(in srgb, var(--ldo-secondary) 20%, white);
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__weight input:focus-visible + label {
+    outline: 2px solid var(--ldo-text);
+    outline-offset: 2px;
   }
 
   #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__weight input:disabled + label {
@@ -107,42 +209,74 @@
     text-decoration: line-through;
   }
 
-  /* Add to cart */
+  /* ---------- Delivery / ATC / payments ---------- */
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__delivery {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 1.4rem;
+    line-height: 1.3;
+    color: var(--ldo-muted);
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__delivery .material-icon {
+    font-size: 2.4rem;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__delivery p {
+    margin: 0;
+  }
+
   #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__atc {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
     width: 100%;
-    min-height: 56px;
-    padding: 16px 24px;
+    padding: 20px;
     border: none;
     border-radius: 12px;
     background-color: {{ section.settings.atc_background }};
     color: {{ section.settings.atc_text_color }};
     font-weight: 700;
-    font-size: 1.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.02em;
+    font-size: 1.6rem;
+    line-height: 1.5;
     cursor: pointer;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__atc .material-icon {
+    font-size: 2.4rem;
   }
 
   #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__atc:hover {
     opacity: 0.94;
   }
 
-  /* Payment icons */
   #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__payments {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin-top: 4px;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__payments-label {
+    font-size: 1.4rem;
+    line-height: 1;
+    letter-spacing: 0.6px;
+    color: var(--ldo-muted);
   }
 
   #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__payments svg {
-    width: 38px;
+    width: 35px;
     height: auto;
   }
 
@@ -151,8 +285,36 @@
     border: 1px dashed #b7b8b8;
     border-radius: 12px;
     font-size: 1.4rem;
-    color: rgba(var(--color-foreground), 0.75);
+    color: var(--ldo-muted);
     text-align: center;
+  }
+
+  /* ---------- Tablet / mobile ---------- */
+
+  @media screen and (max-width: 989px) {
+    #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__inner {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 32px;
+    }
+
+    #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__media {
+      flex: 0 0 auto;
+      position: static;
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__title {
+      font-size: 2.8rem;
+    }
+
+    #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__description {
+      font-size: 1.6rem;
+    }
   }
 </style>
 
@@ -164,86 +326,148 @@
         Select a product for this offer in the theme editor, then add the "Kaching Bundles" app block inside this section (Add block &rarr; Apps) and set its product to the same one. The product must have a Kaching Bundles deal configured.
       </div>
     {%- else -%}
-      <form
-        action="{{ routes.cart_add_url }}"
-        method="post"
-        enctype="multipart/form-data"
-        class="petsome-ld-offer__form"
-      >
-        {%- comment -%}
-          Kaching engine (hidden by the custom-display CSS). The Kaching Bundles
-          APP BLOCK - added by the merchant into this section - is what
-          server-renders the deal-settings blob our custom UI reads. Set that
-          app block's product to the same product picked in this section.
-          The bare <kaching-bundle> tag is only a fallback and won't carry deal
-          data on its own.
-        {%- endcomment -%}
-        {%- if section.blocks.size > 0 -%}
-          {%- for block in section.blocks -%}
-            {%- render block -%}
-          {%- endfor -%}
-        {%- else -%}
-          <kaching-bundle product-id="{{ offer_product.id }}"></kaching-bundle>
-        {%- endif -%}
+      {%- if section.settings.image != blank -%}
+        <div class="petsome-ld-offer__media">
+          <img
+            src="{{ section.settings.image | image_url: width: 960 }}"
+            srcset="
+              {{ section.settings.image | image_url: width: 480 }} 480w,
+              {{ section.settings.image | image_url: width: 960 }} 960w
+            "
+            sizes="(min-width: 990px) 480px, min(100vw, 480px)"
+            alt="{{ section.settings.image.alt | default: offer_title | escape }}"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+            loading="lazy"
+          >
+        </div>
+      {%- endif -%}
 
-        {%- comment -%} Variant id submitted to /cart/add; kept in sync with the weight selector below {%- endcomment -%}
-        <input type="hidden" name="id" value="{{ first_variant.id }}" data-offer-variant-id>
-
-        {%- comment -%}
-          Weight selector - the custom-display JS looks this up by
-          id="variant-selects-<section.id>", reads the variants JSON, and
-          listens to the radio inputs (value = option1).
-        {%- endcomment -%}
-        {%- if weight_option and weight_option.values.size > 0 -%}
-          <div id="variant-selects-{{ section.id }}">
-            <script type="application/json">{{ offer_product.variants | json }}</script>
-            {%- if section.settings.weight_label != blank -%}
-              <p class="petsome-ld-offer__weight-label">{{ section.settings.weight_label }}</p>
-            {%- endif -%}
-            <div class="petsome-ld-offer__weights">
-              {%- for value in weight_option.values -%}
-                {%- assign v = offer_product.variants | where: 'option1', value | first -%}
-                <div class="petsome-ld-offer__weight">
-                  <input
-                    type="radio"
-                    id="weight-{{ section.id }}-{{ forloop.index }}"
-                    name="weight-{{ section.id }}"
-                    value="{{ value | escape }}"
-                    data-variant-id="{{ v.id }}"
-                    {% if forloop.first %}checked{% endif %}
-                    {% unless v.available %}disabled{% endunless %}
+      <div class="petsome-ld-offer__info">
+        <div class="petsome-ld-offer__intro">
+          <div class="petsome-ld-offer__intro-head">
+            {%- if section.settings.trustpilot_image != blank or section.settings.trustpilot_text != blank -%}
+              <div class="petsome-ld-offer__trustpilot">
+                {%- if section.settings.trustpilot_image != blank -%}
+                  <img
+                    src="{{ section.settings.trustpilot_image | image_url: height: 44 }}"
+                    alt=""
+                    width="{{ section.settings.trustpilot_image.width }}"
+                    height="{{ section.settings.trustpilot_image.height }}"
+                    loading="lazy"
                   >
-                  <label for="weight-{{ section.id }}-{{ forloop.index }}">{{ value }}</label>
-                </div>
-              {%- endfor -%}
-            </div>
+                {%- endif -%}
+                {%- if section.settings.trustpilot_text != blank -%}
+                  <span class="petsome-ld-offer__trustpilot-text">{{ section.settings.trustpilot_text }}</span>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            {%- if offer_title != blank -%}
+              <h2 class="petsome-ld-offer__title">{{ offer_title }}</h2>
+            {%- endif -%}
           </div>
-        {%- else -%}
-          <div id="variant-selects-{{ section.id }}">
-            <script type="application/json">{{ offer_product.variants | json }}</script>
-          </div>
-        {%- endif -%}
 
-        {%- comment -%} Our custom bundle tiles + gifts UI, reused unchanged {%- endcomment -%}
-        {% render 'kaching-custom-display', block: section, section: section, product: offer_product %}
+          {%- if section.settings.description != blank -%}
+            <div class="petsome-ld-offer__description rte">{{ section.settings.description }}</div>
+          {%- endif -%}
+        </div>
 
-        <button type="submit" class="petsome-ld-offer__atc">
-          {{ section.settings.atc_label | default: 'Add to cart' }}
-        </button>
-
-        {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
-          <div class="petsome-ld-offer__payments">
-            {%- for type in shop.enabled_payment_types -%}
-              {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+        <form
+          action="{{ routes.cart_add_url }}"
+          method="post"
+          enctype="multipart/form-data"
+          class="petsome-ld-offer__form"
+        >
+          {%- comment -%}
+            Kaching engine (hidden by the custom-display CSS). The Kaching Bundles
+            APP BLOCK - added by the merchant into this section - is what
+            server-renders the deal-settings blob our custom UI reads. Set that
+            app block's product to the same product picked in this section.
+            The bare <kaching-bundle> tag is only a fallback and won't carry deal
+            data on its own.
+          {%- endcomment -%}
+          {%- if section.blocks.size > 0 -%}
+            {%- for block in section.blocks -%}
+              {%- render block -%}
             {%- endfor -%}
+          {%- else -%}
+            <kaching-bundle product-id="{{ offer_product.id }}"></kaching-bundle>
+          {%- endif -%}
+
+          {%- comment -%} Variant id submitted to /cart/add; kept in sync with the weight selector below {%- endcomment -%}
+          <input type="hidden" name="id" value="{{ first_variant.id }}" data-offer-variant-id>
+
+          {%- comment -%}
+            Weight selector - the custom-display JS looks this up by
+            id="variant-selects-<section.id>", reads the variants JSON, and
+            listens to the radio inputs (value = option1).
+          {%- endcomment -%}
+          {%- if weight_option and weight_option.values.size > 0 -%}
+            <div id="variant-selects-{{ section.id }}">
+              <script type="application/json">{{ offer_product.variants | json }}</script>
+              {%- if section.settings.weight_label != blank -%}
+                <p class="petsome-ld-offer__weight-label">{{ section.settings.weight_label }}</p>
+              {%- endif -%}
+              <div class="petsome-ld-offer__weights">
+                {%- for value in weight_option.values -%}
+                  {%- assign v = offer_product.variants | where: 'option1', value | first -%}
+                  <div class="petsome-ld-offer__weight">
+                    <input
+                      type="radio"
+                      id="weight-{{ section.id }}-{{ forloop.index }}"
+                      name="weight-{{ section.id }}"
+                      value="{{ value | escape }}"
+                      data-variant-id="{{ v.id }}"
+                      {% if forloop.first %}checked{% endif %}
+                      {% unless v.available %}disabled{% endunless %}
+                    >
+                    <label for="weight-{{ section.id }}-{{ forloop.index }}">{{ value }}</label>
+                  </div>
+                {%- endfor -%}
+              </div>
+            </div>
+          {%- else -%}
+            <div id="variant-selects-{{ section.id }}">
+              <script type="application/json">{{ offer_product.variants | json }}</script>
+            </div>
+          {%- endif -%}
+
+          {%- comment -%} Our custom bundle tiles + gifts UI, reused unchanged {%- endcomment -%}
+          {% render 'kaching-custom-display', block: section, section: section, product: offer_product %}
+
+          <div class="petsome-ld-offer__actions">
+            {%- if section.settings.delivery_text != blank -%}
+              <div class="petsome-ld-offer__delivery">
+                {% render 'material-icon', icon: 'local_shipping', filled: true %}
+                {{ section.settings.delivery_text }}
+              </div>
+            {%- endif -%}
+
+            <button type="submit" class="petsome-ld-offer__atc">
+              {% render 'material-icon', icon: 'shopping_bag' %}
+              <span data-atc-text>{{ section.settings.atc_label | default: 'Add to cart' }}</span>
+            </button>
+
+            {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+              <div class="petsome-ld-offer__payments">
+                {%- if section.settings.payments_label != blank -%}
+                  <span class="petsome-ld-offer__payments-label">{{ section.settings.payments_label }}</span>
+                {%- endif -%}
+                {%- for type in shop.enabled_payment_types -%}
+                  {{ type | payment_type_svg_tag: class: 'payment-icon' }}
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
           </div>
-        {%- endif -%}
-      </form>
+        </form>
+      </div>
 
       <script>
         (function () {
           var root = document.getElementById('petsome-ld-offer-{{ section.id }}');
           if (!root) return;
+
           var hidden = root.querySelector('[data-offer-variant-id]');
           var radios = root.querySelectorAll('#variant-selects-{{ section.id }} input[type="radio"]');
           radios.forEach(function (radio) {
@@ -253,6 +477,26 @@
               }
             });
           });
+
+          {%- if section.settings.atc_show_price -%}
+            /* Mirrors the Kaching header price into the button label. Read-only:
+               if the custom display never renders, the label is left alone. */
+            var priceEl = root.querySelector('[data-header-price-current]');
+            var atcText = root.querySelector('[data-atc-text]');
+            if (priceEl && atcText) {
+              var baseLabel = atcText.textContent.trim();
+              var syncPrice = function () {
+                var price = priceEl.textContent.trim();
+                atcText.textContent = price ? baseLabel + ' - ' + price : baseLabel;
+              };
+              new MutationObserver(syncPrice).observe(priceEl, {
+                childList: true,
+                characterData: true,
+                subtree: true
+              });
+              syncPrice();
+            }
+          {%- endif -%}
         })();
       </script>
     {%- endif -%}
@@ -276,10 +520,56 @@
       "info": "Must have a Kaching Bundles deal configured for it. The weight selector is built from this product's first option."
     },
     {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Product image",
+      "info": "Shown square (1:1) on the left. Recommended 960 × 960px."
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Product name",
+      "info": "Leave blank to use the product's own title."
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Short description",
+      "info": "Start with a bold lead-in using the Bold (B) button.",
+      "default": "<p><strong>Lorem ipsum dolor sit amet</strong>, consectetur adipiscing elit. Praesent sit amet arcu ac ipsum mattis elementum.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Trustpilot strip"
+    },
+    {
+      "type": "image_picker",
+      "id": "trustpilot_image",
+      "label": "Rating image",
+      "info": "E.g. the Trustpilot logo and stars exported as one SVG/PNG."
+    },
+    {
+      "type": "text",
+      "id": "trustpilot_text",
+      "label": "Rating text",
+      "default": "Excellent"
+    },
+    {
+      "type": "header",
+      "content": "Weight selector & cart"
+    },
+    {
       "type": "text",
       "id": "weight_label",
       "label": "Weight selector label",
       "default": "Choose your dog's weight:"
+    },
+    {
+      "type": "richtext",
+      "id": "delivery_text",
+      "label": "Delivery estimate",
+      "info": "Shown with a truck icon above the button. Leave blank to hide.",
+      "default": "<p>Estimated delivery: <strong>2-3 days</strong></p>"
     },
     {
       "type": "text",
@@ -289,9 +579,22 @@
     },
     {
       "type": "checkbox",
+      "id": "atc_show_price",
+      "label": "Append the selected price to the button",
+      "info": "Mirrors the total shown above the tiles, e.g. \"Add to cart - 69,80 €\".",
+      "default": true
+    },
+    {
+      "type": "checkbox",
       "id": "show_payment_icons",
       "label": "Show payment icons",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "payments_label",
+      "label": "Payment icons label",
+      "default": "Secure payment with:"
     },
     {
       "type": "header",
@@ -380,7 +683,20 @@
       "type": "color",
       "id": "background_color",
       "label": "Section background",
-      "default": "#FDFBF7"
+      "default": "#FEF6F6"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#3B2F2F"
+    },
+    {
+      "type": "color",
+      "id": "muted_text_color",
+      "label": "Secondary text",
+      "info": "Delivery estimate and the payment icons label.",
+      "default": "#565858"
     },
     {
       "type": "color",
@@ -399,7 +715,7 @@
       "type": "color",
       "id": "secondary_color",
       "label": "Secondary color (fallback)",
-      "info": "Used for the \"recommended\" tile/badge, the selected-tile highlight, and the gifts panel.",
+      "info": "Used for the \"recommended\" tile/badge, the selected weight and tile highlight, and the gifts panel.",
       "default": "#e8d6c5"
     },
     {
@@ -412,7 +728,7 @@
       "type": "color",
       "id": "atc_background",
       "label": "Add to cart background",
-      "default": "#0e1111"
+      "default": "#3B2F2F"
     },
     {
       "type": "color",
@@ -479,7 +795,7 @@
       "max": 120,
       "step": 4,
       "unit": "px",
-      "default": 40
+      "default": 80
     },
     {
       "type": "range",
@@ -489,7 +805,7 @@
       "max": 120,
       "step": 4,
       "unit": "px",
-      "default": 40
+      "default": 80
     },
     {
       "type": "range",

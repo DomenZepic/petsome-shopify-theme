@@ -203,7 +203,8 @@
   /* ---------- Tablet / mobile ---------- */
 
   @media screen and (max-width: 989px) {
-    /* The visual stacks above the whole timeline. */
+    /* The image sits left on desktop, so on mobile it drops BELOW the steps -
+       the copy always comes first. */
     #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__body {
       flex-direction: column;
       align-items: stretch;
@@ -212,9 +213,14 @@
 
     #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__media {
       flex: 0 0 auto;
+      order: 2;
       width: 100%;
       max-width: 400px;
       margin: 0 auto;
+    }
+
+    #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__steps {
+      order: 1;
     }
 
     #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__header {
