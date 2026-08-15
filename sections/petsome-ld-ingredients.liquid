@@ -49,6 +49,14 @@
     font-family: var(--font-body-family);
   }
 
+  /* The universal rule above outranks the .material-symbols-outlined rule that
+     Google Fonts ships, which would swap the icon font for the body font and
+     leave raw ligature text on screen. Restore it for anything rendered inside
+     this section (e.g. the Kaching UI and its JS-injected gift icons). */
+  #petsome-ld-ingredients-{{ section.id }} .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+  }
+
   #petsome-ld-ingredients-{{ section.id }} p {
     margin: 0;
   }
