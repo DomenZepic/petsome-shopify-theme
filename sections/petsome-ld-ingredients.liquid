@@ -1,0 +1,575 @@
+{% comment %}
+  Petsome Ld: Ingredients - the page-hostable twin of "Petsome: Ingredients",
+  for landing pages that live on /pages/ instead of /products/.
+
+  Identical behaviour to the product-template section: a centered header above a
+  grid of ingredient cards (image, category badge, name) sourced from a
+  product's "Ingredients" metafield - a list of "sestavina" metaobjects - so
+  nothing is entered by hand. Each card opens a shared modal with a larger
+  image, the full description and the amount per package.
+
+  The difference is where the product comes from: /pages/ has no product
+  context, so the product is picked in the theme editor below. Every accent /
+  secondary color still follows THAT product's own metafields, so each product's
+  landing page themes itself and only falls back to the color settings here when
+  a metafield is blank.
+
+  Uses the BODY font everywhere so the whole landing page reads as one
+  consistent style.
+{% endcomment %}
+{%- liquid
+  assign ing_product = section.settings.product | default: product
+  assign accent_color = ing_product.metafields.custom.product_accent_color.value | default: section.settings.accent_color
+  assign accent_color_dark = ing_product.metafields.custom.product_accent_color_dark.value | default: section.settings.accent_color_dark
+  assign secondary_color = ing_product.metafields.custom.product_secondary_color.value | default: section.settings.secondary_color
+  assign ingredients = ing_product.metafields.custom.ingredients.value
+-%}
+<style>
+  #petsome-ld-ingredients-{{ section.id }},
+  #petsome-ld-ingredients-modal-{{ section.id }} {
+    --pli-text: {{ section.settings.text_color }};
+    --pli-accent: {{ accent_color }};
+    {%- if accent_color_dark != blank -%}
+      --pli-accent-dark: {{ accent_color_dark }};
+    {%- else -%}
+      --pli-accent-dark: color-mix(in srgb, var(--pli-accent) 70%, black);
+    {%- endif -%}
+    --pli-secondary: {{ secondary_color }};
+    --pli-light: {{ section.settings.light_text_color }};
+  }
+
+  #petsome-ld-ingredients-{{ section.id }} {
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_top }}px var(--petsome-padding-x) {{ section.settings.padding_bottom }}px;
+    font-family: var(--font-body-family);
+    color: var(--pli-text);
+  }
+
+  #petsome-ld-ingredients-{{ section.id }} * {
+    font-family: var(--font-body-family);
+  }
+
+  #petsome-ld-ingredients-{{ section.id }} p {
+    margin: 0;
+  }
+
+  #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredients__inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  /* ---------- Header ---------- */
+
+  #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredients__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    text-align: center;
+    word-break: break-word;
+  }
+
+  #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredients__heading {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredients__description {
+    max-width: 760px;
+    font-size: 1.7rem;
+    line-height: 1.5;
+  }
+
+  /* ---------- Grid ---------- */
+
+  #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredients__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    width: 100%;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredients__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredients__heading {
+      font-size: 2.8rem;
+    }
+
+    #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredients__description {
+      font-size: 1.6rem;
+    }
+
+    #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredient__badge {
+      top: 8px;
+      left: 8px;
+      padding: 4px 10px;
+      font-size: 1.1rem;
+    }
+  }
+
+  #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredient {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    border: none;
+    padding: 0;
+    background: none;
+    text-align: left;
+    cursor: pointer;
+    color: inherit;
+  }
+
+  #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredient__image-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #ffffff;
+  }
+
+  #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredient__image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredient__badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 4px 16px;
+    border-radius: 999px;
+    background-image: linear-gradient(180deg, var(--pli-accent) 0%, var(--pli-accent-dark) 100%);
+    color: var(--pli-light);
+    font-weight: 700;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    text-transform: uppercase;
+  }
+
+  #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredient__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredient__name {
+    flex: 1 0 0;
+    min-width: 0;
+    font-weight: 400;
+    font-size: 1.6rem;
+    line-height: 1.5;
+  }
+
+  #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredient__plus {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredient__plus .material-icon {
+    font-size: 2.4rem;
+  }
+
+  #petsome-ld-ingredients-{{ section.id }} .petsome-ld-ingredients__notice {
+    padding: 16px;
+    border: 1px dashed #b7b8b8;
+    border-radius: 12px;
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  /* ---------- Modal ---------- */
+
+  #petsome-ld-ingredients-modal-{{ section.id }} {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: var(--petsome-padding-x);
+    font-family: var(--font-body-family);
+    color: var(--pli-text);
+  }
+
+  #petsome-ld-ingredients-modal-{{ section.id }}.is-open {
+    display: flex;
+  }
+
+  #petsome-ld-ingredients-modal-{{ section.id }} p {
+    margin: 0;
+  }
+
+  #petsome-ld-ingredients-modal-{{ section.id }} .petsome-ld-ingredients__modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.65);
+  }
+
+  #petsome-ld-ingredients-modal-{{ section.id }} .petsome-ld-ingredients__modal-card {
+    position: relative;
+    background-color: #ffffff;
+    border: 1px solid var(--pli-secondary);
+    border-radius: 16px;
+    max-width: 420px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  #petsome-ld-ingredients-modal-{{ section.id }} .petsome-ld-ingredients__modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background-color: color-mix(in srgb, var(--pli-secondary) 20%, white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  #petsome-ld-ingredients-modal-{{ section.id }} .petsome-ld-ingredients__modal-close .material-icon {
+    font-size: 2rem;
+  }
+
+  #petsome-ld-ingredients-modal-{{ section.id }} .petsome-ld-ingredients__modal-image-wrapper {
+    width: 100%;
+    max-width: 350px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #ffffff;
+  }
+
+  #petsome-ld-ingredients-modal-{{ section.id }} .petsome-ld-ingredients__modal-image-wrapper img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  #petsome-ld-ingredients-modal-{{ section.id }} .petsome-ld-ingredients__modal-badge {
+    display: inline-flex;
+    align-self: flex-start;
+    padding: 4px 16px;
+    border-radius: 999px;
+    background-image: linear-gradient(180deg, var(--pli-accent) 0%, var(--pli-accent-dark) 100%);
+    color: var(--pli-light);
+    font-weight: 700;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04rem;
+  }
+
+  #petsome-ld-ingredients-modal-{{ section.id }} .petsome-ld-ingredients__modal-name {
+    font-weight: 800;
+    font-size: 2.2rem;
+    line-height: 1.3;
+  }
+
+  #petsome-ld-ingredients-modal-{{ section.id }} .petsome-ld-ingredients__modal-text {
+    font-size: 1.5rem;
+    line-height: 1.5;
+  }
+
+  #petsome-ld-ingredients-modal-{{ section.id }} .petsome-ld-ingredients__modal-amount {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background-color: color-mix(in srgb, var(--pli-secondary) 20%, white);
+  }
+
+  #petsome-ld-ingredients-modal-{{ section.id }} .petsome-ld-ingredients__modal-amount-label {
+    font-size: 1.4rem;
+  }
+
+  #petsome-ld-ingredients-modal-{{ section.id }} .petsome-ld-ingredients__modal-amount-value {
+    font-weight: 700;
+    font-size: 1.6rem;
+  }
+</style>
+
+{%- if ingredients.size > 0 -%}
+  <div id="petsome-ld-ingredients-{{ section.id }}" class="petsome-ld-ingredients">
+    <div class="petsome-ld-ingredients__inner">
+      {%- if section.settings.heading != blank or section.settings.description != blank -%}
+        <div class="petsome-ld-ingredients__header">
+          {%- if section.settings.heading != blank -%}
+            <div class="petsome-ld-ingredients__heading">{{ section.settings.heading }}</div>
+          {%- endif -%}
+          {%- if section.settings.description != blank -%}
+            <div class="petsome-ld-ingredients__description">{{ section.settings.description }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="petsome-ld-ingredients__grid">
+        {%- for ingredient in ingredients -%}
+          <button
+            type="button"
+            class="petsome-ld-ingredient"
+            data-petsome-ingredient-trigger
+            data-name="{{ ingredient.ime.value | escape }}"
+            data-category="{{ ingredient.kategorija.value | escape }}"
+            data-body="{{ ingredient.opis.value | escape }}"
+            data-amount="{{ ingredient.kolicina.value | escape }}"
+            data-image="{{ ingredient.slika.value | image_url: width: 700 }}"
+            data-image-alt="{{ ingredient.ime.value | escape }}"
+          >
+            <span class="petsome-ld-ingredient__image-wrapper">
+              {%- if ingredient.slika.value != blank -%}
+                <img
+                  src="{{ ingredient.slika.value | image_url: width: 400 }}"
+                  alt="{{ ingredient.ime.value | escape }}"
+                  width="400"
+                  height="400"
+                  loading="lazy"
+                >
+              {%- endif -%}
+              {%- if ingredient.kategorija.value != blank -%}
+                <span class="petsome-ld-ingredient__badge">{{ ingredient.kategorija.value }}</span>
+              {%- endif -%}
+            </span>
+            <span class="petsome-ld-ingredient__footer">
+              <span class="petsome-ld-ingredient__name">{{ ingredient.ime.value }}</span>
+              <span class="petsome-ld-ingredient__plus" aria-hidden="true">
+                {% render 'material-icon', icon: 'add' %}
+              </span>
+            </span>
+          </button>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    <div id="petsome-ld-ingredients-modal-{{ section.id }}" class="petsome-ld-ingredients__modal" data-petsome-ingredient-modal>
+      <div class="petsome-ld-ingredients__modal-backdrop" data-petsome-ingredient-modal-close></div>
+      <div class="petsome-ld-ingredients__modal-card" role="dialog" aria-modal="true">
+        <button type="button" class="petsome-ld-ingredients__modal-close" data-petsome-ingredient-modal-close aria-label="{{ 'accessibility.close' | t }}">
+          {% render 'material-icon', icon: 'close' %}
+        </button>
+        <div class="petsome-ld-ingredients__modal-image-wrapper">
+          <img data-petsome-ingredient-modal-image src="" alt="" width="350" height="350">
+        </div>
+        <span class="petsome-ld-ingredients__modal-badge" data-petsome-ingredient-modal-category></span>
+        <p class="petsome-ld-ingredients__modal-name" data-petsome-ingredient-modal-name></p>
+        <p class="petsome-ld-ingredients__modal-text" data-petsome-ingredient-modal-body></p>
+        <div class="petsome-ld-ingredients__modal-amount" data-petsome-ingredient-modal-amount-row>
+          <p class="petsome-ld-ingredients__modal-amount-label">{{ section.settings.amount_label | default: 'Amount per package' }}</p>
+          <p class="petsome-ld-ingredients__modal-amount-value" data-petsome-ingredient-modal-amount></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('petsome-ld-ingredients-{{ section.id }}');
+      if (!root) return;
+
+      var modal = root.querySelector('[data-petsome-ingredient-modal]');
+      if (!modal) return;
+      document.body.appendChild(modal);
+
+      var modalImage = modal.querySelector('[data-petsome-ingredient-modal-image]');
+      var modalCategory = modal.querySelector('[data-petsome-ingredient-modal-category]');
+      var modalName = modal.querySelector('[data-petsome-ingredient-modal-name]');
+      var modalBody = modal.querySelector('[data-petsome-ingredient-modal-body]');
+      var modalAmount = modal.querySelector('[data-petsome-ingredient-modal-amount]');
+      var modalAmountRow = modal.querySelector('[data-petsome-ingredient-modal-amount-row]');
+
+      function openModal(trigger) {
+        modalImage.src = trigger.getAttribute('data-image') || '';
+        modalImage.alt = trigger.getAttribute('data-image-alt') || '';
+        modalCategory.textContent = trigger.getAttribute('data-category') || '';
+        modalCategory.style.display = modalCategory.textContent ? '' : 'none';
+        modalName.textContent = trigger.getAttribute('data-name') || '';
+        modalBody.textContent = trigger.getAttribute('data-body') || '';
+        modalAmount.textContent = trigger.getAttribute('data-amount') || '';
+        modalAmountRow.style.display = modalAmount.textContent ? '' : 'none';
+        modal.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+
+      root.querySelectorAll('[data-petsome-ingredient-trigger]').forEach(function (trigger) {
+        trigger.addEventListener('click', function () {
+          openModal(trigger);
+        });
+      });
+
+      modal.querySelectorAll('[data-petsome-ingredient-modal-close]').forEach(function (closer) {
+        closer.addEventListener('click', closeModal);
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape') closeModal();
+      });
+    })();
+  </script>
+{%- elsif request.design_mode -%}
+  <div id="petsome-ld-ingredients-{{ section.id }}" class="petsome-ld-ingredients">
+    <div class="petsome-ld-ingredients__inner">
+      <div class="petsome-ld-ingredients__notice">
+        {%- if ing_product == blank -%}
+          Pick the product this landing page is for in the theme editor. Its "Ingredients" metafield supplies the cards, and its color metafields theme this section.
+        {%- else -%}
+          "{{ ing_product.title }}" has no "Ingredients" metafield set, so there is nothing to show here yet.
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Petsome Ld: Ingredients",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Product"
+    },
+    {
+      "type": "paragraph",
+      "content": "Landing pages have no product of their own, so pick one here. Its \"Ingredients\" metafield fills the grid and its \"Product accent color\" / \"Product accent color (gradient end)\" / \"Product secondary color\" metafields theme the badges - so each product's landing page themes itself."
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Quality ingredients that work</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "amount_label",
+      "label": "Modal amount label",
+      "info": "Shown next to each ingredient's amount inside the pop-up.",
+      "default": "Amount per package"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "paragraph",
+      "content": "The accent and secondary colors below are only fallbacks - whenever the picked product has the matching color metafield set, that value wins."
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FDFBF7"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#3B2F2F"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent (fallback)",
+      "default": "#F8AAA7"
+    },
+    {
+      "type": "color",
+      "id": "accent_color_dark",
+      "label": "Accent gradient end (fallback)",
+      "default": "#F47671"
+    },
+    {
+      "type": "color",
+      "id": "secondary_color",
+      "label": "Secondary (fallback)",
+      "default": "#E8D6C5"
+    },
+    {
+      "type": "color",
+      "id": "light_text_color",
+      "label": "Badge text",
+      "default": "#FAF9F6"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome Ld: Ingredients"
+    }
+  ]
+}
+{% endschema %}

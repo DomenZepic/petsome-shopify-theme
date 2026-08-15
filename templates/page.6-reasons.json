@@ -261,6 +261,23 @@
         "margin_top": 0,
         "margin_bottom": 0
       }
+    },
+    "ingredients": {
+      "type": "petsome-ld-ingredients",
+      "settings": {
+        "product": "mobimix",
+        "heading": "<p>Kakovostne sestavine, ki delujejo</p>",
+        "description": "<p>MobiMix includes 8 ingredients, each focused on its own part to help dog joints recover faster, maintain joint agility and protect it from future damage. We combined all of these ingredients into a capsule that you can have for <strong>less than 1.00 € per day</strong>!</p>",
+        "amount_label": "Amount per package",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#fdfbf7",
+        "text_color": "#3b2f2f",
+        "accent_color": "#f8aaa7",
+        "accent_color_dark": "#f47671",
+        "secondary_color": "#e8d6c5",
+        "light_text_color": "#faf9f6"
+      }
     }
   },
   "order": [
@@ -269,6 +286,7 @@
     "hero",
     "reasons",
     "timeline",
-    "offer"
+    "offer",
+    "ingredients"
   ]
 }
