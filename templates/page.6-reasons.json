@@ -90,55 +90,55 @@
         "reason_1": {
           "type": "reason",
           "settings": {
-            "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png",
             "tag": "It's not your fault",
             "title": "Reassure it is not their fault for this problem",
-            "text": "<p>Take the blame off the owner before anything else.</p>"
+            "text": "<p>Take the blame off the owner before anything else.</p>",
+            "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png"
           }
         },
         "reason_2": {
           "type": "reason",
           "settings": {
-            "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png",
             "tag": "The real problem",
             "title": "Explain the problem - why does it happen",
-            "text": "<p>Think \"You are stuck in survival mode\", \"Nobody told you running too much does this to joints\"...</p>"
+            "text": "<p>Think \"You are stuck in survival mode\", \"Nobody told you running too much does this to joints\"...</p>",
+            "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png"
           }
         },
         "reason_3": {
           "type": "reason",
           "settings": {
-            "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png",
             "tag": "Ingredient highlight 1 (Mechanism)",
             "title": "Introduce a way out",
-            "text": "<p>This ingredient has been used by xy in wz for 1000s of years. In MobiMix, it supports joints in X way so it doesn't come to Y problem above.</p>"
+            "text": "<p>This ingredient has been used by xy in wz for 1000s of years. In MobiMix, it supports joints in X way so it doesn't come to Y problem above.</p>",
+            "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png"
           }
         },
         "reason_4": {
           "type": "reason",
           "settings": {
-            "image": "shopify://shop_images/hf_20260715_183826_c908ba8d-6a6a-4516-a1c5-72f1ec0df3d4.png",
             "tag": "Ingredient highlight 2 (Mechanism 2)",
             "title": "Remove any other doubt",
-            "text": "<p>This ingredient causes this other problem to go away as well.</p>"
+            "text": "<p>This ingredient causes this other problem to go away as well.</p>",
+            "image": "shopify://shop_images/hf_20260715_183826_c908ba8d-6a6a-4516-a1c5-72f1ec0df3d4.png"
           }
         },
         "reason_5": {
           "type": "reason",
           "settings": {
-            "image": "shopify://shop_images/hf_20260713_165343_fa82d984-8de5-433f-88d2-3d5047daa731.png",
             "tag": "Ingredient highlight 3 (Mechanism 3)",
             "title": "Present the dream here",
-            "text": "<p>Introduce the dream here: \"For many dog-moms, having a happy, healthy dog is not only about owning a pet. It's about making sure she is capable of taking care of a family member. X ingredient helps your dog regain that agility you were looking for.\"</p>"
+            "text": "<p>Introduce the dream here: \"For many dog-moms, having a happy, healthy dog is not only about owning a pet. It's about making sure she is capable of taking care of a family member. X ingredient helps your dog regain that agility you were looking for.\"</p>",
+            "image": "shopify://shop_images/hf_20260713_165343_fa82d984-8de5-433f-88d2-3d5047daa731.png"
           }
         },
         "reason_6": {
           "type": "reason",
           "settings": {
-            "image": "shopify://shop_images/hf_20260713_163447_2d99eb36-2604-4301-adaf-5d2fc17329e7.png",
             "tag": "Ease of use",
             "title": "A small thing you can do for your dog every day",
-            "text": "<p>Us vs them: dogs don't want to eat powder, while chews do not help joints at all. MobiMix is easy to use - you just give the capsule to your dog with a small treat and he won't even notice. MobiMix is protected by a 60-day money-back guarantee.</p>"
+            "text": "<p>Us vs them: dogs don't want to eat powder, while chews do not help joints at all. MobiMix is easy to use - you just give the capsule to your dog with a small treat and he won't even notice. MobiMix is protected by a 60-day money-back guarantee.</p>",
+            "image": "shopify://shop_images/hf_20260713_163447_2d99eb36-2604-4301-adaf-5d2fc17329e7.png"
           }
         }
       },
@@ -154,12 +154,12 @@
         "show_numbers": true,
         "pad_numbers": true,
         "number_start": 1,
+        "padding_top": 80,
+        "padding_bottom": 80,
         "background_color": "#fdfbf7",
         "text_color": "#3b2f2f",
         "accent_color": "#f04842",
-        "divider_color": "#565858",
-        "padding_top": 80,
-        "padding_bottom": 80
+        "divider_color": "#565858"
       }
     },
     "timeline": {
@@ -198,52 +198,15 @@
         "subheading": "<p>A slow gut and years of routine leave the whole system feeling sluggish. Here's how most owners describe their dog's first two weeks.</p>",
         "image": "shopify://shop_images/hf_20260713_165719_3d2d789b-0b91-400e-b9ae-5854d33e0906.png",
         "footnote": "<p>Every dog is different. Any changes you see or don't see in the first week are simply your dog's body adjusting to a better joint pace. This is a dietary supplement, not a treatment.</p>",
+        "padding_top": 80,
+        "padding_bottom": 80,
         "background_color": "#fcdddc",
         "text_color": "#3b2f2f",
         "accent_color": "#f8aaa7",
         "accent_color_dark": "#f47671",
         "line_color": "#fac3c1",
         "card_color": "#ffffff",
-        "footnote_color": "#565858",
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
-    },
-    "stats": {
-      "type": "petsome-ld-stats",
-      "blocks": {
-        "stat_1": {
-          "type": "stat",
-          "settings": {
-            "number": "2,000+",
-            "description": "Dog owners across Europe"
-          }
-        },
-        "stat_2": {
-          "type": "stat",
-          "settings": {
-            "number": "9 in 10",
-            "description": "Would recommend to a friend"
-          }
-        },
-        "stat_3": {
-          "type": "stat",
-          "settings": {
-            "number": "90 days",
-            "description": "Money-back guarantee"
-          }
-        }
-      },
-      "block_order": [
-        "stat_1",
-        "stat_2",
-        "stat_3"
-      ],
-      "settings": {
-        "background_color": "#e8d6c5",
-        "number_color": "#f47671",
-        "padding_top": 48,
-        "padding_bottom": 48
+        "footnote_color": "#565858"
       }
     },
     "offer": {
@@ -262,9 +225,10 @@
       ],
       "settings": {
         "product": "mobimix",
+        "image": "shopify://shop_images/93b9341cd8c0fc22bbfed015b4d80c1836056d4b.png",
         "heading": "",
         "description": "<p><strong>Lorem ipsum dolor sit amet</strong>, consectetur adipiscing elit. Praesent sit amet arcu ac ipsum mattis elementum. Integer eget enim mollis, sagittis sem a, cursus lacus.</p>",
-        "trustpilot_text": "Excellent",
+        "trustpilot_text": "",
         "weight_label": "Choose your dog's weight:",
         "delivery_text": "<p>Estimated delivery: <strong>2-3 days</strong></p>",
         "atc_label": "Add to cart",
@@ -305,7 +269,6 @@
     "hero",
     "reasons",
     "timeline",
-    "stats",
     "offer"
   ]
 }
