@@ -30,19 +30,57 @@
     },
     "hero": {
       "type": "petsome-ld-hero",
+      "blocks": {
+        "gift_1": {
+          "type": "gift",
+          "settings": {
+            "label": "2x eBook",
+            "price": "35,90 €"
+          }
+        },
+        "gift_2": {
+          "type": "gift",
+          "settings": {
+            "label": "Skrivni izdelek",
+            "price": "14,99 €"
+          }
+        },
+        "gift_3": {
+          "type": "gift",
+          "settings": {
+            "label": "Brezplačna dostava",
+            "price": ""
+          }
+        }
+      },
+      "block_order": [
+        "gift_1",
+        "gift_2",
+        "gift_3"
+      ],
       "settings": {
-        "rating_text": "Trusted by 2,000+ dog owners across Europe",
-        "heading": "<p>6 reasons your dog's body will love it</p>",
-        "subline": "<p>One daily scoop that supports joints, digestion, coat and calm — not six different supplements.</p>",
-        "cta_label": "See the offer",
+        "show_badge_stars": true,
+        "rating_text": "Used by over a 3.500 dogs across Europe",
+        "heading": "<p>6 reasons why Dog Trainers swear on this dog joint supplement</p>",
+        "subline": "<p>Introduce the problem really well - detailed description of the problem, how they tried everything, nothing works.</p>",
+        "cta_label": "START YOUR DOG-TRAINER ROUTINE",
         "cta_url": "#offer",
-        "min_height": 520,
-        "padding_top": 64,
-        "padding_bottom": 64,
-        "background_color": "#e8d6c5",
+        "guarantee_text": "60-day money-back guarantee",
+        "proof_text": "Over 10.000 satisfied customers",
+        "show_gifts": true,
+        "gifts_heading": "FREE GIFTS WITH YOUR FIRST ORDER!",
+        "padding_top": 32,
+        "padding_bottom": 80,
+        "background_color": "#fdfbf7",
         "text_color": "#3b2f2f",
+        "muted_text_color": "#565858",
+        "badge_background": "#fdfdfc",
+        "star_color": "#ff9a0a",
         "button_background": "#3b2f2f",
-        "button_text_color": "#ffffff"
+        "button_text_color": "#ffffff",
+        "accent_color": "#f8aaa7",
+        "gift_tile_color": "#f1e1d5",
+        "gift_tile_border_color": "#b7b8b8"
       }
     },
     "reasons": {
