@@ -81,16 +81,16 @@
         "avatar_1": "shopify://shop_images/FloraMix_lizanje_tack.png",
         "show_badge_stars": true,
         "rating_text": "Uporablja ga že več kot 3.500 psov po Evropi",
-        "heading": "<p>6 razlogov, zakaj veliki psi nehajo prinašati žogico<br>(in kako jo dobijo nazaj)</p>",
+        "heading": "<p>6 razlogov, zakaj veliki psi nehajo prinašati žogico<br>(in kako spet postanejo taki, kot so bili)</p>",
         "subline": "<p>Če ste zadnje čase opazili, da po nekaj metih žogico pusti in se usede – čeprav bi jo prej lovil, dokler ga ne bi ustavili.</p><p>Pes za žogico ne teče, ampak pospešuje, zavira in se obrača. Sila pri zaviranju gre skozi kolena, rame in komolce, dobra mišica pa to leta skriva. MobiMix z zelenoustno školjko, glukozaminom in kurkumo podpira hrustanec in gibljivost, da žogica ostane v igri.</p>",
         "image": "shopify://shop_images/93b9341cd8c0fc22bbfed015b4d80c1836056d4b.png",
         "cta_label": "OHRANITE GA V IGRI",
         "cta_url": "#offer",
-        "guarantee_text": "90-dnevna garancija vračila denarja",
+        "guarantee_text": "60-dnevna garancija vračila denarja",
         "proof_text": "Več kot 10.000 zadovoljnih strank",
         "show_gifts": true,
         "gifts_heading": "BREZPLAČNA DARILA OB PRVEM NAROČILU!",
-        "padding_top": 32,
+        "padding_top": 0,
         "padding_bottom": 80,
         "background_color": "#fdfbf7",
         "text_color": "#3b2f2f",
@@ -101,7 +101,10 @@
         "button_text_color": "#ffffff",
         "accent_color": "#f8aaa7",
         "gift_tile_color": "#f1e1d5",
-        "gift_tile_border_color": "#b7b8b8"
+        "gift_tile_border_color": "#b7b8b8",
+        "gift_badge_label": "GRATIS",
+        "gift_badge_color": "#f47671",
+        "gift_badge_text_color": "#ffffff"
       }
     },
     "reasons": {
@@ -112,7 +115,7 @@
           "settings": {
             "tag": "Ni vaša krivda",
             "title": "Utrujen pes je srečen pes – tako so vam rekli",
-            "text": "<p>In res deluje. Dvajset minut z žogico naredi več kot ura sprehoda. Doma je miren, zadovoljen, ne razgraja. Zato jo mečete vsak dan.</p><p>Nihče vam ni povedal, kaj teh dvajset minut pomeni za njegove sklepe. Naredili ste točno to, kar naredi dober lastnik.</p>",
+            "text": "<p>In res deluje. Dvajset minut z žogico naredi več kot ura sprehoda. Doma je miren, zadovoljen, ne razgraja. Zato jo mečete vsak dan. Nihče vam ni povedal, kaj teh dvajset minut pomeni za njegove sklepe. Naredili ste točno to, kar naredi dober lastnik.</p>",
             "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png"
           }
         },
@@ -121,7 +124,7 @@
           "settings": {
             "tag": "Pravi vzrok",
             "title": "Ne obrablja ga tek, ampak ustavljanje",
-            "text": "<p>Na sprehodu se pes giblje enakomerno in sklepi to brez težav prenesejo. Za žogico pa ne teče – pospeši do polne hitrosti, zavre v nekaj korakih, se zavrti na eni nogi in vse skupaj ponovi. Znova in znova.</p><p>Sila pri zaviranju in obračanju ne gre v mišice, ampak v kolena, rame in komolce. Pri tridesetkilogramskem psu je povsem druga kot pri majhnem. In ker je pes dobro omišičen, tega leta ne opazite – mišica napako pokrije. Ko popusti, se pokaže vse naenkrat.</p>",
+            "text": "<p>Na sprehodu se pes giblje enakomerno in sklepi to brez težav prenesejo. Za žogico pa ne teče – pospeši do polne hitrosti, zavre v nekaj korakih, se zavrti na eni nogi in vse skupaj ponovi. Znova in znova. Sila pri zaviranju in obračanju ne gre v mišice, ampak v kolena, rame in komolce. Pri tridesetkilogramskem psu je povsem druga kot pri majhnem. In ker je pes dobro omišičen, tega leta ne opazite – mišica napako pokrije. Ko popusti, se pokaže vse naenkrat.</p>",
             "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png"
           }
         },
@@ -130,7 +133,7 @@
           "settings": {
             "tag": "Zelenoustna školjka, glukozamin, hondroitin",
             "title": "Blazinica, ki jo vsako zaviranje stanjša",
-            "text": "<p>Zelenoustna školjka, glukozamin in hondroitin so gradniki hrustanca – tistega med kostmi, ki prevzame udarec ob doskoku in zasuku.</p><p>V MobiMixu podpirajo hrustanec in mazivost sklepa. Hrustanec sam ne zraste nazaj, zato šteje, da ga podprete, dokler ga še je.</p>",
+            "text": "<p>Zelenoustna školjka, glukozamin in hondroitin so gradniki hrustanca – tistega med kostmi, ki prevzame udarec ob doskoku in zasuku. V MobiMixu podpirajo hrustanec in mazivost sklepa. Hrustanec sam ne zraste nazaj, zato šteje, da ga podprete, dokler ga še je.</p>",
             "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png"
           }
         },
@@ -139,7 +142,7 @@
           "settings": {
             "tag": "Kurkuma in ingver",
             "title": "Da se popoldnevi ne seštevajo",
-            "text": "<p>Po napornem popoldnevu se sklep odzove. Enkrat to ni nič. Trikrat na teden, tri leta zapored, pa se sešteje – in prvi znak ni šepanje, ampak to, da pes zjutraj malo dlje obleži.</p><p>Kurkuma in ingver v MobiMixu podpirata umirjeno delovanje sklepov, da vsak tak popoldan ne pusti sledi.</p>",
+            "text": "<p>Po napornem popoldnevu se sklep odzove. Enkrat to ni nič. Trikrat na teden, tri leta zapored, pa se sešteje – in prvi znak ni šepanje, ampak to, da pes zjutraj malo dlje obleži. Kurkuma in ingver v MobiMixu podpirata umirjeno delovanje sklepov, da vsak tak popoldan ne pusti sledi.</p>",
             "image": "shopify://shop_images/hf_20260715_183826_c908ba8d-6a6a-4516-a1c5-72f1ec0df3d4.png"
           }
         },
@@ -148,7 +151,7 @@
           "settings": {
             "tag": "Vražji krempelj, šipek in vitamin C",
             "title": "Da žogico prinaša tudi pri desetih letih",
-            "text": "<p>Vražji krempelj, šipek in vitamin C podpirajo udobno gibanje in tvorbo kolagena, ki sklep drži skupaj.</p><p>Cilj ni, da bi žogico pospravili. Cilj je, da jo lahko mečete še čez pet let – in da pes takrat še vedno pride do vrat z isto žogico v gobcu.</p>",
+            "text": "<p>Vražji krempelj, šipek in vitamin C podpirajo udobno gibanje in tvorbo kolagena, ki sklep drži skupaj. Cilj ni, da bi žogico pospravili. Cilj je, da jo lahko mečete še čez pet let – in da pes takrat še vedno pride do vrat z isto žogico v gobcu.</p>",
             "image": "shopify://shop_images/hf_20260713_165343_fa82d984-8de5-433f-88d2-3d5047daa731.png"
           }
         },
@@ -157,7 +160,7 @@
           "settings": {
             "tag": "Enostavna uporaba",
             "title": "Tri kapsule zjutraj, kar v skledo",
-            "text": "<p>Praške psi pogosto puščajo, priboljški za sklepe pa vsebujejo premalo učinkovin, da bi karkoli spremenili.</p><p>MobiMix je kapsula. Pes med 25 in 40 kilogrami dobi tri na dan, ki jih preprosto zmešate v jutranjo skledo. Če v 90 dneh ne opazite razlike, vam denar vrnemo – tudi če je embalaža prazna.</p>",
+            "text": "<p>Praške psi pogosto puščajo, priboljški za sklepe pa vsebujejo premalo učinkovin, da bi karkoli spremenili. MobiMix je kapsula. Pes med 25 in 40 kilogrami dobi tri na dan, ki jih preprosto zmešate v jutranjo skledo. Če v 60 dneh ne opazite razlike, vam denar vrnemo – tudi če je embalaža prazna.</p>",
             "image": "shopify://shop_images/hf_20260713_163447_2d99eb36-2604-4301-adaf-5d2fc17329e7.png"
           }
         }
@@ -327,7 +330,7 @@
           "type": "question",
           "settings": {
             "question": "Kaj če pri mojem psu ne bo delovalo?",
-            "answer": "<p>Na voljo imate 90 dni. Če ne boste zadovoljni, nam pišite in denar vam vrnemo – tudi če je embalaža že odprta.</p>"
+            "answer": "<p>Na voljo imate 60 dni. Če ne boste zadovoljni, nam pišite in denar vam vrnemo – tudi če je embalaža že odprta.</p>"
           }
         },
         "q_5": {
@@ -389,8 +392,8 @@
       "settings": {
         "show_icon": true,
         "icon": "verified_user",
-        "heading": "<p>MobiMix preizkusite brez tveganja 90 dni</p>",
-        "text": "<p>Na kratko razloži, kako garancija deluje in kaj mora kupec narediti, če izdelek vrne.</p>",
+        "heading": "<p>MobiMix preizkusite brez tveganja 60 dni</p>",
+        "text": "<p>Dajte psu prvo embalažo in si vzemite čas. Če v 60 dneh ne boste opazili razlike – da lažje vstane, dlje zdrži na sprehodu ali se spet brez premisleka zažene po stopnicah – nam pišite in denar vam vrnemo. Tudi če je embalaža prazna.</p>",
         "cta_label": "OHRANITE GA V IGRI",
         "cta_url": "#offer",
         "padding_top": 80,

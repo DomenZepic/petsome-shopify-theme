@@ -22,6 +22,8 @@
     --ldh-accent: {{ section.settings.accent_color }};
     --ldh-gift-tile: {{ section.settings.gift_tile_color }};
     --ldh-gift-border: {{ section.settings.gift_tile_border_color }};
+    --ldh-gift-badge: {{ section.settings.gift_badge_color }};
+    --ldh-gift-badge-text: {{ section.settings.gift_badge_text_color }};
     background-color: {{ section.settings.background_color }};
     padding: {{ section.settings.padding_top }}px var(--petsome-padding-x) {{ section.settings.padding_bottom }}px;
     font-family: var(--font-body-family);
@@ -216,7 +218,8 @@
   #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__gifts-list {
     display: flex;
     gap: 12px;
-    padding: 12px;
+    /* Extra room at the top for the badge that straddles each tile's border. */
+    padding: 26px 12px 12px;
   }
 
   #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__gift {
@@ -225,24 +228,53 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    gap: 10px;
-    padding: 12px;
-    border: 2px dashed var(--ldh-gift-border);
-    border-radius: 12px;
-    background-color: var(--ldh-gift-tile);
+    gap: 8px;
     text-align: center;
   }
 
+  /* The dashed tile holds only the image; the name and price sit under it. */
+  #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__gift-tile {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px;
+    border: 2px dashed var(--ldh-gift-border);
+    border-radius: 12px;
+    background-color: var(--ldh-gift-tile);
+  }
+
+  #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__gift-badge {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 4px 12px;
+    border-radius: 8px;
+    background-color: var(--ldh-gift-badge);
+    color: var(--ldh-gift-badge-text);
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
   #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__gift-icon {
-    width: 40px;
-    height: 40px;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
     object-fit: contain;
     display: block;
   }
 
   #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__gift-label {
     font-size: 1.4rem;
+    font-weight: 700;
     line-height: 1.3;
   }
 
@@ -250,6 +282,7 @@
     font-size: 1.2rem;
     line-height: 1.3;
     text-decoration: line-through;
+    opacity: 0.65;
   }
 
   /* ---------- Tablet / mobile ---------- */
@@ -281,7 +314,7 @@
     }
 
     #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__heading {
-      font-size: 2.8rem;
+      font-size: 3.6rem;
     }
 
     #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__cta {
@@ -400,16 +433,21 @@
           <div class="petsome-ld-hero__gifts-list">
             {%- for block in gift_blocks -%}
               <div class="petsome-ld-hero__gift" {{ block.shopify_attributes }}>
-                {%- if block.settings.icon != blank -%}
-                  <img
-                    class="petsome-ld-hero__gift-icon"
-                    src="{{ block.settings.icon | image_url: width: 120 }}"
-                    alt=""
-                    width="40"
-                    height="40"
-                    loading="lazy"
-                  >
-                {%- endif -%}
+                <div class="petsome-ld-hero__gift-tile">
+                  {%- if section.settings.gift_badge_label != blank -%}
+                    <span class="petsome-ld-hero__gift-badge">{{ section.settings.gift_badge_label }}</span>
+                  {%- endif -%}
+                  {%- if block.settings.icon != blank -%}
+                    <img
+                      class="petsome-ld-hero__gift-icon"
+                      src="{{ block.settings.icon | image_url: width: 240 }}"
+                      alt=""
+                      width="120"
+                      height="120"
+                      loading="lazy"
+                    >
+                  {%- endif -%}
+                </div>
                 {%- if block.settings.label != blank -%}
                   <p class="petsome-ld-hero__gift-label">{{ block.settings.label }}</p>
                 {%- endif -%}
@@ -549,6 +587,13 @@
       "default": "FREE GIFTS WITH YOUR FIRST ORDER!"
     },
     {
+      "type": "text",
+      "id": "gift_badge_label",
+      "label": "Gift badge",
+      "info": "The small pill sitting on each gift's border. Leave blank to hide.",
+      "default": "GRATIS"
+    },
+    {
       "type": "header",
       "content": "Padding"
     },
@@ -635,6 +680,18 @@
       "id": "gift_tile_border_color",
       "label": "Gift tile border",
       "default": "#B7B8B8"
+    },
+    {
+      "type": "color",
+      "id": "gift_badge_color",
+      "label": "Gift badge background",
+      "default": "#F47671"
+    },
+    {
+      "type": "color",
+      "id": "gift_badge_text_color",
+      "label": "Gift badge text",
+      "default": "#FFFFFF"
     }
   ],
   "blocks": [
