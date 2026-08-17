@@ -12,6 +12,7 @@ if (!customElements.get('kaching-custom-display')) {
         dosageUnitPowder: this.dataset.i18nDosageUnitPowder || 'g',
         pricePerDay: this.dataset.i18nPricePerDay || '{{ amount }} / day',
       };
+      this.giftsInTier = this.dataset.giftsInTier === '1';
       this.capsulesPerPackage = parseFloat(this.dataset.capsulesPerPackage) || 0;
       this.capsulesPerDayBySize = (this.dataset.capsulesPerDayBySize || '')
         .split(',')
@@ -297,6 +298,7 @@ if (!customElements.get('kaching-custom-display')) {
       this.renderHeader(tilesData);
       this.renderTiles(tilesData);
       this.renderGifts();
+      this.placeGiftsInTier();
 
       // computeFallbackPrice re-implements Kaching's discount math just to
       // paint instantly - it WILL go stale the next time the deal's
@@ -463,9 +465,11 @@ if (!customElements.get('kaching-custom-display')) {
           </button>
         `;
 
+        const bare = badgeStyle === 'none' || !badgeLabel;
         let wrapperEl;
-        if (badgeStyle === 'none' || !badgeLabel) {
+        if (bare) {
           wrapperEl = document.createElement('div');
+          if (this.giftsInTier) wrapperEl.className = 'kaching-tile-wrapper';
           wrapperEl.innerHTML = tileHtml;
         } else {
           wrapperEl = document.createElement('div');
@@ -479,12 +483,30 @@ if (!customElements.get('kaching-custom-display')) {
         const tileButton = wrapperEl.querySelector('.kaching-tile');
         tileButton.addEventListener('click', () => this.handleTileClick(tier));
 
-        if (badgeStyle === 'none' || !badgeLabel) {
+        if (bare && !this.giftsInTier) {
+          tileButton.dataset.barPosition = String(position);
           this.tilesContainer.appendChild(tileButton);
         } else {
+          wrapperEl.dataset.barPosition = String(position);
           this.tilesContainer.appendChild(wrapperEl);
         }
       });
+    }
+
+    // Prestavi obstojeci blok daril v tisto ploscico, ki jih odklene.
+    // Brez zastavice gifts_in_tier se ne zgodi nic - vedenje ostane isto.
+    placeGiftsInTier() {
+      if (!this.giftsInTier || !this.giftsWrapper || !this.gifts || !this.gifts.length) return;
+      const bars = this.gifts
+        .map((g) => Number(g.unlockAtBar))
+        .filter((n) => Number.isFinite(n) && n > 0);
+      if (!bars.length) return;
+      const target = this.tilesContainer.querySelector(
+        `[data-bar-position="${Math.max.apply(null, bars)}"]`
+      );
+      if (!target) return;
+      target.classList.add('kaching-tile-wrapper--has-gifts');
+      target.appendChild(this.giftsWrapper);
     }
 
     renderGifts() {
