@@ -405,11 +405,21 @@
   }
 
   .kaching-tile-wrapper--has-gifts .kaching-tile-wrapper__label {
-    padding: 11px 12px 9px;
-    font-size: 1.9rem;
-    font-weight: 800;
-    letter-spacing: 0.06em;
+    padding: 10px 12px 8px;
+    font-size: 1.7rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
     text-transform: uppercase;
+  }
+
+  /* Welcome offer: ves okvir v barvi znamke, brez crnega roba iz stila "best" */
+  .kaching-tile-wrapper--has-gifts .kaching-tile,
+  .kaching-tile-wrapper--has-gifts.kaching-tile-wrapper--best .kaching-tile {
+    border-color: var(--kaching-accent);
+  }
+
+  .kaching-tile-wrapper--has-gifts .kaching-tile__gifts {
+    border-color: var(--kaching-accent);
   }
 
   /* Zgornja ploscica je vedno v barvi znamke, ne sele ob izbiri */
