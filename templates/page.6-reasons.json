@@ -114,8 +114,8 @@
           "type": "reason",
           "settings": {
             "tag": "Ni vaša krivda",
-            "title": "Utrujen pes je srečen pes – tako so vam rekli",
-            "text": "<p>In res deluje. Dvajset minut z žogico naredi več kot ura sprehoda. Doma je miren, zadovoljen, ne razgraja. Zato jo mečete vsak dan. Nihče vam ni povedal, kaj teh dvajset minut pomeni za njegove sklepe. Naredili ste točno to, kar naredi dober lastnik.</p>",
+            "title": "Rekli so vam, da je utrujen pes srečen pes",
+            "text": "<p>In res je tako. Dvajset minut z žogico naredi več kot ura sprehoda. Doma je miren, zadovoljen, ne razgraja. Zato jo mečete vsak dan. Nihče pa vam ni povedal, kaj teh dvajset minut pomeni za njegove sklepe. Naredili ste točno to, kar naredi dober lastnik.</p>",
             "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png"
           }
         },
@@ -182,8 +182,7 @@
         "background_color": "#fdfbf7",
         "text_color": "#3b2f2f",
         "accent_color": "#f04842",
-        "divider_color": "#565858",
-        "anchor_id": "reasons"
+        "divider_color": "#565858"
       }
     },
     "timeline": {
@@ -230,8 +229,7 @@
         "accent_color_dark": "#f47671",
         "line_color": "#fac3c1",
         "card_color": "#ffffff",
-        "footnote_color": "#565858",
-        "anchor_id": "timeline"
+        "footnote_color": "#565858"
       }
     },
     "offer": {
@@ -281,11 +279,11 @@
         "capsules_per_day_by_size": "1, 2, 3",
         "grams_per_package": 90,
         "grams_per_day_by_size": "1, 2, 3",
+        "anchor_id": "offer",
         "padding_top": 80,
         "padding_bottom": 80,
         "margin_top": 0,
-        "margin_bottom": 0,
-        "anchor_id": "offer"
+        "margin_bottom": 0
       }
     },
     "ingredients": {
@@ -302,8 +300,7 @@
         "accent_color": "#f8aaa7",
         "accent_color_dark": "#f47671",
         "secondary_color": "#e8d6c5",
-        "light_text_color": "#faf9f6",
-        "anchor_id": "ingredients"
+        "light_text_color": "#faf9f6"
       }
     },
     "faq": {
@@ -362,8 +359,7 @@
         "text_color": "#3b2f2f",
         "card_color": "#ffffff",
         "border_color": "#e7e7e7",
-        "accent_color": "#f47671",
-        "anchor_id": "faq"
+        "accent_color": "#f47671"
       }
     },
     "17869840503b54b2bc": {
@@ -407,8 +403,7 @@
         "text_color": "#3b2f2f",
         "icon_color": "#f8aaa7",
         "button_background": "#3b2f2f",
-        "button_text_color": "#ffffff",
-        "anchor_id": "guarantee"
+        "button_text_color": "#ffffff"
       }
     },
     "ld_footer": {
