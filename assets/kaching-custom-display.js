@@ -421,6 +421,10 @@ if (!customElements.get('kaching-custom-display')) {
     renderTiles(tilesData) {
       this.tilesContainer.innerHTML = '';
       const maxQty = Math.max.apply(null, tilesData.map(function (t) { return t.tier.quantity || 0; }));
+      // Katera plocica nosi ponudbo. Privzeto najvecja; nastavitev jo lahko
+      // premakne na manjso (npr. 1+1 = kolicina 2), ce je ta glavna ponudba.
+      const heroQtySetting = parseInt(this.dataset.heroTierQuantity || '', 10);
+      const heroQty = heroQtySetting > 0 ? heroQtySetting : maxQty;
       // Kljukica gre na NAJMANJSI paket, ki doseze priporocene 3 mesece (90 dni).
       let protocolQty = null;
       tilesData.forEach(function (t) {
@@ -483,7 +487,7 @@ if (!customElements.get('kaching-custom-display')) {
           </button>
         `;
 
-        const isHero = this.giftsInTier && tier.quantity === maxQty;
+        const isHero = this.giftsInTier && tier.quantity === heroQty;
         const heroLabel = isHero ? (this.dataset.heroLabel || '').trim() : '';
         const withGifts = isHero && !!this.gifts && !!this.gifts.length;
         const giftsHtml = withGifts ? this.giftsMarkup() : '';
