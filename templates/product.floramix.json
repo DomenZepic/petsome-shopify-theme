@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "main": {
       "type": "main-product",
@@ -646,15 +647,21 @@
               "type": "product_kaching-custom-display",
               "settings": {
                 "disclaimer_text": "<p>To so spremembe, ki jih lastniki najpogosteje opazijo. Prebava se pri večini uredi v 1–2 tednih, praskanja je manj v 3–4 tednih, koža in dlaka se spremenita v 6–8 tednih. Vsak pes je drugačen, zato za pošteno oceno priporočamo vsaj 8 tednov redne uporabe.</p>",
-                "gifts_heading": "",
+                "gifts_heading": "VKLJUČENO V TA PAKET",
                 "hide_gifts_heading": false,
+                "hero_label": "OMEJENA ZAČETNA PONUDBA",
+                "offer_checklist": "2x FloraMix (240 g)\nPrenosna zložljiva posoda — 9,00 €\nDentalSticks — 14,90 €\nBrezplačna dostava\n90-dnevna garancija vračila denarja",
+                "offer_total_value": "Skupna vrednost 115,70 € — prihraniš 35,70 €",
+                "protocol_label": "3-mesečni protokol",
+                "hero_tier_quantity": "2",
+                "gifts_in_tier": true,
                 "tier_1_style": "none",
-                "tier_2_style": "recommended",
-                "tier_3_style": "best",
+                "tier_2_style": "none",
+                "tier_3_style": "none",
                 "tier_4_style": "none",
-                "accent_color": "#f8aaa7",
-                "accent_color_dark": "#f47671",
-                "secondary_color": "#e8d6c5",
+                "accent_color": "#c9a0e0",
+                "accent_color_dark": "#6d388b",
+                "secondary_color": "#f4e1ff",
                 "light_text_color": "#faf9f6",
                 "product_type": "powder",
                 "capsules_per_package": 90,
