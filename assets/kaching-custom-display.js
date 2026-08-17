@@ -460,31 +460,36 @@ if (!customElements.get('kaching-custom-display')) {
               <span class="kaching-tile__title">${this.translateFromKaching(tier.title) || tier.title}</span>
               <span class="kaching-tile__price">${this.formatMoney(price / tier.quantity)}</span>
               ${dosageLines.map((line) => `<span class="kaching-tile__dosage">${line}</span>`).join('')}
-              ${this.giftsInTier && tier.quantity === maxQty && this.giftsLine()
-                ? `<span class="kaching-tile__gifts">${this.giftsLine()}</span>`
-                : ''}
               ${!valid ? `<span class="kaching-tile__unavailable">${validationMessage || this.i18n.unavailable}</span>` : ''}
             </span>
           </button>
         `;
 
-        let wrapperEl;
-        if (badgeStyle === 'none' || !badgeLabel) {
-          wrapperEl = document.createElement('div');
+        const withGifts =
+          this.giftsInTier && tier.quantity === maxQty && !!this.gifts && !!this.gifts.length;
+        const giftsHtml = withGifts ? this.giftsMarkup() : '';
+        const bare = (badgeStyle === 'none' || !badgeLabel) && !withGifts;
+
+        let wrapperEl = document.createElement('div');
+        if (bare) {
           wrapperEl.innerHTML = tileHtml;
+        } else if (badgeStyle === 'none' || !badgeLabel) {
+          wrapperEl.className = 'kaching-tile-wrapper';
+          wrapperEl.innerHTML = `${tileHtml}${giftsHtml}`;
         } else {
-          wrapperEl = document.createElement('div');
           wrapperEl.className = `kaching-tile-wrapper kaching-tile-wrapper--${badgeStyle}`;
           wrapperEl.innerHTML = `
             <p class="kaching-tile-wrapper__label">${badgeLabel}</p>
             ${tileHtml}
+            ${giftsHtml}
           `;
         }
+        if (withGifts) wrapperEl.classList.add('kaching-tile-wrapper--has-gifts');
 
         const tileButton = wrapperEl.querySelector('.kaching-tile');
         tileButton.addEventListener('click', () => this.handleTileClick(tier));
 
-        if (badgeStyle === 'none' || !badgeLabel) {
+        if (bare) {
           this.tilesContainer.appendChild(tileButton);
         } else {
           this.tilesContainer.appendChild(wrapperEl);
@@ -492,13 +497,23 @@ if (!customElements.get('kaching-custom-display')) {
       });
     }
 
-    // Imena daril, ki jih odklene najvecji paket. Samo besedilo v ploscici -
-    // nic se ne premika, zato se ne more podreti ob Kachingovem ponovnem izrisu.
-    giftsLine() {
+    // Darila izrisana kot del ploscice. Nastanejo znotraj renderTiles, zato
+    // prezivijo vsak ponovni izris - nic se ne premika po DOM-u.
+    giftsMarkup() {
       if (!this.gifts || !this.gifts.length) return '';
-      const names = this.gifts.map(function (g) { return g.title; }).filter(Boolean);
-      if (!names.length) return '';
-      return '🎁 ' + names.join(' + ');
+      const heading = this.dataset.giftsTitle || '';
+      const boxes = this.gifts
+        .map((gift) => {
+          const image = gift.image
+            ? `<img class="kaching-gift__image" src="${gift.image}" alt="" loading="lazy">`
+            : `<span class="kaching-gift__icon"><span class="material-icon material-symbols-outlined">${gift.icon || 'redeem'}</span></span>`;
+          const priceEl = gift.comparePrice
+            ? `<span class="kaching-gift__compare-price">${this.formatMoney(gift.comparePrice)}</span>`
+            : '';
+          return `<div class="kaching-gift kaching-gift--unlocked">${image}<span class="kaching-gift__title">${gift.title}</span>${priceEl}</div>`;
+        })
+        .join('');
+      return `<div class="kaching-tile__gifts">${heading ? `<p class="kaching-tile__gifts-heading">${heading}</p>` : ''}<div class="kaching-tile__gifts-list">${boxes}</div></div>`;
     }
 
     renderGifts() {
@@ -510,7 +525,8 @@ if (!customElements.get('kaching-custom-display')) {
         return;
       }
 
-      if (this.giftsWrapper) this.giftsWrapper.hidden = false;
+      if (this.giftsWrapper) this.giftsWrapper.hidden = !!this.giftsInTier;
+      if (this.giftsInTier) return;
 
       const headingEl = this.querySelector('.kaching-custom-display__gifts-heading');
       if (headingEl && this.giftsTitle) {
