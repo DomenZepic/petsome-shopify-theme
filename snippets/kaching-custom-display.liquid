@@ -23,6 +23,7 @@
     assign kaching_amount_per_day_by_size = block.settings.grams_per_day_by_size
   endif
 
+  assign offer_checklist = block.settings.offer_checklist | newline_to_br | split: '<br />'
   assign kaching_gifts_heading = block.settings.gifts_heading
   if kaching_gifts_heading == blank
     assign kaching_gifts_heading = 'kaching_custom_display.gifts_heading_default' | t
@@ -417,6 +418,38 @@
     color: #8a8a8a;
   }
 
+  .kaching-tile__checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid color-mix(in srgb, var(--kaching-accent) 45%, white);
+  }
+
+  .kaching-tile__checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 1.4rem;
+    line-height: 1.35;
+    color: rgb(var(--color-foreground));
+  }
+
+  .kaching-tile__checklist-item::before {
+    content: '✓';
+    font-weight: 700;
+    color: var(--kaching-accent-dark);
+    flex-shrink: 0;
+  }
+
+  .kaching-tile__total {
+    margin-top: 6px;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: rgb(var(--color-foreground));
+  }
+
   .kaching-tile__check {
     margin-top: 2px;
     font-weight: 700;
@@ -499,6 +532,8 @@
     data-gifts-in-tier="{% if block.settings.gifts_in_tier %}1{% endif %}"
     data-gifts-title="{{ kaching_gifts_heading | escape }}"
     data-protocol-label="{{ block.settings.protocol_label | default: '3-mesečni protokol' | escape }}"
+    data-offer-checklist="{{ offer_checklist | json | escape }}"
+    data-offer-total="{{ block.settings.offer_total_value | escape }}"
     data-product-title="{{ product.title | escape }}"
     data-tier1-style="{{ block.settings.tier_1_style | default: 'none' }}"
     data-tier2-style="{{ block.settings.tier_2_style | default: 'recommended' }}"

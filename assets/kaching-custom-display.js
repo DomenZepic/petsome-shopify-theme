@@ -473,6 +473,7 @@ if (!customElements.get('kaching-custom-display')) {
                   : ''}
               </span>
               ${dosageLines.map((line) => `<span class="kaching-tile__dosage">${line}</span>`).join('')}
+              ${tier.quantity === maxQty ? this.checklistMarkup() : ''}
               ${tier.quantity === protocolQty
                 ? `<span class="kaching-tile__check">✓ ${this.dataset.protocolLabel || '3-mesečni protokol'}</span>`
                 : ''}
@@ -515,6 +516,24 @@ if (!customElements.get('kaching-custom-display')) {
 
     // Darila izrisana kot del ploscice. Nastanejo znotraj renderTiles, zato
     // prezivijo vsak ponovni izris - nic se ne premika po DOM-u.
+    // Vrednostni sklop, ki ga uporabnik vpise v urejevalniku teme.
+    checklistMarkup() {
+      let items = [];
+      try {
+        items = JSON.parse(this.dataset.offerChecklist || '[]');
+      } catch (e) {
+        items = [];
+      }
+      items = items.map((x) => String(x).trim()).filter(Boolean);
+      const total = (this.dataset.offerTotal || '').trim();
+      if (!items.length && !total) return '';
+      const rows = items
+        .map((x) => `<span class="kaching-tile__checklist-item">${x}</span>`)
+        .join('');
+      const totalRow = total ? `<span class="kaching-tile__total">${total}</span>` : '';
+      return `<span class="kaching-tile__checklist">${rows}${totalRow}</span>`;
+    }
+
     giftsMarkup() {
       if (!this.gifts || !this.gifts.length) return '';
       const heading = this.dataset.giftsTitle || '';
