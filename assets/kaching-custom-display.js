@@ -475,7 +475,6 @@ if (!customElements.get('kaching-custom-display')) {
                   : ''}
               </span>
               ${dosageLines.map((line) => `<span class="kaching-tile__dosage">${line}</span>`).join('')}
-              ${this.giftsInTier && tier.quantity === maxQty ? this.checklistMarkup() : ''}
               ${this.giftsInTier && tier.quantity === protocolQty
                 ? `<span class="kaching-tile__check">✓ ${this.dataset.protocolLabel || '3-mesečni protokol'}</span>`
                 : ''}
@@ -488,6 +487,7 @@ if (!customElements.get('kaching-custom-display')) {
         const heroLabel = isHero ? (this.dataset.heroLabel || '').trim() : '';
         const withGifts = isHero && !!this.gifts && !!this.gifts.length;
         const giftsHtml = withGifts ? this.giftsMarkup() : '';
+        const listHtml = isHero ? this.checklistMarkup() : '';
         const label = heroLabel || badgeLabel;
         const bare = (badgeStyle === 'none' && !heroLabel) || (!label && !withGifts);
 
@@ -496,12 +496,13 @@ if (!customElements.get('kaching-custom-display')) {
           wrapperEl.innerHTML = tileHtml;
         } else if ((badgeStyle === 'none' || !label) && !heroLabel) {
           wrapperEl.className = 'kaching-tile-wrapper';
-          wrapperEl.innerHTML = `${tileHtml}${giftsHtml}`;
+          wrapperEl.innerHTML = `${tileHtml}${listHtml}${giftsHtml}`;
         } else {
           wrapperEl.className = `kaching-tile-wrapper kaching-tile-wrapper--${badgeStyle === 'none' ? 'best' : badgeStyle}`;
           wrapperEl.innerHTML = `
             <p class="kaching-tile-wrapper__label">${label}</p>
             ${tileHtml}
+            ${listHtml}
             ${giftsHtml}
           `;
         }

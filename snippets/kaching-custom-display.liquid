@@ -384,7 +384,10 @@
   .kaching-tile-wrapper--has-gifts .kaching-tile {
     padding: 16px;
     gap: 14px;
-    align-items: flex-start;   /* slika ob naslov, ne navpicno na sredino */
+    align-items: center;
+    border-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
   .kaching-tile-wrapper--has-gifts .kaching-tile__image {
@@ -399,8 +402,8 @@
     }
 
     .kaching-tile-wrapper--has-gifts .kaching-tile__image {
-      width: 92px;
-      height: 92px;
+      width: 84px;
+      height: 84px;
     }
 
     .kaching-tile-wrapper--has-gifts .kaching-tile__title {
@@ -434,8 +437,8 @@
   }
 
   .kaching-tile-wrapper--has-gifts .kaching-tile__image {
-    width: 140px;
-    height: 140px;
+    width: 108px;
+    height: 108px;
   }
 
   /* Ploscica brez slike: brez prazne vrzeli, tekst se pomakne levo */
@@ -500,10 +503,16 @@
   .kaching-tile__checklist {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid color-mix(in srgb, var(--kaching-accent) 45%, white);
+    gap: 5px;
+    padding: 12px 16px 14px;
+    background-color: #ffffff;
+    border-left: 2px solid #e7e7e7;
+    border-right: 2px solid #e7e7e7;
+  }
+
+  .kaching-tile-wrapper--has-gifts:has(.kaching-tile--selected) .kaching-tile__checklist {
+    border-color: var(--kaching-accent);
+    background-color: color-mix(in srgb, var(--kaching-accent) 8%, white);
   }
 
   .kaching-tile__checklist-item {
