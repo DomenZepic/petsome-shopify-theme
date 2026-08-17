@@ -96,8 +96,14 @@
   }
 
   /* Per the Figma mobile frame the bar keeps its desktop type and pill; only
-     the gap between the copy and the timer tightens (24 -> 16). */
+     the gap between the copy and the timer tightens (24 -> 16). The vertical
+     padding is squeezed to 4px so the bar stays a thin strip on a phone. */
   @media screen and (max-width: 749px) {
+    #petsome-ld-offer-bar-{{ section.id }} {
+      padding-top: min({{ section.settings.padding_top }}px, 4px);
+      padding-bottom: min({{ section.settings.padding_bottom }}px, 4px);
+    }
+
     #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__inner {
       gap: 16px;
     }
