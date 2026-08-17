@@ -1,0 +1,384 @@
+{% comment %}
+  Petsome Ld: Offer bar - the promo strip that sits ABOVE the logo header on
+  landing pages (the "Ld" family). Two lines of editable copy next to a pill
+  holding a live countdown.
+
+  The countdown runs to the next midnight in the shop's timezone (Europe/
+  Ljubljana by default) and resets itself the moment it gets there. It reads the
+  current wall-clock time in that timezone on every tick via Intl rather than
+  counting down a stored number, which means:
+    - it is correct no matter what timezone the visitor is in,
+    - CET/CEST is handled for us, so it does not drift when the clocks change,
+    - a tab left open overnight rolls straight over to a fresh 23:59:59.
+{% endcomment %}
+<style>
+  #petsome-ld-offer-bar-{{ section.id }} {
+    --ldb-text: {{ section.settings.text_color }};
+    --ldb-pill: {{ section.settings.pill_color }};
+    --ldb-pill-text: {{ section.settings.pill_text_color }};
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_top }}px var(--petsome-padding-x) {{ section.settings.padding_bottom }}px;
+    font-family: var(--font-body-family);
+    color: var(--ldb-text);
+  }
+
+  #petsome-ld-offer-bar-{{ section.id }} * {
+    font-family: var(--font-body-family);
+  }
+
+  #petsome-ld-offer-bar-{{ section.id }} p {
+    margin: 0;
+  }
+
+  #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    text-align: center;
+  }
+
+  #petsome-ld-offer-bar-{{ section.id }} a.petsome-ld-bar__inner {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    line-height: normal;
+  }
+
+  #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__headline {
+    font-size: 1.6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__subline {
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+
+  /* ---------- Countdown pill ---------- */
+
+  #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__timer {
+    flex-shrink: 0;
+    padding: 4px 16px;
+    border-radius: 12px;
+    background-color: var(--ldb-pill);
+    color: var(--ldb-pill-text);
+    line-height: 1.25;
+  }
+
+  #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__grid {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    justify-items: center;
+    align-items: baseline;
+    column-gap: 4px;
+  }
+
+  #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__num,
+  #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__sep {
+    font-size: 1.8rem;
+    font-weight: 900;
+    /* Keeps the pill from twitching as the digits change. */
+    font-variant-numeric: tabular-nums;
+  }
+
+  #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__label {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__inner {
+      gap: 12px;
+    }
+
+    #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__headline {
+      font-size: 1.4rem;
+    }
+
+    #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__subline {
+      font-size: 1.2rem;
+    }
+
+    #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__timer {
+      padding: 4px 12px;
+    }
+
+    #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__num,
+    #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__sep {
+      font-size: 1.6rem;
+    }
+  }
+</style>
+
+{%- liquid
+  assign has_copy = false
+  if section.settings.headline != blank or section.settings.subline != blank
+    assign has_copy = true
+  endif
+-%}
+
+{%- if has_copy or section.settings.show_timer -%}
+  <div id="petsome-ld-offer-bar-{{ section.id }}" class="petsome-ld-offer-bar">
+    {%- if section.settings.link != blank -%}
+      <a href="{{ section.settings.link }}" class="petsome-ld-bar__inner">
+    {%- else -%}
+      <div class="petsome-ld-bar__inner">
+    {%- endif -%}
+
+    {%- if has_copy -%}
+      <div class="petsome-ld-bar__copy">
+        {%- if section.settings.headline != blank -%}
+          <p class="petsome-ld-bar__headline">{{ section.settings.headline }}</p>
+        {%- endif -%}
+        {%- if section.settings.subline != blank -%}
+          <p class="petsome-ld-bar__subline">{{ section.settings.subline }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_timer -%}
+      <div
+        class="petsome-ld-bar__timer"
+        role="timer"
+        data-petsome-countdown
+        data-timezone="{{ section.settings.timezone | default: 'Europe/Ljubljana' | escape }}"
+      >
+        <div class="petsome-ld-bar__grid">
+          <span class="petsome-ld-bar__num" data-countdown-hours>00</span>
+          <span class="petsome-ld-bar__sep">:</span>
+          <span class="petsome-ld-bar__num" data-countdown-minutes>00</span>
+          <span class="petsome-ld-bar__sep">:</span>
+          <span class="petsome-ld-bar__num" data-countdown-seconds>00</span>
+
+          <span class="petsome-ld-bar__label">{{ section.settings.hours_label }}</span>
+          <span class="petsome-ld-bar__label"></span>
+          <span class="petsome-ld-bar__label">{{ section.settings.minutes_label }}</span>
+          <span class="petsome-ld-bar__label"></span>
+          <span class="petsome-ld-bar__label">{{ section.settings.seconds_label }}</span>
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.link != blank -%}
+      </a>
+    {%- else -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if section.settings.show_timer -%}
+    <script>
+      (function () {
+        var root = document.getElementById('petsome-ld-offer-bar-{{ section.id }}');
+        if (!root) return;
+
+        var timer = root.querySelector('[data-petsome-countdown]');
+        if (!timer) return;
+
+        var hoursEl = timer.querySelector('[data-countdown-hours]');
+        var minutesEl = timer.querySelector('[data-countdown-minutes]');
+        var secondsEl = timer.querySelector('[data-countdown-seconds]');
+        var timeZone = timer.getAttribute('data-timezone') || 'Europe/Ljubljana';
+
+        // A bad/unsupported timezone would throw on every tick, so fall back to
+        // the visitor's own clock rather than leaving the timer frozen at 00.
+        var formatter;
+        try {
+          formatter = new Intl.DateTimeFormat('en-GB', {
+            timeZone: timeZone,
+            hourCycle: 'h23',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+          });
+        } catch (error) {
+          formatter = new Intl.DateTimeFormat('en-GB', {
+            hourCycle: 'h23',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+          });
+        }
+
+        function pad(value) {
+          return value < 10 ? '0' + value : String(value);
+        }
+
+        function tick() {
+          var parts = {};
+          formatter.formatToParts(new Date()).forEach(function (part) {
+            parts[part.type] = part.value;
+          });
+
+          // Read the wall clock in the target timezone every tick, so the
+          // countdown self-corrects and rolls over on its own at midnight.
+          var h = parseInt(parts.hour, 10) % 24;
+          var m = parseInt(parts.minute, 10);
+          var s = parseInt(parts.second, 10);
+          if (isNaN(h) || isNaN(m) || isNaN(s)) return;
+
+          var remaining = 86400 - (h * 3600 + m * 60 + s);
+          if (remaining === 86400) remaining = 0; // exactly midnight
+
+          hoursEl.textContent = pad(Math.floor(remaining / 3600));
+          minutesEl.textContent = pad(Math.floor((remaining % 3600) / 60));
+          secondsEl.textContent = pad(remaining % 60);
+        }
+
+        tick();
+        var interval = setInterval(tick, 1000);
+
+        // Catch up immediately when a backgrounded tab is brought forward.
+        document.addEventListener('visibilitychange', function () {
+          if (!document.hidden) tick();
+        });
+
+        if (window.Shopify && window.Shopify.designMode) {
+          document.addEventListener('shopify:section:unload', function (event) {
+            if (event.target === root || event.target.contains(root)) {
+              clearInterval(interval);
+            }
+          });
+        }
+      })();
+    </script>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Petsome Ld: Offer bar",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "text",
+      "id": "headline",
+      "label": "Headline",
+      "info": "Shown in uppercase. Emoji are fine.",
+      "default": "🎂🎈 It's petsome's birthday 🎈🎂"
+    },
+    {
+      "type": "text",
+      "id": "subline",
+      "label": "Subline",
+      "default": "Up to 70% discount + free gifts"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link",
+      "info": "Optional - makes the whole bar clickable. Use #offer to jump to the offer."
+    },
+    {
+      "type": "header",
+      "content": "Countdown"
+    },
+    {
+      "type": "paragraph",
+      "content": "Counts down to midnight in the timezone below and restarts automatically. Daylight saving is handled for you."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_timer",
+      "label": "Show countdown",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "timezone",
+      "label": "Timezone",
+      "info": "An IANA name, e.g. Europe/Ljubljana.",
+      "default": "Europe/Ljubljana"
+    },
+    {
+      "type": "text",
+      "id": "hours_label",
+      "label": "Hours label",
+      "default": "Hours"
+    },
+    {
+      "type": "text",
+      "id": "minutes_label",
+      "label": "Minutes label",
+      "default": "Min"
+    },
+    {
+      "type": "text",
+      "id": "seconds_label",
+      "label": "Seconds label",
+      "default": "Sec"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#3B2F2F"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#FAF9F6"
+    },
+    {
+      "type": "color",
+      "id": "pill_color",
+      "label": "Countdown background",
+      "default": "#F8AAA7"
+    },
+    {
+      "type": "color",
+      "id": "pill_text_color",
+      "label": "Countdown text",
+      "default": "#3B2F2F"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome Ld: Offer bar"
+    }
+  ]
+}
+{% endschema %}

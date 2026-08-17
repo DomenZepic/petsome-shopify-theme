@@ -17,6 +17,25 @@
         "hide_footer": true
       }
     },
+    "offer_bar": {
+      "type": "petsome-ld-offer-bar",
+      "settings": {
+        "headline": "🎂🎈 It's petsome's birthday 🎈🎂",
+        "subline": "Up to 70% discount + free gifts",
+        "link": "",
+        "show_timer": true,
+        "timezone": "Europe/Ljubljana",
+        "hours_label": "Hours",
+        "minutes_label": "Min",
+        "seconds_label": "Sec",
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "background_color": "#3b2f2f",
+        "text_color": "#faf9f6",
+        "pill_color": "#f8aaa7",
+        "pill_text_color": "#3b2f2f"
+      }
+    },
     "ld_header": {
       "type": "petsome-ld-header",
       "settings": {
@@ -327,6 +346,7 @@
   },
   "order": [
     "hide_chrome",
+    "offer_bar",
     "ld_header",
     "hero",
     "reasons",
