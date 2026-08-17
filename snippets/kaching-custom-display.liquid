@@ -475,7 +475,8 @@
     color: var(--kaching-accent-dark);
   }
 
-  /* Darila izrisana znotraj najvecje ploscice (gifts_in_tier) */
+  /* Darila izrisana znotraj najvecje ploscice (gifts_in_tier).
+     Barva sledi stanju ploscice - nevtralna, ko ni izbrana. */
   .kaching-tile-wrapper--has-gifts .kaching-tile {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -483,11 +484,29 @@
   }
 
   .kaching-tile__gifts {
-    border: 2px solid var(--kaching-accent);
+    border: 2px solid #e7e7e7;
     border-top: 0;
     border-radius: 0 0 12px 12px;
-    background-color: color-mix(in srgb, var(--kaching-accent) 12%, white);
+    background-color: #ffffff;
     overflow: hidden;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .kaching-tile__gifts::before {
+    content: '';
+    display: block;
+    height: 1px;
+    margin: 0 12px;
+    background-color: #ececec;
+  }
+
+  .kaching-tile-wrapper--has-gifts:has(.kaching-tile--selected) .kaching-tile__gifts {
+    border-color: var(--kaching-accent);
+    background-color: color-mix(in srgb, var(--kaching-accent) 14%, white);
+  }
+
+  .kaching-tile-wrapper--has-gifts:has(.kaching-tile--selected) .kaching-tile__gifts::before {
+    background-color: color-mix(in srgb, var(--kaching-accent) 40%, white);
   }
 
   .kaching-tile__gifts-heading {
@@ -511,7 +530,13 @@
   .kaching-tile__gifts-list .kaching-gift {
     padding: 8px 6px;
     gap: 6px;
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: transparent;
+    border-color: #d9d9d9;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .kaching-tile-wrapper--has-gifts:has(.kaching-tile--selected) .kaching-tile__gifts-list .kaching-gift {
+    background-color: rgba(255, 255, 255, 0.9);
     border-color: var(--kaching-accent);
   }
 
