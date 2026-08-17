@@ -421,8 +421,16 @@ if (!customElements.get('kaching-custom-display')) {
     renderTiles(tilesData) {
       this.tilesContainer.innerHTML = '';
       const maxQty = Math.max.apply(null, tilesData.map(function (t) { return t.tier.quantity || 0; }));
+      // Kljukica gre na NAJMANJSI paket, ki doseze priporocene 3 mesece (90 dni).
+      let protocolQty = null;
+      tilesData.forEach(function (t) {
+        const d = t.dosage && t.dosage.daysSupply;
+        if (d && d >= 89 && (protocolQty === null || t.tier.quantity < protocolQty)) {
+          protocolQty = t.tier.quantity;
+        }
+      });
 
-      tilesData.forEach(({ tier, imageUrl, price, valid, validationMessage, dosage }, index) => {
+      tilesData.forEach(({ tier, imageUrl, price, comparePrice, valid, validationMessage, dosage }, index) => {
         const position = index + 1;
         const badgeStyle = this.dataset[`tier${position}Style`] || 'none';
         const rawBadgeLabel = tier.label || tier.badgeText || '';
@@ -458,8 +466,16 @@ if (!customElements.get('kaching-custom-display')) {
             <span class="kaching-tile__image" aria-hidden="true"${imageUrl ? ` style="background-image:url('${imageUrl}')"` : ''}></span>
             <span class="kaching-tile__content">
               <span class="kaching-tile__title">${this.translateFromKaching(tier.title) || tier.title}</span>
-              <span class="kaching-tile__price">${this.formatMoney(price / tier.quantity)}</span>
+              <span class="kaching-tile__price-row">
+                <span class="kaching-tile__price">${this.formatMoney(price / tier.quantity)}</span>
+                ${comparePrice && comparePrice > price
+                  ? `<s class="kaching-tile__price-compare">${this.formatMoney(comparePrice / tier.quantity)}</s>`
+                  : ''}
+              </span>
               ${dosageLines.map((line) => `<span class="kaching-tile__dosage">${line}</span>`).join('')}
+              ${tier.quantity === protocolQty
+                ? `<span class="kaching-tile__check">✓ ${this.dataset.protocolLabel || '3-mesečni protokol'}</span>`
+                : ''}
               ${!valid ? `<span class="kaching-tile__unavailable">${validationMessage || this.i18n.unavailable}</span>` : ''}
             </span>
           </button>

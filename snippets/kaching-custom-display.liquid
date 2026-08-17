@@ -379,6 +379,52 @@
     color: rgb(var(--color-foreground));
   }
 
+  /* ---- WELCOME OFFER: vecja, izpostavljena ploscica ---- */
+  .kaching-tile-wrapper--has-gifts .kaching-tile {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .kaching-tile-wrapper--has-gifts .kaching-tile__image {
+    width: 128px;
+    height: 128px;
+  }
+
+  .kaching-tile-wrapper--has-gifts .kaching-tile__title {
+    font-size: 2.4rem;
+  }
+
+  .kaching-tile-wrapper--has-gifts .kaching-tile__price {
+    font-size: 2.2rem;
+  }
+
+  .kaching-tile-wrapper--has-gifts .kaching-tile-wrapper__label {
+    padding: 8px 12px 6px;
+    font-size: 1.7rem;
+    letter-spacing: 0.02em;
+  }
+
+  .kaching-tile__price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .kaching-tile__price-compare {
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: #8a8a8a;
+  }
+
+  .kaching-tile__check {
+    margin-top: 2px;
+    font-weight: 700;
+    font-size: 1.35rem;
+    line-height: 1.3;
+    color: var(--kaching-accent-dark);
+  }
+
   /* Darila izrisana znotraj najvecje ploscice (gifts_in_tier) */
   .kaching-tile-wrapper--has-gifts .kaching-tile {
     border-bottom-left-radius: 0;
@@ -452,6 +498,7 @@
     data-capsules-per-day-by-size="{{ kaching_amount_per_day_by_size }}"
     data-gifts-in-tier="{% if block.settings.gifts_in_tier %}1{% endif %}"
     data-gifts-title="{{ kaching_gifts_heading | escape }}"
+    data-protocol-label="{{ block.settings.protocol_label | default: '3-mesečni protokol' | escape }}"
     data-product-title="{{ product.title | escape }}"
     data-tier1-style="{{ block.settings.tier_1_style | default: 'none' }}"
     data-tier2-style="{{ block.settings.tier_2_style | default: 'recommended' }}"
