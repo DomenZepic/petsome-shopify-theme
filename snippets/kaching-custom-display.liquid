@@ -387,8 +387,13 @@
   }
 
   .kaching-tile-wrapper--has-gifts .kaching-tile__image {
-    width: 128px;
-    height: 128px;
+    width: 140px;
+    height: 140px;
+  }
+
+  /* Ploscica brez slike: brez prazne vrzeli, tekst se pomakne levo */
+  .kaching-tile:not(:has(.kaching-tile__image)) {
+    padding: 14px 12px;
   }
 
   .kaching-tile-wrapper--has-gifts .kaching-tile__title {
