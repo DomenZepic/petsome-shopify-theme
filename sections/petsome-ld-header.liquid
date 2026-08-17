@@ -58,7 +58,11 @@
 
 <div id="petsome-ld-header-{{ section.id }}" class="petsome-ld-header">
   <div class="petsome-ld-header__inner">
-    <a href="{{ section.settings.logo_link | default: routes.root_url }}" class="petsome-ld-header__logo-link">
+    {%- comment -%}
+      Landing pages are a closed funnel: with no link set the logo is inert
+      rather than falling back to the homepage, so there is no way off the page.
+    {%- endcomment -%}
+    {%- capture logo_markup -%}
       {%- if logo != blank -%}
         <img
           class="petsome-ld-header__logo"
@@ -71,7 +75,13 @@
       {%- else -%}
         <span class="petsome-ld-header__name">{{ shop.name }}</span>
       {%- endif -%}
-    </a>
+    {%- endcapture -%}
+
+    {%- if section.settings.logo_link != blank -%}
+      <a href="{{ section.settings.logo_link }}" class="petsome-ld-header__logo-link">{{ logo_markup }}</a>
+    {%- else -%}
+      <span class="petsome-ld-header__logo-link">{{ logo_markup }}</span>
+    {%- endif -%}
   </div>
 </div>
 
@@ -101,7 +111,7 @@
       "type": "url",
       "id": "logo_link",
       "label": "Logo link",
-      "info": "Defaults to the homepage."
+      "info": "Leave blank to keep the logo unclickable, so the landing page stays a closed funnel."
     },
     {
       "type": "checkbox",

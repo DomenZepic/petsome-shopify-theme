@@ -20,14 +20,14 @@
     "offer_bar": {
       "type": "petsome-ld-offer-bar",
       "settings": {
-        "headline": "🎂🎈 It's petsome's birthday 🎈🎂",
-        "subline": "Up to 70% discount + free gifts",
+        "headline": "🎂🎈 Petsome praznuje rojstni dan 🎈🎂",
+        "subline": "Do 70 % popusta + brezplačna darila",
         "link": "",
         "show_timer": true,
         "timezone": "Europe/Ljubljana",
-        "hours_label": "Hours",
+        "hours_label": "Ure",
         "minutes_label": "Min",
-        "seconds_label": "Sec",
+        "seconds_label": "Sek",
         "padding_top": 12,
         "padding_bottom": 12,
         "background_color": "#3b2f2f",
@@ -53,7 +53,7 @@
         "gift_1": {
           "type": "gift",
           "settings": {
-            "label": "2x eBook",
+            "label": "2x e-knjiga",
             "price": "35,90 €"
           }
         },
@@ -80,16 +80,16 @@
       "settings": {
         "avatar_1": "shopify://shop_images/FloraMix_lizanje_tack.png",
         "show_badge_stars": true,
-        "rating_text": "Used by over a 3.500 dogs across Europe",
-        "heading": "<p>6 reasons why Dog Trainers swear on this dog joint supplement</p>",
-        "subline": "<p>Introduce the problem really well - detailed description of the problem, how they tried everything, nothing works.</p>",
+        "rating_text": "Uporablja ga že več kot 3.500 psov po Evropi",
+        "heading": "<p>6 razlogov, zakaj pasji trenerji prisegajo na ta dodatek za sklepe</p>",
+        "subline": "<p>Tukaj dobro predstavi težavo: podrobno opiši, kako so poskusili že vse, pa nič ni pomagalo.</p>",
         "image": "shopify://shop_images/93b9341cd8c0fc22bbfed015b4d80c1836056d4b.png",
-        "cta_label": "START YOUR DOG-TRAINER ROUTINE",
+        "cta_label": "ZAČNITE Z RUTINO PASJIH TRENERJEV",
         "cta_url": "#offer",
-        "guarantee_text": "60-day money-back guarantee",
-        "proof_text": "Over 10.000 satisfied customers",
+        "guarantee_text": "60-dnevna garancija vračila denarja",
+        "proof_text": "Več kot 10.000 zadovoljnih strank",
         "show_gifts": true,
-        "gifts_heading": "FREE GIFTS WITH YOUR FIRST ORDER!",
+        "gifts_heading": "BREZPLAČNA DARILA OB PRVEM NAROČILU!",
         "padding_top": 32,
         "padding_bottom": 80,
         "background_color": "#fdfbf7",
@@ -110,54 +110,54 @@
         "reason_1": {
           "type": "reason",
           "settings": {
-            "tag": "It's not your fault",
-            "title": "Reassure it is not their fault for this problem",
-            "text": "<p>Take the blame off the owner before anything else.</p>",
+            "tag": "Ni vaša krivda",
+            "title": "Pomiri bralca, da za težavo ni kriv sam",
+            "text": "<p>Najprej z lastnika snemi krivdo.</p>",
             "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png"
           }
         },
         "reason_2": {
           "type": "reason",
           "settings": {
-            "tag": "The real problem",
-            "title": "Explain the problem - why does it happen",
-            "text": "<p>Think \"You are stuck in survival mode\", \"Nobody told you running too much does this to joints\"...</p>",
+            "tag": "Pravi vzrok",
+            "title": "Razloži težavo – zakaj sploh nastane",
+            "text": "<p>Razmisli v smeri: »Ujeti ste v način preživetja«, »Nihče vam ni povedal, da pretirano tekanje tako zdela sklepe« ...</p>",
             "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png"
           }
         },
         "reason_3": {
           "type": "reason",
           "settings": {
-            "tag": "Ingredient highlight 1 (Mechanism)",
-            "title": "Introduce a way out",
-            "text": "<p>This ingredient has been used by xy in wz for 1000s of years. In MobiMix, it supports joints in X way so it doesn't come to Y problem above.</p>",
+            "tag": "Sestavina 1 (mehanizem)",
+            "title": "Predstavi izhod iz težave",
+            "text": "<p>To sestavino v xy uporabljajo že tisočletja. V MobiMixu podpira sklepe na način X, da do težave Y sploh ne pride.</p>",
             "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png"
           }
         },
         "reason_4": {
           "type": "reason",
           "settings": {
-            "tag": "Ingredient highlight 2 (Mechanism 2)",
-            "title": "Remove any other doubt",
-            "text": "<p>This ingredient causes this other problem to go away as well.</p>",
+            "tag": "Sestavina 2 (mehanizem 2)",
+            "title": "Odpravi še zadnji dvom",
+            "text": "<p>Ta sestavina odpravi tudi to drugo težavo.</p>",
             "image": "shopify://shop_images/hf_20260715_183826_c908ba8d-6a6a-4516-a1c5-72f1ec0df3d4.png"
           }
         },
         "reason_5": {
           "type": "reason",
           "settings": {
-            "tag": "Ingredient highlight 3 (Mechanism 3)",
-            "title": "Present the dream here",
-            "text": "<p>Introduce the dream here: \"For many dog-moms, having a happy, healthy dog is not only about owning a pet. It's about making sure she is capable of taking care of a family member. X ingredient helps your dog regain that agility you were looking for.\"</p>",
+            "tag": "Sestavina 3 (mehanizem 3)",
+            "title": "Naslikaj želeni rezultat",
+            "text": "<p>Tu opiši, kaj si lastnik res želi: »Za marsikatero lastnico pes ni le hišni ljubljenček. Gre za to, da lahko skrbi za člana družine. Sestavina X psu pomaga povrniti gibčnost, ki ste jo pogrešali.«</p>",
             "image": "shopify://shop_images/hf_20260713_165343_fa82d984-8de5-433f-88d2-3d5047daa731.png"
           }
         },
         "reason_6": {
           "type": "reason",
           "settings": {
-            "tag": "Ease of use",
-            "title": "A small thing you can do for your dog every day",
-            "text": "<p>Us vs them: dogs don't want to eat powder, while chews do not help joints at all. MobiMix is easy to use - you just give the capsule to your dog with a small treat and he won't even notice. MobiMix is protected by a 60-day money-back guarantee.</p>",
+            "tag": "Enostavna uporaba",
+            "title": "Majhna stvar, ki jo za psa naredite vsak dan",
+            "text": "<p>Mi proti njim: psi praška nočejo jesti, priboljški pa sklepom sploh ne pomagajo. MobiMix je enostaven – kapsulo psu daste kar z manjšim priboljškom in sploh je ne bo opazil. Za MobiMix velja 60-dnevna garancija vračila denarja.</p>",
             "image": "shopify://shop_images/hf_20260713_163447_2d99eb36-2604-4301-adaf-5d2fc17329e7.png"
           }
         }
@@ -188,22 +188,22 @@
         "step_1": {
           "type": "step",
           "settings": {
-            "badge_text": "DAY 1-5",
-            "text": "<p><strong>The gut wakes up.</strong> The prebiotic fibre gets to work. Many owners notice easier, more regular digestion within a day or two.</p>"
+            "badge_text": "DAN 1–5",
+            "text": "<p><strong>Črevesje se prebudi.</strong> Prebiotična vlaknina začne delovati. Mnogi lastniki že v dnevu ali dveh opazijo lažjo in bolj redno prebavo.</p>"
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
-            "badge_text": "DAY 6-10",
-            "text": "<p><strong>Mornings feel lighter.</strong> Less of that heavy, sluggish feeling. Energy through the day comes on steadier.</p>"
+            "badge_text": "DAN 6–10",
+            "text": "<p><strong>Jutra so lažja.</strong> Manj tiste težke, zaspane otopelosti. Energija čez dan je bolj enakomerna.</p>"
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
-            "badge_text": "DAY 10-14",
-            "text": "<p><strong>More like themselves.</strong> Less bloating by evening, a calmer tummy, and the daily scoop becomes a habit.</p>"
+            "badge_text": "DAN 10–14",
+            "text": "<p><strong>Spet je bolj on sam.</strong> Proti večeru manj napihnjenosti, mirnejši trebuh, dnevna doza pa postane navada.</p>"
           }
         }
       },
@@ -213,11 +213,11 @@
         "step_3"
       ],
       "settings": {
-        "eyebrow": "First 14 days",
-        "heading": "<p>First steps happen fast</p>",
-        "subheading": "<p>A slow gut and years of routine leave the whole system feeling sluggish. Here's how most owners describe their dog's first two weeks.</p>",
+        "eyebrow": "Prvih 14 dni",
+        "heading": "<p>Prvi premiki so hitri</p>",
+        "subheading": "<p>Počasno prebavo in leta iste rutine čuti celo telo. Takole večina lastnikov opiše prva dva tedna svojega psa.</p>",
         "image": "shopify://shop_images/hf_20260713_165719_3d2d789b-0b91-400e-b9ae-5854d33e0906.png",
-        "footnote": "<p>Every dog is different. Any changes you see or don't see in the first week are simply your dog's body adjusting to a better joint pace. This is a dietary supplement, not a treatment.</p>",
+        "footnote": "<p>Vsak pes je drugačen. Kar koli v prvem tednu opazite ali ne opazite, je le prilagajanje telesa na boljši tempo sklepov. To je prehransko dopolnilo, ne zdravilo.</p>",
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#fcdddc",
@@ -246,16 +246,16 @@
       "settings": {
         "product": "mobimix",
         "image": "shopify://shop_images/93b9341cd8c0fc22bbfed015b4d80c1836056d4b.png",
-        "heading": "MobiMix - Dodatek za sklepe psov",
-        "description": "<p><strong>Lorem ipsum dolor sit amet</strong>, consectetur adipiscing elit. Praesent sit amet arcu ac ipsum mattis elementum. Integer eget enim mollis, sagittis sem a, cursus lacus.</p>",
+        "heading": "MobiMix – Dodatek za sklepe psov",
+        "description": "<p><strong>Kratek opis izdelka.</strong> V nekaj stavkih povej, komu je namenjen in kaj naredi.</p>",
         "trustpilot_text": "",
-        "weight_label": "Choose your dog's weight:",
-        "delivery_text": "<p>Estimated delivery: <strong>2-3 days</strong></p>",
-        "atc_label": "Add to cart",
+        "weight_label": "Izberite težo psa:",
+        "delivery_text": "<p>Predviden čas dostave: <strong>2–3 dni</strong></p>",
+        "atc_label": "Dodaj v košarico",
         "atc_show_price": true,
         "show_payment_icons": true,
-        "payments_label": "Secure payment with:",
-        "disclaimer_text": "<p>*First changes are visible in 2-3 weeks. For best results we recommend 2-3 months of use.</p>",
+        "payments_label": "Varno plačevanje z:",
+        "disclaimer_text": "<p>*Prve spremembe so vidne v 2–3 tednih. Za najboljše rezultate priporočamo 2–3 mesece uporabe.</p>",
         "gifts_heading": "",
         "hide_gifts_heading": false,
         "tier_1_style": "none",
@@ -287,8 +287,8 @@
       "settings": {
         "product": "mobimix",
         "heading": "<p>Kakovostne sestavine, ki delujejo</p>",
-        "description": "<p>MobiMix includes 8 ingredients, each focused on its own part to help dog joints recover faster, maintain joint agility and protect it from future damage. We combined all of these ingredients into a capsule that you can have for <strong>less than 1.00 € per day</strong>!</p>",
-        "amount_label": "Amount per package",
+        "description": "<p>MobiMix vsebuje 8 sestavin in vsaka skrbi za svoj del: da si sklepi hitreje opomorejo, ostanejo gibljivi in zaščiteni pred nadaljnjo obrabo. Vse smo združili v eno kapsulo, ki vas stane <strong>manj kot 1,00 € na dan</strong>!</p>",
+        "amount_label": "Količina na pakiranje",
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#fdfbf7",
@@ -330,9 +330,9 @@
       "settings": {
         "show_icon": true,
         "icon": "verified_user",
-        "heading": "<p>Try MobiMix risk-free for 60 days</p>",
-        "text": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent sit amet arcu ac ipsum mattis elementum. Integer eget enim mollis, sagittis sem a, cursus lacus. Pellentesque vitae neque est.</p>",
-        "cta_label": "START YOUR DOG-TRAINER ROUTINE",
+        "heading": "<p>MobiMix preizkusite brez tveganja 60 dni</p>",
+        "text": "<p>Na kratko razloži, kako garancija deluje in kaj mora kupec narediti, če izdelek vrne.</p>",
+        "cta_label": "ZAČNITE Z RUTINO PASJIH TRENERJEV",
         "cta_url": "#offer",
         "padding_top": 80,
         "padding_bottom": 80,
@@ -341,6 +341,62 @@
         "icon_color": "#f8aaa7",
         "button_background": "#3b2f2f",
         "button_text_color": "#ffffff"
+      }
+    },
+    "ld_footer": {
+      "type": "petsome-ld-footer",
+      "blocks": {
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Razlogi",
+            "anchor": "#shopify-section-reasons"
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Prvih 14 dni",
+            "anchor": "#shopify-section-timeline"
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Ponudba",
+            "anchor": "#offer"
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Sestavine",
+            "anchor": "#shopify-section-ingredients"
+          }
+        },
+        "link_5": {
+          "type": "link",
+          "settings": {
+            "label": "Garancija",
+            "anchor": "#shopify-section-guarantee"
+          }
+        }
+      },
+      "block_order": [
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "link_5"
+      ],
+      "settings": {
+        "logo_width": 90,
+        "legal_text": "<p>© Petsome. Vse pravice pridržane.</p>",
+        "padding_top": 48,
+        "padding_bottom": 48,
+        "background_color": "#3b2f2f",
+        "text_color": "#faf9f6",
+        "muted_text_color": "#c9bfbb"
       }
     }
   },
@@ -354,6 +410,7 @@
     "offer",
     "ingredients",
     "17869840503b54b2bc",
-    "guarantee"
+    "guarantee",
+    "ld_footer"
   ]
 }

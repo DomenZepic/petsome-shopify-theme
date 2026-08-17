@@ -1,0 +1,284 @@
+{% comment %}
+  Petsome Ld: Footer - the closing bar for landing pages (the "Ld" family).
+
+  Landing pages are a closed funnel, so this footer deliberately links ONLY to
+  anchors on the page itself - there is no navigation, no policy menu and no
+  clickable logo. Every link block is validated below: anything that isn't an
+  in-page "#anchor" is rendered as plain text instead of a link, so a stray
+  external URL can't quietly open an exit.
+
+  Targets: Shopify wraps every section in <section id="shopify-section-KEY">,
+  where KEY is the section's key in the template's JSON. So "#shopify-section-
+  reasons" jumps to the reasons section without needing an id added anywhere.
+  The offer section also renders its own shorter "#offer" anchor.
+{% endcomment %}
+<style>
+  #petsome-ld-footer-{{ section.id }} {
+    --ldf-text: {{ section.settings.text_color }};
+    --ldf-muted: {{ section.settings.muted_text_color }};
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_top }}px var(--petsome-padding-x) {{ section.settings.padding_bottom }}px;
+    font-family: var(--font-body-family);
+    color: var(--ldf-text);
+  }
+
+  #petsome-ld-footer-{{ section.id }} * {
+    font-family: var(--font-body-family);
+  }
+
+  /* The universal rule above outranks the .material-symbols-outlined rule that
+     Google Fonts ships, which would swap the icon font for the body font and
+     leave raw ligature text on screen. */
+  #petsome-ld-footer-{{ section.id }} .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+  }
+
+  #petsome-ld-footer-{{ section.id }} p {
+    margin: 0;
+  }
+
+  #petsome-ld-footer-{{ section.id }} .petsome-ld-footer__inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+  }
+
+  #petsome-ld-footer-{{ section.id }} .petsome-ld-footer__logo {
+    display: block;
+    width: {{ section.settings.logo_width }}px;
+    height: auto;
+  }
+
+  #petsome-ld-footer-{{ section.id }} .petsome-ld-footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px 28px;
+  }
+
+  #petsome-ld-footer-{{ section.id }} .petsome-ld-footer__link {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--ldf-text);
+    text-decoration: none;
+  }
+
+  #petsome-ld-footer-{{ section.id }} a.petsome-ld-footer__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  #petsome-ld-footer-{{ section.id }} .petsome-ld-footer__divider {
+    width: 100%;
+    height: 1px;
+    border: 0;
+    margin: 0;
+    background-color: currentColor;
+    opacity: 0.15;
+  }
+
+  #petsome-ld-footer-{{ section.id }} .petsome-ld-footer__legal {
+    font-size: 1.3rem;
+    line-height: 1.5;
+    color: var(--ldf-muted);
+    max-width: 760px;
+  }
+
+  #petsome-ld-footer-{{ section.id }} .petsome-ld-footer__legal p + p {
+    margin-top: 0.75em;
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-ld-footer-{{ section.id }} .petsome-ld-footer__nav {
+      gap: 10px 20px;
+    }
+
+    #petsome-ld-footer-{{ section.id }} .petsome-ld-footer__link {
+      font-size: 1.4rem;
+    }
+  }
+</style>
+
+{%- liquid
+  assign logo = section.settings.logo | default: settings.logo
+-%}
+
+<div id="petsome-ld-footer-{{ section.id }}" class="petsome-ld-footer">
+  <div class="petsome-ld-footer__inner">
+    {%- if logo != blank -%}
+      {%- comment -%} Not a link - see the note at the top of this file. {%- endcomment -%}
+      <img
+        class="petsome-ld-footer__logo"
+        src="{{ logo | image_url: width: 600 }}"
+        alt="{{ logo.alt | default: shop.name | escape }}"
+        width="{{ logo.width }}"
+        height="{{ logo.height }}"
+        loading="lazy"
+      >
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <nav class="petsome-ld-footer__nav">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.label != blank -%}
+            {%- liquid
+              assign target = block.settings.anchor | strip
+              assign first_char = target | slice: 0
+              assign is_in_page = false
+              if first_char == '#' and target.size > 1
+                assign is_in_page = true
+              endif
+            -%}
+            {%- if is_in_page -%}
+              <a class="petsome-ld-footer__link" href="{{ target }}" {{ block.shopify_attributes }}>
+                {{- block.settings.label -}}
+              </a>
+            {%- else -%}
+              <span class="petsome-ld-footer__link" {{ block.shopify_attributes }}>{{ block.settings.label }}</span>
+            {%- endif -%}
+          {%- endif -%}
+        {%- endfor -%}
+      </nav>
+    {%- endif -%}
+
+    {%- if section.settings.legal_text != blank -%}
+      <hr class="petsome-ld-footer__divider">
+      <div class="petsome-ld-footer__legal">{{ section.settings.legal_text }}</div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Petsome Ld: Footer",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "paragraph",
+      "content": "The logo is intentionally not clickable, so the landing page stays a closed funnel."
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "Optional - falls back to the theme's logo."
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 60,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "default": 90
+    },
+    {
+      "type": "header",
+      "content": "Links"
+    },
+    {
+      "type": "paragraph",
+      "content": "Only in-page anchors are allowed. Use #offer for the offer, or #shopify-section-KEY for any other section, where KEY is that section's name in this template (e.g. #shopify-section-reasons). Anything that isn't an anchor is shown as plain text instead of a link."
+    },
+    {
+      "type": "header",
+      "content": "Legal"
+    },
+    {
+      "type": "richtext",
+      "id": "legal_text",
+      "label": "Small print",
+      "default": "<p>© Petsome. All rights reserved.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#3B2F2F"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#FAF9F6"
+    },
+    {
+      "type": "color",
+      "id": "muted_text_color",
+      "label": "Small print",
+      "default": "#C9BFBB"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link",
+      "name": "Link",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Ponudba"
+        },
+        {
+          "type": "text",
+          "id": "anchor",
+          "label": "Anchor",
+          "info": "Must start with #, e.g. #offer or #shopify-section-reasons.",
+          "default": "#offer"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome Ld: Footer",
+      "blocks": [
+        { "type": "link" },
+        { "type": "link" },
+        { "type": "link" }
+      ]
+    }
+  ]
+}
+{% endschema %}
