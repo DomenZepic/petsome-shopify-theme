@@ -484,21 +484,23 @@ if (!customElements.get('kaching-custom-display')) {
           </button>
         `;
 
-        const withGifts =
-          this.giftsInTier && tier.quantity === maxQty && !!this.gifts && !!this.gifts.length;
+        const isHero = this.giftsInTier && tier.quantity === maxQty;
+        const heroLabel = isHero ? (this.dataset.heroLabel || '').trim() : '';
+        const withGifts = isHero && !!this.gifts && !!this.gifts.length;
         const giftsHtml = withGifts ? this.giftsMarkup() : '';
-        const bare = (badgeStyle === 'none' || !badgeLabel) && !withGifts;
+        const label = heroLabel || badgeLabel;
+        const bare = (badgeStyle === 'none' || !label) && !withGifts && !heroLabel;
 
         let wrapperEl = document.createElement('div');
         if (bare) {
           wrapperEl.innerHTML = tileHtml;
-        } else if (badgeStyle === 'none' || !badgeLabel) {
+        } else if ((badgeStyle === 'none' || !label) && !heroLabel) {
           wrapperEl.className = 'kaching-tile-wrapper';
           wrapperEl.innerHTML = `${tileHtml}${giftsHtml}`;
         } else {
-          wrapperEl.className = `kaching-tile-wrapper kaching-tile-wrapper--${badgeStyle}`;
+          wrapperEl.className = `kaching-tile-wrapper kaching-tile-wrapper--${badgeStyle === 'none' ? 'best' : badgeStyle}`;
           wrapperEl.innerHTML = `
-            <p class="kaching-tile-wrapper__label">${badgeLabel}</p>
+            <p class="kaching-tile-wrapper__label">${label}</p>
             ${tileHtml}
             ${giftsHtml}
           `;

@@ -405,9 +405,21 @@
   }
 
   .kaching-tile-wrapper--has-gifts .kaching-tile-wrapper__label {
-    padding: 8px 12px 6px;
-    font-size: 1.7rem;
-    letter-spacing: 0.02em;
+    padding: 11px 12px 9px;
+    font-size: 1.9rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* Zgornja ploscica je vedno v barvi znamke, ne sele ob izbiri */
+  .kaching-tile-wrapper--has-gifts {
+    background: linear-gradient(180deg, var(--kaching-accent) 0%, var(--kaching-accent-dark) 100%) !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.10);
+  }
+
+  .kaching-tile-wrapper--has-gifts .kaching-tile-wrapper__label {
+    color: {{ block.settings.light_text_color }} !important;
   }
 
   .kaching-tile__price-row {
@@ -539,6 +551,7 @@
     data-protocol-label="{{ block.settings.protocol_label | default: '3-mesečni protokol' | escape }}"
     data-offer-checklist="{{ offer_checklist | json | escape }}"
     data-offer-total="{{ block.settings.offer_total_value | escape }}"
+    data-hero-label="{{ block.settings.hero_label | escape }}"
     data-product-title="{{ product.title | escape }}"
     data-tier1-style="{{ block.settings.tier_1_style | default: 'none' }}"
     data-tier2-style="{{ block.settings.tier_2_style | default: 'recommended' }}"
