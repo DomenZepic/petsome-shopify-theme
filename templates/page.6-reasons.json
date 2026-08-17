@@ -390,6 +390,7 @@
         "link_5"
       ],
       "settings": {
+        "logo": "shopify://shop_images/Logo_cc9e4809-610d-4e12-9861-949378c4b8de.png",
         "logo_width": 90,
         "legal_text": "<p>© Petsome. Vse pravice pridržane.</p>",
         "padding_top": 48,
