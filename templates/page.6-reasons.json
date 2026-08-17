@@ -39,12 +39,12 @@
     "ld_header": {
       "type": "petsome-ld-header",
       "settings": {
-        "logo_width": 90,
+        "logo_width": 110,
         "logo_link": "",
         "show_border": true,
         "background_color": "#fdfbf7",
-        "padding_top": 20,
-        "padding_bottom": 20
+        "padding_top": 16,
+        "padding_bottom": 16
       }
     },
     "hero": {
@@ -452,8 +452,8 @@
         "logo": "shopify://shop_images/Logo_cc9e4809-610d-4e12-9861-949378c4b8de.png",
         "logo_width": 90,
         "legal_text": "<p>© Petsome. Vse pravice pridržane.</p>",
-        "padding_top": 48,
-        "padding_bottom": 48,
+        "padding_top": 64,
+        "padding_bottom": 64,
         "background_color": "#3b2f2f",
         "text_color": "#faf9f6",
         "muted_text_color": "#c9bfbb"

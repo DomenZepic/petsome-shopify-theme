@@ -3,9 +3,9 @@
   "6 reasons why" page templates. Two columns on desktop: a text column
   (social-proof pill, heading, body copy, full-width CTA with a guarantee /
   review line under it, and a "free gifts" box) next to a square lifestyle
-  image. On mobile everything stacks and the image slots in between the heading
-  and the body copy. The heading uses the HEADING font (Literata); everything
-  else uses the body font, matching the Figma design.
+  image. On mobile the whole text column stacks above the image. The heading
+  uses the HEADING font (Literata); everything else uses the body font,
+  matching the Figma design.
 {% endcomment %}
 {%- liquid
   assign gift_blocks = section.blocks | where: 'type', 'gift'
@@ -269,45 +269,23 @@
     }
   }
 
+  /* Per the Figma mobile frame only the heading scales (48 -> 36) and the
+     reassurance line stacks; the pill, CTA and gifts box keep their desktop
+     sizes. The mobile hero also carries no vertical padding of its own - the
+     logo bar above and the reasons section below supply the spacing. */
   @media screen and (max-width: 749px) {
+    #petsome-ld-hero-{{ section.id }} {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
     #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__heading {
-      font-size: 3.2rem;
-    }
-
-    #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__badge {
-      flex-wrap: wrap;
-      gap: 8px;
-      padding: 8px 12px;
-    }
-
-    #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__badge-text {
-      flex: 1 0 100%;
-      text-align: center;
-      font-size: 1.4rem;
-    }
-
-    #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__cta {
-      padding: 18px 20px;
-      font-size: 1.8rem;
+      font-size: 3.6rem;
     }
 
     #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__reassurance {
       flex-direction: column;
-      gap: 8px;
-    }
-
-    #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__gifts-list {
-      gap: 8px;
-      padding: 8px;
-    }
-
-    #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__gift {
-      padding: 10px 6px;
-      gap: 8px;
-    }
-
-    #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__gift-label {
-      font-size: 1.3rem;
+      gap: 4px;
     }
   }
 </style>

@@ -236,24 +236,16 @@
     }
   }
 
+  /* Mobile keeps the 46px circles, the 16px card padding and the 17px
+     eyebrow/subheading; only the heading (40 -> 32) and padding change. */
   @media screen and (max-width: 749px) {
+    #petsome-ld-timeline-{{ section.id }} {
+      padding-top: min({{ section.settings.padding_top }}px, 40px);
+      padding-bottom: min({{ section.settings.padding_bottom }}px, 40px);
+    }
+
     #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__heading {
-      font-size: 2.8rem;
-    }
-
-    #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__eyebrow,
-    #petsome-ld-timeline-{{ section.id }} .petsome-ld-timeline__subheading {
-      font-size: 1.6rem;
-    }
-
-    #petsome-ld-timeline-{{ section.id }} .petsome-ld-step__number {
-      width: 38px;
-      height: 38px;
-      font-size: 1.6rem;
-    }
-
-    #petsome-ld-timeline-{{ section.id }} .petsome-ld-step__card {
-      padding: 14px;
+      font-size: 3.2rem;
     }
   }
 </style>

@@ -106,27 +106,20 @@
     }
   }
 
+  /* Mobile keeps the 75px shield, the 40px gap and the full-size button;
+     only the heading (40 -> 32) and the section padding change. */
   @media screen and (max-width: 749px) {
-    #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__inner {
-      gap: 32px;
-    }
-
-    #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__icon .petsome-ld-icon {
-      font-size: 5.6rem;
+    #petsome-ld-guarantee-{{ section.id }} {
+      padding-top: min({{ section.settings.padding_top }}px, 40px);
+      padding-bottom: min({{ section.settings.padding_bottom }}px, 40px);
     }
 
     #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__heading {
-      font-size: 2.8rem;
-    }
-
-    #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__text {
-      font-size: 1.6rem;
+      font-size: 3.2rem;
     }
 
     #petsome-ld-guarantee-{{ section.id }} .petsome-ld-guarantee__cta {
       align-self: stretch;
-      padding: 18px 20px;
-      font-size: 1.8rem;
     }
   }
 </style>

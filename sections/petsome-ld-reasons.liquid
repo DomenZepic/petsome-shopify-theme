@@ -138,25 +138,16 @@
     }
 
     #petsome-ld-reasons-{{ section.id }} .petsome-ld-reasons__inner {
-      gap: 48px;
+      gap: 40px;
     }
   }
 
+  /* The Figma mobile frame keeps every type size here (number 32, tag 18,
+     title 32, body 17) - only the section padding halves. */
   @media screen and (max-width: 749px) {
-    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__number {
-      font-size: 2.8rem;
-    }
-
-    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__tag {
-      font-size: 1.6rem;
-    }
-
-    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__title {
-      font-size: 2.4rem;
-    }
-
-    #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__body {
-      font-size: 1.6rem;
+    #petsome-ld-reasons-{{ section.id }} {
+      padding-top: min({{ section.settings.padding_top }}px, 40px);
+      padding-bottom: min({{ section.settings.padding_bottom }}px, 40px);
     }
 
     #petsome-ld-reasons-{{ section.id }} .petsome-ld-reason__label {

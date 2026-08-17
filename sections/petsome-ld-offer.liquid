@@ -165,13 +165,6 @@
     gap: 8px;
   }
 
-  @media screen and (max-width: 559px) {
-    #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__weights {
-      grid-auto-flow: row;
-      grid-template-columns: 1fr;
-    }
-  }
-
   #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__weight {
     position: relative;
   }
@@ -326,13 +319,16 @@
     }
   }
 
+  /* The weight options stay side by side on mobile per the design; only the
+     product title (40 -> 32) and the section padding change. */
   @media screen and (max-width: 749px) {
-    #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__title {
-      font-size: 2.8rem;
+    #petsome-ld-offer-{{ section.id }} {
+      padding-top: min({{ section.settings.padding_top }}px, 40px);
+      padding-bottom: min({{ section.settings.padding_bottom }}px, 40px);
     }
 
-    #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__description {
-      font-size: 1.6rem;
+    #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__title {
+      font-size: 3.2rem;
     }
   }
 </style>

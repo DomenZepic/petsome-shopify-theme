@@ -144,12 +144,13 @@
   }
 
   @media screen and (max-width: 749px) {
-    #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__heading {
-      font-size: 2.8rem;
+    #petsome-ld-faq-{{ section.id }} {
+      padding-top: min({{ section.settings.padding_top }}px, 40px);
+      padding-bottom: min({{ section.settings.padding_bottom }}px, 40px);
     }
 
-    #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__subheading {
-      font-size: 1.6rem;
+    #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__heading {
+      font-size: 3.2rem;
     }
 
     #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__q {

@@ -95,26 +95,11 @@
     font-weight: 400;
   }
 
+  /* Per the Figma mobile frame the bar keeps its desktop type and pill; only
+     the gap between the copy and the timer tightens (24 -> 16). */
   @media screen and (max-width: 749px) {
     #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__inner {
-      gap: 12px;
-    }
-
-    #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__headline {
-      font-size: 1.4rem;
-    }
-
-    #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__subline {
-      font-size: 1.2rem;
-    }
-
-    #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__timer {
-      padding: 4px 12px;
-    }
-
-    #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__num,
-    #petsome-ld-offer-bar-{{ section.id }} .petsome-ld-bar__sep {
-      font-size: 1.6rem;
+      gap: 16px;
     }
   }
 </style>

@@ -49,11 +49,8 @@
     color: rgb(var(--color-foreground));
   }
 
-  @media screen and (max-width: 749px) {
-    #petsome-ld-header-{{ section.id }} .petsome-ld-header__logo {
-      width: {{ section.settings.logo_width | times: 0.8 | round }}px;
-    }
-  }
+  /* The Figma desktop and mobile frames both draw the logo at the same size,
+     so it is deliberately not scaled down on small screens. */
 </style>
 
 <div id="petsome-ld-header-{{ section.id }}" class="petsome-ld-header">
