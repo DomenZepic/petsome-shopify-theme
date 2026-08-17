@@ -588,7 +588,7 @@
                 "gifts_heading": "VKLJUČENO V TA PAKET",
                 "hide_gifts_heading": false,
                 "tier_1_style": "best",
-                "tier_2_style": "recommended",
+                "tier_2_style": "none",
                 "tier_3_style": "none",
                 "tier_4_style": "none",
                 "accent_color": "#f8aaa7",
