@@ -299,6 +299,65 @@
         "light_text_color": "#faf9f6"
       }
     },
+    "faq": {
+      "type": "petsome-ld-faq",
+      "blocks": {
+        "q_1": {
+          "type": "question",
+          "settings": {
+            "question": "Kdaj lahko pričakujem prve spremembe?",
+            "answer": "<p>Večina lastnikov prve premike opazi v dveh do treh tednih. Za poln učinek priporočamo 2–3 mesece redne uporabe.</p>"
+          }
+        },
+        "q_2": {
+          "type": "question",
+          "settings": {
+            "question": "Kako psu dam MobiMix?",
+            "answer": "<p>Kapsulo skrijete v priboljšek ali jo primešate hrani. Dnevni odmerek je odvisen od teže psa in je naveden na embalaži.</p>"
+          }
+        },
+        "q_3": {
+          "type": "question",
+          "settings": {
+            "question": "Je primeren za vse pasme in starosti?",
+            "answer": "<p>Primeren je za odrasle pse vseh pasem. Če je psička breja ali doji oziroma pes jemlje zdravila, se pred uporabo posvetujte z veterinarjem.</p>"
+          }
+        },
+        "q_4": {
+          "type": "question",
+          "settings": {
+            "question": "Kaj če pri mojem psu ne bo delovalo?",
+            "answer": "<p>Na voljo imate 60 dni. Če ne boste zadovoljni, nam pišite in denar vam vrnemo – tudi če je embalaža že odprta.</p>"
+          }
+        },
+        "q_5": {
+          "type": "question",
+          "settings": {
+            "question": "Kako hitro dostavite?",
+            "answer": "<p>Naročila oddamo v enem delovnem dnevu, paket pa je pri vas običajno v 2–3 dneh.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q_1",
+        "q_2",
+        "q_3",
+        "q_4",
+        "q_5"
+      ],
+      "settings": {
+        "heading": "<p>Pogosta vprašanja</p>",
+        "subheading": "",
+        "open_first": false,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#FAF9F6",
+        "text_color": "#3b2f2f",
+        "card_color": "#ffffff",
+        "border_color": "#e7e7e7",
+        "accent_color": "#f47671"
+      }
+    },
     "17869840503b54b2bc": {
       "type": "apps",
       "blocks": {
@@ -398,65 +457,6 @@
         "background_color": "#3b2f2f",
         "text_color": "#faf9f6",
         "muted_text_color": "#c9bfbb"
-      }
-    },
-    "faq": {
-      "type": "petsome-ld-faq",
-      "blocks": {
-        "q_1": {
-          "type": "question",
-          "settings": {
-            "question": "Kdaj bom opazil prve spremembe?",
-            "answer": "<p>Večina lastnikov prve premike opazi v dveh do treh tednih. Za poln učinek priporočamo 2–3 mesece redne uporabe.</p>"
-          }
-        },
-        "q_2": {
-          "type": "question",
-          "settings": {
-            "question": "Kako psu dam MobiMix?",
-            "answer": "<p>Kapsulo skrijete v priboljšek ali jo primešate hrani. Dnevni odmerek je odvisen od teže psa in je naveden na embalaži.</p>"
-          }
-        },
-        "q_3": {
-          "type": "question",
-          "settings": {
-            "question": "Je primeren za vse pasme in starosti?",
-            "answer": "<p>Primeren je za odrasle pse vseh pasem. Če je psička breja ali doji oziroma pes jemlje zdravila, se pred uporabo posvetujte z veterinarjem.</p>"
-          }
-        },
-        "q_4": {
-          "type": "question",
-          "settings": {
-            "question": "Kaj če pri mojem psu ne bo delovalo?",
-            "answer": "<p>Na voljo imate 60 dni. Če ne boste zadovoljni, nam pišite in denar vam vrnemo – tudi če je embalaža že odprta.</p>"
-          }
-        },
-        "q_5": {
-          "type": "question",
-          "settings": {
-            "question": "Kako hitro dostavite?",
-            "answer": "<p>Naročila oddamo v enem delovnem dnevu, paket pa je pri vas običajno v 2–3 dneh.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "q_1",
-        "q_2",
-        "q_3",
-        "q_4",
-        "q_5"
-      ],
-      "settings": {
-        "heading": "<p>Pogosta vprašanja</p>",
-        "subheading": "",
-        "open_first": false,
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "background_color": "#fef6f6",
-        "text_color": "#3b2f2f",
-        "card_color": "#ffffff",
-        "border_color": "#e7e7e7",
-        "accent_color": "#f47671"
       }
     }
   },
