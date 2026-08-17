@@ -383,7 +383,54 @@
   /* ---- WELCOME OFFER: vecja, izpostavljena ploscica ---- */
   .kaching-tile-wrapper--has-gifts .kaching-tile {
     padding: 16px;
-    gap: 16px;
+    gap: 14px;
+    align-items: flex-start;   /* slika ob naslov, ne navpicno na sredino */
+  }
+
+  .kaching-tile-wrapper--has-gifts .kaching-tile__image {
+    margin-top: 2px;
+  }
+
+  /* Ozki zasloni: manjsa slika in tekst, da se nic ne lomi po nepotrebnem */
+  @media screen and (max-width: 560px) {
+    .kaching-tile-wrapper--has-gifts .kaching-tile {
+      padding: 12px;
+      gap: 10px;
+    }
+
+    .kaching-tile-wrapper--has-gifts .kaching-tile__image {
+      width: 92px;
+      height: 92px;
+    }
+
+    .kaching-tile-wrapper--has-gifts .kaching-tile__title {
+      font-size: 2rem;
+    }
+
+    .kaching-tile-wrapper--has-gifts .kaching-tile__price {
+      font-size: 1.9rem;
+    }
+
+    .kaching-tile__checklist-item,
+    .kaching-tile__total {
+      font-size: 1.3rem;
+    }
+
+    .kaching-tile__gifts-list {
+      gap: 6px;
+      padding: 0 8px 8px;
+    }
+
+    .kaching-tile__gifts-list .kaching-gift__title {
+      font-size: 1.1rem;
+      line-height: 1.25;
+    }
+
+    .kaching-tile__gifts-list .kaching-gift__image,
+    .kaching-tile__gifts-list .kaching-gift__icon {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   .kaching-tile-wrapper--has-gifts .kaching-tile__image {
