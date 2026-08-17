@@ -521,9 +521,20 @@
     border-right: 2px solid #e7e7e7;
   }
 
-  .kaching-tile-wrapper--has-gifts:has(.kaching-tile--selected) .kaching-tile__checklist {
+  .kaching-tile-wrapper--clickable {
+    cursor: pointer;
+  }
+
+  /* Izbrano stanje: seznam, darila in ploscica v ISTEM odtenku */
+  .kaching-tile-wrapper--has-gifts:has(.kaching-tile--selected) .kaching-tile__checklist,
+  .kaching-tile-wrapper--has-gifts:has(.kaching-tile--selected) .kaching-tile__gifts {
     border-color: var(--kaching-accent);
-    background-color: color-mix(in srgb, var(--kaching-accent) 8%, white);
+    background-color: color-mix(in srgb, var(--kaching-accent) 20%, white);
+  }
+
+  .kaching-tile-wrapper--has-gifts:has(.kaching-tile--selected) .kaching-tile__gifts-list .kaching-gift {
+    background-color: transparent;
+    border-color: color-mix(in srgb, var(--kaching-accent) 65%, white);
   }
 
   .kaching-tile__checklist-item {
@@ -582,10 +593,7 @@
     background-color: #ececec;
   }
 
-  .kaching-tile-wrapper--has-gifts:has(.kaching-tile--selected) .kaching-tile__gifts {
-    border-color: var(--kaching-accent);
-    background-color: color-mix(in srgb, var(--kaching-accent) 14%, white);
-  }
+
 
   .kaching-tile-wrapper--has-gifts:has(.kaching-tile--selected) .kaching-tile__gifts::before {
     background-color: color-mix(in srgb, var(--kaching-accent) 40%, white);

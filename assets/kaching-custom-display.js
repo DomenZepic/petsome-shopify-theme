@@ -511,6 +511,17 @@ if (!customElements.get('kaching-custom-display')) {
         const tileButton = wrapperEl.querySelector('.kaching-tile');
         tileButton.addEventListener('click', () => this.handleTileClick(tier));
 
+        // Seznam in darila so zunaj gumba, zato klik nanju sam po sebi ne izbere
+        // ponudbe. Poslusamo cel okvir; klike znotraj gumba pusti gumbu.
+        if (isHero) {
+          wrapperEl.classList.add('kaching-tile-wrapper--clickable');
+          wrapperEl.addEventListener('click', (event) => {
+            if (event.target.closest('.kaching-tile')) return;
+            if (tileButton.disabled) return;
+            this.handleTileClick(tier);
+          });
+        }
+
         if (bare) {
           this.tilesContainer.appendChild(tileButton);
         } else {
