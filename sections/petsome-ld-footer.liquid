@@ -7,10 +7,10 @@
   in-page "#anchor" is rendered as plain text instead of a link, so a stray
   external URL can't quietly open an exit.
 
-  Targets: Shopify wraps every section in <section id="shopify-section-KEY">,
-  where KEY is the section's key in the template's JSON. So "#shopify-section-
-  reasons" jumps to the reasons section without needing an id added anywhere.
-  The offer section also renders its own shorter "#offer" anchor.
+  Targets come from each Ld section's "Anchor id" setting (#offer, #reasons,
+  #ingredients and so on), rendered by the petsome-ld-anchor snippet. Do not
+  use Shopify's "#shopify-section-..." wrapper: in a JSON template that id is
+  prefixed with the template, so a hand-written one points at nothing.
 {% endcomment %}
 <style>
   #petsome-ld-footer-{{ section.id }} {
@@ -109,6 +109,7 @@
   assign logo = section.settings.logo | default: settings.logo
 -%}
 
+{% render 'petsome-ld-anchor-scroll' %}
 <div id="petsome-ld-footer-{{ section.id }}" class="petsome-ld-footer">
   <div class="petsome-ld-footer__inner">
     {%- if logo != blank -%}
@@ -190,7 +191,7 @@
     },
     {
       "type": "paragraph",
-      "content": "Only in-page anchors are allowed. Use #offer for the offer, or #shopify-section-KEY for any other section, where KEY is that section's name in this template (e.g. #shopify-section-reasons). Anything that isn't an anchor is shown as plain text instead of a link."
+      "content": "Only in-page anchors are allowed. Each Ld section has an \"Anchor id\" setting - use that value with a # in front, e.g. #offer, #reasons, #ingredients. Anything that isn't an anchor is shown as plain text instead of a link."
     },
     {
       "type": "header",

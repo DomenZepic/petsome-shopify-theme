@@ -328,6 +328,7 @@
   }
 </style>
 
+{%% render 'petsome-ld-anchor', id: section.settings.anchor_id %%}
 {%- if ingredients.size > 0 -%}
   <div id="petsome-ld-ingredients-{{ section.id }}" class="petsome-ld-ingredients">
     <div class="petsome-ld-ingredients__inner">
@@ -503,6 +504,17 @@
       "label": "Modal amount label",
       "info": "Shown next to each ingredient's amount inside the pop-up.",
       "default": "Amount per package"
+    },
+    {
+      "type": "header",
+      "content": "Anchor"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor id",
+      "info": "Lets the footer link here, e.g. #ingredients. Leave blank to add no anchor.",
+      "default": "ingredients"
     },
     {
       "type": "header",

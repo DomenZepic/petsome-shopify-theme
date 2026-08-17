@@ -1,0 +1,25 @@
+{%- comment -%}
+  Petsome Ld: scroll anchor.
+
+  Renders a stable, human-readable jump target for a section, e.g. "#reasons".
+
+  Do NOT use Shopify's own "#shopify-section-<id>" wrapper for this. In a JSON
+  template that id is not the section's key - it is prefixed with the template,
+  e.g. "shopify-section-template--30955182424389__reasons" - so any hand-written
+  link to "#shopify-section-reasons" silently points at nothing, and the number
+  changes between templates and themes.
+
+  Usage: {% render 'petsome-ld-anchor', id: section.settings.anchor_id %}
+
+  The inline style keeps it self-contained, so the snippet can be dropped into
+  any section without that section needing a matching CSS rule.
+{%- endcomment -%}
+{%- assign anchor_id = id | strip | replace: '#', '' -%}
+{%- if anchor_id != blank -%}
+  <div
+    id="{{ anchor_id | escape }}"
+    class="petsome-ld-anchor"
+    aria-hidden="true"
+    style="display:block;scroll-margin-top:20px"
+  ></div>
+{%- endif -%}

@@ -127,6 +127,7 @@
   }
 </style>
 
+{%% render 'petsome-ld-anchor', id: section.settings.anchor_id %%}
 <div id="petsome-ld-guarantee-{{ section.id }}" class="petsome-ld-guarantee">
   <div class="petsome-ld-guarantee__inner">
     <div class="petsome-ld-guarantee__header">
@@ -213,6 +214,17 @@
       "label": "Button URL",
       "info": "Leave as #offer to scroll back up to the offer. A URL field would strip an anchor like that, so this is a plain text field.",
       "default": "#offer"
+    },
+    {
+      "type": "header",
+      "content": "Anchor"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor id",
+      "info": "Lets the footer link here, e.g. #guarantee. Leave blank to add no anchor.",
+      "default": "guarantee"
     },
     {
       "type": "header",

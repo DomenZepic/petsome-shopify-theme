@@ -165,6 +165,7 @@
   }
 </style>
 
+{%% render 'petsome-ld-anchor', id: section.settings.anchor_id %%}
 {%- if section.blocks.size > 0 -%}
   <div id="petsome-ld-faq-{{ section.id }}" class="petsome-ld-faq">
     <div class="petsome-ld-faq__inner">
@@ -235,6 +236,17 @@
       "id": "open_first",
       "label": "Open the first question by default",
       "default": false
+    },
+    {
+      "type": "header",
+      "content": "Anchor"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor id",
+      "info": "Lets the footer link here, e.g. #faq. Leave blank to add no anchor.",
+      "default": "faq"
     },
     {
       "type": "header",

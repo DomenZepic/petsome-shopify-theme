@@ -342,7 +342,7 @@
 </style>
 
 {% render 'petsome-ld-anchor-scroll' %}
-<div id="offer" class="petsome-ld-offer__anchor" aria-hidden="true"></div>
+{% render 'petsome-ld-anchor', id: section.settings.anchor_id | default: 'offer' %}
 <div id="petsome-ld-offer-{{ section.id }}" class="petsome-ld-offer">
   <div class="petsome-ld-offer__inner">
     {%- if offer_product == blank -%}
@@ -806,6 +806,17 @@
       "info": "One number per size option value, comma-separated, in the same order as the size option's values.",
       "default": "1, 2, 3",
       "visible_if": "{{ section.settings.product_type == 'powder' }}"
+    },
+    {
+      "type": "header",
+      "content": "Anchor"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor id",
+      "info": "Lets the footer link here, e.g. #offer. Leave blank to add no anchor.",
+      "default": "offer"
     },
     {
       "type": "header",

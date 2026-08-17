@@ -250,6 +250,7 @@
   }
 </style>
 
+{%% render 'petsome-ld-anchor', id: section.settings.anchor_id %%}
 <div id="petsome-ld-timeline-{{ section.id }}" class="petsome-ld-timeline">
   <div class="petsome-ld-timeline__inner">
     {%- if section.settings.eyebrow != blank
@@ -367,6 +368,17 @@
       "label": "Footnote",
       "info": "Small italic disclaimer under the steps.",
       "default": "<p>Every dog is different. This is a dietary supplement, not a treatment.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Anchor"
+    },
+    {
+      "type": "text",
+      "id": "anchor_id",
+      "label": "Anchor id",
+      "info": "Lets the footer link here, e.g. #timeline. Leave blank to add no anchor.",
+      "default": "timeline"
     },
     {
       "type": "header",

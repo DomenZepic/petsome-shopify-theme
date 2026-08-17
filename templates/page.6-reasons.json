@@ -182,7 +182,8 @@
         "background_color": "#fdfbf7",
         "text_color": "#3b2f2f",
         "accent_color": "#f04842",
-        "divider_color": "#565858"
+        "divider_color": "#565858",
+        "anchor_id": "reasons"
       }
     },
     "timeline": {
@@ -229,7 +230,8 @@
         "accent_color_dark": "#f47671",
         "line_color": "#fac3c1",
         "card_color": "#ffffff",
-        "footnote_color": "#565858"
+        "footnote_color": "#565858",
+        "anchor_id": "timeline"
       }
     },
     "offer": {
@@ -282,7 +284,8 @@
         "padding_top": 80,
         "padding_bottom": 80,
         "margin_top": 0,
-        "margin_bottom": 0
+        "margin_bottom": 0,
+        "anchor_id": "offer"
       }
     },
     "ingredients": {
@@ -299,7 +302,8 @@
         "accent_color": "#f8aaa7",
         "accent_color_dark": "#f47671",
         "secondary_color": "#e8d6c5",
-        "light_text_color": "#faf9f6"
+        "light_text_color": "#faf9f6",
+        "anchor_id": "ingredients"
       }
     },
     "faq": {
@@ -358,7 +362,8 @@
         "text_color": "#3b2f2f",
         "card_color": "#ffffff",
         "border_color": "#e7e7e7",
-        "accent_color": "#f47671"
+        "accent_color": "#f47671",
+        "anchor_id": "faq"
       }
     },
     "17869840503b54b2bc": {
@@ -402,7 +407,8 @@
         "text_color": "#3b2f2f",
         "icon_color": "#f8aaa7",
         "button_background": "#3b2f2f",
-        "button_text_color": "#ffffff"
+        "button_text_color": "#ffffff",
+        "anchor_id": "guarantee"
       }
     },
     "ld_footer": {
@@ -412,14 +418,14 @@
           "type": "link",
           "settings": {
             "label": "Razlogi",
-            "anchor": "#shopify-section-reasons"
+            "anchor": "#reasons"
           }
         },
         "link_2": {
           "type": "link",
           "settings": {
             "label": "Prvih 14 dni",
-            "anchor": "#shopify-section-timeline"
+            "anchor": "#timeline"
           }
         },
         "link_3": {
@@ -433,14 +439,14 @@
           "type": "link",
           "settings": {
             "label": "Sestavine",
-            "anchor": "#shopify-section-ingredients"
+            "anchor": "#ingredients"
           }
         },
         "link_5": {
           "type": "link",
           "settings": {
             "label": "Garancija",
-            "anchor": "#shopify-section-guarantee"
+            "anchor": "#guarantee"
           }
         }
       },
