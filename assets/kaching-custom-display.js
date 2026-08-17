@@ -30,7 +30,6 @@ if (!customElements.get('kaching-custom-display')) {
       this.giftsWrapper = this.giftsContainer
         ? this.giftsContainer.closest('.kaching-custom-display__gifts')
         : null;
-      this.giftsHome = this.giftsWrapper ? this.giftsWrapper.parentNode : null;
 
       this.kachingEl = document.querySelector('kaching-bundle');
       this.variantRoot = document.querySelector(`#variant-selects-${this.sectionId}`);
@@ -299,7 +298,6 @@ if (!customElements.get('kaching-custom-display')) {
       this.renderHeader(tilesData);
       this.renderTiles(tilesData);
       this.renderGifts();
-      this.placeGiftsInTier();
 
       // computeFallbackPrice re-implements Kaching's discount math just to
       // paint instantly - it WILL go stale the next time the deal's
@@ -421,12 +419,8 @@ if (!customElements.get('kaching-custom-display')) {
     }
 
     renderTiles(tilesData) {
-      // Darila lahko zivijo znotraj ploscice (gifts_in_tier). Preden vsebnik
-      // pobrisemo, jih vrnemo domov - drugace jih innerHTML='' unici.
-      if (this.giftsWrapper && this.giftsHome && this.tilesContainer.contains(this.giftsWrapper)) {
-        this.giftsHome.appendChild(this.giftsWrapper);
-      }
       this.tilesContainer.innerHTML = '';
+      const maxQty = Math.max.apply(null, tilesData.map(function (t) { return t.tier.quantity || 0; }));
 
       tilesData.forEach(({ tier, imageUrl, price, valid, validationMessage, dosage }, index) => {
         const position = index + 1;
@@ -466,16 +460,17 @@ if (!customElements.get('kaching-custom-display')) {
               <span class="kaching-tile__title">${this.translateFromKaching(tier.title) || tier.title}</span>
               <span class="kaching-tile__price">${this.formatMoney(price / tier.quantity)}</span>
               ${dosageLines.map((line) => `<span class="kaching-tile__dosage">${line}</span>`).join('')}
+              ${this.giftsInTier && tier.quantity === maxQty && this.giftsLine()
+                ? `<span class="kaching-tile__gifts">${this.giftsLine()}</span>`
+                : ''}
               ${!valid ? `<span class="kaching-tile__unavailable">${validationMessage || this.i18n.unavailable}</span>` : ''}
             </span>
           </button>
         `;
 
-        const bare = badgeStyle === 'none' || !badgeLabel;
         let wrapperEl;
-        if (bare) {
+        if (badgeStyle === 'none' || !badgeLabel) {
           wrapperEl = document.createElement('div');
-          if (this.giftsInTier) wrapperEl.className = 'kaching-tile-wrapper';
           wrapperEl.innerHTML = tileHtml;
         } else {
           wrapperEl = document.createElement('div');
@@ -489,36 +484,21 @@ if (!customElements.get('kaching-custom-display')) {
         const tileButton = wrapperEl.querySelector('.kaching-tile');
         tileButton.addEventListener('click', () => this.handleTileClick(tier));
 
-        if (bare && !this.giftsInTier) {
-          tileButton.dataset.barPosition = String(position);
-          tileButton.dataset.quantity = String(tier.quantity);
+        if (badgeStyle === 'none' || !badgeLabel) {
           this.tilesContainer.appendChild(tileButton);
         } else {
-          wrapperEl.dataset.barPosition = String(position);
-          wrapperEl.dataset.quantity = String(tier.quantity);
           this.tilesContainer.appendChild(wrapperEl);
         }
       });
     }
 
-    // Prestavi obstojeci blok daril v tisto ploscico, ki jih odklene.
-    // Brez zastavice gifts_in_tier se ne zgodi nic - vedenje ostane isto.
-    placeGiftsInTier() {
-      if (!this.giftsInTier || !this.giftsWrapper || !this.gifts || !this.gifts.length) return;
-      // Ciljamo ploscico z NAJVECJO kolicino - Kaching lahko stopnje izpise
-      // naprej ali nazaj, zato se na polozaj v seznamu ne zanasamo.
-      let best = null;
-      let bestQty = -1;
-      this.tilesContainer.querySelectorAll('[data-quantity]').forEach((el) => {
-        const q = Number(el.dataset.quantity);
-        if (Number.isFinite(q) && q > bestQty) {
-          bestQty = q;
-          best = el;
-        }
-      });
-      if (!best) return;
-      best.classList.add('kaching-tile-wrapper--has-gifts');
-      best.appendChild(this.giftsWrapper);
+    // Imena daril, ki jih odklene najvecji paket. Samo besedilo v ploscici -
+    // nic se ne premika, zato se ne more podreti ob Kachingovem ponovnem izrisu.
+    giftsLine() {
+      if (!this.gifts || !this.gifts.length) return '';
+      const names = this.gifts.map(function (g) { return g.title; }).filter(Boolean);
+      if (!names.length) return '';
+      return '🎁 ' + names.join(' + ');
     }
 
     renderGifts() {
