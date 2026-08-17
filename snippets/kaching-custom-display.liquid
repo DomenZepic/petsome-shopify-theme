@@ -500,6 +500,17 @@
     color: #8a8a8a;
   }
 
+  .kaching-custom-display__tiles,
+  .kaching-tile-wrapper,
+  .kaching-tile {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .kaching-tile__content {
+    min-width: 0;
+  }
+
   .kaching-tile__checklist {
     display: flex;
     flex-direction: column;
@@ -592,10 +603,20 @@
   }
 
   .kaching-tile__gifts-list {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: stretch;
     gap: 8px;
     padding: 0 10px 10px;
+  }
+
+  .kaching-tile__gifts-list .kaching-gift {
+    min-width: 0;
+    flex: none;
+  }
+
+  .kaching-tile__gifts-list .kaching-gift__title {
+    overflow-wrap: anywhere;
   }
 
   .kaching-tile__gifts-list .kaching-gift {
