@@ -30,6 +30,7 @@ if (!customElements.get('kaching-custom-display')) {
       this.giftsWrapper = this.giftsContainer
         ? this.giftsContainer.closest('.kaching-custom-display__gifts')
         : null;
+      this.giftsHome = this.giftsWrapper ? this.giftsWrapper.parentNode : null;
 
       this.kachingEl = document.querySelector('kaching-bundle');
       this.variantRoot = document.querySelector(`#variant-selects-${this.sectionId}`);
@@ -420,6 +421,11 @@ if (!customElements.get('kaching-custom-display')) {
     }
 
     renderTiles(tilesData) {
+      // Darila lahko zivijo znotraj ploscice (gifts_in_tier). Preden vsebnik
+      // pobrisemo, jih vrnemo domov - drugace jih innerHTML='' unici.
+      if (this.giftsWrapper && this.giftsHome && this.tilesContainer.contains(this.giftsWrapper)) {
+        this.giftsHome.appendChild(this.giftsWrapper);
+      }
       this.tilesContainer.innerHTML = '';
 
       tilesData.forEach(({ tier, imageUrl, price, valid, validationMessage, dosage }, index) => {
@@ -485,9 +491,11 @@ if (!customElements.get('kaching-custom-display')) {
 
         if (bare && !this.giftsInTier) {
           tileButton.dataset.barPosition = String(position);
+          tileButton.dataset.quantity = String(tier.quantity);
           this.tilesContainer.appendChild(tileButton);
         } else {
           wrapperEl.dataset.barPosition = String(position);
+          wrapperEl.dataset.quantity = String(tier.quantity);
           this.tilesContainer.appendChild(wrapperEl);
         }
       });
@@ -497,16 +505,20 @@ if (!customElements.get('kaching-custom-display')) {
     // Brez zastavice gifts_in_tier se ne zgodi nic - vedenje ostane isto.
     placeGiftsInTier() {
       if (!this.giftsInTier || !this.giftsWrapper || !this.gifts || !this.gifts.length) return;
-      const bars = this.gifts
-        .map((g) => Number(g.unlockAtBar))
-        .filter((n) => Number.isFinite(n) && n > 0);
-      if (!bars.length) return;
-      const target = this.tilesContainer.querySelector(
-        `[data-bar-position="${Math.max.apply(null, bars)}"]`
-      );
-      if (!target) return;
-      target.classList.add('kaching-tile-wrapper--has-gifts');
-      target.appendChild(this.giftsWrapper);
+      // Ciljamo ploscico z NAJVECJO kolicino - Kaching lahko stopnje izpise
+      // naprej ali nazaj, zato se na polozaj v seznamu ne zanasamo.
+      let best = null;
+      let bestQty = -1;
+      this.tilesContainer.querySelectorAll('[data-quantity]').forEach((el) => {
+        const q = Number(el.dataset.quantity);
+        if (Number.isFinite(q) && q > bestQty) {
+          bestQty = q;
+          best = el;
+        }
+      });
+      if (!best) return;
+      best.classList.add('kaching-tile-wrapper--has-gifts');
+      best.appendChild(this.giftsWrapper);
     }
 
     renderGifts() {
