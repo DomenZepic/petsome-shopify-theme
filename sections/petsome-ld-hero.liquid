@@ -166,6 +166,7 @@
     font-weight: 700;
     line-height: normal;
     text-align: center;
+    white-space: nowrap;
     text-decoration: none;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   }
@@ -284,7 +285,8 @@
     }
 
     #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__cta {
-      font-size: 1.7rem;
+      padding: 16px 12px;
+      font-size: clamp(1.2rem, 3.9vw, 1.7rem);
     }
 
     #petsome-ld-hero-{{ section.id }} .petsome-ld-hero__reassurance {

@@ -41,7 +41,7 @@
       "settings": {
         "logo_width": 110,
         "logo_link": "",
-        "show_border": true,
+        "show_border": false,
         "background_color": "#fdfbf7",
         "padding_top": 16,
         "padding_bottom": 16

@@ -252,6 +252,7 @@
     font-weight: 700;
     font-size: 1.6rem;
     line-height: 1.5;
+    white-space: nowrap;
     cursor: pointer;
   }
 
@@ -329,6 +330,11 @@
 
     #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__title {
       font-size: 3.2rem;
+    }
+
+    #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__atc {
+      padding: 16px 12px;
+      font-size: clamp(1.2rem, 3.6vw, 1.6rem);
     }
   }
 </style>
