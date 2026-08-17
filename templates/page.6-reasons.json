@@ -81,10 +81,10 @@
         "avatar_1": "shopify://shop_images/FloraMix_lizanje_tack.png",
         "show_badge_stars": true,
         "rating_text": "Uporablja ga že več kot 3.500 psov po Evropi",
-        "heading": "<p>6 razlogov, zakaj pasji trenerji prisegajo na ta dodatek za sklepe</p>",
-        "subline": "<p>Tukaj dobro predstavi težavo: podrobno opiši, kako so poskusili že vse, pa nič ni pomagalo.</p>",
+        "heading": "<p>6 razlogov, zakaj majhni psi nehajo skakati s kavča</p>",
+        "subline": "<p>Majhen pes s kavča, postelje in stola skoči vsak dan znova. Pri malih pasmah je utor, po katerem drsi pogačica, plitvejši, zato vsak doskok načne hrustanec – tiho in leta dolgo. MobiMix z zelenoustno školjko, glukozaminom in kurkumo podpira hrustanec in gibljivost, dokler je še kaj ohraniti.</p>",
         "image": "shopify://shop_images/93b9341cd8c0fc22bbfed015b4d80c1836056d4b.png",
-        "cta_label": "ZAČNITE Z RUTINO PASJIH TRENERJEV",
+        "cta_label": "POSKRBITE ZA NJEGOVA KOLENA",
         "cta_url": "#offer",
         "guarantee_text": "60-dnevna garancija vračila denarja",
         "proof_text": "Več kot 10.000 zadovoljnih strank",
@@ -111,8 +111,8 @@
           "type": "reason",
           "settings": {
             "tag": "Ni vaša krivda",
-            "title": "Pomiri bralca, da za težavo ni kriv sam",
-            "text": "<p>Najprej z lastnika snemi krivdo.</p>",
+            "title": "Vsaka reklama za sklepe kaže labradorca",
+            "text": "<p>Zato ste mislili, da vas to ne zadeva. Da so sklepi stvar velikih pasem, kolkov in starih psov. Vaš pes tehta šest kilogramov, je videti povsem v redu in ni še nikoli šepal.</p><p>Nihče vam ni povedal, da prav male pasme kolena obrabijo najhitreje.</p>",
             "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png"
           }
         },
@@ -120,35 +120,35 @@
           "type": "reason",
           "settings": {
             "tag": "Pravi vzrok",
-            "title": "Razloži težavo – zakaj sploh nastane",
-            "text": "<p>Razmisli v smeri: »Ujeti ste v način preživetja«, »Nihče vam ni povedal, da pretirano tekanje tako zdela sklepe« ...</p>",
+            "title": "Tisti poskok na treh nogah ni razvada",
+            "text": "<p>Pes teče, nenadoma za dva ali tri korake dvigne zadnjo nogo in nadaljuje, kot da se ni nič zgodilo. To ni igra. To je pogačica, ki je zdrsnila iz utora in skočila nazaj.</p><p>Pri malih pasmah je ta utor plitvejši, doskok s kavča pa je zanje tako, kot bi človek skočil z mize – in to večkrat na dan, vsak dan. Vsakič se hrustanec malo obrusi. Med enim in drugim poskokom pes ne kaže ničesar, zato je videti, da je vse v redu. Hrustanec pa ne zraste nazaj.</p>",
             "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png"
           }
         },
         "reason_3": {
           "type": "reason",
           "settings": {
-            "tag": "Sestavina 1 (mehanizem)",
-            "title": "Predstavi izhod iz težave",
-            "text": "<p>To sestavino v xy uporabljajo že tisočletja. V MobiMixu podpira sklepe na način X, da do težave Y sploh ne pride.</p>",
+            "tag": "Zelenoustna školjka, glukozamin, hondroitin",
+            "title": "Blazinica, ki je koleno nima več",
+            "text": "<p>Zelenoustna školjka, glukozamin in hondroitin so gradniki, iz katerih je hrustanec, in sestavine, ki jih pes s hrano skoraj ne dobi.</p><p>V MobiMixu podpirajo hrustanec in mazivost sklepa – torej prav tisto blazinico, ki se ob vsakem doskoku stanjša.</p>",
             "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png"
           }
         },
         "reason_4": {
           "type": "reason",
           "settings": {
-            "tag": "Sestavina 2 (mehanizem 2)",
-            "title": "Odpravi še zadnji dvom",
-            "text": "<p>Ta sestavina odpravi tudi to drugo težavo.</p>",
+            "tag": "Kurkuma in ingver",
+            "title": "Da se dnevi ne seštejejo v toga jutra",
+            "text": "<p>Koleno vsak dan prejme nekaj deset majhnih obremenitev. Pes tega ne pokaže – samo malo manj navdušeno se zažene po stopnicah in malo dlje se zbira pred skokom.</p><p>Kurkuma in ingver v MobiMixu podpirata umirjeno delovanje sklepov, da se posamezni dnevi ne seštejejo v jutra, ko se pes težko razmiga.</p>",
             "image": "shopify://shop_images/hf_20260715_183826_c908ba8d-6a6a-4516-a1c5-72f1ec0df3d4.png"
           }
         },
         "reason_5": {
           "type": "reason",
           "settings": {
-            "tag": "Sestavina 3 (mehanizem 3)",
-            "title": "Naslikaj želeni rezultat",
-            "text": "<p>Tu opiši, kaj si lastnik res želi: »Za marsikatero lastnico pes ni le hišni ljubljenček. Gre za to, da lahko skrbi za člana družine. Sestavina X psu pomaga povrniti gibčnost, ki ste jo pogrešali.«</p>",
+            "tag": "Vražji krempelj, šipek in vitamin C",
+            "title": "Spet vas prehiti do vrat",
+            "text": "<p>Vražji krempelj, šipek in vitamin C podpirajo udobno gibanje in tvorbo kolagena, ki sklep drži skupaj.</p><p>Za vas je to videti povsem preprosto: pes spet sam skoči na kavč, na sprehodu ne prosi, da ga vzamete v naročje, in vas zvečer spet prehiti do vrat.</p>",
             "image": "shopify://shop_images/hf_20260713_165343_fa82d984-8de5-433f-88d2-3d5047daa731.png"
           }
         },
@@ -156,8 +156,8 @@
           "type": "reason",
           "settings": {
             "tag": "Enostavna uporaba",
-            "title": "Majhna stvar, ki jo za psa naredite vsak dan",
-            "text": "<p>Mi proti njim: psi praška nočejo jesti, priboljški pa sklepom sploh ne pomagajo. MobiMix je enostaven – kapsulo psu daste kar z manjšim priboljškom in sploh je ne bo opazil. Za MobiMix velja 60-dnevna garancija vračila denarja.</p>",
+            "title": "Ena kapsula na dan, skrita v priboljšku",
+            "text": "<p>Praška majhni psi večinoma nočejo jesti, priboljški za sklepe pa vsebujejo premalo učinkovin, da bi kaj spremenili.</p><p>MobiMix je kapsula. Pes do 10 kg dobi eno na dan, zato ena embalaža zdrži najdlje prav pri najmanjših. Če v 60 dneh ne opazite razlike, vam denar vrnemo – tudi če je embalaža prazna.</p>",
             "image": "shopify://shop_images/hf_20260713_163447_2d99eb36-2604-4301-adaf-5d2fc17329e7.png"
           }
         }
