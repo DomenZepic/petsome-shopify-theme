@@ -463,20 +463,20 @@ if (!customElements.get('kaching-custom-display')) {
             ${valid ? '' : 'disabled'}
             data-deal-bar-id="${tier.id}"
           >
-            ${imageUrl
-              ? `<span class="kaching-tile__image" aria-hidden="true" style="background-image:url('${imageUrl}')"></span>`
+            ${imageUrl || !this.giftsInTier
+              ? `<span class="kaching-tile__image" aria-hidden="true"${imageUrl ? ` style="background-image:url('${imageUrl}')"` : ''}></span>`
               : ''}
             <span class="kaching-tile__content">
               <span class="kaching-tile__title">${this.translateFromKaching(tier.title) || tier.title}</span>
               <span class="kaching-tile__price-row">
                 <span class="kaching-tile__price">${this.formatMoney(price / tier.quantity)}</span>
-                ${comparePrice && comparePrice > price
+                ${this.giftsInTier && comparePrice && comparePrice > price
                   ? `<s class="kaching-tile__price-compare">${this.formatMoney(comparePrice / tier.quantity)}</s>`
                   : ''}
               </span>
               ${dosageLines.map((line) => `<span class="kaching-tile__dosage">${line}</span>`).join('')}
-              ${tier.quantity === maxQty ? this.checklistMarkup() : ''}
-              ${tier.quantity === protocolQty
+              ${this.giftsInTier && tier.quantity === maxQty ? this.checklistMarkup() : ''}
+              ${this.giftsInTier && tier.quantity === protocolQty
                 ? `<span class="kaching-tile__check">✓ ${this.dataset.protocolLabel || '3-mesečni protokol'}</span>`
                 : ''}
               ${!valid ? `<span class="kaching-tile__unavailable">${validationMessage || this.i18n.unavailable}</span>` : ''}
