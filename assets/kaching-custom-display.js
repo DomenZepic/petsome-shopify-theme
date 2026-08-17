@@ -463,7 +463,9 @@ if (!customElements.get('kaching-custom-display')) {
             ${valid ? '' : 'disabled'}
             data-deal-bar-id="${tier.id}"
           >
-            <span class="kaching-tile__image" aria-hidden="true"${imageUrl ? ` style="background-image:url('${imageUrl}')"` : ''}></span>
+            ${imageUrl
+              ? `<span class="kaching-tile__image" aria-hidden="true" style="background-image:url('${imageUrl}')"></span>`
+              : ''}
             <span class="kaching-tile__content">
               <span class="kaching-tile__title">${this.translateFromKaching(tier.title) || tier.title}</span>
               <span class="kaching-tile__price-row">
