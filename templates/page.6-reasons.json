@@ -279,6 +279,32 @@
         "light_text_color": "#faf9f6"
       }
     },
+    "17869840503b54b2bc": {
+      "type": "apps",
+      "blocks": {
+        "loox_reviews_loox_agg_section_egjtKf": {
+          "type": "shopify://apps/loox-reviews/blocks/loox-agg-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "settings": {
+            "reviews_to_display": "",
+            "default_tab": "automatic",
+            "only_photos": false,
+            "hide_thumbnails": false,
+            "product_handle": "",
+            "aggregated": true,
+            "data-limit": 7,
+            "maxwidth": 1080,
+            "is_sample": true
+          }
+        }
+      },
+      "block_order": [
+        "loox_reviews_loox_agg_section_egjtKf"
+      ],
+      "settings": {
+        "display_id": false,
+        "include_margins": true
+      }
+    },
     "guarantee": {
       "type": "petsome-ld-guarantee",
       "settings": {
@@ -306,6 +332,7 @@
     "timeline",
     "offer",
     "ingredients",
+    "17869840503b54b2bc",
     "guarantee"
   ]
 }
