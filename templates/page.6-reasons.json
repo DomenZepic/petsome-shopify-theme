@@ -81,10 +81,10 @@
         "avatar_1": "shopify://shop_images/FloraMix_lizanje_tack.png",
         "show_badge_stars": true,
         "rating_text": "Uporablja ga že več kot 3.500 psov po Evropi",
-        "heading": "<p>6 razlogov, zakaj majhni psi nehajo skakati s kavča</p>",
-        "subline": "<p>Majhen pes s kavča, postelje in stola skoči vsak dan znova. Pri malih pasmah je utor, po katerem drsi pogačica, plitvejši, zato vsak doskok načne hrustanec – tiho in leta dolgo. MobiMix z zelenoustno školjko, glukozaminom in kurkumo podpira hrustanec in gibljivost, dokler je še kaj ohraniti.</p>",
+        "heading": "<p>6 razlogov, zakaj velikega psa bolj obrabi žogica kot sprehod</p>",
+        "subline": "<p>Pes za žogico ne teče – pospešuje, zavira in se obrača. Sila pri zaviranju gre pri tridesetkilogramskem psu naravnost skozi kolena, rame in komolce, dobra mišica pa to leta uspešno skriva. MobiMix z zelenoustno školjko, glukozaminom in kurkumo podpira hrustanec in gibljivost, da žogica ostane v igri tudi pri desetih letih.</p>",
         "image": "shopify://shop_images/93b9341cd8c0fc22bbfed015b4d80c1836056d4b.png",
-        "cta_label": "POSKRBITE ZA NJEGOVA KOLENA",
+        "cta_label": "OHRANITE GA V IGRI",
         "cta_url": "#offer",
         "guarantee_text": "60-dnevna garancija vračila denarja",
         "proof_text": "Več kot 10.000 zadovoljnih strank",
@@ -111,8 +111,8 @@
           "type": "reason",
           "settings": {
             "tag": "Ni vaša krivda",
-            "title": "Vsaka reklama za sklepe kaže labradorca",
-            "text": "<p>Zato ste mislili, da vas to ne zadeva. Da so sklepi stvar velikih pasem, kolkov in starih psov. Vaš pes tehta šest kilogramov, je videti povsem v redu in ni še nikoli šepal.</p><p>Nihče vam ni povedal, da prav male pasme kolena obrabijo najhitreje.</p>",
+            "title": "Utrujen pes je srečen pes – tako so vam rekli",
+            "text": "<p>In res deluje. Dvajset minut z žogico naredi več kot ura sprehoda. Doma je miren, zadovoljen, ne razgraja. Zato jo mečete vsak dan.</p><p>Nihče vam ni povedal, kaj teh dvajset minut pomeni za njegove sklepe. Naredili ste točno to, kar naredi dober lastnik.</p>",
             "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png"
           }
         },
@@ -120,8 +120,8 @@
           "type": "reason",
           "settings": {
             "tag": "Pravi vzrok",
-            "title": "Tisti poskok na treh nogah ni razvada",
-            "text": "<p>Pes teče, nenadoma za dva ali tri korake dvigne zadnjo nogo in nadaljuje, kot da se ni nič zgodilo. To ni igra. To je pogačica, ki je zdrsnila iz utora in skočila nazaj.</p><p>Pri malih pasmah je ta utor plitvejši, doskok s kavča pa je zanje tako, kot bi človek skočil z mize – in to večkrat na dan, vsak dan. Vsakič se hrustanec malo obrusi. Med enim in drugim poskokom pes ne kaže ničesar, zato je videti, da je vse v redu. Hrustanec pa ne zraste nazaj.</p>",
+            "title": "Ne obrablja ga tek, ampak ustavljanje",
+            "text": "<p>Na sprehodu se pes giblje enakomerno in sklepi to brez težav prenesejo. Za žogico pa ne teče – pospeši do polne hitrosti, zavre v nekaj korakih, se zavrti na eni nogi in vse skupaj ponovi. Znova in znova.</p><p>Sila pri zaviranju in obračanju ne gre v mišice, ampak v kolena, rame in komolce. Pri tridesetkilogramskem psu je povsem druga kot pri majhnem. In ker je pes dobro omišičen, tega leta ne opazite – mišica napako pokrije. Ko popusti, se pokaže vse naenkrat.</p>",
             "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png"
           }
         },
@@ -129,8 +129,8 @@
           "type": "reason",
           "settings": {
             "tag": "Zelenoustna školjka, glukozamin, hondroitin",
-            "title": "Blazinica, ki je koleno nima več",
-            "text": "<p>Zelenoustna školjka, glukozamin in hondroitin so gradniki, iz katerih je hrustanec, in sestavine, ki jih pes s hrano skoraj ne dobi.</p><p>V MobiMixu podpirajo hrustanec in mazivost sklepa – torej prav tisto blazinico, ki se ob vsakem doskoku stanjša.</p>",
+            "title": "Blazinica, ki jo vsako zaviranje stanjša",
+            "text": "<p>Zelenoustna školjka, glukozamin in hondroitin so gradniki hrustanca – tistega med kostmi, ki prevzame udarec ob doskoku in zasuku.</p><p>V MobiMixu podpirajo hrustanec in mazivost sklepa. Hrustanec sam ne zraste nazaj, zato šteje, da ga podprete, dokler ga še je.</p>",
             "image": "shopify://shop_images/hf_20260715_175745_8b260536-e046-4ea2-960d-c7e43da88e68.png"
           }
         },
@@ -138,8 +138,8 @@
           "type": "reason",
           "settings": {
             "tag": "Kurkuma in ingver",
-            "title": "Da se dnevi ne seštejejo v toga jutra",
-            "text": "<p>Koleno vsak dan prejme nekaj deset majhnih obremenitev. Pes tega ne pokaže – samo malo manj navdušeno se zažene po stopnicah in malo dlje se zbira pred skokom.</p><p>Kurkuma in ingver v MobiMixu podpirata umirjeno delovanje sklepov, da se posamezni dnevi ne seštejejo v jutra, ko se pes težko razmiga.</p>",
+            "title": "Da se popoldnevi ne seštevajo",
+            "text": "<p>Po napornem popoldnevu se sklep odzove. Enkrat to ni nič. Trikrat na teden, tri leta zapored, pa se sešteje – in prvi znak ni šepanje, ampak to, da pes zjutraj malo dlje obleži.</p><p>Kurkuma in ingver v MobiMixu podpirata umirjeno delovanje sklepov, da vsak tak popoldan ne pusti sledi.</p>",
             "image": "shopify://shop_images/hf_20260715_183826_c908ba8d-6a6a-4516-a1c5-72f1ec0df3d4.png"
           }
         },
@@ -147,8 +147,8 @@
           "type": "reason",
           "settings": {
             "tag": "Vražji krempelj, šipek in vitamin C",
-            "title": "Spet vas prehiti do vrat",
-            "text": "<p>Vražji krempelj, šipek in vitamin C podpirajo udobno gibanje in tvorbo kolagena, ki sklep drži skupaj.</p><p>Za vas je to videti povsem preprosto: pes spet sam skoči na kavč, na sprehodu ne prosi, da ga vzamete v naročje, in vas zvečer spet prehiti do vrat.</p>",
+            "title": "Da žogico prinaša tudi pri desetih letih",
+            "text": "<p>Vražji krempelj, šipek in vitamin C podpirajo udobno gibanje in tvorbo kolagena, ki sklep drži skupaj.</p><p>Cilj ni, da bi žogico pospravili. Cilj je, da jo lahko mečete še čez pet let – in da pes takrat še vedno pride do vrat z isto žogico v gobcu.</p>",
             "image": "shopify://shop_images/hf_20260713_165343_fa82d984-8de5-433f-88d2-3d5047daa731.png"
           }
         },
@@ -156,8 +156,8 @@
           "type": "reason",
           "settings": {
             "tag": "Enostavna uporaba",
-            "title": "Ena kapsula na dan, skrita v priboljšku",
-            "text": "<p>Praška majhni psi večinoma nočejo jesti, priboljški za sklepe pa vsebujejo premalo učinkovin, da bi kaj spremenili.</p><p>MobiMix je kapsula. Pes do 10 kg dobi eno na dan, zato ena embalaža zdrži najdlje prav pri najmanjših. Če v 60 dneh ne opazite razlike, vam denar vrnemo – tudi če je embalaža prazna.</p>",
+            "title": "Tri kapsule zjutraj, kar v skledo",
+            "text": "<p>Praške psi pogosto puščajo, priboljški za sklepe pa vsebujejo premalo učinkovin, da bi karkoli spremenili.</p><p>MobiMix je kapsula. Pes med 25 in 40 kilogrami dobi tri na dan, ki jih preprosto zmešate v jutranjo skledo. Če v 60 dneh ne opazite razlike, vam denar vrnemo – tudi če je embalaža prazna.</p>",
             "image": "shopify://shop_images/hf_20260713_163447_2d99eb36-2604-4301-adaf-5d2fc17329e7.png"
           }
         }
