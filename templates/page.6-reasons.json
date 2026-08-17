@@ -81,7 +81,7 @@
         "avatar_1": "shopify://shop_images/FloraMix_lizanje_tack.png",
         "show_badge_stars": true,
         "rating_text": "Uporablja ga že več kot 3.500 psov po Evropi",
-        "heading": "<p>6 razlogov, zakaj veliki psi znova prinašajo žogico<br>(in spet postanejo taki, kot so bili)</p>",
+        "heading": "<p>6 razlogov, zakaj veliki psi znova prinašajo žogico (in spet postanejo taki, kot so bili)</p>",
         "subline": "<p>Če ste zadnje čase opazili, da po nekaj metih žogico pusti in se usede – čeprav bi jo prej lovil, dokler ga ne bi ustavili.</p><p>Pes za žogico ne teče, ampak pospešuje, zavira in se obrača. Sila pri zaviranju gre skozi kolena, rame in komolce, dobra mišica pa to leta skriva. MobiMix z zelenoustno školjko, glukozaminom in kurkumo podpira hrustanec in gibljivost, da žogica ostane v igri.</p>",
         "image": "shopify://shop_images/93b9341cd8c0fc22bbfed015b4d80c1836056d4b.png",
         "cta_label": "OHRANITE GA V IGRI",
@@ -90,6 +90,7 @@
         "proof_text": "Več kot 10.000 zadovoljnih strank",
         "show_gifts": true,
         "gifts_heading": "BREZPLAČNA DARILA OB PRVEM NAROČILU!",
+        "gift_badge_label": "GRATIS",
         "padding_top": 0,
         "padding_bottom": 80,
         "background_color": "#fdfbf7",
@@ -102,7 +103,6 @@
         "accent_color": "#f8aaa7",
         "gift_tile_color": "#f1e1d5",
         "gift_tile_border_color": "#b7b8b8",
-        "gift_badge_label": "GRATIS",
         "gift_badge_color": "#f47671",
         "gift_badge_text_color": "#ffffff"
       }
@@ -354,7 +354,7 @@
         "open_first": false,
         "padding_top": 80,
         "padding_bottom": 80,
-        "background_color": "#FAF9F6",
+        "background_color": "#faf9f6",
         "text_color": "#3b2f2f",
         "card_color": "#ffffff",
         "border_color": "#e7e7e7",
