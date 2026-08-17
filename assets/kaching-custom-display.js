@@ -489,7 +489,7 @@ if (!customElements.get('kaching-custom-display')) {
         const withGifts = isHero && !!this.gifts && !!this.gifts.length;
         const giftsHtml = withGifts ? this.giftsMarkup() : '';
         const label = heroLabel || badgeLabel;
-        const bare = (badgeStyle === 'none' || !label) && !withGifts && !heroLabel;
+        const bare = (badgeStyle === 'none' && !heroLabel) || (!label && !withGifts);
 
         let wrapperEl = document.createElement('div');
         if (bare) {

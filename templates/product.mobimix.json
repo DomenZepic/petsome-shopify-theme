@@ -585,11 +585,11 @@
               "type": "product_kaching-custom-display",
               "settings": {
                 "disclaimer_text": "<p>*Prve spremembe so vidne v 2–3 tednih.  Za najboljše rezultate priporočamo uporabo 2–3 mesece.</p>",
-                "gifts_heading": "",
+                "gifts_heading": "VKLJUČENO V TA PAKET",
                 "hide_gifts_heading": false,
                 "tier_1_style": "none",
-                "tier_2_style": "recommended",
-                "tier_3_style": "best",
+                "tier_2_style": "none",
+                "tier_3_style": "none",
                 "tier_4_style": "none",
                 "accent_color": "#f8aaa7",
                 "accent_color_dark": "#f47671",
@@ -602,7 +602,11 @@
                 "grams_per_day_by_size": "1, 2, 3",
                 "margin_top": 15,
                 "margin_bottom": 15,
-                "gifts_in_tier": false
+                "gifts_in_tier": true,
+                "hero_label": "OMEJENA POLETNA PONUDBA",
+                "protocol_label": "3-mesečni protokol",
+                "offer_checklist": "3x MobiMix (270 kapsul)\nPrenosna zložljiva posoda — 9,00 €\nDentalSticks — 14,90 €\nBrezplačna dostava\n90-dnevna garancija vračila denarja",
+                "offer_total_value": "Skupna vrednost 170,90 € — prihraniš 72,90 €"
               },
               "blocks": {}
             },
