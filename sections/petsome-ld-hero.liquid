@@ -401,7 +401,7 @@
 
       {%- if section.settings.cta_label != blank -%}
         <div class="petsome-ld-hero__actions">
-          <a href="{{ section.settings.cta_url | default: '#' }}" class="petsome-ld-hero__cta">
+          <a href="{{ section.settings.cta_url | default: '#offer' }}" class="petsome-ld-hero__cta">
             {{ section.settings.cta_label }}
           </a>
 
@@ -553,9 +553,11 @@
       "default": "START YOUR DOG-TRAINER ROUTINE"
     },
     {
-      "type": "url",
+      "type": "text",
       "id": "cta_url",
-      "label": "Button URL"
+      "label": "Button URL",
+      "info": "Use #offer to scroll down to the offer. A URL field would strip an anchor like that, so this is a plain text field.",
+      "default": "#offer"
     },
     {
       "type": "text",

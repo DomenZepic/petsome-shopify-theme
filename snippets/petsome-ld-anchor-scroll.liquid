@@ -1,0 +1,60 @@
+{%- comment -%}
+  Petsome Ld: in-page anchor scrolling.
+
+  Native "#anchor" navigation is unreliable on this theme - the Shrine bundle
+  and the app blocks both move and re-render content after load, and a plain
+  hash jump can land on an element whose position has since changed (or not
+  fire at all). This takes over: on a click of any in-page link it finds the
+  target itself and scrolls to it, so the buttons work regardless.
+
+  Delegated on document and registered once per page, so it covers the hero
+  CTA, the guarantee CTA and every footer link without each of them needing
+  their own script. Only hrefs beginning with "#" are touched - the add to
+  cart form and any real link are left alone.
+
+  Render this once, from the section that owns the "#offer" target.
+{%- endcomment -%}
+<script>
+  (function () {
+    if (window.petsomeLdAnchorScroll) return;
+    window.petsomeLdAnchorScroll = true;
+
+    function targetFor(hash) {
+      if (!hash || hash === '#' || hash.length < 2) return null;
+      var id = decodeURIComponent(hash.slice(1));
+      // getElementById first; querySelector would throw on ids that aren't
+      // valid CSS selectors (a leading digit, for instance).
+      return document.getElementById(id);
+    }
+
+    function scrollTo(el) {
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    }
+
+    document.addEventListener('click', function (event) {
+      var link = event.target.closest && event.target.closest('a[href]');
+      if (!link) return;
+
+      var href = link.getAttribute('href') || '';
+      if (href.charAt(0) !== '#') return;
+
+      var el = targetFor(href);
+      if (!el) return;
+
+      event.preventDefault();
+      scrollTo(el);
+      // Keep the URL honest without triggering a second, native jump.
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', href);
+      }
+    });
+
+    // A page opened directly on #offer can land before the app blocks have
+    // finished rendering, which shifts the target. Re-resolve once on load.
+    window.addEventListener('load', function () {
+      var el = targetFor(window.location.hash);
+      if (el) window.setTimeout(function () { scrollTo(el); }, 250);
+    });
+  })();
+</script>

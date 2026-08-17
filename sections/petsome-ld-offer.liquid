@@ -341,7 +341,8 @@
   }
 </style>
 
-<a id="offer" class="petsome-ld-offer__anchor" aria-hidden="true"></a>
+{% render 'petsome-ld-anchor-scroll' %}
+<div id="offer" class="petsome-ld-offer__anchor" aria-hidden="true"></div>
 <div id="petsome-ld-offer-{{ section.id }}" class="petsome-ld-offer">
   <div class="petsome-ld-offer__inner">
     {%- if offer_product == blank -%}
