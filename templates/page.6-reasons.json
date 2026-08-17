@@ -81,12 +81,12 @@
         "avatar_1": "shopify://shop_images/FloraMix_lizanje_tack.png",
         "show_badge_stars": true,
         "rating_text": "Uporablja ga že več kot 3.500 psov po Evropi",
-        "heading": "<p>6 razlogov, zakaj velikega psa bolj obrabi žogica kot sprehod</p>",
-        "subline": "<p>Pes za žogico ne teče – pospešuje, zavira in se obrača. Sila pri zaviranju gre pri tridesetkilogramskem psu naravnost skozi kolena, rame in komolce, dobra mišica pa to leta uspešno skriva. MobiMix z zelenoustno školjko, glukozaminom in kurkumo podpira hrustanec in gibljivost, da žogica ostane v igri tudi pri desetih letih.</p>",
+        "heading": "<p>6 razlogov, zakaj veliki psi nehajo prinašati žogico<br>(in kako jo dobijo nazaj)</p>",
+        "subline": "<p>Če ste zadnje čase opazili, da po nekaj metih žogico pusti in se usede – čeprav bi jo prej lovil, dokler ga ne bi ustavili.</p><p>Pes za žogico ne teče, ampak pospešuje, zavira in se obrača. Sila pri zaviranju gre skozi kolena, rame in komolce, dobra mišica pa to leta skriva. MobiMix z zelenoustno školjko, glukozaminom in kurkumo podpira hrustanec in gibljivost, da žogica ostane v igri.</p>",
         "image": "shopify://shop_images/93b9341cd8c0fc22bbfed015b4d80c1836056d4b.png",
         "cta_label": "OHRANITE GA V IGRI",
         "cta_url": "#offer",
-        "guarantee_text": "60-dnevna garancija vračila denarja",
+        "guarantee_text": "90-dnevna garancija vračila denarja",
         "proof_text": "Več kot 10.000 zadovoljnih strank",
         "show_gifts": true,
         "gifts_heading": "BREZPLAČNA DARILA OB PRVEM NAROČILU!",
@@ -157,7 +157,7 @@
           "settings": {
             "tag": "Enostavna uporaba",
             "title": "Tri kapsule zjutraj, kar v skledo",
-            "text": "<p>Praške psi pogosto puščajo, priboljški za sklepe pa vsebujejo premalo učinkovin, da bi karkoli spremenili.</p><p>MobiMix je kapsula. Pes med 25 in 40 kilogrami dobi tri na dan, ki jih preprosto zmešate v jutranjo skledo. Če v 60 dneh ne opazite razlike, vam denar vrnemo – tudi če je embalaža prazna.</p>",
+            "text": "<p>Praške psi pogosto puščajo, priboljški za sklepe pa vsebujejo premalo učinkovin, da bi karkoli spremenili.</p><p>MobiMix je kapsula. Pes med 25 in 40 kilogrami dobi tri na dan, ki jih preprosto zmešate v jutranjo skledo. Če v 90 dneh ne opazite razlike, vam denar vrnemo – tudi če je embalaža prazna.</p>",
             "image": "shopify://shop_images/hf_20260713_163447_2d99eb36-2604-4301-adaf-5d2fc17329e7.png"
           }
         }
@@ -327,7 +327,7 @@
           "type": "question",
           "settings": {
             "question": "Kaj če pri mojem psu ne bo delovalo?",
-            "answer": "<p>Na voljo imate 60 dni. Če ne boste zadovoljni, nam pišite in denar vam vrnemo – tudi če je embalaža že odprta.</p>"
+            "answer": "<p>Na voljo imate 90 dni. Če ne boste zadovoljni, nam pišite in denar vam vrnemo – tudi če je embalaža že odprta.</p>"
           }
         },
         "q_5": {
@@ -389,9 +389,9 @@
       "settings": {
         "show_icon": true,
         "icon": "verified_user",
-        "heading": "<p>MobiMix preizkusite brez tveganja 60 dni</p>",
+        "heading": "<p>MobiMix preizkusite brez tveganja 90 dni</p>",
         "text": "<p>Na kratko razloži, kako garancija deluje in kaj mora kupec narediti, če izdelek vrne.</p>",
-        "cta_label": "ZAČNITE Z RUTINO PASJIH TRENERJEV",
+        "cta_label": "OHRANITE GA V IGRI",
         "cta_url": "#offer",
         "padding_top": 80,
         "padding_bottom": 80,
