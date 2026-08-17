@@ -188,22 +188,22 @@
         "step_1": {
           "type": "step",
           "settings": {
-            "badge_text": "DAN 1–5",
-            "text": "<p><strong>Črevesje se prebudi.</strong> Prebiotična vlaknina začne delovati. Mnogi lastniki že v dnevu ali dveh opazijo lažjo in bolj redno prebavo.</p>"
+            "badge_text": "2.–3. TEDEN",
+            "text": "<p><strong>Vstane malo lažje.</strong> Prva sprememba je skoraj vedno jutranja. Pes se po ležanju pobere hitreje in se manj časa razmiguje, preden pride do vrat.</p>"
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
-            "badge_text": "DAN 6–10",
-            "text": "<p><strong>Jutra so lažja.</strong> Manj tiste težke, zaspane otopelosti. Energija čez dan je bolj enakomerna.</p>"
+            "badge_text": "1. MESEC",
+            "text": "<p><strong>Spet hodi, kot bi moral.</strong> Korak se izenači, proti koncu sprehoda ne zaostaja več, stopnice pa spet vzame brez premisleka.</p>"
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
-            "badge_text": "DAN 10–14",
-            "text": "<p><strong>Spet je bolj on sam.</strong> Proti večeru manj napihnjenosti, mirnejši trebuh, dnevna doza pa postane navada.</p>"
+            "badge_text": "2.–3. MESEC",
+            "text": "<p><strong>Deluje kot mlajši.</strong> Tu večina lastnikov omeni igrivost: sam prinese igračo, znova skoči v prtljažnik in se zvečer ne uleže takoj, ko pride domov.</p>"
           }
         }
       },
@@ -213,11 +213,11 @@
         "step_3"
       ],
       "settings": {
-        "eyebrow": "Prvih 14 dni",
-        "heading": "<p>Prvi premiki so hitri</p>",
-        "subheading": "<p>Počasno prebavo in leta iste rutine čuti celo telo. Takole večina lastnikov opiše prva dva tedna svojega psa.</p>",
+        "eyebrow": "Prvi trije meseci",
+        "heading": "<p>Prvo, kar opazite, je jutro</p>",
+        "subheading": "<p>Hrustanec nima lastne prekrvavitve, zato sestavine do njega pridejo počasi. Prvih nekaj dni zato ne boste opazili ničesar – in tako je prav. Takole večina lastnikov opiše prve tri mesece.</p>",
         "image": "shopify://shop_images/hf_20260713_165719_3d2d789b-0b91-400e-b9ae-5854d33e0906.png",
-        "footnote": "<p>Vsak pes je drugačen. Kar koli v prvem tednu opazite ali ne opazite, je le prilagajanje telesa na boljši tempo sklepov. To je prehransko dopolnilo, ne zdravilo.</p>",
+        "footnote": "<p>Navedeno je tisto, kar opisuje večina lastnikov, vsak pes pa je drugačen. MobiMix je prehransko dopolnilo in ne zdravilo. Če pes šepa, izraziteje spremeni gibanje ali kaže bolečino, se posvetujte z veterinarjem.</p>",
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#fcdddc",
@@ -247,7 +247,7 @@
         "product": "mobimix",
         "image": "shopify://shop_images/93b9341cd8c0fc22bbfed015b4d80c1836056d4b.png",
         "heading": "MobiMix – Dodatek za sklepe psov",
-        "description": "<p><strong>Kratek opis izdelka.</strong> V nekaj stavkih povej, komu je namenjen in kaj naredi.</p>",
+        "description": "<p><strong>Osem sestavin za sklepe v eni kapsuli.</strong> Zelenoustna školjka, glukozamin in hondroitin podpirajo hrustanec, kurkuma in ingver umirjeno delovanje sklepov, vražji krempelj, šipek in vitamin C pa udobno gibanje. Odmerek je prilagojen teži psa, kapsulo pa daste skupaj z obrokom ali jo stresete v hrano. Razvito in izdelano v Sloveniji.</p>",
         "trustpilot_text": "",
         "weight_label": "Izberite težo psa:",
         "delivery_text": "<p>Predviden čas dostave: <strong>2–3 dni</strong></p>",
