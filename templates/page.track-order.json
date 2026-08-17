@@ -20,57 +20,71 @@
     "48a61bc7-365a-4136-bce5-4aa7f7623d0a": {
       "type": "track-order",
       "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "title": "Track your order",
+        "title_highlight_1": "solid-color",
+        "title_highlight_1_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_1_bg-color": "#f9efff",
+        "title_highlight_1_color": "#6d388b",
+        "highlighted-1_border_radius": 8,
+        "highlighted-1_border_width": 0,
+        "highlighted-1_border": "solid",
+        "highlighted-1_border_color": "#6d388b",
+        "highlighted-1_padding-block": 0.3,
+        "highlighted-1_padding-inline": 0.3,
+        "title_highlight_1_underline-thickness": 2,
+        "title_highlight_1_underline-color": "#6d388b",
+        "title_highlight_1_underline-color--gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_1_underline-color-position": 25,
+        "title_highlight_1_handwritten-color": "#6d388b",
+        "title_highlight_1_handwritten-stroke-width": 3,
+        "title_highlight_1_handwritten-position": 60,
+        "title_highlight_2": "none",
+        "title_highlight_2_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_2_bg-color": "#f9efff",
+        "title_highlight_2_color": "#6d388b",
+        "highlighted-2_border_radius": 8,
+        "highlighted-2_border_width": 0,
+        "highlighted-2_border": "solid",
+        "highlighted-2_border_color": "#6d388b",
+        "highlighted-2_padding-block": 0.3,
+        "highlighted-2_padding-inline": 0.3,
+        "title_highlight_2_underline-thickness": 2,
+        "title_highlight_2_underline-color": "#6d388b",
+        "title_highlight_2_underline-color--gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_2_underline-color-position": 25,
+        "title_highlight_2_handwritten-color": "#6d388b",
+        "title_highlight_2_handwritten-stroke-width": 3,
+        "title_highlight_2_handwritten-position": 60,
         "heading_size": "h1",
+        "custom_desktop_size": 39,
+        "custom_mobile_size": 28,
         "text": "<p>Welcome to our tracking page! Here you can easily track the status of your order by simply entering the tracking number we provided in your confirmation email. Stay up-to-date with the latest information on your delivery and ensure a hassle-free experience. Thank you for choosing our services! If you have any questions don't hesitate to contact us.</p>",
+        "input_label": "Tracking number",
         "button_label": "TRACK",
         "button_full_width": true,
         "color_scheme": "background-1",
+        "custom_colors_background": "#ffffff",
+        "custom_gradient_background": "",
+        "custom_colors_text": "#2e2a39",
+        "custom_colors_solid_button_background": "#dd1d1d",
+        "custom_colors_solid_button_text": "#ffffff",
+        "pattern_bg": "none",
+        "pattern_color": "#6d388b",
+        "pattern_size": 20,
+        "pattern_thickness": 2,
+        "pattern_angle": 45,
+        "pattern_opacity_mode": "low",
+        "pattern_opacity_low": 7,
+        "pattern_opacity_normal": 80,
         "padding_top": 36,
         "padding_bottom": 36
-      }
-    },
-    "fd57cce8-d801-473c-9554-025221fb7723": {
-      "type": "image-with-text",
-      "blocks": {
-        "template-18472096104777_fd57cce8-d801-473c-9554-025221fb7723-1679865021003cfb75-0": {
-          "type": "heading",
-          "settings": {
-            "heading_size": "h1"
-          }
-        },
-        "template-18472096104777_fd57cce8-d801-473c-9554-025221fb7723-1679865021003cfb75-1": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>"
-          }
-        },
-        "template-18472096104777_fd57cce8-d801-473c-9554-025221fb7723-1679865021003cfb75-2": {
-          "type": "button",
-          "settings": {
-            "button_label": "Contact us",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "template-18472096104777_fd57cce8-d801-473c-9554-025221fb7723-1679865021003cfb75-0",
-        "template-18472096104777_fd57cce8-d801-473c-9554-025221fb7723-1679865021003cfb75-1",
-        "template-18472096104777_fd57cce8-d801-473c-9554-025221fb7723-1679865021003cfb75-2"
-      ],
-      "settings": {
-        "height": "adapt",
-        "color_scheme": "background-1",
-        "content_layout": "overlap",
-        "layout": "image_first",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "left"
       }
     }
   },
   "order": [
     "main",
-    "48a61bc7-365a-4136-bce5-4aa7f7623d0a",
-    "fd57cce8-d801-473c-9554-025221fb7723"
+    "48a61bc7-365a-4136-bce5-4aa7f7623d0a"
   ]
 }
