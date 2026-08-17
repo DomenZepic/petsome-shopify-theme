@@ -422,10 +422,15 @@
     border-color: var(--kaching-accent);
   }
 
-  /* Zgornja ploscica je vedno v barvi znamke, ne sele ob izbiri */
+  /* Okvir v barvi znamke; preliv gre na SAM TRAK, da tece cez njegovo visino
+     - enako kot pri znacki prihranka. Na visokem okvirju bi bil preliv neviden. */
   .kaching-tile-wrapper--has-gifts {
-    background: linear-gradient(180deg, var(--kaching-accent) 0%, var(--kaching-accent-dark) 100%) !important;
+    background-color: var(--kaching-accent) !important;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.10);
+  }
+
+  .kaching-tile-wrapper--has-gifts .kaching-tile-wrapper__label {
+    background: linear-gradient(180deg, var(--kaching-accent) 0%, var(--kaching-accent-dark) 100%);
   }
 
   .kaching-tile-wrapper--has-gifts .kaching-tile-wrapper__label {
