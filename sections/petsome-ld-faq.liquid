@@ -1,0 +1,330 @@
+{% comment %}
+  Petsome Ld: FAQ - a short closing FAQ for landing pages (the "Ld" family).
+  Deliberately small: the schema caps it at 5 questions, because this sits near
+  the buy decision and is meant to clear the last few objections, not replace
+  the full FAQ page.
+
+  Built on native <details>/<summary>, so it opens and closes with no
+  JavaScript at all - it still works if a script fails, and screen readers and
+  keyboard users get the expand/collapse behaviour for free.
+
+  Uses the BODY font everywhere so the whole landing page reads as one
+  consistent style.
+{% endcomment %}
+<style>
+  #petsome-ld-faq-{{ section.id }} {
+    --ldq-text: {{ section.settings.text_color }};
+    --ldq-card: {{ section.settings.card_color }};
+    --ldq-border: {{ section.settings.border_color }};
+    --ldq-accent: {{ section.settings.accent_color }};
+    background-color: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_top }}px var(--petsome-padding-x) {{ section.settings.padding_bottom }}px;
+    font-family: var(--font-body-family);
+    color: var(--ldq-text);
+  }
+
+  #petsome-ld-faq-{{ section.id }} * {
+    font-family: var(--font-body-family);
+  }
+
+  /* The universal rule above outranks the .material-symbols-outlined rule that
+     Google Fonts ships, which would swap the icon font for the body font and
+     leave raw ligature text on screen. */
+  #petsome-ld-faq-{{ section.id }} .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+  }
+
+  #petsome-ld-faq-{{ section.id }} p {
+    margin: 0;
+  }
+
+  #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__inner {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+  }
+
+  #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    text-align: center;
+    word-break: break-word;
+  }
+
+  #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__heading {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__subheading {
+    font-size: 1.7rem;
+    line-height: 1.5;
+  }
+
+  #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__item {
+    background-color: var(--ldq-card);
+    border: 1px solid var(--ldq-border);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__q {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px 20px;
+    cursor: pointer;
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1.4;
+    list-style: none;
+  }
+
+  /* Hides the default disclosure triangle so only our chevron shows. */
+  #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__q::-webkit-details-marker {
+    display: none;
+  }
+
+  #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__q::marker {
+    content: '';
+  }
+
+  #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__q:focus-visible {
+    outline: 2px solid var(--ldq-accent);
+    outline-offset: -2px;
+  }
+
+  #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__chevron {
+    flex-shrink: 0;
+    display: flex;
+    color: var(--ldq-accent);
+    transition: transform 0.2s ease;
+  }
+
+  #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__chevron .petsome-ld-icon {
+    display: block;
+    flex-shrink: 0;
+    font-size: 2.4rem;
+  }
+
+  #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__item[open] .petsome-ld-faq__chevron {
+    transform: rotate(180deg);
+  }
+
+  #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__a {
+    padding: 0 20px 18px;
+    font-size: 1.6rem;
+    line-height: 1.5;
+  }
+
+  #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__a p + p {
+    margin-top: 1em;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__chevron {
+      transition: none;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__heading {
+      font-size: 2.8rem;
+    }
+
+    #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__subheading {
+      font-size: 1.6rem;
+    }
+
+    #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__q {
+      padding: 16px;
+      font-size: 1.6rem;
+    }
+
+    #petsome-ld-faq-{{ section.id }} .petsome-ld-faq__a {
+      padding: 0 16px 16px;
+      font-size: 1.5rem;
+    }
+  }
+</style>
+
+{%- if section.blocks.size > 0 -%}
+  <div id="petsome-ld-faq-{{ section.id }}" class="petsome-ld-faq">
+    <div class="petsome-ld-faq__inner">
+      {%- if section.settings.heading != blank or section.settings.subheading != blank -%}
+        <div class="petsome-ld-faq__header">
+          {%- if section.settings.heading != blank -%}
+            <div class="petsome-ld-faq__heading">{{ section.settings.heading }}</div>
+          {%- endif -%}
+          {%- if section.settings.subheading != blank -%}
+            <div class="petsome-ld-faq__subheading">{{ section.settings.subheading }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="petsome-ld-faq__list">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.question != blank -%}
+            <details
+              class="petsome-ld-faq__item"
+              {% if section.settings.open_first and forloop.first %}open{% endif %}
+              {{ block.shopify_attributes }}
+            >
+              <summary class="petsome-ld-faq__q">
+                {{ block.settings.question }}
+                <span class="petsome-ld-faq__chevron" aria-hidden="true">
+                  {% render 'petsome-ld-icon', icon: 'expand_more' %}
+                </span>
+              </summary>
+              {%- if block.settings.answer != blank -%}
+                <div class="petsome-ld-faq__a rte">{{ block.settings.answer }}</div>
+              {%- endif -%}
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Petsome Ld: FAQ",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 5,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header"
+    },
+    {
+      "type": "paragraph",
+      "content": "Capped at 5 questions on purpose - this sits next to the buy decision and should clear the last objections, not replace the full FAQ page."
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Pogosta vprašanja</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "subheading",
+      "label": "Subheading"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_first",
+      "label": "Open the first question by default",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#FEF6F6"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text",
+      "default": "#3B2F2F"
+    },
+    {
+      "type": "color",
+      "id": "card_color",
+      "label": "Question background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Question border",
+      "default": "#E7E7E7"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Chevron",
+      "default": "#F47671"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Kdaj bom opazil prve spremembe?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "default": "<p>Odgovorite na kratko in konkretno.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Petsome Ld: FAQ",
+      "blocks": [
+        { "type": "question" },
+        { "type": "question" },
+        { "type": "question" },
+        { "type": "question" },
+        { "type": "question" }
+      ]
+    }
+  ]
+}
+{% endschema %}
