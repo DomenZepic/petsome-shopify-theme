@@ -34,11 +34,15 @@
     text-decoration: none;
   }
 
+  /* Both dimensions are left auto and constrained by max-* instead, so the
+     logo is scaled proportionally to fit the box whatever its aspect ratio -
+     the height cap can never squash a tall logo. */
   #petsome-ld-header-{{ section.id }} .petsome-ld-header__logo {
     display: block;
-    width: {{ section.settings.logo_width }}px;
-    max-width: 60vw;
+    width: auto;
     height: auto;
+    max-width: min({{ section.settings.logo_width }}px, 60vw);
+    max-height: 50px;
   }
 
   #petsome-ld-header-{{ section.id }} .petsome-ld-header__name {
@@ -49,8 +53,11 @@
     color: rgb(var(--color-foreground));
   }
 
-  /* The Figma desktop and mobile frames both draw the logo at the same size,
-     so it is deliberately not scaled down on small screens. */
+  @media screen and (max-width: 749px) {
+    #petsome-ld-header-{{ section.id }} .petsome-ld-header__logo {
+      max-height: 40px;
+    }
+  }
 </style>
 
 <div id="petsome-ld-header-{{ section.id }}" class="petsome-ld-header">
@@ -97,7 +104,8 @@
     {
       "type": "range",
       "id": "logo_width",
-      "label": "Logo width",
+      "label": "Maximum logo width",
+      "info": "The logo is also capped at 50px tall on desktop and 40px on mobile, so a tall logo scales down to fit.",
       "min": 60,
       "max": 320,
       "step": 10,
