@@ -30,10 +30,10 @@
         "seconds_label": "Sek",
         "padding_top": 12,
         "padding_bottom": 12,
-        "background_color": "#3b2f2f",
+        "background_color": "#0e1111",
         "text_color": "#faf9f6",
         "pill_color": "#9bb8d3",
-        "pill_text_color": "#3b2f2f"
+        "pill_text_color": "#0e1111"
       }
     },
     "ld_header": {
@@ -99,11 +99,11 @@
         "padding_top": 0,
         "padding_bottom": 80,
         "background_color": "#fdfbf7",
-        "text_color": "#3b2f2f",
+        "text_color": "#0e1111",
         "muted_text_color": "#565858",
         "badge_background": "#fdfdfc",
         "star_color": "#ff9a0a",
-        "button_background": "#3b2f2f",
+        "button_background": "#0e1111",
         "button_text_color": "#ffffff",
         "accent_color": "#9bb8d3",
         "gift_tile_color": "#f1e1d5",
@@ -186,7 +186,7 @@
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#fdfbf7",
-        "text_color": "#3b2f2f",
+        "text_color": "#0e1111",
         "accent_color": "#87a0b7",
         "divider_color": "#565858"
       }
@@ -231,7 +231,7 @@
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#eaf1f6",
-        "text_color": "#3b2f2f",
+        "text_color": "#0e1111",
         "accent_color": "#9bb8d3",
         "accent_color_dark": "#87a0b7",
         "line_color": "#fac3c1",
@@ -273,13 +273,13 @@
         "tier_3_style": "best",
         "tier_4_style": "none",
         "background_color": "#f6fafc",
-        "text_color": "#3b2f2f",
+        "text_color": "#0e1111",
         "muted_text_color": "#565858",
         "accent_color": "#9bb8d3",
         "accent_color_dark": "#87a0b7",
         "secondary_color": "#e8d6c5",
         "light_text_color": "#faf9f6",
-        "atc_background": "#3b2f2f",
+        "atc_background": "#0e1111",
         "atc_text_color": "#ffffff",
         "product_type": "powder",
         "capsules_per_package": 90,
@@ -348,7 +348,7 @@
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#fdfbf7",
-        "text_color": "#3b2f2f",
+        "text_color": "#0e1111",
         "accent_color": "#9bb8d3",
         "accent_color_dark": "#87a0b7",
         "secondary_color": "#e8d6c5",
@@ -409,7 +409,7 @@
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#faf9f6",
-        "text_color": "#3b2f2f",
+        "text_color": "#0e1111",
         "card_color": "#ffffff",
         "border_color": "#e7e7e7",
         "accent_color": "#87a0b7"
@@ -455,9 +455,9 @@
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#eaf1f6",
-        "text_color": "#3b2f2f",
+        "text_color": "#0e1111",
         "icon_color": "#9bb8d3",
-        "button_background": "#3b2f2f",
+        "button_background": "#0e1111",
         "button_text_color": "#ffffff"
       }
     },
@@ -513,7 +513,7 @@
         "legal_text": "<p>© Petsome. Vse pravice pridržane.</p>",
         "padding_top": 64,
         "padding_bottom": 64,
-        "background_color": "#3b2f2f",
+        "background_color": "#0e1111",
         "text_color": "#faf9f6",
         "muted_text_color": "#c9bfbb"
       }
