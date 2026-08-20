@@ -568,9 +568,10 @@
             <span class="product-form__error-message"></span>
           </div>
 
+          {%- assign ld_form_id = 'ld-offer-form-' | append: section.id -%}
           {%- form 'product',
             offer_product,
-            id: 'ld-offer-form-' | append: section.id,
+            id: ld_form_id,
             class: 'petsome-ld-offer__form',
             novalidate: 'novalidate',
             data-type: 'add-to-cart-form'
