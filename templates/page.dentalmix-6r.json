@@ -30,10 +30,10 @@
         "seconds_label": "Sek",
         "padding_top": 12,
         "padding_bottom": 12,
-        "background_color": "#3b2f2f",
+        "background_color": "#2b3a47",
         "text_color": "#faf9f6",
-        "pill_color": "#f8aaa7",
-        "pill_text_color": "#3b2f2f"
+        "pill_color": "#9bb8d3",
+        "pill_text_color": "#2b3a47"
       }
     },
     "ld_header": {
@@ -53,7 +53,6 @@
         "gift_1": {
           "type": "gift",
           "settings": {
-            "icon": "shopify://shop_images/hf_20260717_164541_5f9f0a09-7342-414c-b5a1-38000374b199.png",
             "label": "Prenosna zložljiva posoda",
             "price": "9,00 €"
           }
@@ -61,7 +60,6 @@
         "gift_2": {
           "type": "gift",
           "settings": {
-            "icon": "shopify://shop_images/hf_20260709_194728_f15d5b24-84c3-48bd-a64e-0545ecd72289.png",
             "label": "DentalSticks",
             "price": "14,90 €"
           }
@@ -69,7 +67,6 @@
         "gift_3": {
           "type": "gift",
           "settings": {
-            "icon": "shopify://shop_images/851188-1-ecommerce-shipping-box-sendbox-packhelp-21-04-2022-gsps-19518-png.avif",
             "label": "Brezplačna dostava",
             "price": ""
           }
@@ -81,34 +78,32 @@
         "gift_3"
       ],
       "settings": {
-        "avatar_1": "shopify://shop_images/hf_20260820_160334_845787b3-ee6f-4443-9533-810b61347ca5.png",
-        "avatar_2": "shopify://shop_images/hf_20260820_160458_92d4dac0-4680-4243-9a34-044c03484f2b.png",
-        "avatar_3": "shopify://shop_images/hf_20260820_160839_22cd4963-9aee-4509-ac49-517a705e9db4.png",
+        "avatar_1": "shopify://shop_images/FloraMix_lizanje_tack.png",
         "show_badge_stars": true,
-        "rating_text": "★★★★★  2000+ ocen · 5000+ lastnikov psov",
-        "heading": "<p>6 razlogov, zakaj 5000+ lastnikov uporablja DentalMix za čistejše zob in svež zadah — brez ščetkanja</p>",
-        "subline": "<p>DentalMix deluje tako, da napade vzrok slabega zadaha in zobnega kamna, namesto da bi ga samo prikril. Razvit je z veterinarji, vsebuje VOHC klinično raziskane sestavine, uporaba pa je dovolj preprosta za vsak dan — in prav zdaj ga dobiš po znižani ceni.</p>",
-        "image": "shopify://shop_images/hf_20260820_164220_5d425647-f9fa-45ad-accd-0dd2861f56ca.png",
+        "rating_text": "★★★★★  _______ ocen · _______ lastnikov psov",
+        "heading": "<p>6 razlogov, zakaj _______ lastnikov uporablja DentalMix za čistejše zobe in svež zadah — brez ščetkanja</p>",
+        "subline": "<p>DentalMix deluje tako, da napade vzrok slabega zadaha in zobnega kamna, namesto da bi ga samo prikril. Razvit je s strokovnjaki in pregledan pri veterinarju, _______, uporaba pa je dovolj preprosta za vsak dan — in prav zdaj ga dobiš po znižani ceni.</p>",
+        "image": "shopify://shop_images/hf_20260817_202846_41b9f6f9-9b1d-431b-a591-aa8e907a3dad.png",
         "cta_label": "NAROČI ZDAJ",
         "cta_url": "#offer",
         "guarantee_text": "90-dnevna garancija vračila denarja",
-        "proof_text": "5000+ prodanih lončkov · Razvito v Sloveniji, izdelano v EU",
+        "proof_text": "_______ prodanih lončkov · Razvito v Sloveniji, izdelano v EU",
         "show_gifts": true,
-        "gifts_heading": "BREZPLAČNA DARILA PRI EKSLUZIVNI PONUDBI!",
+        "gifts_heading": "BREZPLAČNA DARILA OB PRVEM NAROČILU!",
         "gift_badge_label": "GRATIS",
         "padding_top": 0,
         "padding_bottom": 80,
         "background_color": "#fdfbf7",
-        "text_color": "#3b2f2f",
+        "text_color": "#2b3a47",
         "muted_text_color": "#565858",
         "badge_background": "#fdfdfc",
         "star_color": "#ff9a0a",
-        "button_background": "#3b2f2f",
+        "button_background": "#2b3a47",
         "button_text_color": "#ffffff",
-        "accent_color": "#f8aaa7",
-        "gift_tile_color": "#f1e1d5",
+        "accent_color": "#9bb8d3",
+        "gift_tile_color": "#edf2f7",
         "gift_tile_border_color": "#b7b8b8",
-        "gift_badge_color": "#f47671",
+        "gift_badge_color": "#87a0b7",
         "gift_badge_text_color": "#ffffff"
       }
     },
@@ -120,53 +115,53 @@
           "settings": {
             "tag": "1. razlog",
             "title": "Dentalne palčke in priboljški ne delujejo! DentalMix napade izvor slabega zadaha in rumenih zob.",
-            "text": "<p>Večina dentalnih izdelkov vonj samo za nekaj ur prekrije ali očisti le površino. DentalMix deluje skozi slino in napade izvor vonja in oblog, vsebuje dve klinično raziskani sestavini, ki pomagata zmanjševati nastajanje zobnih oblog, zobnega kamna in slabega zadaha. Rezultat je trajno svežji zadah, čistejši videz zob in bolj zdrave dlesni.</p>",
-            "image": "shopify://shop_images/prenos.png"
+            "text": "<p>Večina dentalnih izdelkov vonj samo za nekaj ur prekrije ali očisti le površino. DentalMix deluje skozi slino in napade izvor vonja in oblog, _______. Rezultat je trajno svežji zadah, čistejši videz zob in bolj zdrave dlesni.</p>",
+            "image": "shopify://shop_images/hf_20260817_203054_072c99f0-3c50-4e70-9ec5-bb4f709b9b5e.png"
           }
         },
         "reason_2": {
           "type": "reason",
           "settings": {
             "tag": "2. razlog",
-            "title": "Razvito z veterinarji, klinično dokazane sestavine — dentalni prašek za pse.",
-            "text": "<p>DentalMix združuje sestavine, katerih učinki na ustno zdravje psov so bili klinično raziskani. <strong>Natrijev tripolifosfat je v raziskavi zmanjšal nastajanje zobnega kamna za 55 %,</strong> rjava alga <em><strong>Ascophyllum nodosum</strong></em> pa je v 90-dnevni dvojno slepi, placebo kontrolirani študiji <strong>pomembno zmanjšala zobne obloge, zobni kamen in spojine, povezane s slabim zadahom</strong>. Rezultat? Svežejši zadah, manj zobnih oblog in kamna ter čistejši zobje — brez vsakodnevnega boja s ščetkanjem.</p>",
-            "image": "shopify://shop_images/10_vet_citat.jpg"
+            "title": "Ustvarili strokovnjaki, _______ — dentalni prašek za pse.",
+            "text": "<p>Sestavo smo razvili skupaj z veterinarjem, _______. _______, druga meritev pa je pokazala, da se zmanjša glavna snov, ki povzroča zadah, _______. Izid so svežji zadah, manj oblog in belejši videz zob — brez boja s ščetko.</p>",
+            "image": "shopify://shop_images/hf_20260817_203918_b355d81a-2aa3-4f9f-ad01-2e849955b5e2.png"
           }
         },
         "reason_3": {
           "type": "reason",
           "settings": {
             "tag": "3. razlog",
-            "title": "Edinstvena dentalna mešanica: Veže. Razgradi. Osveži.",
-            "text": "<p>Ni le prašek, ampak večnamenska dentalna formula, kjer vsaka merica deluje na več ključnih področij ustne higiene:</p><p><strong>Probiotična podpora – </strong><em>Lactobacillus plantarum</em> in <em>Bacillus velezensis</em> pomagata podpirati uravnoteženo ustno mikrobioto in okolje v ustih.</p><p><strong>Aktivne sestavine proti oblogam in kamnu – </strong>Rjava alga <em>Ascophyllum nodosum</em> in natrijev tripolifosfat pomagata zmanjševati nastajanje zobnih oblog in zobnega kamna.</p><p><strong>Rastlinski izvlečki – </strong>Zeleni čaj in granatno jabolko pomagata ohranjati svež zadah ter podpirata zdrave dlesni in ustno higieno.</p>",
-            "image": "shopify://shop_images/09_presek.jpg"
+            "title": "Edinstvena večdelna dentalna mešanica: Veže. Razgradi. Osveži.",
+            "text": "<p>DentalMix združuje več ciljanih sestavin, ki delujejo skupaj.<br>Probiotična mešanica pomaga uravnavati bakterije v gobcu in cilja na plast, na kateri nastane zobni kamen.<br>Hidrolizirane rjave alge in natrijev tripolifosfat neposredno napadejo nabiranje in bakterijsko plast, ki obarva zobe in ustvarja vonj.<br>Rastlinska izvlečka zelenega čaja in granatnega jabolka delujeta na to plast in podpirata zdrave dlesni.</p>",
+            "image": "shopify://shop_images/hf_20260817_204031_999dda0c-8d44-4ea1-a65e-a2eee6fb9d24.png"
           }
         },
         "reason_4": {
           "type": "reason",
           "settings": {
             "tag": "4. razlog",
-            "title": "Vidno čistejši zobje in svež zadah v 90 dneh.",
-            "text": "<p>Za mnoge lastnike je DentalMix preprost način, kako vsakodnevno podpreti ustno higieno psa tudi na mestih, ki jih je s ščetkanjem težko doseči. Večina lastnikov poroča o vidno čistejših zobeh in svetlejšem videzu znotraj tega obdobja.</p>",
-            "image": "shopify://shop_images/prenos_2.png"
+            "title": "Vidno čistejši zobje in svež zadah v 90 dneh ali manj.",
+            "text": "<p>Za mnoge lastnike je to prva metoda, s katero sploh pridejo do mest, kjer se nabirata obarvanost in obloga. Večina lastnikov poroča o vidno čistejših zobeh in svetlejšem videzu znotraj tega obdobja, _______.</p>",
+            "image": "shopify://shop_images/hf_20260817_204213_b2ff668a-8942-4745-aa0c-0f7e4b127bd0.png"
           }
         },
         "reason_5": {
           "type": "reason",
           "settings": {
             "tag": "5. razlog",
-            "title": "Obožuje ga 5000+ lastnikov psov, podpirajo ga strokovnjaki.",
-            "text": "<p>Od prvih uporabnikov do dolgoletnih strank je DentalMix postal del vsakodnevne rutine tisočih lastnikov psov. Z več kot 5.000 zadovoljnimi pasjimi uporabniki in številnimi odličnimi ocenami je postal preprosta izbira za učinkovito nego zob in svež zadah doma.</p>",
-            "image": "shopify://shop_images/12_ugc_mreza.jpg"
+            "title": "Obožuje ga _______ lastnikov psov, podpirajo ga strokovnjaki.",
+            "text": "<p>_______ lastnikov psov ga je vključilo v vsakodnevno nego svojega psa. _______, poleg tega pa ima veliko visokih ocen zadovoljnih lastnikov.</p>",
+            "image": "shopify://shop_images/hf_20260817_204401_8fb976c0-813b-474b-ba1f-1ffe804dce15.png"
           }
         },
         "reason_6": {
           "type": "reason",
           "settings": {
             "tag": "6. razlog",
-            "title": "Okus po govedini, zaradi katerega bo posodica prazna",
-            "text": "<p>DentalMix ima okusen goveji okus, ki ga psi z veseljem sprejmejo kot del vsakodnevnega obroka. Tako nega zob ne postane še ena obveznost, ampak priljubljen del njihove rutine. Kot majhen dnevni priboljšek — le da hkrati podpira čistejše zobe, svež zadah in zdrave dlesni.</p>",
-            "image": "shopify://shop_images/11_posip_dvojni.jpg"
+            "title": "Okus, ob katerem pes obliže skledo.",
+            "text": "<p>Prašek ima okus, ki psom ustreza, in se pomeša med običajen obrok. _______ psov ga sprejme že ob prvi uporabi, zato nega zob ni več opravilo, ampak del večerje.</p>",
+            "image": "shopify://shop_images/hf_20260817_204744_f3c1e2af-2223-4e98-ad23-929ca1315dbf.png"
           }
         }
       },
@@ -182,12 +177,11 @@
         "show_numbers": false,
         "pad_numbers": true,
         "number_start": 1,
-        "anchor_id": "reasons",
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#fdfbf7",
-        "text_color": "#3b2f2f",
-        "accent_color": "#f04842",
+        "text_color": "#2b3a47",
+        "accent_color": "#6f8ba3",
         "divider_color": "#565858"
       }
     },
@@ -225,15 +219,14 @@
         "eyebrow": "Kaj pričakovati",
         "heading": "<p>Prvih 90 dni, korak za korakom</p>",
         "subheading": "<p>Zadah se odzove prvi, obloge počasneje, kamen najpočasneje. Takole večina lastnikov opiše prve tri mesece.</p>",
-        "image": "shopify://shop_images/05_zobje.jpg",
+        "image": "shopify://shop_images/hf_20260713_165719_3d2d789b-0b91-400e-b9ae-5854d33e0906.png",
         "footnote": "<p>Navedeno je tisto, kar opisuje večina lastnikov, vsak pes pa je drugačen. DentalMix je prehransko dopolnilo in ne zdravilo. Star, že strjen zobni kamen lahko odstrani samo veterinar.</p>",
-        "anchor_id": "timeline",
         "padding_top": 80,
         "padding_bottom": 80,
-        "background_color": "#fcdddc",
-        "text_color": "#3b2f2f",
-        "accent_color": "#f8aaa7",
-        "accent_color_dark": "#f47671",
+        "background_color": "#eef3f8",
+        "text_color": "#2b3a47",
+        "accent_color": "#9bb8d3",
+        "accent_color_dark": "#87a0b7",
         "line_color": "#fac3c1",
         "card_color": "#ffffff",
         "footnote_color": "#565858"
@@ -273,13 +266,13 @@
         "tier_3_style": "best",
         "tier_4_style": "none",
         "background_color": "#fef6f6",
-        "text_color": "#3b2f2f",
+        "text_color": "#2b3a47",
         "muted_text_color": "#565858",
-        "accent_color": "#f8aaa7",
-        "accent_color_dark": "#f47671",
+        "accent_color": "#9bb8d3",
+        "accent_color_dark": "#87a0b7",
         "secondary_color": "#e8d6c5",
         "light_text_color": "#faf9f6",
-        "atc_background": "#3b2f2f",
+        "atc_background": "#2b3a47",
         "atc_text_color": "#ffffff",
         "product_type": "powder",
         "capsules_per_package": 90,
@@ -293,50 +286,6 @@
         "margin_bottom": 0
       }
     },
-    "petsome_before_after_bEFgxj": {
-      "type": "petsome-before-after",
-      "blocks": {
-        "story_minGFf": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/hf_20260709_191847_47f9a875-2a81-4321-ab1a-0928235e472e.png",
-            "dog_name": "Piki, 9-let",
-            "issue": "Rjavi zobje in hud zadah",
-            "text": "<p>Pikijev zadah je bil neznosen, ščetkanja ni pustil. Po dveh tednih DentalMixa lastnica poroča, da je zadah opazno milejši in da ga spet crklja od blizu. Tudi zobje so bolj beli.</p>"
-          }
-        },
-        "story_wXAAPn": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/Untitled_design_90_23d1c325-2ca9-408a-adbc-21cf722c055a.webp",
-            "dog_name": "Rosa, 11-letna maltežanka",
-            "issue": "Rjave obloge",
-            "text": "<p>Rosa je imela rjave obloge ob dlesnih in skrbela jo je anestezija. Z rednim DentalMixom so zobje videti čistejši, brez postopka pri veterinarju.</p>"
-          }
-        },
-        "story_pikMgy": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/image00004_db7b8cc8-6684-47d2-980a-96f678167a77.png",
-            "dog_name": "Dante, 12-letni ovčar",
-            "issue": "Starejši pes, ne pusti ščetke",
-            "text": "<p>Dante je starejši ovčar in ščetkanja ne prenese. Prašek na hrani je preprosta rešitev — zadaha ni več, lastnica pa mirna.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "story_minGFf",
-        "story_wXAAPn",
-        "story_pikMgy"
-      ],
-      "settings": {
-        "heading": "<p>Dokazi so v rezultatih</p>",
-        "description": "<p>Pomagali smo že več kot 5000+ psom po vsej Evropi. Tukaj je nekaj njihovih zgodb.</p>",
-        "border_color": "#e8d6c5",
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
-    },
     "ingredients": {
       "type": "petsome-ld-ingredients",
       "settings": {
@@ -344,13 +293,12 @@
         "heading": "<p>Sestavine, ki delujejo skozi slino</p>",
         "description": "<p>Vsaka sestavina pokriva svoj del: da se kalcij ne strdi v kamen, da se bakterije težje oprimejo sklenine in da zadah izgine od znotraj. Nič ni notri zato, da bi deklaracija izgledala daljša.</p>",
         "amount_label": "Količina na pakiranje",
-        "anchor_id": "ingredients",
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#fdfbf7",
-        "text_color": "#3b2f2f",
-        "accent_color": "#f8aaa7",
-        "accent_color_dark": "#f47671",
+        "text_color": "#2b3a47",
+        "accent_color": "#9bb8d3",
+        "accent_color_dark": "#87a0b7",
         "secondary_color": "#e8d6c5",
         "light_text_color": "#faf9f6"
       }
@@ -358,61 +306,84 @@
     "faq": {
       "type": "petsome-ld-faq",
       "blocks": {
-        "q_1": {
+        "q1": {
           "type": "question",
           "settings": {
-            "question": "Kdaj lahko pričakujem prve spremembe?",
-            "answer": "<p>Svež zadah večina lastnikov opazi v 7 do 14 dneh. Za vidno razliko na zobeh priporočamo 2 do 3 mesece redne uporabe.</p>"
+            "question": "Kako DentalMix pomaga pri zadahu mojega psa?",
+            "answer": "<p>Zadah nastane zaradi bakterij, ki živijo v oblogah na zobeh in ob dlesni. Zeleni čaj in granatno jabolko pomagata umirjati prav te bakterije, probiotiki pa delujejo od znotraj. Ker se prašek raztopi v slini, pride tudi do zadnjih kočnikov, kjer je vonja največ. Večina lastnikov spremembo opazi v 7 do 14 dneh.</p>"
           }
         },
-        "q_2": {
+        "q2": {
           "type": "question",
           "settings": {
-            "question": "Ali odstrani zobni kamen, ki je že tam?",
-            "answer": "<p>Ne. Star, strjen kamen lahko odstrani samo veterinar. DentalMix poskrbi za to, da se novi ne nabira naprej.</p>"
+            "question": "V čem se prašek razlikuje od dentalnih palčk in priboljškov?",
+            "answer": "<p>Palčka čisti samo tam, kjer pes naključno zagrize, in če jo pogoltne v dveh sekundah, ni naredila nič — razen dodanih kalorij. Prašek ne potrebuje žvečenja. Deluje skozi slino, ki 24 ur na dan obliva vsak zob, tudi zadnje kočnike in linijo ob dlesni, kamor palčka in ščetka ne prideta.</p>"
           }
         },
-        "q_3": {
+        "q3": {
           "type": "question",
           "settings": {
-            "question": "Kako psu dam DentalMix?",
-            "answer": "<p>Odmerek, prilagojen teži psa, potreseš po hrani. Brez ščetke in brez boja — pes samo poje svoj obrok.</p>"
+            "question": "Kako pogosto ga dajem?",
+            "answer": "<p>Enkrat na dan, ob rednem obroku. Odmerek je prilagojen teži psa in je naveden na embalaži — potreseš ga po hrani in pes normalno poje svoj obrok.</p>"
           }
         },
-        "q_4": {
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Kdaj lahko pričakujem vidno čistejše zobe?",
+            "answer": "<p>Prvo se spremeni zadah, običajno v 7 do 14 dneh. Nove obloge se nehajo nabirati v prvem mesecu, vidna razlika na kočnikih pa se pokaže v drugem in tretjem. Star, že strjen kamen ostane — tega odstrani samo veterinar.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "question": "Kaj če ga moj pes noče jesti?",
+            "answer": "<p>Prašek nima izrazitega okusa in se pomeša med obrok, zato ga večina psov pojé, ne da bi opazila. Če je pes izbirčen, ga primešaj v mokro hrano ali v manjši obrok, ki ga zagotovo poje do konca.</p>"
+          }
+        },
+        "q6": {
+          "type": "question",
+          "settings": {
+            "question": "Kako dolgo naj ga uporabljam?",
+            "answer": "<p>DentalMix ni kura, ampak dnevna nega. Deluje, dokler ga pes dobiva — ko ga nehaš dajati, se kalcij iz sline spet začne nabirati. Za oceno učinka priporočamo vsaj 2 do 3 mesece.</p>"
+          }
+        },
+        "q7": {
           "type": "question",
           "settings": {
             "question": "Je primeren za vse pasme in starosti?",
-            "answer": "<p>Primeren je za odrasle pse vseh pasem, tudi za majhne in starejše, ki priboljška ne morejo prežvečiti. Če je psička breja ali doji oziroma pes jemlje zdravila, se posvetuj z veterinarjem.</p>"
+            "answer": "<p>Primeren je za odrasle pse vseh pasem, tudi za majhne in starejše, ki dentalnega priboljška ne morejo prežvečiti — in prav ti ga najbolj potrebujejo. Če je psička breja ali doji oziroma pes jemlje zdravila, se pred uporabo posvetuj z veterinarjem.</p>"
           }
         },
-        "q_5": {
+        "q8": {
           "type": "question",
           "settings": {
-            "question": "Kaj če pri mojem psu ne bo delovalo?",
-            "answer": "<p>Na voljo imaš 90 dni. Če ne boš zadovoljen, nam piši in denar ti vrnemo – tudi če je embalaža že odprta.</p>"
+            "question": "Kaj če psu pomotoma dam preveč?",
+            "answer": "<p>Enkraten večji odmerek ni razlog za skrb; pri občutljivem psu se lahko pokaže kot mehkejše blato, ki mine samo od sebe. Naslednji dan nadaljuj z običajnim odmerkom po teži.</p>"
           }
         }
       },
       "block_order": [
-        "q_1",
-        "q_2",
-        "q_3",
-        "q_4",
-        "q_5"
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8"
       ],
       "settings": {
         "heading": "<p>Pogosta vprašanja</p>",
         "subheading": "",
         "open_first": false,
-        "anchor_id": "faq",
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#faf9f6",
-        "text_color": "#3b2f2f",
+        "text_color": "#2b3a47",
         "card_color": "#ffffff",
         "border_color": "#e7e7e7",
-        "accent_color": "#f47671"
+        "accent_color": "#87a0b7"
       }
     },
     "17869840503b54b2bc": {
@@ -420,7 +391,6 @@
       "blocks": {
         "loox_reviews_loox_agg_section_egjtKf": {
           "type": "shopify://apps/loox-reviews/blocks/loox-agg-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
-          "disabled": true,
           "settings": {
             "reviews_to_display": "",
             "default_tab": "automatic",
@@ -451,13 +421,12 @@
         "text": "<p>Daj psu prvo embalažo in si vzemi čas. Če v 90 dneh ne opaziš razlike – da je zadah blažji, da se nove obloge ne nabirajo in da ti pes spet lahko pride blizu – nam piši in denar ti vrnemo, tudi če je embalaža že odprta.</p>",
         "cta_label": "NAROČI ZDAJ",
         "cta_url": "#offer",
-        "anchor_id": "guarantee",
         "padding_top": 80,
         "padding_bottom": 80,
-        "background_color": "#fcdddc",
-        "text_color": "#3b2f2f",
-        "icon_color": "#f8aaa7",
-        "button_background": "#3b2f2f",
+        "background_color": "#eef3f8",
+        "text_color": "#2b3a47",
+        "icon_color": "#9bb8d3",
+        "button_background": "#2b3a47",
         "button_text_color": "#ffffff"
       }
     },
@@ -513,9 +482,53 @@
         "legal_text": "<p>© Petsome. Vse pravice pridržane.</p>",
         "padding_top": 64,
         "padding_bottom": 64,
-        "background_color": "#3b2f2f",
+        "background_color": "#2b3a47",
         "text_color": "#faf9f6",
         "muted_text_color": "#c9bfbb"
+      }
+    },
+    "before_after": {
+      "type": "petsome-before-after",
+      "blocks": {
+        "story_zam3gr": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260709_191847_47f9a875-2a81-4321-ab1a-0928235e472e.png",
+            "dog_name": "Piki, 9-let",
+            "issue": "Rjavi zobje in hud zadah",
+            "text": "<p>Pikijev zadah je bil neznosen, ščetkanja ni pustil. Po dveh tednih DentalMixa lastnica poroča, da je zadah opazno milejši in da ga spet crklja od blizu. Tudi zobje so bolj beli.</p>"
+          }
+        },
+        "story_VneA77": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_90_23d1c325-2ca9-408a-adbc-21cf722c055a.webp",
+            "dog_name": "Rosa, 11-letna maltežanka",
+            "issue": "Rjave obloge",
+            "text": "<p>Rosa je imela rjave obloge ob dlesnih in skrbela jo je anestezija. Z rednim DentalMixom so zobje videti čistejši, brez postopka pri veterinarju.</p>"
+          }
+        },
+        "story_Prgkhk": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/image00004_db7b8cc8-6684-47d2-980a-96f678167a77.png",
+            "dog_name": "Dante, 12-letni ovčar",
+            "issue": "Starejši pes, ne pusti ščetke",
+            "text": "<p>Dante je starejši ovčar in ščetkanja ne prenese. Prašek na hrani je preprosta rešitev — zadaha ni več, lastnica pa mirna.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "story_zam3gr",
+        "story_VneA77",
+        "story_Prgkhk"
+      ],
+      "settings": {
+        "heading": "<p>Dokazi so v rezultatih</p>",
+        "description": "<p>Pomagali smo že več kot 10.000 psom po vsej Evropi. Tukaj je nekaj njihovih zgodb.</p>",
+        "border_color": "#e8d6c5",
+        "padding_top": 80,
+        "padding_bottom": 80
       }
     }
   },
@@ -525,9 +538,9 @@
     "ld_header",
     "hero",
     "reasons",
+    "before_after",
     "timeline",
     "offer",
-    "petsome_before_after_bEFgxj",
     "ingredients",
     "faq",
     "17869840503b54b2bc",
