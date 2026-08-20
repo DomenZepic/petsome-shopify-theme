@@ -344,7 +344,12 @@
         "padding_top": 80,
         "padding_bottom": 80,
         "margin_top": 0,
-        "margin_bottom": 0
+        "margin_bottom": 0,
+        "hero_label": "OMEJENA POLETNA PONUDBA",
+        "gifts_in_tier": true,
+        "protocol_label": "3-mesečni protokol",
+        "offer_checklist": "3x DentalMix\nPrenosna zložljiva posoda — 9,00 €\nDentalSticks — 14,90 €\nBrezplačna dostava\n90-dnevna garancija vračila denarja",
+        "offer_total_value": "Skupna vrednost 161,60 € — prihraniš 71,60 €"
       }
     },
     "petsome_before_after_bEFgxj": {
