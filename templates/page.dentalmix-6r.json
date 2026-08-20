@@ -113,8 +113,8 @@
         "reason_1": {
           "type": "reason",
           "settings": {
-            "tag": "Dentalne palčke in priboljški ne delujejo!",
-            "title": "DentalMix napade izvor slabega zadaha in rumenih zob",
+            "tag": "1. razlog",
+            "title": "Dentalne palčke in priboljški ne delujejo! DentalMix napade izvor slabega zadaha in rumenih zob.",
             "text": "<p>Večina dentalnih palčk in priboljškov naredi eno stvar: za nekaj ur prekrije vonj. Vzrok ostane nedotaknjen. Palčka čisti samo tam, kjer pes naključno zagrize — morda še sprednje zobe, zadnje kočnike in linijo ob dlesni pa pogosto zgreši. Če jo pogoltne v dveh sekundah, ni naredil nič za zobe, dodal je samo kalorije. DentalMix ne poskuša podrgniti zob od zunaj. Deluje skozi slino, ki 24 ur na dan obliva vsak zob v gobcu, tudi tiste, do katerih ščetka in palčka nikoli ne prideta. Namesto da prikrije posledico, napade tisto, kar zadah in obloge sploh ustvarja.</p>",
             "image": "shopify://shop_images/hf_20260817_203054_072c99f0-3c50-4e70-9ec5-bb4f709b9b5e.png"
           }
@@ -122,8 +122,8 @@
         "reason_2": {
           "type": "reason",
           "settings": {
-            "tag": "Razvito s strokovnjaki, _______",
-            "title": "Dentalni prašek za pse, ki ga je pregledal veterinar",
+            "tag": "2. razlog",
+            "title": "Ustvarili strokovnjaki, _______ — dentalni prašek za pse.",
             "text": "<p>DentalMix ni nastal v marketinškem oddelku. Sestavo je pregledal veterinar, _______, in notri je šlo samo tisto, kar se da zagovarjati. Glavna sestavina so hidrolizirane rjave alge (Ascophyllum nodosum) v deležu 53,5 %, ki delujejo skozi slino. Ob njih stoji natrijev tripolifosfat, snov s priznanim mehanizmom proti zobnemu kamnu. _______. _______. Deklaracija je v celoti izpisana, vsaka sestavina z deležem — brez skritih mešanic in brez patentiranih formul, ki jih nihče ne sme videti.</p>",
             "image": "shopify://shop_images/hf_20260817_203918_b355d81a-2aa3-4f9f-ad01-2e849955b5e2.png"
           }
@@ -131,8 +131,8 @@
         "reason_3": {
           "type": "reason",
           "settings": {
-            "tag": "Edinstvena večdelna dentalna mešanica",
-            "title": "Veže. Razgradi. Osveži.",
+            "tag": "3. razlog",
+            "title": "Edinstvena večdelna dentalna mešanica: Veže. Razgradi. Osveži.",
             "text": "<p>Trije mehanizmi, vsi skozi slino. VEŽE — natrijev tripolifosfat v slini veže prosti kalcij, preden se ta useda v mehko oblogo in jo v 48 do 72 urah spremeni v trden kamen. RAZGRADI — hidrolizirane rjave alge naredijo sklenino bolj gladko, tako da se bakterije težje oprimejo in nove obloge težje nastanejo. OSVEŽI — zeleni čaj in granatno jabolko pomagata umirjati bakterije, odgovorne za neprijeten vonj, probiotiki pa delujejo od znotraj. Temu pravimo Saliva-Activated Defense: prašek se raztopi v slini in gre tja, kamor se ti ne moreš prebiti.</p>",
             "image": "shopify://shop_images/hf_20260817_204031_999dda0c-8d44-4ea1-a65e-a2eee6fb9d24.png"
           }
@@ -140,8 +140,8 @@
         "reason_4": {
           "type": "reason",
           "settings": {
-            "tag": "Vidno čistejši zobje in svež zadah",
-            "title": "V 90 dneh ali manj",
+            "tag": "4. razlog",
+            "title": "Vidno čistejši zobje in svež zadah v 90 dneh ali manj.",
             "text": "<p>Prvo se spremeni zadah, ker se bakterije, ki delajo vonj, umirijo najhitreje — večina lastnikov to opazi v 7 do 14 dneh. V prvem mesecu se nove obloge nehajo nabirati: kar je bilo mehko, se ne strjuje naprej. V drugem in tretjem mesecu je razlika vidna na kočnikih, in prav tam se odloča, ali bo veterinar ob naslednjem pregledu omenil čiščenje pod anestezijo. _______ lastnikov poroča o vidni izboljšavi v 90 dneh. Star, že strjen kamen ostane in ga odstrani samo veterinar — tega ti ne bomo obljubljali. Kar DentalMix naredi, je, da se novi ne nabira naprej.</p>",
             "image": "shopify://shop_images/hf_20260817_204213_b2ff668a-8942-4745-aa0c-0f7e4b127bd0.png"
           }
@@ -149,8 +149,8 @@
         "reason_5": {
           "type": "reason",
           "settings": {
-            "tag": "Zaupa mu _______ lastnikov",
-            "title": "In stoji za njim veterinar",
+            "tag": "5. razlog",
+            "title": "Obožuje ga _______ lastnikov psov, podpirajo ga strokovnjaki.",
             "text": "<p>_______ lastnikov psov že uporablja Petsome v Sloveniji, na Hrvaškem in v Italiji. _______. DentalMix je razvit v Sloveniji in izdelan v Evropski uniji, po evropskih standardih za krmne dodatke. Sestavo je pregledal veterinar, _______. Ne prodajamo obljube, da bo pes jutri imel bele zobe. Prodajamo to, da se stanje neha slabšati — in to je edina stvar, ki jo lahko doma dejansko narediš.</p>",
             "image": "shopify://shop_images/hf_20260817_204401_8fb976c0-813b-474b-ba1f-1ffe804dce15.png"
           }
@@ -158,8 +158,8 @@
         "reason_6": {
           "type": "reason",
           "settings": {
-            "tag": "Okus, ob katerem pes obliže skledo",
-            "title": "Brez ščetke, brez boja, brez odlašanja",
+            "tag": "6. razlog",
+            "title": "Okus, ob katerem pes obliže skledo.",
             "text": "<p>Najboljši izdelek za zobe je tisti, ki ga pes dejansko poje. Prašek nima izrazitega okusa in se pomeša med obrok, zato ga psi večinoma pojedo, ne da bi opazili — tudi tisti, ki dentalne palčke pljunejo ali jih zaradi slabih zob in majhne pasme sploh ne morejo prežvečiti. _______ psov ga sprejme že prvič. Odmerek, prilagojen teži psa, preprosto potreseš po hrani. Zvečer ni več opravila, ki bi ga odlašal: je samo del obroka, ki ga pes tako ali tako poje.</p>",
             "image": "shopify://shop_images/hf_20260817_204744_f3c1e2af-2223-4e98-ad23-929ca1315dbf.png"
           }
@@ -174,7 +174,7 @@
         "reason_6"
       ],
       "settings": {
-        "show_numbers": true,
+        "show_numbers": false,
         "pad_numbers": true,
         "number_start": 1,
         "padding_top": 80,
