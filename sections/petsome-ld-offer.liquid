@@ -557,12 +557,24 @@
           {%- endif -%}
         </div>
 
-        <form
-          action="{{ routes.cart_add_url }}"
-          method="post"
-          enctype="multipart/form-data"
-          class="petsome-ld-offer__form"
+        <product-form
+          id="LdOfferForm-{{ section.id }}"
+          class="product-form"
+          data-section="{{ section.id }}"
+          data-options="{{ offer_product.options | join: ',' }}"
+          data-main="false"
         >
+          <div class="product-form__error-message-wrapper" role="alert" hidden>
+            <span class="product-form__error-message"></span>
+          </div>
+
+          {%- form 'product',
+            offer_product,
+            id: 'ld-offer-form-' | append: section.id,
+            class: 'petsome-ld-offer__form',
+            novalidate: 'novalidate',
+            data-type: 'add-to-cart-form'
+          -%}
           {%- comment -%}
             Kaching engine (hidden by the custom-display CSS). The Kaching Bundles
             APP BLOCK - added by the merchant into this section - is what
@@ -571,8 +583,9 @@
             The bare <kaching-bundle> tag is only a fallback and won't carry deal
             data on its own.
           {%- endcomment -%}
-          {%- if section.blocks.size > 0 -%}
-            {%- for block in section.blocks -%}
+          {%- assign app_blocks = section.blocks | where: 'type', '@app' -%}
+          {%- if app_blocks.size > 0 -%}
+            {%- for block in app_blocks -%}
               {%- render block -%}
             {%- endfor -%}
           {%- else -%}
@@ -644,7 +657,8 @@
               </div>
             {%- endif -%}
           </div>
-        </form>
+          {%- endform -%}
+        </product-form>
 
         {%- assign row_blocks = section.blocks | where: 'type', 'info_row' -%}
         {%- if row_blocks.size > 0 -%}
