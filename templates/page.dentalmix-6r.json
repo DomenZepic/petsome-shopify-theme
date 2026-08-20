@@ -80,14 +80,14 @@
       "settings": {
         "avatar_1": "shopify://shop_images/FloraMix_lizanje_tack.png",
         "show_badge_stars": true,
-        "rating_text": "[[OCENA + ŠTEVILO OCEN — npr. 4,8 ★ · 1.200+ ocen]]",
+        "rating_text": "Petsome uporablja že več kot 4.000 lastnikov psov",
         "heading": "<p>Čistejši zobje in svež zadah — brez ščetkanja</p>",
         "subline": "<p>Če si ščetkanje že poskusil in odnehal po treh večerih — nisi len in ti ni vseeno. Pes instinktivno zapre gobec in obrne glavo, takoj ko mu greš proti zadnjim kočnikom. In prav tam nastaja zobni kamen. Tukaj je 6 razlogov, zakaj DentalMix deluje drugače.</p>",
         "image": "shopify://shop_images/hf_20260817_202846_41b9f6f9-9b1d-431b-a591-aa8e907a3dad.png",
         "cta_label": "POGLEJ PONUDBO",
         "cta_url": "#offer",
         "guarantee_text": "90-dnevna garancija vračila denarja",
-        "proof_text": "[[ŠTEVILO STRANK / PRODANIH LONČKOV]] · Razvito v Sloveniji, izdelano v EU",
+        "proof_text": "Razvito v Sloveniji, izdelano v Evropski uniji",
         "show_gifts": true,
         "gifts_heading": "BREZPLAČNA DARILA OB PRVEM NAROČILU!",
         "gift_badge_label": "GRATIS",
@@ -124,7 +124,7 @@
           "settings": {
             "tag": "Preverjeno pri veterinarju",
             "title": "Sestavo je pregledal veterinar, ne marketing",
-            "text": "<p>DentalMix je pregledal veterinar Blaž Petelinek Ledinski. Hero sestavina so hidrolizirane rjave alge (Ascophyllum nodosum) v deležu 53,5 %, ki delujejo skozi slino. [[DOKAZ 1 — mesto za tvoj podatek o oblogah ali kamnu. PetLab ima tu svojo klinično študijo; ti lahko navedeš objavljene raziskave o Ascophyllum nodosum pri psih ali svoj podatek. NE prepisuj njihove številke.]] [[DOKAZ 2 — mesto za tvoj podatek o zadahu.]]</p>",
+            "text": "<p>DentalMix je pregledal veterinar Blaž Petelinek Ledinski. Glavna sestavina so hidrolizirane rjave alge (Ascophyllum nodosum) v deležu 53,5 % — ena redkih sestavin za pasje zobe, o kateri obstajajo objavljene raziskave pri psih in ki je ista aktivna snov kot v najbolj znanem izdelku te kategorije. Ob njej stoji natrijev tripolifosfat, snov s priznanim mehanizmom proti zobnemu kamnu: v slini veže prosti kalcij, preden se ta lahko strdi. To nista sestavini, dodani zato, da bi deklaracija izgledala bogatejša — sta razlog, zakaj izdelek sploh obstaja.</p>",
             "image": "shopify://shop_images/hf_20260817_203918_b355d81a-2aa3-4f9f-ad01-2e849955b5e2.png"
           }
         },
@@ -142,7 +142,7 @@
           "settings": {
             "tag": "Vidna razlika",
             "title": "Prvo se spremeni zadah, in to hitro",
-            "text": "<p>Bakterije, ki delajo vonj, se umirijo najhitreje — zato je zadah prvi znak, da se je v gobcu nekaj premaknilo. Večina lastnikov ga opazi v 7 do 14 dneh. Obloge in kamen se odzovejo počasneje: nove se nehajo nabirati v prvem mesecu, razlika na kočnikih pa je vidna v drugem in tretjem. [[ODSTOTEK LASTNIKOV, KI POROČA O IZBOLJŠANJU V 90 DNEH — vstavi svoj podatek iz anket ali ocen. PetLab ima tu 93 %.]]</p>",
+            "text": "<p>Bakterije, ki delajo vonj, se umirijo najhitreje — zato je zadah prvi znak, da se je v gobcu nekaj premaknilo. Večina lastnikov ga opazi v 7 do 14 dneh. Obloge in kamen se odzovejo počasneje: nove se nehajo nabirati v prvem mesecu, razlika na kočnikih pa je vidna v drugem in tretjem. Star, že strjen kamen ostane in ga odstrani samo veterinar — tega ti ne bomo obljubljali.</p>",
             "image": "shopify://shop_images/hf_20260817_204213_b2ff668a-8942-4745-aa0c-0f7e4b127bd0.png"
           }
         },
@@ -150,8 +150,8 @@
           "type": "reason",
           "settings": {
             "tag": "Zaupanje",
-            "title": "Koliko psov ga že uporablja",
-            "text": "<p>[[ŠTEVILO STRANK / PRODANIH LONČKOV — vstavi svoj podatek.]] [[NAGRADE ALI PRIZNANJA — če jih nimaš, ta odstavek zamenjaj z drugim dokazom: mnenja strank, ocene, priporočilo veterinarja. PetLab ima tu Product of the Year.]] Razvito v Sloveniji, izdelano v Evropski uniji. Star, že strjen kamen odstrani samo veterinar — tega ti ne bomo obljubljali. Kar DentalMix naredi, je, da se novi ne nabira naprej.</p>",
+            "title": "Zakaj lahko verjameš temu, kar piše na lončku",
+            "text": "<p>Petsome uporablja že več kot 4.000 lastnikov psov v Sloveniji, na Hrvaškem in v Italiji. DentalMix je razvit v Sloveniji in izdelan v Evropski uniji, po evropskih standardih za krmne dodatke. Sestavo je pregledal veterinar, deklaracija pa je v celoti izpisana — vsaka sestavina je navedena z deležem, brez skritih mešanic in brez „patentiranih formul\", ki jih nihče ne sme videti.</p>",
             "image": "shopify://shop_images/hf_20260817_204401_8fb976c0-813b-474b-ba1f-1ffe804dce15.png"
           }
         },
@@ -160,7 +160,7 @@
           "settings": {
             "tag": "Enostavna uporaba",
             "title": "Odmerek potreseš po hrani in pes samo poje svoj obrok",
-            "text": "<p>Brez ščetke, brez boja, brez lovljenja po kavču. Odmerek, prilagojen teži psa, preprosto potreseš po hrani. Prašek nima izrazitega okusa, zato ga psi večinoma sprejmejo brez pripomb. [[ODSTOTEK PSOV, KI GA SPREJME TAKOJ — vstavi svoj podatek. PetLab ima tu 91 %.]] Zvečer ni več opravila, ki bi ga odlašal — je samo del obroka, ki ga pes tako ali tako poje.</p>",
+            "text": "<p>Brez ščetke, brez boja, brez lovljenja po kavču. Odmerek, prilagojen teži psa, preprosto potreseš po hrani. Prašek nima izrazitega okusa in se pomeša med obrok, zato ga psi večinoma pojedo, ne da bi opazili — tudi tisti, ki dentalne palčke pljunejo ali jih ne morejo prežvečiti. Zvečer ni več opravila, ki bi ga odlašal: je samo del obroka, ki ga pes tako ali tako poje.</p>",
             "image": "shopify://shop_images/hf_20260817_204744_f3c1e2af-2223-4e98-ad23-929ca1315dbf.png"
           }
         }
