@@ -198,7 +198,7 @@
         "step_2": {
           "type": "step",
           "settings": {
-            "badge_text": "MESEC",
+            "badge_text": "1. MESEC",
             "text": "<p>Nove obloge se ne nabirajo več. Kar je bilo mehko, se ne strjuje naprej, in zobje ostanejo takšni, kot so.</p>"
           }
         },
