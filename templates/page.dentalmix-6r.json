@@ -291,6 +291,50 @@
         "margin_bottom": 0
       }
     },
+    "petsome_before_after_bEFgxj": {
+      "type": "petsome-before-after",
+      "blocks": {
+        "story_minGFf": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/hf_20260709_191847_47f9a875-2a81-4321-ab1a-0928235e472e.png",
+            "dog_name": "Piki, 9-let",
+            "issue": "Rjavi zobje in hud zadah",
+            "text": "<p>Pikijev zadah je bil neznosen, ščetkanja ni pustil. Po dveh tednih DentalMixa lastnica poroča, da je zadah opazno milejši in da ga spet crklja od blizu. Tudi zobje so bolj beli.</p>"
+          }
+        },
+        "story_wXAAPn": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_90_23d1c325-2ca9-408a-adbc-21cf722c055a.webp",
+            "dog_name": "Rosa, 11-letna maltežanka",
+            "issue": "Rjave obloge",
+            "text": "<p>Rosa je imela rjave obloge ob dlesnih in skrbela jo je anestezija. Z rednim DentalMixom so zobje videti čistejši, brez postopka pri veterinarju.</p>"
+          }
+        },
+        "story_pikMgy": {
+          "type": "story",
+          "settings": {
+            "image": "shopify://shop_images/image00004_db7b8cc8-6684-47d2-980a-96f678167a77.png",
+            "dog_name": "Dante, 12-letni ovčar",
+            "issue": "Starejši pes, ne pusti ščetke",
+            "text": "<p>Dante je starejši ovčar in ščetkanja ne prenese. Prašek na hrani je preprosta rešitev — zadaha ni več, lastnica pa mirna.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "story_minGFf",
+        "story_wXAAPn",
+        "story_pikMgy"
+      ],
+      "settings": {
+        "heading": "<p>Dokazi so v rezultatih</p>",
+        "description": "<p>Pomagali smo že več kot 5000+ psom po vsej Evropi. Tukaj je nekaj njihovih zgodb.</p>",
+        "border_color": "#e8d6c5",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
     "ingredients": {
       "type": "petsome-ld-ingredients",
       "settings": {
@@ -480,6 +524,7 @@
     "reasons",
     "timeline",
     "offer",
+    "petsome_before_after_bEFgxj",
     "ingredients",
     "faq",
     "17869840503b54b2bc",
