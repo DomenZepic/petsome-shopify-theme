@@ -53,6 +53,7 @@
         "gift_1": {
           "type": "gift",
           "settings": {
+            "icon": "shopify://shop_images/hf_20260717_164541_5f9f0a09-7342-414c-b5a1-38000374b199.png",
             "label": "Prenosna zložljiva posoda",
             "price": "9,00 €"
           }
@@ -60,6 +61,7 @@
         "gift_2": {
           "type": "gift",
           "settings": {
+            "icon": "shopify://shop_images/hf_20260709_194728_f15d5b24-84c3-48bd-a64e-0545ecd72289.png",
             "label": "DentalSticks",
             "price": "14,90 €"
           }
@@ -80,14 +82,14 @@
       "settings": {
         "avatar_1": "shopify://shop_images/FloraMix_lizanje_tack.png",
         "show_badge_stars": true,
-        "rating_text": "★★★★★  _______ ocen · _______ lastnikov psov",
-        "heading": "<p>6 razlogov, zakaj _______ lastnikov uporablja DentalMix za čistejše zobe in svež zadah — brez ščetkanja</p>",
-        "subline": "<p>Zasnovan tako, da napade vzrok slabega zadaha in zobnega kamna — ne da bi ga samo prikril. Sestavo je pregledal veterinar, _______, uporaba pa je preprosta in vsakodnevna.</p>",
+        "rating_text": "★★★★★  1000 + ocen · 5000+ lastnikov psov",
+        "heading": "<p>6 razlogov, zakaj 5000+ lastnikov uporablja DentalMix za čistejše zobe in svež zadah — brez ščetkanja</p>",
+        "subline": "<p>Zasnovan tako, da napade vzrok slabega zadaha in zobnega kamna — ne da bi ga samo prikril. Razvito z veterinarji, VOHC klinično dokazana sestavina, uporaba pa je preprosta in vsakodnevna.</p>",
         "image": "shopify://shop_images/hf_20260817_202846_41b9f6f9-9b1d-431b-a591-aa8e907a3dad.png",
         "cta_label": "NAROČI ZDAJ",
         "cta_url": "#offer",
         "guarantee_text": "90-dnevna garancija vračila denarja",
-        "proof_text": "_______ prodanih lončkov · Razvito v Sloveniji, izdelano v EU",
+        "proof_text": "5000+ prodanih lončkov · Razvito v Sloveniji, izdelano v EU",
         "show_gifts": true,
         "gifts_heading": "BREZPLAČNA DARILA OB PRVEM NAROČILU!",
         "gift_badge_label": "GRATIS",
@@ -177,6 +179,7 @@
         "show_numbers": false,
         "pad_numbers": true,
         "number_start": 1,
+        "anchor_id": "reasons",
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#fdfbf7",
@@ -221,6 +224,7 @@
         "subheading": "<p>Zadah se odzove prvi, obloge počasneje, kamen najpočasneje. Takole večina lastnikov opiše prve tri mesece.</p>",
         "image": "shopify://shop_images/hf_20260713_165719_3d2d789b-0b91-400e-b9ae-5854d33e0906.png",
         "footnote": "<p>Navedeno je tisto, kar opisuje večina lastnikov, vsak pes pa je drugačen. DentalMix je prehransko dopolnilo in ne zdravilo. Star, že strjen zobni kamen lahko odstrani samo veterinar.</p>",
+        "anchor_id": "timeline",
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#fcdddc",
@@ -293,6 +297,7 @@
         "heading": "<p>Sestavine, ki delujejo skozi slino</p>",
         "description": "<p>Vsaka sestavina pokriva svoj del: da se kalcij ne strdi v kamen, da se bakterije težje oprimejo sklenine in da zadah izgine od znotraj. Nič ni notri zato, da bi deklaracija izgledala daljša.</p>",
         "amount_label": "Količina na pakiranje",
+        "anchor_id": "ingredients",
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#fdfbf7",
@@ -353,6 +358,7 @@
         "heading": "<p>Pogosta vprašanja</p>",
         "subheading": "",
         "open_first": false,
+        "anchor_id": "faq",
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#faf9f6",
@@ -397,6 +403,7 @@
         "text": "<p>Daj psu prvo embalažo in si vzemi čas. Če v 90 dneh ne opaziš razlike – da je zadah blažji, da se nove obloge ne nabirajo in da ti pes spet lahko pride blizu – nam piši in denar ti vrnemo, tudi če je embalaža že odprta.</p>",
         "cta_label": "NAROČI ZDAJ",
         "cta_url": "#offer",
+        "anchor_id": "guarantee",
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#fcdddc",
