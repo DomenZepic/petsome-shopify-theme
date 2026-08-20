@@ -192,10 +192,78 @@
   #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__title {
     font-family: var(--font-heading-family);
     font-weight: 800;
-    font-size: 4rem;
-    line-height: 1.1;
+    font-size: 3.9rem;
+    line-height: 1.15;
     margin: 0;
     word-break: break-word;
+  }
+
+  /* ---------- Blok s produktne strani ---------- */
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__stars {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 10px;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__stars svg {
+    width: 15px;
+    height: 15px;
+    display: block;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__stars-icons {
+    display: flex;
+    gap: 2px;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__stars-label {
+    font-size: 1.4rem;
+    line-height: 1;
+    opacity: .85;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 14px 0 0;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__tag {
+    background: {{ section.settings.tag_color | default: '#9bb8d3' }};
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1;
+    padding: 9px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__checks {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__check {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 1.6rem;
+    line-height: 1.35;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__check svg {
+    flex: 0 0 19px;
+    width: 19px;
+    height: 19px;
+    margin-top: 1px;
   }
 
   #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__description {
@@ -446,7 +514,7 @@
     }
 
     #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__title {
-      font-size: 3.2rem;
+      font-size: 2.8rem;
     }
 
     #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__atc {
@@ -547,8 +615,48 @@
               </div>
             {%- endif -%}
 
+            {%- if section.settings.rating_label != blank -%}
+              <div class="petsome-ld-offer__stars">
+                <div class="petsome-ld-offer__stars-icons">
+                  {%- for i in (1..5) -%}
+                    <svg viewBox="0 0 24 24" fill="{{ section.settings.star_color | default: '#ffcc00' }}" aria-hidden="true">
+                      <path d="M12 2.2l2.9 6.05 6.6.86-4.85 4.55 1.23 6.54L12 17.1l-5.88 3.1 1.23-6.54L2.5 9.11l6.6-.86L12 2.2z"/>
+                    </svg>
+                  {%- endfor -%}
+                </div>
+                <span class="petsome-ld-offer__stars-label">{{ section.settings.rating_label }}</span>
+              </div>
+            {%- endif -%}
+
             {%- if offer_title != blank -%}
               <h2 class="petsome-ld-offer__title">{{ offer_title }}</h2>
+            {%- endif -%}
+
+            {%- if section.settings.tags != blank -%}
+              {%- assign tag_list = section.settings.tags | split: '|' -%}
+              <div class="petsome-ld-offer__tags">
+                {%- for t in tag_list -%}
+                  {%- assign tt = t | strip -%}
+                  {%- if tt != blank -%}<span class="petsome-ld-offer__tag">{{ tt }}</span>{%- endif -%}
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+
+            {%- if section.settings.checks != blank -%}
+              {%- assign check_lines = section.settings.checks | strip_html | newline_to_br | split: '<br />' -%}
+              <ul class="petsome-ld-offer__checks">
+                {%- for line in check_lines -%}
+                  {%- assign cl = line | strip -%}
+                  {%- if cl != blank -%}
+                    <li class="petsome-ld-offer__check">
+                      <svg viewBox="0 0 24 24" fill="{{ section.settings.check_color | default: '#121212' }}" aria-hidden="true">
+                        <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm-1.2 14.4l-4.2-4.2 1.7-1.7 2.5 2.5 5.4-5.4 1.7 1.7-7.1 7.1z"/>
+                      </svg>
+                      <span>{{ cl }}</span>
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
             {%- endif -%}
           </div>
 
@@ -824,6 +932,46 @@
       "label": "Disclaimer text",
       "info": "Shown below the package tiles. Leave blank to hide.",
       "default": "<p>*First changes are visible in 2-3 weeks. For best results we recommend 2-3 months of use.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Blok s produktne strani"
+    },
+    {
+      "type": "text",
+      "id": "rating_label",
+      "label": "Besedilo ob zvezdicah",
+      "info": "Pusti prazno, da se zvezdice ne prikazejo."
+    },
+    {
+      "type": "color",
+      "id": "star_color",
+      "label": "Barva zvezdic",
+      "default": "#ffcc00"
+    },
+    {
+      "type": "text",
+      "id": "tags",
+      "label": "Oznake",
+      "info": "Loci jih z znakom pipe, npr: Proti zadahu | Za cistejse zobe"
+    },
+    {
+      "type": "color",
+      "id": "tag_color",
+      "label": "Barva oznak",
+      "default": "#9bb8d3"
+    },
+    {
+      "type": "textarea",
+      "id": "checks",
+      "label": "Alineje s kljukico",
+      "info": "Ena alineja na vrstico."
+    },
+    {
+      "type": "color",
+      "id": "check_color",
+      "label": "Barva kljukic",
+      "default": "#121212"
     },
     {
       "type": "text",
