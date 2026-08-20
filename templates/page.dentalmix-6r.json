@@ -69,6 +69,7 @@
         "gift_3": {
           "type": "gift",
           "settings": {
+            "icon": "shopify://shop_images/851188-1-ecommerce-shipping-box-sendbox-packhelp-21-04-2022-gsps-19518-png.avif",
             "label": "Brezplačna dostava",
             "price": ""
           }
