@@ -351,7 +351,13 @@
         "padding_top": 80,
         "padding_bottom": 80,
         "margin_top": 0,
-        "margin_bottom": 0
+        "margin_bottom": 0,
+        "rating_label": "4.8 / 5 (2.000+ zadovoljnih lastnikov)",
+        "star_color": "#ffcc00",
+        "tags": "Proti zadahu | Za čistejše zobe | Veterinarsko podprto",
+        "tag_color": "#9bb8d3",
+        "checks": "Pomaga zmanjšati neprijeten zadah\nPomaga zmanjšati vidne zobne oblog in nastajanje zobnega kamna\nZnanstveno zasnovana formula z močnim kompleksom aktivnih sestavin\nZa čistejše zobe in vsakodnevno nego ustne votline\nBrez ščetkanja in brez anestezije",
+        "check_color": "#121212"
       }
     },
     "petsome_before_after_bEFgxj": {
