@@ -32,7 +32,7 @@
         "padding_bottom": 12,
         "background_color": "#3b2f2f",
         "text_color": "#faf9f6",
-        "pill_color": "#f8aaa7",
+        "pill_color": "#9bb8d3",
         "pill_text_color": "#3b2f2f"
       }
     },
@@ -105,10 +105,10 @@
         "star_color": "#ff9a0a",
         "button_background": "#3b2f2f",
         "button_text_color": "#ffffff",
-        "accent_color": "#f8aaa7",
+        "accent_color": "#9bb8d3",
         "gift_tile_color": "#f1e1d5",
         "gift_tile_border_color": "#b7b8b8",
-        "gift_badge_color": "#f47671",
+        "gift_badge_color": "#87a0b7",
         "gift_badge_text_color": "#ffffff"
       }
     },
@@ -187,7 +187,7 @@
         "padding_bottom": 80,
         "background_color": "#fdfbf7",
         "text_color": "#3b2f2f",
-        "accent_color": "#f04842",
+        "accent_color": "#87a0b7",
         "divider_color": "#565858"
       }
     },
@@ -226,14 +226,14 @@
         "heading": "<p>Prvih 90 dni, korak za korakom</p>",
         "subheading": "<p>Zadah se odzove prvi, obloge počasneje, kamen najpočasneje. Takole večina lastnikov opiše prve tri mesece.</p>",
         "image": "shopify://shop_images/05_zobje.jpg",
-        "footnote": "<p>Navedeno je tisto, kar opisuje večina lastnikov, vsak pes pa je drugačen. DentalMix je prehransko dopolnilo in ne zdravilo.</p>",
+        "footnote": "<p>Navedeno je tisto, kar opisuje večina lastnikov, vsak pes pa je drugačen. DentalMix je prehransko dopolnilo in ne zdravilo. Star, že strjen zobni kamen lahko odstrani samo veterinar.</p>",
         "anchor_id": "timeline",
         "padding_top": 80,
         "padding_bottom": 80,
-        "background_color": "#fcdddc",
+        "background_color": "#eaf1f6",
         "text_color": "#3b2f2f",
-        "accent_color": "#f8aaa7",
-        "accent_color_dark": "#f47671",
+        "accent_color": "#9bb8d3",
+        "accent_color_dark": "#87a0b7",
         "line_color": "#fac3c1",
         "card_color": "#ffffff",
         "footnote_color": "#565858"
@@ -272,11 +272,11 @@
         "tier_2_style": "recommended",
         "tier_3_style": "best",
         "tier_4_style": "none",
-        "background_color": "#fef6f6",
+        "background_color": "#f6fafc",
         "text_color": "#3b2f2f",
         "muted_text_color": "#565858",
-        "accent_color": "#f8aaa7",
-        "accent_color_dark": "#f47671",
+        "accent_color": "#9bb8d3",
+        "accent_color_dark": "#87a0b7",
         "secondary_color": "#e8d6c5",
         "light_text_color": "#faf9f6",
         "atc_background": "#3b2f2f",
@@ -349,8 +349,8 @@
         "padding_bottom": 80,
         "background_color": "#fdfbf7",
         "text_color": "#3b2f2f",
-        "accent_color": "#f8aaa7",
-        "accent_color_dark": "#f47671",
+        "accent_color": "#9bb8d3",
+        "accent_color_dark": "#87a0b7",
         "secondary_color": "#e8d6c5",
         "light_text_color": "#faf9f6"
       }
@@ -412,7 +412,7 @@
         "text_color": "#3b2f2f",
         "card_color": "#ffffff",
         "border_color": "#e7e7e7",
-        "accent_color": "#f47671"
+        "accent_color": "#87a0b7"
       }
     },
     "17869840503b54b2bc": {
@@ -454,9 +454,9 @@
         "anchor_id": "guarantee",
         "padding_top": 80,
         "padding_bottom": 80,
-        "background_color": "#fcdddc",
+        "background_color": "#eaf1f6",
         "text_color": "#3b2f2f",
-        "icon_color": "#f8aaa7",
+        "icon_color": "#9bb8d3",
         "button_background": "#3b2f2f",
         "button_text_color": "#ffffff"
       }
