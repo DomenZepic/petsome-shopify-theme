@@ -20,8 +20,8 @@
     "offer_bar": {
       "type": "petsome-ld-offer-bar",
       "settings": {
-        "headline": "🎂🎈 Petsome praznuje rojstni dan 🎈🎂",
-        "subline": "Do 70 % popusta + brezplačna darila",
+        "headline": "2+1 GRATIS — SAMO DANES",
+        "subline": "3 za 90 € · vrednost 161,60 € · prihraniš 71,60 €",
         "link": "",
         "show_timer": true,
         "timezone": "Europe/Ljubljana",
@@ -53,15 +53,15 @@
         "gift_1": {
           "type": "gift",
           "settings": {
-            "label": "2x e-knjiga",
-            "price": "35,90 €"
+            "label": "Prenosna zložljiva posoda",
+            "price": "9,00 €"
           }
         },
         "gift_2": {
           "type": "gift",
           "settings": {
-            "label": "Skrivni izdelek",
-            "price": "14,99 €"
+            "label": "DentalSticks",
+            "price": "14,90 €"
           }
         },
         "gift_3": {
@@ -86,7 +86,7 @@
         "image": "shopify://shop_images/hf_20260817_202846_41b9f6f9-9b1d-431b-a591-aa8e907a3dad.png",
         "cta_label": "OHRANITE GA V IGRI",
         "cta_url": "#offer",
-        "guarantee_text": "60-dnevna garancija vračila denarja",
+        "guarantee_text": "90-dnevna garancija vračila denarja",
         "proof_text": "Več kot 10.000 zadovoljnih strank",
         "show_gifts": true,
         "gifts_heading": "BREZPLAČNA DARILA OB PRVEM NAROČILU!",
@@ -331,7 +331,7 @@
           "type": "question",
           "settings": {
             "question": "Kaj če pri mojem psu ne bo delovalo?",
-            "answer": "<p>Na voljo imate 60 dni. Če ne boste zadovoljni, nam pišite in denar vam vrnemo – tudi če je embalaža že odprta.</p>"
+            "answer": "<p>Na voljo imate 90 dni. Če ne boste zadovoljni, nam pišite in denar vam vrnemo – tudi če je embalaža že odprta.</p>"
           }
         },
         "q_5": {
@@ -393,8 +393,8 @@
       "settings": {
         "show_icon": true,
         "icon": "verified_user",
-        "heading": "<p>MobiMix preizkusite brez tveganja 60 dni</p>",
-        "text": "<p>Dajte psu prvo embalažo in si vzemite čas. Če v 60 dneh ne boste opazili razlike – da lažje vstane, dlje zdrži na sprehodu ali se spet brez premisleka zažene po stopnicah – nam pišite in denar vam vrnemo. Tudi če je embalaža prazna.</p>",
+        "heading": "<p>MobiMix preizkusite brez tveganja 90 dni</p>",
+        "text": "<p>Dajte psu prvo embalažo in si vzemite čas. Če v 90 dneh ne boste opazili razlike – da lažje vstane, dlje zdrži na sprehodu ali se spet brez premisleka zažene po stopnicah – nam pišite in denar vam vrnemo. Tudi če je embalaža prazna.</p>",
         "cta_label": "OHRANITE GA V IGRI",
         "cta_url": "#offer",
         "padding_top": 80,
