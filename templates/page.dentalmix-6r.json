@@ -53,7 +53,6 @@
         "gift_1": {
           "type": "gift",
           "settings": {
-            "icon": "shopify://shop_images/hf_20260717_164541_5f9f0a09-7342-414c-b5a1-38000374b199.png",
             "label": "Prenosna zložljiva posoda",
             "price": "9,00 €"
           }
@@ -61,7 +60,6 @@
         "gift_2": {
           "type": "gift",
           "settings": {
-            "icon": "shopify://shop_images/hf_20260709_194728_f15d5b24-84c3-48bd-a64e-0545ecd72289.png",
             "label": "DentalSticks",
             "price": "14,90 €"
           }
@@ -82,14 +80,14 @@
       "settings": {
         "avatar_1": "shopify://shop_images/FloraMix_lizanje_tack.png",
         "show_badge_stars": true,
-        "rating_text": "★★★★★  1000 + ocen · 5000+ lastnikov psov",
-        "heading": "<p>6 razlogov, zakaj 5000+ lastnikov uporablja DentalMix za čistejše zobe in svež zadah — brez ščetkanja</p>",
-        "subline": "<p>Zasnovan tako, da napade vzrok slabega zadaha in zobnega kamna — ne da bi ga samo prikril. Razvito z veterinarji, VOHC klinično dokazana sestavina, uporaba pa je preprosta in vsakodnevna.</p>",
+        "rating_text": "★★★★★  _______ ocen · _______ lastnikov psov",
+        "heading": "<p>6 razlogov, zakaj _______ lastnikov uporablja DentalMix za čistejše zobe in svež zadah — brez ščetkanja</p>",
+        "subline": "<p>Zasnovan tako, da napade vzrok slabega zadaha in zobnega kamna, ne da bi ga samo prikril. Pregledan pri veterinarju, _______, in preprost za vsakodnevno uporabo — odmerek potreseš po hrani, pes samo poje svoj obrok.</p>",
         "image": "shopify://shop_images/hf_20260817_202846_41b9f6f9-9b1d-431b-a591-aa8e907a3dad.png",
         "cta_label": "NAROČI ZDAJ",
         "cta_url": "#offer",
         "guarantee_text": "90-dnevna garancija vračila denarja",
-        "proof_text": "5000+ prodanih lončkov · Razvito v Sloveniji, izdelano v EU",
+        "proof_text": "_______ prodanih lončkov · Razvito v Sloveniji, izdelano v EU",
         "show_gifts": true,
         "gifts_heading": "BREZPLAČNA DARILA OB PRVEM NAROČILU!",
         "gift_badge_label": "GRATIS",
@@ -117,7 +115,7 @@
           "settings": {
             "tag": "1. razlog",
             "title": "Dentalne palčke in priboljški ne delujejo! DentalMix napade izvor slabega zadaha in rumenih zob.",
-            "text": "<p>Večina dentalnih palčk in priboljškov naredi eno stvar: za nekaj ur prekrije vonj. Vzrok ostane nedotaknjen. Palčka čisti samo tam, kjer pes naključno zagrize — morda še sprednje zobe, zadnje kočnike in linijo ob dlesni pa pogosto zgreši. Če jo pogoltne v dveh sekundah, ni naredil nič za zobe, dodal je samo kalorije. DentalMix ne poskuša podrgniti zob od zunaj. Deluje skozi slino, ki 24 ur na dan obliva vsak zob v gobcu, tudi tiste, do katerih ščetka in palčka nikoli ne prideta. Namesto da prikrije posledico, napade tisto, kar zadah in obloge sploh ustvarja.</p>",
+            "text": "<p>Dentalne palčke in priboljški prekrijejo vonj za nekaj ur, vzroka pa se ne dotaknejo. DentalMix deluje skozi slino, _______, in napade prosti kalcij, preden se strdi v kamen. Rezultat so vidno čistejši zobje in svež zadah — brez ščetke in brez boja.</p>",
             "image": "shopify://shop_images/hf_20260817_203054_072c99f0-3c50-4e70-9ec5-bb4f709b9b5e.png"
           }
         },
@@ -126,7 +124,7 @@
           "settings": {
             "tag": "2. razlog",
             "title": "Ustvarili strokovnjaki, _______ — dentalni prašek za pse.",
-            "text": "<p>DentalMix ni nastal v marketinškem oddelku. Sestavo je pregledal veterinar, _______, in notri je šlo samo tisto, kar se da zagovarjati. Glavna sestavina so hidrolizirane rjave alge (Ascophyllum nodosum) v deležu 53,5 %, ki delujejo skozi slino. Ob njih stoji natrijev tripolifosfat, snov s priznanim mehanizmom proti zobnemu kamnu. _______. _______. Deklaracija je v celoti izpisana, vsaka sestavina z deležem — brez skritih mešanic in brez patentiranih formul, ki jih nihče ne sme videti.</p>",
+            "text": "<p>DentalMix je razvit s strokovnjaki in pregledan pri veterinarju, _______. Hidrolizirane rjave alge v deležu 53,5 % in natrijev tripolifosfat s priznanim mehanizmom proti zobnemu kamnu sta glavni aktivni sestavini, _______. Skupaj pomenita manj novih oblog, manj kamna in svežji zadah, brez posega pri veterinarju.</p>",
             "image": "shopify://shop_images/hf_20260817_203918_b355d81a-2aa3-4f9f-ad01-2e849955b5e2.png"
           }
         },
@@ -135,7 +133,7 @@
           "settings": {
             "tag": "3. razlog",
             "title": "Edinstvena večdelna dentalna mešanica: Veže. Razgradi. Osveži.",
-            "text": "<p>Trije mehanizmi, vsi skozi slino. VEŽE — natrijev tripolifosfat v slini veže prosti kalcij, preden se ta useda v mehko oblogo in jo v 48 do 72 urah spremeni v trden kamen. RAZGRADI — hidrolizirane rjave alge naredijo sklenino bolj gladko, tako da se bakterije težje oprimejo in nove obloge težje nastanejo. OSVEŽI — zeleni čaj in granatno jabolko pomagata umirjati bakterije, odgovorne za neprijeten vonj, probiotiki pa delujejo od znotraj. Temu pravimo Saliva-Activated Defense: prašek se raztopi v slini in gre tja, kamor se ti ne moreš prebiti.</p>",
+            "text": "<p>Tri poti hkrati, vse skozi slino.<br><strong>VEŽE</strong> — natrijev tripolifosfat veže prosti kalcij, preden se useda v oblogo.<br><strong>RAZGRADI</strong> — rjave alge naredijo sklenino gladko, da se bakterije težje oprimejo.<br><strong>OSVEŽI</strong> — zeleni čaj, granatno jabolko in probiotiki umirjajo bakterije, ki delajo vonj.</p>",
             "image": "shopify://shop_images/hf_20260817_204031_999dda0c-8d44-4ea1-a65e-a2eee6fb9d24.png"
           }
         },
@@ -144,7 +142,7 @@
           "settings": {
             "tag": "4. razlog",
             "title": "Vidno čistejši zobje in svež zadah v 90 dneh ali manj.",
-            "text": "<p>Prvo se spremeni zadah, ker se bakterije, ki delajo vonj, umirijo najhitreje — večina lastnikov to opazi v 7 do 14 dneh. V prvem mesecu se nove obloge nehajo nabirati: kar je bilo mehko, se ne strjuje naprej. V drugem in tretjem mesecu je razlika vidna na kočnikih, in prav tam se odloča, ali bo veterinar ob naslednjem pregledu omenil čiščenje pod anestezijo. _______ lastnikov poroča o vidni izboljšavi v 90 dneh. Star, že strjen kamen ostane in ga odstrani samo veterinar — tega ti ne bomo obljubljali. Kar DentalMix naredi, je, da se novi ne nabira naprej.</p>",
+            "text": "<p>Ščetkanje odpade po treh večerih, palčko pes pogoltne v dveh sekundah — DentalMix pa samo potreseš po hrani in deluje 24 ur na dan. Svež zadah večina lastnikov opazi v 7 do 14 dneh, _______ pa jih poroča o vidno čistejših zobeh v 90 dneh.</p>",
             "image": "shopify://shop_images/hf_20260817_204213_b2ff668a-8942-4745-aa0c-0f7e4b127bd0.png"
           }
         },
@@ -153,7 +151,7 @@
           "settings": {
             "tag": "5. razlog",
             "title": "Obožuje ga _______ lastnikov psov, podpirajo ga strokovnjaki.",
-            "text": "<p>_______ lastnikov psov že uporablja Petsome v Sloveniji, na Hrvaškem in v Italiji. _______. DentalMix je razvit v Sloveniji in izdelan v Evropski uniji, po evropskih standardih za krmne dodatke. Sestavo je pregledal veterinar, _______. Ne prodajamo obljube, da bo pes jutri imel bele zobe. Prodajamo to, da se stanje neha slabšati — in to je edina stvar, ki jo lahko doma dejansko narediš.</p>",
+            "text": "<p>Petsome uporablja že _______ lastnikov psov v Sloveniji, na Hrvaškem in v Italiji. _______, izdelek pa je razvit v Sloveniji in izdelan v Evropski uniji.</p>",
             "image": "shopify://shop_images/hf_20260817_204401_8fb976c0-813b-474b-ba1f-1ffe804dce15.png"
           }
         },
@@ -162,7 +160,7 @@
           "settings": {
             "tag": "6. razlog",
             "title": "Okus, ob katerem pes obliže skledo.",
-            "text": "<p>Najboljši izdelek za zobe je tisti, ki ga pes dejansko poje. Prašek nima izrazitega okusa in se pomeša med obrok, zato ga psi večinoma pojedo, ne da bi opazili — tudi tisti, ki dentalne palčke pljunejo ali jih zaradi slabih zob in majhne pasme sploh ne morejo prežvečiti. _______ psov ga sprejme že prvič. Odmerek, prilagojen teži psa, preprosto potreseš po hrani. Zvečer ni več opravila, ki bi ga odlašal: je samo del obroka, ki ga pes tako ali tako poje.</p>",
+            "text": "<p>Prašek nima izrazitega okusa in se pomeša med obrok, zato ga pojedo tudi psi, ki dentalne palčke pljunejo ali jih ne morejo prežvečiti. _______ psov ga sprejme že prvič, brez skrivanja in brez pregovarjanja.</p>",
             "image": "shopify://shop_images/hf_20260817_204744_f3c1e2af-2223-4e98-ad23-929ca1315dbf.png"
           }
         }
@@ -179,7 +177,6 @@
         "show_numbers": false,
         "pad_numbers": true,
         "number_start": 1,
-        "anchor_id": "reasons",
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#fdfbf7",
@@ -224,7 +221,6 @@
         "subheading": "<p>Zadah se odzove prvi, obloge počasneje, kamen najpočasneje. Takole večina lastnikov opiše prve tri mesece.</p>",
         "image": "shopify://shop_images/hf_20260713_165719_3d2d789b-0b91-400e-b9ae-5854d33e0906.png",
         "footnote": "<p>Navedeno je tisto, kar opisuje večina lastnikov, vsak pes pa je drugačen. DentalMix je prehransko dopolnilo in ne zdravilo. Star, že strjen zobni kamen lahko odstrani samo veterinar.</p>",
-        "anchor_id": "timeline",
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#fcdddc",
@@ -297,7 +293,6 @@
         "heading": "<p>Sestavine, ki delujejo skozi slino</p>",
         "description": "<p>Vsaka sestavina pokriva svoj del: da se kalcij ne strdi v kamen, da se bakterije težje oprimejo sklenine in da zadah izgine od znotraj. Nič ni notri zato, da bi deklaracija izgledala daljša.</p>",
         "amount_label": "Količina na pakiranje",
-        "anchor_id": "ingredients",
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#fdfbf7",
@@ -358,7 +353,6 @@
         "heading": "<p>Pogosta vprašanja</p>",
         "subheading": "",
         "open_first": false,
-        "anchor_id": "faq",
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#faf9f6",
@@ -403,7 +397,6 @@
         "text": "<p>Daj psu prvo embalažo in si vzemi čas. Če v 90 dneh ne opaziš razlike – da je zadah blažji, da se nove obloge ne nabirajo in da ti pes spet lahko pride blizu – nam piši in denar ti vrnemo, tudi če je embalaža že odprta.</p>",
         "cta_label": "NAROČI ZDAJ",
         "cta_url": "#offer",
-        "anchor_id": "guarantee",
         "padding_top": 80,
         "padding_bottom": 80,
         "background_color": "#fcdddc",
