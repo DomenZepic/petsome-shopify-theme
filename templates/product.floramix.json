@@ -619,7 +619,7 @@
                 "breaks_border_width": 2,
                 "breaks_color_scheme": "accent-1",
                 "breaks_vertical_items_align": "flex-start",
-                "breaks_badges": "[empty], Most popular, [empty]",
+                "breaks_badges": "[empty], [empty], [empty]",
                 "breaks_badge_style": "1",
                 "breaks_badge_color": "accent-1",
                 "breaks_displayed_images": "none",
