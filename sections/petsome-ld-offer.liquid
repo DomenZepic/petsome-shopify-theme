@@ -274,6 +274,56 @@
     text-decoration: line-through;
   }
 
+  /* ---------- Zlozljive vrstice pod nakupom ---------- */
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__rows {
+    margin-top: 22px;
+    border-top: 1px solid rgba(0,0,0,.10);
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__row {
+    border-bottom: 1px solid rgba(0,0,0,.10);
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__row > summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 16px 2px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__row > summary::-webkit-details-marker { display: none; }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__row > summary::after {
+    content: '';
+    flex: 0 0 9px;
+    height: 9px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg);
+    transition: transform .2s ease;
+    opacity: .55;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__row[open] > summary::after {
+    transform: rotate(45deg);
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__row-body {
+    padding: 0 2px 18px;
+    font-size: .96rem;
+    line-height: 1.55;
+    opacity: .9;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__row-body p { margin: 0 0 .7em; }
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__row-body p:last-child { margin-bottom: 0; }
+
   /* ---------- Delivery / ATC / payments ---------- */
 
   #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__actions {
@@ -592,6 +642,18 @@
             {%- endif -%}
           </div>
         </form>
+
+        {%- assign row_blocks = section.blocks | where: 'type', 'info_row' -%}
+        {%- if row_blocks.size > 0 -%}
+          <div class="petsome-ld-offer__rows">
+            {%- for b in row_blocks -%}
+              <details class="petsome-ld-offer__row"{% if b.settings.open %} open{% endif %} {{ b.shopify_attributes }}>
+                <summary>{{ b.settings.heading }}</summary>
+                <div class="petsome-ld-offer__row-body">{{ b.settings.content }}</div>
+              </details>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
       </div>
 
       <script>
@@ -978,7 +1040,16 @@
     }
   ],
   "blocks": [
-    { "type": "@app" }
+    { "type": "@app" },
+    {
+      "type": "info_row",
+      "name": "Zlozljiva vrstica",
+      "settings": [
+        { "type": "text", "id": "heading", "label": "Naslov", "default": "Naslov vrstice" },
+        { "type": "richtext", "id": "content", "label": "Vsebina" },
+        { "type": "checkbox", "id": "open", "label": "Privzeto odprta", "default": false }
+      ]
+    }
   ],
   "presets": [
     {
