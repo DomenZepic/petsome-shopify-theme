@@ -86,6 +86,68 @@
     display: block;
   }
 
+  /* drsljiva galerija */
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__gallery {
+    flex: 1 0 0;
+    min-width: 0;
+    position: sticky;
+    top: 20px;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__track {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    border-radius: 12px;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__slide {
+    flex: 0 0 100%;
+    scroll-snap-align: center;
+    aspect-ratio: 1 / 1;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__thumbs {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__thumbs::-webkit-scrollbar { display: none; }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__thumb {
+    flex: 0 0 62px;
+    height: 62px;
+    border: 1px solid #e6e6e6;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #fff;
+    padding: 0;
+  }
+
+  #petsome-ld-offer-{{ section.id }} .petsome-ld-offer__thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
   /* ---------- Offer column ---------- */
 
   /* Only two children - the intro and the form - so this gap is exactly the
@@ -350,7 +412,52 @@
         Select a product for this offer in the theme editor, then add the "Kaching Bundles" app block inside this section (Add block &rarr; Apps) and set its product to the same one. The product must have a Kaching Bundles deal configured.
       </div>
     {%- else -%}
-      {%- if section.settings.image != blank -%}
+      {%- liquid
+        assign gallery_media = offer_product.media | where: 'media_type', 'image'
+        if section.settings.show_gallery == false
+          assign gallery_media = empty
+        endif
+      -%}
+      {%- if gallery_media != empty and gallery_media.size > 0 -%}
+        <div class="petsome-ld-offer__gallery" id="ldg-{{ section.id }}">
+          <div class="petsome-ld-offer__track" data-ldg-track>
+            {%- for m in gallery_media -%}
+              <div class="petsome-ld-offer__slide" id="ldg-{{ section.id }}-{{ forloop.index0 }}">
+                <img
+                  src="{{ m | image_url: width: 960 }}"
+                  srcset="{{ m | image_url: width: 480 }} 480w, {{ m | image_url: width: 960 }} 960w"
+                  sizes="(min-width: 990px) 480px, min(100vw, 480px)"
+                  alt="{{ m.alt | default: offer_title | escape }}"
+                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                >
+              </div>
+            {%- endfor -%}
+          </div>
+          {%- if gallery_media.size > 1 -%}
+            <div class="petsome-ld-offer__thumbs">
+              {%- for m in gallery_media -%}
+                <button type="button" class="petsome-ld-offer__thumb" data-ldg-go="{{ forloop.index0 }}" aria-label="Slika {{ forloop.index }}">
+                  <img src="{{ m | image_url: width: 160 }}" alt="" loading="lazy">
+                </button>
+              {%- endfor -%}
+            </div>
+            <script>
+              (function(){
+                var root = document.getElementById('ldg-{{ section.id }}');
+                if (!root) return;
+                var track = root.querySelector('[data-ldg-track]');
+                root.querySelectorAll('[data-ldg-go]').forEach(function(b){
+                  b.addEventListener('click', function(){
+                    var i = parseInt(b.getAttribute('data-ldg-go'), 10);
+                    var slide = track.children[i];
+                    if (slide) track.scrollTo({ left: slide.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+                  });
+                });
+              })();
+            </script>
+          {%- endif -%}
+        </div>
+      {%- elsif section.settings.image != blank -%}
         <div class="petsome-ld-offer__media">
           <img
             src="{{ section.settings.image | image_url: width: 960 }}"
@@ -542,6 +649,13 @@
       "id": "product",
       "label": "Offer product",
       "info": "Must have a Kaching Bundles deal configured for it. The weight selector is built from this product's first option."
+    },
+    {
+      "type": "checkbox",
+      "id": "show_gallery",
+      "label": "Prikazi galerijo produktnih fotografij",
+      "info": "Ce je vklopljeno, se namesto ene slike prikazejo vse fotografije izdelka, ki jih je mogoce drsati.",
+      "default": true
     },
     {
       "type": "image_picker",
