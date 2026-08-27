@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "main": {
       "type": "main-product",
@@ -587,6 +588,12 @@
                 "disclaimer_text": "<p>*Prve spremembe so vidne v 2–3 tednih.  Za najboljše rezultate priporočamo uporabo 2–3 mesece.</p>",
                 "gifts_heading": "VKLJUČENO V TA PAKET",
                 "hide_gifts_heading": false,
+                "hero_label": "OMEJENA POLETNA PONUDBA",
+                "offer_checklist": "3x MobiMix (270 kapsul)\nPrenosna zložljiva posoda — 9,00 €\nDentalSticks — 14,90 €\nBrezplačna dostava\n90-dnevna garancija vračila denarja",
+                "offer_total_value": "",
+                "protocol_label": "3-mesečni protokol",
+                "hero_tier_quantity": "",
+                "gifts_in_tier": true,
                 "tier_1_style": "none",
                 "tier_2_style": "none",
                 "tier_3_style": "none",
@@ -601,12 +608,7 @@
                 "grams_per_package": 90,
                 "grams_per_day_by_size": "1, 2, 3",
                 "margin_top": 15,
-                "margin_bottom": 15,
-                "gifts_in_tier": true,
-                "hero_label": "OMEJENA POLETNA PONUDBA",
-                "protocol_label": "3-mesečni protokol",
-                "offer_checklist": "3x MobiMix (270 kapsul)\nPrenosna zložljiva posoda — 9,00 €\nDentalSticks — 14,90 €\nBrezplačna dostava\n90-dnevna garancija vračila denarja",
-                "offer_total_value": "Skupna vrednost 161,60 € — prihraniš 71,60 €"
+                "margin_bottom": 15
               },
               "blocks": {}
             },
@@ -666,11 +668,11 @@
                 "mobile_alignment": "mobile-center",
                 "text_size": 12,
                 "enable_custom_color": false,
-                "custom_text_color": "#FF0000",
+                "custom_text_color": "#ff0000",
                 "bold_text_style": "none",
-                "bold_solid_color": "#6D388B",
+                "bold_solid_color": "#6d388b",
                 "bold_gradient_color": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
-                "bold_bg_color": "#FFD700",
+                "bold_bg_color": "#ffd700",
                 "bold_bg_text_color": "#000000",
                 "bold_bg_padding_inline": 0.7,
                 "bold_bg_padding_block": 0.2,
@@ -680,9 +682,9 @@
                 "bold_bg_border_color": "#121212",
                 "bold_remove_weight": false,
                 "italic_text_style": "none",
-                "italic_solid_color": "#6D388B",
+                "italic_solid_color": "#6d388b",
                 "italic_gradient_color": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
-                "italic_bg_color": "#FFD700",
+                "italic_bg_color": "#ffd700",
                 "italic_bg_text_color": "#121212",
                 "italic_bg_padding_inline": 0.7,
                 "italic_bg_padding_block": 0.2,
@@ -712,7 +714,7 @@
                 "highlighter_underline_color": "#000000",
                 "highlighter_underline_thickness": 2,
                 "highlighter_underline_offset": 0,
-                "highlighter_strike_color": "#FF0000",
+                "highlighter_strike_color": "#ff0000",
                 "highlighter_strike_thickness": 2,
                 "highlighter_strike_offset": 0,
                 "highlighter_animation_duration": 800,
