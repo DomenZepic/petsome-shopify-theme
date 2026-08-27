@@ -989,6 +989,11 @@
         "type": "shopify://apps/kaching-popup/blocks/popup/e910a01f-bb85-45d8-92ef-3667265465b1",
         "disabled": false,
         "settings": {}
+      },
+      "17689343982267387927": {
+        "type": "shopify://apps/shipcheck/blocks/asc-shipping-protection/5cbdac36-4e4f-49fa-aec2-0cf6dea70fab",
+        "disabled": false,
+        "settings": {}
       }
     }
   },
