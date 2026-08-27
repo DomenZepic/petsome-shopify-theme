@@ -279,50 +279,6 @@
         "margin_bottom": 0
       }
     },
-    "before_after": {
-      "type": "petsome-before-after",
-      "blocks": {
-        "story_1": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/FloraMix_card_tacke.jpg",
-            "dog_name": "VPIŠI ime in starost psa",
-            "issue": "VPIŠI težavo — npr. lizanje tačk ponoči",
-            "text": "<p>VPIŠI resnično zgodbo stranke. Izmišljenih ne objavljamo.</p>"
-          }
-        },
-        "story_2": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/FloraMix_card_praskanje.jpg",
-            "dog_name": "VPIŠI ime in starost psa",
-            "issue": "VPIŠI težavo — npr. praskanje in stresanje z glavo",
-            "text": "<p>VPIŠI resnično zgodbo stranke.</p>"
-          }
-        },
-        "story_3": {
-          "type": "story",
-          "settings": {
-            "image": "shopify://shop_images/FloraMix_card_dlaka.jpg",
-            "dog_name": "VPIŠI ime in starost psa",
-            "issue": "VPIŠI težavo — npr. izpadanje dlake, dlaka brez leska",
-            "text": "<p>VPIŠI resnično zgodbo stranke.</p>"
-          }
-        }
-      },
-      "block_order": [
-        "story_1",
-        "story_2",
-        "story_3"
-      ],
-      "settings": {
-        "heading": "<p>Rezultati, ki jih lastniki obožujejo</p>",
-        "description": "<p>VPIŠI: koliko psom smo že pomagali. Tukaj je nekaj njihovih zgodb.</p>",
-        "border_color": "#e8d6c5",
-        "padding_top": 80,
-        "padding_bottom": 80
-      }
-    },
     "ingredients": {
       "type": "petsome-ld-ingredients",
       "settings": {
@@ -560,24 +516,6 @@
         "muted_text_color": "#c9bfbb"
       }
     },
-    "cta_mid": {
-      "type": "petsome-ld-guarantee",
-      "settings": {
-        "show_icon": false,
-        "icon": "verified_user",
-        "heading": "<p>VPIŠI št. — Pridruži se X lastnikom psov, ki izbirajo FloraMix</p>",
-        "text": "<p>Danes 1 + 1 GRATIS, z brezplačno dostavo in 60-dnevno garancijo.</p>",
-        "cta_label": "NAROČI ZDAJ",
-        "cta_url": "#offer",
-        "padding_top": 48,
-        "padding_bottom": 48,
-        "background_color": "#efe7f8",
-        "text_color": "#2a2140",
-        "icon_color": "#b9a3dd",
-        "button_background": "#2a2140",
-        "button_text_color": "#ffffff"
-      }
-    },
     "reasons_b": {
       "type": "petsome-ld-reasons",
       "blocks": {
@@ -627,22 +565,37 @@
         "divider_color": "#565858"
       }
     },
-    "cta_mid2": {
-      "type": "petsome-ld-guarantee",
+    "pl_bar1": {
+      "type": "custom-liquid",
       "settings": {
-        "show_icon": false,
-        "icon": "verified_user",
-        "heading": "<p>VPIŠI št. — Pridruži se X lastnikom in izkoristi 1 + 1 GRATIS</p>",
-        "text": "<p>Ponudba velja omejen čas. Brezplačna dostava, 60-dnevna garancija.</p>",
-        "cta_label": "NAROČI ZDAJ",
-        "cta_url": "#offer",
-        "padding_top": 48,
-        "padding_bottom": 48,
-        "background_color": "#efe7f8",
-        "text_color": "#2a2140",
-        "icon_color": "#b9a3dd",
-        "button_background": "#2a2140",
-        "button_text_color": "#ffffff"
+        "custom_liquid": "<style>\n.plx{--plx-ink:#2a2140;--plx-mut:#565858;--plx-acc:#8a6fc0;--plx-soft:#efe7f8;--plx-line:#e3ded4;\n max-width:1144px;margin:0 auto;padding:0 16px;\n font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:var(--plx-ink)}\n.plx *{box-sizing:border-box}\n.plx__head{max-width:648px;margin:0 auto 32px;text-align:center;display:flex;flex-direction:column;gap:8px}\n.plx__head h2{font-size:28px;line-height:1.2;font-weight:700;margin:0}\n.plx__head p{font-size:16px;line-height:1.5;color:var(--plx-mut);margin:0}\n@media(min-width:750px){.plx__head h2{font-size:34px}}\n\n/* 4 koristi z okroglo ikono */\n.plx-ben{display:grid;grid-template-columns:1fr;gap:32px}\n@media(min-width:750px){.plx-ben{grid-template-columns:repeat(4,1fr);gap:24px}}\n.plx-ben__i{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center}\n.plx-ben__badge{display:flex;align-items:center;justify-content:center;border-radius:9999px;\n height:88px;width:88px;min-height:88px;min-width:88px;background:var(--plx-soft);font-size:34px;line-height:1}\n.plx-ben__t{font-size:20px;font-weight:600;line-height:1.25;margin:0}\n.plx-ben__b{font-size:16px;line-height:1.5;color:var(--plx-mut);margin:0}\n\n/* velike statistike */\n.plx-stat{display:flex;width:100%;flex-direction:column;gap:24px}\n@media(min-width:750px){.plx-stat{flex-direction:row;gap:40px}}\n.plx-stat__i{display:inline-flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;\n padding:16px 0;border-top:1px solid var(--plx-line);flex:1;min-width:166px}\n@media(min-width:750px){.plx-stat__i{padding:24px 0}}\n.plx-stat__n{font-family:Georgia,'Times New Roman',serif;font-size:32px;font-weight:600;line-height:1.2;color:var(--plx-ink)}\n@media(min-width:750px){.plx-stat__n{font-size:48px}}\n.plx-stat__l{font-size:14px;font-weight:600;line-height:1.4;margin-top:8px}\n@media(min-width:750px){.plx-stat__l{font-size:16px}}\n.plx-stat__s{font-size:13px;color:var(--plx-mut);font-weight:400;margin-top:6px}\n\n/* 4 male statistike na obarvani podlagi */\n.plx-wrapsoft{background:#f4f1fa}\n.plx-mini{display:grid;grid-template-columns:1fr 1fr;gap:24px;justify-items:center;text-align:center}\n@media(min-width:750px){.plx-mini{grid-template-columns:repeat(4,1fr)}}\n.plx-mini__n{font-family:Georgia,'Times New Roman',serif;font-size:32px;font-weight:600;line-height:1.2}\n@media(min-width:750px){.plx-mini__n{font-size:48px}}\n.plx-mini__l{font-size:14px;font-weight:600;line-height:1.4;margin-top:6px}\n\n/* vet kartici */\n.plx-vets{display:grid;grid-template-columns:1fr;gap:16px}\n@media(min-width:640px){.plx-vets{grid-template-columns:1fr 1fr}}\n.plx-vet{background:#fff;border:1px solid var(--plx-line);border-radius:12px;padding:24px}\n.plx-vet p{font-style:italic;font-size:16px;line-height:1.5;margin:0 0 14px}\n.plx-vet__n{font-size:14px;font-weight:700;margin:0}\n.plx-vet__r{font-size:13px;color:var(--plx-mut);margin:2px 0 0}\n\n/* znacke kakovosti */\n.plx-q{display:grid;grid-template-columns:1fr 1fr;gap:16px}\n@media(min-width:750px){.plx-q{grid-template-columns:repeat(4,1fr)}}\n.plx-q__i{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;\n background:#fff;border:1px solid var(--plx-line);border-radius:12px;padding:20px 14px}\n.plx-q__e{font-size:28px;line-height:1}\n.plx-q__t{font-size:14px;font-weight:700;line-height:1.3}\n\n/* socialni pas s CTA */\n.plx-bar{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}\n.plx-bar__btn{display:inline-block;background:var(--plx-ink);color:#fff;text-decoration:none;\n font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase;\n padding:16px 40px;border-radius:6px;min-width:260px}\n.plx-bar__p{font-size:14px;color:var(--plx-mut);margin:0}\n\n/* dokazi strank, centrirano in ozko */\n.plx-res{max-width:765px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}\n.plx-res__stars{color:#ff9a0a;letter-spacing:3px;font-size:16px}\n.plx-res__q{font-size:18px;font-weight:600;line-height:1.4;max-width:520px;margin:0}\n.plx-res__w{font-size:13px;color:var(--plx-mut);text-transform:uppercase;letter-spacing:.06em;margin:0}\n.plx-note{background:#fff8e6;border:1px solid #efdfa4;color:#7a5c12;font-size:13px;\n border-radius:8px;padding:10px 12px;margin:18px auto 0;max-width:648px;text-align:left}\n</style><div class=\"plx\"><div class=\"plx-bar\">\n <a class=\"plx-bar__btn\" href=\"#offer\">NAROČI ZDAJ</a>\n <p class=\"plx-bar__p\"><span style=\"color:#a8712f;font-weight:700;background:#f6ead9;border-radius:4px;padding:0 4px\">VPIŠI št.</span> &mdash; Pridruzi se X lastnikom psov, ki izbirajo FloraMix</p>\n</div></div>",
+        "display_id": false,
+        "visibility": "always-display",
+        "color_scheme": "background-1",
+        "padding_top": 32,
+        "padding_bottom": 56
+      }
+    },
+    "pl_bar2": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"plx\"><div class=\"plx-bar\">\n <a class=\"plx-bar__btn\" href=\"#offer\">NAROČI ZDAJ</a>\n <p class=\"plx-bar__p\"><span style=\"color:#a8712f;font-weight:700;background:#f6ead9;border-radius:4px;padding:0 4px\">VPIŠI št.</span> &mdash; Pridruzi se X lastnikom psov, ki izbirajo FloraMix</p>\n</div></div>",
+        "display_id": false,
+        "visibility": "always-display",
+        "color_scheme": "background-1",
+        "padding_top": 32,
+        "padding_bottom": 56
+      }
+    },
+    "pl_res": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"plx\"><div class=\"plx-res\">\n <div class=\"plx-res__stars\">&#9733;&#9733;&#9733;&#9733;&#9733;</div>\n <h2 style=\"font-size:22px;font-weight:700;margin:0\">Rezultati, ki jih lastniki obozujejo</h2>\n <p class=\"plx-res__q\">&bdquo;<span style=\"color:#a8712f;font-weight:700;background:#f6ead9;border-radius:4px;padding:0 4px\">VPIŠI RESNIČNO OCENO STRANKE</span>&ldquo;</p>\n <p class=\"plx-res__w\"><span style=\"color:#a8712f;font-weight:700;background:#f6ead9;border-radius:4px;padding:0 4px\">IME, KRAJ</span></p>\n <div class=\"plx-note\">Opomba uredniku: vstavi resnicno oceno stranke. Izmisljenih ne objavljamo.</div>\n</div></div>",
+        "display_id": false,
+        "visibility": "always-display",
+        "color_scheme": "background-1",
+        "padding_top": 56,
+        "padding_bottom": 40
       }
     }
   },
@@ -652,10 +605,10 @@
     "ld_header",
     "hero",
     "reasons",
-    "cta_mid",
+    "pl_bar1",
     "reasons_b",
-    "cta_mid2",
-    "before_after",
+    "pl_bar2",
+    "pl_res",
     "offer",
     "ingredients",
     "faq",
