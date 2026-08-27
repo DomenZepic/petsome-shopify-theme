@@ -20,8 +20,8 @@
     "offer_bar": {
       "type": "petsome-ld-offer-bar",
       "settings": {
-        "headline": "EKSKLUZIVNA PONUDBA ZA NOVE STRANKE",
-        "subline": "1 + 1 GRATIS + brezplačna darila · samo danes",
+        "headline": "1 + 1 GRATIS PLUS BREZPLAČNO DARILO 🎁",
+        "subline": "VPIŠI št. — Pridruži se X lastnikom psov, ki izbirajo FloraMix",
         "link": "",
         "show_timer": true,
         "timezone": "Europe/Ljubljana",
