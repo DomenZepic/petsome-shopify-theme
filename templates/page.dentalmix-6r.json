@@ -86,7 +86,7 @@
         "avatar_3": "shopify://shop_images/hf_20260820_160839_22cd4963-9aee-4509-ac49-517a705e9db4.png",
         "show_badge_stars": true,
         "rating_text": "2000+ ocen · 5000+ lastnikov psov",
-        "heading": "<p>6 razlogov, zakaj 5000+ lastnikov uporablja DentalMix za čistejše zob in svež zadah — brez ščetkanja</p>",
+        "heading": "<p>6 razlogov, zakaj 5000+ lastnikov uporablja DentalMix za čistejše zobe in svež zadah — brez ščetkanja</p>",
         "subline": "<p>DentalMix deluje tako, da napade vzrok slabega zadaha in zobnega kamna, namesto da bi ga samo prikril. Razvit je z veterinarji, vsebuje VOHC klinično raziskane sestavine, uporaba pa je dovolj preprosta za vsak dan — in prav zdaj ga dobiš po znižani ceni.</p>",
         "image": "shopify://shop_images/hf_20260820_164220_5d425647-f9fa-45ad-accd-0dd2861f56ca.png",
         "cta_label": "NAROČI ZDAJ",
@@ -321,6 +321,12 @@
         "show_payment_icons": true,
         "payments_label": "Varno plačevanje z:",
         "disclaimer_text": "<p>*Svež zadah večina lastnikov opazi v 7 do 14 dneh. Za najboljše rezultate priporočamo 2–3 mesece redne uporabe.</p>",
+        "rating_label": "4.8 / 5 (2.000+ zadovoljnih lastnikov)",
+        "star_color": "#ffcc00",
+        "tags": "Proti zadahu | Za čistejše zobe | Veterinarsko podprto",
+        "tag_color": "#9bb8d3",
+        "checks": "Pomaga zmanjšati neprijeten zadah\nPomaga zmanjšati vidne zobne oblog in nastajanje zobnega kamna\nZnanstveno zasnovana formula z močnim kompleksom aktivnih sestavin\nZa čistejše zobe in vsakodnevno nego ustne votline\nBrez ščetkanja in brez anestezije",
+        "check_color": "#121212",
         "hero_label": "OMEJENA POLETNA PONUDBA",
         "hero_tier_quantity": "",
         "gifts_in_tier": true,
@@ -351,13 +357,7 @@
         "padding_top": 80,
         "padding_bottom": 80,
         "margin_top": 0,
-        "margin_bottom": 0,
-        "rating_label": "4.8 / 5 (2.000+ zadovoljnih lastnikov)",
-        "star_color": "#ffcc00",
-        "tags": "Proti zadahu | Za čistejše zobe | Veterinarsko podprto",
-        "tag_color": "#9bb8d3",
-        "checks": "Pomaga zmanjšati neprijeten zadah\nPomaga zmanjšati vidne zobne oblog in nastajanje zobnega kamna\nZnanstveno zasnovana formula z močnim kompleksom aktivnih sestavin\nZa čistejše zobe in vsakodnevno nego ustne votline\nBrez ščetkanja in brez anestezije",
-        "check_color": "#121212"
+        "margin_bottom": 0
       }
     },
     "petsome_before_after_bEFgxj": {
