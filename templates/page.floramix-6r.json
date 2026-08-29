@@ -20,7 +20,7 @@
       "type": "petsome-ld-offer-bar",
       "settings": {
         "headline": "1 + 1 GRATIS PLUS BREZPLAČNO DARILO 🎁",
-        "subline": "VPIŠI št. — Pridruži se X lastnikom psov, ki izbirajo FloraMix",
+        "subline": "Odmerjanje prilagojeno teži psa",
         "link": "",
         "show_timer": true,
         "timezone": "Europe/Ljubljana",
@@ -531,8 +531,8 @@
           "type": "reason",
           "settings": {
             "tag": "5. razlog",
-            "title": "5. VPIŠI št. — X psov se ne moti",
-            "text": "<p><strong>VPIŠI:</strong> število uporabnikov in število ocen.</p><p>Po parkih, kavčih in dvoriščih. Kar lastniki najpogosteje omenijo: mirnejša prebava, udobnejša koža in več tistih trenutkov, ko pes sam pride po crkljanje.</p>",
+            "title": "Krilova omega-3, ne lososovo olje",
+            "text": "<p>Večina dodatkov za kožo in dlako uporabi lososovo olje. FloraMix ima <strong>krilovo moko 22,44 %</strong> — poleg kolostruma 13,3 % in Sophore japonice 5 %. To so tri sestavine, ki jih v konkurenčnih praških za pse pri nas ne najdeš skupaj.</p>",
             "image": "shopify://shop_images/FloraMix_sijoca_dlaka.png"
           }
         },
