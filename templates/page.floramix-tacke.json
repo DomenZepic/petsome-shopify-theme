@@ -1,0 +1,618 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */{
+  "sections": {
+    "hide_chrome": {
+      "type": "hide-header-footer",
+      "settings": {
+        "hide_header": true,
+        "hide_announcements": true,
+        "hide_footer": true
+      }
+    },
+    "offer_bar": {
+      "type": "petsome-ld-offer-bar",
+      "settings": {
+        "headline": "1 + 1 GRATIS PLUS BREZPLAČNO DARILO 🎁",
+        "subline": "Za pse, ki ponoči ližejo tačke",
+        "link": "",
+        "show_timer": true,
+        "timezone": "Europe/Ljubljana",
+        "hours_label": "Ure",
+        "minutes_label": "Min",
+        "seconds_label": "Sek",
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "background_color": "#2a2140",
+        "text_color": "#faf9f6",
+        "pill_color": "#b9a3dd",
+        "pill_text_color": "#2a2140"
+      }
+    },
+    "ld_header": {
+      "type": "petsome-ld-header",
+      "settings": {
+        "logo_width": 110,
+        "logo_link": "",
+        "show_border": false,
+        "background_color": "#fdfbf7",
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
+    },
+    "hero": {
+      "type": "petsome-ld-hero",
+      "blocks": {
+        "gift_1": {
+          "type": "gift",
+          "settings": {
+            "label": "VPIŠI darilo 1",
+            "price": "0,00 €"
+          }
+        },
+        "gift_2": {
+          "type": "gift",
+          "settings": {
+            "label": "VPIŠI darilo 2",
+            "price": "0,00 €"
+          }
+        },
+        "gift_3": {
+          "type": "gift",
+          "settings": {
+            "label": "Brezplačna dostava",
+            "price": ""
+          }
+        }
+      },
+      "block_order": [
+        "gift_1",
+        "gift_2",
+        "gift_3"
+      ],
+      "settings": {
+        "avatar_1": "shopify://shop_images/FloraMix_card_praskanje.jpg",
+        "avatar_2": "shopify://shop_images/FloraMix_card_tacke.jpg",
+        "avatar_3": "shopify://shop_images/FloraMix_card_dlaka.jpg",
+        "show_badge_stars": true,
+        "rating_text": "VPIŠI št. — Pridruži se X lastnikom psov, ki izbirajo FloraMix",
+        "heading": "<p>Ali tvoj pes liže tačke, se praska ali stresa z glavo?</p>",
+        "subline": "<p>Če to počne vsak večer, ni razvada. Odgovor najpogosteje ni na koži — je v črevesju. FloraMix je dnevni prašek s 15 aktivnimi sestavinami, ki podpira črevesje, imunski odziv in kožo hkrati. Danes 1 + 1 GRATIS.</p>",
+        "image": "shopify://shop_images/FloraMix_SLO_01_hero.png",
+        "cta_label": "NAROČI ZDAJ",
+        "cta_url": "#offer",
+        "guarantee_text": "60-dnevna garancija vračila denarja",
+        "proof_text": "Razvito v Sloveniji, izdelano v EU",
+        "show_gifts": true,
+        "gifts_heading": "BREZPLAČNA DARILA PRI EKSKLUZIVNI PONUDBI!",
+        "gift_badge_label": "GRATIS",
+        "padding_top": 0,
+        "padding_bottom": 80,
+        "background_color": "#fdfbf7",
+        "text_color": "#2a2140",
+        "muted_text_color": "#565858",
+        "badge_background": "#fdfdfc",
+        "star_color": "#ff9a0a",
+        "button_background": "#2a2140",
+        "button_text_color": "#ffffff",
+        "accent_color": "#b9a3dd",
+        "gift_tile_color": "#efe7f8",
+        "gift_tile_border_color": "#b7b8b8",
+        "gift_badge_color": "#8a6fc0",
+        "gift_badge_text_color": "#ffffff"
+      }
+    },
+    "reasons": {
+      "type": "petsome-ld-reasons",
+      "blocks": {
+        "r1": {
+          "type": "reason",
+          "settings": {
+            "tag": "1. znak",
+            "title": "1. Lizanje tačk ponoči ni razvada",
+            "text": "<p>Najprej opaziš zvok — tisto ritmično lizanje, ko je v hiši že tiho. Potem tačke, ki so med prsti obarvane rjavo-rdečkasto. Zraven pride praskanje, stresanje z glavo, drgnjenje gobca ob kavč in koža, ki zadiši drugače kot prej. Vsak od teh znakov posebej izgleda nedolžno — skupaj so vzorec.</p>",
+            "image": "shopify://shop_images/FloraMix_explainer_split.png"
+          }
+        },
+        "r2": {
+          "type": "reason",
+          "settings": {
+            "tag": "2. vzrok",
+            "title": "2. Vzrok najpogosteje ni na koži",
+            "text": "<p>Zato šamponi, spreji in losjoni delujejo nekaj dni, potem pa se vse vrne. Ker se ukvarjajo s tem, kar vidiš, ne s tem, od kod prihaja. Velik del imunskega odziva psa sedi v črevesju — in ko je tam ravnovesje porušeno, se to najprej pokaže tam, kjer je koža najtanjša: na tačkah, v ušesih, okoli gobca.</p>",
+            "image": "shopify://shop_images/FloraMix_SLO_04_veterinar.png"
+          }
+        },
+        "r3": {
+          "type": "reason",
+          "settings": {
+            "tag": "3. mehanizem",
+            "title": "3. To pa še ni vse — samo prebava ni dovolj",
+            "text": "<p>Tu se večina probiotikov ustavi: dodajo bakterije, uredijo prebavo in končajo. Ampak če urediš samo prebavo, ostaneta imunski odziv in koža nedotaknjena. <strong>TriAxis Reset™</strong> zato dela v treh smereh hkrati — <strong>Umiri. Nahrani. Okrepi.</strong> Črevesje: cikorija kot prebiotik, žive kulture E. lactis (200 mrd CFU/kg) in B. velezensis. Imunski odziv: kolostrum in Sophora japonica. Koža in dlaka: krilova moka, maceha in kurkuma.</p>",
+            "image": "shopify://shop_images/FloraMix_graf.png"
+          }
+        }
+      },
+      "block_order": [
+        "r1",
+        "r2",
+        "r3"
+      ],
+      "settings": {
+        "show_numbers": false,
+        "pad_numbers": true,
+        "number_start": 1,
+        "anchor_id": "reasons",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#fdfbf7",
+        "text_color": "#2a2140",
+        "accent_color": "#8a6fc0",
+        "divider_color": "#565858"
+      }
+    },
+    "offer": {
+      "type": "petsome-ld-offer",
+      "blocks": {
+        "kaching_bundles_app_block_Kh7wtC": {
+          "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
+          "settings": {
+            "product": "{{section.settings.product}}",
+            "manual_deal_block_id": ""
+          }
+        },
+        "row1": {
+          "type": "info_row",
+          "settings": {
+            "heading": "Podatki o izdelku",
+            "content": "<p>FloraMix je dnevni prašek za pse, ki se praskajo, ližejo tačke, stresajo z glavo ali imajo neurejeno prebavo. Potreseš ga po obroku. Namesto da bi deloval na koži, podpira <strong>tri smeri hkrati — črevesje, odpornost in kožo</strong>. Ta pristop imenujemo <strong>TriAxis Reset™</strong>.</p>",
+            "open": true
+          }
+        },
+        "row2": {
+          "type": "info_row",
+          "settings": {
+            "heading": "Koristne bakterije se lotijo dela",
+            "content": "<p>✅ Podpira urejeno prebavo — prve spremembe lastniki pogosto opazijo v 1–2 tednih<br/>✅ Podpira mirnejšo kožo in manj praskanja, lizanja tačk in stresanja z glavo<br/>✅ Podpira lesk in gostoto dlake<br/>✅ 15 aktivnih sestavin z izpisanimi količinami<br/>✅ Odmerek prilagojen teži psa — brez ugibanja</p>",
+            "open": false
+          }
+        },
+        "row3": {
+          "type": "info_row",
+          "settings": {
+            "heading": "Zasnovan za podporo prebavi",
+            "content": "<p>Cikorija hrani koristne bakterije, žive kulture in dva postbiotika podpirajo ravnovesje črevesja. Kolostrum, beta-glukani in Sophora japonica podpirajo odpornost — večina imunskega odziva se dogaja prav ob črevesju. Krilova moka, biotin, cink, vitamin E, maceha in kurkuma pa delujejo na kožo in dlako. Prašek samo potreseš po hrani, pes ga zaužije skupaj z obrokom.</p>",
+            "open": false
+          }
+        },
+        "row4": {
+          "type": "info_row",
+          "settings": {
+            "heading": "Podpora pri kvasnih glivicah in sezonskih težavah",
+            "content": "<p>Noben lastnik ne želi gledati psa, ki si liže tačke, stresa z glavo, grizlja in se praska. Prebiotik, žive kulture in postbiotika v FloraMixu podpirajo delovanje imunskega odziva, kolostrum, beta-glukani in Sophora japonica 5 % pa mu dajo oporo.</p>",
+            "open": false
+          }
+        },
+        "row5": {
+          "type": "info_row",
+          "settings": {
+            "heading": "Prilagojeno velikosti tvojega psa",
+            "content": "<p>FloraMix je na voljo v treh velikostih — 1–15 kg, 15–30 kg in 30+ kg — tako da pes vsak dan dobi svoj odmerek. Enkrat na dan potresi po mokri ali suhi hrani in premešaj. Za najboljše rezultate uporabljaj vsak dan.</p>",
+            "open": false
+          }
+        },
+        "row6": {
+          "type": "info_row",
+          "settings": {
+            "heading": "Sestavine in opozorila",
+            "content": "<p><strong>Aktivne sestavine:</strong> krilova moka 22,44 % · kolostrum 13,3 % · Sophora japonica 5 % · maceha (Viola tricolor) 3,33 % · kurkuma 3,33 % · cikorija · inaktivirani kvas (vir beta-glukanov) · 2 postbiotika (<em>L. plantarum</em> CECT 9161 + <em>L. helveticus</em> HA-122) · <em>E. lactis</em> 200 mrd CFU/kg · <em>B. velezensis</em> 100 mrd CFU/kg · vitamin C 16.450 mg/kg · biotin 895.000 µg/kg · vitamin E 2.500 mg/kg · cink 2.600 mg/kg. Skupaj 15 aktivnih sestavin. Izdelano v EU.</p><p><strong>Opozorila:</strong> ni za prehrano ljudi. Hrani izven dosega otrok, na suhem in hladnem, stran od neposredne sončne svetlobe. Po uporabi embalažo dobro zapri.</p><p><strong>Previdnost:</strong> če se stanje psa poslabša ali se ne izboljša, prenehaj z uporabo in se posvetuj z veterinarjem. Pri brejih ali doječih psicah in psih na terapiji se pred uvedbo posvetuj z veterinarjem.</p>",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "kaching_bundles_app_block_Kh7wtC",
+        "row1",
+        "row2",
+        "row3",
+        "row4",
+        "row5",
+        "row6"
+      ],
+      "settings": {
+        "product": "floramix",
+        "show_gallery": true,
+        "image": "shopify://shop_images/FloraMix_1x_no_bg.png",
+        "heading": "FloraMix — dnevni prašek za črevesje, odpornost in kožo",
+        "description": "<p>Prašek s 15 aktivnimi sestavinami za podporo prebavi, sezonskim težavam in ravnovesju kvasnih glivic.</p><p><em>VPIŠI citat veterinarja + ime in naziv.</em> Če veterinarja nimamo z njegovim soglasjem, to vrstico izbriši.</p>",
+        "trustpilot_text": "",
+        "weight_label": "Izberi težo psa:",
+        "delivery_text": "<p>Predviden čas dostave: <strong>2–3 dni</strong></p>",
+        "atc_label": "DODAJ V KOŠARICO",
+        "atc_show_price": true,
+        "show_payment_icons": true,
+        "payments_label": "Varno plačevanje z:",
+        "disclaimer_text": "<p>*Prve spremembe pri prebavi lastniki pogosto opazijo v 1–2 tednih. Za najboljše rezultate priporočamo 2–3 mesece redne uporabe.</p>",
+        "rating_label": "VPIŠI: 4.X / 5 (X zadovoljnih lastnikov)",
+        "star_color": "#ffcc00",
+        "tags": "Za mirnejšo kožo | Za urejeno prebavo | 15 aktivnih sestavin",
+        "tag_color": "#b9a3dd",
+        "checks": "Podpira mirnejšo kožo in manj praskanja\nPodpira urejeno prebavo in enakomerno blato\nPodpira lesk in gostoto dlake\n15 aktivnih sestavin z izpisanimi količinami\nOdmerek prilagojen teži psa\nIzdelano v EU",
+        "check_color": "#121212",
+        "hero_label": "EKSKLUZIVNA PONUDBA",
+        "hero_tier_quantity": "",
+        "gifts_in_tier": true,
+        "protocol_label": "3-mesečni protokol",
+        "offer_checklist": "VPIŠI vsebino paketa\nVPIŠI darilo 1 — 0,00 €\nVPIŠI darilo 2 — 0,00 €\nBrezplačna dostava\n60-dnevna garancija vračila denarja",
+        "offer_total_value": "VPIŠI: Skupna vrednost X € — prihraniš X €",
+        "gifts_heading": "VKLJUČENO V TA PAKET",
+        "hide_gifts_heading": false,
+        "tier_1_style": "none",
+        "tier_2_style": "recommended",
+        "tier_3_style": "best",
+        "tier_4_style": "none",
+        "background_color": "#fdfbf7",
+        "text_color": "#2a2140",
+        "muted_text_color": "#565858",
+        "accent_color": "#b9a3dd",
+        "accent_color_dark": "#8a6fc0",
+        "secondary_color": "#e8d6c5",
+        "light_text_color": "#faf9f6",
+        "atc_background": "#2a2140",
+        "atc_text_color": "#ffffff",
+        "product_type": "powder",
+        "capsules_per_package": 120,
+        "capsules_per_day_by_size": "1, 2, 3",
+        "grams_per_package": 120,
+        "grams_per_day_by_size": "1, 2, 3",
+        "anchor_id": "offer",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "ingredients": {
+      "type": "petsome-ld-ingredients",
+      "settings": {
+        "product": "floramix",
+        "heading": "<p>15 sestavin, tri smeri</p>",
+        "description": "<p>Vsaka sestavina pokriva svoj del: da se črevesje umiri, da odpornost dobi oporo in da koža in dlaka dobita gradnike. Nič ni notri zato, da bi deklaracija izgledala daljša — vse količine so izpisane.</p>",
+        "amount_label": "Količina na pakiranje",
+        "anchor_id": "ingredients",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#fdfbf7",
+        "text_color": "#2a2140",
+        "accent_color": "#b9a3dd",
+        "accent_color_dark": "#8a6fc0",
+        "secondary_color": "#e8d6c5",
+        "light_text_color": "#faf9f6"
+      }
+    },
+    "faq": {
+      "type": "petsome-ld-faq",
+      "blocks": {
+        "q_1": {
+          "type": "question",
+          "settings": {
+            "question": "Kako dolgo naj pes jemlje probiotik?",
+            "answer": "<p>FloraMix je primeren za vsakodnevno uporabo in je lahko del dolgotrajne rutine. Posebej koristen je med antibiotičnim zdravljenjem in po njem, v obdobjih stresa, ob spremembi hrane ali kadar pes kaže znake občasnih prebavnih težav. Za nasvet, prilagojen tvojemu psu, vprašaj veterinarja.</p>"
+          }
+        },
+        "q_2": {
+          "type": "question",
+          "settings": {
+            "question": "Ob katerem času dneva naj psu dam FloraMix?",
+            "answer": "<p>Kadar tebi najbolj ustreza. Ker se potrese po hrani, je najpreprosteje kar ob rednem obroku.</p>"
+          }
+        },
+        "q_3": {
+          "type": "question",
+          "settings": {
+            "question": "Kaj probiotiki naredijo za psa?",
+            "answer": "<p>Žive kulture podpirajo ravnovesje črevesne mikrobiote in s tem prebavo ter delovanje imunskega odziva. FloraMix poleg njih vsebuje še prebiotik, dva postbiotika, kolostrum, beta-glukane in Sophoro japonico — torej podporo tudi odpornosti in koži.</p>"
+          }
+        },
+        "q_4": {
+          "type": "question",
+          "settings": {
+            "question": "Ali FloraMix deluje?",
+            "answer": "<p>FloraMix je formuliran s prebiotikom, živimi kulturami in postbiotikoma za črevesje, z beta-glukani, kolostrumom in Sophoro japonico za odpornost ter s krilovo moko, biotinom, cinkom in vitaminom E za kožo in dlako. <strong>VPIŠI</strong> podatke iz naše ankete uporabnikov, z vzorcem in datumom.</p>"
+          }
+        },
+        "q_5": {
+          "type": "question",
+          "settings": {
+            "question": "Kako hitro probiotiki začnejo delovati pri psih?",
+            "answer": "<p>Odvisno od starosti, pasme, zdravja in načina življenja psa. Prebava se navadno odzove prva, pogosto v 1–2 tednih. Za celovito sliko priporočamo 2–3 mesece redne uporabe.</p>"
+          }
+        },
+        "q_6": {
+          "type": "question",
+          "settings": {
+            "question": "Ali ga lahko jemljejo vsi psi? So kakšne omejitve?",
+            "answer": "<p>FloraMix je primeren za pse vseh velikosti in pasem. Če ima pes posebne zdravstvene težave ali znane preobčutljivosti oziroma jemlje zdravila, se pred uvedbo posvetuj z veterinarjem.</p>"
+          }
+        },
+        "q_7": {
+          "type": "question",
+          "settings": {
+            "question": "Kaj če pes dobi preveč FloraMixa?",
+            "answer": "<p>Če si nehote dal preveč, se posvetuj z veterinarjem. Priporočeni odmerek glede na težo psa je naveden na embalaži in v razdelku Prilagojeno velikosti tvojega psa zgoraj.</p>"
+          }
+        },
+        "q_8": {
+          "type": "question",
+          "settings": {
+            "question": "Po čem je FloraMix drugačen od navadnega probiotičnega praška?",
+            "answer": "<p>Navaden probiotik doda žive kulture in tu se konča. FloraMix ima poleg njih še prebiotično cikorijo, dva postbiotika, kolostrum, beta-glukane, Sophoro japonico, krilovo moko, macehe, kurkumo ter vitamina C in E, biotin in cink — skupaj 15 aktivnih sestavin v treh smereh.</p>"
+          }
+        },
+        "q_9": {
+          "type": "question",
+          "settings": {
+            "question": "Ali ga lahko jemljejo mladiči?",
+            "answer": "<p><strong>VPIŠI</strong> — z deklaracije preveri, od katere starosti je FloraMix primeren.</p>"
+          }
+        },
+        "q_10": {
+          "type": "question",
+          "settings": {
+            "question": "Ali je primeren za mačke?",
+            "answer": "<p>Ne. FloraMix je formuliran za pse in ga mačkam ne dajaj.</p>"
+          }
+        },
+        "q_11": {
+          "type": "question",
+          "settings": {
+            "question": "Kakšen je rok uporabe?",
+            "answer": "<p><strong>VPIŠI</strong> rok uporabe z embalaže.</p>"
+          }
+        },
+        "q_12": {
+          "type": "question",
+          "settings": {
+            "question": "Kaj če z izdelkom nisem zadovoljen?",
+            "answer": "<p>Na voljo imaš 60 dni. Če ne boš zadovoljen, nam piši in denar ti vrnemo — tudi če je embalaža že odprta.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q_1",
+        "q_2",
+        "q_3",
+        "q_4",
+        "q_5",
+        "q_6",
+        "q_7",
+        "q_8",
+        "q_9",
+        "q_10",
+        "q_11",
+        "q_12"
+      ],
+      "settings": {
+        "heading": "<p>Pogosta vprašanja</p>",
+        "subheading": "",
+        "open_first": false,
+        "anchor_id": "faq",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#faf9f6",
+        "text_color": "#2a2140",
+        "card_color": "#ffffff",
+        "border_color": "#e7e7e7",
+        "accent_color": "#8a6fc0"
+      }
+    },
+    "loox_reviews": {
+      "type": "apps",
+      "blocks": {
+        "loox_reviews_loox_agg_section_egjtKf": {
+          "type": "shopify://apps/loox-reviews/blocks/loox-agg-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "disabled": true,
+          "settings": {
+            "reviews_to_display": "",
+            "default_tab": "automatic",
+            "only_photos": false,
+            "hide_thumbnails": false,
+            "product_handle": "floramix",
+            "aggregated": true,
+            "data-limit": 7,
+            "maxwidth": 1080,
+            "is_sample": true
+          }
+        }
+      },
+      "block_order": [
+        "loox_reviews_loox_agg_section_egjtKf"
+      ],
+      "settings": {
+        "display_id": false,
+        "include_margins": true
+      }
+    },
+    "guarantee": {
+      "type": "petsome-ld-guarantee",
+      "settings": {
+        "show_icon": true,
+        "icon": "verified_user",
+        "heading": "<p>Ne zamudi — 1 + 1 GRATIS</p>",
+        "text": "<p>Podpri pasje črevesje s 15 aktivnimi sestavinami v treh smereh. Preizkusi brez tveganja 60 dni: če ne opaziš razlike, nam piši in denar ti vrnemo, tudi če je embalaža že odprta.</p>",
+        "cta_label": "NAROČI ZDAJ",
+        "cta_url": "#offer",
+        "anchor_id": "guarantee",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#efe7f8",
+        "text_color": "#2a2140",
+        "icon_color": "#b9a3dd",
+        "button_background": "#2a2140",
+        "button_text_color": "#ffffff"
+      }
+    },
+    "ld_footer": {
+      "type": "petsome-ld-footer",
+      "blocks": {
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Razlogi",
+            "anchor": "#reasons"
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Prvih 90 dni",
+            "anchor": "#timeline"
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Ponudba",
+            "anchor": "#offer"
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Sestavine",
+            "anchor": "#ingredients"
+          }
+        },
+        "link_5": {
+          "type": "link",
+          "settings": {
+            "label": "Garancija",
+            "anchor": "#guarantee"
+          }
+        }
+      },
+      "block_order": [
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "link_5"
+      ],
+      "settings": {
+        "logo": "shopify://shop_images/Logo_cc9e4809-610d-4e12-9861-949378c4b8de.png",
+        "logo_width": 90,
+        "legal_text": "<p>© Petsome. Vse pravice pridržane.</p>",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "background_color": "#2a2140",
+        "text_color": "#faf9f6",
+        "muted_text_color": "#c9bfbb"
+      }
+    },
+    "reasons_b": {
+      "type": "petsome-ld-reasons",
+      "blocks": {
+        "r4": {
+          "type": "reason",
+          "settings": {
+            "tag": "4. razlika",
+            "title": "4. Sophora japonica — tisto, česar drugi nimajo",
+            "text": "<p>Trojica pre-, pro- in postbiotikov ni razlika: to oglašuje danes vsak. Razlika je <strong>Sophora japonica 5 %</strong>, ki je pri nas ne najdeš v nobenem konkurenčnem dodatku za pse. Zraven kolostrum 13,3 % in krilova moka 22,44 % — ne lososovo olje, ampak krill.</p>",
+            "image": "shopify://shop_images/FloraMix_SLO_06_odmerjanje.png"
+          }
+        },
+        "r5": {
+          "type": "reason",
+          "settings": {
+            "tag": "5. uporaba",
+            "title": "5. Potreseš po obroku in premešaš",
+            "text": "<p>Brez skrivanja v siru, brez pregovarjanja, brez še ene tablete. FloraMix je prah — odmerek prilagodiš teži psa in ga zmešaš v obrok. Pes ne opazi, da si karkoli naredil.</p>",
+            "image": "shopify://shop_images/FloraMix_sijoca_dlaka.png"
+          }
+        },
+        "r6": {
+          "type": "reason",
+          "settings": {
+            "tag": "6. preglednost",
+            "title": "6. Vse količine izpisane. Izdelano v EU.",
+            "text": "<p>Pri FloraMixu ni mešanice brez številk: krilova moka 22,44 % · kolostrum 13,3 % · Sophora japonica 5 % · maceha 3,33 % · kurkuma. Petnajst aktivnih sestavin in vsaka s svojo količino. Razvito v Sloveniji, izdelano v EU.</p>",
+            "image": "shopify://shop_images/FloraMix_checklist.png"
+          }
+        }
+      },
+      "block_order": [
+        "r4",
+        "r5",
+        "r6"
+      ],
+      "settings": {
+        "show_numbers": false,
+        "pad_numbers": true,
+        "number_start": 1,
+        "anchor_id": "reasons-b",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#fdfbf7",
+        "text_color": "#2a2140",
+        "accent_color": "#8a6fc0",
+        "divider_color": "#565858"
+      }
+    },
+    "pl_bar1": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<style>\n.plx{--plx-ink:#2a2140;--plx-mut:#565858;--plx-acc:#8a6fc0;--plx-soft:#efe7f8;--plx-line:#e3ded4;\n max-width:1144px;margin:0 auto;padding:0 16px;\n font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:var(--plx-ink)}\n.plx *{box-sizing:border-box}\n.plx__head{max-width:648px;margin:0 auto 32px;text-align:center;display:flex;flex-direction:column;gap:8px}\n.plx__head h2{font-size:28px;line-height:1.2;font-weight:700;margin:0}\n.plx__head p{font-size:16px;line-height:1.5;color:var(--plx-mut);margin:0}\n@media(min-width:750px){.plx__head h2{font-size:34px}}\n\n/* 4 koristi z okroglo ikono */\n.plx-ben{display:grid;grid-template-columns:1fr;gap:32px}\n@media(min-width:750px){.plx-ben{grid-template-columns:repeat(4,1fr);gap:24px}}\n.plx-ben__i{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center}\n.plx-ben__badge{display:flex;align-items:center;justify-content:center;border-radius:9999px;\n height:88px;width:88px;min-height:88px;min-width:88px;background:var(--plx-soft);font-size:34px;line-height:1}\n.plx-ben__t{font-size:20px;font-weight:600;line-height:1.25;margin:0}\n.plx-ben__b{font-size:16px;line-height:1.5;color:var(--plx-mut);margin:0}\n\n/* velike statistike: besedilo levo, slika DESNO (pri njih flex-row-reverse) */\n.plx-statrow{display:flex;flex-direction:column-reverse;gap:40px;align-items:stretch}\n@media(min-width:640px){.plx-statrow{flex-direction:row-reverse;justify-content:space-between}}\n.plx-statrow__img{width:100%;flex-shrink:0}\n@media(min-width:640px){.plx-statrow__img{width:50%}}\n@media(min-width:750px){.plx-statrow__img{width:41%}}\n.plx-statrow__img .plx-frame1{position:relative;width:100%;overflow:hidden;aspect-ratio:1/1;border-radius:16px}\n@media(min-width:750px){.plx-statrow__img .plx-frame1{border-radius:24px}}\n.plx-statrow__img img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}\n.plx-statrow__body{display:flex;flex-direction:column;gap:24px;margin:auto 0;width:100%;align-items:center;text-align:center}\n@media(min-width:640px){.plx-statrow__body{width:50%;align-items:flex-start;text-align:left}}\n.plx-statrow__body h2{font-size:24px;line-height:1.2;font-weight:700;margin:0}\n@media(min-width:750px){.plx-statrow__body h2{font-size:34px}}\n.plx-statrow__body>p{font-size:16px;line-height:1.5;color:var(--plx-mut);margin:0}\n/* velike statistike */\n.plx-stat{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%}\n@media(min-width:750px){.plx-stat{gap:24px;max-width:420px}}\n.plx-stat__i{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;text-align:left;\n padding:16px 0;border-top:1px solid var(--plx-line);flex:1;min-width:166px}\n@media(min-width:750px){.plx-stat__i{padding:24px 0}}\n.plx-stat__n{font-family:Georgia,'Times New Roman',serif;font-size:32px;font-weight:600;line-height:1.2;color:var(--plx-ink)}\n@media(min-width:750px){.plx-stat__n{font-size:48px}}\n.plx-stat__l{font-size:14px;font-weight:600;line-height:1.4;margin-top:8px}\n@media(min-width:750px){.plx-stat__l{font-size:16px}}\n.plx-stat__s{font-size:13px;color:var(--plx-mut);font-weight:400;margin-top:6px}\n\n/* 4 male statistike na obarvani podlagi */\n.plx-soft-sec{background:#f4f1fa;margin:0 -100vw;padding:56px 100vw}\n.plx-mini{display:grid;grid-template-columns:1fr 1fr;gap:24px;justify-items:center;text-align:center}\n@media(min-width:750px){.plx-mini{grid-template-columns:repeat(4,1fr)}}\n.plx-mini__n{font-family:Georgia,'Times New Roman',serif;font-size:32px;font-weight:600;line-height:1.2}\n@media(min-width:750px){.plx-mini__n{font-size:48px}}\n.plx-mini__l{font-size:14px;font-weight:600;line-height:1.4;margin-top:6px}\n\n/* vet blok: slika levo, citata desno (kot pri njih) */\n.plx-vetrow{display:flex;flex-direction:column;gap:24px;align-items:stretch}\n@media(min-width:750px){.plx-vetrow{flex-direction:row;gap:40px}}\n.plx-vetrow__img{width:100%;flex-shrink:0}\n@media(min-width:640px){.plx-vetrow__img{width:50%}}\n@media(min-width:750px){.plx-vetrow__img{width:41%}}\n.plx-vetrow__img .plx-frame{position:relative;width:100%;overflow:hidden;aspect-ratio:4/5;border-radius:16px}\n@media(min-width:750px){.plx-vetrow__img .plx-frame{border-radius:24px}}\n.plx-vetrow__img img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}\n.plx-vets{display:flex;flex-direction:column;gap:24px;margin:auto 0;width:100%}\n.plx-vet{background:#fff;border:1px solid var(--plx-line);border-radius:12px;padding:24px}\n.plx-vet p{font-style:italic;font-size:16px;line-height:1.5;margin:0 0 14px}\n.plx-vet__n{font-size:14px;font-weight:700;margin:0}\n.plx-vet__r{font-size:13px;color:var(--plx-mut);margin:2px 0 0}\n\n/* znacke kakovosti */\n.plx-q{display:grid;grid-template-columns:1fr 1fr;gap:16px}\n@media(min-width:750px){.plx-q{grid-template-columns:repeat(4,1fr)}}\n.plx-q__i{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;\n background:#fff;border:1px solid var(--plx-line);border-radius:12px;padding:20px 14px}\n.plx-q__e{font-size:28px;line-height:1}\n.plx-q__t{font-size:14px;font-weight:700;line-height:1.3}\n\n/* socialni pas s CTA */\n.plx-bar{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}\n.plx-bar__btn{display:inline-block;background:var(--plx-ink);color:#fff;text-decoration:none;\n font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase;\n padding:16px 40px;border-radius:6px;min-width:260px}\n.plx-bar__p{font-size:14px;color:var(--plx-mut);margin:0}\n\n/* dokazi strank, centrirano in ozko */\n.plx-res{max-width:765px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}\n.plx-res__stars{color:#ff9a0a;letter-spacing:3px;font-size:16px}\n.plx-res__q{font-size:18px;font-weight:600;line-height:1.4;max-width:520px;margin:0}\n.plx-res__w{font-size:13px;color:var(--plx-mut);text-transform:uppercase;letter-spacing:.06em;margin:0}\n.plx-note{background:#fff8e6;border:1px solid #efdfa4;color:#7a5c12;font-size:13px;\n border-radius:8px;padding:10px 12px;margin:18px auto 0;max-width:648px;text-align:left}\n</style><div class=\"plx\"><div class=\"plx-bar\">\n <a class=\"plx-bar__btn\" href=\"#offer\">NAROČI ZDAJ</a>\n <p class=\"plx-bar__p\"><span style=\"color:#a8712f;font-weight:700;background:#f6ead9;border-radius:4px;padding:0 4px\">VPIŠI št.</span> &mdash; Pridruži se X lastnikom psov, ki izbirajo FloraMix</p>\n</div></div>",
+        "display_id": false,
+        "visibility": "always-display",
+        "color_scheme": "background-1",
+        "padding_top": 32,
+        "padding_bottom": 56
+      }
+    },
+    "pl_bar2": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"plx\"><div class=\"plx-bar\">\n <a class=\"plx-bar__btn\" href=\"#offer\">NAROČI ZDAJ</a>\n <p class=\"plx-bar__p\"><span style=\"color:#a8712f;font-weight:700;background:#f6ead9;border-radius:4px;padding:0 4px\">VPIŠI št.</span> &mdash; Pridruži se X lastnikom psov, ki izbirajo FloraMix</p>\n</div></div>",
+        "display_id": false,
+        "visibility": "always-display",
+        "color_scheme": "background-1",
+        "padding_top": 32,
+        "padding_bottom": 56
+      }
+    },
+    "pl_res": {
+      "type": "custom-liquid",
+      "settings": {
+        "custom_liquid": "<div class=\"plx\"><div class=\"plx-res\">\n <div class=\"plx-res__stars\">&#9733;&#9733;&#9733;&#9733;&#9733;</div>\n <h2 style=\"font-size:22px;font-weight:700;margin:0\">Rezultati, ki jih lastniki obožujejo</h2>\n <p class=\"plx-res__q\">&bdquo;<span style=\"color:#a8712f;font-weight:700;background:#f6ead9;border-radius:4px;padding:0 4px\">VPIŠI RESNIČNO OCENO STRANKE</span>&ldquo;</p>\n <p class=\"plx-res__w\"><span style=\"color:#a8712f;font-weight:700;background:#f6ead9;border-radius:4px;padding:0 4px\">IME, KRAJ</span></p>\n <div class=\"plx-note\">Opomba uredniku: vstavi resnično oceno stranke. Izmišljenih ne objavljamo.</div>\n</div></div>",
+        "display_id": false,
+        "visibility": "always-display",
+        "color_scheme": "background-1",
+        "padding_top": 56,
+        "padding_bottom": 40
+      }
+    }
+  },
+  "order": [
+    "hide_chrome",
+    "offer_bar",
+    "ld_header",
+    "hero",
+    "reasons",
+    "pl_bar1",
+    "reasons_b",
+    "pl_bar2",
+    "pl_res",
+    "offer",
+    "ingredients",
+    "faq",
+    "loox_reviews",
+    "guarantee",
+    "ld_footer"
+  ]
+}
