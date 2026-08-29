@@ -1536,7 +1536,7 @@
                   "settings": {
                     "visibility": "always-display",
                     "button_label": "Preveri razpoložljivost ➻",
-                    "button_link": "https://shrine.io",
+                    "button_link": "/products/mobimix-za-pse-in-macke",
                     "button_style_secondary": false,
                     "large_font_size": false,
                     "enable_custom_color": false,
@@ -3523,7 +3523,7 @@
               "settings": {
                 "visibility": "always-display",
                 "button_label": "Preveri razpoložljivost ➻",
-                "button_link": "https://shrine.io",
+                "button_link": "/products/mobimix-za-pse-in-macke",
                 "button_style_secondary": false,
                 "large_font_size": false,
                 "enable_custom_color": false,
