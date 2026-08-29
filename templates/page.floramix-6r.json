@@ -250,7 +250,7 @@
         "gifts_in_tier": true,
         "protocol_label": "3-mesečni protokol",
         "offer_checklist": "2× FloraMix — 1 + 1 GRATIS\nPrenosna zložljiva posoda — 9,00 €\nBrezplačna dostava\n60-dnevna garancija vračila denarja",
-        "offer_total_value": "⚠ VPIŠI: Skupna vrednost X € — prihraniš X €",
+        "offer_total_value": "",
         "gifts_heading": "VKLJUČENO V TA PAKET",
         "hide_gifts_heading": false,
         "tier_1_style": "none",
