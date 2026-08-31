@@ -174,7 +174,7 @@
           "settings": {
             "tag": "Rešitev",
             "title": "Pridi do vzroka težav na koži od znotraj — naravna rešitev, ki pokrije vse tri fronte hkrati",
-            "text": "<p>FloraMix je posebej formuliran za podporo <strong>zdravemu črevesju, imunskemu sistemu ter zdravi koži in dlaki</strong>. Vsebuje skrbno izbrano kombinacijo probiotikov, prebiotika, postbiotikov ter drugih pomembnih sestavin.</p><p>Formula pomaga podpirati <strong>ravnovesje črevesne mikrobiote in normalen imunski odziv</strong>, hkrati pa skrbi za kožo in dlako – kar lahko pomeni <strong>manj srbenja, lizanja tačk, stresanja z glavo in nelagodja</strong> ter bolj zadovoljnega in udobnega psa.</p>",
+            "text": "<p>FloraMix je posebej formuliran za podporo <strong>zdravemu črevesju, imunskemu sistemu ter zdravi koži in dlaki</strong>. Vsebuje skrbno izbrano kombinacijo probiotikov, prebiotika, postbiotikov ter drugih pomembnih sestavin.</p><p>Formula pomaga podpirati ravnovesje črevesne mikrobiote in normalen imunski odziv, hkrati pa skrbi za kožo in dlako – kar lahko pomeni <strong>manj srbenja, lizanja tačk, stresanja z glavo in nelagodja</strong> ter bolj zadovoljnega in udobnega psa.</p>",
             "image": "shopify://shop_images/hf_20260831_231614_7e47fce3-5d3f-46c6-8c8b-f82167699623.png"
           }
         }
@@ -347,17 +347,6 @@
         "divider_color": "#565858"
       }
     },
-    "pl_res": {
-      "type": "custom-liquid",
-      "settings": {
-        "display_id": false,
-        "visibility": "always-display",
-        "custom_liquid": "",
-        "color_scheme": "background-1",
-        "padding_top": 56,
-        "padding_bottom": 40
-      }
-    },
     "offer": {
       "type": "petsome-ld-offer",
       "blocks": {
@@ -444,13 +433,13 @@
         "star_color": "#ffcc00",
         "tags": "Za mirnejšo kožo | Za urejeno prebavo | 15 aktivnih sestavin",
         "tag_color": "#b9a3dd",
-        "checks": "Podpira mirnejšo kožo in manj praskanja\nPodpira urejeno prebavo in enakomerno blato\nPodpira lesk in gostoto dlake\n15 aktivnih sestavin z izpisanimi količinami\nOdmerek prilagojen teži psa\nIzdelano v EU",
+        "checks": "Trdnejše blato, manj napenjanja in mirnejša prebava\nManj praskanja, lizanja tačk in stresanja z glavo\nGostejša in bolj sijoča dlaka ter manj dlake po stanovanju\nGut-Activated Defense: probiotik, prebiotik in postbiotik v enem prašku\n15 sestavin",
         "check_color": "#121212",
         "hero_label": "EKSKLUZIVNA PONUDBA",
-        "hero_tier_quantity": "",
+        "hero_tier_quantity": "4",
         "gifts_in_tier": true,
         "protocol_label": "3-mesečni protokol",
-        "offer_checklist": "2× FloraMix — 1 + 1 GRATIS\nPrenosna zložljiva posoda — 9,00 €\nBrezplačna dostava\n60-dnevna garancija vračila denarja",
+        "offer_checklist": "4× FloraMix \nPrenosna zložljiva posoda — 9,00 €\nDentalSticks - 14,90 €\nBrezplačna dostava\n60-dnevna garancija vračila denarja",
         "offer_total_value": "",
         "gifts_heading": "VKLJUČENO V TA PAKET",
         "hide_gifts_heading": false,
@@ -791,7 +780,6 @@
     "pl_bar2",
     "petsome_comparison_rYJVwz",
     "petsome_ld_reasons_fhytGw",
-    "pl_res",
     "offer",
     "petsome_stats_4VFMbU",
     "ingredients",
