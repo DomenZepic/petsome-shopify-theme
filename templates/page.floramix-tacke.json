@@ -180,30 +180,10 @@
             "text": "<p>FloraMix je posebej formuliran za podporo <strong>zdravemu črevesju, imunskemu sistemu ter zdravi koži in dlaki</strong>. Vsebuje skrbno izbrano kombinacijo probiotikov, prebiotika, postbiotikov ter drugih pomembnih sestavin.</p><p>Formula pomaga podpirati <strong>ravnovesje črevesne mikrobiote in normalen imunski odziv</strong>, hkrati pa skrbi za kožo in dlako – kar lahko pomeni <strong>manj srbenja, lizanja tačk, stresanja z glavo in nelagodja</strong> ter bolj zadovoljnega in udobnega psa.</p>",
             "image": "shopify://shop_images/FloraMix_SLO_06_odmerjanje.png"
           }
-        },
-        "r5": {
-          "type": "reason",
-          "settings": {
-            "tag": "kako se uporablja",
-            "title": "Potreseš po obroku in premešaš",
-            "text": "<p>Brez skrivanja v siru, brez pregovarjanja, brez še ene tablete. FloraMix je prah — odmerek prilagodiš teži psa in ga zmešaš v obrok. Pes ne opazi, da si karkoli naredil.</p>",
-            "image": "shopify://shop_images/FloraMix_sijoca_dlaka.png"
-          }
-        },
-        "r6": {
-          "type": "reason",
-          "settings": {
-            "tag": "kaj je notri",
-            "title": "Vse količine izpisane. Izdelano v EU.",
-            "text": "<p>Pri FloraMixu ni mešanice brez številk: krilova moka 22,44 % · kolostrum 13,3 % · Sophora japonica 5 % · maceha 3,33 % · kurkuma. Petnajst aktivnih sestavin in vsaka s svojo količino. Razvito v Sloveniji, izdelano v EU.</p>",
-            "image": "shopify://shop_images/FloraMix_checklist.png"
-          }
         }
       },
       "block_order": [
-        "r4",
-        "r5",
-        "r6"
+        "r4"
       ],
       "settings": {
         "show_numbers": false,
@@ -212,7 +192,148 @@
         "anchor_id": "reasons-b",
         "padding_top": 80,
         "padding_bottom": 80,
-        "background_color": "#fdfbf7",
+        "background_color": "#E3DFE8",
+        "text_color": "#2a2140",
+        "accent_color": "#8a6fc0",
+        "divider_color": "#565858"
+      }
+    },
+    "petsome_comparison_rYJVwz": {
+      "type": "petsome-comparison",
+      "blocks": {
+        "row_m3VNwC": {
+          "type": "row",
+          "settings": {
+            "label": "Prebiotik — cikorija hrani koristne bakterije",
+            "them_value": "✅",
+            "us_value": "✅"
+          }
+        },
+        "row_CVAm6P": {
+          "type": "row",
+          "settings": {
+            "label": "Probiotik, 2 seva — naseljujeta črevesje",
+            "them_value": "✅",
+            "us_value": "✅"
+          }
+        },
+        "row_jxexzW": {
+          "type": "row",
+          "settings": {
+            "label": "Postbiotika, 2 seva — delujeta tam, kjer žive kulture ne sežejo",
+            "them_value": "✅",
+            "us_value": "✅"
+          }
+        },
+        "row_9VUbhc": {
+          "type": "row",
+          "settings": {
+            "label": "Število aktivnih sestavin",
+            "them_value": "5-7",
+            "us_value": "15"
+          }
+        },
+        "row_RpXVQL": {
+          "type": "row",
+          "settings": {
+            "label": "Kolostrum 13,3 % — imunoglobulini za odpornost ob črevesju",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_UzHFKb": {
+          "type": "row",
+          "settings": {
+            "label": "Sophora japonica 5 % — flavonoidi za imunski odziv, ki poganja kožo",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_CMb8AE": {
+          "type": "row",
+          "settings": {
+            "label": "Beta-glukani iz kvasa — dodatna opora imunskemu odzivu",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_iP4B8L": {
+          "type": "row",
+          "settings": {
+            "label": "Krilova moka 22,44 % — EPA in DHA, gradniki kožne pregrade",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        },
+        "row_gw6N9V": {
+          "type": "row",
+          "settings": {
+            "label": "Cink, biotin in vitamin E — kar koža porabi pri obnavljanju",
+            "them_value": "❌",
+            "us_value": "✅"
+          }
+        }
+      },
+      "block_order": [
+        "row_m3VNwC",
+        "row_CVAm6P",
+        "row_jxexzW",
+        "row_9VUbhc",
+        "row_RpXVQL",
+        "row_UzHFKb",
+        "row_CMb8AE",
+        "row_iP4B8L",
+        "row_gw6N9V"
+      ],
+      "settings": {
+        "heading": "<p>Zakaj navadni probiotiki pogosto ne zaležejo?</p>",
+        "description": "<p>Ko slišiš, da gre za črevesje, kupiš probiotik. Prebava se umiri, praskanje pa ostane. Razlog ni, da probiotiki ne delajo. Razlog je, da so v igri tri fronte, navaden probiotik pa naslavlja samo eno.</p>",
+        "them_image": "shopify://shop_images/us_vs_them.png",
+        "them_label": "Ostali dodatki",
+        "us_image": "shopify://shop_images/Kaching-Bundles-FloraMix_bundle_1x_transparent_800x800_49509508-4650-4c88-a050-ea5ef68437f5.webp",
+        "us_label": "FloraMix",
+        "background_color": "#FAF9F6",
+        "accent_color": "#F3EFF7",
+        "accent_color_dark": "#5B3A87",
+        "secondary_color": "#E3DFE8",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "petsome_ld_reasons_fhytGw": {
+      "type": "petsome-ld-reasons",
+      "blocks": {
+        "reason_yee4Jz": {
+          "type": "reason",
+          "settings": {
+            "tag": "Priporočeno s strani veterinarjev",
+            "title": "Proizvedeno, pregledano in priporočeno s strani strokovnjakov",
+            "text": "<p>Petsome izdelki so razviti v Sloveniji in narejeni s pomočjo strokovnjakov na področju veterine in farmacije. Na voljo so v že več kot 40+ veterinarskih ambulant po Sloveniji. </p>",
+            "image": "shopify://shop_images/hf_20260831_222426_bfe5a94b-6058-40f0-b4c2-a9066f6b0737.png"
+          }
+        },
+        "reason_GTUKCt": {
+          "type": "reason",
+          "settings": {
+            "tag": "Rešitev",
+            "title": "Pridi do vzroka težav na koži od znotraj — z dnevnim praškom, ki pokrije vse tri fronte hkrati",
+            "text": "<p>FloraMix je posebej formuliran za podporo <strong>zdravemu črevesju, imunskemu sistemu ter zdravi koži in dlaki</strong>. Vsebuje skrbno izbrano kombinacijo probiotikov, prebiotika, postbiotikov ter drugih pomembnih sestavin.</p><p>Formula pomaga podpirati <strong>ravnovesje črevesne mikrobiote in normalen imunski odziv</strong>, hkrati pa skrbi za kožo in dlako – kar lahko pomeni <strong>manj srbenja, lizanja tačk, stresanja z glavo in nelagodja</strong> ter bolj zadovoljnega in udobnega psa.</p>",
+            "image": "shopify://shop_images/FloraMix_SLO_06_odmerjanje.png"
+          }
+        }
+      },
+      "block_order": [
+        "reason_yee4Jz",
+        "reason_GTUKCt"
+      ],
+      "settings": {
+        "show_numbers": false,
+        "pad_numbers": true,
+        "number_start": 1,
+        "anchor_id": "reasons-b",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#FAF9F6",
         "text_color": "#2a2140",
         "accent_color": "#8a6fc0",
         "divider_color": "#565858"
@@ -607,6 +728,8 @@
     "reasons",
     "pl_bar1",
     "reasons_b",
+    "petsome_comparison_rYJVwz",
+    "petsome_ld_reasons_fhytGw",
     "pl_bar2",
     "pl_res",
     "offer",
