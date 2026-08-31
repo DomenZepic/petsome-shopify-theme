@@ -316,8 +316,8 @@
           "type": "reason",
           "settings": {
             "tag": "Mnenja strank",
-            "title": "Obožuje ga 5.000+ lastnikov psov",
-            "text": "<p>Od prvih uporabnikov do dolgoletnih strank je FloraMix postal del vsakodnevne rutine tisočih lastnikov psov. Z več kot 5.000 zadovoljnimi psi in številnimi odličnimi ocenami je postal preprosta izbira za podporo črevesju, odpornosti in koži — vsak dan, z eno mero po obroku.</p>",
+            "title": "Obožuje ga 5.000+ lastnikov psov po EU",
+            "text": "<p>Od prvih uporabnikov do dolgoletnih strank je FloraMix postal del vsakodnevne rutine tisočih lastnikov psov. Z več kot 5.000 zadovoljnimi psi in številnimi odličnimi ocenami je postal preprosta izbira za podporo črevesju, odpornosti in koži — vsak dan.</p>",
             "image": "shopify://shop_images/hf_20260831_222710_521da732-73f5-4bb0-8d27-6306eac6c48b.png"
           }
         }
@@ -616,6 +616,32 @@
         "accent_color": "#8a6fc0"
       }
     },
+    "178821677423e6ddea": {
+      "type": "apps",
+      "blocks": {
+        "loox_reviews_loox_agg_section_Ne8e63": {
+          "type": "shopify://apps/loox-reviews/blocks/loox-agg-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "settings": {
+            "reviews_to_display": "product_reviews_only",
+            "default_tab": "automatic",
+            "only_photos": false,
+            "hide_thumbnails": false,
+            "product_handle": "",
+            "aggregated": false,
+            "data-limit": 20,
+            "maxwidth": 1080,
+            "is_sample": true
+          }
+        }
+      },
+      "block_order": [
+        "loox_reviews_loox_agg_section_Ne8e63"
+      ],
+      "settings": {
+        "display_id": false,
+        "include_margins": true
+      }
+    },
     "loox_reviews": {
       "type": "apps",
       "blocks": {
@@ -735,6 +761,7 @@
     "offer",
     "ingredients",
     "faq",
+    "178821677423e6ddea",
     "loox_reviews",
     "guarantee",
     "ld_footer"
