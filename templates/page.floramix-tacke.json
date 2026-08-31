@@ -460,7 +460,7 @@
         "capsules_per_package": 120,
         "capsules_per_day_by_size": "1, 2, 3",
         "grams_per_package": 120,
-        "grams_per_day_by_size": "1.5, 3, 4.5",
+        "grams_per_day_by_size": "1.33, 2.67, 4",
         "anchor_id": "offer",
         "padding_top": 80,
         "padding_bottom": 80,
