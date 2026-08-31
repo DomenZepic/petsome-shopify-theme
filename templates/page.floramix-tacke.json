@@ -224,7 +224,7 @@
       "settings": {
         "display_id": false,
         "visibility": "always-display",
-        "custom_liquid": "",
+        "custom_liquid": "<style>\n.pz { background:#FAF9F6; padding:48px 16px; }\n.pz-wrap { max-width:680px; margin:0 auto; }\n.pz-kicker { font-size:13px; letter-spacing:.02em; color:#0E1111; opacity:.5; margin:0 0 6px; }\n.pz-title { font-family:Poppins,sans-serif; font-weight:700; font-size:28px; line-height:1.25; color:#0E1111; margin:0 0 20px; }\n.pz-head, .pz-row { display:grid; grid-template-columns:minmax(0,1fr) 92px 92px; }\n.pz-head { align-items:end; margin-bottom:4px; }\n.pz-col-us { background:#0E1111; color:#FAF9F6; text-align:center; padding:11px 4px; border-radius:10px 10px 0 0; font-family:Poppins,sans-serif; font-weight:700; font-size:13px; line-height:1.2; }\n.pz-col-them { text-align:center;",
         "color_scheme": "background-1",
         "padding_top": 40,
         "padding_bottom": 52
