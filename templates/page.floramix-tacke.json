@@ -17,13 +17,13 @@
         "hide_footer": true
       }
     },
-    "offer_bar": {
+    "petsome_ld_offer_bar_8VbjGi": {
       "type": "petsome-ld-offer-bar",
       "settings": {
-        "headline": "VODNIK ZA LASTNIKE PSOV",
-        "subline": "Bralni čas: 4 minute",
+        "headline": "Samo za nove stranke do -45%",
+        "subline": "+ 2 brezplačni darili 🎁",
         "link": "",
-        "show_timer": false,
+        "show_timer": true,
         "timezone": "Europe/Ljubljana",
         "hours_label": "Ure",
         "minutes_label": "Min",
@@ -722,7 +722,7 @@
   },
   "order": [
     "hide_chrome",
-    "offer_bar",
+    "petsome_ld_offer_bar_8VbjGi",
     "ld_header",
     "hero",
     "reasons",
