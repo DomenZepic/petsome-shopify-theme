@@ -78,18 +78,15 @@
         "gift_3"
       ],
       "settings": {
-        "avatar_1": "shopify://shop_images/FloraMix_card_praskanje.jpg",
-        "avatar_2": "shopify://shop_images/FloraMix_card_tacke.jpg",
-        "avatar_3": "shopify://shop_images/FloraMix_card_dlaka.jpg",
-        "show_badge_stars": true,
-        "rating_text": "15 aktivnih sestavin · vse količine izpisane na embalaži",
+        "show_badge_stars": false,
+        "rating_text": "",
         "heading": "<p>Ali tvoj pes liže tačke, se praska ali stresa z glavo?</p>",
-        "subline": "<p>Če to počne vsak večer, ni razvada. Odgovor najpogosteje ni na koži — je v črevesju. FloraMix je dnevni prašek s 15 aktivnimi sestavinami, ki podpira črevesje, imunski odziv in kožo hkrati. Danes 1 + 1 GRATIS.</p>",
+        "subline": "<p>Če to počne vsak dan, to ni razvada. Odgovor najpogosteje ni na koži — je v črevesju. FloraMix je dnevni prašek s 15 aktivnimi sestavinami, ki podpira črevesje, imunski odziv in kožo hkrati. </p>",
         "image": "shopify://shop_images/FloraMix_SLO_01_hero.png",
         "cta_label": "Preberi, zakaj ↓",
-        "cta_url": "#offer",
+        "cta_url": "#",
         "guarantee_text": "",
-        "proof_text": "Razvito v Sloveniji, izdelano v EU",
+        "proof_text": "",
         "show_gifts": false,
         "gifts_heading": "BREZPLAČNA DARILA PRI EKSKLUZIVNI PONUDBI!",
         "gift_badge_label": "GRATIS",
@@ -482,6 +479,43 @@
         "margin_bottom": 0
       }
     },
+    "petsome_stats_4VFMbU": {
+      "type": "petsome-stats",
+      "blocks": {
+        "stat_6VbwnF": {
+          "type": "stat",
+          "settings": {
+            "number": "300 milijard",
+            "description": "CFU/kg iz dveh EU-registriranih sevov z oznakama 4b1705ii in 4b1820."
+          }
+        },
+        "stat_4LmiWp": {
+          "type": "stat",
+          "settings": {
+            "number": "3 področja",
+            "description": "podpore: črevesje, imunski odziv ter koža in dlaka."
+          }
+        },
+        "stat_Xjn9KG": {
+          "type": "stat",
+          "settings": {
+            "number": "Do 90 dni",
+            "description": "uporabe iz enega pakiranja pri psu do 15 kg ob eni merici na dan."
+          }
+        }
+      },
+      "block_order": [
+        "stat_6VbwnF",
+        "stat_4LmiWp",
+        "stat_Xjn9KG"
+      ],
+      "settings": {
+        "background_color": "#e8d6c5",
+        "number_color": "#5B3A87",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
     "ingredients": {
       "type": "petsome-ld-ingredients",
       "settings": {
@@ -759,6 +793,7 @@
     "pl_bar2",
     "pl_res",
     "offer",
+    "petsome_stats_4VFMbU",
     "ingredients",
     "faq",
     "178821677423e6ddea",
