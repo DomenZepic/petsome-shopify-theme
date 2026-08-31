@@ -133,9 +133,9 @@
         "r3": {
           "type": "reason",
           "settings": {
-            "tag": "zakaj drugo ne zaleže",
-            "title": "To pa še ni vse — samo prebava ni dovolj",
-            "text": "<p>Tu se večina probiotikov ustavi: dodajo bakterije, uredijo prebavo in končajo. Ampak če urediš samo prebavo, ostaneta imunski odziv in koža nedotaknjena. <strong>TriAxis Reset™</strong> zato dela v treh smereh hkrati — <strong>Umiri. Nahrani. Okrepi.</strong> Črevesje: cikorija kot prebiotik, žive kulture E. lactis (200 mrd CFU/kg) in B. velezensis. Imunski odziv: kolostrum in Sophora japonica. Koža in dlaka: krilova moka, maceha in kurkuma.</p>",
+            "tag": "Zakaj probiotik sam ne zaleže",
+            "title": "Črevesje je začetek, ne konec",
+            "text": "<p>Ko enkrat slišiš, da gre za črevesje, je prva misel probiotik. In res naredi svoje — prebava se umiri, blato je enakomernejše. Nekaj tednov je videti, kot da si našel odgovor.</p><p>Potem se počasi vrne. Najprej spet tisto lizanje zvečer, čez čas stresanje z glavo. Prebava ostane urejena, koža pa je tam, kjer je bila.</p><p>Ker se veriga v črevesju ne konča. Ob njem sedi velik del imunskega odziva tvojega psa in ta se ne pomiri sam od sebe samo zato, ker so se dodale bakterije. Dokler je razdražen, koža reagira naprej. In koža, ki se je mesece praskala in lizala, rabi še gradnike, da si opomore.</p><p>Probiotik torej ni napačna pot. Je samo prva tretjina.</p>",
             "image": "shopify://shop_images/FloraMix_graf.png"
           }
         }
@@ -175,9 +175,9 @@
         "r4": {
           "type": "reason",
           "settings": {
-            "tag": "v čem je razlika",
-            "title": "Sophora japonica — tisto, česar drugi nimajo",
-            "text": "<p>Trojica pre-, pro- in postbiotikov ni razlika: to oglašuje danes vsak. Razlika je <strong>Sophora japonica 5 %</strong>, ki je pri nas ne najdeš v nobenem konkurenčnem dodatku za pse. Zraven kolostrum 13,3 % in krilova moka 22,44 % — ne lososovo olje, ampak krill.</p>",
+            "tag": "Rešitev",
+            "title": "Pridi do vzroka težav na koži od znotraj — z dnevnim praškom, ki pokrije vse tri fronte hkrati",
+            "text": "<p>FloraMix je posebej formuliran za podporo <strong>zdravemu črevesju, imunskemu sistemu ter zdravi koži in dlaki</strong>. Vsebuje skrbno izbrano kombinacijo probiotikov, prebiotika, postbiotikov ter drugih pomembnih sestavin.</p><p>Formula pomaga podpirati <strong>ravnovesje črevesne mikrobiote in normalen imunski odziv</strong>, hkrati pa skrbi za kožo in dlako – kar lahko pomeni <strong>manj srbenja, lizanja tačk, stresanja z glavo in nelagodja</strong> ter bolj zadovoljnega in udobnega psa.</p>",
             "image": "shopify://shop_images/FloraMix_SLO_06_odmerjanje.png"
           }
         },
@@ -218,6 +218,18 @@
         "divider_color": "#565858"
       }
     },
+    "custom_liquid_UQA7eB": {
+      "type": "custom-liquid",
+      "name": "t:sections.custom-liquid.presets.name",
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "custom_liquid": "",
+        "color_scheme": "background-1",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
     "pl_bar2": {
       "type": "custom-liquid",
       "settings": {
@@ -254,7 +266,7 @@
           "type": "info_row",
           "settings": {
             "heading": "Podatki o izdelku",
-            "content": "<p>FloraMix je dnevni prašek za pse, ki se praskajo, ližejo tačke, stresajo z glavo ali imajo neurejeno prebavo. Potreseš ga po obroku. Namesto da bi deloval na koži, podpira <strong>tri smeri hkrati — črevesje, odpornost in kožo</strong>. Ta pristop imenujemo <strong>TriAxis Reset™</strong>.</p>",
+            "content": "<p>FloraMix je dnevni prašek za pse, ki se praskajo, ližejo tačke, stresajo z glavo ali imajo neurejeno prebavo. Potreseš ga po obroku. Namesto da bi deloval na koži, podpira <strong>tri smeri hkrati — črevesje, odpornost in kožo</strong>.</p>",
             "open": true
           }
         },
@@ -607,6 +619,7 @@
     "reasons",
     "pl_bar1",
     "reasons_b",
+    "custom_liquid_UQA7eB",
     "pl_bar2",
     "pl_res",
     "offer",
