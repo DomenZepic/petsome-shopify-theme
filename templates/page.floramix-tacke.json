@@ -82,7 +82,7 @@
         "rating_text": "",
         "heading": "<p>Ali tvoj pes liže tačke, se praska ali stresa z glavo?</p>",
         "subline": "<p>Če to počne vsak dan, to ni razvada. Odgovor najpogosteje ni na koži — je v črevesju. FloraMix je dnevni prašek s 15 aktivnimi sestavinami, ki podpira črevesje, imunski odziv in kožo hkrati. </p>",
-        "image": "shopify://shop_images/FloraMix_SLO_01_hero.png",
+        "image": "shopify://shop_images/hf_20260831_225848_7894d240-f8d8-4680-8b02-169e2f1f52e7.png",
         "cta_label": "Preberi, zakaj ↓",
         "cta_url": "#",
         "guarantee_text": "",
@@ -113,18 +113,18 @@
           "type": "reason",
           "settings": {
             "tag": "",
-            "title": "Zakaj je zdravje črevesja pomembno pri sezonskih alergijah in kvasovkah?",
+            "title": "Zakaj je zdravje črevesja pomembno pri sezonskih alergijah in kvasnih glivah?",
             "text": "<p>Večina lastnikov je presenečenih, ko izve, da so lahko srbenje, lizanje tačk in stresanje z glavo pri njihovem psu povezani z organom, ki potrebuje podporo – z neravnovesjem v črevesju.</p><p>Vendar so to le <strong>3 od številnih znakov</strong>, da črevesje vašega psa ni v ravnovesju. Tukaj je še nekaj drugih!</p>",
-            "image": "shopify://shop_images/FloraMix_explainer_split.png"
+            "image": "shopify://shop_images/hf_20260831_230324_9287ce8f-2603-4621-9896-289dadc1f29f.png"
           }
         },
         "r2": {
           "type": "reason",
           "settings": {
-            "tag": "od kod prihaja",
+            "tag": "",
             "title": "Kateri so znaki slabega zdravja črevesja?",
             "text": "<p>Bodite pozorni na naslednje značilne znake, ki lahko kažejo na neravnovesje v črevesju:</p><ul><li>Občasno srbenje</li><li>Lizanje tačk</li><li>Stresanje z glavo</li><li>Uživanje trave</li><li>Tačke ali ušesa, ki imajo »sirast« oziroma neprijeten vonj</li><li>Občasne prebavne težave (mehko blato, driska ipd.)</li><li>Izpadanje dlake</li><li>Solzenje oči in rjavi madeži pod očmi</li></ul>",
-            "image": "shopify://shop_images/FloraMix_SLO_04_veterinar.png"
+            "image": "shopify://shop_images/hf_20260831_230700_a9c71954-410c-4ed1-96f1-562d1ff032fd.png"
           }
         },
         "r3": {
@@ -133,7 +133,7 @@
             "tag": "Zakaj probiotik sam ne zaleže",
             "title": "Črevesje je začetek, ne konec",
             "text": "<p>Ko enkrat slišiš, da gre za črevesje, je prva misel probiotik. In res naredi svoje — prebava se umiri, blato je enakomernejše. Nekaj tednov je videti, kot da si našel odgovor.</p><p>Potem se počasi vrne. Najprej spet tisto lizanje zvečer, čez čas stresanje z glavo. Prebava ostane urejena, koža pa je tam, kjer je bila.</p><p>Ker se veriga v črevesju ne konča. Ob njem sedi velik del imunskega odziva tvojega psa in ta se ne pomiri sam od sebe samo zato, ker so se dodale bakterije. Dokler je razdražen, koža reagira naprej. In koža, ki se je mesece praskala in lizala, rabi še gradnike, da si opomore.</p><p>Probiotik torej ni napačna pot. Je samo prva tretjina.</p>",
-            "image": "shopify://shop_images/FloraMix_graf.png"
+            "image": "shopify://shop_images/hf_20260831_231059_2e6a425b-3078-42b9-9fd6-ab3a6d815a45.png"
           }
         }
       },
@@ -788,9 +788,9 @@
     "reasons",
     "pl_bar1",
     "reasons_b",
+    "pl_bar2",
     "petsome_comparison_rYJVwz",
     "petsome_ld_reasons_fhytGw",
-    "pl_bar2",
     "pl_res",
     "offer",
     "petsome_stats_4VFMbU",
