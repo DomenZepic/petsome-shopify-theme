@@ -454,7 +454,7 @@
                   "prdouct_3_preselected": false,
                   "product_3_desc": "",
                   "product_3_percentage_discount": "0",
-                  "product_3_fixed_amount_discount": "0",
+                  "product_3_fixed_amount_discount": "10",
                   "show_images": true,
                   "images_size": "5",
                   "images_corner_radius": 2,
