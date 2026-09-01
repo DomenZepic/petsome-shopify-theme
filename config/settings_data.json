@@ -295,61 +295,6 @@
                 },
                 "blocks": {}
               },
-              "926ea95f-fd8a-43e7-b215-de4f6cbc19f9": {
-                "type": "cart_checkpoints-bar",
-                "disabled": true,
-                "settings": {
-                  "goal_type": "subtotal",
-                  "progress_message": "You're [amount] away from [next_goal]!",
-                  "success_message": "Congrats! You've unlocked all promotions!",
-                  "labels_mobile_text_size": 10,
-                  "labels_desktop_text_size": 12,
-                  "icon_size": 24,
-                  "icon_scale": 60,
-                  "icon_color": "accent-1",
-                  "icon_custom_color": "#dd1d1d",
-                  "icon_bg": "background-1",
-                  "icon_bg_color": "#ececec",
-                  "icon_bg_gradient": "linear-gradient(89deg, rgba(249, 234, 255, 1) 7%, rgba(218, 197, 255, 1) 94%)",
-                  "border_thickness": 2,
-                  "border_style": "solid",
-                  "border_color": "accent-1",
-                  "border_custom_color": "#dd1d1d",
-                  "icon_corner_radius": 100,
-                  "line_height": 7,
-                  "display_stripes": true,
-                  "line_color": "accent-1",
-                  "line_custom_color": "#dd1d1d",
-                  "line_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
-                  "enable_goal_1": true,
-                  "goal_1_icon_type": "icon",
-                  "goal_1_icon": "local_shipping",
-                  "goal_1_icon_filled": false,
-                  "goal_1_label": "Free Shipping",
-                  "goal_1_label_2": "",
-                  "goal_1_text": "FREE shipping",
-                  "goal_1_amount": 40,
-                  "enable_goal_2": true,
-                  "goal_2_icon_type": "icon",
-                  "goal_2_icon": "sell",
-                  "goal_2_icon_filled": false,
-                  "goal_2_label": "20% OFF",
-                  "goal_2_label_2": "",
-                  "goal_2_text": "a 20% discount",
-                  "goal_2_amount": 60,
-                  "enable_goal_3": true,
-                  "goal_3_icon_type": "icon",
-                  "goal_3_icon": "redeem",
-                  "goal_3_icon_filled": false,
-                  "goal_3_label": "Free Gift",
-                  "goal_3_label_2": "",
-                  "goal_3_text": "a FREE GIFT",
-                  "goal_3_amount": 80,
-                  "margin_top": 15,
-                  "margin_bottom": 15
-                },
-                "blocks": {}
-              },
               "058d6d0a-ba0d-48cb-9432-de85da1e5aef": {
                 "type": "cart_progress-bar",
                 "settings": {
@@ -496,7 +441,6 @@
             },
             "block_order": [
               "6269cf6e-8e24-4068-8e2a-35bb4addad4e",
-              "926ea95f-fd8a-43e7-b215-de4f6cbc19f9",
               "058d6d0a-ba0d-48cb-9432-de85da1e5aef",
               "097b7b4f-c0b8-4073-a06b-e6d49a5aad20",
               "cart_product_upsells_EmHKnm"
@@ -507,23 +451,6 @@
             "static": true,
             "settings": {},
             "blocks": {
-              "631b0e34-4299-400e-9f4d-c107c08cce01": {
-                "type": "cart_discount-field",
-                "disabled": true,
-                "settings": {
-                  "bottom_separator": true,
-                  "placeholder": "Enter discount code",
-                  "btn_label": "ADD",
-                  "error_msg": "Please enter a discount code!",
-                  "error_not_applicable_msg": "This code isn't valid or doesn't apply to your cart.",
-                  "error_already_applied_msg": "This code is already applied to your order.",
-                  "success_msg": "",
-                  "success_msg_duration": 3000,
-                  "margin_top": 15,
-                  "margin_bottom": 15
-                },
-                "blocks": {}
-              },
               "4f3e2a5f-006d-40ed-8370-49b15e0e427d": {
                 "type": "cart_subtotals",
                 "settings": {
@@ -578,7 +505,6 @@
               }
             },
             "block_order": [
-              "631b0e34-4299-400e-9f4d-c107c08cce01",
               "4f3e2a5f-006d-40ed-8370-49b15e0e427d",
               "0935e47c-9604-4faa-b47a-d61ca49c0c16",
               "68fdc0a0-cd7c-40b9-97b3-a76eb7917a47"
