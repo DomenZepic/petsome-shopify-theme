@@ -379,7 +379,7 @@
                   "toggle_element": "container",
                   "add_btn_label": "<strong>Dodaj</strong>",
                   "hide_in_cart_items": true,
-                  "stacking": "slider",
+                  "stacking": "row",
                   "accent_color": "accent-1",
                   "color_scheme": "background-1",
                   "product_list": [
