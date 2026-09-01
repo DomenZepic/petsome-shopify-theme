@@ -379,7 +379,7 @@
                   "toggle_element": "container",
                   "add_btn_label": "<strong>Dodaj</strong>",
                   "hide_in_cart_items": true,
-                  "stacking": "row",
+                  "stacking": "slider",
                   "accent_color": "accent-1",
                   "color_scheme": "background-1",
                   "product_list": [
@@ -412,7 +412,7 @@
                   "price_position": "next_to_title",
                   "price_size": "1.4",
                   "hide_compare_price": false,
-                  "show_variant_picker": false,
+                  "show_variant_picker": true,
                   "update_prices": false,
                   "skip_unavailable": false,
                   "container_title": "Dodaj in prihrani!",
