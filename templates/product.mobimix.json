@@ -627,7 +627,7 @@
               "type": "product_buy-buttons",
               "settings": {
                 "show_dynamic_checkout": false,
-                "skip_cart": true,
+                "skip_cart": false,
                 "atc_append": "left",
                 "atc_append_heights": "stretch-quantity",
                 "uppercase_text": true,
