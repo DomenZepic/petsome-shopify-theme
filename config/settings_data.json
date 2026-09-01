@@ -368,7 +368,6 @@
               "cart_product_upsells_EmHKnm": {
                 "type": "cart_product-upsells",
                 "name": "Product upsells",
-                "disabled": true,
                 "settings": {
                   "position": "body",
                   "display": "globally",
@@ -384,9 +383,9 @@
                   "accent_color": "accent-1",
                   "color_scheme": "background-1",
                   "product_list": [
-                    "floramix",
-                    "dentalmix",
-                    "mobimix"
+                    "dentalmix-1",
+                    "mobimix-1",
+                    "floramix-1"
                   ],
                   "collection": "upsell",
                   "prdouct_1_preselected": false,
