@@ -402,7 +402,7 @@
                   "enable_savings": true,
                   "savings_text": "<strong>(Prihraniš [amount])</strong>",
                   "savings_color": "text",
-                  "quantity_font_size": 14,
+                  "quantity_font_size": 12,
                   "quantity_container_padding": 0,
                   "quantity_corner_radius": 6,
                   "quantity_border_width": 1,
@@ -581,7 +581,7 @@
           }
         },
         "settings": {
-          "test_mode": false,
+          "test_mode": true,
           "heading_text": "Košarica",
           "heading_alignment": "flex-start",
           "heading_size": 26,
