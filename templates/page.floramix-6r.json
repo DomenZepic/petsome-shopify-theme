@@ -411,6 +411,43 @@
         "margin_bottom": 0
       }
     },
+    "petsome_stats_FUgxQp": {
+      "type": "petsome-stats",
+      "blocks": {
+        "stat_baMCXU": {
+          "type": "stat",
+          "settings": {
+            "number": "300 milijard",
+            "description": "CFU/kg iz dveh EU-registriranih sevov z oznakama 4b1705ii in 4b1820."
+          }
+        },
+        "stat_xAf4GM": {
+          "type": "stat",
+          "settings": {
+            "number": "3 področja",
+            "description": "podpore: črevesje, imunski odziv ter koža in dlaka."
+          }
+        },
+        "stat_AKWxzf": {
+          "type": "stat",
+          "settings": {
+            "number": "Do 90 dni",
+            "description": "uporabe iz enega pakiranja pri psu do 15 kg ob eni merici na dan."
+          }
+        }
+      },
+      "block_order": [
+        "stat_baMCXU",
+        "stat_xAf4GM",
+        "stat_AKWxzf"
+      ],
+      "settings": {
+        "background_color": "#e8d6c5",
+        "number_color": "#5B3A87",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
     "ingredients": {
       "type": "petsome-ld-ingredients",
       "settings": {
@@ -660,6 +697,7 @@
     "pl_bar2",
     "petsome_ld_timeline_hbjXJL",
     "offer",
+    "petsome_stats_FUgxQp",
     "ingredients",
     "faq",
     "loox_reviews",
