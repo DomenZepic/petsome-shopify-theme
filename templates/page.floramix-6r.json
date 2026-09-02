@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "hide_chrome": {
       "type": "hide-header-footer",
@@ -52,20 +53,23 @@
         "gift_1": {
           "type": "gift",
           "settings": {
+            "icon": "shopify://shop_images/hf_20260717_164541_5f9f0a09-7342-414c-b5a1-38000374b199.png",
             "label": "Prenosna zložljiva posoda",
-            "price": "0,00 €"
+            "price": "9.00 €"
           }
         },
         "gift_2": {
           "type": "gift",
           "settings": {
-            "label": "Brezplačna dostava",
-            "price": "0,00 €"
+            "icon": "shopify://shop_images/hf_20260709_194728_f15d5b24-84c3-48bd-a64e-0545ecd72289.png",
+            "label": "DentalSticks",
+            "price": "14.50 €"
           }
         },
         "gift_3": {
           "type": "gift",
           "settings": {
+            "icon": "shopify://shop_images/851188-1-ecommerce-shipping-box-sendbox-packhelp-21-04-2022-gsps-19518-png.avif",
             "label": "Brezplačna dostava",
             "price": ""
           }
@@ -82,8 +86,8 @@
         "avatar_3": "shopify://shop_images/FloraMix_card_dlaka.jpg",
         "show_badge_stars": true,
         "rating_text": "15 aktivnih sestavin · vse količine izpisane na embalaži",
-        "heading": "<p>6 razlogov, zakaj lastniki psov obožujejo FloraMix</p>",
-        "subline": "<p>Dnevni prašek za pse s 15 aktivnimi sestavinami. Formuliran za podporo prebavi, sezonskim težavam in ravnovesju kvasnih glivic.</p><p><strong>Danes 1 + 1 GRATIS.</strong></p>",
+        "heading": "<p>6 razlogov, zakaj lastniki psov izberejo FloraMix za mirnejšo kožo, urejeno prebavo in manj praskanja</p>",
+        "subline": "<p>FloraMix ne pomirja kože od zunaj, ampak podpira črevesje, imunski odziv in kožo hkrati — vse tri fronte, ne samo prve. 15 aktivnih sestavin z izpisanimi količinami. Prav zdaj po znižani ceni.</p>",
         "image": "shopify://shop_images/FloraMix_SLO_01_hero.png",
         "cta_label": "NAROČI ZDAJ",
         "cta_url": "#offer",
@@ -114,33 +118,43 @@
         "r1": {
           "type": "reason",
           "settings": {
+            "tag": "Simptomi",
+            "title": "Tudi tvoj pes trpi za naslednjimi simptomi?",
+            "text": "<p>To niso ločene težave. Skupaj so vzorec.<br/><br/>✓ lizanje tačk<br/>✓ praskanje<br/>✓ stresanje z glavo<br/>✓ sirast vonj iz ušes ali tačk<br/>✓ solzni madeži<br/>✓ izpadanje dlake ali moten kožuh<br/>✓ ješčost trave<br/>✓ občasne prebavne težave<br/><br/>Če jih prepoznaš dva ali tri, ni šlo za naključje.</p>",
+            "image": "shopify://shop_images/hf_20260831_230700_a9c71954-410c-4ed1-96f1-562d1ff032fd.png"
+          }
+        },
+        "reason_hiF3fT": {
+          "type": "reason",
+          "settings": {
             "tag": "1. razlog",
-            "title": "1. Prašek za prebavo, sezonske težave in kvasne glivice",
-            "text": "<p>Kaj je skrivnost <strong>mirnejše prebave, umirjene kože in uravnoteženih kvasnih glivic</strong>? Zdravo črevesje.</p><p>FloraMix podpira ravnovesje črevesja od znotraj navzven. Podpira enakomernejše blato, umirjeno kožo in uravnotežene kvasne glivice. Da se tvoj pes lahko podi, spi in crklja brez skrbi.</p>",
-            "image": "shopify://shop_images/FloraMix_explainer_split.png"
+            "title": "Šamponi, spreji in losjoni ne delujejo. FloraMix napade izvor praskanja, ne kože.",
+            "text": "<p>Izdelki za kožo očistijo površino, zato delujejo nekaj dni in potem se vse vrne. Vzrok najpogosteje ni na koži — velik del imunskega odziva psa sedi ob črevesju, in ko je tam ravnovesje porušeno, se pokaže tam, kjer je koža najtanjša. FloraMix deluje na vseh frontah: prašek s 15 aktivnimi sestavinami podpira črevesje, imunski odziv ter kožo in dlako hkrati. Rezultat je mirnejša koža, manj praskanja in urejena prebava.</p>",
+            "image": "shopify://shop_images/hf_20260831_230324_9287ce8f-2603-4621-9896-289dadc1f29f.png"
           }
         },
         "r2": {
           "type": "reason",
           "settings": {
             "tag": "2. razlog",
-            "title": "Vse količine izpisane — nič skrito v mešanici",
-            "text": "<p>Pri večini dodatkov piše samo sestavina, brez številke. Pri FloraMixu je zraven vsake tudi količina: krilova moka 22,44 % · kolostrum 13,3 % · Sophora japonica 5 % · maceha 3,33 % · kurkuma. Petnajst aktivnih sestavin in vsaka s svojo količino, da jih lahko postaviš zraven česarkoli drugega.</p>",
-            "image": "shopify://shop_images/FloraMix_SLO_04_veterinar.png"
+            "title": "Tudi navaden probiotik ni dovolj. Uredi prebavo, praskanje in ostali simptomi pa se pogosto vrnejo.",
+            "text": "<p>Ko slišiš, da gre za črevesje, je prva misel probiotik — in res naredi svoje, prebava se umiri. Potem se počasi vrne: najprej lizanje zvečer, čez čas stresanje z glavo. Ker se veriga v črevesju ne konča. Ob njem sedi imunski odziv in ta se ne pomiri sam od sebe samo zato, ker so se dodale bakterije. Dokler je razdražen, koža reagira naprej. Probiotik torej ni napačna pot — je samo prva tretjina.</p>",
+            "image": "shopify://shop_images/hf_20260831_231059_2e6a425b-3078-42b9-9fd6-ab3a6d815a45.png"
           }
         },
         "r3": {
           "type": "reason",
           "settings": {
             "tag": "3. razlog",
-            "title": "3. TriAxis Reset™: Umiri. Nahrani. Okrepi.",
-            "text": "<p>Ni samo probiotik — so tri smeri, ki v vsaki merici delujejo hkrati:</p><p><strong>Črevesje.</strong> Cikorija kot prebiotik, žive kulture <em>E. lactis</em> (200 mrd CFU/kg) in <em>B. velezensis</em> (100 mrd CFU/kg) ter dva postbiotika, <em>L. plantarum</em> CECT 9161 in <em>L. helveticus</em> HA-122.</p><p><strong>Odpornost.</strong> Kolostrum 13,3 %, beta-glukani iz inaktiviranega kvasa in Sophora japonica 5 %.</p><p><strong>Koža in dlaka.</strong> Krilova moka 22,44 %, biotin, cink, vitamin E, maceha in kurkuma.</p><p>Pro-, pre- in postbiotike ima danes skoraj vsak lonček. Sophore japonice pri primerljivih izdelkih na našem trgu ne najdeš.</p>",
-            "image": "shopify://shop_images/FloraMix_graf.png"
+            "title": "Edinstvena formula: Umiri. Nahrani. Okrepi.",
+            "text": "<p>Ni le probiotik, ampak formula, kjer vsaka merica deluje na treh področjih hkrati:</p><p><strong>Črevesje - </strong>Prebiotik, dva probiotična seva (200 mrd CFU/kg) in dva postbiotika skupaj podpirajo ravnovesje črevesne flore. (skupaj 300 milijard CFU/kg)</p><p><strong>Imunski odziv - </strong> Kolostrum 13,3 % z imunoglobulini, beta-glukani iz inaktiviranega kvasa, Sophora japonica 5 % in vitamin C dajejo oporo imunskemu odzivu, ki sedi tik ob črevesju.</p><p><strong>Koža in dlaka.</strong> Omega-3 iz krilove moke 22,44 %, cink, biotin, vitamin E, maceha 3,33 % in kurkuma 3,33 % so gradniki, ki jih koža porabi pri obnavljanju.</p><p>Vsaka sestavina pokriva svoj del verige. Nič ni notri zato, da bi deklaracija izgledala daljša.</p>",
+            "image": "shopify://shop_images/hf_20260902_094641_487a2a4a-4555-4cef-a097-243c272b1add.png"
           }
         }
       },
       "block_order": [
         "r1",
+        "reason_hiF3fT",
         "r2",
         "r3"
       ],
@@ -155,6 +169,88 @@
         "text_color": "#2a2140",
         "accent_color": "#8a6fc0",
         "divider_color": "#565858"
+      }
+    },
+    "pl_bar1": {
+      "type": "custom-liquid",
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "custom_liquid": "<style>\n.plx{--plx-ink:#2a2140;--plx-mut:#565858;--plx-acc:#8a6fc0;--plx-soft:#efe7f8;--plx-line:#e3ded4;\n max-width:1144px;margin:0 auto;padding:0 16px;\n font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:var(--plx-ink)}\n.plx *{box-sizing:border-box}\n.plx__head{max-width:648px;margin:0 auto 32px;text-align:center;display:flex;flex-direction:column;gap:8px}\n.plx__head h2{font-size:28px;line-height:1.2;font-weight:700;margin:0}\n.plx__head p{font-size:16px;line-height:1.5;color:var(--plx-mut);margin:0}\n@media(min-width:750px){.plx__head h2{font-size:34px}}\n\n/* 4 koristi z okroglo ikono */\n.plx-ben{display:grid;grid-template-columns:1fr;gap:32px}\n@media(min-width:750px){.plx-ben{grid-template-columns:repeat(4,1fr);gap:24px}}\n.plx-ben__i{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center}\n.plx-ben__badge{display:flex;align-items:center;justify-content:center;border-radius:9999px;\n height:88px;width:88px;min-height:88px;min-width:88px;background:var(--plx-soft);font-size:34px;line-height:1}\n.plx-ben__t{font-size:20px;font-weight:600;line-height:1.25;margin:0}\n.plx-ben__b{font-size:16px;line-height:1.5;color:var(--plx-mut);margin:0}\n\n/* velike statistike: besedilo levo, slika DESNO (pri njih flex-row-reverse) */\n.plx-statrow{display:flex;flex-direction:column-reverse;gap:40px;align-items:stretch}\n@media(min-width:640px){.plx-statrow{flex-direction:row-reverse;justify-content:space-between}}\n.plx-statrow__img{width:100%;flex-shrink:0}\n@media(min-width:640px){.plx-statrow__img{width:50%}}\n@media(min-width:750px){.plx-statrow__img{width:41%}}\n.plx-statrow__img .plx-frame1{position:relative;width:100%;overflow:hidden;aspect-ratio:1/1;border-radius:16px}\n@media(min-width:750px){.plx-statrow__img .plx-frame1{border-radius:24px}}\n.plx-statrow__img img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}\n.plx-statrow__body{display:flex;flex-direction:column;gap:24px;margin:auto 0;width:100%;align-items:center;text-align:center}\n@media(min-width:640px){.plx-statrow__body{width:50%;align-items:flex-start;text-align:left}}\n.plx-statrow__body h2{font-size:24px;line-height:1.2;font-weight:700;margin:0}\n@media(min-width:750px){.plx-statrow__body h2{font-size:34px}}\n.plx-statrow__body>p{font-size:16px;line-height:1.5;color:var(--plx-mut);margin:0}\n/* velike statistike */\n.plx-stat{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%}\n@media(min-width:750px){.plx-stat{gap:24px;max-width:420px}}\n.plx-stat__i{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;text-align:left;\n padding:16px 0;border-top:1px solid var(--plx-line);flex:1;min-width:166px}\n@media(min-width:750px){.plx-stat__i{padding:24px 0}}\n.plx-stat__n{font-family:Georgia,'Times New Roman',serif;font-size:32px;font-weight:600;line-height:1.2;color:var(--plx-ink)}\n@media(min-width:750px){.plx-stat__n{font-size:48px}}\n.plx-stat__l{font-size:14px;font-weight:600;line-height:1.4;margin-top:8px}\n@media(min-width:750px){.plx-stat__l{font-size:16px}}\n.plx-stat__s{font-size:13px;color:var(--plx-mut);font-weight:400;margin-top:6px}\n\n/* 4 male statistike na obarvani podlagi */\n.plx-soft-sec{background:#f4f1fa;margin:0 -100vw;padding:56px 100vw}\n.plx-mini{display:grid;grid-template-columns:1fr 1fr;gap:24px;justify-items:center;text-align:center}\n@media(min-width:750px){.plx-mini{grid-template-columns:repeat(4,1fr)}}\n.plx-mini__n{font-family:Georgia,'Times New Roman',serif;font-size:32px;font-weight:600;line-height:1.2}\n@media(min-width:750px){.plx-mini__n{font-size:48px}}\n.plx-mini__l{font-size:14px;font-weight:600;line-height:1.4;margin-top:6px}\n\n/* vet blok: slika levo, citata desno (kot pri njih) */\n.plx-vetrow{display:flex;flex-direction:column;gap:24px;align-items:stretch}\n@media(min-width:750px){.plx-vetrow{flex-direction:row;gap:40px}}\n.plx-vetrow__img{width:100%;flex-shrink:0}\n@media(min-width:640px){.plx-vetrow__img{width:50%}}\n@media(min-width:750px){.plx-vetrow__img{width:41%}}\n.plx-vetrow__img .plx-frame{position:relative;width:100%;overflow:hidden;aspect-ratio:4/5;border-radius:16px}\n@media(min-width:750px){.plx-vetrow__img .plx-frame{border-radius:24px}}\n.plx-vetrow__img img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}\n.plx-vets{display:flex;flex-direction:column;gap:24px;margin:auto 0;width:100%}\n.plx-vet{background:#fff;border:1px solid var(--plx-line);border-radius:12px;padding:24px}\n.plx-vet p{font-style:italic;font-size:16px;line-height:1.5;margin:0 0 14px}\n.plx-vet__n{font-size:14px;font-weight:700;margin:0}\n.plx-vet__r{font-size:13px;color:var(--plx-mut);margin:2px 0 0}\n\n/* znacke kakovosti */\n.plx-q{display:grid;grid-template-columns:1fr 1fr;gap:16px}\n@media(min-width:750px){.plx-q{grid-template-columns:repeat(4,1fr)}}\n.plx-q__i{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;\n background:#fff;border:1px solid var(--plx-line);border-radius:12px;padding:20px 14px}\n.plx-q__e{font-size:28px;line-height:1}\n.plx-q__t{font-size:14px;font-weight:700;line-height:1.3}\n\n/* socialni pas s CTA */\n.plx-bar{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}\n.plx-bar__btn{display:inline-block;background:var(--plx-ink);color:#fff;text-decoration:none;\n font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase;\n padding:16px 40px;border-radius:6px;min-width:260px}\n.plx-bar__p{font-size:14px;color:var(--plx-mut);margin:0}\n\n/* dokazi strank, centrirano in ozko */\n.plx-res{max-width:765px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}\n.plx-res__stars{color:#ff9a0a;letter-spacing:3px;font-size:16px}\n.plx-res__q{font-size:18px;font-weight:600;line-height:1.4;max-width:520px;margin:0}\n.plx-res__w{font-size:13px;color:var(--plx-mut);text-transform:uppercase;letter-spacing:.06em;margin:0}\n.plx-note{background:#fff8e6;border:1px solid #efdfa4;color:#7a5c12;font-size:13px;\n border-radius:8px;padding:10px 12px;margin:18px auto 0;max-width:648px;text-align:left}\n</style><div class=\"plx\"><div class=\"plx-bar\">\n <a class=\"plx-bar__btn\" href=\"#offer\">NAROČI ZDAJ</a>\n <p class=\"plx-bar__p\">15 aktivnih sestavin · vse količine izpisane na embalaži</p>\n</div></div>",
+        "color_scheme": "background-1",
+        "padding_top": 32,
+        "padding_bottom": 56
+      }
+    },
+    "reasons_b": {
+      "type": "petsome-ld-reasons",
+      "blocks": {
+        "r4": {
+          "type": "reason",
+          "settings": {
+            "tag": "4. razlog",
+            "title": "Razvito z veterinarji, 9 klinično raziskanih sestavin — probiotični prašek za pse.",
+            "text": "<p>FloraMix združuje sestavine, katerih učinki na pse so bili klinično raziskani — za vse tri fronte, ne le za prebavo. </p><p>Probiotični sev Enterococcus lactis NCIMB 10415 je pri psih značilno zvišal raven IgA in okrepil odziv imunskega sistema. Kolostrum je v 40-tedenski raziskavi na psih povečal imunski odziv in raznolikost črevesne mikrobiote. Za kožo pa je biotin v raziskavi na 119 psih s slabim kožuhom, luščenjem in srbenjem prinesel izboljšanje ali izzvenetje simptomov pri 91 % psov, omega-3 iz krilove moke pa je pri psih dvignil raven EPA in DHA bistveno bolj kot rastlinska olja. </p><p>Rezultat? Urejena prebava, opora imunskemu odzivu ter mirnejša koža in gostejša dlaka — brez šamponov in brez vsakodnevnega boja.</p>",
+            "image": "shopify://shop_images/hf_20260831_222426_bfe5a94b-6058-40f0-b4c2-a9066f6b0737.png"
+          }
+        },
+        "r5": {
+          "type": "reason",
+          "settings": {
+            "tag": "5. razlog",
+            "title": "Mirnejša koža in urejena prebava v 90 dneh.",
+            "text": "<p>Za mnoge lastnike je FloraMix preprost način, kako vsak dan podpreti črevesje, imunski odziv in kožo psa hkrati. Prebava se odzove prva, koža počasneje — in znotraj tega obdobja večina lastnikov opiše, da se lizanje umiri, dlaka je gostejša na dotik, prebava je urejena ter tačke med prsti niso več obarvane.</p>",
+            "image": "shopify://shop_images/hf_20260831_231614_7e47fce3-5d3f-46c6-8c8b-f82167699623.png"
+          }
+        },
+        "r6": {
+          "type": "reason",
+          "settings": {
+            "tag": "6. razlog",
+            "title": "Obožuje ga 4000+ lastnikov psov, podpirajo ga strokovnjaki.",
+            "text": "<p>Od prvih uporabnikov do dolgoletnih strank je FloraMix postal del vsakodnevne rutine tisočih lastnikov psov. Z več kot 4.000 zadovoljnimi psi in številnimi odličnimi ocenami je postal preprosta izbira za podporo črevesju, odpornosti in koži. Odmerjanje prilgojeno teži psa, potreseš po obroku — brez tablet, brez skrivanja v siru in brez pregovarjanja. Okus, ki ga psi brez problema sprejmejo kot del obroka, pri izbirčnih pa ga potreseš po mokri hrani in premešaš.</p>",
+            "image": "shopify://shop_images/hf_20260831_222710_521da732-73f5-4bb0-8d27-6306eac6c48b.png"
+          }
+        }
+      },
+      "block_order": [
+        "r4",
+        "r5",
+        "r6"
+      ],
+      "settings": {
+        "show_numbers": false,
+        "pad_numbers": true,
+        "number_start": 1,
+        "anchor_id": "reasons-b",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#fdfbf7",
+        "text_color": "#2a2140",
+        "accent_color": "#8a6fc0",
+        "divider_color": "#565858"
+      }
+    },
+    "pl_bar2": {
+      "type": "custom-liquid",
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "custom_liquid": "<div class=\"plx\"><div class=\"plx-bar\">\n <a class=\"plx-bar__btn\" href=\"#offer\">NAROČI ZDAJ</a>\n <p class=\"plx-bar__p\">15 aktivnih sestavin · vse količine izpisane na embalaži</p>\n</div></div>",
+        "color_scheme": "background-1",
+        "padding_top": 32,
+        "padding_bottom": 56
+      }
+    },
+    "pl_res": {
+      "type": "custom-liquid",
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "custom_liquid": "",
+        "color_scheme": "background-1",
+        "padding_top": 56,
+        "padding_bottom": 40
       }
     },
     "offer": {
@@ -513,88 +609,6 @@
         "background_color": "#2a2140",
         "text_color": "#faf9f6",
         "muted_text_color": "#c9bfbb"
-      }
-    },
-    "reasons_b": {
-      "type": "petsome-ld-reasons",
-      "blocks": {
-        "r4": {
-          "type": "reason",
-          "settings": {
-            "tag": "4. razlog",
-            "title": "4. Preizkušeno. Pasje odobreno.",
-            "text": "<p>Kako najlažje spraviš skrb za črevesje v pasji dan? Tako, da je ne opazi.</p><p>FloraMix je prah — potreseš ga po obroku in premešaš. Brez skrivanja v siru, brez pregovarjanja. In ker desetkilogramski pes ne rabi enako kot štiridesetkilogramski, je odmerek prilagojen teži psa: 1–15 kg, 15–30 kg in 30+ kg.</p>",
-            "image": "shopify://shop_images/FloraMix_SLO_06_odmerjanje.png"
-          }
-        },
-        "r5": {
-          "type": "reason",
-          "settings": {
-            "tag": "5. razlog",
-            "title": "Krilova omega-3, ne lososovo olje",
-            "text": "<p>Večina dodatkov za kožo in dlako uporabi lososovo olje. FloraMix ima <strong>krilovo moko 22,44 %</strong> — poleg kolostruma 13,3 % in Sophore japonice 5 %. To so tri sestavine, ki jih v konkurenčnih praških za pse pri nas ne najdeš skupaj.</p>",
-            "image": "shopify://shop_images/FloraMix_sijoca_dlaka.png"
-          }
-        },
-        "r6": {
-          "type": "reason",
-          "settings": {
-            "tag": "6. razlog",
-            "title": "6. Čisto. Pregledno. Izdelano v EU.",
-            "text": "<p>Pri FloraMixu so vse količine izpisane — nič ni skrito v mešanici brez številk:</p><p>krilova moka 22,44 % · kolostrum 13,3 % · Sophora japonica 5 % · maceha 3,33 % · kurkuma 3,33 % · vitamin C 16.450 mg/kg · biotin 895.000 µg/kg · vitamin E 2.500 mg/kg · cink 2.600 mg/kg.</p><p>15 aktivnih sestavin. Razvito v Sloveniji, izdelano v EU.</p><p>Brez skrivnih polnil. Brez praznih obljub. Samo tisto, kar dejansko dela.</p>",
-            "image": "shopify://shop_images/FloraMix_checklist.png"
-          }
-        }
-      },
-      "block_order": [
-        "r4",
-        "r5",
-        "r6"
-      ],
-      "settings": {
-        "show_numbers": false,
-        "pad_numbers": true,
-        "number_start": 1,
-        "anchor_id": "reasons-b",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "background_color": "#fdfbf7",
-        "text_color": "#2a2140",
-        "accent_color": "#8a6fc0",
-        "divider_color": "#565858"
-      }
-    },
-    "pl_bar1": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<style>\n.plx{--plx-ink:#2a2140;--plx-mut:#565858;--plx-acc:#8a6fc0;--plx-soft:#efe7f8;--plx-line:#e3ded4;\n max-width:1144px;margin:0 auto;padding:0 16px;\n font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:var(--plx-ink)}\n.plx *{box-sizing:border-box}\n.plx__head{max-width:648px;margin:0 auto 32px;text-align:center;display:flex;flex-direction:column;gap:8px}\n.plx__head h2{font-size:28px;line-height:1.2;font-weight:700;margin:0}\n.plx__head p{font-size:16px;line-height:1.5;color:var(--plx-mut);margin:0}\n@media(min-width:750px){.plx__head h2{font-size:34px}}\n\n/* 4 koristi z okroglo ikono */\n.plx-ben{display:grid;grid-template-columns:1fr;gap:32px}\n@media(min-width:750px){.plx-ben{grid-template-columns:repeat(4,1fr);gap:24px}}\n.plx-ben__i{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center}\n.plx-ben__badge{display:flex;align-items:center;justify-content:center;border-radius:9999px;\n height:88px;width:88px;min-height:88px;min-width:88px;background:var(--plx-soft);font-size:34px;line-height:1}\n.plx-ben__t{font-size:20px;font-weight:600;line-height:1.25;margin:0}\n.plx-ben__b{font-size:16px;line-height:1.5;color:var(--plx-mut);margin:0}\n\n/* velike statistike: besedilo levo, slika DESNO (pri njih flex-row-reverse) */\n.plx-statrow{display:flex;flex-direction:column-reverse;gap:40px;align-items:stretch}\n@media(min-width:640px){.plx-statrow{flex-direction:row-reverse;justify-content:space-between}}\n.plx-statrow__img{width:100%;flex-shrink:0}\n@media(min-width:640px){.plx-statrow__img{width:50%}}\n@media(min-width:750px){.plx-statrow__img{width:41%}}\n.plx-statrow__img .plx-frame1{position:relative;width:100%;overflow:hidden;aspect-ratio:1/1;border-radius:16px}\n@media(min-width:750px){.plx-statrow__img .plx-frame1{border-radius:24px}}\n.plx-statrow__img img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}\n.plx-statrow__body{display:flex;flex-direction:column;gap:24px;margin:auto 0;width:100%;align-items:center;text-align:center}\n@media(min-width:640px){.plx-statrow__body{width:50%;align-items:flex-start;text-align:left}}\n.plx-statrow__body h2{font-size:24px;line-height:1.2;font-weight:700;margin:0}\n@media(min-width:750px){.plx-statrow__body h2{font-size:34px}}\n.plx-statrow__body>p{font-size:16px;line-height:1.5;color:var(--plx-mut);margin:0}\n/* velike statistike */\n.plx-stat{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%}\n@media(min-width:750px){.plx-stat{gap:24px;max-width:420px}}\n.plx-stat__i{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;text-align:left;\n padding:16px 0;border-top:1px solid var(--plx-line);flex:1;min-width:166px}\n@media(min-width:750px){.plx-stat__i{padding:24px 0}}\n.plx-stat__n{font-family:Georgia,'Times New Roman',serif;font-size:32px;font-weight:600;line-height:1.2;color:var(--plx-ink)}\n@media(min-width:750px){.plx-stat__n{font-size:48px}}\n.plx-stat__l{font-size:14px;font-weight:600;line-height:1.4;margin-top:8px}\n@media(min-width:750px){.plx-stat__l{font-size:16px}}\n.plx-stat__s{font-size:13px;color:var(--plx-mut);font-weight:400;margin-top:6px}\n\n/* 4 male statistike na obarvani podlagi */\n.plx-soft-sec{background:#f4f1fa;margin:0 -100vw;padding:56px 100vw}\n.plx-mini{display:grid;grid-template-columns:1fr 1fr;gap:24px;justify-items:center;text-align:center}\n@media(min-width:750px){.plx-mini{grid-template-columns:repeat(4,1fr)}}\n.plx-mini__n{font-family:Georgia,'Times New Roman',serif;font-size:32px;font-weight:600;line-height:1.2}\n@media(min-width:750px){.plx-mini__n{font-size:48px}}\n.plx-mini__l{font-size:14px;font-weight:600;line-height:1.4;margin-top:6px}\n\n/* vet blok: slika levo, citata desno (kot pri njih) */\n.plx-vetrow{display:flex;flex-direction:column;gap:24px;align-items:stretch}\n@media(min-width:750px){.plx-vetrow{flex-direction:row;gap:40px}}\n.plx-vetrow__img{width:100%;flex-shrink:0}\n@media(min-width:640px){.plx-vetrow__img{width:50%}}\n@media(min-width:750px){.plx-vetrow__img{width:41%}}\n.plx-vetrow__img .plx-frame{position:relative;width:100%;overflow:hidden;aspect-ratio:4/5;border-radius:16px}\n@media(min-width:750px){.plx-vetrow__img .plx-frame{border-radius:24px}}\n.plx-vetrow__img img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}\n.plx-vets{display:flex;flex-direction:column;gap:24px;margin:auto 0;width:100%}\n.plx-vet{background:#fff;border:1px solid var(--plx-line);border-radius:12px;padding:24px}\n.plx-vet p{font-style:italic;font-size:16px;line-height:1.5;margin:0 0 14px}\n.plx-vet__n{font-size:14px;font-weight:700;margin:0}\n.plx-vet__r{font-size:13px;color:var(--plx-mut);margin:2px 0 0}\n\n/* znacke kakovosti */\n.plx-q{display:grid;grid-template-columns:1fr 1fr;gap:16px}\n@media(min-width:750px){.plx-q{grid-template-columns:repeat(4,1fr)}}\n.plx-q__i{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;\n background:#fff;border:1px solid var(--plx-line);border-radius:12px;padding:20px 14px}\n.plx-q__e{font-size:28px;line-height:1}\n.plx-q__t{font-size:14px;font-weight:700;line-height:1.3}\n\n/* socialni pas s CTA */\n.plx-bar{text-align:center;display:flex;flex-direction:column;align-items:center;gap:12px}\n.plx-bar__btn{display:inline-block;background:var(--plx-ink);color:#fff;text-decoration:none;\n font-weight:700;font-size:15px;letter-spacing:.04em;text-transform:uppercase;\n padding:16px 40px;border-radius:6px;min-width:260px}\n.plx-bar__p{font-size:14px;color:var(--plx-mut);margin:0}\n\n/* dokazi strank, centrirano in ozko */\n.plx-res{max-width:765px;margin:0 auto;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}\n.plx-res__stars{color:#ff9a0a;letter-spacing:3px;font-size:16px}\n.plx-res__q{font-size:18px;font-weight:600;line-height:1.4;max-width:520px;margin:0}\n.plx-res__w{font-size:13px;color:var(--plx-mut);text-transform:uppercase;letter-spacing:.06em;margin:0}\n.plx-note{background:#fff8e6;border:1px solid #efdfa4;color:#7a5c12;font-size:13px;\n border-radius:8px;padding:10px 12px;margin:18px auto 0;max-width:648px;text-align:left}\n</style><div class=\"plx\"><div class=\"plx-bar\">\n <a class=\"plx-bar__btn\" href=\"#offer\">NAROČI ZDAJ</a>\n <p class=\"plx-bar__p\">15 aktivnih sestavin · vse količine izpisane na embalaži</p>\n</div></div>",
-        "display_id": false,
-        "visibility": "always-display",
-        "color_scheme": "background-1",
-        "padding_top": 32,
-        "padding_bottom": 56
-      }
-    },
-    "pl_bar2": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<div class=\"plx\"><div class=\"plx-bar\">\n <a class=\"plx-bar__btn\" href=\"#offer\">NAROČI ZDAJ</a>\n <p class=\"plx-bar__p\">15 aktivnih sestavin · vse količine izpisane na embalaži</p>\n</div></div>",
-        "display_id": false,
-        "visibility": "always-display",
-        "color_scheme": "background-1",
-        "padding_top": 32,
-        "padding_bottom": 56
-      }
-    },
-    "pl_res": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "",
-        "display_id": false,
-        "visibility": "always-display",
-        "color_scheme": "background-1",
-        "padding_top": 56,
-        "padding_bottom": 40
       }
     }
   },
