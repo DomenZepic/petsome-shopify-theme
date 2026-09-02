@@ -85,14 +85,14 @@
         "avatar_2": "shopify://shop_images/FloraMix_card_tacke.jpg",
         "avatar_3": "shopify://shop_images/FloraMix_card_dlaka.jpg",
         "show_badge_stars": true,
-        "rating_text": "15 aktivnih sestavin · vse količine izpisane na embalaži",
+        "rating_text": "2000+ ocen · 5000+ lastnikov psov",
         "heading": "<p>6 razlogov, zakaj lastniki psov izberejo FloraMix za mirnejšo kožo, urejeno prebavo in manj praskanja.</p>",
-        "subline": "<p>FloraMix ne pomirja kože od zunaj, ampak podpira črevesje, imunski odziv in kožo hkrati — vse tri fronte, ne samo prve. 15 aktivnih sestavin z izpisanimi količinami. Prav zdaj po znižani ceni.</p>",
+        "subline": "<p>FloraMix ne pomirja kože od zunaj, ampak podpira črevesje, imunski odziv in kožo hkrati — vse tri fronte, ne samo prve. 15 aktivnih sestavin od tega 9 klinično dokazanih. Prav zdaj po znižani ceni.</p>",
         "image": "shopify://shop_images/hf_20260902_140808_ea3b9085-876b-4cd3-9428-ecddd7080d93.png",
         "cta_label": "NAROČI ZDAJ",
         "cta_url": "#offer",
         "guarantee_text": "60-dnevna garancija vračila denarja",
-        "proof_text": "Razvito v Sloveniji, izdelano v EU",
+        "proof_text": "5000+ prodanih lončkov · Razvito v Sloveniji, izdelano v EU",
         "show_gifts": true,
         "gifts_heading": "BREZPLAČNA DARILA PRI EKSKLUZIVNI PONUDBI!",
         "gift_badge_label": "GRATIS",
@@ -231,6 +231,17 @@
         "divider_color": "#565858"
       }
     },
+    "pl_bar2": {
+      "type": "custom-liquid",
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "custom_liquid": "<div class=\"plx\"><div class=\"plx-bar\">\n <a class=\"plx-bar__btn\" href=\"#offer\">NAROČI ZDAJ</a>\n <p class=\"plx-bar__p\">15 aktivnih sestavin · vse količine izpisane na embalaži</p>\n</div></div>",
+        "color_scheme": "background-1",
+        "padding_top": 32,
+        "padding_bottom": 56
+      }
+    },
     "petsome_ld_timeline_hbjXJL": {
       "type": "petsome-ld-timeline",
       "blocks": {
@@ -277,28 +288,6 @@
         "line_color": "#fac3c1",
         "card_color": "#ffffff",
         "footnote_color": "#565858"
-      }
-    },
-    "pl_bar2": {
-      "type": "custom-liquid",
-      "settings": {
-        "display_id": false,
-        "visibility": "always-display",
-        "custom_liquid": "<div class=\"plx\"><div class=\"plx-bar\">\n <a class=\"plx-bar__btn\" href=\"#offer\">NAROČI ZDAJ</a>\n <p class=\"plx-bar__p\">15 aktivnih sestavin · vse količine izpisane na embalaži</p>\n</div></div>",
-        "color_scheme": "background-1",
-        "padding_top": 32,
-        "padding_bottom": 56
-      }
-    },
-    "pl_res": {
-      "type": "custom-liquid",
-      "settings": {
-        "display_id": false,
-        "visibility": "always-display",
-        "custom_liquid": "",
-        "color_scheme": "background-1",
-        "padding_top": 56,
-        "padding_bottom": 40
       }
     },
     "offer": {
@@ -588,7 +577,7 @@
       "settings": {
         "show_icon": true,
         "icon": "verified_user",
-        "heading": "<p>Ne zamudi — 1 + 1 GRATIS</p>",
+        "heading": "<p>Ne zamudi — do -45%</p>",
         "text": "<p>Podpri pasje črevesje s 15 aktivnimi sestavinami v treh smereh. Preizkusi brez tveganja 60 dni: če ne opaziš razlike, nam piši in denar ti vrnemo, tudi če je embalaža že odprta.</p>",
         "cta_label": "NAROČI ZDAJ",
         "cta_url": "#offer",
@@ -668,9 +657,8 @@
     "reasons",
     "pl_bar1",
     "reasons_b",
-    "petsome_ld_timeline_hbjXJL",
     "pl_bar2",
-    "pl_res",
+    "petsome_ld_timeline_hbjXJL",
     "offer",
     "ingredients",
     "faq",
