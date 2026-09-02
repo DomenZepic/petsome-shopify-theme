@@ -724,7 +724,7 @@
               "name": "Text",
               "settings": {
                 "visibility": "always-display",
-                "text": "<p>*Najnižja cena v zadnjih 30 dneh: 45,90€</p>",
+                "text": "<p>*Najnižja cena v zadnjih 30 dneh: 39,90€</p>",
                 "alignment": "center",
                 "mobile_alignment": "mobile-center",
                 "text_size": 12,
