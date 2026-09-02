@@ -20,8 +20,8 @@
     "offer_bar": {
       "type": "petsome-ld-offer-bar",
       "settings": {
-        "headline": "1 + 1 GRATIS PLUS BREZPLAČNO DARILO 🎁",
-        "subline": "Odmerjanje prilagojeno teži psa",
+        "headline": "Samo za nove stranke do -45%",
+        "subline": "+ 2 gratis darili 🎁",
         "link": "",
         "show_timer": true,
         "timezone": "Europe/Ljubljana",
@@ -383,7 +383,7 @@
         "show_payment_icons": true,
         "payments_label": "Varno plačevanje z:",
         "disclaimer_text": "<p>*Prve spremembe pri prebavi lastniki pogosto opazijo v 1–2 tednih. Za najboljše rezultate priporočamo 2–3 mesece redne uporabe.</p>",
-        "rating_label": "Odmerjanje prilagojeno teži psa",
+        "rating_label": "5000 + zadovoljnih strank",
         "star_color": "#ffcc00",
         "tags": "Za mirnejšo kožo | Za urejeno prebavo | 15 aktivnih sestavin",
         "tag_color": "#b9a3dd",
