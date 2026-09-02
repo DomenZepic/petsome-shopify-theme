@@ -231,6 +231,54 @@
         "divider_color": "#565858"
       }
     },
+    "petsome_ld_timeline_hbjXJL": {
+      "type": "petsome-ld-timeline",
+      "blocks": {
+        "step_Fmf8Xh": {
+          "type": "step",
+          "settings": {
+            "badge_text": "7.–14. DAN",
+            "text": "<p>Prebava se umiri. Blato je enakomernejše, želodec mirnejši, manj pogosto je travo. Prvi in najhitrejši znak, da se je v črevesju nekaj premaknilo.</p>"
+          }
+        },
+        "step_w4Vxt9": {
+          "type": "step",
+          "settings": {
+            "badge_text": "1. MESEC",
+            "text": "<p>Praskanje in lizanje sta manj pogosta. Ne izgineta čez noč — opaziš, da so težave manj pogoste vsak dan, in da pes redkeje stresa z glavo.</p>"
+          }
+        },
+        "step_68AwxB": {
+          "type": "step",
+          "settings": {
+            "badge_text": "2.–3. MESEC",
+            "text": "<p>Razlika je vidna. Tačke med prsti niso več obarvane, dlaka je gostejša na dotik, ušesa ne dišijo, solznih madežev je manj. Zvečer ugasneš luč in ni tistega zvoka.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_Fmf8Xh",
+        "step_w4Vxt9",
+        "step_68AwxB"
+      ],
+      "settings": {
+        "eyebrow": "Kaj pričakovati",
+        "heading": "<p>Prvih 90 dni, korak za korakom</p>",
+        "subheading": "<p>Prebava se odzove prva, koža počasneje. Takole večina lastnikov opiše prve tri mesece.</p>",
+        "image": "shopify://shop_images/hf_20260831_225848_7894d240-f8d8-4680-8b02-169e2f1f52e7.png",
+        "footnote": "<p>Navedeno je tisto, kar opisuje večina lastnikov, vsak pes pa je drugačen. FloraMix je prehransko dopolnilo in ne zdravilo.</p>",
+        "anchor_id": "timeline",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#E3DFE8",
+        "text_color": "#0e1111",
+        "accent_color": "#E0C7FF",
+        "accent_color_dark": "#5B3A87",
+        "line_color": "#fac3c1",
+        "card_color": "#ffffff",
+        "footnote_color": "#565858"
+      }
+    },
     "pl_bar2": {
       "type": "custom-liquid",
       "settings": {
@@ -620,6 +668,7 @@
     "reasons",
     "pl_bar1",
     "reasons_b",
+    "petsome_ld_timeline_hbjXJL",
     "pl_bar2",
     "pl_res",
     "offer",
