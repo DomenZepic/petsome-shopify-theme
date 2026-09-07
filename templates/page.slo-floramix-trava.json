@@ -80,9 +80,9 @@
       "settings": {
         "show_badge_stars": false,
         "rating_text": "",
-        "heading": "<p>6 razlogov, zakaj psi jedo travo, ki jih večina lastnikov ne pozna</p>",
-        "subline": "<p>Če to počne vsak dan, to ni razvada. Odgovor je najpogosteje porušeno ravnovesje v črevesju. FloraMix je dnevni prašek s 15 aktivnimi sestavinami, ki podpira črevesje, imunski odziv in kožo hkrati. </p>",
-        "image": "shopify://shop_images/hf_20260831_225848_7894d240-f8d8-4680-8b02-169e2f1f52e7.png",
+        "heading": "<p>6 razlogov za nemirno pasjo prebavo, ki jih večina lastnikov ne pozna</p>",
+        "subline": "<p>Če tvoj pes je travo, ima mehko blato, se drsa z ritjo po tleh, bruha po obrokih,... To ni normalno vedenje in odgovor je najpogosteje porušeno ravnovesje v črevesju. FloraMix je dnevni prašek s 15 aktivnimi sestavinami, ki podpira črevesje, imunski odziv in kožo hkrati. </p>",
+        "image": "shopify://shop_images/hf_20260907_142856_8f529076-50fd-4387-9ac6-6c40ac7c6ccf.png",
         "cta_label": "Preberi, zakaj ↓",
         "cta_url": "#reasons",
         "guarantee_text": "",
@@ -112,25 +112,25 @@
         "r1": {
           "type": "reason",
           "settings": {
-            "tag": "",
-            "title": "Zakaj je zdravje črevesja pomembno, ko pes je travo ?",
-            "text": "<p>Večina lastnikov je presenečenih, ko izve, da je pasje jedenje trave lahko povezano z organom, ki potrebuje podporo — z neravnovesjem v črevesju.</p><p>Vendar so to le <strong>3 od številnih znakov</strong>, da črevesje vašega psa ni v ravnovesju. Tukaj je še nekaj drugih!</p>",
+            "tag": "1.Razlog",
+            "title": "Zakaj je zdravje črevesja pomembno za pasjo prebavo?",
+            "text": "<p>Večina lastnikov je presenečenih, ko izve, da so jedenje trave, mehko blato in nemiren želodec znaki, ki so povezani med seboj in niso normalni za psa. Povezani so z organom, ki potrebuje podporo — z neravnovesjem v črevesju.</p><p>Vendar so to le <strong>3 od številnih znakov</strong>, da črevesje vašega psa ni v ravnovesju. Tukaj je še nekaj drugih!</p>",
             "image": "shopify://shop_images/hf_20260831_230324_9287ce8f-2603-4621-9896-289dadc1f29f.png"
           }
         },
         "r2": {
           "type": "reason",
           "settings": {
-            "tag": "",
+            "tag": "2. Razlog",
             "title": "Kateri so znaki slabega zdravja črevesja?",
-            "text": "<p>Bodite pozorni na naslednje značilne znake, ki lahko kažejo na neravnovesje v črevesju:</p><ul><li>Uživanje trave</li><li>Občasno srbenje</li><li>Lizanje tačk</li><li>Stresanje z glavo</li><li>Tačke ali ušesa, ki imajo »sirast« oziroma neprijeten vonj</li><li>Občasne prebavne težave (mehko blato, driska ipd.)</li><li>Izpadanje dlake</li><li>Solzenje oči in rjavi madeži pod očmi</li></ul>",
+            "text": "<p>Bodite pozorni na naslednje značilne znake, ki lahko kažejo na neravnovesje v črevesju:</p><p>✓ jedenje trave<br/>✓ mehko ali neenakomerno blato<br/>✓ bruhanje hrane po obroku<br/>✓ sluz na blatu<br/>✓ pogostejši iztrebki, kot je bil navajen<br/>✓ drsanje po tleh in lizanje pod repom<br/>✓ oster, ribji vonj, ki se pojavi in izgine<br/>✓ nemiren želodec, ki se sliši</p>",
             "image": "shopify://shop_images/hf_20260831_230700_a9c71954-410c-4ed1-96f1-562d1ff032fd.png"
           }
         },
         "r3": {
           "type": "reason",
           "settings": {
-            "tag": "Zakaj menjava hrane ne zaleže",
+            "tag": "3. Zakaj menjava hrane ne zaleže",
             "title": "Črevesje je začetek, ne konec",
             "text": "<p>Ko enkrat slišiš, da gre za črevesje, je prva misel zamenjati hrano. In res naredi svoje — nekaj tednov je bolje, pes manj išče travo, blato je enakomernejše.<br/><br/>Potem se počasi vrne. Najprej spet tisti postanek na sprehodu, čez čas vsak dan.<br/><br/>Ker menjava hrane naslavlja to, kar gre v psa, ne tistega, kar hrano razgradi. Blato dobi obliko v debelem črevesu, in za to skrbijo bakterije, ki tam živijo. Nova hrana to ravnovesje za kratek čas premakne, potem pa se vse vrne tja, kjer je bilo.<br/><br/>Menjava hrane torej ni napačna pot. Je samo prvi korak.</p>",
             "image": "shopify://shop_images/hf_20260831_231059_2e6a425b-3078-42b9-9fd6-ab3a6d815a45.png"
@@ -173,7 +173,7 @@
           "type": "reason",
           "settings": {
             "tag": "Rešitev",
-            "title": "Naravna rešitev, ki pride do vzroka težav na koži od znotraj — vse tri fronte hkrati",
+            "title": "Naravna rešitev, ki pride do vzroka nemirne prebave od znotraj — vse tri fronte hkrati",
             "text": "<p>FloraMix je posebej formuliran za podporo zdravemu črevesju, imunskemu sistemu ter zdravi koži in dlaki. Vsebuje skrbno izbrano kombinacijo probiotikov, prebiotika, postbiotikov ter drugih pomembnih sestavin — petnajst aktivnih, vsaka z izpisano količino na embalaži.<br/><br/>Dva živa seva, 300 milijard CFU na kilogram, prebiotična cikorija, ki jih hrani, in dva postbiotika, ki delujeta tam, kjer žive kulture ne sežejo. Formula pomaga podpirati ravnovesje črevesne mikrobiote in normalno prebavo — kar lahko pomeni enakomernejše blato, manj podrigavanja in psa, ki na sprehodu ne išče več trave.</p>",
             "image": "shopify://shop_images/hf_20260831_231614_7e47fce3-5d3f-46c6-8c8b-f82167699623.png"
           }
@@ -229,7 +229,7 @@
           "type": "row",
           "settings": {
             "label": "Postbiotika, 2 seva — delujeta tam, kjer žive kulture ne sežejo",
-            "them_value": "✅",
+            "them_value": "❌ ",
             "us_value": "✅"
           }
         },
@@ -295,7 +295,7 @@
       ],
       "settings": {
         "heading": "<p>Zakaj navadni probiotiki pogosto ne zaležejo?</p>",
-        "description": "<p>Ko slišiš, da gre za črevesje, kupiš probiotik. Prebava se umiri, praskanje pa ostane. Razlog ni, da probiotiki ne delajo. Razlog je, da so v igri tri fronte, navaden probiotik pa naslavlja samo eno.</p>",
+        "description": "<p>Jedenje trave, mehko blato, praskanje in ostale pogosto niso ločene težave. Zato FloraMix ne cilja na eno, ampak na vse tri fronte hkrati — s petnajstimi aktivnimi sestavinami, vsako z izpisano količino.</p>",
         "them_image": "shopify://shop_images/us_vs_them.png",
         "them_label": "Ostali dodatki",
         "us_image": "shopify://shop_images/Kaching-Bundles-FloraMix_bundle_1x_transparent_800x800_49509508-4650-4c88-a050-ea5ef68437f5.webp",
