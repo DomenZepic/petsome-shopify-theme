@@ -81,7 +81,7 @@
         "show_badge_stars": false,
         "rating_text": "",
         "heading": "<p>6 razlogov za nemirno pasjo prebavo, ki jih večina lastnikov ne pozna</p>",
-        "subline": "<p>Če tvoj pes je travo, ima mehko blato, se drsa z ritjo po tleh, bruha po obrokih,... To ni normalno vedenje in odgovor je najpogosteje porušeno ravnovesje v črevesju. FloraMix je dnevni prašek s 15 aktivnimi sestavinami, ki podpira črevesje, imunski odziv in kožo hkrati. </p>",
+        "subline": "<p>Če tvoj pes je travo, ima mehko blato, se drsa z ritjo po tleh, sluz na blatu,... To ni normalno vedenje in odgovor je najpogosteje porušeno ravnovesje v črevesju. FloraMix je dnevni prašek s 15 aktivnimi sestavinami, ki podpira črevesje, imunski odziv in kožo hkrati. </p>",
         "image": "shopify://shop_images/hf_20260907_142856_8f529076-50fd-4387-9ac6-6c40ac7c6ccf.png",
         "cta_label": "Preberi, zakaj ↓",
         "cta_url": "#reasons",
@@ -114,7 +114,7 @@
           "settings": {
             "tag": "1.Razlog",
             "title": "Zakaj je zdravje črevesja pomembno za pasjo prebavo?",
-            "text": "<p>Večina lastnikov je presenečenih, ko izve, da so jedenje trave, mehko blato in nemiren želodec znaki, ki so povezani med seboj in niso normalni za psa. Povezani so z organom, ki potrebuje podporo — z neravnovesjem v črevesju.</p><p>Vendar so to le <strong>3 od številnih znakov</strong>, da črevesje vašega psa ni v ravnovesju. Tukaj je še nekaj drugih!</p>",
+            "text": "<p>Večina lastnikov je presenečenih, ko izve, da so jedenje trave, mehko blato in nemiren želodec znaki, ki so povezani med seboj in niso normalni za psa. Povezani so z organom, ki potrebuje podporo — z neravnovesjem v črevesju.</p><p>Vendar so to le <strong>3 od številnih znakov</strong>, da črevesje tvojega psa ni v ravnovesju. Tukaj je še nekaj drugih!</p>",
             "image": "shopify://shop_images/hf_20260831_230324_9287ce8f-2603-4621-9896-289dadc1f29f.png"
           }
         },
@@ -130,8 +130,8 @@
         "r3": {
           "type": "reason",
           "settings": {
-            "tag": "3. Zakaj menjava hrane ne zaleže",
-            "title": "Črevesje je začetek, ne konec",
+            "tag": "3. Razlog",
+            "title": "Zakaj menjava hrane ne zaleže",
             "text": "<p>Ko enkrat slišiš, da gre za črevesje, je prva misel zamenjati hrano. In res naredi svoje — nekaj tednov je bolje, pes manj išče travo, blato je enakomernejše.<br/><br/>Potem se počasi vrne. Najprej spet tisti postanek na sprehodu, čez čas vsak dan.<br/><br/>Ker menjava hrane naslavlja to, kar gre v psa, ne tistega, kar hrano razgradi. Blato dobi obliko v debelem črevesu, in za to skrbijo bakterije, ki tam živijo. Nova hrana to ravnovesje za kratek čas premakne, potem pa se vse vrne tja, kjer je bilo.<br/><br/>Menjava hrane torej ni napačna pot. Je samo prvi korak.</p>",
             "image": "shopify://shop_images/hf_20260831_231059_2e6a425b-3078-42b9-9fd6-ab3a6d815a45.png"
           }
