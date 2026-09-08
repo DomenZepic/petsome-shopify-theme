@@ -762,7 +762,7 @@
         "link_2": {
           "type": "link",
           "settings": {
-            "label": "Prvih 14 dni",
+            "label": "Prvih 90 dni",
             "anchor": "#timeline"
           }
         },
