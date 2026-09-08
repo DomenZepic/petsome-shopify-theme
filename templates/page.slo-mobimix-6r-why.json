@@ -400,24 +400,24 @@
         "row1": {
           "type": "info_row",
           "settings": {
-            "heading": "Kaj je DentalMix?",
-            "content": "<p>DentalMix je prašek za vsakodnevno nego pasjih zob, ki ga preprosto potreseš po hrani. Deluje skozi slino. Ta način delovanja imenujemo <strong>Saliva-Activated Defense™</strong>. Pomaga vezati kalcij, preden se ta strdi v zobni kamen, in otežuje oprijem zobnih oblog. Pomaga pri zadahu in ohranjanju čistejših zob, pri tem pa ščetkanje ni potrebno.</p>",
+            "heading": "Kaj je MobiMix?",
+            "content": "<p>MobiMix je kapsula za vsakodnevno podporo pasjim sklepom, ki jo preprosto dodaš med hrano. Deluje na treh poteh hkrati. Ta način delovanja imenujemo ArthroRegen™. Pomaga podpreti obnovo hrustanca, umirjen vnetni odziv in nastajanje sklepne tekočine. Pomaga pri gibljivosti in lažjem vstajanju, pri tem pa vsakodnevna borba s tabletami ni potrebna.</p>",
             "open": true
           }
         },
         "row2": {
           "type": "info_row",
           "settings": {
-            "heading": "Prednosti DentalMixa",
-            "content": "<p>✅ Manj zadaha. Mnogi lastniki prve spremembe opazijo v 7–14 dneh.<br/>✅ Vidno čistejši zobje ter manj zobnih oblog in zobnega kamna<br/>✅Brez ščetkanja in pregovarjanja. Prašek samo potreseš po obroku.<br/>✅ Primerno za vse pasme in starosti psov</p>",
+            "heading": "Prednosti MobiMixa",
+            "content": "<p>✅ Lažje vstajanje. Mnogi lastniki prve spremembe opazijo v 2–3 tednih.<br/>✅ Več volje za sprehod ter manj oklevanja pred stopnicami<br/>✅ Brez lomljenja tablet. Kapsulo samo dodaš med hrano ali jo odpreš in vsebino potreseš po obroku.<br/>✅ Primerno za vse pasme in velikosti psov</p>",
             "open": false
           }
         },
         "row3": {
           "type": "info_row",
           "settings": {
-            "heading": "Kako deluje DentalMix?",
-            "content": "<p>DentalMix zob ne čisti z drgnjenjem. Deluje skozi slino, ki ves dan obliva vsak zob. Natrijev tripolifosfat veže kalcij v slini in tako pomaga preprečevati njegovo nalaganje na zobeh. Polisaharidi iz morskih alg otežujejo oprijem zobnih oblog. Zeleni čaj in granatno jabolko pomagata pri bakterijah, ki povzročajo neprijeten zadah. Prašek samo potreseš po hrani, pes pa ga zaužije skupaj z obrokom.</p>",
+            "heading": "Kako deluje MobiMix?",
+            "content": "<p>MobiMix sklepa ne umiri z blokado bolečine. Deluje na treh poteh hkrati, ki se med sabo poganjajo. Glukozamin in hondroitin sta gradnika, iz katerih telo obnavlja hrustanec. Zelenoustna školjka, vražji krempelj in kurkuma pomagajo podpreti umirjen vnetni odziv, ki obrabo hrustanca poganja naprej. Šipek, ingver in vitamin C podpirajo obrambo pred oksidativnim stresom, vitamin C pa prispeva tudi k normalnemu nastajanju kolagena. Kapsulo samo dodaš med hrano, pes pa jo zaužije skupaj z obrokom.</p>",
             "open": false
           }
         },
@@ -425,7 +425,7 @@
           "type": "info_row",
           "settings": {
             "heading": "Sestavine",
-            "content": "<p><strong>Hidrolizirana algna moka 53,5 %</strong> (proti oblogam) · <strong>natrijev tripolifosfat</strong> (proti zobnemu kamnu) · <strong>cikorija 20 %</strong> (prebiotik) · <strong>zeleni čaj 5 %</strong> in <strong>granatno jabolko 10 %</strong> (proti zadahu) · <strong>Bacillus velezensis 200 mrd CFU/kg</strong> (proti zadahu iz črevesja). Proizvedeno v EU.</p>",
+            "content": "<ul><li>Zelenoustna školjka</li><li>Glukozamin in hondroitin</li><li>Vražji krempelj</li><li>Kurkuma</li><li>Izvleček ingverjeve korenine</li><li>Izvleček šipka</li><li>Vitamin C</li></ul>",
             "open": false
           }
         },
@@ -433,7 +433,7 @@
           "type": "info_row",
           "settings": {
             "heading": "Odmerjanje",
-            "content": "<p>Enkrat na dan potresi priporočeno količino praška po mokri ali suhi hrani in dobro premešaj. Količino prilagodi teži psa. Za najboljše rezultate DentalMix uporabljaj vsak dan.</p>",
+            "content": "<p><strong>Priporočen dnevni vnos (3 mesece ali do izboljšanja stanja):</strong> </p><p>Mačke: 1/2 – 1 kapsula </p><p>Majhni psi (do 10 kg): 1 kapsula </p><p>Srednje veliki psi (11-24kg): 2 kapsuli </p><p>Veliki psi (25-40kg): 3 kapsule </p><p>Zelo veliki psi (več kot 41 kg): 4 kapsule </p><p><br/></p><p><strong>Vzdrževalni in preventivni vnos:</strong> </p><p>Do 20kg: 1 – 2 kapsule </p><p>Nad 20kg: 2 kapsuli </p><p><br/></p><p>Po treh mesecih jemanja oziroma po izboljšanju stanja, je potreben prehod na vzdrževalni vnos ali po potrebi ponoviti kuro. V primeru preobčutljivosti ali težav pri hranjenju se kapsulo lahko odpre, vsebino pa strese med dnevni obrok. Kapsulo v tem primeru zavržete. </p>",
             "open": false
           }
         },
@@ -441,7 +441,7 @@
           "type": "info_row",
           "settings": {
             "heading": "Študije",
-            "content": "<p>Natrijev tripolifosfat se uporablja v izdelkih za pomoč pri nadzoru zobnega kamna. Hidrolizirana algna moka spada v isto kategorijo morskih alg, ki se uporabljajo tudi v drugih znanih izdelkih za nego pasjih zob. Probiotik Bacillus velezensis DSM 15544 je registriran v EU pod oznako 4b1820. Večina lastnikov prve spremembe pri zadahu opazi v 7–14 dneh.</p>",
+            "content": "<p><strong>Tiffany Linn Bierer3 and Linh M. Bui Waltham USA, Vernon, CA: Improvement of Arthritic Signs in Dogs Fed Green-Lipped Mussel (Perna canaliculus)</strong></p><p>“Podatki iz študije kažejo, da je GLM prašek učinkovit pri zmanjševanju znakov artritisa pri psih, bodisi, ko se neposredno posuje na standardno prehrano, bodisi, ko je vključen v obdelane priboljške ali glavne obroke. Po šestih tednih dopolnjevanja z GLM so se skupne ocene artritisa, bolečin v sklepih in oteklin bistveno zmanjšale. GLM vsebuje omega-3 maščobne kisline, ki zmanjšujejo vnetja, brez škodljivih učinkov na prebavni sistem ali strjevanje krvi, kar daje prednost pred mnogimi nesteroidnimi protivnetnimi zdravili. Prehransko dopolnjevanje z GLM lahko pripomore k obvladovanju artritičnih težav pri psih in zmanjša potrebo po običajnem zdravljenju.”</p><p><strong>Grainne McCarthy a,*, James O’Donovan b, Boyd Jones a, Hester McAllister c, Michael Seed d, Carmel Mooney: Randomised double-blind, positive-controlled trial to assess the efficacy of glucosamine/chondroitin sulfate for the treatment of dogs with osteoarthritis</strong></p><p>To poročilo je prvo, ki dokazuje, da se klinični znaki osteoartritisa pri psih znatno izboljšajo po 70 dneh zdravljenja z glukozamin hidrokloridom in hondroitin sulfatom. Čeprav so bili v prejšnjih študijah rezultati pri nekaterih dodatkih manj izraziti, so v tej študiji izboljšanja v bolečini in splošnem stanju postala pomembna po 70 dneh, kar kaže na dolgoročno učinkovitost tega zdravljenja.  </p><p><strong>Efficacy of Turmeric for Treatment of Osteoarthritis: A Systematic Review and Meta-Analysis of Experimental Animal Model Studies Stacey Sheahan VMD, MS-TCVM</strong></p><p>Ta sistematični pregled in meta-analiza sta pokazala, da ima kurkuma/kurkumin obetavne terapevtske učinke pri zdravljenju osteoartritisa (OA). Zmanjšuje vnetne citokine, kot sta TNF-α in IL-1β, ter ščiti hrustanec pred degeneracijo. Klinične študije na domačih ljubljenčkih, predvsem psih, so potrebne za dodatno raziskovanje učinkov kurkume pri zdravljenju OA. Kurkuma se lahko uporablja kot del širšega zdravljenja v okviru tradicionalne kitajske veterinarske medicine.</p>",
             "open": false
           }
         }
@@ -603,8 +603,8 @@
       "type": "petsome-ld-ingredients",
       "settings": {
         "product": "mobimix",
-        "heading": "<p>Sestavine, ki delujejo skozi slino</p>",
-        "description": "<p>Vsaka sestavina pokriva svoj del: da se kalcij ne strdi v kamen, da se bakterije težje oprimejo sklenine in da zadah izgine od znotraj. Nič ni notri zato, da bi deklaracija izgledala daljša.</p>",
+        "heading": "<p>Sestavine, ki delujejo na treh poteh</p>",
+        "description": "<p>Vsaka sestavina pokriva svoj del: da ima telo iz česa obnavljati hrustanec, da se vnetni odziv, ki obrabo poganja naprej, umiri, in da sklep ostane namazan. Nič ni notri zato, da bi deklaracija izgledala daljša.</p>",
         "amount_label": "Količina na pakiranje",
         "anchor_id": "ingredients",
         "padding_top": 80,
