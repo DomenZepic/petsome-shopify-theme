@@ -32,7 +32,7 @@
         "padding_bottom": 12,
         "background_color": "#0e1111",
         "text_color": "#faf9f6",
-        "pill_color": "#9bb8d3",
+        "pill_color": "#F47671",
         "pill_text_color": "#0e1111"
       }
     },
@@ -105,10 +105,10 @@
         "star_color": "#ff9a0a",
         "button_background": "#0e1111",
         "button_text_color": "#ffffff",
-        "accent_color": "#9bb8d3",
+        "accent_color": "#F47671",
         "gift_tile_color": "#f1e1d5",
         "gift_tile_border_color": "#b7b8b8",
-        "gift_badge_color": "#87a0b7",
+        "gift_badge_color": "#F47671",
         "gift_badge_text_color": "#ffffff"
       }
     },
@@ -172,7 +172,7 @@
         "reason_5": {
           "type": "reason",
           "settings": {
-            "tag": "5. razlog",
+            "tag": "6. razlog",
             "title": "Obožuje ga 5000+ lastnikov psov, podpirajo ga strokovnjaki.",
             "text": "<p>Od prvih uporabnikov do dolgoletnih strank je MobiMix postal del vsakodnevne rutine tisočih lastnikov psov. Z več kot 5.000 zadovoljnimi psi in številnimi odličnimi ocenami je postal preprosta izbira za podporo sklepom in gibljivosti doma. Kapsulo preprosto dodaš med hrano — brez lomljenja tablet in brez pregovarjanja.</p>",
             "image": "shopify://shop_images/hf_20260908_114301_f65bc535-9c50-4d32-a5ea-94ca6f45e6e0.png"
@@ -197,7 +197,7 @@
         "padding_bottom": 80,
         "background_color": "#fdfbf7",
         "text_color": "#0e1111",
-        "accent_color": "#87a0b7",
+        "accent_color": "#F47671",
         "divider_color": "#565858"
       }
     },
@@ -378,10 +378,10 @@
         "anchor_id": "timeline",
         "padding_top": 80,
         "padding_bottom": 80,
-        "background_color": "#eaf1f6",
+        "background_color": "#FDFBF7",
         "text_color": "#0e1111",
-        "accent_color": "#9bb8d3",
-        "accent_color_dark": "#87a0b7",
+        "accent_color": "#F47671",
+        "accent_color_dark": "#F47671",
         "line_color": "#fac3c1",
         "card_color": "#ffffff",
         "footnote_color": "#565858"
