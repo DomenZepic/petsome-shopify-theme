@@ -347,6 +347,15 @@
         "reason_1": {
           "type": "reason",
           "settings": {
+            "tag": "Simptomi",
+            "title": "Prepoznaš te znake pri svojem psu?",
+            "text": "<p>To niso ločene težave. Skupaj so vzorec.</p><p>✓ obotavljivo vstajanje po ležanju<br/>✓ ne skoči več v avto ali na kavč<br/>✓ počasnejši po stopnicah, sploh navzdol<br/>✓ šepanje po daljšem sprehodu<br/>✓ pokanje ali klikanje v sklepih<br/>✓ na sprehodu se ustavi prej kot nekoč<br/>✓ lizanje sklepov<br/>✓ manj volje do igre</p><p>Če jih prepoznaš dva ali tri, ni šlo za naključje.</p>",
+            "image": "shopify://shop_images/prenos.png"
+          }
+        },
+        "reason_txewzG": {
+          "type": "reason",
+          "settings": {
             "tag": "1. razlog",
             "title": "Večina glukozaminskih dodatkov za sklepe ne deluje!",
             "text": "<p>Večina dodatkov za sklepe je poddoziranih in brez kliničnih dokazov — sestavina je notri, ampak ravno toliko, da jo smejo napisati na embalažo. In pogosto je sama, brez sestavin, ki bi z njo delovale skupaj. MobiMix deluje na vseh treh poteh hkrati — hrustanec, vnetni odziv in sklepna tekočina. Vsebuje 6 klinično raziskanih sestavin, ki pomagajo podpreti gibljivost in obnovo sklepa. Rezultat je lažje vstajanje, več gibanja in pes, ki spet pride do vrat.</p>",
@@ -376,14 +385,14 @@
           "settings": {
             "tag": "4. razlog",
             "title": "6 klinično raziskanih sestavin, preverjeno s strani veterinarjev",
-            "text": "<p>MobiMix združuje sestavine, katerih učinki na pse so bili klinično raziskani. Zelenoustna školjka je bila v dvojno slepi raziskavi na 45 psih primerjana s placebom in s karprofenom — torej s pravim protivnetnim zdravilom. Uporabljamo 100 % novozelandsko Perna canaliculus, liofilizirano in ne iz gostih gojišč. Kurkuma je pri psih z osteoartrozo v dvojno slepi navzkrižni raziskavi izboljšala oceno gibanja, šipek in vražji krempelj pa sta bila v raziskavi na psih preizkušena kot podpora pri togih sklepih. Vsaka količina je izpisana, vsaka dobava laboratorijsko analizirana.</p>",
+            "text": "<p>MobiMix združuje sestavine, katerih učinki na pse so bili klinično raziskani — za vse tri poti, ne le za hrustanec.<br/><br/>Zelenoustna školjka je bila v dvojno slepi raziskavi na 45 psih s kronično bolečino primerjana s placebom in s karprofenom, protivnetnim zdravilom. Merili so, koliko teže pes dejansko prenese na bolno nogo — objektivno, na merilni plošči — in po štirih tednih se je vrednost pri školjki dvignila več kot pri zdravilu. Šipek in vražji krempelj sta bila preizkušena v randomizirani raziskavi na psih z naravno nastalo osteoartrozo, kurkuma pa v dvojno slepi navzkrižni raziskavi na 32 psih, kjer se je ocena gibanja izboljšala.<br/><br/>Rezultat? Lažje vstajanje, več volje za sprehod in manj oklevanja pred stopnicami — brez ugibanja, koliko česa je v kapsuli.</p>",
             "image": "shopify://shop_images/prenos_2.png"
           }
         },
         "reason_WmmFA9": {
           "type": "reason",
           "settings": {
-            "tag": "4. razlog",
+            "tag": "5. razlog",
             "title": "Lažje vstajanje in več gibanja v 90 dneh.",
             "text": "<p>Za mnoge lastnike je MobiMix preprost način, kako vsakodnevno podpreti sklepe psa tudi takrat, ko gibanja ni več toliko kot nekoč. Znotraj tega obdobja lastniki najpogosteje opišejo, da pes lažje vstane po ležanju, gre po stopnicah brez postanka in na sprehodu spet zdrži dlje.</p>",
             "image": "shopify://shop_images/prenos_2.png"
@@ -397,25 +406,16 @@
             "text": "<p>Od prvih uporabnikov do dolgoletnih strank je MobiMix postal del vsakodnevne rutine tisočih lastnikov psov. Z več kot 5.000 zadovoljnimi psi in številnimi odličnimi ocenami je postal preprosta izbira za podporo sklepom in gibljivosti doma. Kapsulo preprosto dodaš med hrano — brez lomljenja tablet in brez pregovarjanja.</p>",
             "image": "shopify://shop_images/12_ugc_mreza.jpg"
           }
-        },
-        "reason_6": {
-          "type": "reason",
-          "settings": {
-            "tag": "6. razlog",
-            "title": "Kapsula med hrano in pes sploh ne opazi",
-            "text": "<p>Kapsulo preprosto dodaš med hrano — psi jo skoraj vedno pojedo skupaj z obrokom, brez skrivanja in brez pregovarjanja. Če je pes izbirčen, jo lahko odpreš in vsebino potreseš po mokri hrani. Tako podpora sklepom ne postane še ena obveznost, ampak del rutine, ki ti vzame nekaj sekund na dan.</p>",
-            "image": "shopify://shop_images/11_posip_dvojni.jpg"
-          }
         }
       },
       "block_order": [
         "reason_1",
+        "reason_txewzG",
         "reason_2",
         "reason_3",
         "reason_4",
         "reason_WmmFA9",
-        "reason_5",
-        "reason_6"
+        "reason_5"
       ],
       "settings": {
         "show_numbers": false,
