@@ -650,28 +650,28 @@
           "type": "question",
           "settings": {
             "question": "Kdaj lahko pričakujem prve spremembe?",
-            "answer": "<p>Svež zadah večina lastnikov opazi v 7 do 14 dneh. Za vidno razliko na zobeh priporočamo 2 do 3 mesece redne uporabe.</p>"
+            "answer": "<p>Mnogi lastniki prve spremembe opazijo v 2–3 tednih, za poln učinek pa je običajno potrebnih 8–12 tednov redne uporabe. Hitrost je odvisna od starosti psa, stopnje težav in doslednosti — sklepi se ne obnovijo v enem tednu.</p>"
           }
         },
         "q_2": {
           "type": "question",
           "settings": {
-            "question": "Ali odstrani zobni kamen, ki je že tam?",
-            "answer": "<p>Ne. Star, strjen kamen lahko odstrani samo veterinar. DentalMix poskrbi za to, da se novi ne nabira naprej.</p>"
+            "question": "Koliko kapsul potrebuje moj pes?",
+            "answer": "<p>Odmerek je odvisen od teže psa in je naveden na embalaži. MobiMix se daje enkrat dnevno, skupaj z obrokom.</p>"
           }
         },
         "q_3": {
           "type": "question",
           "settings": {
-            "question": "Kako psu dam DentalMix?",
-            "answer": "<p>Odmerek, prilagojen teži psa, potreseš po hrani. Brez ščetke in brez boja — pes samo poje svoj obrok.</p>"
+            "question": "Kaj če pes kapsule noče pogoltniti?",
+            "answer": "<p>Kapsulo lahko odpreš in vsebino potreseš po hrani. Ovojnico v tem primeru zavrzi.</p>"
           }
         },
         "q_4": {
           "type": "question",
           "settings": {
             "question": "Je primeren za vse pasme in starosti?",
-            "answer": "<p>Primeren je za odrasle pse vseh pasem, tudi za majhne in starejše, ki priboljška ne morejo prežvečiti. Če je psička breja ali doji oziroma pes jemlje zdravila, se posvetuj z veterinarjem.</p>"
+            "answer": "<p>Da, za vse pasme in velikosti. Pomembno je le, da upoštevaš odmerek glede na težo. Pri mladičih priporočamo začetek po približno 5. mesecu starosti.</p>"
           }
         },
         "q_5": {
