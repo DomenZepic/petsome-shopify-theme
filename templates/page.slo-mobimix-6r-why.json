@@ -53,7 +53,7 @@
         "gift_1": {
           "type": "gift",
           "settings": {
-            "icon": "shopify://shop_images/hf_20260717_164541_5f9f0a09-7342-414c-b5a1-38000374b199.png",
+            "icon": "shopify://shop_images/Ada0f20e1488b42368773869a28a63524b1.png",
             "label": "Prenosna zložljiva posoda",
             "price": "9,00 €"
           }
@@ -112,6 +112,95 @@
         "gift_badge_text_color": "#ffffff"
       }
     },
+    "reasons": {
+      "type": "petsome-ld-reasons",
+      "blocks": {
+        "reason_1": {
+          "type": "reason",
+          "settings": {
+            "tag": "Simptomi",
+            "title": "Prepoznaš te znake pri svojem psu?",
+            "text": "<p>To niso ločene težave. Skupaj so vzorec.</p><p>✓ obotavljivo vstajanje po ležanju<br/>✓ ne skoči več v avto ali na kavč<br/>✓ počasnejši po stopnicah, sploh navzdol<br/>✓ šepanje po daljšem sprehodu<br/>✓ pokanje ali klikanje v sklepih<br/>✓ na sprehodu se ustavi prej kot nekoč<br/>✓ lizanje sklepov<br/>✓ manj volje do igre</p><p>Če jih prepoznaš dva ali tri, ni šlo za naključje.</p>",
+            "image": "shopify://shop_images/hf_20260908_092415_8b8b7da3-a099-450b-b6fe-8ccd3bc7fed0_1.png"
+          }
+        },
+        "reason_txewzG": {
+          "type": "reason",
+          "settings": {
+            "tag": "1. razlog",
+            "title": "Večina glukozaminskih dodatkov za sklepe ne deluje!",
+            "text": "<p>Večina dodatkov za sklepe je poddoziranih in brez kliničnih dokazov — sestavina je notri, ampak ravno toliko, da jo smejo napisati na embalažo. In pogosto je sama, brez sestavin, ki bi z njo delovale skupaj. MobiMix deluje na vseh treh poteh hkrati — hrustanec, vnetni odziv in sklepna tekočina. Vsebuje 6 klinično raziskanih sestavin, ki pomagajo podpreti gibljivost in obnovo sklepa. Rezultat je lažje vstajanje, več gibanja in pes, ki spet pride do vrat.</p>",
+            "image": "shopify://shop_images/hf_20260908_110919_7ad9258d-f5ae-443b-8252-3c2df9a6d0d3.png"
+          }
+        },
+        "reason_2": {
+          "type": "reason",
+          "settings": {
+            "tag": "2. razlog",
+            "title": "Tvoj pes se ne upočasnjuje zaradi let.",
+            "text": "<p>Ko pes začne počasneje vstajati, je prva misel, da so prišla leta — in res, pri veterinarju slišiš isto. Potem počakaš. Čez pol leta ne skoči več v avto, čez leto se na sprehodu ustavi prej. Ker starost sama po sebi ne obrablja hrustanca. Obrablja ga vsakodnevna raba, vnetni odziv pa to obrabo poganja naprej. Leta samo povedo, koliko časa se je nabiralo. Starost torej ni napačna razlaga — je samo nepopolna.</p>",
+            "image": "shopify://shop_images/hf_20260908_111451_5fa2a684-b027-4768-b3f9-5d8d0523794f.png"
+          }
+        },
+        "reason_3": {
+          "type": "reason",
+          "settings": {
+            "tag": "3. razlog",
+            "title": "Edinstvena sklepna formula: Obnovi. Umiri. Navlaži.",
+            "text": "<p>Ni le glukozamin, ampak večnamenska sklepna formula, kjer vsaka kapsula deluje na več ključnih področij gibljivosti:</p><p><strong>Gradniki hrustanca</strong> — Glukozamin in hondroitin sta osnovni gradbeni material, iz katerega telo obnavlja hrustanec.<br/><br/><strong>Podpora umirjenemu vnetnemu odzivu</strong> — Zelenoustna školjka, vražji krempelj in kurkuma pomagajo podpirati umirjen vnetni odziv v sklepu, ki obrabo poganja naprej.<br/><br/><strong>Rastlinski izvlečki in antioksidanti </strong>— Šipek, ingver in vitamin C podpirajo obrambo pred oksidativnim stresom in prispevajo k normalnemu nastajanju kolagena, ki je del hrustanca.</p>",
+            "image": "shopify://shop_images/hf_20260908_112313_83cfb7d0-1ef6-4e51-9cee-29b52bbc3b32.png"
+          }
+        },
+        "reason_4": {
+          "type": "reason",
+          "settings": {
+            "tag": "4. razlog",
+            "title": "6 klinično raziskanih sestavin, preverjeno s strani veterinarjev",
+            "text": "<p>MobiMix združuje sestavine, katerih učinki na pse so bili klinično raziskani — za vse tri poti, ne le za hrustanec.<br/><br/>Zelenoustna školjka je bila v dvojno slepi raziskavi na 45 psih s kronično bolečino primerjana s placebom in s karprofenom, protivnetnim zdravilom. Merili so, koliko teže pes dejansko prenese na bolno nogo — objektivno, na merilni plošči — in po štirih tednih se je vrednost pri školjki dvignila več kot pri zdravilu. Šipek in vražji krempelj sta bila preizkušena v randomizirani raziskavi na psih z naravno nastalo osteoartrozo, kurkuma pa v dvojno slepi navzkrižni raziskavi na 32 psih, kjer se je ocena gibanja izboljšala.<br/><br/>Rezultat? Lažje vstajanje, več volje za sprehod in manj oklevanja pred stopnicami — brez ugibanja, koliko česa je v kapsuli.</p>",
+            "image": "shopify://shop_images/hf_20260908_113112_7705928b-e454-4232-9255-36f36ab93811.png"
+          }
+        },
+        "reason_WmmFA9": {
+          "type": "reason",
+          "settings": {
+            "tag": "5. razlog",
+            "title": "Lažje vstajanje in več gibanja v 90 dneh.",
+            "text": "<p>Za mnoge lastnike je MobiMix preprost način, kako vsakodnevno podpreti sklepe psa tudi takrat, ko gibanja ni več toliko kot nekoč. Znotraj tega obdobja lastniki najpogosteje opišejo, da pes lažje vstane po ležanju, gre po stopnicah brez postanka in na sprehodu spet zdrži dlje.</p>",
+            "image": "shopify://shop_images/hf_20260817_204213_b2ff668a-8942-4745-aa0c-0f7e4b127bd0.png"
+          }
+        },
+        "reason_5": {
+          "type": "reason",
+          "settings": {
+            "tag": "5. razlog",
+            "title": "Obožuje ga 5000+ lastnikov psov, podpirajo ga strokovnjaki.",
+            "text": "<p>Od prvih uporabnikov do dolgoletnih strank je MobiMix postal del vsakodnevne rutine tisočih lastnikov psov. Z več kot 5.000 zadovoljnimi psi in številnimi odličnimi ocenami je postal preprosta izbira za podporo sklepom in gibljivosti doma. Kapsulo preprosto dodaš med hrano — brez lomljenja tablet in brez pregovarjanja.</p>",
+            "image": "shopify://shop_images/hf_20260908_114301_f65bc535-9c50-4d32-a5ea-94ca6f45e6e0.png"
+          }
+        }
+      },
+      "block_order": [
+        "reason_1",
+        "reason_txewzG",
+        "reason_2",
+        "reason_3",
+        "reason_4",
+        "reason_WmmFA9",
+        "reason_5"
+      ],
+      "settings": {
+        "show_numbers": false,
+        "pad_numbers": true,
+        "number_start": 1,
+        "anchor_id": "reasons",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#fdfbf7",
+        "text_color": "#0e1111",
+        "accent_color": "#87a0b7",
+        "divider_color": "#565858"
+      }
+    },
     "icon_bar_tTCYrC": {
       "type": "icon-bar",
       "blocks": {
@@ -121,8 +210,8 @@
             "icon": "check_circle",
             "filled_icon": false,
             "image": "shopify://shop_images/microscope_bcece7bd-3bf7-4d5b-bf55-29cb2ffbaa6e.svg",
-            "title": "Laboratorijsko testirano",
-            "text": "<p></p><p></p>"
+            "title": "",
+            "text": "<p>Laboratorijsko testirano</p>"
           }
         },
         "column_J8ieDh": {
@@ -131,8 +220,8 @@
             "icon": "check_circle",
             "filled_icon": false,
             "image": "shopify://shop_images/certification-3_80266f99-f611-498f-93b8-d21612809bdb.png",
-            "title": "FCA certificirano",
-            "text": "<p></p><p></p>"
+            "title": "",
+            "text": "<p>FCA certificirano</p>"
           }
         },
         "column_GkqKWa": {
@@ -141,8 +230,8 @@
             "icon": "check_circle",
             "filled_icon": false,
             "image": "shopify://shop_images/paw-print_e3778c93-faad-40e1-855e-e245defe75be.svg",
-            "title": "Veterinarsko formulirano",
-            "text": ""
+            "title": "",
+            "text": "<p>Veterinarsko formulirano</p>"
           }
         },
         "column_kqVxDx": {
@@ -151,8 +240,8 @@
             "icon": "check_circle",
             "filled_icon": false,
             "image": "shopify://shop_images/shield-check_e12ffcfe-6520-4ee2-a686-5e1f7bdb6c1a.svg",
-            "title": "60 - dnevna garancija",
-            "text": ""
+            "title": "",
+            "text": "<p>60 - dnevna garancija</p>"
           }
         }
       },
@@ -201,7 +290,7 @@
         "title_highlight_2_handwritten-color": "#6D388B",
         "title_highlight_2_handwritten-stroke-width": 3,
         "title_highlight_2_handwritten-position": 60,
-        "heading_size": "h1",
+        "heading_size": "h2",
         "custom_desktop_size": 39,
         "custom_mobile_size": 28,
         "text": "",
@@ -218,7 +307,7 @@
         "pattern_opacity_low": 7,
         "pattern_opacity_normal": 80,
         "icon_layout": "vertical",
-        "icon_size": "small",
+        "icon_size": "medium",
         "icon_color": "accent-1",
         "cards_color_scheme": "background-1",
         "custom_cards_colors_background": "#F3F3F3",
@@ -248,186 +337,6 @@
         "mobile_arrows_position": "under",
         "padding_top": 0,
         "padding_bottom": 0
-      }
-    },
-    "petsome_home_reviews_nntxYK": {
-      "type": "petsome-home-reviews",
-      "blocks": {
-        "review_3HBhMy": {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "body": "\"Maj bi moral biti operiran, žal pa so na isti dan operirali mene. Namreč ima kronično vnetje kolenskih sklepov. Po treh tednih jemanja MobiMixa je Maj čudežno shodil. Veterinarja vprašam, kaj sedaj to pomeni. Veterinar mi odgovori, da nima druge razlage kot da je to božji čudež. Ta božji čudež traja že leto dni in upam, da bo trajal in trajal.\"",
-            "author": "Branko Teršek",
-            "dog": "12-letni ovčar"
-          }
-        },
-        "review_dpFKaz": {
-          "type": "review",
-          "settings": {
-            "avatar": "shopify://shop_images/natasa-zivko-tecaj_1.png",
-            "rating": 5,
-            "body": "\"Pred dvema letoma in pol sem za svojo 12 let in pol staro psičko iskala dodatek, ki bi pokrival širši spekter. Po priporočilu sem zasledila MobiMix in psički se je stanje v roku enega meseca tako izboljšalo, da je bila sposobna ponovno sama iti po stopničkah. MobiMix me je tako prepričal, da sem ga uvrstila na svoje poličke, in ga od takrat redno priporočam strankam.\"",
-            "author": "Nataša Živko, ZOO AJKA in kinološka sodnica",
-            "dog": "12,5-letna psička"
-          }
-        },
-        "review_TaVPGa": {
-          "type": "review",
-          "settings": {
-            "avatar": "shopify://shop_images/image00018.jpg",
-            "rating": 5,
-            "body": "\"Glede na to, koliko sva z Eliko predelala, so se pojavile določene težave z gibanjem. Ko sva pred dvema letoma začela uporabljati MobiMix, so težave izvenele, kar je zopet pripomoglo k letošnjemu rezultatu na svetovnem prvenstvu. Ker je MobiMix pomagal Eliki, ga preventivno dajem tudi ostalim psom.\"",
-            "author": "Tomaž Režonja, 5x svetovni prvak",
-            "dog": "Elika, svetovna prvakinja v sledenju"
-          }
-        },
-        "logo_CGL6mz": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/vg-logo.svg",
-            "label": ""
-          }
-        },
-        "logo_DGGWPE": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/Veterina-Skarica_logo-1-1-200x200_png.webp",
-            "label": ""
-          }
-        },
-        "logo_7UWYdD": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/vet_mlakar_logo_color_animated_1.svg",
-            "label": ""
-          }
-        },
-        "logo_Rf4ayr": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/petvet_logo.png",
-            "label": ""
-          }
-        },
-        "logo_Hkkknj": {
-          "type": "logo",
-          "settings": {
-            "image": "shopify://shop_images/logo_veterinaria_1.png",
-            "label": ""
-          }
-        }
-      },
-      "block_order": [
-        "review_3HBhMy",
-        "review_dpFKaz",
-        "review_TaVPGa",
-        "logo_CGL6mz",
-        "logo_DGGWPE",
-        "logo_7UWYdD",
-        "logo_Rf4ayr",
-        "logo_Hkkknj"
-      ],
-      "name": "Petsome: Home reviews",
-      "settings": {
-        "trustpilot_label": "",
-        "heading": "<p>Več kot 5.000 psov. Ena skupna zgodba.</p>",
-        "subline": "<p>Priporočeno s strani veterinarjev.</p>",
-        "logo_speed": 30,
-        "background_color": "#FDFBF7",
-        "card_color": "#faf9f6",
-        "star_color": "#ffcc00",
-        "padding_top": 44,
-        "padding_bottom": 48
-      }
-    },
-    "reasons": {
-      "type": "petsome-ld-reasons",
-      "blocks": {
-        "reason_1": {
-          "type": "reason",
-          "settings": {
-            "tag": "Simptomi",
-            "title": "Prepoznaš te znake pri svojem psu?",
-            "text": "<p>To niso ločene težave. Skupaj so vzorec.</p><p>✓ obotavljivo vstajanje po ležanju<br/>✓ ne skoči več v avto ali na kavč<br/>✓ počasnejši po stopnicah, sploh navzdol<br/>✓ šepanje po daljšem sprehodu<br/>✓ pokanje ali klikanje v sklepih<br/>✓ na sprehodu se ustavi prej kot nekoč<br/>✓ lizanje sklepov<br/>✓ manj volje do igre</p><p>Če jih prepoznaš dva ali tri, ni šlo za naključje.</p>",
-            "image": "shopify://shop_images/prenos.png"
-          }
-        },
-        "reason_txewzG": {
-          "type": "reason",
-          "settings": {
-            "tag": "1. razlog",
-            "title": "Večina glukozaminskih dodatkov za sklepe ne deluje!",
-            "text": "<p>Večina dodatkov za sklepe je poddoziranih in brez kliničnih dokazov — sestavina je notri, ampak ravno toliko, da jo smejo napisati na embalažo. In pogosto je sama, brez sestavin, ki bi z njo delovale skupaj. MobiMix deluje na vseh treh poteh hkrati — hrustanec, vnetni odziv in sklepna tekočina. Vsebuje 6 klinično raziskanih sestavin, ki pomagajo podpreti gibljivost in obnovo sklepa. Rezultat je lažje vstajanje, več gibanja in pes, ki spet pride do vrat.</p>",
-            "image": "shopify://shop_images/prenos.png"
-          }
-        },
-        "reason_2": {
-          "type": "reason",
-          "settings": {
-            "tag": "2. razlog",
-            "title": "Tvoj pes se ne upočasnjuje zaradi let.",
-            "text": "<p>Ko pes začne počasneje vstajati, je prva misel, da so prišla leta — in res, pri veterinarju slišiš isto. Potem počakaš. Čez pol leta ne skoči več v avto, čez leto se na sprehodu ustavi prej. Ker starost sama po sebi ne obrablja hrustanca. Obrablja ga vsakodnevna raba, vnetni odziv pa to obrabo poganja naprej. Leta samo povedo, koliko časa se je nabiralo. Starost torej ni napačna razlaga — je samo nepopolna.</p>",
-            "image": "shopify://shop_images/10_vet_citat.jpg"
-          }
-        },
-        "reason_3": {
-          "type": "reason",
-          "settings": {
-            "tag": "3. razlog",
-            "title": "Edinstvena sklepna formula: Obnovi. Umiri. Navlaži.",
-            "text": "<p>Ni le glukozamin, ampak večnamenska sklepna formula, kjer vsaka kapsula deluje na več ključnih področij gibljivosti:</p><p><strong>Gradniki hrustanca</strong> — Glukozamin in hondroitin sta osnovni gradbeni material, iz katerega telo obnavlja hrustanec.<br/><br/><strong>Podpora umirjenemu vnetnemu odzivu</strong> — Zelenoustna školjka, vražji krempelj in kurkuma pomagajo podpirati umirjen vnetni odziv v sklepu, ki obrabo poganja naprej.<br/><br/><strong>Rastlinski izvlečki in antioksidanti </strong>— Šipek, ingver in vitamin C podpirajo obrambo pred oksidativnim stresom in prispevajo k normalnemu nastajanju kolagena, ki je del hrustanca.</p>",
-            "image": "shopify://shop_images/09_presek.jpg"
-          }
-        },
-        "reason_4": {
-          "type": "reason",
-          "settings": {
-            "tag": "4. razlog",
-            "title": "6 klinično raziskanih sestavin, preverjeno s strani veterinarjev",
-            "text": "<p>MobiMix združuje sestavine, katerih učinki na pse so bili klinično raziskani — za vse tri poti, ne le za hrustanec.<br/><br/>Zelenoustna školjka je bila v dvojno slepi raziskavi na 45 psih s kronično bolečino primerjana s placebom in s karprofenom, protivnetnim zdravilom. Merili so, koliko teže pes dejansko prenese na bolno nogo — objektivno, na merilni plošči — in po štirih tednih se je vrednost pri školjki dvignila več kot pri zdravilu. Šipek in vražji krempelj sta bila preizkušena v randomizirani raziskavi na psih z naravno nastalo osteoartrozo, kurkuma pa v dvojno slepi navzkrižni raziskavi na 32 psih, kjer se je ocena gibanja izboljšala.<br/><br/>Rezultat? Lažje vstajanje, več volje za sprehod in manj oklevanja pred stopnicami — brez ugibanja, koliko česa je v kapsuli.</p>",
-            "image": "shopify://shop_images/prenos_2.png"
-          }
-        },
-        "reason_WmmFA9": {
-          "type": "reason",
-          "settings": {
-            "tag": "5. razlog",
-            "title": "Lažje vstajanje in več gibanja v 90 dneh.",
-            "text": "<p>Za mnoge lastnike je MobiMix preprost način, kako vsakodnevno podpreti sklepe psa tudi takrat, ko gibanja ni več toliko kot nekoč. Znotraj tega obdobja lastniki najpogosteje opišejo, da pes lažje vstane po ležanju, gre po stopnicah brez postanka in na sprehodu spet zdrži dlje.</p>",
-            "image": "shopify://shop_images/prenos_2.png"
-          }
-        },
-        "reason_5": {
-          "type": "reason",
-          "settings": {
-            "tag": "5. razlog",
-            "title": "Obožuje ga 5000+ lastnikov psov, podpirajo ga strokovnjaki.",
-            "text": "<p>Od prvih uporabnikov do dolgoletnih strank je MobiMix postal del vsakodnevne rutine tisočih lastnikov psov. Z več kot 5.000 zadovoljnimi psi in številnimi odličnimi ocenami je postal preprosta izbira za podporo sklepom in gibljivosti doma. Kapsulo preprosto dodaš med hrano — brez lomljenja tablet in brez pregovarjanja.</p>",
-            "image": "shopify://shop_images/12_ugc_mreza.jpg"
-          }
-        }
-      },
-      "block_order": [
-        "reason_1",
-        "reason_txewzG",
-        "reason_2",
-        "reason_3",
-        "reason_4",
-        "reason_WmmFA9",
-        "reason_5"
-      ],
-      "settings": {
-        "show_numbers": false,
-        "pad_numbers": true,
-        "number_start": 1,
-        "anchor_id": "reasons",
-        "padding_top": 80,
-        "padding_bottom": 80,
-        "background_color": "#fdfbf7",
-        "text_color": "#0e1111",
-        "accent_color": "#87a0b7",
-        "divider_color": "#565858"
       }
     },
     "timeline": {
@@ -599,48 +508,95 @@
         "margin_bottom": 0
       }
     },
-    "petsome_before_after_bEFgxj": {
-      "type": "petsome-before-after",
+    "petsome_home_reviews_nntxYK": {
+      "type": "petsome-home-reviews",
       "blocks": {
-        "story_minGFf": {
-          "type": "story",
+        "review_3HBhMy": {
+          "type": "review",
           "settings": {
-            "image": "shopify://shop_images/hf_20260709_191847_47f9a875-2a81-4321-ab1a-0928235e472e.png",
-            "dog_name": "Piki, 9-let",
-            "issue": "Rjavi zobje in hud zadah",
-            "text": "<p>Pikijev zadah je bil neznosen, ščetkanja ni pustil. Po dveh tednih DentalMixa lastnica poroča, da je zadah opazno milejši in da ga spet crklja od blizu. Tudi zobje so bolj beli.</p>"
+            "rating": 5,
+            "body": "\"Maj bi moral biti operiran, žal pa so na isti dan operirali mene. Namreč ima kronično vnetje kolenskih sklepov. Po treh tednih jemanja MobiMixa je Maj čudežno shodil. Veterinarja vprašam, kaj sedaj to pomeni. Veterinar mi odgovori, da nima druge razlage kot da je to božji čudež. Ta božji čudež traja že leto dni in upam, da bo trajal in trajal.\"",
+            "author": "Branko Teršek",
+            "dog": "12-letni ovčar"
           }
         },
-        "story_wXAAPn": {
-          "type": "story",
+        "review_dpFKaz": {
+          "type": "review",
           "settings": {
-            "image": "shopify://shop_images/Untitled_design_90_23d1c325-2ca9-408a-adbc-21cf722c055a.webp",
-            "dog_name": "Rosa, 11-letna maltežanka",
-            "issue": "Rjave obloge",
-            "text": "<p>Rosa je imela rjave obloge ob dlesnih in skrbela jo je anestezija. Z rednim DentalMixom so zobje videti čistejši, brez postopka pri veterinarju.</p>"
+            "avatar": "shopify://shop_images/natasa-zivko-tecaj_1.png",
+            "rating": 5,
+            "body": "\"Pred dvema letoma in pol sem za svojo 12 let in pol staro psičko iskala dodatek, ki bi pokrival širši spekter. Po priporočilu sem zasledila MobiMix in psički se je stanje v roku enega meseca tako izboljšalo, da je bila sposobna ponovno sama iti po stopničkah. MobiMix me je tako prepričal, da sem ga uvrstila na svoje poličke, in ga od takrat redno priporočam strankam.\"",
+            "author": "Nataša Živko, ZOO AJKA in kinološka sodnica",
+            "dog": "12,5-letna psička"
           }
         },
-        "story_pikMgy": {
-          "type": "story",
+        "review_TaVPGa": {
+          "type": "review",
           "settings": {
-            "image": "shopify://shop_images/image00004_db7b8cc8-6684-47d2-980a-96f678167a77.png",
-            "dog_name": "Dante, 12-letni ovčar",
-            "issue": "Starejši pes, ne pusti ščetke",
-            "text": "<p>Dante je starejši ovčar in ščetkanja ne prenese. Prašek na hrani je preprosta rešitev — zadaha ni več, lastnica pa mirna.</p>"
+            "avatar": "shopify://shop_images/image00018.jpg",
+            "rating": 5,
+            "body": "\"Glede na to, koliko sva z Eliko predelala, so se pojavile določene težave z gibanjem. Ko sva pred dvema letoma začela uporabljati MobiMix, so težave izvenele, kar je zopet pripomoglo k letošnjemu rezultatu na svetovnem prvenstvu. Ker je MobiMix pomagal Eliki, ga preventivno dajem tudi ostalim psom.\"",
+            "author": "Tomaž Režonja, 5x svetovni prvak",
+            "dog": "Elika, svetovna prvakinja v sledenju"
+          }
+        },
+        "logo_CGL6mz": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/vg-logo.svg",
+            "label": ""
+          }
+        },
+        "logo_DGGWPE": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Veterina-Skarica_logo-1-1-200x200_png.webp",
+            "label": ""
+          }
+        },
+        "logo_7UWYdD": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/vet_mlakar_logo_color_animated_1.svg",
+            "label": ""
+          }
+        },
+        "logo_Rf4ayr": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/petvet_logo.png",
+            "label": ""
+          }
+        },
+        "logo_Hkkknj": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/logo_veterinaria_1.png",
+            "label": ""
           }
         }
       },
       "block_order": [
-        "story_minGFf",
-        "story_wXAAPn",
-        "story_pikMgy"
+        "review_3HBhMy",
+        "review_dpFKaz",
+        "review_TaVPGa",
+        "logo_CGL6mz",
+        "logo_DGGWPE",
+        "logo_7UWYdD",
+        "logo_Rf4ayr",
+        "logo_Hkkknj"
       ],
+      "name": "Petsome: Home reviews",
       "settings": {
-        "heading": "<p>Dokazi so v rezultatih</p>",
-        "description": "<p>Pomagali smo že več kot 5000+ psom po vsej Evropi. Tukaj je nekaj njihovih zgodb.</p>",
-        "border_color": "#e8d6c5",
-        "padding_top": 80,
-        "padding_bottom": 80
+        "trustpilot_label": "",
+        "heading": "<p>Več kot 5.000 psov. Ena skupna zgodba.</p>",
+        "subline": "<p>Priporočeno s strani veterinarjev.</p>",
+        "logo_speed": 30,
+        "background_color": "#FDFBF7",
+        "card_color": "#faf9f6",
+        "star_color": "#ffcc00",
+        "padding_top": 44,
+        "padding_bottom": 48
       }
     },
     "ingredients": {
@@ -659,6 +615,32 @@
         "accent_color_dark": "#87a0b7",
         "secondary_color": "#e8d6c5",
         "light_text_color": "#faf9f6"
+      }
+    },
+    "1788858474c1df737d": {
+      "type": "apps",
+      "blocks": {
+        "loox_reviews_loox_agg_section_HmVHz3": {
+          "type": "shopify://apps/loox-reviews/blocks/loox-agg-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "settings": {
+            "reviews_to_display": "",
+            "default_tab": "automatic",
+            "only_photos": false,
+            "hide_thumbnails": false,
+            "product_handle": "",
+            "aggregated": true,
+            "data-limit": 20,
+            "maxwidth": 1080,
+            "is_sample": true
+          }
+        }
+      },
+      "block_order": [
+        "loox_reviews_loox_agg_section_HmVHz3"
+      ],
+      "settings": {
+        "display_id": false,
+        "include_margins": true
       }
     },
     "faq": {
@@ -830,13 +812,13 @@
     "offer_bar",
     "ld_header",
     "hero",
-    "icon_bar_tTCYrC",
-    "petsome_home_reviews_nntxYK",
     "reasons",
+    "icon_bar_tTCYrC",
     "timeline",
     "offer",
-    "petsome_before_after_bEFgxj",
+    "petsome_home_reviews_nntxYK",
     "ingredients",
+    "1788858474c1df737d",
     "faq",
     "17869840503b54b2bc",
     "guarantee",
