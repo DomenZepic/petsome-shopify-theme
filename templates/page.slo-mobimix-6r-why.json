@@ -742,9 +742,9 @@
         "anchor_id": "guarantee",
         "padding_top": 80,
         "padding_bottom": 80,
-        "background_color": "#eaf1f6",
+        "background_color": "#FBBCB9",
         "text_color": "#0e1111",
-        "icon_color": "#9bb8d3",
+        "icon_color": "#F47671",
         "button_background": "#0e1111",
         "button_text_color": "#ffffff"
       }
