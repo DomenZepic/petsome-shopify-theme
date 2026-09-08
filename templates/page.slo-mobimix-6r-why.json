@@ -736,7 +736,7 @@
         "show_icon": true,
         "icon": "verified_user",
         "heading": "<p>Preizkusi brez tveganja 90 dni</p>",
-        "text": "<p>Daj psu prvo embalažo in si vzemi čas. Če v 90 dneh ne opaziš razlike – da je zadah blažji, da se nove obloge ne nabirajo in da ti pes spet lahko pride blizu – nam piši in denar ti vrnemo, tudi če je embalaža že odprta.</p>",
+        "text": "<p>Daj psu prvo embalažo in si vzemi čas. Če v 90 dneh ne opaziš razlike - nam piši in denar ti vrnemo, tudi če je embalaža že odprta.</p>",
         "cta_label": "NAROČI ZDAJ",
         "cta_url": "#offer",
         "anchor_id": "guarantee",
