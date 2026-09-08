@@ -436,22 +436,22 @@
         "step_1": {
           "type": "step",
           "settings": {
-            "badge_text": "7.–14. DAN",
-            "text": "<p>Zadah se umiri. Prvi in najhitrejši znak — pes ti spet lahko pride blizu v obraz, ne da bi obrnil glavo stran.</p>"
+            "badge_text": "2.-3. TEDEN",
+            "text": "<p>Vstajanje je lažje. Prvi in najhitrejši znak — pes se po ležanju pobere hitreje in manj okleva, preden greš z njim ven.</p>"
           }
         },
         "step_2": {
           "type": "step",
           "settings": {
-            "badge_text": "1. MESEC",
-            "text": "<p>Nove obloge se ne nabirajo več. Kar je bilo mehko, se ne strjuje naprej, in zobje ostanejo takšni, kot so.</p>"
+            "badge_text": "4.-6. TEDEN",
+            "text": "<p>Sprehod je daljši. Manj postankov, manj šepanja po vrnitvi domov, več volje za igro.</p>"
           }
         },
         "step_3": {
           "type": "step",
           "settings": {
-            "badge_text": "2.–3. MESEC",
-            "text": "<p>Razlika je vidna na kočnikih. Tu večina lastnikov omeni, da veterinar ne omeni več čiščenja pod anestezijo.</p>"
+            "badge_text": "3. MESEC",
+            "text": "<p>Stopnice niso več ovira. Tu lastniki najpogosteje omenijo, da pes spet skoči v avto ali na kavč sam — brez pomoči.</p>"
           }
         }
       },
@@ -463,9 +463,9 @@
       "settings": {
         "eyebrow": "Kaj pričakovati",
         "heading": "<p>Prvih 90 dni, korak za korakom</p>",
-        "subheading": "<p>Zadah se odzove prvi, obloge počasneje, kamen najpočasneje. Takole večina lastnikov opiše prve tri mesece.</p>",
-        "image": "shopify://shop_images/05_zobje.jpg",
-        "footnote": "<p>Navedeno je tisto, kar opisuje večina lastnikov, vsak pes pa je drugačen. DentalMix je prehransko dopolnilo in ne zdravilo. Star, že strjen zobni kamen lahko odstrani samo veterinar.</p>",
+        "subheading": "<p>Sklepi se ne obnovijo v enem tednu. Sestavine začnejo delovati, ko jih je v telesu dovolj — takole večina lastnikov opiše prve tri mesece.</p>",
+        "image": "shopify://shop_images/hf_20260817_202710_a3d49534-1dd8-4d20-bd78-a1128211d3d2.png",
+        "footnote": "<p>Navedeno je tisto, kar opisuje večina lastnikov, vsak pes pa je drugačen. MobiMix je prehransko dopolnilo in ne zdravilo. Pri nenadnem šepanju ali močni bolečini se najprej posvetuj z veterinarjem.</p>",
         "anchor_id": "timeline",
         "padding_top": 80,
         "padding_bottom": 80,
@@ -547,7 +547,7 @@
         "row6"
       ],
       "settings": {
-        "product": "dentalmix",
+        "product": "mobimix",
         "show_gallery": true,
         "image": "shopify://shop_images/93b9341cd8c0fc22bbfed015b4d80c1836056d4b.png",
         "heading": "DentalMix — Dodatek za ustno higieno psov",
@@ -646,7 +646,7 @@
     "ingredients": {
       "type": "petsome-ld-ingredients",
       "settings": {
-        "product": "dentalmix",
+        "product": "mobimix",
         "heading": "<p>Sestavine, ki delujejo skozi slino</p>",
         "description": "<p>Vsaka sestavina pokriva svoj del: da se kalcij ne strdi v kamen, da se bakterije težje oprimejo sklenine in da zadah izgine od znotraj. Nič ni notri zato, da bi deklaracija izgledala daljša.</p>",
         "amount_label": "Količina na pakiranje",
