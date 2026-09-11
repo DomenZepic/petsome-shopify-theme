@@ -112,88 +112,78 @@
     "reasons": {
       "type": "petsome-ld-reasons",
       "blocks": {
-        "reason_1": {
+        "reason_ixDJpk": {
           "type": "reason",
           "settings": {
-            "tag": "1. razlog",
-            "title": "Zakaj ščetkanje in dentalne palčke pogosto niso dovolj?",
-            "text": "<p>Zobne obloge se najhitreje nabirajo na zadnjih kočnikih in ob liniji dlesni — ravno tam, kamor ščetka pogosto težko pride, dentalna palčka pa očisti le mesta, kjer pes dejansko zagrize.</p><p>Če palčko pogoltne v nekaj sekundah, je učinek še manjši. Zato je pomembno delovati tudi tam, kjer klasične rešitve pogosto odpovejo.</p>",
+            "tag": "",
+            "title": "Zakaj je slina ključna pri zobnem kamnu in zadahu?",
+            "text": "<p>Večina lastnikov je presenečenih, ko izve, da rjava obloga na zadnjih kočnikih ne pride od hrane. V gobcu se dogajata dve stvari hkrati. Kalcij, ki ves čas plava v slini, se v 48 do 72 urah useda v mehko oblogo in jo strdi v kamen. Na tej hrapavi površini pa se naselijo bakterije — in prav te delajo tisti vonj, ki ga zavohaš, ko ti pes pride blizu.</p><p>Zato zadah ni ločena težava. Je posledica istega procesa.</p>",
             "image": "shopify://shop_images/prenos.png"
           }
         },
         "reason_hQdPnB": {
           "type": "reason",
           "settings": {
-            "tag": "2. razlog",
+            "tag": "",
             "title": "Prepoznaš katerega od teh znakov pri svojem psu?",
             "text": "<ul><li>Neprijeten zadah</li><li>Rumene ali rjave obloge na zobeh</li><li>Pordele ali občutljive dlesni</li><li>Vedno več zobnega kamna</li><li>Obloga predvsem na zadnjih kočnikih</li><li>Pes ne pusti dotikanja ali ščetkanja zob</li></ul><p>Če prepoznaš enega ali več teh znakov, je čas za ukrepanje, še preden težave postanejo hujše.</p>",
             "image": "shopify://shop_images/prenos.png"
           }
         },
-        "reason_ixDJpk": {
+        "reason_1": {
           "type": "reason",
           "settings": {
-            "tag": "3. razlog",
-            "title": "Vse se začne z mehko zobno oblogo",
-            "text": "<p>Na zobeh se vsak dan nabira mehka obloga, ki jo sestavljajo bakterije in ostanki hrane. Že v 48–72 urah se lahko začne mineralizirati, ko se nanjo veže kalcij iz sline. Takrat mehka obloga postopoma postane trd zobni kamen — in ko se enkrat strdi, ga doma ne moreš več preprosto odstraniti.</p>",
+            "tag": "",
+            "title": "Zakaj ščetkanje in dentalne palčke pogosto niso dovolj?",
+            "text": "<p>Ko slišiš zobni kamen, je prva misel ščetka. Ali dentalna palčka. Oboje res nekaj naredi — kar zdrgneš, izgine.</p><p>Potem se vrne. Ščetka ne pride do zadnjih kočnikov, ker pes tam zapre gobec. Palčko pogoltne v dveh sekundah in čisti samo tam, kjer slučajno zagrize.</p><p>Ker se veriga na zobu ne konča. Kamen nastane iz kalcija v slini in se strdi v 48 do 72 urah. Na tej hrapavi površini se naselijo bakterije, ki delajo zadah — in ščetka jih pobere samo tam, kamor pride. Zato ščetkanje vsake tri dni ne reši ničesar.</p><p>Ščetka in palčka nista napačna pot. Sta samo nepopolna rešitev.</p>",
             "image": "shopify://shop_images/prenos.png"
           }
         },
         "reason_3": {
           "type": "reason",
           "settings": {
-            "tag": "3. razlog",
+            "tag": "",
             "title": "Naravna rešitev, ki deluje skozi slino",
-            "text": "<p>Odgovor za bolj zdrave zobe in svež zadah je že v pasjih ustih — <strong>slina</strong>. Ta 24 ur na dan obliva vsak zob, tudi zadnje kočnike, kamor ščetka in dentalne palčke pogosto ne pridejo.</p><p><strong>Probiotična podpora – </strong><em>Lactobacillus plantarum</em> in <em>Bacillus velezensis</em> pomagata podpirati uravnoteženo ustno mikrobioto in okolje v ustih.</p><p><strong>Aktivne sestavine proti oblogam in kamnu – </strong>Rjava alga <em>Ascophyllum nodosum</em> in natrijev tripolifosfat pomagata zmanjševati nastajanje zobnih oblog in zobnega kamna.</p><p><strong>Rastlinski izvlečki – </strong>Zeleni čaj in granatno jabolko pomagata ohranjati svež zadah ter podpirata zdrave dlesni in ustno higieno.</p>",
+            "text": "<p>Odgovor za bolj zdrave zobe in svež zadah je že v pasjih ustih — <strong>slina</strong>. Ta 24 ur na dan obliva vsak zob, tudi zadnje kočnike, kamor ščetka in dentalne palčke pogosto ne pridejo.</p><p><strong>Probiotična podpora – </strong><em>Lactobacillus plantarum</em> in <em>Bacillus velezensis</em> pomagata podpirati uravnoteženo ustno mikrobioto in okolje v ustih.</p><p><strong>Aktivne sestavine proti oblogam in kamnu – </strong>Rjava alga <em>Ascophyllum nodosum</em> in natrijev tripolifosfat pomagata zmanjševati nastajanje zobnih oblog in zobnega kamna.</p><p><strong>Rastlinski izvlečki – </strong>Zeleni čaj in granatno jabolko pomagata ohranjati svež zadah ter podpirata zdrave dlesni in ustno higieno.</p><p>Bolj <strong>svež zadah, čistejši zobje</strong> in <strong>manj novih oblog</strong> — brez ščetkanja.</p>",
             "image": "shopify://shop_images/09_presek.jpg"
-          }
-        },
-        "reason_2": {
-          "type": "reason",
-          "settings": {
-            "tag": "2. razlog",
-            "title": "Razvito z veterinarji, klinično dokazane sestavine — dentalni prašek za pse.",
-            "text": "<p>DentalMix združuje sestavine, katerih učinki na ustno zdravje psov so bili klinično raziskani. <strong>Natrijev tripolifosfat je v raziskavi zmanjšal nastajanje zobnega kamna za 55 %,</strong> rjava alga <em><strong>Ascophyllum nodosum</strong></em> pa je v 90-dnevni dvojno slepi, placebo kontrolirani študiji <strong>pomembno zmanjšala zobne obloge, zobni kamen in spojine, povezane s slabim zadahom</strong>. Rezultat? Svežejši zadah, manj zobnih oblog in kamna ter čistejši zobje — brez vsakodnevnega boja s ščetkanjem.</p>",
-            "image": "shopify://shop_images/10_vet_citat.jpg"
           }
         },
         "reason_4": {
           "type": "reason",
           "settings": {
-            "tag": "4. razlog",
+            "tag": "",
             "title": "Vidno čistejši zobje in svež zadah v 90 dneh.",
             "text": "<p>Za mnoge lastnike je DentalMix preprost način, kako vsakodnevno podpreti ustno higieno psa tudi na mestih, ki jih je s ščetkanjem težko doseči. Večina lastnikov poroča o vidno čistejših zobeh in svetlejšem videzu znotraj tega obdobja.</p>",
             "image": "shopify://shop_images/prenos_2.png"
           }
         },
+        "reason_2": {
+          "type": "reason",
+          "settings": {
+            "tag": "",
+            "title": "Razvito z veterinarji, klinično dokazane sestavine — dentalni prašek za pse.",
+            "text": "<p>DentalMix združuje sestavine, katerih učinki na ustno zdravje psov so bili klinično raziskani. <strong>Natrijev tripolifosfat je v raziskavi zmanjšal nastajanje zobnega kamna za 55 %,</strong> rjava alga <em><strong>Ascophyllum nodosum</strong></em> pa je v 90-dnevni dvojno slepi, placebo kontrolirani študiji <strong>pomembno zmanjšala zobne obloge, zobni kamen in spojine, povezane s slabim zadahom</strong>. Rezultat? Svežejši zadah, manj zobnih oblog in kamna ter čistejši zobje — brez vsakodnevnega boja s ščetkanjem.</p>",
+            "image": "shopify://shop_images/10_vet_citat.jpg"
+          }
+        },
         "reason_5": {
           "type": "reason",
           "settings": {
-            "tag": "5. razlog",
+            "tag": "",
             "title": "Obožuje ga 5000+ lastnikov psov, podpirajo ga strokovnjaki.",
             "text": "<p>Od prvih uporabnikov do dolgoletnih strank je DentalMix postal del vsakodnevne rutine tisočih lastnikov psov. Z več kot 5.000 zadovoljnimi pasjimi uporabniki in številnimi odličnimi ocenami je postal preprosta izbira za učinkovito nego zob in svež zadah doma.</p>",
             "image": "shopify://shop_images/12_ugc_mreza.jpg"
           }
-        },
-        "reason_6": {
-          "type": "reason",
-          "settings": {
-            "tag": "6. razlog",
-            "title": "Okus po govedini, zaradi katerega bo posodica prazna",
-            "text": "<p>DentalMix ima okusen goveji okus, ki ga psi z veseljem sprejmejo kot del vsakodnevnega obroka. Tako nega zob ne postane še ena obveznost, ampak priljubljen del njihove rutine. Kot majhen dnevni priboljšek — le da hkrati podpira čistejše zobe, svež zadah in zdrave dlesni.</p>",
-            "image": "shopify://shop_images/11_posip_dvojni.jpg"
-          }
         }
       },
       "block_order": [
-        "reason_1",
-        "reason_hQdPnB",
         "reason_ixDJpk",
+        "reason_hQdPnB",
+        "reason_1",
         "reason_3",
-        "reason_2",
         "reason_4",
-        "reason_5",
-        "reason_6"
+        "reason_2",
+        "reason_5"
       ],
       "settings": {
         "show_numbers": false,
