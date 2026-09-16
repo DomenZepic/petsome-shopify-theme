@@ -125,22 +125,7 @@
           data-media-id="{{ section.id }}-{{ featured_media.id }}"
           data-alt="{{ featured_media.alt | escape }}"
         >
-          {%
-            render 'product-thumbnail',
-            media: featured_media,
-            media_count: media_count,
-            position: media_position,
-            desktop_layout: section.settings.gallery_layout,
-            mobile_layout: section.settings.mobile_thumbnails,
-            loop: section.settings.enable_video_looping,
-            modal_id: section.id,
-            xr_button: true,
-            media_width: media_width,
-            media_fit: section.settings.media_fit,
-            constrain_to_viewport: section.settings.constrain_to_viewport,
-            lazy_load: false,
-            section
-          %}
+          {% render 'product-thumbnail', media: featured_media, media_count: media_count, position: media_position, desktop_layout: section.settings.gallery_layout, mobile_layout: section.settings.mobile_thumbnails, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, media_fit: section.settings.media_fit, constrain_to_viewport: section.settings.constrain_to_viewport, lazy_load: false %}
         </li>
       {%- endif -%}
       {%- for media in product.media -%}
@@ -163,22 +148,7 @@
             data-media-id="{{ section.id }}-{{ media.id }}"
             data-alt="{{ media.alt | escape }}"
           >
-            {%
-              render 'product-thumbnail',
-              media: media,
-              media_count: media_count,
-              position: media_position,
-              desktop_layout: section.settings.gallery_layout,
-              mobile_layout: section.settings.mobile_thumbnails,
-              loop: section.settings.enable_video_looping,
-              modal_id: section.id,
-              xr_button: true,
-              media_width: media_width,
-              media_fit: section.settings.media_fit,
-              constrain_to_viewport: section.settings.constrain_to_viewport,
-              lazy_load: lazy_load,
-              section
-            %}
+            {% render 'product-thumbnail', media: media, media_count: media_count, position: media_position, desktop_layout: section.settings.gallery_layout, mobile_layout: section.settings.mobile_thumbnails, loop: section.settings.enable_video_looping, modal_id: section.id, xr_button: true, media_width: media_width, media_fit: section.settings.media_fit, constrain_to_viewport: section.settings.constrain_to_viewport, lazy_load: lazy_load %}
           </li>
         {%- endif -%}
       {%- endfor -%}
@@ -423,3 +393,58 @@
     </slider-component>
   {%- endif -%}
 </media-gallery>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {%
+                render 'product-thumbnail',
+                media: featured_media,
+                media_count: media_count,
+                position: media_position,
+                desktop_layout: section.settings.gallery_layout,
+                mobile_layout: section.settings.mobile_thumbnails,
+                loop: section.settings.enable_video_looping,
+                modal_id: section.id,
+                xr_button: true,
+                media_width: media_width,
+                media_fit: section.settings.media_fit,
+                constrain_to_viewport: section.settings.constrain_to_viewport,
+                lazy_load: false,
+                section
+              %}
+  to: "{% render 'product-thumbnail', media: featured_media, media_count: media_count,
+    position: media_position, desktop_layout: section.settings.gallery_layout, mobile_layout:
+    section.settings.mobile_thumbnails, loop: section.settings.enable_video_looping,
+    modal_id: section.id, xr_button: true, media_width: media_width, media_fit: section.settings.media_fit,
+    constrain_to_viewport: section.settings.constrain_to_viewport, lazy_load: false
+    %}"
+  position: 5846..6283
+- from: |-
+    {%
+                  render 'product-thumbnail',
+                  media: media,
+                  media_count: media_count,
+                  position: media_position,
+                  desktop_layout: section.settings.gallery_layout,
+                  mobile_layout: section.settings.mobile_thumbnails,
+                  loop: section.settings.enable_video_looping,
+                  modal_id: section.id,
+                  xr_button: true,
+                  media_width: media_width,
+                  media_fit: section.settings.media_fit,
+                  constrain_to_viewport: section.settings.constrain_to_viewport,
+                  lazy_load: lazy_load,
+                  section
+                %}
+  to: "{% render 'product-thumbnail', media: media, media_count: media_count, position:
+    media_position, desktop_layout: section.settings.gallery_layout, mobile_layout:
+    section.settings.mobile_thumbnails, loop: section.settings.enable_video_looping,
+    modal_id: section.id, xr_button: true, media_width: media_width, media_fit: section.settings.media_fit,
+    constrain_to_viewport: section.settings.constrain_to_viewport, lazy_load: lazy_load
+    %}"
+  position: 7583..8015
+{% endcomment %}

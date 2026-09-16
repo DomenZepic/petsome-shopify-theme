@@ -103,7 +103,7 @@
     {% endif %}
     <div class="featured-product product--product-images-{{ section.settings.product_images }} product product--{{ section.settings.media_size }} grid grid--1-col gradient color-{{ section.settings.color_scheme }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }}{% if section.settings.secondary_background == false %} isolate{% endif %} {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %} isolate">
       <div class="grid__item product__media-wrapper{% if section.settings.media_position == 'right' %} medium-hide large-up-hide{% endif %}{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}{% if product == blank %} hidden{% endif %}">
-        {% render 'product-media-gallery', product: product, variant_images: variant_images, has_filtering: has_filtering, section %}
+        {% render 'product-media-gallery', product: product, variant_images: variant_images, has_filtering: has_filtering %}
       </div>
       <div class="product__info-wrapper grid__item{% if settings.page_width > 1400 and section.settings.media_size == "small" %} product__info-wrapper--extra-padding{% endif %}{% if section.settings.enable_sticky_info %} product__column-sticky{% endif %}{% if section.settings.mobile_pagination == 'dots_overlay' or hide_mobile_slider or section.settings.product_images == 'one' %} product__info-wrapper--top-padding{% endif %}">
         <product-info
@@ -1536,3 +1536,15 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'product-media-gallery', product: product, variant_images: variant_images,
+    has_filtering: has_filtering, section %}"
+  to: "{% render 'product-media-gallery', product: product, variant_images: variant_images,
+    has_filtering: has_filtering %}"
+  position: 5139..5255
+{% endcomment %}

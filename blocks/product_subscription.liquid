@@ -232,7 +232,7 @@
         {% endif %}
         <div class="subscription__content">
           {% if is_checkbox %}
-            {% render 'checkbox-icons', checked: preselected == 'subscription' %}
+            {% render 'checkbox-icons', checked: preselected %}
           {% endif %}
           <div class="subscription__content__left left">
             {% if block.settings.subscription_label != blank %}
@@ -1188,3 +1188,13 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'checkbox-icons', checked: preselected == 'subscription' %}"
+  to: "{% render 'checkbox-icons', checked: preselected %}"
+  position: 12615..12666
+{% endcomment %}

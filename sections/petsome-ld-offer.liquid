@@ -525,7 +525,7 @@
 </style>
 
 {% render 'petsome-ld-anchor-scroll' %}
-{% render 'petsome-ld-anchor', id: section.settings.anchor_id | default: 'offer' %}
+{% render 'petsome-ld-anchor', id: section.settings.anchor_id, default: 'offer' %}
 <div id="petsome-ld-offer-{{ section.id }}" class="petsome-ld-offer">
   <div class="petsome-ld-offer__inner">
     {%- if offer_product == blank -%}
@@ -1259,3 +1259,15 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'petsome-ld-anchor', id: section.settings.anchor_id | default:
+    'offer' %}"
+  to: "{% render 'petsome-ld-anchor', id: section.settings.anchor_id, default: 'offer'
+    %}"
+  position: 15122..15204
+{% endcomment %}
