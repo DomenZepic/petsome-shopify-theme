@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin language editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "general": {
     "password_page": {
@@ -474,5 +483,60 @@
       "copy_code_success": "Kód byl úspěšně zkopírován",
       "print_gift_card": "Vytisknout"
     }
+  },
+  "gempages": {
+    "Carousel": {
+      "no_slider": "Žádný posuvník"
+    },
+    "CarouselV3": {
+      "no_slider": "Žádný posuvník"
+    },
+    "Newsletter": {
+      "err_msg_default": "Nelze odeslat e-mail. Zkuste to prosím znovu později.",
+      "success_msg_default": "Děkujeme za odběr"
+    },
+    "IconListV2": {
+      "icons_not_found": "Ikony nebyly nalezeny"
+    },
+    "IconList": {
+      "icons_not_found": "Ikony nebyly nalezeny"
+    },
+    "IconListHoz": {
+      "icons_not_found": "Ikony nebyly nalezeny"
+    },
+    "Product": {
+      "product_not_found": "Produkt nebyl nalezen"
+    },
+    "ProductList": {
+      "product_not_found": "Produkt nebyl nalezen!",
+      "no_products_found": "Nebyly nalezeny žádné produkty!",
+      "no_related_products": "Žádné související produkty!"
+    },
+    "ProductListV3": {
+      "product_not_found": "Produkt nebyl nalezen!",
+      "no_products_found": "Nebyly nalezeny žádné produkty!",
+      "no_related_products": "Žádné související produkty!"
+    },
+    "ProductTitle": {
+      "product_not_found": "Produkt nebyl nalezen"
+    },
+    "ProductVariants": {
+      "please_select": "Vyberte prosím možnost"
+    },
+    "StockCounter": {
+      "let_buy_now": "<mark>POSPĚŠTE SI!</mark> KUPTE HNED TEĎ"
+    },
+    "Breadcrumb": {
+      "home": "Domů"
+    }
+  },
+  "kaching_custom_display": {
+    "unavailable": "Není k dispozici",
+    "savings_prefix": "Ušetříte {{ amount }}",
+    "dosage_supply": "{{ months }}-měsíční zásoba ({{ amount }} {{ unit }})",
+    "dosage_unit_capsules": "kapslí",
+    "dosage_unit_powder": "g",
+    "price_per_day": "{{ amount }}  / den",
+    "gifts_heading_default": "🎁 Dárky zdarma při větším nákupu"
   }
 }
