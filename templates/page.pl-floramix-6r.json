@@ -91,7 +91,7 @@
         "image": "shopify://shop_images/pl-floramix-hero.png",
         "cta_label": "NAROČI ZDAJ",
         "cta_url": "#offer",
-        "guarantee_text": "60-dnevna garancija vračila denarja",
+        "guarantee_text": "90-dnevna garancija vračila denarja",
         "proof_text": "5000+ prodanih lončkov · Razvito v Sloveniji, izdelano v EU",
         "show_gifts": true,
         "gifts_heading": "BREZPLAČNA DARILA PRI EKSKLUZIVNI PONUDBI!",
@@ -382,7 +382,7 @@
         "hero_tier_quantity": "",
         "gifts_in_tier": true,
         "protocol_label": "3-mesečni protokol",
-        "offer_checklist": "4× FloraMix — 45% popusta\nPrenosna zložljiva posoda — 9,00 €\nDentalSticks - 14,50 €\nBrezplačna dostava\n60-dnevna garancija vračila denarja",
+        "offer_checklist": "4× FloraMix — 45% popusta\nPrenosna zložljiva posoda — 9,00 €\nDentalSticks - 14,50 €\nBrezplačna dostava\n90-dnevna garancija vračila denarja",
         "offer_total_value": "",
         "gifts_heading": "VKLJUČENO V TA PAKET",
         "hide_gifts_heading": false,
@@ -550,7 +550,7 @@
           "type": "question",
           "settings": {
             "question": "Kaj če z izdelkom nisem zadovoljen?",
-            "answer": "<p>Na voljo imaš 60 dni. Če ne boš zadovoljen, nam piši in denar ti vrnemo — tudi če je embalaža že odprta.</p>"
+            "answer": "<p>Na voljo imaš 90 dni. Če ne boš zadovoljen, nam piši in denar ti vrnemo — tudi če je embalaža že odprta.</p>"
           }
         }
       },
@@ -615,7 +615,7 @@
         "show_icon": true,
         "icon": "verified_user",
         "heading": "<p>Ne zamudi — do -45%</p>",
-        "text": "<p>Podpri pasje črevesje s 15 aktivnimi sestavinami v treh smereh. Preizkusi brez tveganja 60 dni: če ne opaziš razlike, nam piši in denar ti vrnemo, tudi če je embalaža že odprta.</p>",
+        "text": "<p>Podpri pasje črevesje s 15 aktivnimi sestavinami v treh smereh. Preizkusi brez tveganja 90 dni: če ne opaziš razlike, nam piši in denar ti vrnemo, tudi če je embalaža že odprta.</p>",
         "cta_label": "NAROČI ZDAJ",
         "cta_url": "#offer",
         "anchor_id": "guarantee",
