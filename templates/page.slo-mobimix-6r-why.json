@@ -154,7 +154,7 @@
             "tag": "4. razlog",
             "title": "6 klinično raziskanih sestavin, preverjeno s strani veterinarjev",
             "text": "<p>MobiMix združuje sestavine, katerih učinki na pse so bili klinično raziskani — za vse tri poti, ne le za hrustanec.<br/><br/>Zelenoustna školjka je bila v dvojno slepi raziskavi na 45 psih s kronično bolečino primerjana s placebom in s karprofenom, protivnetnim zdravilom. Merili so, koliko teže pes dejansko prenese na bolno nogo — objektivno, na merilni plošči — in po štirih tednih se je vrednost pri školjki dvignila več kot pri zdravilu. Šipek in vražji krempelj sta bila preizkušena v randomizirani raziskavi na psih z naravno nastalo osteoartrozo, kurkuma pa v dvojno slepi navzkrižni raziskavi na 32 psih, kjer se je ocena gibanja izboljšala.<br/><br/>Rezultat? Lažje vstajanje, več volje za sprehod in manj oklevanja pred stopnicami — brez ugibanja, koliko česa je v kapsuli.</p>",
-            "image": "shopify://shop_images/hf_20260908_113112_7705928b-e454-4232-9255-36f36ab93811.png"
+            "image": "shopify://shop_images/slo-mobimix-6r-vet.png"
           }
         },
         "reason_WmmFA9": {
@@ -472,7 +472,7 @@
         "tag_color": "#F47671",
         "checks": "Tvoj pes se spet premika brez obotavljanja\nManj jutranje togosti že v 2-3 tednih\nVeč energije za igro in sprehode\nDolgoročna zaščita pred obrabo sklepov\nArthroRegen mehanizem",
         "check_color": "#121212",
-        "hero_label": "OMEJENA POLETNA PONUDBA",
+        "hero_label": "EKSKLUZIVNA PONUDBA",
         "hero_tier_quantity": "",
         "gifts_in_tier": true,
         "protocol_label": "3-mesečni protokol",
@@ -711,7 +711,7 @@
             "default_tab": "automatic",
             "only_photos": false,
             "hide_thumbnails": false,
-            "product_handle": "dentalmix",
+            "product_handle": "mobimix",
             "aggregated": true,
             "data-limit": 7,
             "maxwidth": 1080,
