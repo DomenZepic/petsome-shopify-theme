@@ -101,15 +101,30 @@ if (!customElements.get('kaching-custom-display')) {
 
     readDealSettings() {
       const productId = this.kachingEl.getAttribute('product-id');
-      const settingsEl = document.querySelector(
-        `script.kaching-bundles-deal-block-settings[data-product-id="${productId}"]`
+      const settingsEls = Array.from(
+        document.querySelectorAll(
+          `script.kaching-bundles-deal-block-settings[data-product-id="${productId}"]`
+        )
       );
-      if (!settingsEl) return null;
-      try {
-        return JSON.parse(settingsEl.textContent);
-      } catch (error) {
-        return null;
+      if (!settingsEls.length) return null;
+      const parse = (el) => {
+        try {
+          return JSON.parse(el.textContent);
+        } catch (error) {
+          return null;
+        }
+      };
+      // Kaching embeds every deal for the product on every market's page
+      // (each with marketId / excludedMarketIds). Only on the Czech market
+      // pick the deal bound to it; everywhere else keep the first one.
+      const CZECH_MARKET_ID = 103847461189;
+      if (Number(this.dataset.marketId) === CZECH_MARKET_ID) {
+        const czech = settingsEls
+          .map(parse)
+          .find((settings) => settings && Number(settings.marketId) === CZECH_MARKET_ID);
+        if (czech) return czech;
       }
+      return parse(settingsEls[0]);
     }
 
     // Kaching's own multi-language deal text (translated natively in the
