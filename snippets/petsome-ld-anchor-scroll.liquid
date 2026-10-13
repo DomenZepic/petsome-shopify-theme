@@ -24,7 +24,43 @@
       var id = decodeURIComponent(hash.slice(1));
       // getElementById first; querySelector would throw on ids that aren't
       // valid CSS selectors (a leading digit, for instance).
-      return document.getElementById(id);
+      return document.getElementById(id) || fallbackFor(id);
+    }
+
+    // The anchor ids are plain text settings, so translation apps translate
+    // them too ("reasons" becomes "důvody") and the link then points at
+    // nothing. When the id is missing, fall back to the section it was meant
+    // for, in page order: "reasons" is the first reasons section, "reasons-b"
+    // the second.
+    var FALLBACKS = {
+      'reasons': ['.petsome-ld-reasons', 0],
+      'reasons-b': ['.petsome-ld-reasons', 1],
+      'timeline': ['.petsome-ld-timeline', 0],
+      'offer': ['.petsome-ld-offer', 0],
+      'ingredients': ['.petsome-ld-ingredients', 0],
+      'faq': ['.petsome-ld-faq', 0],
+      'guarantee': ['.petsome-ld-guarantee', 0]
+    };
+
+    function fallbackFor(id) {
+      var rule = FALLBACKS[id];
+      if (!rule) return null;
+      return document.querySelectorAll(rule[0])[rule[1]] || null;
+    }
+
+    // A footer link to a section this page does not have (no timeline on
+    // some landers) would be a dead button - hide it instead.
+    function hideDeadFooterLinks() {
+      var links = document.querySelectorAll('a.petsome-ld-footer__link[href^="#"]');
+      for (var i = 0; i < links.length; i++) {
+        if (!targetFor(links[i].getAttribute('href'))) links[i].style.display = 'none';
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', hideDeadFooterLinks);
+    } else {
+      hideDeadFooterLinks();
     }
 
     function scrollTo(el) {
