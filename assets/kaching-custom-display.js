@@ -386,10 +386,14 @@ if (!customElements.get('kaching-custom-display')) {
     formatMoney(amount) {
       if (amount == null) return '';
       try {
-        return new Intl.NumberFormat(document.documentElement.lang || undefined, {
-          style: 'currency',
-          currency: window.Shopify && window.Shopify.currency ? window.Shopify.currency.active : 'EUR',
-        }).format(amount);
+        const currency = window.Shopify && window.Shopify.currency ? window.Shopify.currency.active : 'EUR';
+        const options = { style: 'currency', currency };
+        // Czech prices are shown without decimals (999 Kč, not 999,00 Kč).
+        if (currency === 'CZK') {
+          options.minimumFractionDigits = 0;
+          options.maximumFractionDigits = 0;
+        }
+        return new Intl.NumberFormat(document.documentElement.lang || undefined, options).format(amount);
       } catch (error) {
         return `${amount.toFixed(2)}`;
       }
