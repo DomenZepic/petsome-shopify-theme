@@ -1,0 +1,824 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hide_chrome": {
+      "type": "hide-header-footer",
+      "settings": {
+        "hide_header": true,
+        "hide_announcements": true,
+        "hide_footer": true
+      }
+    },
+    "offer_bar": {
+      "type": "petsome-ld-offer-bar",
+      "settings": {
+        "headline": "EKSKLUZIVNA PONUDA ZA NOVE KUPCE",
+        "subline": "Do -35% + besplatni pokloni · samo danas",
+        "link": "",
+        "show_timer": true,
+        "timezone": "Europe/Ljubljana",
+        "hours_label": "Sati",
+        "minutes_label": "Min",
+        "seconds_label": "Sek",
+        "padding_top": 12,
+        "padding_bottom": 12,
+        "background_color": "#0e1111",
+        "text_color": "#faf9f6",
+        "pill_color": "#F47671",
+        "pill_text_color": "#0e1111"
+      }
+    },
+    "ld_header": {
+      "type": "petsome-ld-header",
+      "settings": {
+        "logo_width": 110,
+        "logo_link": "",
+        "show_border": false,
+        "background_color": "#fdfbf7",
+        "padding_top": 16,
+        "padding_bottom": 16
+      }
+    },
+    "hero": {
+      "type": "petsome-ld-hero",
+      "blocks": {
+        "gift_1": {
+          "type": "gift",
+          "settings": {
+            "icon": "shopify://shop_images/Ada0f20e1488b42368773869a28a63524b1.png",
+            "label": "Prijenosna sklopiva posuda",
+            "price": "9,00 €"
+          }
+        },
+        "gift_2": {
+          "type": "gift",
+          "settings": {
+            "icon": "shopify://shop_images/hf_20260709_194728_f15d5b24-84c3-48bd-a64e-0545ecd72289.png",
+            "label": "DentalSticks",
+            "price": "14,90 €"
+          }
+        },
+        "gift_3": {
+          "type": "gift",
+          "settings": {
+            "icon": "shopify://shop_images/851188-1-ecommerce-shipping-box-sendbox-packhelp-21-04-2022-gsps-19518-png.avif",
+            "label": "Besplatna dostava",
+            "price": ""
+          }
+        }
+      },
+      "block_order": [
+        "gift_1",
+        "gift_2",
+        "gift_3"
+      ],
+      "settings": {
+        "show_badge_stars": true,
+        "rating_text": "2000+ ocjena · 5000+ vlasnika pasa",
+        "heading": "<p>6 razloga zašto 5000+ vlasnika koristi MobiMix za lakše ustajanje i više kretanja — bez tableta protiv bolova</p>",
+        "subline": "<p>MobiMix djeluje tako da cilja uzrok ukočenih zglobova, umjesto da bol samo prikrije. Podržava hrskavicu, smiren upalni odgovor i zglobnu tekućinu istovremeno — sva tri puta, ne samo prvi. 6 klinički istraženih sastojaka, a primjena je dovoljno jednostavna za svaki dan — i upravo ga sada dobivaš po sniženoj cijeni.</p>",
+        "image": "shopify://shop_images/hr-mobimix-6r-hero.png",
+        "cta_label": "NARUČI ODMAH",
+        "cta_url": "#offer",
+        "guarantee_text": "90-dnevno jamstvo povrata novca",
+        "proof_text": "5000+ prodanih posudica · Razvijeno u Sloveniji, proizvedeno u EU",
+        "show_gifts": true,
+        "gifts_heading": "BESPLATNI POKLONI UZ EKSKLUZIVNU PONUDU!",
+        "gift_badge_label": "GRATIS",
+        "padding_top": 0,
+        "padding_bottom": 80,
+        "background_color": "#fdfbf7",
+        "text_color": "#0e1111",
+        "muted_text_color": "#565858",
+        "badge_background": "#fdfdfc",
+        "star_color": "#ff9a0a",
+        "button_background": "#0e1111",
+        "button_text_color": "#ffffff",
+        "accent_color": "#F47671",
+        "gift_tile_color": "#f1e1d5",
+        "gift_tile_border_color": "#b7b8b8",
+        "gift_badge_color": "#F47671",
+        "gift_badge_text_color": "#ffffff"
+      }
+    },
+    "reasons": {
+      "type": "petsome-ld-reasons",
+      "blocks": {
+        "reason_1": {
+          "type": "reason",
+          "settings": {
+            "tag": "Simptomi",
+            "title": "Prepoznaješ li ove znakove kod svog psa?",
+            "text": "<p>To nisu odvojeni problemi. Zajedno čine obrazac.</p><p>✓ oklijevanje pri ustajanju nakon ležanja<br/>✓ više ne skače u auto ni na kauč<br/>✓ sporiji na stepenicama, osobito prema dolje<br/>✓ šepanje nakon duže šetnje<br/>✓ pucketanje ili škljocanje u zglobovima<br/>✓ u šetnji stane ranije nego prije<br/>✓ lizanje zglobova<br/>✓ manje volje za igru</p><p>Ako prepoznaješ dva ili tri, nije riječ o slučajnosti.</p>",
+            "image": "shopify://shop_images/hf_20260908_092415_8b8b7da3-a099-450b-b6fe-8ccd3bc7fed0_1.png"
+          }
+        },
+        "reason_txewzG": {
+          "type": "reason",
+          "settings": {
+            "tag": "1. razlog",
+            "title": "Većina dodataka s glukozaminom za zglobove ne djeluje!",
+            "text": "<p>Većina dodataka za zglobove je poddozirana i bez kliničkih dokaza — sastojak je unutra, ali tek toliko da ga smiju napisati na ambalažu. I često je sam, bez sastojaka koji bi s njim djelovali zajedno. MobiMix djeluje na sva tri puta istovremeno — hrskavica, upalni odgovor i zglobna tekućina. Sadrži 6 klinički istraženih sastojaka koji pomažu podržati pokretljivost i obnovu zgloba. Rezultat je lakše ustajanje, više kretanja i pas koji ponovno dođe do vrata.</p>",
+            "image": "shopify://shop_images/hf_20260908_110919_7ad9258d-f5ae-443b-8252-3c2df9a6d0d3.png"
+          }
+        },
+        "reason_2": {
+          "type": "reason",
+          "settings": {
+            "tag": "2. razlog",
+            "title": "Tvoj pas ne usporava zbog godina.",
+            "text": "<p>Kad pas počne sporije ustajati, prva je pomisao da su stigle godine — i doista, kod veterinara čuješ isto. Onda pričekaš. Za pola godine više ne skače u auto, za godinu dana u šetnji stane ranije. Jer starost sama po sebi ne troši hrskavicu. Troši je svakodnevna upotreba, a upalni odgovor to trošenje gura dalje. Godine samo govore koliko se dugo nakupljalo. Starost dakle nije pogrešno objašnjenje — samo je nepotpuno.</p>",
+            "image": "shopify://shop_images/hf_20260908_111451_5fa2a684-b027-4768-b3f9-5d8d0523794f.png"
+          }
+        },
+        "reason_3": {
+          "type": "reason",
+          "settings": {
+            "tag": "3. razlog",
+            "title": "Jedinstvena formula za zglobove: Obnovi. Smiri. Podmaži.",
+            "text": "<p>Nije samo glukozamin, nego višenamjenska formula za zglobove, u kojoj svaka kapsula djeluje na više ključnih područja pokretljivosti:</p><p><strong>Gradivni elementi hrskavice</strong> — Glukozamin i kondroitin osnovni su gradivni materijal iz kojeg tijelo obnavlja hrskavicu.<br/><br/><strong>Podrška smirenom upalnom odgovoru</strong> — Zelenousna školjka, vražja kandža i kurkuma pomažu podržati smiren upalni odgovor u zglobu, koji trošenje gura dalje.<br/><br/><strong>Biljni ekstrakti i antioksidansi </strong>— Šipak, đumbir i vitamin C podržavaju obranu od oksidativnog stresa i pridonose normalnom stvaranju kolagena, koji je dio hrskavice.</p>",
+            "image": "shopify://shop_images/hr-mobimix-6r-sestavine.png"
+          }
+        },
+        "reason_4": {
+          "type": "reason",
+          "settings": {
+            "tag": "4. razlog",
+            "title": "6 klinički istraženih sastojaka, provjereno od strane veterinara",
+            "text": "<p>MobiMix objedinjuje sastojke čiji su učinci na pse klinički istraženi — za sva tri puta, ne samo za hrskavicu.<br/><br/>Zelenousna školjka je u dvostruko slijepom istraživanju na 45 pasa s kroničnom boli uspoređena s placebom i s karprofenom, protuupalnim lijekom. Mjerili su koliko težine pas doista prenese na bolesnu nogu — objektivno, na mjernoj ploči — i nakon četiri tjedna vrijednost je kod školjke porasla više nego kod lijeka. Šipak i vražja kandža ispitani su u randomiziranom istraživanju na psima s prirodno nastalom osteoartrozom, a kurkuma u dvostruko slijepom ukriženom istraživanju na 32 psa, u kojem se ocjena kretanja poboljšala.<br/><br/>Rezultat? Lakše ustajanje, više volje za šetnju i manje oklijevanja pred stepenicama — bez nagađanja koliko čega ima u kapsuli.</p>",
+            "image": "shopify://shop_images/hr-mobimix-6r-vet.png"
+          }
+        },
+        "reason_WmmFA9": {
+          "type": "reason",
+          "settings": {
+            "tag": "5. razlog",
+            "title": "Lakše ustajanje i više kretanja u 90 dana.",
+            "text": "<p>Za mnoge vlasnike MobiMix je jednostavan način da svakodnevno podrže zglobove psa i onda kada kretanja više nema toliko kao nekad. Unutar tog razdoblja vlasnici najčešće opisuju da pas lakše ustane nakon ležanja, ide po stepenicama bez zastajanja i u šetnji ponovno izdrži dulje.</p>",
+            "image": "shopify://shop_images/hf_20260817_204213_b2ff668a-8942-4745-aa0c-0f7e4b127bd0.png"
+          }
+        },
+        "reason_5": {
+          "type": "reason",
+          "settings": {
+            "tag": "6. razlog",
+            "title": "Obožava ga 5000+ vlasnika pasa, podržavaju ga stručnjaci.",
+            "text": "<p>Od prvih korisnika do dugogodišnjih kupaca, MobiMix je postao dio svakodnevne rutine tisuća vlasnika pasa. S više od 5.000 zadovoljnih pasa i brojnim odličnim ocjenama postao je jednostavan izbor za podršku zglobovima i pokretljivosti kod kuće. Kapsulu jednostavno dodaš u hranu — bez lomljenja tableta i bez nagovaranja.</p>",
+            "image": "shopify://shop_images/hr-mobimix-6r-kolaz.png"
+          }
+        }
+      },
+      "block_order": [
+        "reason_1",
+        "reason_txewzG",
+        "reason_2",
+        "reason_3",
+        "reason_4",
+        "reason_WmmFA9",
+        "reason_5"
+      ],
+      "settings": {
+        "show_numbers": false,
+        "pad_numbers": true,
+        "number_start": 1,
+        "anchor_id": "reasons",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#fdfbf7",
+        "text_color": "#0e1111",
+        "accent_color": "#F47671",
+        "divider_color": "#565858"
+      }
+    },
+    "icon_bar_tTCYrC": {
+      "type": "icon-bar",
+      "blocks": {
+        "column_rgpe3E": {
+          "type": "column",
+          "settings": {
+            "icon": "check_circle",
+            "filled_icon": false,
+            "image": "shopify://shop_images/microscope_bcece7bd-3bf7-4d5b-bf55-29cb2ffbaa6e.svg",
+            "title": "",
+            "text": "<p>Laboratorijski testirano</p>"
+          }
+        },
+        "column_J8ieDh": {
+          "type": "column",
+          "settings": {
+            "icon": "check_circle",
+            "filled_icon": false,
+            "image": "shopify://shop_images/certification-3_80266f99-f611-498f-93b8-d21612809bdb.png",
+            "title": "",
+            "text": "<p>FCA certificirano</p>"
+          }
+        },
+        "column_GkqKWa": {
+          "type": "column",
+          "settings": {
+            "icon": "check_circle",
+            "filled_icon": false,
+            "image": "shopify://shop_images/paw-print_e3778c93-faad-40e1-855e-e245defe75be.svg",
+            "title": "",
+            "text": "<p>Veterinarski formulirano</p>"
+          }
+        },
+        "column_kqVxDx": {
+          "type": "column",
+          "settings": {
+            "icon": "check_circle",
+            "filled_icon": false,
+            "image": "shopify://shop_images/shield-check_e12ffcfe-6520-4ee2-a686-5e1f7bdb6c1a.svg",
+            "title": "",
+            "text": "<p>90-dnevno jamstvo</p>"
+          }
+        }
+      },
+      "block_order": [
+        "column_rgpe3E",
+        "column_J8ieDh",
+        "column_GkqKWa",
+        "column_kqVxDx"
+      ],
+      "name": "Icon Bar",
+      "settings": {
+        "display_id": false,
+        "visibility": "always-display",
+        "title": "",
+        "title_highlight_1": "solid-color",
+        "title_highlight_1_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_1_bg-color": "#F9EFFF",
+        "title_highlight_1_color": "#6D388B",
+        "highlighted-1_border_radius": 8,
+        "highlighted-1_border_width": 0,
+        "highlighted-1_border": "solid",
+        "highlighted-1_border_color": "#6D388B",
+        "highlighted-1_padding-block": 0.3,
+        "highlighted-1_padding-inline": 0.3,
+        "title_highlight_1_underline-thickness": 2,
+        "title_highlight_1_underline-color": "#6D388B",
+        "title_highlight_1_underline-color--gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_1_underline-color-position": 25,
+        "title_highlight_1_handwritten-color": "#6D388B",
+        "title_highlight_1_handwritten-stroke-width": 3,
+        "title_highlight_1_handwritten-position": 60,
+        "title_highlight_2": "none",
+        "title_highlight_2_gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_2_bg-color": "#F9EFFF",
+        "title_highlight_2_color": "#6D388B",
+        "highlighted-2_border_radius": 8,
+        "highlighted-2_border_width": 0,
+        "highlighted-2_border": "solid",
+        "highlighted-2_border_color": "#6D388B",
+        "highlighted-2_padding-block": 0.3,
+        "highlighted-2_padding-inline": 0.3,
+        "title_highlight_2_underline-thickness": 2,
+        "title_highlight_2_underline-color": "#6D388B",
+        "title_highlight_2_underline-color--gradient": "linear-gradient(57deg, rgba(249, 119, 255, 1) 8%, rgba(54, 212, 255, 1) 47%, rgba(43, 252, 135, 1) 83%)",
+        "title_highlight_2_underline-color-position": 25,
+        "title_highlight_2_handwritten-color": "#6D388B",
+        "title_highlight_2_handwritten-stroke-width": 3,
+        "title_highlight_2_handwritten-position": 60,
+        "heading_size": "h2",
+        "custom_desktop_size": 39,
+        "custom_mobile_size": 28,
+        "text": "",
+        "color_scheme": "background-1",
+        "custom_colors_background": "#FFFFFF",
+        "custom_gradient_background": "",
+        "custom_colors_text": "#2E2A39",
+        "pattern_bg": "none",
+        "pattern_color": "#6D388B",
+        "pattern_size": 20,
+        "pattern_thickness": 2,
+        "pattern_angle": 45,
+        "pattern_opacity_mode": "low",
+        "pattern_opacity_low": 7,
+        "pattern_opacity_normal": 80,
+        "icon_layout": "vertical",
+        "icon_size": "medium",
+        "icon_color": "accent-1",
+        "cards_color_scheme": "background-1",
+        "custom_cards_colors_background": "#F3F3F3",
+        "custom_cards_gradient_background": "",
+        "custom_cards_colors_text": "#2E2A39",
+        "type": "slide",
+        "autoplay": false,
+        "autoplay_speed": 5,
+        "arrows_color_scheme": "inverse",
+        "transparent_arrows": true,
+        "dots_color_scheme": "inverse",
+        "desktop_full_page": false,
+        "columns_desktop": 4,
+        "slider_desktop": false,
+        "per_move_desktop": 1,
+        "desktop_spacing": 0,
+        "desktop_side_padding": 0,
+        "desktop_padding_calc": true,
+        "desktop_adaptive_height": false,
+        "desktop_dots_position": "under",
+        "desktop_arrows_position": "sides",
+        "columns_mobile": "2",
+        "slider_mobile": false,
+        "enable_mobile_preview": false,
+        "mobile_adaptive_height": true,
+        "mobile_dots_position": "under",
+        "mobile_arrows_position": "under",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "timeline": {
+      "type": "petsome-ld-timeline",
+      "blocks": {
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "badge_text": "2.-3. TJEDAN",
+            "text": "<p>Ustajanje je lakše. Prvi i najbrži znak — pas se nakon ležanja digne brže i manje oklijeva prije nego što izađeš s njim.</p>"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "badge_text": "4.-6. TJEDAN",
+            "text": "<p>Šetnja je dulja. Manje zastajanja, manje šepanja nakon povratka kući, više volje za igru.</p>"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "badge_text": "3. MJESEC",
+            "text": "<p>Stepenice više nisu prepreka. Ovdje vlasnici najčešće spominju da pas ponovno sam skače u auto ili na kauč — bez pomoći.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3"
+      ],
+      "settings": {
+        "eyebrow": "Što očekivati",
+        "heading": "<p>Prvih 90 dana, korak po korak</p>",
+        "subheading": "<p>Zglobovi se ne obnove u jednom tjednu. Sastojci počinju djelovati kad ih u tijelu ima dovoljno — ovako većina vlasnika opisuje prva tri mjeseca.</p>",
+        "image": "shopify://shop_images/hf_20260817_202710_a3d49534-1dd8-4d20-bd78-a1128211d3d2.png",
+        "footnote": "<p>Navedeno je ono što opisuje većina vlasnika, a svaki je pas drugačiji. MobiMix je dodatak prehrani, a ne lijek. Kod iznenadnog šepanja ili jake boli najprije se posavjetuj s veterinarom.</p>",
+        "anchor_id": "timeline",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#FDFBF7",
+        "text_color": "#0e1111",
+        "accent_color": "#F47671",
+        "accent_color_dark": "#F47671",
+        "line_color": "#fac3c1",
+        "card_color": "#ffffff",
+        "footnote_color": "#565858"
+      }
+    },
+    "offer": {
+      "type": "petsome-ld-offer",
+      "blocks": {
+        "kaching_bundles_app_block_Kh7wtC": {
+          "type": "shopify://apps/kaching-bundles/blocks/app-block/6c637362-a106-4a32-94ac-94dcfd68cdb8",
+          "settings": {
+            "product": "{{section.settings.product}}",
+            "manual_deal_block_id": ""
+          }
+        },
+        "row1": {
+          "type": "info_row",
+          "settings": {
+            "heading": "Što je MobiMix?",
+            "content": "<p>MobiMix je kapsula za svakodnevnu podršku psećim zglobovima, koju jednostavno dodaš u hranu. Djeluje na tri puta istovremeno. Taj način djelovanja zovemo ArthroRegen™. Pomaže podržati obnovu hrskavice, smiren upalni odgovor i stvaranje zglobne tekućine. Pomaže kod pokretljivosti i lakšeg ustajanja, a pritom svakodnevna borba s tabletama nije potrebna.</p>",
+            "open": true
+          }
+        },
+        "row2": {
+          "type": "info_row",
+          "settings": {
+            "heading": "Prednosti MobiMixa",
+            "content": "<p>✅ Lakše ustajanje. Mnogi vlasnici prve promjene primijete za 2–3 tjedna.<br/>✅ Više volje za šetnju i manje oklijevanja pred stepenicama<br/>✅ Bez lomljenja tableta. Kapsulu samo dodaš u hranu ili je otvoriš i sadržaj pospeš po obroku.<br/>✅ Prikladno za sve pasmine i veličine pasa</p>",
+            "open": false
+          }
+        },
+        "row3": {
+          "type": "info_row",
+          "settings": {
+            "heading": "Kako djeluje MobiMix?",
+            "content": "<p>MobiMix zglob ne smiruje blokadom boli. Djeluje na tri puta istovremeno, koji se međusobno potiču. Glukozamin i kondroitin gradivni su elementi iz kojih tijelo obnavlja hrskavicu. Zelenousna školjka, vražja kandža i kurkuma pomažu podržati smiren upalni odgovor, koji trošenje hrskavice gura dalje. Šipak, đumbir i vitamin C podržavaju obranu od oksidativnog stresa, a vitamin C pridonosi i normalnom stvaranju kolagena. Kapsulu samo dodaš u hranu, a pas je pojede zajedno s obrokom.</p>",
+            "open": false
+          }
+        },
+        "row4": {
+          "type": "info_row",
+          "settings": {
+            "heading": "Sastojci",
+            "content": "<ul><li>Zelenousna školjka</li><li>Glukozamin i kondroitin</li><li>Vražja kandža</li><li>Kurkuma</li><li>Ekstrakt korijena đumbira</li><li>Ekstrakt šipka</li><li>Vitamin C</li></ul>",
+            "open": false
+          }
+        },
+        "row5": {
+          "type": "info_row",
+          "settings": {
+            "heading": "Doziranje",
+            "content": "<p><strong>Preporučeni dnevni unos (3 mjeseca ili do poboljšanja stanja):</strong> </p><p>Mačke: 1/2 – 1 kapsula </p><p>Mali psi (do 10 kg): 1 kapsula </p><p>Srednje veliki psi (11-24kg): 2 kapsule </p><p>Veliki psi (25-40kg): 3 kapsule </p><p>Vrlo veliki psi (više od 41 kg): 4 kapsule </p><p><br/></p><p><strong>Unos za održavanje i prevenciju:</strong> </p><p>Do 20kg: 1 – 2 kapsule </p><p>Iznad 20kg: 2 kapsule </p><p><br/></p><p>Nakon tri mjeseca uzimanja, odnosno nakon poboljšanja stanja, potreban je prijelaz na unos za održavanje ili po potrebi ponoviti kuru. U slučaju preosjetljivosti ili poteškoća pri hranjenju kapsula se može otvoriti, a sadržaj istresti u dnevni obrok. Kapsulu u tom slučaju bacite. </p>",
+            "open": false
+          }
+        },
+        "row6": {
+          "type": "info_row",
+          "settings": {
+            "heading": "Studije",
+            "content": "<p><strong>Tiffany Linn Bierer3 and Linh M. Bui Waltham USA, Vernon, CA: Improvement of Arthritic Signs in Dogs Fed Green-Lipped Mussel (Perna canaliculus)</strong></p><p>“Podaci iz studije pokazuju da je GLM prah učinkovit u smanjenju znakova artritisa kod pasa, bilo da se izravno pospe po standardnoj hrani, bilo da je uključen u obrađene poslastice ili glavne obroke. Nakon šest tjedana dopunjavanja GLM-om ukupne ocjene artritisa, bolova u zglobovima i oteklina znatno su se smanjile. GLM sadrži omega-3 masne kiseline koje smanjuju upale, bez štetnih učinaka na probavni sustav ili zgrušavanje krvi, što daje prednost pred mnogim nesteroidnim protuupalnim lijekovima. Dopuna prehrane GLM-om može pridonijeti kontroli artritičnih tegoba kod pasa i smanjiti potrebu za uobičajenim liječenjem.”</p><p><strong>Grainne McCarthy a,*, James O’Donovan b, Boyd Jones a, Hester McAllister c, Michael Seed d, Carmel Mooney: Randomised double-blind, positive-controlled trial to assess the efficacy of glucosamine/chondroitin sulfate for the treatment of dogs with osteoarthritis</strong></p><p>Ovo je izvješće prvo koje dokazuje da se klinički znakovi osteoartritisa kod pasa znatno poboljšavaju nakon 70 dana liječenja glukozamin hidrokloridom i kondroitin sulfatom. Iako su u prijašnjim studijama rezultati kod nekih dodataka bili manje izraženi, u ovoj su studiji poboljšanja boli i općeg stanja postala značajna nakon 70 dana, što upućuje na dugoročnu učinkovitost ovog liječenja.  </p><p><strong>Efficacy of Turmeric for Treatment of Osteoarthritis: A Systematic Review and Meta-Analysis of Experimental Animal Model Studies Stacey Sheahan VMD, MS-TCVM</strong></p><p>Ovaj sustavni pregled i meta-analiza pokazali su da kurkuma/kurkumin ima obećavajuće terapijske učinke u liječenju osteoartritisa (OA). Smanjuje upalne citokine, kao što su TNF-α i IL-1β, te štiti hrskavicu od degeneracije. Kliničke studije na kućnim ljubimcima, prije svega psima, potrebne su za daljnje istraživanje učinaka kurkume u liječenju OA. Kurkuma se može koristiti kao dio šireg liječenja u okviru tradicionalne kineske veterinarske medicine.</p>",
+            "open": false
+          }
+        }
+      },
+      "block_order": [
+        "kaching_bundles_app_block_Kh7wtC",
+        "row1",
+        "row2",
+        "row3",
+        "row4",
+        "row5",
+        "row6"
+      ],
+      "settings": {
+        "product": "mobimix",
+        "show_gallery": true,
+        "image": "shopify://shop_images/93b9341cd8c0fc22bbfed015b4d80c1836056d4b.png",
+        "heading": "MobiMix - podrži zglobove svog psa",
+        "description": "",
+        "trustpilot_text": "",
+        "weight_label": "Odaberi težinu psa:",
+        "delivery_text": "<p>Predviđeno vrijeme dostave: <strong>2–3 dana</strong></p>",
+        "atc_label": "DODAJ U KOŠARICU",
+        "atc_show_price": true,
+        "show_payment_icons": true,
+        "payments_label": "Sigurno plaćanje:",
+        "disclaimer_text": "<p>*Prve promjene vidljive su za 2-3 tjedna. Za najbolje rezultate preporučujemo primjenu 2-3 mjeseca.</p>",
+        "rating_label": "4.8 / 5 (2.000+ zadovoljnih vlasnika)",
+        "star_color": "#ffcc00",
+        "tags": "Podrška zglobovima| Veća pokretljivost | Veterinarski podržano",
+        "tag_color": "#F47671",
+        "checks": "Tvoj pas se ponovno kreće bez oklijevanja\nManje jutarnje ukočenosti već za 2-3 tjedna\nViše energije za igru i šetnje\nDugoročna zaštita od trošenja zglobova\nArthroRegen mehanizam",
+        "check_color": "#121212",
+        "hero_label": "EKSKLUZIVNA PONUDA",
+        "hero_tier_quantity": "",
+        "gifts_in_tier": true,
+        "protocol_label": "3-mjesečni protokol",
+        "offer_checklist": "4x MobiMix\nPrijenosna sklopiva posuda — 9,00 €\nDentalSticks — 14,90 €\nBesplatna dostava\n90-dnevno jamstvo povrata novca",
+        "offer_total_value": "Ukupna vrijednost 161,60 € — štediš 71,60 €",
+        "gifts_heading": "UKLJUČENO U OVAJ PAKET",
+        "hide_gifts_heading": false,
+        "tier_1_style": "none",
+        "tier_2_style": "none",
+        "tier_3_style": "best",
+        "tier_4_style": "none",
+        "background_color": "#fdfbf7",
+        "text_color": "#0e1111",
+        "muted_text_color": "#565858",
+        "accent_color": "#9bb8d3",
+        "accent_color_dark": "#87a0b7",
+        "secondary_color": "#e8d6c5",
+        "light_text_color": "#faf9f6",
+        "atc_background": "#0e1111",
+        "atc_text_color": "#ffffff",
+        "product_type": "capsules",
+        "capsules_per_package": 90,
+        "capsules_per_day_by_size": "1, 2, 3, 4",
+        "grams_per_package": 90,
+        "grams_per_day_by_size": "1.33, 2.66, 5.22",
+        "anchor_id": "offer",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "margin_top": 0,
+        "margin_bottom": 0
+      }
+    },
+    "petsome_home_reviews_nntxYK": {
+      "type": "petsome-home-reviews",
+      "blocks": {
+        "review_3HBhMy": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "body": "\"Maj je trebao biti operiran, no nažalost su isti dan operirali mene. Naime, ima kroničnu upalu zglobova koljena. Nakon tri tjedna uzimanja MobiMixa Maj je čudesno prohodao. Pitam veterinara što to sada znači. Veterinar mi odgovara da nema drugog objašnjenja nego da je to Božje čudo. To Božje čudo traje već godinu dana i nadam se da će trajati i trajati.\"",
+            "author": "Branko Teršek",
+            "dog": "12-godišnji ovčar"
+          }
+        },
+        "review_dpFKaz": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/natasa-zivko-tecaj_1.png",
+            "rating": 5,
+            "body": "\"Prije dvije i pol godine tražila sam za svoju kujicu staru 12 i pol godina dodatak koji bi pokrivao širi spektar. Po preporuci sam naišla na MobiMix i kujici se stanje u roku od mjesec dana toliko poboljšalo da je ponovno mogla sama ići po stepenicama. MobiMix me toliko uvjerio da sam ga uvrstila na svoje police i otada ga redovito preporučujem kupcima.\"",
+            "author": "Nataša Živko, ZOO AJKA i kinološka sutkinja",
+            "dog": "kujica stara 12,5 godina"
+          }
+        },
+        "review_TaVPGa": {
+          "type": "review",
+          "settings": {
+            "avatar": "shopify://shop_images/image00018.jpg",
+            "rating": 5,
+            "body": "\"S obzirom na to koliko smo Elika i ja prošli, pojavile su se određene poteškoće s kretanjem. Kad smo prije dvije godine počeli koristiti MobiMix, poteškoće su nestale, što je ponovno pridonijelo ovogodišnjem rezultatu na svjetskom prvenstvu. Budući da je MobiMix pomogao Eliki, preventivno ga dajem i ostalim psima.\"",
+            "author": "Tomaž Režonja, 5x svjetski prvak",
+            "dog": "Elika, svjetska prvakinja u praćenju traga"
+          }
+        },
+        "logo_CGL6mz": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/vg-logo.svg",
+            "label": ""
+          }
+        },
+        "logo_DGGWPE": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Veterina-Skarica_logo-1-1-200x200_png.webp",
+            "label": ""
+          }
+        },
+        "logo_7UWYdD": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/vet_mlakar_logo_color_animated_1.svg",
+            "label": ""
+          }
+        },
+        "logo_Rf4ayr": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/petvet_logo.png",
+            "label": ""
+          }
+        },
+        "logo_Hkkknj": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/logo_veterinaria_1.png",
+            "label": ""
+          }
+        }
+      },
+      "block_order": [
+        "review_3HBhMy",
+        "review_dpFKaz",
+        "review_TaVPGa",
+        "logo_CGL6mz",
+        "logo_DGGWPE",
+        "logo_7UWYdD",
+        "logo_Rf4ayr",
+        "logo_Hkkknj"
+      ],
+      "name": "Petsome: Home reviews",
+      "settings": {
+        "trustpilot_label": "",
+        "heading": "<p>Više od 5.000 pasa. Jedna zajednička priča.</p>",
+        "subline": "<p>Preporučuju veterinari.</p>",
+        "logo_speed": 30,
+        "background_color": "#FDFBF7",
+        "card_color": "#faf9f6",
+        "star_color": "#ffcc00",
+        "padding_top": 44,
+        "padding_bottom": 48
+      }
+    },
+    "ingredients": {
+      "type": "petsome-ld-ingredients",
+      "settings": {
+        "product": "mobimix",
+        "heading": "<p>Sastojci koji djeluju na tri puta</p>",
+        "description": "<p>Svaki sastojak pokriva svoj dio: da tijelo ima iz čega obnavljati hrskavicu, da se upalni odgovor koji trošenje gura dalje smiri i da zglob ostane podmazan. Ništa nije unutra zato da bi deklaracija izgledala dulja.</p>",
+        "amount_label": "Količina po pakiranju",
+        "anchor_id": "ingredients",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#fdfbf7",
+        "text_color": "#0e1111",
+        "accent_color": "#9bb8d3",
+        "accent_color_dark": "#87a0b7",
+        "secondary_color": "#e8d6c5",
+        "light_text_color": "#faf9f6"
+      }
+    },
+    "1788858474c1df737d": {
+      "type": "apps",
+      "blocks": {
+        "loox_reviews_loox_agg_section_HmVHz3": {
+          "type": "shopify://apps/loox-reviews/blocks/loox-agg-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "settings": {
+            "reviews_to_display": "",
+            "default_tab": "automatic",
+            "only_photos": false,
+            "hide_thumbnails": false,
+            "product_handle": "",
+            "aggregated": true,
+            "data-limit": 6,
+            "maxwidth": 1080,
+            "is_sample": true
+          }
+        }
+      },
+      "block_order": [
+        "loox_reviews_loox_agg_section_HmVHz3"
+      ],
+      "settings": {
+        "display_id": false,
+        "include_margins": true
+      }
+    },
+    "faq": {
+      "type": "petsome-ld-faq",
+      "blocks": {
+        "q_1": {
+          "type": "question",
+          "settings": {
+            "question": "Kada mogu očekivati prve promjene?",
+            "answer": "<p>Mnogi vlasnici prve promjene primijete za 2–3 tjedna, a za puni učinak obično je potrebno 8–12 tjedana redovite primjene. Brzina ovisi o dobi psa, stupnju tegoba i dosljednosti — zglobovi se ne obnove u jednom tjednu.</p>"
+          }
+        },
+        "q_2": {
+          "type": "question",
+          "settings": {
+            "question": "Koliko kapsula treba moj pas?",
+            "answer": "<p>Doza ovisi o težini psa i navedena je na ambalaži. MobiMix se daje jednom dnevno, zajedno s obrokom.</p>"
+          }
+        },
+        "q_3": {
+          "type": "question",
+          "settings": {
+            "question": "Što ako pas ne želi progutati kapsulu?",
+            "answer": "<p>Kapsulu možeš otvoriti i sadržaj posuti po hrani. Ovojnicu u tom slučaju baci.</p>"
+          }
+        },
+        "q_4": {
+          "type": "question",
+          "settings": {
+            "question": "Je li prikladan za sve pasmine i dobi?",
+            "answer": "<p>Da, za sve pasmine i veličine. Važno je samo da se pridržavaš doze prema težini. Kod štenaca preporučujemo početak nakon otprilike 5. mjeseca starosti.</p>"
+          }
+        },
+        "q_5": {
+          "type": "question",
+          "settings": {
+            "question": "Što ako kod mog psa ne bude djelovalo?",
+            "answer": "<p>Imaš 90 dana. Ako ne budeš zadovoljan, piši nam i vratit ćemo ti novac – čak i ako je ambalaža već otvorena.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q_1",
+        "q_2",
+        "q_3",
+        "q_4",
+        "q_5"
+      ],
+      "settings": {
+        "heading": "<p>Česta pitanja</p>",
+        "subheading": "",
+        "open_first": false,
+        "anchor_id": "faq",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#faf9f6",
+        "text_color": "#0e1111",
+        "card_color": "#ffffff",
+        "border_color": "#e7e7e7",
+        "accent_color": "#87a0b7"
+      }
+    },
+    "17869840503b54b2bc": {
+      "type": "apps",
+      "blocks": {
+        "loox_reviews_loox_agg_section_egjtKf": {
+          "type": "shopify://apps/loox-reviews/blocks/loox-agg-section/5c3b337f-fd14-4df5-b1d6-80ec13e6e28e",
+          "disabled": true,
+          "settings": {
+            "reviews_to_display": "",
+            "default_tab": "automatic",
+            "only_photos": false,
+            "hide_thumbnails": false,
+            "product_handle": "dentalmix",
+            "aggregated": true,
+            "data-limit": 7,
+            "maxwidth": 1080,
+            "is_sample": true
+          }
+        }
+      },
+      "block_order": [
+        "loox_reviews_loox_agg_section_egjtKf"
+      ],
+      "settings": {
+        "display_id": false,
+        "include_margins": true
+      }
+    },
+    "guarantee": {
+      "type": "petsome-ld-guarantee",
+      "settings": {
+        "show_icon": true,
+        "icon": "verified_user",
+        "heading": "<p>Isprobaj bez rizika 90 dana</p>",
+        "text": "<p>Daj psu prvo pakiranje i uzmi si vremena. Ako u 90 dana ne primijetiš razliku - piši nam i vratit ćemo ti novac, čak i ako je ambalaža već otvorena.</p>",
+        "cta_label": "NARUČI ODMAH",
+        "cta_url": "#offer",
+        "anchor_id": "guarantee",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "background_color": "#FBBCB9",
+        "text_color": "#0e1111",
+        "icon_color": "#F47671",
+        "button_background": "#0e1111",
+        "button_text_color": "#ffffff"
+      }
+    },
+    "ld_footer": {
+      "type": "petsome-ld-footer",
+      "blocks": {
+        "link_1": {
+          "type": "link",
+          "settings": {
+            "label": "Razlozi",
+            "anchor": "#reasons"
+          }
+        },
+        "link_2": {
+          "type": "link",
+          "settings": {
+            "label": "Prvih 90 dana",
+            "anchor": "#timeline"
+          }
+        },
+        "link_3": {
+          "type": "link",
+          "settings": {
+            "label": "Ponuda",
+            "anchor": "#offer"
+          }
+        },
+        "link_4": {
+          "type": "link",
+          "settings": {
+            "label": "Sastojci",
+            "anchor": "#ingredients"
+          }
+        },
+        "link_5": {
+          "type": "link",
+          "settings": {
+            "label": "Jamstvo",
+            "anchor": "#guarantee"
+          }
+        }
+      },
+      "block_order": [
+        "link_1",
+        "link_2",
+        "link_3",
+        "link_4",
+        "link_5"
+      ],
+      "settings": {
+        "logo": "shopify://shop_images/Logo_cc9e4809-610d-4e12-9861-949378c4b8de.png",
+        "logo_width": 90,
+        "legal_text": "<p>© Petsome. Sva prava pridržana.</p>",
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "background_color": "#0e1111",
+        "text_color": "#faf9f6",
+        "muted_text_color": "#c9bfbb"
+      }
+    }
+  },
+  "order": [
+    "hide_chrome",
+    "offer_bar",
+    "ld_header",
+    "hero",
+    "reasons",
+    "icon_bar_tTCYrC",
+    "timeline",
+    "offer",
+    "petsome_home_reviews_nntxYK",
+    "ingredients",
+    "1788858474c1df737d",
+    "faq",
+    "17869840503b54b2bc",
+    "guarantee",
+    "ld_footer"
+  ]
+}
