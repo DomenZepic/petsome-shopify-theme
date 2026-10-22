@@ -617,7 +617,7 @@
               "name": "Petsome: Shipping info",
               "settings": {
                 "icon": "",
-                "text": "<p>📦 Prednaročilo – odpošiljamo v začetku novembra. S kodo PREDNAROCILO10 prihraniš dodatnih 10 %.</p>",
+                "text": "<p>📦 Prednaročilo – odpošiljamo v začetku novembra. S kodo PDN10 prihraniš dodatnih 10 %.</p>",
                 "margin_top": 0,
                 "margin_bottom": 12
               },
