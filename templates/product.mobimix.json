@@ -616,8 +616,8 @@
               "type": "product_petsome-shipping-info",
               "name": "Petsome: Shipping info",
               "settings": {
-                "icon": "local_shipping",
-                "text": "<p>Predviden čas dostave: <strong>2-3 dni</strong></p>",
+                "icon": "",
+                "text": "<p>📦 Prednaročilo – odpošiljamo v začetku novembra. S kodo PREDNAROCILO10 prihraniš dodatnih 10 %.</p>",
                 "margin_top": 0,
                 "margin_bottom": 12
               },
@@ -633,7 +633,7 @@
                 "uppercase_text": true,
                 "icon_scale": 120,
                 "icon_spacing": 10,
-                "atc_custom_label": "Dodaj v košarico",
+                "atc_custom_label": "Prednaroči zdaj",
                 "atc_label_size": 18,
                 "atc_label_2": "",
                 "atc_label_2_size": 12,
