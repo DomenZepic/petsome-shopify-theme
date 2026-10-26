@@ -13,8 +13,8 @@
 {%capture section_id %}ecom-default-template{% endcapture%}{% if section and section_id == section.id and headless == true %}
 {{ content_for_header }}
 {% render 'ecom_header', ECOM_THEME: true %}{% endif %}<link href="https://fonts.googleapis.com/css?family=Plus+Jakarta+Sans:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Albert+Sans:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css?family=Jost:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet"/>
-{{'https://nhocleo.myshopify.com/cdn/shop/t/41/assets/ecom-65d80a3f5c865bdfa4074a12.css?v=108684635481550204061711967394' | stylesheet_tag }}
-<script src="https://nhocleo.myshopify.com/cdn/shop/t/41/assets/ecom-65d80a3f5c865bdfa4074a12.js?v=73947026943843446861711967393" defer="defer"></script>
+{{ 'ecom-default-template-quickview.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'ecom-default-template-quickview.js' | asset_url }}" defer="defer"></script>
 <script type="text/javascript" class="ecom-page-info">
  window.EComposer = window.EComposer || {};
  window.EComposer.TEMPLATE_ID="65d80a3f5c865bdfa4074a12";
