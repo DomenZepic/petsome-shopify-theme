@@ -13,6 +13,12 @@
   endif
 
   assign goal = block.settings.goal | times: goal_multiplier
+  unless is_quantity
+    case cart.currency.iso_code
+      when 'CZK'
+        assign goal = goal | times: 25
+    endcase
+  endunless
   assign goal_progress = goal_max_reference | divided_by: goal | times: 100.0
 
   assign sub_auto_complete = false
