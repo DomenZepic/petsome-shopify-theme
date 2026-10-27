@@ -55,7 +55,7 @@
           "settings": {
             "icon": "shopify://shop_images/hf_20260717_164541_5f9f0a09-7342-414c-b5a1-38000374b199.png",
             "label": "Prenosna zložljiva posoda",
-            "price": "9.00 €"
+            "price": "225 Kč"
           }
         },
         "gift_2": {
@@ -63,7 +63,7 @@
           "settings": {
             "icon": "shopify://shop_images/hf_20260709_194728_f15d5b24-84c3-48bd-a64e-0545ecd72289.png",
             "label": "DentalSticks",
-            "price": "14.50 €"
+            "price": "360 Kč"
           }
         },
         "gift_3": {
@@ -91,7 +91,7 @@
         "image": "shopify://shop_images/cz-floramix-hero.png",
         "cta_label": "NAROČI ZDAJ",
         "cta_url": "#offer",
-        "guarantee_text": "60-dnevna garancija vračila denarja",
+        "guarantee_text": "90-dnevna garancija vračila denarja",
         "proof_text": "5000+ prodanih lončkov · Razvito v Sloveniji, izdelano v EU",
         "show_gifts": true,
         "gifts_heading": "BREZPLAČNA DARILA PRI EKSKLUZIVNI PONUDBI!",
@@ -118,7 +118,7 @@
         "r1": {
           "type": "reason",
           "settings": {
-            "tag": "Simptomi",
+            "tag": "Příznaky",
             "title": "Tudi tvoj pes trpi za naslednjimi simptomi?",
             "text": "<p>To niso ločene težave. Skupaj so vzorec.<br/><br/>✓ lizanje tačk<br/>✓ praskanje<br/>✓ stresanje z glavo<br/>✓ sirast vonj iz ušes ali tačk<br/>✓ solzni madeži<br/>✓ izpadanje dlake ali moten kožuh<br/>✓ ješčost trave<br/>✓ občasne prebavne težave<br/><br/>Če jih prepoznaš dva ali tri, ni šlo za naključje.</p>",
             "image": "shopify://shop_images/hf_20260831_230700_a9c71954-410c-4ed1-96f1-562d1ff032fd.png"
@@ -382,7 +382,7 @@
         "hero_tier_quantity": "",
         "gifts_in_tier": true,
         "protocol_label": "3-mesečni protokol",
-        "offer_checklist": "4× FloraMix — 45% popusta\nPrenosna zložljiva posoda — 9,00 €\nDentalSticks - 14,50 €\nBrezplačna dostava\n60-dnevna garancija vračila denarja",
+        "offer_checklist": "4× FloraMix — 45% popusta\nPrenosna zložljiva posoda — 9,00 €\nDentalSticks - 14,50 €\nBrezplačna dostava\n90-dnevna garancija vračila denarja",
         "offer_total_value": "",
         "gifts_heading": "VKLJUČENO V TA PAKET",
         "hide_gifts_heading": false,
@@ -550,7 +550,7 @@
           "type": "question",
           "settings": {
             "question": "Kaj če z izdelkom nisem zadovoljen?",
-            "answer": "<p>Na voljo imaš 60 dni. Če ne boš zadovoljen, nam piši in denar ti vrnemo — tudi če je embalaža že odprta.</p>"
+            "answer": "<p>Na voljo imaš 90 dni. Če ne boš zadovoljen, nam piši in denar ti vrnemo — tudi če je embalaža že odprta.</p>"
           }
         }
       },
@@ -615,7 +615,7 @@
         "show_icon": true,
         "icon": "verified_user",
         "heading": "<p>Ne zamudi — do -45%</p>",
-        "text": "<p>Podpri pasje črevesje s 15 aktivnimi sestavinami v treh smereh. Preizkusi brez tveganja 60 dni: če ne opaziš razlike, nam piši in denar ti vrnemo, tudi če je embalaža že odprta.</p>",
+        "text": "<p>Podpri pasje črevesje s 15 aktivnimi sestavinami v treh smereh. Preizkusi brez tveganja 90 dni: če ne opaziš razlike, nam piši in denar ti vrnemo, tudi če je embalaža že odprta.</p>",
         "cta_label": "NAROČI ZDAJ",
         "cta_url": "#offer",
         "anchor_id": "guarantee",
