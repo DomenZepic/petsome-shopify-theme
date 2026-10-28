@@ -1,0 +1,190 @@
+{%- comment -%}
+  Petsome pack grid (vzor: Tasty Dose halloween-sale). Tabi po izdelku: Duo / Trio Zdrav pes (vedno na sredini) / Mesečna zaloga.
+{%- endcomment -%}
+{%- liquid
+  assign trio = section.settings.trio
+-%}
+<style>
+  .ppg-{{ section.id }}{background:{{ section.settings.bg }};padding:48px 16px 56px;color:#2b1d33;font-family:inherit}
+  .ppg-{{ section.id }} .ppg-wrap{max-width:1180px;margin:0 auto;text-align:center}
+  .ppg-{{ section.id }} .ppg-trust{display:inline-flex;gap:8px;align-items:center;font-weight:600;font-size:15px;margin-bottom:14px}
+  .ppg-{{ section.id }} .ppg-trust span{color:#f5a623;letter-spacing:2px}
+  .ppg-{{ section.id }} .ppg-h1{font-size:clamp(28px,4.4vw,46px);line-height:1.1;margin:0 0 10px;font-weight:800}
+  .ppg-{{ section.id }} .ppg-h1 em{font-style:normal;color:{{ section.settings.accent }}}
+  .ppg-{{ section.id }} .ppg-sub{font-size:17px;opacity:.85;margin:0 0 28px}
+  .ppg-{{ section.id }} .ppg-kicker{font-size:13px;font-weight:800;letter-spacing:.14em;color:{{ section.settings.accent }};margin:0 0 4px}
+  .ppg-{{ section.id }} .ppg-h2{font-size:clamp(22px,3vw,30px);margin:0 0 18px;font-weight:800}
+  .ppg-{{ section.id }} .ppg-tabs{display:inline-flex;background:#fff;border-radius:999px;padding:5px;gap:4px;margin:0 0 26px;box-shadow:0 2px 10px rgba(0,0,0,.06);flex-wrap:wrap;justify-content:center}
+  .ppg-{{ section.id }} .ppg-tab{border:0;background:transparent;padding:10px 20px;border-radius:999px;font-weight:700;font-size:15px;cursor:pointer;color:#2b1d33}
+  .ppg-{{ section.id }} .ppg-tab[aria-selected="true"]{background:#2b1d33;color:#fff}
+  .ppg-{{ section.id }} .ppg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:stretch}
+  .ppg-{{ section.id }} .ppg-card{background:#fff;border-radius:18px;padding:16px 16px 20px;position:relative;display:flex;flex-direction:column;box-shadow:0 4px 18px rgba(0,0,0,.07);border:2px solid transparent;text-align:left}
+  .ppg-{{ section.id }} .ppg-card.is-hero{border-color:{{ section.settings.accent }};transform:translateY(-6px)}
+  .ppg-{{ section.id }} .ppg-ribbon{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:{{ section.settings.accent }};color:#fff;font-size:12px;font-weight:800;letter-spacing:.06em;padding:6px 14px;border-radius:999px;white-space:nowrap}
+  .ppg-{{ section.id }} .ppg-img{border-radius:12px;overflow:hidden;aspect-ratio:1/1;background:#f4ece4;margin-bottom:12px}
+  .ppg-{{ section.id }} .ppg-img img{width:100%;height:100%;object-fit:cover;display:block}
+  .ppg-{{ section.id }} .ppg-row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+  .ppg-{{ section.id }} .ppg-save{background:#2b1d33;color:#fff;font-size:12px;font-weight:800;padding:4px 10px;border-radius:6px}
+  .ppg-{{ section.id }} .ppg-unit{font-size:13px;font-weight:700}
+  .ppg-{{ section.id }} .ppg-unit b{font-size:17px}
+  .ppg-{{ section.id }} .ppg-name{font-size:20px;font-weight:800;margin:4px 0 2px}
+  .ppg-{{ section.id }} .ppg-what{font-size:14px;opacity:.85;margin:0 0 10px;min-height:38px}
+  .ppg-{{ section.id }} .ppg-price{display:flex;gap:10px;align-items:baseline;margin:auto 0 4px}
+  .ppg-{{ section.id }} .ppg-price .now{font-size:26px;font-weight:800}
+  .ppg-{{ section.id }} .ppg-price s{opacity:.55;font-size:16px}
+  .ppg-{{ section.id }} .ppg-saved{font-size:13px;font-weight:700;color:#1d7a3a;margin-bottom:12px}
+  .ppg-{{ section.id }} .ppg-btn{border:0;border-radius:12px;background:{{ section.settings.accent }};color:#fff;font-weight:800;font-size:16px;padding:14px;cursor:pointer;width:100%}
+  .ppg-{{ section.id }} .ppg-btn[disabled]{opacity:.6}
+  .ppg-{{ section.id }} .ppg-guar{margin:28px auto 0;max-width:640px;display:flex;gap:12px;align-items:center;justify-content:center;font-size:15px}
+  .ppg-{{ section.id }} .ppg-guar b{display:block}
+  .ppg-{{ section.id }} [hidden]{display:none!important}
+  @media (max-width:820px){
+    .ppg-{{ section.id }} .ppg-grid{grid-template-columns:1fr;gap:22px}
+    .ppg-{{ section.id }} .ppg-card.is-hero{order:-1;transform:none}
+  }
+</style>
+
+{%- capture card -%}{%- endcapture -%}
+
+<div class="ppg-{{ section.id }}" id="ppg-{{ section.id }}">
+  <div class="ppg-wrap">
+    {%- if section.settings.trust != blank -%}
+      <div class="ppg-trust"><span>★★★★★</span>{{ section.settings.trust }}</div>
+    {%- endif -%}
+    <h1 class="ppg-h1">{{ section.settings.heading }}</h1>
+    {%- if section.settings.sub != blank -%}<p class="ppg-sub">{{ section.settings.sub }}</p>{%- endif -%}
+
+    <p class="ppg-kicker">{{ section.settings.kicker }}</p>
+    <h2 class="ppg-h2">{{ section.settings.heading2 }}</h2>
+
+    <div class="ppg-tabs" role="tablist">
+      {%- for block in section.blocks -%}
+        <button class="ppg-tab" role="tab" type="button" data-tab="{{ forloop.index0 }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.label }}</button>
+      {%- endfor -%}
+    </div>
+
+    {%- for block in section.blocks -%}
+      {%- assign packs = '' | split: '' -%}
+      <div class="ppg-grid" data-panel="{{ forloop.index0 }}" {% unless forloop.first %}hidden{% endunless %}>
+        {%- for i in (1..3) -%}
+          {%- liquid
+            if i == 1
+              assign p = block.settings.duo
+              assign what = block.settings.duo_text
+              assign qty = 2
+              assign hero = false
+            elsif i == 2
+              assign p = trio
+              assign what = section.settings.trio_text
+              assign qty = 3
+              assign hero = true
+            else
+              assign p = block.settings.month
+              assign what = block.settings.month_text
+              assign qty = 4
+              assign hero = false
+            endif
+          -%}
+          {%- if p != blank -%}
+            {%- liquid
+              assign v = p.selected_or_first_available_variant
+              assign cmp = v.compare_at_price | default: v.price
+              assign saved = cmp | minus: v.price
+              assign pct = 0
+              if cmp > 0
+                assign pct = saved | times: 100 | divided_by: cmp
+              endif
+              assign unit = v.price | divided_by: qty
+            -%}
+            <div class="ppg-card{% if hero %} is-hero{% endif %}">
+              {%- if hero -%}<div class="ppg-ribbon">{{ section.settings.hero_label }}</div>{%- endif -%}
+              <div class="ppg-img">{%- if p.featured_image -%}{{ p.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: p.title }}{%- endif -%}</div>
+              <div class="ppg-row">
+                <span class="ppg-save">{{ section.settings.save_label }} {{ pct }} %</span>
+                <span class="ppg-unit">{{ section.settings.only_label }} <b>{{ unit | money }}</b> / {{ section.settings.unit_label }}</span>
+              </div>
+              <div class="ppg-name">{{ p.title | split: ' (' | first }}</div>
+              <p class="ppg-what">{{ what }}</p>
+              <div class="ppg-price"><span class="now">{{ v.price | money }}</span>{%- if saved > 0 -%}<s>{{ cmp | money }}</s>{%- endif -%}</div>
+              {%- if saved > 0 -%}<div class="ppg-saved">{{ section.settings.saved_label }} {{ saved | money }}</div>{%- endif -%}
+              <button class="ppg-btn" type="button" data-variant="{{ v.id }}" {% unless v.available %}disabled{% endunless %}>
+                {%- if v.available -%}{{ section.settings.btn_label }}{%- else -%}{{ section.settings.soldout_label }}{%- endif -%}
+              </button>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+
+    {%- if section.settings.guarantee != blank -%}
+      <div class="ppg-guar">
+        {%- if section.settings.guarantee_img != blank -%}{{ section.settings.guarantee_img | image_url: width: 140 | image_tag: width: 70, height: 70, loading: 'lazy' }}{%- endif -%}
+        <div>{{ section.settings.guarantee }}</div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+(function(){
+  var root=document.getElementById('ppg-{{ section.id }}'); if(!root) return;
+  root.querySelectorAll('.ppg-tab').forEach(function(t){
+    t.addEventListener('click',function(){
+      root.querySelectorAll('.ppg-tab').forEach(function(x){x.setAttribute('aria-selected','false')});
+      t.setAttribute('aria-selected','true');
+      root.querySelectorAll('[data-panel]').forEach(function(p){p.hidden = p.getAttribute('data-panel')!==t.getAttribute('data-tab')});
+    });
+  });
+  root.querySelectorAll('.ppg-btn[data-variant]').forEach(function(b){
+    b.addEventListener('click',function(){
+      b.disabled=true;
+      fetch(window.Shopify && Shopify.routes ? Shopify.routes.root + 'cart/add.js' : '/cart/add.js',{
+        method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({items:[{id:parseInt(b.getAttribute('data-variant'),10),quantity:1}]})
+      }).then(function(r){return r.json()}).then(function(){
+        window.location.href=(window.Shopify && Shopify.routes ? Shopify.routes.root : '/')+'cart';
+      }).catch(function(){b.disabled=false});
+    });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Petsome: paketi",
+  "settings": [
+    { "type": "color", "id": "bg", "label": "Ozadje", "default": "#f6eee6" },
+    { "type": "color", "id": "accent", "label": "Poudarek", "default": "#e86a1c" },
+    { "type": "text", "id": "trust", "label": "Zaupanje", "default": "Zaupa nam več kot 3.500 lastnikov psov" },
+    { "type": "richtext", "id": "heading", "label": "Naslov", "default": "<p>Edina strašna stvar za noč čarovnic? Popusti do −42 %!</p>" },
+    { "type": "text", "id": "sub", "label": "Podnaslov", "default": "Založi se, preden popusti za noč čarovnic izginejo." },
+    { "type": "text", "id": "kicker", "label": "Nadnaslov paketov", "default": "PAKETI ZA NOČ ČAROVNIC" },
+    { "type": "text", "id": "heading2", "label": "Naslov paketov", "default": "Strašansko dobri popusti" },
+    { "type": "product", "id": "trio", "label": "Trio paket (vedno na sredini)" },
+    { "type": "text", "id": "trio_text", "label": "Trio – vsebina", "default": "FloraMix + DentalMix + MobiMix + 2 darili" },
+    { "type": "text", "id": "hero_label", "label": "Oznaka trio", "default": "NAJBOLJ PRILJUBLJEN PAKET" },
+    { "type": "text", "id": "save_label", "label": "Prihrani (značka)", "default": "PRIHRANI" },
+    { "type": "text", "id": "only_label", "label": "LE", "default": "le" },
+    { "type": "text", "id": "unit_label", "label": "Enota", "default": "dózo" },
+    { "type": "text", "id": "saved_label", "label": "Prihranek", "default": "Prihraniš" },
+    { "type": "text", "id": "btn_label", "label": "Gumb", "default": "Dodaj v košarico" },
+    { "type": "text", "id": "soldout_label", "label": "Razprodano", "default": "Razprodano" },
+    { "type": "image_picker", "id": "guarantee_img", "label": "Garancija – slika" },
+    { "type": "richtext", "id": "guarantee", "label": "Garancija", "default": "<p><strong>90-dnevna garancija vračila kupnine.</strong> Če izdelek ne izpolni pričakovanj, ti vrnemo denar.</p>" }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Izdelek (tab)",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Ime taba", "default": "FloraMix" },
+        { "type": "product", "id": "duo", "label": "Duo paket" },
+        { "type": "text", "id": "duo_text", "label": "Duo – vsebina", "default": "2x + darilo" },
+        { "type": "product", "id": "month", "label": "Mesečna zaloga" },
+        { "type": "text", "id": "month_text", "label": "Mesečna zaloga – vsebina", "default": "4x + 2 darili" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Petsome: paketi" }]
+}
+{% endschema %}

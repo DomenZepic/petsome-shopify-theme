@@ -1,0 +1,106 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "pack_grid": {
+      "type": "petsome-pack-grid",
+      "blocks": {
+        "tab_flora": {
+          "type": "tab",
+          "settings": {
+            "label": "FloraMix",
+            "duo": "floramix-duo-2x-darilo",
+            "duo_text": "2x FloraMix + darilo (zložljiva posodica)",
+            "month": "floramix-mesecna-zaloga-4x-2-darili",
+            "month_text": "4x FloraMix + 2 darili (posodica + DentalSticks)"
+          }
+        },
+        "tab_mobi": {
+          "type": "tab",
+          "settings": {
+            "label": "MobiMix",
+            "duo": "mobimix-duo-2x-darilo",
+            "duo_text": "2x MobiMix + darilo (zložljiva posodica)",
+            "month": "mobimix-mesecna-zaloga-4x-2-darili",
+            "month_text": "4x MobiMix + 2 darili (posodica + DentalSticks)"
+          }
+        },
+        "tab_dental": {
+          "type": "tab",
+          "settings": {
+            "label": "DentalMix",
+            "duo": "dentalmix-duo-2x-darilo",
+            "duo_text": "2x DentalMix + darilo (zložljiva posodica)",
+            "month": "dentalmix-mesecna-zaloga-4x-2-darili",
+            "month_text": "4x DentalMix + 2 darili (posodica + DentalSticks)"
+          }
+        }
+      },
+      "block_order": [
+        "tab_flora",
+        "tab_mobi",
+        "tab_dental"
+      ],
+      "settings": {
+        "trio": "paket-zdrav-pes-floramix-dentalmix-mobimix",
+        "trio_text": "FloraMix + DentalMix + MobiMix + 2 darili (črevesje, zobje, sklepi)",
+        "guarantee_img": "shopify://shop_images/Guarantee.png",
+        "guarantee": "<p><strong>90-dnevna garancija vračila kupnine.</strong> Če izdelek ne izpolni pričakovanj, lahko v 90 dneh zahtevaš vračilo kupnine.</p>"
+      }
+    },
+    "vet": {
+      "type": "petsome-vet-quotes",
+      "blocks": {
+        "q_flora": {
+          "type": "quote",
+          "settings": {
+            "tag": "FloraMix",
+            "color": "#6b3fa0",
+            "quote": "„Neurejena prebava, praskanje in lizanje tačk pri psih pogosto niso tri ločene težave. Pogosto so povezani z neravnovesjem v črevesju in imunskim odzivom. FloraMix je zasnovan tako, da hkrati podpira črevesno floro, imunski odziv ter kožo in dlako.“",
+            "author": "Blaž Petelinek Ledinski, dr. vet. med.",
+            "image": "shopify://shop_images/unnamed_1.jpg"
+          }
+        },
+        "q_dental": {
+          "type": "quote",
+          "settings": {
+            "tag": "DentalMix",
+            "color": "#1f8a8a",
+            "quote": "„Več kot 80 % psov ima do tretjega leta vidne težave z zobmi, večina lastnikov pa rednega ščetkanja preprosto ne zmore. DentalMix deluje drugače: skozi pasjo slino, ki obliva zobe ves dan. Enostavna dnevna podpora za svežji zadah in čistejše zobe, brez ščetkanja.“",
+            "author": "Blaž Petelinek Ledinski, dr. vet. med.",
+            "image": "shopify://shop_images/unnamed_1.jpg"
+          }
+        },
+        "q_mobi": {
+          "type": "quote",
+          "settings": {
+            "tag": "MobiMix",
+            "color": "#e85d5d",
+            "quote": "„Pri starejših in aktivnih psih pogosto opažamo spremembe v gibanju, ki niso nujno takoj boleče, a vplivajo na kakovost življenja. MobiMix cilja ključne elemente, povezane z zdravjem sklepov in gibanjem.“",
+            "author": "Blaž Petelinek Ledinski, dr. vet. med.",
+            "image": "shopify://shop_images/unnamed_1.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "q_flora",
+        "q_dental",
+        "q_mobi"
+      ],
+      "settings": {
+        "heading": "Kaj pravi veterinar"
+      }
+    }
+  },
+  "order": [
+    "pack_grid",
+    "vet"
+  ]
+}
