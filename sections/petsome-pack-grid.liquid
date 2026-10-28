@@ -38,6 +38,19 @@
   .ppg-{{ section.id }} .ppg-guar{margin:28px auto 0;max-width:640px;display:flex;gap:12px;align-items:center;justify-content:center;font-size:15px}
   .ppg-{{ section.id }} .ppg-guar b{display:block}
   .ppg-{{ section.id }} [hidden]{display:none!important}
+  .ppg-{{ section.id }} .ppg-hero{margin:-48px -16px 28px}
+  .ppg-{{ section.id }} .ppg-hero img{width:100%;height:auto;display:block;max-height:560px;object-fit:cover}
+  .ppg-{{ section.id }} .ppg-singles-h{margin-top:48px}
+  .ppg-{{ section.id }} .ppg-o{display:flex;align-items:center;gap:10px;border:2px solid #eadfd4;border-radius:12px;padding:10px 12px;margin:0 0 8px;cursor:pointer;background:#fff}
+  .ppg-{{ section.id }} .ppg-o:has(input:checked){border-color:{{ section.settings.accent }};background:#fff7f0}
+  .ppg-{{ section.id }} .ppg-o input{accent-color:{{ section.settings.accent }}}
+  .ppg-{{ section.id }} .ppg-o-l{flex:1;font-size:14px;line-height:1.3}
+  .ppg-{{ section.id }} .ppg-o-l small{display:block;opacity:.75;font-size:12px}
+  .ppg-{{ section.id }} .ppg-o-s{font-style:normal;background:#2b1d33;color:#fff;font-size:11px;font-weight:800;padding:2px 6px;border-radius:5px;margin-left:4px;white-space:nowrap}
+  .ppg-{{ section.id }} .ppg-o-p{text-align:right;font-weight:800;font-size:16px;white-space:nowrap}
+  .ppg-{{ section.id }} .ppg-o-p s{display:block;font-weight:400;opacity:.5;font-size:12px}
+  .ppg-{{ section.id }} .ppg-btn--ghost{display:block;text-align:center;text-decoration:none;background:#fff;color:#2b1d33;border:2px solid #2b1d33}
+  @media (max-width:749px){.ppg-{{ section.id }} .ppg-hero img{max-height:none}}
   @media (max-width:820px){
     .ppg-{{ section.id }} .ppg-grid{grid-template-columns:1fr;gap:22px}
     .ppg-{{ section.id }} .ppg-card.is-hero{order:-1;transform:none}
@@ -47,6 +60,14 @@
 {%- capture card -%}{%- endcapture -%}
 
 <div class="ppg-{{ section.id }}" id="ppg-{{ section.id }}">
+  {%- if section.settings.hero_d != blank -%}
+    <div class="ppg-hero">
+      <picture>
+        <source media="(max-width: 749px)" srcset="{{ section.settings.hero_m | default: section.settings.hero_d | asset_img_url: '1200x' }}">
+        <img src="{{ section.settings.hero_d | asset_img_url: '2000x' }}" alt="{{ section.settings.kicker | escape }}" width="2752" height="1536">
+      </picture>
+    </div>
+  {%- endif -%}
   <div class="ppg-wrap">
     {%- if section.settings.trust != blank -%}
       <div class="ppg-trust"><span>★★★★★</span>{{ section.settings.trust }}</div>
@@ -122,6 +143,61 @@
         <div>{{ section.settings.guarantee }}</div>
       </div>
     {%- endif -%}
+
+    {%- if section.settings.single_1 != blank or section.settings.single_2 != blank or section.settings.single_3 != blank -%}
+      <h2 class="ppg-h2 ppg-singles-h">{{ section.settings.singles_heading }}</h2>
+      <div class="ppg-grid ppg-singles">
+        {%- for n in (1..3) -%}
+          {%- liquid
+            assign k1 = 'single_' | append: n
+            assign k3 = k1 | append: '_3x'
+            assign k6 = k1 | append: '_6x'
+            assign kt = k1 | append: '_text'
+            assign sp = section.settings[k1]
+            assign p3 = section.settings[k3]
+            assign p6 = section.settings[k6]
+            assign stext = section.settings[kt]
+          -%}
+          {%- if sp != blank -%}
+            {%- liquid
+              assign v1 = sp.selected_or_first_available_variant
+              assign base = v1.price
+            -%}
+            <div class="ppg-card ppg-opt" data-opt>
+              <a class="ppg-img" href="{{ sp.url }}">{%- if sp.featured_image -%}{{ sp.featured_image | image_url: width: 700 | image_tag: loading: 'lazy', alt: sp.title }}{%- endif -%}</a>
+              <div class="ppg-name">{{ sp.title }}</div>
+              <p class="ppg-what">{{ stext }}</p>
+              <label class="ppg-o"><input type="radio" name="o-{{ section.id }}-{{ n }}" value="{{ v1.id }}"><span class="ppg-o-l"><b>1x</b> {{ sp.title }}<small>{{ base | money }} / {{ section.settings.unit_label }}</small></span><span class="ppg-o-p">{{ base | money }}</span></label>
+              {%- assign qs = '3,6' | split: ',' -%}
+              {%- for qq in qs -%}
+                {%- liquid
+                  if qq == '3'
+                    assign pp = p3
+                    assign q = 3
+                    assign gifts = section.settings.gift_3
+                  else
+                    assign pp = p6
+                    assign q = 6
+                    assign gifts = section.settings.gift_6
+                  endif
+                -%}
+                {%- if pp != blank -%}
+                  {%- liquid
+                    assign vv = pp.selected_or_first_available_variant
+                    assign full = base | times: q
+                    assign svd = full | minus: vv.price
+                    assign pc = svd | times: 100 | divided_by: full
+                    assign per = vv.price | divided_by: q
+                  -%}
+                  <label class="ppg-o"><input type="radio" name="o-{{ section.id }}-{{ n }}" value="{{ vv.id }}" {% if q == 3 %}checked{% endif %}><span class="ppg-o-l"><b>{{ q }}x</b> {{ sp.title }} <em class="ppg-o-s">{{ section.settings.save_label }} {{ pc }} %</em><small>{{ per | money }} / {{ section.settings.unit_label }} · 🎁 {{ gifts }}</small></span><span class="ppg-o-p">{{ vv.price | money }}<s>{{ full | money }}</s></span></label>
+                {%- endif -%}
+              {%- endfor -%}
+              <button class="ppg-btn" type="button" data-opt-add>{{ section.settings.btn_label }}</button>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
   </div>
 </div>
 
@@ -133,6 +209,14 @@
       root.querySelectorAll('.ppg-tab').forEach(function(x){x.setAttribute('aria-selected','false')});
       t.setAttribute('aria-selected','true');
       root.querySelectorAll('[data-panel]').forEach(function(p){p.hidden = p.getAttribute('data-panel')!==t.getAttribute('data-tab')});
+    });
+  });
+  root.querySelectorAll('[data-opt-add]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var c=b.closest('[data-opt]').querySelector('input:checked'); if(!c) return;
+      b.disabled=true;
+      fetch('/cart/add.js',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:[{id:parseInt(c.value,10),quantity:1}]})})
+      .then(function(r){return r.json()}).then(function(){window.location.href=(window.Shopify&&Shopify.routes?Shopify.routes.root:'/')+'cart'}).catch(function(){b.disabled=false});
     });
   });
   root.querySelectorAll('.ppg-btn[data-variant]').forEach(function(b){
@@ -154,6 +238,24 @@
   "name": "Petsome: paketi",
   "settings": [
     { "type": "color", "id": "bg", "label": "Ozadje", "default": "#f6eee6" },
+    { "type": "text", "id": "hero_d", "label": "Hero slika (asset, namizje)" },
+    { "type": "text", "id": "hero_m", "label": "Hero slika (asset, mobilno)" },
+    { "type": "text", "id": "singles_heading", "label": "Posamezni izdelki – naslov", "default": "Ne veš, kje začeti? Izberi svoj izdelek" },
+    { "type": "text", "id": "single_btn", "label": "Posamezni – gumb", "default": "Poglej izdelek" },
+    { "type": "text", "id": "gift_3", "label": "Darila pri 3x", "default": "darilo: zložljiva posodica" },
+    { "type": "text", "id": "gift_6", "label": "Darila pri 6x", "default": "2 darili: posodica + DentalSticks" },
+    { "type": "product", "id": "single_1", "label": "Posamezni 1" },
+    { "type": "product", "id": "single_1_3x", "label": "Posamezni 1 – 3x paket" },
+    { "type": "product", "id": "single_1_6x", "label": "Posamezni 1 – 6x paket" },
+    { "type": "text", "id": "single_1_text", "label": "Posamezni 1 – opis" },
+    { "type": "product", "id": "single_2", "label": "Posamezni 2" },
+    { "type": "product", "id": "single_2_3x", "label": "Posamezni 2 – 3x paket" },
+    { "type": "product", "id": "single_2_6x", "label": "Posamezni 2 – 6x paket" },
+    { "type": "text", "id": "single_2_text", "label": "Posamezni 2 – opis" },
+    { "type": "product", "id": "single_3", "label": "Posamezni 3" },
+    { "type": "product", "id": "single_3_3x", "label": "Posamezni 3 – 3x paket" },
+    { "type": "product", "id": "single_3_6x", "label": "Posamezni 3 – 6x paket" },
+    { "type": "text", "id": "single_3_text", "label": "Posamezni 3 – opis" },
     { "type": "color", "id": "accent", "label": "Poudarek", "default": "#e86a1c" },
     { "type": "text", "id": "trust", "label": "Zaupanje", "default": "Zaupa nam več kot 3.500 lastnikov psov" },
     { "type": "richtext", "id": "heading", "label": "Naslov", "default": "<p>Edina strašna stvar za noč čarovnic? Popusti do −42 %!</p>" },
