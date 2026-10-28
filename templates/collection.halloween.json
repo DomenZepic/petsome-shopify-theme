@@ -67,7 +67,24 @@
         "single_2_6x": "mobimix-6x-2-darili",
         "single_3_3x": "dentalmix-3x-darilo",
         "single_3_6x": "dentalmix-6x-2-darili",
-        "unit_label": "kos"
+        "unit_label": "kos",
+        "bar_text": "🎃 Akcija za noč čarovnic traja samo do 2. novembra",
+        "top_cta": "Poglej pakete",
+        "single_btn": "Poglej izdelek",
+        "popular_label": "NAJBOLJ PRILJUBLJENO",
+        "gift_3": "darilo: zložljiva posodica",
+        "gift_6": "2 darili: posodica + DentalSticks",
+        "trust": "Zaupa nam več kot 3.500 lastnikov psov",
+        "heading": "<p>Edina strašna stvar za noč čarovnic? Popusti do −42 %!</p>",
+        "sub": "Založi se, preden popusti za noč čarovnic izginejo.",
+        "kicker": "PAKETI ZA NOČ ČAROVNIC",
+        "heading2": "Strašansko dobri popusti",
+        "hero_label": "NAJBOLJ PRILJUBLJEN PAKET",
+        "save_label": "PRIHRANI",
+        "only_label": "le",
+        "saved_label": "Prihraniš",
+        "btn_label": "Dodaj v košarico",
+        "soldout_label": "Razprodano"
       }
     },
     "vet": {
