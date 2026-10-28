@@ -27,6 +27,10 @@
         </div>
       {%- endfor -%}
     </div>
+    {%- if section.settings.show_loox -%}
+      <h2 style="margin-top:48px">{{ section.settings.reviews_heading }}</h2>
+      <div id="looxReviews" class="loox-widget" data-loox-aggregate data-limit="{{ section.settings.reviews_limit }}" style="margin:0 auto;max-width:1080px;"></div>
+    {%- endif -%}
   </div>
 </div>
 {% schema %}
@@ -34,7 +38,10 @@
   "name": "Petsome: veterinar",
   "settings": [
     { "type": "color", "id": "bg", "label": "Ozadje", "default": "#ffffff" },
-    { "type": "text", "id": "heading", "label": "Naslov", "default": "Kaj pravi veterinar" }
+    { "type": "text", "id": "heading", "label": "Naslov", "default": "Kaj pravi veterinar" },
+    { "type": "checkbox", "id": "show_loox", "label": "Pokaži Loox mnenja (vsi izdelki)", "default": true },
+    { "type": "text", "id": "reviews_heading", "label": "Naslov mnenj", "default": "Kaj pravijo lastniki psov" },
+    { "type": "range", "id": "reviews_limit", "label": "Število mnenj", "min": 3, "max": 30, "step": 1, "default": 12 }
   ],
   "blocks": [
     {
