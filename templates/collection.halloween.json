@@ -53,8 +53,7 @@
         "trio_text": "FloraMix + DentalMix + MobiMix + 2 darili (črevesje, zobje, sklepi)",
         "guarantee_img": "shopify://shop_images/Guarantee.png",
         "guarantee": "<p><strong>90-dnevna garancija vračila kupnine.</strong> Če izdelek ne izpolni pričakovanj, lahko v 90 dneh zahtevaš vračilo kupnine.</p>",
-        "hero_d": "hwhero_desktop.jpg",
-        "hero_m": "hwhero_mobile.jpg",
+        "hero_d": "hwghost_dogs.jpg",
         "single_1": "floramix",
         "single_1_text": "Koža, dlaka in črevesje",
         "single_2": "mobimix",
@@ -67,7 +66,8 @@
         "single_2_3x": "mobimix-3x-darilo",
         "single_2_6x": "mobimix-6x-2-darili",
         "single_3_3x": "dentalmix-3x-darilo",
-        "single_3_6x": "dentalmix-6x-2-darili"
+        "single_3_6x": "dentalmix-6x-2-darili",
+        "unit_label": "dozo"
       }
     },
     "vet": {

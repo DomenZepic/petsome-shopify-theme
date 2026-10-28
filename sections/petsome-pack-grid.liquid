@@ -38,8 +38,12 @@
   .ppg-{{ section.id }} .ppg-guar{margin:28px auto 0;max-width:640px;display:flex;gap:12px;align-items:center;justify-content:center;font-size:15px}
   .ppg-{{ section.id }} .ppg-guar b{display:block}
   .ppg-{{ section.id }} [hidden]{display:none!important}
-  .ppg-{{ section.id }} .ppg-hero{margin:-48px -16px 28px}
-  .ppg-{{ section.id }} .ppg-hero img{width:100%;height:auto;display:block;max-height:560px;object-fit:cover}
+  .ppg-{{ section.id }} .ppg-bar{background:{{ section.settings.accent }};color:#fff;text-align:center;font-weight:800;font-size:14px;padding:10px 16px;margin:-48px -16px 32px;letter-spacing:.02em}
+  .ppg-{{ section.id }} .ppg-top{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;margin:0 0 48px;text-align:left}
+  .ppg-{{ section.id }} .ppg-top-img img{width:100%;height:auto;border-radius:18px;display:block;box-shadow:0 8px 30px rgba(0,0,0,.12)}
+  .ppg-{{ section.id }} .ppg-top-cta{display:inline-block;width:auto;padding:14px 28px;text-decoration:none;margin-top:6px}
+  @media (max-width:749px){.ppg-{{ section.id }} .ppg-top{grid-template-columns:1fr;gap:20px;text-align:center}}
+
   .ppg-{{ section.id }} .ppg-singles-h{margin-top:48px}
   .ppg-{{ section.id }} .ppg-o{display:flex;align-items:center;gap:10px;border:2px solid #eadfd4;border-radius:12px;padding:10px 12px;margin:0 0 8px;cursor:pointer;background:#fff}
   .ppg-{{ section.id }} .ppg-o:has(input:checked){border-color:{{ section.settings.accent }};background:#fff7f0}
@@ -50,7 +54,7 @@
   .ppg-{{ section.id }} .ppg-o-p{text-align:right;font-weight:800;font-size:16px;white-space:nowrap}
   .ppg-{{ section.id }} .ppg-o-p s{display:block;font-weight:400;opacity:.5;font-size:12px}
   .ppg-{{ section.id }} .ppg-btn--ghost{display:block;text-align:center;text-decoration:none;background:#fff;color:#2b1d33;border:2px solid #2b1d33}
-  @media (max-width:749px){.ppg-{{ section.id }} .ppg-hero img{max-height:none}}
+  
   @media (max-width:820px){
     .ppg-{{ section.id }} .ppg-grid{grid-template-columns:1fr;gap:22px}
     .ppg-{{ section.id }} .ppg-card.is-hero{order:-1;transform:none}
@@ -60,21 +64,23 @@
 {%- capture card -%}{%- endcapture -%}
 
 <div class="ppg-{{ section.id }}" id="ppg-{{ section.id }}">
-  {%- if section.settings.hero_d != blank -%}
-    <div class="ppg-hero">
-      <picture>
-        <source media="(max-width: 749px)" srcset="{{ section.settings.hero_m | default: section.settings.hero_d | asset_img_url: '1200x' }}">
-        <img src="{{ section.settings.hero_d | asset_img_url: '2000x' }}" alt="{{ section.settings.kicker | escape }}" width="2752" height="1536">
-      </picture>
-    </div>
-  {%- endif -%}
+  {%- if section.settings.bar_text != blank -%}<div class="ppg-bar">{{ section.settings.bar_text }}</div>{%- endif -%}
   <div class="ppg-wrap">
-    {%- if section.settings.trust != blank -%}
-      <div class="ppg-trust"><span>★★★★★</span>{{ section.settings.trust }}</div>
-    {%- endif -%}
-    <h1 class="ppg-h1">{{ section.settings.heading }}</h1>
-    {%- if section.settings.sub != blank -%}<p class="ppg-sub">{{ section.settings.sub }}</p>{%- endif -%}
+    <div class="ppg-top">
+      {%- if section.settings.hero_d != blank -%}
+        <div class="ppg-top-img"><img src="{{ section.settings.hero_d | asset_img_url: '1200x' }}" alt="{{ section.settings.kicker | escape }}" width="1400" height="1400"></div>
+      {%- endif -%}
+      <div class="ppg-top-txt">
+        {%- if section.settings.trust != blank -%}
+          <div class="ppg-trust"><span>★★★★★</span>{{ section.settings.trust }}</div>
+        {%- endif -%}
+        <h1 class="ppg-h1">{{ section.settings.heading }}</h1>
+        {%- if section.settings.sub != blank -%}<p class="ppg-sub">{{ section.settings.sub }}</p>{%- endif -%}
+        <a class="ppg-btn ppg-top-cta" href="#ppg-packs-{{ section.id }}">{{ section.settings.top_cta }}</a>
+      </div>
+    </div>
 
+    <div id="ppg-packs-{{ section.id }}"></div>
     <p class="ppg-kicker">{{ section.settings.kicker }}</p>
     <h2 class="ppg-h2">{{ section.settings.heading2 }}</h2>
 
@@ -253,6 +259,8 @@
     { "type": "color", "id": "bg", "label": "Ozadje", "default": "#f6eee6" },
     { "type": "text", "id": "hero_d", "label": "Hero slika (asset, namizje)" },
     { "type": "text", "id": "hero_m", "label": "Hero slika (asset, mobilno)" },
+    { "type": "text", "id": "bar_text", "label": "Pas na vrhu", "default": "🎃 Akcija za noč čarovnic traja samo do 2. novembra" },
+    { "type": "text", "id": "top_cta", "label": "Gumb pod naslovom", "default": "Poglej pakete" },
     { "type": "text", "id": "singles_heading", "label": "Posamezni izdelki – naslov", "default": "Ne veš, kje začeti? Izberi svoj izdelek" },
     { "type": "text", "id": "single_btn", "label": "Posamezni – gumb", "default": "Poglej izdelek" },
     { "type": "text", "id": "gift_3", "label": "Darila pri 3x", "default": "darilo: zložljiva posodica" },
@@ -280,7 +288,7 @@
     { "type": "text", "id": "hero_label", "label": "Oznaka trio", "default": "NAJBOLJ PRILJUBLJEN PAKET" },
     { "type": "text", "id": "save_label", "label": "Prihrani (značka)", "default": "PRIHRANI" },
     { "type": "text", "id": "only_label", "label": "LE", "default": "le" },
-    { "type": "text", "id": "unit_label", "label": "Enota", "default": "dózo" },
+    { "type": "text", "id": "unit_label", "label": "Enota", "default": "dozo" },
     { "type": "text", "id": "saved_label", "label": "Prihranek", "default": "Prihraniš" },
     { "type": "text", "id": "btn_label", "label": "Gumb", "default": "Dodaj v košarico" },
     { "type": "text", "id": "soldout_label", "label": "Razprodano", "default": "Razprodano" },
