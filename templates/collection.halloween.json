@@ -19,7 +19,7 @@
             "duo": "floramix-duo-2x-darilo",
             "duo_text": "2x FloraMix + darilo (zložljiva posodica)",
             "month": "floramix-mesecna-zaloga-4x-2-darili",
-            "month_text": "4x FloraMix + 2 darili (posodica + DentalSticks)"
+            "month_text": "4x FloraMix + 2 darili (posodica + DentalSticks) – zaloga za 3+ mesece, odvisno od teže psa"
           }
         },
         "tab_mobi": {
@@ -29,7 +29,7 @@
             "duo": "mobimix-duo-2x-darilo",
             "duo_text": "2x MobiMix + darilo (zložljiva posodica)",
             "month": "mobimix-mesecna-zaloga-4x-2-darili",
-            "month_text": "4x MobiMix + 2 darili (posodica + DentalSticks)"
+            "month_text": "4x MobiMix + 2 darili (posodica + DentalSticks) – zaloga za 3+ mesece, odvisno od teže psa"
           }
         },
         "tab_dental": {
@@ -39,7 +39,7 @@
             "duo": "dentalmix-duo-2x-darilo",
             "duo_text": "2x DentalMix + darilo (zložljiva posodica)",
             "month": "dentalmix-mesecna-zaloga-4x-2-darili",
-            "month_text": "4x DentalMix + 2 darili (posodica + DentalSticks)"
+            "month_text": "4x DentalMix + 2 darili (posodica + DentalSticks) – zaloga za 3+ mesece, odvisno od teže psa"
           }
         }
       },
