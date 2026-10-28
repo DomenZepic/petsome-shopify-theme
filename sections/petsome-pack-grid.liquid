@@ -211,24 +211,37 @@
       root.querySelectorAll('[data-panel]').forEach(function(p){p.hidden = p.getAttribute('data-panel')!==t.getAttribute('data-tab')});
     });
   });
+  var rootUrl=(window.Shopify&&Shopify.routes&&Shopify.routes.root)||'/';
+  function addToCart(id,btn){
+    btn.disabled=true;
+    var cd=document.querySelector('cart-drawer');
+    var body={items:[{id:parseInt(id,10),quantity:1}]};
+    var canDrawer=cd && typeof cd.renderContents==='function' && typeof cd.getSectionsToRender==='function';
+    if(canDrawer){ body.sections=cd.getSectionsToRender().map(function(s){return s.id}); body.sections_url=window.location.pathname; }
+    fetch(rootUrl+'cart/add.js',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(body)})
+      .then(function(r){return r.json()})
+      .then(function(state){
+        btn.disabled=false;
+        if(state && state.status){ alert(state.description||state.message||'Napaka'); return; }
+        if(canDrawer){
+          try{
+            if(cd.classList.contains('is-empty')) cd.classList.remove('is-empty');
+            cd.renderContents(state);
+            document.dispatchEvent(new CustomEvent('cart:refresh',{bubbles:true}));
+            return;
+          }catch(e){}
+        }
+        window.location.href=rootUrl+'cart';
+      })
+      .catch(function(){btn.disabled=false; window.location.href=rootUrl+'cart';});
+  }
   root.querySelectorAll('[data-opt-add]').forEach(function(b){
     b.addEventListener('click',function(){
-      var c=b.closest('[data-opt]').querySelector('input:checked'); if(!c) return;
-      b.disabled=true;
-      fetch('/cart/add.js',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items:[{id:parseInt(c.value,10),quantity:1}]})})
-      .then(function(r){return r.json()}).then(function(){window.location.href=(window.Shopify&&Shopify.routes?Shopify.routes.root:'/')+'cart'}).catch(function(){b.disabled=false});
+      var c=b.closest('[data-opt]').querySelector('input:checked'); if(c) addToCart(c.value,b);
     });
   });
   root.querySelectorAll('.ppg-btn[data-variant]').forEach(function(b){
-    b.addEventListener('click',function(){
-      b.disabled=true;
-      fetch(window.Shopify && Shopify.routes ? Shopify.routes.root + 'cart/add.js' : '/cart/add.js',{
-        method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({items:[{id:parseInt(b.getAttribute('data-variant'),10),quantity:1}]})
-      }).then(function(r){return r.json()}).then(function(){
-        window.location.href=(window.Shopify && Shopify.routes ? Shopify.routes.root : '/')+'cart';
-      }).catch(function(){b.disabled=false});
-    });
+    b.addEventListener('click',function(){ addToCart(b.getAttribute('data-variant'),b); });
   });
 })();
 </script>
