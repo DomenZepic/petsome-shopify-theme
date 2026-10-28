@@ -76,12 +76,11 @@
         {%- endif -%}
         <h1 class="ppg-h1">{{ section.settings.heading }}</h1>
         {%- if section.settings.sub != blank -%}<p class="ppg-sub">{{ section.settings.sub }}</p>{%- endif -%}
-        <a class="ppg-btn ppg-top-cta" href="#ppg-packs-{{ section.id }}">{{ section.settings.top_cta }}</a>
+        <button type="button" class="ppg-btn ppg-top-cta" onclick="var t=document.getElementById('ppg-packs-{{ section.id }}');if(t){window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-90,behavior:'smooth'});}">{{ section.settings.top_cta }}</button>
       </div>
     </div>
 
-    <div id="ppg-packs-{{ section.id }}"></div>
-    <p class="ppg-kicker">{{ section.settings.kicker }}</p>
+        <p class="ppg-kicker" id="ppg-packs-{{ section.id }}">{{ section.settings.kicker }}</p>
     <h2 class="ppg-h2">{{ section.settings.heading2 }}</h2>
 
     <div class="ppg-tabs" role="tablist">
