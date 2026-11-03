@@ -260,6 +260,9 @@
                   {%- liquid
                     assign vv = pp.selected_or_first_available_variant
                     assign full = base | times: q
+                    if vv.compare_at_price > full
+                      assign full = vv.compare_at_price
+                    endif
                     assign svd = full | minus: vv.price
                     assign pc = svd | times: 100 | divided_by: full
                     assign per = vv.price | divided_by: q
