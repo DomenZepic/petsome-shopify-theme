@@ -44,13 +44,13 @@
   endcase
   case bf_lang
     when 'hr'
-      assign bf_hero_title = product.title | append: ' – protokol za 3+ mjeseca'
+      assign bf_hero_title = 'Zaliha za 3+ mjeseca'
       assign bf_gifts_title = 'Paket poklona u vrijednosti 23,90 €'
     when 'cs'
-      assign bf_hero_title = product.title | append: ' – protokol na 3+ měsíce'
+      assign bf_hero_title = 'Zásoba na 3+ měsíce'
       assign bf_gifts_title = 'Dárkový balíček v hodnotě 600 Kč'
     else
-      assign bf_hero_title = product.title | append: ' – 3+ mesečni protokol'
+      assign bf_hero_title = 'Zaloga za 3+ mesece'
       assign bf_gifts_title = 'Darilni paket v vrednosti 23,90 €'
   endcase
   assign bf_title = block.settings.bf_banner_title | default: 'Pre-Black Friday Exclusive'
