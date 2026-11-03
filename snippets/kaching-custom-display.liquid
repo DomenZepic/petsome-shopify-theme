@@ -727,7 +727,7 @@
     data-protocol-label="{{ block.settings.protocol_label | default: '3-mesečni protokol' | escape }}"
     data-offer-checklist="{{ offer_checklist | json | escape }}"
     data-offer-total="{{ block.settings.offer_total_value | escape }}"
-    data-hero-label="{{ block.settings.hero_label | escape }}"
+    data-hero-label="{% if block.settings.bf_mode and block.settings.bf_hero_label != blank %}{{ block.settings.bf_hero_label | escape }}{% else %}{{ block.settings.hero_label | escape }}{% endif %}"
     data-hero-tier-quantity="{{ block.settings.hero_tier_quantity | escape }}"
     data-product-title="{{ product.title | escape }}"
     data-tier1-style="{{ block.settings.tier_1_style | default: 'none' }}"
@@ -744,7 +744,7 @@
     <div class="kaching-custom-display__inner">
       <div class="kaching-custom-display__top">
         {%- if block.settings.bf_mode -%}
-          <div class="kcd-bf-banner">
+          <div class="kcd-bf-banner" data-kcd-bf-banner>
             <div class="kcd-bf-banner__left">
               {%- if block.settings.bf_banner_kicker != blank -%}<p class="kcd-bf-banner__kicker">{{ block.settings.bf_banner_kicker }}</p>{%- endif -%}
               {%- if block.settings.bf_banner_title != blank -%}<p class="kcd-bf-banner__title">{{ block.settings.bf_banner_title }}</p>{%- endif -%}
@@ -784,3 +784,19 @@
 </div>
 
 <script src="{{ 'kaching-custom-display.js' | asset_url }}" defer="defer"></script>
+
+{%- if block.settings.bf_mode -%}
+<script>
+  (function () {
+    var root = document.getElementById('kaching-custom-display-{{ section.id }}-{{ block.id }}');
+    if (!root) return;
+    var banner = root.querySelector('[data-kcd-bf-banner]');
+    var scope = root.closest('section, .shopify-section, product-info, .product') || document;
+    var target = scope.querySelector('variant-selects, variant-radios');
+    if (banner && target && target.parentNode) {
+      banner.style.marginBottom = '16px';
+      target.parentNode.insertBefore(banner, target);
+    }
+  })();
+</script>
+{%- endif -%}
