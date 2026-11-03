@@ -9,7 +9,7 @@
   .bfg-{{ section.id }} picture{display:block}
   .bfg-{{ section.id }} img{max-width:100%}
   .bfg-{{ section.id }} .bfg-wrap{max-width:1180px;margin:0 auto;text-align:center}
-  .bfg-{{ section.id }} .bfg-bar{background:#141416;color:{{ s.accent }};text-align:center;font-weight:800;font-size:14px;padding:10px 16px;margin:0 -16px 32px;letter-spacing:.02em}
+  .bfg-{{ section.id }} .bfg-bar{background:#111;color:#fff;text-align:center;font-weight:800;font-size:14px;padding:10px 16px;margin:0 -16px 32px;letter-spacing:.02em}
   .bfg-{{ section.id }} .bfg-top{display:grid;grid-template-columns:1.15fr 1fr;gap:40px;align-items:center;margin:0 0 48px;text-align:left}
   .bfg-{{ section.id }} .bfg-top img{width:100%;height:auto;border-radius:18px;display:block;box-shadow:0 14px 40px rgba(0,0,0,.18)}
   .bfg-{{ section.id }} .bfg-trust{display:inline-flex;gap:8px;align-items:center;font-weight:600;font-size:15px;margin-bottom:14px;opacity:.9}
@@ -18,17 +18,17 @@
   .bfg-{{ section.id }} .bfg-h1 p{margin:0}
   .bfg-{{ section.id }} .bfg-h1 em{display:block;font-style:italic;color:{{ s.red }}}
   .bfg-{{ section.id }} .bfg-sub{font-size:17px;opacity:.85;margin:0 0 22px}
-  .bfg-{{ section.id }} .bfg-cta{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(227,182,91,.6);border-radius:999px;background:linear-gradient(180deg,#26262a,#0e0e10);color:#fff;font-weight:700;font-size:16px;letter-spacing:.04em;padding:16px 30px;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.08);transition:transform .2s,box-shadow .2s}
-  .bfg-{{ section.id }} .bfg-cta:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(0,0,0,.28)}
-  .bfg-{{ section.id }} .bfg-cta span{color:{{ s.accent }};font-size:18px}
-  .bfg-{{ section.id }} .bfg-badge{display:inline-block;background:#141416;color:{{ s.accent }};font-weight:800;font-size:12.5px;letter-spacing:.18em;padding:8px 16px;border-radius:999px;margin-bottom:16px;border:1px solid rgba(227,182,91,.45)}
+  .bfg-{{ section.id }} .bfg-cta{display:inline-block;border:0;border-radius:6px;background:#111;color:#fff;font-weight:800;font-size:15px;letter-spacing:.04em;text-transform:uppercase;padding:17px 44px;cursor:pointer}
+  .bfg-{{ section.id }} .bfg-cta:hover{background:#2a2a2a}
+  .bfg-{{ section.id }} .bfg-cta span{display:none}
+  .bfg-{{ section.id }} .bfg-badge{display:inline-block;background:#111;color:#fff;font-weight:800;font-size:12px;letter-spacing:.16em;padding:7px 14px;border-radius:4px;margin-bottom:16px}
   .bfg-{{ section.id }} .bfg-cd{display:flex;gap:8px;margin:0 0 22px}
   .bfg-{{ section.id }} .bfg-cd div{background:#fff;border:1px solid rgba(20,20,20,.08);border-radius:12px;min-width:64px;padding:8px 6px;text-align:center;box-shadow:0 6px 16px rgba(60,40,20,.08)}
   .bfg-{{ section.id }} .bfg-cd b{display:block;font-size:24px;font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums}
   .bfg-{{ section.id }} .bfg-cd small{font-size:10.5px;letter-spacing:.12em;opacity:.6;text-transform:uppercase}
   .bfg-{{ section.id }} .bfg-usp{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:18px;font-size:14px;font-weight:600;opacity:.85}
   .bfg-{{ section.id }} .bfg-usp span:before{content:"✓ ";color:#1d7a3a;font-weight:900}
-  .bfg-{{ section.id }} .bfg-kicker{font-size:13px;font-weight:800;letter-spacing:.14em;color:#b07a1e;margin:0 0 4px}
+  .bfg-{{ section.id }} .bfg-kicker{font-size:13px;font-weight:800;letter-spacing:.14em;color:#111;margin:0 0 4px}
   .bfg-{{ section.id }} .bfg-h2{font-size:clamp(24px,3.2vw,36px);margin:0 0 18px;font-weight:900;color:#1a1a1a!important;-webkit-text-fill-color:#1a1a1a!important;opacity:1!important}
   .bfg-{{ section.id }} .bfg-tabs{display:inline-flex;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08);border-radius:999px;padding:5px;gap:4px;margin:0 0 34px;flex-wrap:wrap;justify-content:center}
   .bfg-{{ section.id }} .bfg-tab{border:0;background:transparent;padding:10px 22px;border-radius:999px;font-weight:700;font-size:15px;cursor:pointer;color:#1a1a1a}
@@ -36,9 +36,9 @@
   .bfg-{{ section.id }} .bfg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch;padding-top:22px}
   .bfg-{{ section.id }} .bfg-card{background:#fff;color:#1a1a1a;border-radius:20px;padding:16px 16px 20px;position:relative;display:flex;flex-direction:column;text-align:left;border:1px solid rgba(20,20,20,.07);box-shadow:0 1px 2px rgba(20,20,20,.04),0 12px 32px rgba(60,40,20,.10);transition:transform .2s ease,box-shadow .2s ease}
   .bfg-{{ section.id }} .bfg-card:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(20,20,20,.05),0 18px 44px rgba(60,40,20,.16)}
-  .bfg-{{ section.id }} .bfg-card.is-hero{border:2px solid {{ s.accent }};box-shadow:0 0 0 6px rgba(227,182,91,.18),0 22px 50px rgba(60,40,20,.22);transform:translateY(-12px)}
+  .bfg-{{ section.id }} .bfg-card.is-hero{border:2px solid #111;box-shadow:0 22px 50px rgba(60,40,20,.18);transform:translateY(-12px)}
   .bfg-{{ section.id }} .bfg-card.is-hero:hover{transform:translateY(-15px)}
-  .bfg-{{ section.id }} .bfg-ribbon{position:absolute;top:-17px;left:50%;transform:translateX(-50%);background:linear-gradient(180deg,#1d1d20,#0e0e10);color:{{ s.accent }};font-weight:800;letter-spacing:.12em;font-size:12.5px;padding:9px 20px;border-radius:999px;white-space:nowrap;box-shadow:0 6px 16px rgba(0,0,0,.25);border:1px solid rgba(227,182,91,.5);z-index:2}
+  .bfg-{{ section.id }} .bfg-ribbon{position:absolute;top:-15px;left:50%;transform:translateX(-50%);background:#111;color:#fff;font-weight:800;letter-spacing:.12em;font-size:12px;padding:8px 18px;border-radius:6px;white-space:nowrap;z-index:2}
   .bfg-{{ section.id }} .bfg-img{position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;margin-bottom:16px;background:#111;box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}
   .bfg-{{ section.id }} .bfg-img img{width:100%;height:100%;object-fit:cover;display:block}
   .bfg-{{ section.id }} .bfg-pct{position:absolute;top:10px;left:10px;box-shadow:0 4px 10px rgba(224,30,30,.3);background:{{ s.red }};color:#fff;font-weight:800;font-size:13px;padding:6px 12px;border-radius:999px}
@@ -53,9 +53,9 @@
   .bfg-{{ section.id }} .bfg-price .now{font-size:26px;font-weight:900;color:#141416}
   .bfg-{{ section.id }} .bfg-price s{opacity:.55;font-size:16px}
   .bfg-{{ section.id }} .bfg-price .sv{background:{{ s.red }};color:#fff;border-radius:999px;font-weight:800;font-size:13px;padding:6px 12px}
-  .bfg-{{ section.id }} .bfg-btn{border:0;border-radius:999px;background:linear-gradient(180deg,#26262a,#0e0e10);color:#fff;font-weight:800;font-size:15px;padding:16px;cursor:pointer;width:100%;text-transform:uppercase;letter-spacing:.08em;box-shadow:0 8px 20px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.08);transition:transform .2s,box-shadow .2s}
-  .bfg-{{ section.id }} .bfg-btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(0,0,0,.25)}
-  .bfg-{{ section.id }} .is-hero .bfg-btn{background:linear-gradient(180deg,#f2d38c,#c9963a);color:#141416;box-shadow:0 10px 24px rgba(201,150,58,.4),inset 0 1px 0 rgba(255,255,255,.5)}
+  .bfg-{{ section.id }} .bfg-btn{border:0;border-radius:6px;background:#111;color:#fff;font-weight:800;font-size:15px;padding:16px;cursor:pointer;width:100%;text-transform:uppercase;letter-spacing:.04em}
+  .bfg-{{ section.id }} .bfg-btn:hover{background:#2a2a2a}
+  .bfg-{{ section.id }} .is-hero .bfg-btn{background:#111;color:#fff}
   .bfg-{{ section.id }} .bfg-btn[disabled]{opacity:.6}
   .bfg-{{ section.id }} [hidden]{display:none!important}
   .bfg-{{ section.id }} .bfg-trio{margin:44px auto 0;max-width:900px;display:grid;grid-template-columns:1fr 1.1fr;gap:22px;align-items:center;margin-top:44px}
@@ -161,7 +161,7 @@
               assign unit = v.price | divided_by: qty
             -%}
             <div class="bfg-card{% if hero %} is-hero{% endif %}">
-              {%- if hero -%}<div class="bfg-ribbon">★ {{ s.hero_label }}</div>{%- endif -%}
+              {%- if hero -%}<div class="bfg-ribbon">{{ s.hero_label }}</div>{%- endif -%}
               <div class="bfg-img">
                 {%- if p.featured_image -%}{{ p.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: p.title }}{%- endif -%}
                 {%- if pct > 0 -%}<span class="bfg-pct">{{ s.save_label }} {{ pct }} %</span>{%- endif -%}
