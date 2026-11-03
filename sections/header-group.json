@@ -130,7 +130,7 @@
         "show_separator": false,
         "color_scheme": "custom",
         "custom_colors_background": "#0e1111",
-        "custom_gradient_background": "",
+        "custom_gradient_background": "linear-gradient(90deg, #0c0a10 0%, #2a1740 45%, #5b3290 75%, #0c0a10 100%)",
         "custom_colors_text": "#ffffff",
         "slider_mobile": true,
         "slider_desktop": true,
@@ -375,8 +375,8 @@
         "padding_bottom": 20
       },
       "custom_css": [
-        "a[href*=\"black-friday\"] span {background: #111111; color: #ffffff; padding: 6px 12px; border-radius: 4px; font-weight: 700; letter-spacing: 0.04em;}",
-        "a[href*=\"black-friday\"] {text-decoration: none;}"
+        "a[href*=\"black-friday\"] {display: inline-flex; align-items: center; text-decoration: none; padding-top: 0; padding-bottom: 0; align-self: center;}",
+        "a[href*=\"black-friday\"] span {display: inline-block; line-height: 1; padding: 9px 14px; border-radius: 6px; color: #ffffff; font-weight: 700; letter-spacing: 0.05em; background: linear-gradient(120deg, #0c0a10 0%, #2a1740 55%, #6b3fa0 100%); box-shadow: 0 4px 12px rgba(60, 30, 100, 0.25);}"
       ]
     }
   },
