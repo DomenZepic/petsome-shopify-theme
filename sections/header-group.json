@@ -82,6 +82,22 @@
     "fe1c8c67-b84c-4466-a515-70df3134c1c0": {
       "type": "announcement-bar",
       "blocks": {
+        "bf-early-announcement": {
+          "type": "announcement",
+          "settings": {
+            "text": "<a href=\"/collections/black-friday\" title=\"Black Friday\"><strong>Early Black Friday: do −47 % na paketih</strong></a>  →",
+            "text_alignment": "center",
+            "mobile_text_size": 14,
+            "desktop_text_size": 14,
+            "icon": "",
+            "filled_icon": false,
+            "mobile_icon_size": 20,
+            "desktop_icon_size": 26,
+            "desktop_layout": "horizontal",
+            "mobile_layout": "horizontal"
+          },
+          "blocks": {}
+        },
         "sections-21450414096679_fe1c8c67-b84c-4466-a515-70df3134c1c0-announcement-1": {
           "type": "announcement",
           "settings": {
@@ -100,6 +116,7 @@
         }
       },
       "block_order": [
+        "bf-early-announcement",
         "sections-21450414096679_fe1c8c67-b84c-4466-a515-70df3134c1c0-announcement-1"
       ],
       "settings": {
@@ -111,9 +128,9 @@
         "mobile_spacing": 16,
         "show_separator": false,
         "color_scheme": "custom",
-        "custom_colors_background": "#e8d6c5",
+        "custom_colors_background": "#0e1111",
         "custom_gradient_background": "",
-        "custom_colors_text": "#0e1111",
+        "custom_colors_text": "#ffffff",
         "slider_mobile": true,
         "slider_desktop": true,
         "type": "loop",
@@ -124,7 +141,10 @@
         "displayed_products": "",
         "padding_top": 8,
         "padding_bottom": 8
-      }
+      },
+      "custom_css": [
+        "a {color: #ffffff; text-decoration: underline; text-underline-offset: 3px;}"
+      ]
     },
     "header": {
       "type": "header",
@@ -352,7 +372,11 @@
         "margin_bottom": 0,
         "padding_top": 20,
         "padding_bottom": 20
-      }
+      },
+      "custom_css": [
+        "a[href*=\"black-friday\"] span {background: #111111; color: #ffffff; padding: 6px 12px; border-radius: 4px; font-weight: 700; letter-spacing: 0.04em;}",
+        "a[href*=\"black-friday\"] {text-decoration: none;}"
+      ]
     }
   },
   "order": [
