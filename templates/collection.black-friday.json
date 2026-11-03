@@ -26,7 +26,7 @@
             "month_gifts": "Zložljiva posodica, DentalSticks",
             "six": "floramix-6x-2-darili",
             "six_name": "Zimska zaloga",
-            "six_text": "6x FloraMix · najnižja cena na dózo",
+            "six_text": "6x FloraMix · najnižja cena na kos",
             "six_gifts": "Zložljiva posodica, DentalSticks"
           }
         },
@@ -44,7 +44,7 @@
             "month_gifts": "Zložljiva posodica, DentalSticks",
             "six": "mobimix-6x-2-darili",
             "six_name": "Zimska zaloga",
-            "six_text": "6x MobiMix · najnižja cena na dózo",
+            "six_text": "6x MobiMix · najnižja cena na kos",
             "six_gifts": "Zložljiva posodica, DentalSticks"
           }
         },
@@ -62,7 +62,7 @@
             "month_gifts": "Zložljiva posodica, DentalSticks",
             "six": "dentalmix-6x-2-darili",
             "six_name": "Zimska zaloga",
-            "six_text": "6x DentalMix · najnižja cena na dózo",
+            "six_text": "6x DentalMix · najnižja cena na kos",
             "six_gifts": "Zložljiva posodica, DentalSticks"
           }
         }
@@ -89,7 +89,7 @@
         "hero_label": "NAJBOLJ PRILJUBLJEN",
         "save_label": "PRIHRANI",
         "only_label": "SAMO",
-        "unit_label": "DÓZO",
+        "unit_label": "KOS",
         "btn_label": "Dodaj v košarico",
         "soldout_label": "Razprodano",
         "trio_heading": "Ali vse za zdravega psa v enem paketu",
