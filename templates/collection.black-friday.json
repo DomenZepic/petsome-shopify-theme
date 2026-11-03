@@ -97,7 +97,22 @@
         "trio_text": "FloraMix + DentalMix + MobiMix (črevesje, zobje, sklepi)",
         "trio_gifts": "Zložljiva posodica, DentalSticks",
         "guarantee_img": "shopify://shop_images/Guarantee.png",
-        "guarantee": "<p><strong>90-dnevna garancija vračila kupnine.</strong> Če izdelek ne izpolni pričakovanj, lahko v 90 dneh zahtevaš vračilo kupnine.</p>"
+        "guarantee": "<p><strong>90-dnevna garancija vračila kupnine.</strong> Če izdelek ne izpolni pričakovanj, lahko v 90 dneh zahtevaš vračilo kupnine.</p>",
+        "singles_heading": "Ne veš, kje začeti? Izberi svoj izdelek",
+        "gift_3": "darilo: zložljiva posodica",
+        "gift_6": "2 darili: posodica + DentalSticks",
+        "single_1": "floramix",
+        "single_1_3x": "floramix-3x-darilo",
+        "single_1_6x": "floramix-6x-2-darili",
+        "single_1_text": "Koža, dlaka in črevesje",
+        "single_2": "mobimix",
+        "single_2_3x": "mobimix-3x-darilo",
+        "single_2_6x": "mobimix-6x-2-darili",
+        "single_2_text": "Sklepi in gibanje",
+        "single_3": "dentalmix",
+        "single_3_3x": "dentalmix-3x-darilo",
+        "single_3_6x": "dentalmix-6x-2-darili",
+        "single_3_text": "Zobje in svež zadah"
       }
     },
     "vet": {
