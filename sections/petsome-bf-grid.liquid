@@ -24,11 +24,13 @@
   .bfg-{{ section.id }} .bfg-tabs{display:inline-flex;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08);border-radius:999px;padding:5px;gap:4px;margin:0 0 34px;flex-wrap:wrap;justify-content:center}
   .bfg-{{ section.id }} .bfg-tab{border:0;background:transparent;padding:10px 22px;border-radius:999px;font-weight:700;font-size:15px;cursor:pointer;color:#1a1a1a}
   .bfg-{{ section.id }} .bfg-tab[aria-selected="true"]{background:#141416;color:#fff}
-  .bfg-{{ section.id }} .bfg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
-  .bfg-{{ section.id }} .bfg-card{background:#fff;color:#1a1a1a;border-radius:16px;padding:18px 18px 20px;position:relative;display:flex;flex-direction:column;text-align:left;margin-top:44px;box-shadow:0 6px 24px rgba(0,0,0,.08)}
-  .bfg-{{ section.id }} .bfg-card.is-hero{margin-top:0;border:3px solid {{ s.red }};border-top:0;border-radius:0 0 16px 16px;padding-top:18px}
-  .bfg-{{ section.id }} .bfg-ribbon{background:{{ s.red }};color:#fff;font-weight:800;letter-spacing:.06em;font-size:16px;padding:12px;text-align:center;margin:-18px -21px 18px;border-radius:16px 16px 0 0}
-  .bfg-{{ section.id }} .bfg-img{position:relative;aspect-ratio:1/1;border-radius:12px;overflow:hidden;margin-bottom:14px;background:#111}
+  .bfg-{{ section.id }} .bfg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:stretch;padding-top:22px}
+  .bfg-{{ section.id }} .bfg-card{background:#fff;color:#1a1a1a;border-radius:20px;padding:16px 16px 20px;position:relative;display:flex;flex-direction:column;text-align:left;border:1px solid rgba(20,20,20,.07);box-shadow:0 1px 2px rgba(20,20,20,.04),0 12px 32px rgba(60,40,20,.10);transition:transform .2s ease,box-shadow .2s ease}
+  .bfg-{{ section.id }} .bfg-card:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(20,20,20,.05),0 18px 44px rgba(60,40,20,.16)}
+  .bfg-{{ section.id }} .bfg-card.is-hero{border:2px solid {{ s.accent }};box-shadow:0 0 0 6px rgba(227,182,91,.18),0 22px 50px rgba(60,40,20,.22);transform:translateY(-12px)}
+  .bfg-{{ section.id }} .bfg-card.is-hero:hover{transform:translateY(-15px)}
+  .bfg-{{ section.id }} .bfg-ribbon{position:absolute;top:-17px;left:50%;transform:translateX(-50%);background:linear-gradient(180deg,#1d1d20,#0e0e10);color:{{ s.accent }};font-weight:800;letter-spacing:.12em;font-size:12.5px;padding:9px 20px;border-radius:999px;white-space:nowrap;box-shadow:0 6px 16px rgba(0,0,0,.25);border:1px solid rgba(227,182,91,.5);z-index:2}
+  .bfg-{{ section.id }} .bfg-img{position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;margin-bottom:16px;background:#111;box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}
   .bfg-{{ section.id }} .bfg-img img{width:100%;height:100%;object-fit:cover;display:block}
   .bfg-{{ section.id }} .bfg-pct{position:absolute;top:10px;left:10px;background:{{ s.red }};color:#fff;font-weight:800;font-size:13px;padding:6px 12px;border-radius:999px}
   .bfg-{{ section.id }} .bfg-seal{position:absolute;top:8px;right:8px;width:96px;height:96px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f3d48a,#b8862e 70%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.05;font-weight:800;box-shadow:0 0 0 4px rgba(184,134,46,.35);text-shadow:0 1px 2px rgba(0,0,0,.35)}
@@ -42,7 +44,7 @@
   .bfg-{{ section.id }} .bfg-price .now{font-size:24px;font-weight:900;color:{{ s.btn }}}
   .bfg-{{ section.id }} .bfg-price s{opacity:.55;font-size:16px}
   .bfg-{{ section.id }} .bfg-price .sv{background:{{ s.red }};color:#fff;border-radius:999px;font-weight:800;font-size:13px;padding:6px 12px}
-  .bfg-{{ section.id }} .bfg-btn{border:0;border-radius:10px;background:{{ s.btn }};color:#fff;font-weight:800;font-size:16px;padding:15px;cursor:pointer;width:100%;text-transform:uppercase;letter-spacing:.02em}
+  .bfg-{{ section.id }} .bfg-btn{border:0;border-radius:12px;background:linear-gradient(180deg,#f07a24,{{ s.btn }});color:#fff;font-weight:800;font-size:16px;padding:15px;cursor:pointer;width:100%;text-transform:uppercase;letter-spacing:.03em;box-shadow:0 8px 18px rgba(232,98,12,.28)}
   .bfg-{{ section.id }} .bfg-btn[disabled]{opacity:.6}
   .bfg-{{ section.id }} [hidden]{display:none!important}
   .bfg-{{ section.id }} .bfg-trio{margin:44px auto 0;max-width:900px;display:grid;grid-template-columns:1fr 1.1fr;gap:22px;align-items:center;margin-top:44px}
@@ -67,7 +69,9 @@
     .bfg-{{ section.id }} .bfg-top img{border-radius:0}
     .bfg-{{ section.id }} .bfg-grid{grid-template-columns:1fr;gap:22px}
     .bfg-{{ section.id }} .bfg-card{max-width:400px;width:100%;margin:0 auto}
-    .bfg-{{ section.id }} .bfg-card.is-hero{order:-1}
+    .bfg-{{ section.id }} .bfg-card.is-hero{order:-1;transform:none}
+    .bfg-{{ section.id }} .bfg-card.is-hero:hover,.bfg-{{ section.id }} .bfg-card:hover{transform:none}
+    .bfg-{{ section.id }} .bfg-grid{gap:34px}
     .bfg-{{ section.id }} .bfg-seal{width:82px;height:82px}
     .bfg-{{ section.id }} .bfg-seal b{font-size:17px}
     .bfg-{{ section.id }} .bfg-trio{grid-template-columns:1fr;max-width:400px}
@@ -141,7 +145,7 @@
               assign unit = v.price | divided_by: qty
             -%}
             <div class="bfg-card{% if hero %} is-hero{% endif %}">
-              {%- if hero -%}<div class="bfg-ribbon">{{ s.hero_label }}</div>{%- endif -%}
+              {%- if hero -%}<div class="bfg-ribbon">★ {{ s.hero_label }}</div>{%- endif -%}
               <div class="bfg-img">
                 {%- if p.featured_image -%}{{ p.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: p.title }}{%- endif -%}
                 {%- if pct > 0 -%}<span class="bfg-pct">{{ s.save_label }} {{ pct }} %</span>{%- endif -%}
@@ -179,7 +183,7 @@
           {%- if t.featured_image -%}{{ t.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: t.title }}{%- endif -%}
           {%- if pct > 0 -%}<span class="bfg-pct">{{ s.save_label }} {{ pct }} %</span>{%- endif -%}
         </div>
-        <div class="bfg-card" style="margin:0">
+        <div class="bfg-card">
           <div class="bfg-name">{{ t.title | split: ' (' | first }}</div>
           <p class="bfg-what">{{ s.trio_text }}</p>
           {%- if s.trio_gifts != blank -%}
