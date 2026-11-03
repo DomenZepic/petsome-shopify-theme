@@ -61,9 +61,7 @@
   if kaching_gifts_heading == blank
     assign kaching_gifts_heading = 'kaching_custom_display.gifts_heading_default' | t
   endif
-  if bf_on
-    assign kaching_gifts_heading = bf_gifts_title
-  endif
+
 -%}
 <style>
   kaching-bundle {
@@ -765,7 +763,7 @@
     data-protocol-label="{{ block.settings.protocol_label | default: '3-mesečni protokol' | escape }}"
     data-offer-checklist="{{ offer_checklist | json | escape }}"
     data-offer-total="{{ block.settings.offer_total_value | escape }}"
-    data-hero-title="{% if bf_on %}{{ bf_hero_title | escape }}{% endif %}"
+    data-hero-title=""
     data-hero-label="{% if bf_on %}{{ bf_hero | escape }}{% else %}{{ block.settings.hero_label | escape }}{% endif %}"
     data-hero-tier-quantity="{{ block.settings.hero_tier_quantity | escape }}"
     data-product-title="{{ product.title | escape }}"
