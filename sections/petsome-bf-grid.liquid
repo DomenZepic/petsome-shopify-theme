@@ -4,28 +4,28 @@
 {%- endcomment -%}
 {%- assign s = section.settings -%}
 <style>
-  .bfg-{{ section.id }}{background:{{ s.bg }};padding:0 16px 56px;color:#fff;font-family:inherit;overflow-x:hidden}
+  .bfg-{{ section.id }}{background:{{ s.bg }};padding:0 16px 56px;color:#1a1a1a;font-family:inherit;overflow-x:hidden}
   .bfg-{{ section.id }} .bfg-top>*,.bfg-{{ section.id }} .bfg-grid>*,.bfg-{{ section.id }} .bfg-trio>*{min-width:0}
   .bfg-{{ section.id }} picture{display:block}
   .bfg-{{ section.id }} img{max-width:100%}
   .bfg-{{ section.id }} .bfg-wrap{max-width:1180px;margin:0 auto;text-align:center}
-  .bfg-{{ section.id }} .bfg-bar{background:{{ s.accent }};color:#111;text-align:center;font-weight:800;font-size:14px;padding:10px 16px;margin:0 -16px 32px;letter-spacing:.02em}
+  .bfg-{{ section.id }} .bfg-bar{background:#141416;color:{{ s.accent }};text-align:center;font-weight:800;font-size:14px;padding:10px 16px;margin:0 -16px 32px;letter-spacing:.02em}
   .bfg-{{ section.id }} .bfg-top{display:grid;grid-template-columns:1.15fr 1fr;gap:40px;align-items:center;margin:0 0 48px;text-align:left}
-  .bfg-{{ section.id }} .bfg-top img{width:100%;height:auto;border-radius:18px;display:block}
+  .bfg-{{ section.id }} .bfg-top img{width:100%;height:auto;border-radius:18px;display:block;box-shadow:0 14px 40px rgba(0,0,0,.18)}
   .bfg-{{ section.id }} .bfg-trust{display:inline-flex;gap:8px;align-items:center;font-weight:600;font-size:15px;margin-bottom:14px;opacity:.9}
-  .bfg-{{ section.id }} .bfg-trust span{color:{{ s.accent }};letter-spacing:2px}
-  .bfg-{{ section.id }} .bfg-h1{font-size:clamp(30px,4.4vw,50px);line-height:1.08;margin:0 0 12px;font-weight:900;color:#fff;overflow-wrap:break-word}
+  .bfg-{{ section.id }} .bfg-trust span{color:#f5a623;letter-spacing:2px}
+  .bfg-{{ section.id }} .bfg-h1{font-size:clamp(30px,4.4vw,50px);line-height:1.08;margin:0 0 12px;font-weight:900;color:#1a1a1a;overflow-wrap:break-word}
   .bfg-{{ section.id }} .bfg-h1 p{margin:0}
-  .bfg-{{ section.id }} .bfg-h1 em{display:block;font-style:normal;color:{{ s.accent }}}
+  .bfg-{{ section.id }} .bfg-h1 em{display:block;font-style:normal;color:{{ s.red }}}
   .bfg-{{ section.id }} .bfg-sub{font-size:17px;opacity:.85;margin:0 0 22px}
   .bfg-{{ section.id }} .bfg-cta{display:inline-block;border:0;border-radius:12px;background:{{ s.btn }};color:#fff;font-weight:800;font-size:16px;padding:15px 30px;cursor:pointer}
-  .bfg-{{ section.id }} .bfg-kicker{font-size:13px;font-weight:800;letter-spacing:.14em;color:{{ s.accent }};margin:0 0 4px}
-  .bfg-{{ section.id }} .bfg-h2{font-size:clamp(24px,3.2vw,36px);margin:0 0 18px;font-weight:900;color:#fff!important;-webkit-text-fill-color:#fff!important;opacity:1!important}
-  .bfg-{{ section.id }} .bfg-tabs{display:inline-flex;background:#1d1d22;border-radius:999px;padding:5px;gap:4px;margin:0 0 34px;flex-wrap:wrap;justify-content:center}
-  .bfg-{{ section.id }} .bfg-tab{border:0;background:transparent;padding:10px 22px;border-radius:999px;font-weight:700;font-size:15px;cursor:pointer;color:#fff}
-  .bfg-{{ section.id }} .bfg-tab[aria-selected="true"]{background:{{ s.accent }};color:#111}
+  .bfg-{{ section.id }} .bfg-kicker{font-size:13px;font-weight:800;letter-spacing:.14em;color:#b07a1e;margin:0 0 4px}
+  .bfg-{{ section.id }} .bfg-h2{font-size:clamp(24px,3.2vw,36px);margin:0 0 18px;font-weight:900;color:#1a1a1a!important;-webkit-text-fill-color:#1a1a1a!important;opacity:1!important}
+  .bfg-{{ section.id }} .bfg-tabs{display:inline-flex;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08);border-radius:999px;padding:5px;gap:4px;margin:0 0 34px;flex-wrap:wrap;justify-content:center}
+  .bfg-{{ section.id }} .bfg-tab{border:0;background:transparent;padding:10px 22px;border-radius:999px;font-weight:700;font-size:15px;cursor:pointer;color:#1a1a1a}
+  .bfg-{{ section.id }} .bfg-tab[aria-selected="true"]{background:#141416;color:#fff}
   .bfg-{{ section.id }} .bfg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
-  .bfg-{{ section.id }} .bfg-card{background:#fff;color:#1a1a1a;border-radius:16px;padding:18px 18px 20px;position:relative;display:flex;flex-direction:column;text-align:left;margin-top:44px}
+  .bfg-{{ section.id }} .bfg-card{background:#fff;color:#1a1a1a;border-radius:16px;padding:18px 18px 20px;position:relative;display:flex;flex-direction:column;text-align:left;margin-top:44px;box-shadow:0 6px 24px rgba(0,0,0,.08)}
   .bfg-{{ section.id }} .bfg-card.is-hero{margin-top:0;border:3px solid {{ s.red }};border-top:0;border-radius:0 0 16px 16px;padding-top:18px}
   .bfg-{{ section.id }} .bfg-ribbon{background:{{ s.red }};color:#fff;font-weight:800;letter-spacing:.06em;font-size:16px;padding:12px;text-align:center;margin:-18px -21px 18px;border-radius:16px 16px 0 0}
   .bfg-{{ section.id }} .bfg-img{position:relative;aspect-ratio:1/1;border-radius:12px;overflow:hidden;margin-bottom:14px;background:#111}
@@ -47,8 +47,8 @@
   .bfg-{{ section.id }} [hidden]{display:none!important}
   .bfg-{{ section.id }} .bfg-trio{margin:44px auto 0;max-width:900px;display:grid;grid-template-columns:1fr 1.1fr;gap:22px;align-items:center;margin-top:44px}
   .bfg-{{ section.id }} .bfg-trio .bfg-img{margin:0}
-  .bfg-{{ section.id }} .bfg-trio-h{font-size:clamp(22px,3vw,30px);font-weight:900;margin:56px 0 6px;color:#fff!important;-webkit-text-fill-color:#fff!important;opacity:1!important}
-  .bfg-{{ section.id }} .bfg-guar{margin:34px auto 0;max-width:640px;display:flex;gap:12px;align-items:center;justify-content:center;font-size:15px;text-align:left;border:1px dashed rgba(255,255,255,.35);border-radius:12px;padding:14px 18px}
+  .bfg-{{ section.id }} .bfg-trio-h{font-size:clamp(22px,3vw,30px);font-weight:900;margin:56px 0 6px;color:#1a1a1a!important;-webkit-text-fill-color:#1a1a1a!important;opacity:1!important}
+  .bfg-{{ section.id }} .bfg-guar{margin:34px auto 0;max-width:640px;display:flex;gap:12px;align-items:center;justify-content:center;font-size:15px;text-align:left;border:1px dashed rgba(0,0,0,.25);background:#fff;border-radius:12px;padding:14px 18px}
   .bfg-{{ section.id }} .bfg-guar p{margin:0}
   @media (max-width:820px){
     .bfg-{{ section.id }} .bfg-top{grid-template-columns:1fr;gap:18px;text-align:center;margin-left:-16px;margin-right:-16px}
