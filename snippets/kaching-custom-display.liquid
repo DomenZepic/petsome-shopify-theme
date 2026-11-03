@@ -65,6 +65,26 @@
   assign bf_tag = block.settings.bf_banner_tag | default: settings.bf_g_tag | default: 'do 12. 11.'
 
   assign offer_checklist = block.settings.offer_checklist | newline_to_br | split: '<br />'
+  if bf_on
+    case bf_lang
+      when 'hr'
+        assign bf_gift_prefix = 'POKLON: '
+      when 'cs'
+        assign bf_gift_prefix = 'DÁREK: '
+      else
+        assign bf_gift_prefix = 'DARILO: '
+    endcase
+    assign bf_list = ''
+    for item in offer_checklist
+      assign it = item | strip
+      assign itd = it | downcase
+      if itd contains 'posod' or itd contains 'zdjelic' or itd contains 'misk' or itd contains 'dentalsticks'
+        assign it = bf_gift_prefix | append: it
+      endif
+      assign bf_list = bf_list | append: it | append: '|||'
+    endfor
+    assign offer_checklist = bf_list | split: '|||'
+  endif
   assign kaching_gifts_heading = block.settings.gifts_heading
   if kaching_gifts_heading == blank
     assign kaching_gifts_heading = 'kaching_custom_display.gifts_heading_default' | t
