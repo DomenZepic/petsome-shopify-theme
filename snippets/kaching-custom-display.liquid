@@ -44,6 +44,14 @@
   endcase
   case bf_lang
     when 'hr'
+      assign bf_duo_gift = '+ Besplatna sklopiva zdjelica'
+    when 'cs'
+      assign bf_duo_gift = '+ Skládací miska zdarma'
+    else
+      assign bf_duo_gift = '+ Brezplačna zložljiva posodica'
+  endcase
+  case bf_lang
+    when 'hr'
       assign bf_hero_title = 'Zaliha za 3+ mjeseca'
       assign bf_gifts_title = 'Paket poklona u vrijednosti 23,90 €'
     when 'cs'
@@ -762,6 +770,7 @@
     data-offer-checklist="{{ offer_checklist | json | escape }}"
     data-offer-total="{{ block.settings.offer_total_value | escape }}"
     data-hero-title=""
+    data-bf-duo-gift="{% if bf_on %}{{ bf_duo_gift | escape }}{% endif %}"
     data-hero-label="{% if bf_on %}{{ bf_hero | escape }}{% else %}{{ block.settings.hero_label | escape }}{% endif %}"
     data-hero-tier-quantity="{{ block.settings.hero_tier_quantity | escape }}"
     data-product-title="{{ product.title | escape }}"

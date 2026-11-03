@@ -501,6 +501,9 @@ if (!customElements.get('kaching-custom-display')) {
               ${this.giftsInTier && tier.quantity === protocolQty
                 ? `<span class="kaching-tile__check">✓ ${this.dataset.protocolLabel || '3-mesečni protokol'}</span>`
                 : ''}
+              ${tier.quantity === 2 && (this.dataset.bfDuoGift || '').trim()
+                ? `<span class="kaching-tile__check">✓ ${this.dataset.bfDuoGift.trim()}</span>`
+                : ''}
               ${!valid ? `<span class="kaching-tile__unavailable">${validationMessage || this.i18n.unavailable}</span>` : ''}
             </span>
           </button>
