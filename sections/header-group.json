@@ -134,7 +134,7 @@
         "slider_mobile": true,
         "slider_desktop": true,
         "type": "loop",
-        "autoplay": false,
+        "autoplay": true,
         "autoplay_speed": 3,
         "hidden_products": "",
         "enable_specific_display": false,
