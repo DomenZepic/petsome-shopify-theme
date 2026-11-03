@@ -42,6 +42,17 @@
       assign bf_text = block.settings.bf_banner_text | default: 'S paketi prihraniš do 35 % + brezplačna darila'
       assign bf_hero = block.settings.bf_hero_label | default: 'OMEJENA PRE-BLACK FRIDAY PONUDBA'
   endcase
+  case bf_lang
+    when 'hr'
+      assign bf_hero_title = product.title | append: ' – protokol za 3+ mjeseca'
+      assign bf_gifts_title = 'Paket poklona u vrijednosti 23,90 €'
+    when 'cs'
+      assign bf_hero_title = product.title | append: ' – protokol na 3+ měsíce'
+      assign bf_gifts_title = 'Dárkový balíček v hodnotě 600 Kč'
+    else
+      assign bf_hero_title = product.title | append: ' – 3+ mesečni protokol'
+      assign bf_gifts_title = 'Darilni paket v vrednosti 23,90 €'
+  endcase
   assign bf_title = block.settings.bf_banner_title | default: 'Pre-Black Friday Exclusive'
   assign bf_tag = block.settings.bf_banner_tag | default: settings.bf_g_tag | default: 'do 12. 11.'
 
@@ -49,6 +60,9 @@
   assign kaching_gifts_heading = block.settings.gifts_heading
   if kaching_gifts_heading == blank
     assign kaching_gifts_heading = 'kaching_custom_display.gifts_heading_default' | t
+  endif
+  if bf_on
+    assign kaching_gifts_heading = bf_gifts_title
   endif
 -%}
 <style>
@@ -751,6 +765,7 @@
     data-protocol-label="{{ block.settings.protocol_label | default: '3-mesečni protokol' | escape }}"
     data-offer-checklist="{{ offer_checklist | json | escape }}"
     data-offer-total="{{ block.settings.offer_total_value | escape }}"
+    data-hero-title="{% if bf_on %}{{ bf_hero_title | escape }}{% endif %}"
     data-hero-label="{% if bf_on %}{{ bf_hero | escape }}{% else %}{{ block.settings.hero_label | escape }}{% endif %}"
     data-hero-tier-quantity="{{ block.settings.hero_tier_quantity | escape }}"
     data-product-title="{{ product.title | escape }}"

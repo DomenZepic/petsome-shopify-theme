@@ -490,7 +490,7 @@ if (!customElements.get('kaching-custom-display')) {
               ? `<span class="kaching-tile__image" aria-hidden="true"${imageUrl ? ` style="background-image:url('${imageUrl}')"` : ''}></span>`
               : ''}
             <span class="kaching-tile__content">
-              <span class="kaching-tile__title">${this.translateFromKaching(tier.title) || tier.title}</span>
+              <span class="kaching-tile__title">${(this.giftsInTier && tier.quantity === heroQty && (this.dataset.heroTitle || '').trim()) ? this.dataset.heroTitle.trim() : (this.translateFromKaching(tier.title) || tier.title)}</span>
               <span class="kaching-tile__price-row">
                 <span class="kaching-tile__price">${this.formatMoney(price / tier.quantity)}</span>
                 ${this.giftsInTier && comparePrice && comparePrice > price
