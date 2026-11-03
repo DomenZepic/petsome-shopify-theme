@@ -18,7 +18,16 @@
   .bfg-{{ section.id }} .bfg-h1 p{margin:0}
   .bfg-{{ section.id }} .bfg-h1 em{display:block;font-style:normal;color:{{ s.red }}}
   .bfg-{{ section.id }} .bfg-sub{font-size:17px;opacity:.85;margin:0 0 22px}
-  .bfg-{{ section.id }} .bfg-cta{display:inline-block;border:0;border-radius:12px;background:{{ s.btn }};color:#fff;font-weight:800;font-size:16px;padding:15px 30px;cursor:pointer}
+  .bfg-{{ section.id }} .bfg-cta{display:inline-flex;align-items:center;gap:10px;border:1px solid rgba(227,182,91,.6);border-radius:999px;background:linear-gradient(180deg,#26262a,#0e0e10);color:#fff;font-weight:700;font-size:16px;letter-spacing:.04em;padding:16px 30px;cursor:pointer;box-shadow:0 10px 26px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.08);transition:transform .2s,box-shadow .2s}
+  .bfg-{{ section.id }} .bfg-cta:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(0,0,0,.28)}
+  .bfg-{{ section.id }} .bfg-cta span{color:{{ s.accent }};font-size:18px}
+  .bfg-{{ section.id }} .bfg-badge{display:inline-block;background:#141416;color:{{ s.accent }};font-weight:800;font-size:12.5px;letter-spacing:.18em;padding:8px 16px;border-radius:999px;margin-bottom:16px;border:1px solid rgba(227,182,91,.45)}
+  .bfg-{{ section.id }} .bfg-cd{display:flex;gap:8px;margin:0 0 22px}
+  .bfg-{{ section.id }} .bfg-cd div{background:#fff;border:1px solid rgba(20,20,20,.08);border-radius:12px;min-width:64px;padding:8px 6px;text-align:center;box-shadow:0 6px 16px rgba(60,40,20,.08)}
+  .bfg-{{ section.id }} .bfg-cd b{display:block;font-size:24px;font-weight:900;line-height:1.1;font-variant-numeric:tabular-nums}
+  .bfg-{{ section.id }} .bfg-cd small{font-size:10.5px;letter-spacing:.12em;opacity:.6;text-transform:uppercase}
+  .bfg-{{ section.id }} .bfg-usp{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:18px;font-size:14px;font-weight:600;opacity:.85}
+  .bfg-{{ section.id }} .bfg-usp span:before{content:"✓ ";color:#1d7a3a;font-weight:900}
   .bfg-{{ section.id }} .bfg-kicker{font-size:13px;font-weight:800;letter-spacing:.14em;color:#b07a1e;margin:0 0 4px}
   .bfg-{{ section.id }} .bfg-h2{font-size:clamp(24px,3.2vw,36px);margin:0 0 18px;font-weight:900;color:#1a1a1a!important;-webkit-text-fill-color:#1a1a1a!important;opacity:1!important}
   .bfg-{{ section.id }} .bfg-tabs{display:inline-flex;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08);border-radius:999px;padding:5px;gap:4px;margin:0 0 34px;flex-wrap:wrap;justify-content:center}
@@ -32,7 +41,7 @@
   .bfg-{{ section.id }} .bfg-ribbon{position:absolute;top:-17px;left:50%;transform:translateX(-50%);background:linear-gradient(180deg,#1d1d20,#0e0e10);color:{{ s.accent }};font-weight:800;letter-spacing:.12em;font-size:12.5px;padding:9px 20px;border-radius:999px;white-space:nowrap;box-shadow:0 6px 16px rgba(0,0,0,.25);border:1px solid rgba(227,182,91,.5);z-index:2}
   .bfg-{{ section.id }} .bfg-img{position:relative;aspect-ratio:1/1;border-radius:14px;overflow:hidden;margin-bottom:16px;background:#111;box-shadow:inset 0 0 0 1px rgba(0,0,0,.05)}
   .bfg-{{ section.id }} .bfg-img img{width:100%;height:100%;object-fit:cover;display:block}
-  .bfg-{{ section.id }} .bfg-pct{position:absolute;top:10px;left:10px;background:{{ s.red }};color:#fff;font-weight:800;font-size:13px;padding:6px 12px;border-radius:999px}
+  .bfg-{{ section.id }} .bfg-pct{position:absolute;top:10px;left:10px;box-shadow:0 4px 10px rgba(224,30,30,.3);background:{{ s.red }};color:#fff;font-weight:800;font-size:13px;padding:6px 12px;border-radius:999px}
   .bfg-{{ section.id }} .bfg-seal{position:absolute;top:8px;right:8px;width:96px;height:96px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f3d48a,#b8862e 70%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.05;font-weight:800;box-shadow:0 0 0 4px rgba(184,134,46,.35);text-shadow:0 1px 2px rgba(0,0,0,.35)}
   .bfg-{{ section.id }} .bfg-seal small{font-size:11px;letter-spacing:.04em}
   .bfg-{{ section.id }} .bfg-seal b{font-size:19px}
@@ -41,10 +50,12 @@
   .bfg-{{ section.id }} .bfg-gifts{list-style:none;padding:0;margin:0 0 14px;font-size:14px;text-transform:uppercase;letter-spacing:.02em;opacity:.85}
   .bfg-{{ section.id }} .bfg-gifts li:before{content:"+ ";font-weight:800;color:{{ s.red }}}
   .bfg-{{ section.id }} .bfg-price{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:auto 0 14px}
-  .bfg-{{ section.id }} .bfg-price .now{font-size:24px;font-weight:900;color:{{ s.btn }}}
+  .bfg-{{ section.id }} .bfg-price .now{font-size:26px;font-weight:900;color:#141416}
   .bfg-{{ section.id }} .bfg-price s{opacity:.55;font-size:16px}
   .bfg-{{ section.id }} .bfg-price .sv{background:{{ s.red }};color:#fff;border-radius:999px;font-weight:800;font-size:13px;padding:6px 12px}
-  .bfg-{{ section.id }} .bfg-btn{border:0;border-radius:12px;background:linear-gradient(180deg,#f07a24,{{ s.btn }});color:#fff;font-weight:800;font-size:16px;padding:15px;cursor:pointer;width:100%;text-transform:uppercase;letter-spacing:.03em;box-shadow:0 8px 18px rgba(232,98,12,.28)}
+  .bfg-{{ section.id }} .bfg-btn{border:0;border-radius:999px;background:linear-gradient(180deg,#26262a,#0e0e10);color:#fff;font-weight:800;font-size:15px;padding:16px;cursor:pointer;width:100%;text-transform:uppercase;letter-spacing:.08em;box-shadow:0 8px 20px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.08);transition:transform .2s,box-shadow .2s}
+  .bfg-{{ section.id }} .bfg-btn:hover{transform:translateY(-1px);box-shadow:0 12px 26px rgba(0,0,0,.25)}
+  .bfg-{{ section.id }} .is-hero .bfg-btn{background:linear-gradient(180deg,#f2d38c,#c9963a);color:#141416;box-shadow:0 10px 24px rgba(201,150,58,.4),inset 0 1px 0 rgba(255,255,255,.5)}
   .bfg-{{ section.id }} .bfg-btn[disabled]{opacity:.6}
   .bfg-{{ section.id }} [hidden]{display:none!important}
   .bfg-{{ section.id }} .bfg-trio{margin:44px auto 0;max-width:900px;display:grid;grid-template-columns:1fr 1.1fr;gap:22px;align-items:center;margin-top:44px}
@@ -90,9 +101,14 @@
       {%- endif -%}
       <div class="bfg-top-txt">
         {%- if s.trust != blank -%}<div class="bfg-trust"><span>★★★★★</span>{{ s.trust }}</div>{%- endif -%}
+        {%- if s.badge != blank -%}<div class="bfg-badge">{{ s.badge }}</div>{%- endif -%}
         <div class="bfg-h1">{{ s.heading }}</div>
         {%- if s.sub != blank -%}<p class="bfg-sub">{{ s.sub }}</p>{%- endif -%}
-        <button type="button" class="bfg-cta" onclick="var t=document.getElementById('bfg-packs-{{ section.id }}');if(t){window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-90,behavior:'smooth'});}">{{ s.top_cta }}</button>
+        {%- if s.deadline != blank -%}
+          <div class="bfg-cd" data-end="{{ s.deadline }}"><div><b data-d>0</b><small>{{ s.cd_d }}</small></div><div><b data-h>0</b><small>{{ s.cd_h }}</small></div><div><b data-m>0</b><small>{{ s.cd_m }}</small></div><div><b data-s>0</b><small>{{ s.cd_s }}</small></div></div>
+        {%- endif -%}
+        <button type="button" class="bfg-cta" onclick="var t=document.getElementById('bfg-packs-{{ section.id }}');if(t){window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-90,behavior:'smooth'});}">{{ s.top_cta }} <span>→</span></button>
+        {%- if s.usp != blank -%}<div class="bfg-usp">{%- assign ul = s.usp | split: ',' -%}{%- for u in ul -%}<span>{{ u | strip }}</span>{%- endfor -%}</div>{%- endif -%}
       </div>
     </div>
 
@@ -270,6 +286,8 @@
       root.querySelectorAll('[data-panel]').forEach(function(p){p.hidden = p.getAttribute('data-panel')!==t.getAttribute('data-tab')});
     });
   });
+  var cd=root.querySelector('.bfg-cd');
+  if(cd){var end=new Date(cd.getAttribute('data-end')).getTime();var f=function(n){return n<10?'0'+n:n};var tick=function(){var x=Math.max(0,end-Date.now())/1000;cd.querySelector('[data-d]').textContent=Math.floor(x/86400);cd.querySelector('[data-h]').textContent=f(Math.floor(x%86400/3600));cd.querySelector('[data-m]').textContent=f(Math.floor(x%3600/60));cd.querySelector('[data-s]').textContent=f(Math.floor(x%60));};tick();setInterval(tick,1000);}
   var rootUrl=(window.Shopify&&Shopify.routes&&Shopify.routes.root)||'/';
   function addToCart(id,btn){
     btn.disabled=true;
@@ -316,6 +334,13 @@
     { "type": "text", "id": "hero_d", "label": "Hero slika (asset, namizje)" },
     { "type": "text", "id": "hero_m", "label": "Hero slika (asset, mobilno)" },
     { "type": "text", "id": "bar_text", "label": "Pas na vrhu" },
+    { "type": "text", "id": "badge", "label": "Značka nad naslovom" },
+    { "type": "text", "id": "deadline", "label": "Odštevalnik do (ISO, npr. 2026-11-12T23:59:00+01:00)" },
+    { "type": "text", "id": "cd_d", "label": "Odštevalnik – dni", "default": "dni" },
+    { "type": "text", "id": "cd_h", "label": "Odštevalnik – ur", "default": "ur" },
+    { "type": "text", "id": "cd_m", "label": "Odštevalnik – min", "default": "min" },
+    { "type": "text", "id": "cd_s", "label": "Odštevalnik – sek", "default": "sek" },
+    { "type": "text", "id": "usp", "label": "Prednosti pod gumbom (z vejico)" },
     { "type": "text", "id": "trust", "label": "Zaupanje", "default": "Zaupa nam več kot 3.500 lastnikov psov" },
     { "type": "richtext", "id": "heading", "label": "Naslov" },
     { "type": "text", "id": "sub", "label": "Podnaslov" },

@@ -79,10 +79,10 @@
         "btn": "#e8620c",
         "hero_d": "bfhero_desktop.jpg",
         "hero_m": "bfhero_mobile.jpg",
-        "bar_text": "⚫ PRE-BLACK FRIDAY · Te cene veljajo do 12. novembra",
+        "bar_text": "EARLY BLACK FRIDAY · Cene veljajo do 12. novembra",
         "trust": "Zaupa nam več kot 3.500 lastnikov psov",
-        "heading": "<p>Black Friday se začne zdaj:<br><em>do −44 % + darila</em></p>",
-        "sub": "Založi se za zimo, preden pride Black Friday gneča. Vsak paket dobiš z brezplačnimi darili.",
+        "heading": "<p>Black Friday cene,<br><em>že zdaj: do −44 %</em></p>",
+        "sub": "Zgodnji dostop do letošnjih najboljših paketov, preden pride gneča. Vsak paket dobiš z brezplačnimi darili.",
         "top_cta": "Poglej pakete",
         "kicker": "BLACK FRIDAY PAKETI",
         "heading2": "Kaj pripravimo za tvojega psa?",
@@ -112,7 +112,14 @@
         "single_3": "dentalmix",
         "single_3_3x": "dentalmix-3x-darilo",
         "single_3_6x": "dentalmix-6x-2-darili",
-        "single_3_text": "Zobje in svež zadah"
+        "single_3_text": "Zobje in svež zadah",
+        "badge": "EARLY BLACK FRIDAY",
+        "deadline": "2026-11-12T23:59:00+01:00",
+        "cd_d": "dni",
+        "cd_h": "ur",
+        "cd_m": "min",
+        "cd_s": "sek",
+        "usp": "Brezplačna darila, 90-dnevna garancija, Plačilo po povzetju"
       }
     },
     "vet": {
