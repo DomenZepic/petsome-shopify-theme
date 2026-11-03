@@ -744,7 +744,7 @@
     <div class="kaching-custom-display__inner">
       <div class="kaching-custom-display__top">
         {%- if block.settings.bf_mode -%}
-          <div class="kcd-bf-banner" data-kcd-bf-banner>
+          <div class="kcd-bf-banner" data-kcd-bf-banner style="--kaching-accent: {{ accent_color }}; background-color: #0c0a10;">
             <div class="kcd-bf-banner__left">
               {%- if block.settings.bf_banner_kicker != blank -%}<p class="kcd-bf-banner__kicker">{{ block.settings.bf_banner_kicker }}</p>{%- endif -%}
               {%- if block.settings.bf_banner_title != blank -%}<p class="kcd-bf-banner__title">{{ block.settings.bf_banner_title }}</p>{%- endif -%}
