@@ -112,7 +112,8 @@
             "desktop_layout": "horizontal",
             "mobile_layout": "horizontal"
           },
-          "blocks": {}
+          "blocks": {},
+          "disabled": true
         }
       },
       "block_order": [
@@ -134,7 +135,7 @@
         "slider_mobile": true,
         "slider_desktop": true,
         "type": "loop",
-        "autoplay": true,
+        "autoplay": false,
         "autoplay_speed": 3,
         "hidden_products": "",
         "enable_specific_display": false,
