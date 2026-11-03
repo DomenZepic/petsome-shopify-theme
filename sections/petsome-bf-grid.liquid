@@ -1,0 +1,284 @@
+{%- comment -%}
+  Petsome Black Friday paketi. Kartice v stilu Coffee 2.0: Duo / Zaloga 3+ mesece (izpostavljena) / 6-mesečna zaloga,
+  pod njimi Paket Zdrav pes. Cene in prečrtane cene pridejo iz Shopify Bundles izdelkov.
+{%- endcomment -%}
+{%- assign s = section.settings -%}
+<style>
+  .bfg-{{ section.id }}{background:{{ s.bg }};padding:0 16px 56px;color:#fff;font-family:inherit}
+  .bfg-{{ section.id }} .bfg-wrap{max-width:1180px;margin:0 auto;text-align:center}
+  .bfg-{{ section.id }} .bfg-bar{background:{{ s.accent }};color:#111;text-align:center;font-weight:800;font-size:14px;padding:10px 16px;margin:0 -16px 32px;letter-spacing:.02em}
+  .bfg-{{ section.id }} .bfg-top{display:grid;grid-template-columns:1.15fr 1fr;gap:40px;align-items:center;margin:0 0 48px;text-align:left}
+  .bfg-{{ section.id }} .bfg-top img{width:100%;height:auto;border-radius:18px;display:block}
+  .bfg-{{ section.id }} .bfg-trust{display:inline-flex;gap:8px;align-items:center;font-weight:600;font-size:15px;margin-bottom:14px;opacity:.9}
+  .bfg-{{ section.id }} .bfg-trust span{color:{{ s.accent }};letter-spacing:2px}
+  .bfg-{{ section.id }} .bfg-h1{font-size:clamp(30px,4.4vw,50px);line-height:1.08;margin:0 0 12px;font-weight:900}
+  .bfg-{{ section.id }} .bfg-h1 p{margin:0}
+  .bfg-{{ section.id }} .bfg-h1 em{display:block;font-style:normal;color:{{ s.accent }}}
+  .bfg-{{ section.id }} .bfg-sub{font-size:17px;opacity:.85;margin:0 0 22px}
+  .bfg-{{ section.id }} .bfg-cta{display:inline-block;border:0;border-radius:12px;background:{{ s.btn }};color:#fff;font-weight:800;font-size:16px;padding:15px 30px;cursor:pointer}
+  .bfg-{{ section.id }} .bfg-kicker{font-size:13px;font-weight:800;letter-spacing:.14em;color:{{ s.accent }};margin:0 0 4px}
+  .bfg-{{ section.id }} .bfg-h2{font-size:clamp(24px,3.2vw,36px);margin:0 0 18px;font-weight:900}
+  .bfg-{{ section.id }} .bfg-tabs{display:inline-flex;background:#1d1d22;border-radius:999px;padding:5px;gap:4px;margin:0 0 34px;flex-wrap:wrap;justify-content:center}
+  .bfg-{{ section.id }} .bfg-tab{border:0;background:transparent;padding:10px 22px;border-radius:999px;font-weight:700;font-size:15px;cursor:pointer;color:#fff}
+  .bfg-{{ section.id }} .bfg-tab[aria-selected="true"]{background:{{ s.accent }};color:#111}
+  .bfg-{{ section.id }} .bfg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start}
+  .bfg-{{ section.id }} .bfg-card{background:#fff;color:#1a1a1a;border-radius:16px;padding:18px 18px 20px;position:relative;display:flex;flex-direction:column;text-align:left;margin-top:44px}
+  .bfg-{{ section.id }} .bfg-card.is-hero{margin-top:0;border:3px solid {{ s.red }};border-top:0;border-radius:0 0 16px 16px;padding-top:18px}
+  .bfg-{{ section.id }} .bfg-ribbon{background:{{ s.red }};color:#fff;font-weight:800;letter-spacing:.06em;font-size:16px;padding:12px;text-align:center;margin:-18px -21px 18px;border-radius:16px 16px 0 0}
+  .bfg-{{ section.id }} .bfg-img{position:relative;aspect-ratio:1/1;border-radius:12px;overflow:hidden;margin-bottom:14px;background:#111}
+  .bfg-{{ section.id }} .bfg-img img{width:100%;height:100%;object-fit:cover;display:block}
+  .bfg-{{ section.id }} .bfg-pct{position:absolute;top:10px;left:10px;background:{{ s.red }};color:#fff;font-weight:800;font-size:13px;padding:6px 12px;border-radius:999px}
+  .bfg-{{ section.id }} .bfg-seal{position:absolute;top:8px;right:8px;width:96px;height:96px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f3d48a,#b8862e 70%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.05;font-weight:800;box-shadow:0 0 0 4px rgba(184,134,46,.35);text-shadow:0 1px 2px rgba(0,0,0,.35)}
+  .bfg-{{ section.id }} .bfg-seal small{font-size:11px;letter-spacing:.04em}
+  .bfg-{{ section.id }} .bfg-seal b{font-size:19px}
+  .bfg-{{ section.id }} .bfg-name{font-size:24px;font-weight:800;margin:0 0 4px}
+  .bfg-{{ section.id }} .bfg-what{font-size:14px;text-transform:uppercase;letter-spacing:.02em;margin:0 0 4px;opacity:.85}
+  .bfg-{{ section.id }} .bfg-gifts{list-style:none;padding:0;margin:0 0 14px;font-size:14px;text-transform:uppercase;letter-spacing:.02em;opacity:.85}
+  .bfg-{{ section.id }} .bfg-gifts li:before{content:"+ ";font-weight:800;color:{{ s.red }}}
+  .bfg-{{ section.id }} .bfg-price{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:auto 0 14px}
+  .bfg-{{ section.id }} .bfg-price .now{font-size:24px;font-weight:900;color:{{ s.btn }}}
+  .bfg-{{ section.id }} .bfg-price s{opacity:.55;font-size:16px}
+  .bfg-{{ section.id }} .bfg-price .sv{background:{{ s.red }};color:#fff;border-radius:999px;font-weight:800;font-size:13px;padding:6px 12px}
+  .bfg-{{ section.id }} .bfg-btn{border:0;border-radius:10px;background:{{ s.btn }};color:#fff;font-weight:800;font-size:16px;padding:15px;cursor:pointer;width:100%;text-transform:uppercase;letter-spacing:.02em}
+  .bfg-{{ section.id }} .bfg-btn[disabled]{opacity:.6}
+  .bfg-{{ section.id }} [hidden]{display:none!important}
+  .bfg-{{ section.id }} .bfg-trio{margin:44px auto 0;max-width:900px;display:grid;grid-template-columns:1fr 1.1fr;gap:22px;align-items:center;margin-top:44px}
+  .bfg-{{ section.id }} .bfg-trio .bfg-img{margin:0}
+  .bfg-{{ section.id }} .bfg-trio-h{font-size:clamp(22px,3vw,30px);font-weight:900;margin:56px 0 6px}
+  .bfg-{{ section.id }} .bfg-guar{margin:34px auto 0;max-width:640px;display:flex;gap:12px;align-items:center;justify-content:center;font-size:15px;text-align:left;border:1px dashed rgba(255,255,255,.35);border-radius:12px;padding:14px 18px}
+  .bfg-{{ section.id }} .bfg-guar p{margin:0}
+  @media (max-width:820px){
+    .bfg-{{ section.id }} .bfg-top{grid-template-columns:1fr;gap:18px;text-align:center;margin-left:-16px;margin-right:-16px}
+    .bfg-{{ section.id }} .bfg-top-txt{order:-1;padding:0 18px}
+    .bfg-{{ section.id }} .bfg-top img{border-radius:0}
+    .bfg-{{ section.id }} .bfg-grid{grid-template-columns:1fr;gap:22px}
+    .bfg-{{ section.id }} .bfg-card{max-width:400px;width:100%;margin:0 auto}
+    .bfg-{{ section.id }} .bfg-card.is-hero{order:-1}
+    .bfg-{{ section.id }} .bfg-seal{width:82px;height:82px}
+    .bfg-{{ section.id }} .bfg-seal b{font-size:17px}
+    .bfg-{{ section.id }} .bfg-trio{grid-template-columns:1fr;max-width:400px}
+  }
+</style>
+
+<div class="bfg-{{ section.id }}" id="bfg-{{ section.id }}">
+  {%- if s.bar_text != blank -%}<div class="bfg-bar">{{ s.bar_text }}</div>{%- endif -%}
+  <div class="bfg-wrap">
+    <div class="bfg-top">
+      {%- if s.hero_d != blank -%}
+        <picture>
+          {%- if s.hero_m != blank -%}<source media="(max-width:820px)" srcset="{{ s.hero_m | asset_img_url: '900x' }}">{%- endif -%}
+          <img src="{{ s.hero_d | asset_img_url: '1400x' }}" alt="{{ s.kicker | escape }}" width="1400" height="782">
+        </picture>
+      {%- endif -%}
+      <div class="bfg-top-txt">
+        {%- if s.trust != blank -%}<div class="bfg-trust"><span>★★★★★</span>{{ s.trust }}</div>{%- endif -%}
+        <div class="bfg-h1">{{ s.heading }}</div>
+        {%- if s.sub != blank -%}<p class="bfg-sub">{{ s.sub }}</p>{%- endif -%}
+        <button type="button" class="bfg-cta" onclick="var t=document.getElementById('bfg-packs-{{ section.id }}');if(t){window.scrollTo({top:t.getBoundingClientRect().top+window.pageYOffset-90,behavior:'smooth'});}">{{ s.top_cta }}</button>
+      </div>
+    </div>
+
+    <p class="bfg-kicker" id="bfg-packs-{{ section.id }}">{{ s.kicker }}</p>
+    <h2 class="bfg-h2">{{ s.heading2 }}</h2>
+
+    <div class="bfg-tabs" role="tablist">
+      {%- for block in section.blocks -%}
+        <button class="bfg-tab" role="tab" type="button" data-tab="{{ forloop.index0 }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" {{ block.shopify_attributes }}>{{ block.settings.label }}</button>
+      {%- endfor -%}
+    </div>
+
+    {%- for block in section.blocks -%}
+      {%- assign b = block.settings -%}
+      <div class="bfg-grid" data-panel="{{ forloop.index0 }}" {% unless forloop.first %}hidden{% endunless %}>
+        {%- for i in (1..3) -%}
+          {%- liquid
+            if i == 1
+              assign p = b.duo
+              assign nm = b.duo_name
+              assign what = b.duo_text
+              assign gifts = b.duo_gifts
+              assign qty = 2
+              assign hero = false
+            elsif i == 2
+              assign p = b.month
+              assign nm = b.month_name
+              assign what = b.month_text
+              assign gifts = b.month_gifts
+              assign qty = 4
+              assign hero = true
+            else
+              assign p = b.six
+              assign nm = b.six_name
+              assign what = b.six_text
+              assign gifts = b.six_gifts
+              assign qty = 6
+              assign hero = false
+            endif
+          -%}
+          {%- if p != blank -%}
+            {%- liquid
+              assign v = p.selected_or_first_available_variant
+              assign cmp = v.compare_at_price | default: v.price
+              assign saved = cmp | minus: v.price
+              assign pct = 0
+              if cmp > 0
+                assign pct = saved | times: 100 | divided_by: cmp
+              endif
+              assign unit = v.price | divided_by: qty
+            -%}
+            <div class="bfg-card{% if hero %} is-hero{% endif %}">
+              {%- if hero -%}<div class="bfg-ribbon">{{ s.hero_label }}</div>{%- endif -%}
+              <div class="bfg-img">
+                {%- if p.featured_image -%}{{ p.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', alt: p.title }}{%- endif -%}
+                {%- if pct > 0 -%}<span class="bfg-pct">{{ s.save_label }} {{ pct }} %</span>{%- endif -%}
+                <span class="bfg-seal"><small>{{ s.only_label }}</small><b>{{ unit | money }}</b><small>/ {{ s.unit_label }}</small></span>
+              </div>
+              <div class="bfg-name">{{ nm }}</div>
+              <p class="bfg-what">{{ what }}</p>
+              {%- if gifts != blank -%}
+                <ul class="bfg-gifts">{%- assign gl = gifts | split: ',' -%}{%- for g in gl -%}<li>{{ g | strip }}</li>{%- endfor -%}</ul>
+              {%- endif -%}
+              <div class="bfg-price"><span class="now">{{ v.price | money }}</span>{%- if saved > 0 -%}<s>{{ cmp | money }}</s><span class="sv">{{ s.save_label }} {{ saved | money }}</span>{%- endif -%}</div>
+              <button class="bfg-btn" type="button" data-variant="{{ v.id }}" {% unless v.available %}disabled{% endunless %}>
+                {%- if v.available -%}{{ s.btn_label }}{%- else -%}{{ s.soldout_label }}{%- endif -%}
+              </button>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endfor -%}
+
+    {%- assign t = s.trio -%}
+    {%- if t != blank -%}
+      {%- liquid
+        assign v = t.selected_or_first_available_variant
+        assign cmp = v.compare_at_price | default: v.price
+        assign saved = cmp | minus: v.price
+        assign pct = 0
+        if cmp > 0
+          assign pct = saved | times: 100 | divided_by: cmp
+        endif
+      -%}
+      <h2 class="bfg-trio-h">{{ s.trio_heading }}</h2>
+      <div class="bfg-trio">
+        <div class="bfg-img">
+          {%- if t.featured_image -%}{{ t.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', alt: t.title }}{%- endif -%}
+          {%- if pct > 0 -%}<span class="bfg-pct">{{ s.save_label }} {{ pct }} %</span>{%- endif -%}
+        </div>
+        <div class="bfg-card" style="margin:0">
+          <div class="bfg-name">{{ t.title | split: ' (' | first }}</div>
+          <p class="bfg-what">{{ s.trio_text }}</p>
+          {%- if s.trio_gifts != blank -%}
+            <ul class="bfg-gifts">{%- assign gl = s.trio_gifts | split: ',' -%}{%- for g in gl -%}<li>{{ g | strip }}</li>{%- endfor -%}</ul>
+          {%- endif -%}
+          <div class="bfg-price"><span class="now">{{ v.price | money }}</span>{%- if saved > 0 -%}<s>{{ cmp | money }}</s><span class="sv">{{ s.save_label }} {{ saved | money }}</span>{%- endif -%}</div>
+          <button class="bfg-btn" type="button" data-variant="{{ v.id }}" {% unless v.available %}disabled{% endunless %}>
+            {%- if v.available -%}{{ s.btn_label }}{%- else -%}{{ s.soldout_label }}{%- endif -%}
+          </button>
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if s.guarantee != blank -%}
+      <div class="bfg-guar">
+        {%- if s.guarantee_img != blank -%}{{ s.guarantee_img | image_url: width: 140 | image_tag: width: 60, height: 60, loading: 'lazy' }}{%- endif -%}
+        <div>{{ s.guarantee }}</div>
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+(function(){
+  var root=document.getElementById('bfg-{{ section.id }}'); if(!root) return;
+  root.querySelectorAll('.bfg-tab').forEach(function(t){
+    t.addEventListener('click',function(){
+      root.querySelectorAll('.bfg-tab').forEach(function(x){x.setAttribute('aria-selected','false')});
+      t.setAttribute('aria-selected','true');
+      root.querySelectorAll('[data-panel]').forEach(function(p){p.hidden = p.getAttribute('data-panel')!==t.getAttribute('data-tab')});
+    });
+  });
+  var rootUrl=(window.Shopify&&Shopify.routes&&Shopify.routes.root)||'/';
+  function addToCart(id,btn){
+    btn.disabled=true;
+    var cd=document.querySelector('cart-drawer');
+    var body={items:[{id:parseInt(id,10),quantity:1}]};
+    var canDrawer=cd && typeof cd.renderContents==='function' && typeof cd.getSectionsToRender==='function';
+    if(canDrawer){ body.sections=cd.getSectionsToRender().map(function(s){return s.id}); body.sections_url=window.location.pathname; }
+    fetch(rootUrl+'cart/add.js',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(body)})
+      .then(function(r){return r.json()})
+      .then(function(state){
+        btn.disabled=false;
+        if(state && state.status){ alert(state.description||state.message||'Napaka'); return; }
+        if(canDrawer){
+          try{
+            if(cd.classList.contains('is-empty')) cd.classList.remove('is-empty');
+            cd.renderContents(state);
+            document.dispatchEvent(new CustomEvent('cart:refresh',{bubbles:true}));
+            return;
+          }catch(e){}
+        }
+        window.location.href=rootUrl+'cart';
+      })
+      .catch(function(){btn.disabled=false; window.location.href=rootUrl+'cart';});
+  }
+  root.querySelectorAll('.bfg-btn[data-variant]').forEach(function(b){
+    b.addEventListener('click',function(){ addToCart(b.getAttribute('data-variant'),b); });
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Petsome: BF paketi",
+  "settings": [
+    { "type": "color", "id": "bg", "label": "Ozadje", "default": "#0d0d10" },
+    { "type": "color", "id": "accent", "label": "Zlata (poudarek)", "default": "#e3b65b" },
+    { "type": "color", "id": "red", "label": "Rdeča (značke)", "default": "#e01e1e" },
+    { "type": "color", "id": "btn", "label": "Gumbi", "default": "#e8620c" },
+    { "type": "text", "id": "hero_d", "label": "Hero slika (asset, namizje)" },
+    { "type": "text", "id": "hero_m", "label": "Hero slika (asset, mobilno)" },
+    { "type": "text", "id": "bar_text", "label": "Pas na vrhu" },
+    { "type": "text", "id": "trust", "label": "Zaupanje", "default": "Zaupa nam več kot 3.500 lastnikov psov" },
+    { "type": "richtext", "id": "heading", "label": "Naslov" },
+    { "type": "text", "id": "sub", "label": "Podnaslov" },
+    { "type": "text", "id": "top_cta", "label": "Gumb pod naslovom", "default": "Poglej pakete" },
+    { "type": "text", "id": "kicker", "label": "Nadnaslov paketov" },
+    { "type": "text", "id": "heading2", "label": "Naslov paketov" },
+    { "type": "text", "id": "hero_label", "label": "Trak na izpostavljeni kartici", "default": "NAJBOLJ PRILJUBLJEN" },
+    { "type": "text", "id": "save_label", "label": "Prihrani", "default": "PRIHRANI" },
+    { "type": "text", "id": "only_label", "label": "SAMO", "default": "SAMO" },
+    { "type": "text", "id": "unit_label", "label": "Enota", "default": "DÓZO" },
+    { "type": "text", "id": "btn_label", "label": "Gumb", "default": "Dodaj v košarico" },
+    { "type": "text", "id": "soldout_label", "label": "Razprodano", "default": "Razprodano" },
+    { "type": "text", "id": "trio_heading", "label": "Paket Zdrav pes – naslov" },
+    { "type": "product", "id": "trio", "label": "Paket Zdrav pes" },
+    { "type": "text", "id": "trio_text", "label": "Paket Zdrav pes – vsebina" },
+    { "type": "text", "id": "trio_gifts", "label": "Paket Zdrav pes – darila (ločena z vejico)" },
+    { "type": "image_picker", "id": "guarantee_img", "label": "Garancija – slika" },
+    { "type": "richtext", "id": "guarantee", "label": "Garancija" }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Izdelek (tab)",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Ime taba" },
+        { "type": "product", "id": "duo", "label": "Duo paket" },
+        { "type": "text", "id": "duo_name", "label": "Duo – ime" },
+        { "type": "text", "id": "duo_text", "label": "Duo – vsebina" },
+        { "type": "text", "id": "duo_gifts", "label": "Duo – darila (z vejico)" },
+        { "type": "product", "id": "month", "label": "Zaloga 3+ mesece (izpostavljena)" },
+        { "type": "text", "id": "month_name", "label": "3+ mesece – ime" },
+        { "type": "text", "id": "month_text", "label": "3+ mesece – vsebina" },
+        { "type": "text", "id": "month_gifts", "label": "3+ mesece – darila (z vejico)" },
+        { "type": "product", "id": "six", "label": "6-mesečna zaloga" },
+        { "type": "text", "id": "six_name", "label": "6x – ime" },
+        { "type": "text", "id": "six_text", "label": "6x – vsebina" },
+        { "type": "text", "id": "six_gifts", "label": "6x – darila (z vejico)" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Petsome: BF paketi" }]
+}
+{% endschema %}

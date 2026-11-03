@@ -1,0 +1,154 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "bf_grid": {
+      "type": "petsome-bf-grid",
+      "blocks": {
+        "tab_flora": {
+          "type": "tab",
+          "settings": {
+            "label": "FloraMix",
+            "duo": "floramix-duo-2x-darilo",
+            "duo_name": "Duo",
+            "duo_text": "2x FloraMix",
+            "duo_gifts": "Zložljiva posodica",
+            "month": "floramix-mesecna-zaloga-4x-2-darili",
+            "month_name": "Zaloga za 3+ mesece",
+            "month_text": "4x FloraMix · odvisno od teže psa",
+            "month_gifts": "Zložljiva posodica, DentalSticks",
+            "six": "floramix-6x-2-darili",
+            "six_name": "Zimska zaloga",
+            "six_text": "6x FloraMix · najnižja cena na dózo",
+            "six_gifts": "Zložljiva posodica, DentalSticks"
+          }
+        },
+        "tab_mobi": {
+          "type": "tab",
+          "settings": {
+            "label": "MobiMix",
+            "duo": "mobimix-duo-2x-darilo",
+            "duo_name": "Duo",
+            "duo_text": "2x MobiMix",
+            "duo_gifts": "Zložljiva posodica",
+            "month": "mobimix-mesecna-zaloga-4x-2-darili",
+            "month_name": "Zaloga za 3+ mesece",
+            "month_text": "4x MobiMix · odvisno od teže psa",
+            "month_gifts": "Zložljiva posodica, DentalSticks",
+            "six": "mobimix-6x-2-darili",
+            "six_name": "Zimska zaloga",
+            "six_text": "6x MobiMix · najnižja cena na dózo",
+            "six_gifts": "Zložljiva posodica, DentalSticks"
+          }
+        },
+        "tab_dental": {
+          "type": "tab",
+          "settings": {
+            "label": "DentalMix",
+            "duo": "dentalmix-duo-2x-darilo",
+            "duo_name": "Duo",
+            "duo_text": "2x DentalMix",
+            "duo_gifts": "Zložljiva posodica",
+            "month": "dentalmix-mesecna-zaloga-4x-2-darili",
+            "month_name": "Zaloga za 3+ mesece",
+            "month_text": "4x DentalMix · odvisno od teže psa",
+            "month_gifts": "Zložljiva posodica, DentalSticks",
+            "six": "dentalmix-6x-2-darili",
+            "six_name": "Zimska zaloga",
+            "six_text": "6x DentalMix · najnižja cena na dózo",
+            "six_gifts": "Zložljiva posodica, DentalSticks"
+          }
+        }
+      },
+      "block_order": [
+        "tab_flora",
+        "tab_mobi",
+        "tab_dental"
+      ],
+      "settings": {
+        "bg": "#0d0d10",
+        "accent": "#e3b65b",
+        "red": "#e01e1e",
+        "btn": "#e8620c",
+        "hero_d": "bfhero_desktop.jpg",
+        "hero_m": "bfhero_mobile.jpg",
+        "bar_text": "⚫ PRE-BLACK FRIDAY · Te cene veljajo do 12. novembra",
+        "trust": "Zaupa nam več kot 3.500 lastnikov psov",
+        "heading": "<p>Black Friday se začne zdaj:<br><em>do −44 % + darila</em></p>",
+        "sub": "Založi se za zimo, preden pride Black Friday gneča. Vsak paket dobiš z brezplačnimi darili.",
+        "top_cta": "Poglej pakete",
+        "kicker": "BLACK FRIDAY PAKETI",
+        "heading2": "Kaj pripravimo za tvojega psa?",
+        "hero_label": "NAJBOLJ PRILJUBLJEN",
+        "save_label": "PRIHRANI",
+        "only_label": "SAMO",
+        "unit_label": "DÓZO",
+        "btn_label": "Dodaj v košarico",
+        "soldout_label": "Razprodano",
+        "trio_heading": "Ali vse za zdravega psa v enem paketu",
+        "trio": "paket-zdrav-pes-floramix-dentalmix-mobimix",
+        "trio_text": "FloraMix + DentalMix + MobiMix (črevesje, zobje, sklepi)",
+        "trio_gifts": "Zložljiva posodica, DentalSticks",
+        "guarantee_img": "shopify://shop_images/Guarantee.png",
+        "guarantee": "<p><strong>90-dnevna garancija vračila kupnine.</strong> Če izdelek ne izpolni pričakovanj, lahko v 90 dneh zahtevaš vračilo kupnine.</p>"
+      }
+    },
+    "vet": {
+      "type": "petsome-vet-quotes",
+      "blocks": {
+        "q_flora": {
+          "type": "quote",
+          "settings": {
+            "tag": "FloraMix",
+            "color": "#6b3fa0",
+            "quote": "„Neurejena prebava, praskanje in lizanje tačk pri psih pogosto niso tri ločene težave. Pogosto so povezani z neravnovesjem v črevesju in imunskim odzivom. FloraMix je zasnovan tako, da hkrati podpira črevesno floro, imunski odziv ter kožo in dlako.“",
+            "author": "Blaž Petelinek Ledinski, dr. vet. med.",
+            "image": "shopify://shop_images/unnamed_1.jpg"
+          }
+        },
+        "q_dental": {
+          "type": "quote",
+          "settings": {
+            "tag": "DentalMix",
+            "color": "#1f8a8a",
+            "quote": "„Več kot 80 % psov ima do tretjega leta vidne težave z zobmi, večina lastnikov pa rednega ščetkanja preprosto ne zmore. DentalMix deluje drugače: skozi pasjo slino, ki obliva zobe ves dan. Enostavna dnevna podpora za svežji zadah in čistejše zobe, brez ščetkanja.“",
+            "author": "Blaž Petelinek Ledinski, dr. vet. med.",
+            "image": "shopify://shop_images/unnamed_1.jpg"
+          }
+        },
+        "q_mobi": {
+          "type": "quote",
+          "settings": {
+            "tag": "MobiMix",
+            "color": "#e85d5d",
+            "quote": "„Pri starejših in aktivnih psih pogosto opažamo spremembe v gibanju, ki niso nujno takoj boleče, a vplivajo na kakovost življenja. MobiMix cilja ključne elemente, povezane z zdravjem sklepov in gibanjem.“",
+            "author": "Blaž Petelinek Ledinski, dr. vet. med.",
+            "image": "shopify://shop_images/unnamed_1.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "q_flora",
+        "q_dental",
+        "q_mobi"
+      ],
+      "settings": {
+        "heading": "Kaj pravi veterinar",
+        "show_loox": true,
+        "reviews_heading": "Kaj pravijo lastniki psov",
+        "reviews_limit": 12
+      }
+    }
+  },
+  "order": [
+    "bf_grid",
+    "vet"
+  ]
+}
