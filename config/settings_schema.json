@@ -191,10 +191,12 @@
         "label": "Desktop gradient backgrounds style",
         "options": [
           {
-            "value": "sticky", "label": "Sticky"
+            "value": "sticky",
+            "label": "Sticky"
           },
           {
-            "value": "static", "label": "Static"
+            "value": "static",
+            "label": "Static"
           }
         ],
         "default": "static",
@@ -2861,6 +2863,27 @@
         "id": "continue_shopping_url",
         "label": "Continue shopping button custom link",
         "info": "If empty, a link to all products will be applied."
+      }
+    ]
+  },
+  {
+    "name": "Black Friday",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Eno stikalo za BF videz Kaching ponudbe na VSEH PDP-jih in landerjih. Besedila so prevedena po jeziku (SLO/HR/CZ)."
+      },
+      {
+        "type": "checkbox",
+        "id": "bf_global",
+        "label": "Black Friday videz povsod",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "bf_g_tag",
+        "label": "Oznaka desno v bannerju",
+        "default": "do 12. 11."
       }
     ]
   }
