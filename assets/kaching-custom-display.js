@@ -502,7 +502,7 @@ if (!customElements.get('kaching-custom-display')) {
                 ? `<span class="kaching-tile__check">✓ ${this.dataset.protocolLabel || '3-mesečni protokol'}</span>`
                 : ''}
               ${tier.quantity === 2 && (this.dataset.bfDuoGift || '').trim()
-                ? `<span class="kaching-tile__check">✓ ${this.dataset.bfDuoGift.trim()}</span>`
+                ? `<span class="kaching-tile__checklist-item">${this.dataset.bfDuoGift.trim()}</span>`
                 : ''}
               ${!valid ? `<span class="kaching-tile__unavailable">${validationMessage || this.i18n.unavailable}</span>` : ''}
             </span>
