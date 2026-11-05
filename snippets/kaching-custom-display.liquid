@@ -31,15 +31,16 @@
   case bf_lang
     when 'hr'
       assign bf_kicker = 'OGRANIČENA PONUDA'
-      assign bf_text = 'Uz pakete uštedi do 42 % + besplatni pokloni'
+      assign bf_text = 'Uz pakete uštedi do −42 % + besplatni pokloni'
       assign bf_hero = 'OGRANIČENA PRE-BLACK FRIDAY PONUDA'
     when 'cs'
       assign bf_kicker = 'OMEZENÁ NABÍDKA'
-      assign bf_text = 'S balíčky ušetříte až 30 % + dárky zdarma'
+      assign bf_text = 'S balíčky ušetříte až −46 % + dárky zdarma'
       assign bf_hero = 'OMEZENÁ PRE-BLACK FRIDAY NABÍDKA'
     else
       assign bf_kicker = block.settings.bf_banner_kicker | default: 'OMEJENA PONUDBA'
-      assign bf_text = block.settings.bf_banner_text | default: 'S paketi prihraniš do 42 % + brezplačna darila'
+      assign bf_text = block.settings.bf_banner_text | default: 'S paketi prihraniš do −42 % + brezplačna darila'
+      assign bf_text = bf_text | replace: 'do 35 %', 'do −42 %' | replace: 'do -35 %', 'do −42 %' | replace: 'do −35 %', 'do −42 %'
       assign bf_hero = block.settings.bf_hero_label | default: 'OMEJENA PRE-BLACK FRIDAY PONUDBA'
   endcase
   case bf_lang

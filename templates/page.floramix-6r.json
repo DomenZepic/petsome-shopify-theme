@@ -20,7 +20,7 @@
     "offer_bar": {
       "type": "petsome-ld-offer-bar",
       "settings": {
-        "headline": "Early Black Friday: do -35 %",
+        "headline": "Early Black Friday: do -42 %",
         "subline": "+ 2 gratis darili 🎁",
         "link": "",
         "show_timer": true,
@@ -614,7 +614,7 @@
       "settings": {
         "show_icon": true,
         "icon": "verified_user",
-        "heading": "<p>Ne zamudi — do -35 %</p>",
+        "heading": "<p>Ne zamudi — do -42 %</p>",
         "text": "<p>Podpri pasje črevesje s 15 aktivnimi sestavinami v treh smereh. Preizkusi brez tveganja 90 dni: če ne opaziš razlike, nam piši in denar ti vrnemo, tudi če je embalaža že odprta.</p>",
         "cta_label": "NAROČI ZDAJ",
         "cta_url": "#offer",
