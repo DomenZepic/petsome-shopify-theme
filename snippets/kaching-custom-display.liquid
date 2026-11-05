@@ -93,7 +93,7 @@
     for item in offer_checklist
       assign it = item | strip
       assign itd = it | downcase
-      if itd contains 'posod' or itd contains 'zdjelic' or itd contains 'misk' or itd contains 'dentalsticks'
+      if itd contains 'posod' or itd contains 'zdjelic' or itd contains 'misk' or itd contains 'ciotol' or itd contains 'dentalsticks'
         assign it = bf_gift_prefix | append: it
       endif
       assign it = it | replace: '14,50 €', '14,90 €'
