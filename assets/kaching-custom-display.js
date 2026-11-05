@@ -13,16 +13,6 @@ if (!customElements.get('kaching-custom-display')) {
         pricePerDay: this.dataset.i18nPricePerDay || '{{ amount }} / day',
       };
       this.giftsInTier = this.dataset.giftsInTier === '1';
-      // Vrednost paketa (BF): "2:9,4:23.9" = vrednost daril po kolicini.
-      // Precrtana cena v glavi = doze + darila, zraven "Vrednost paketa" (Omnibus).
-      this.bfGiftValues = {};
-      (this.dataset.bfGiftValues || '').split(',').forEach((pair) => {
-        const parts = pair.split(':');
-        const qty = parseInt(parts[0], 10);
-        const val = parseFloat(parts[1]);
-        if (qty > 0 && !Number.isNaN(val)) this.bfGiftValues[qty] = val;
-      });
-      this.bfValueLabel = this.dataset.bfValueLabel || '';
       this.capsulesPerPackage = parseFloat(this.dataset.capsulesPerPackage) || 0;
       this.capsulesPerDayBySize = (this.dataset.capsulesPerDayBySize || '')
         .split(',')
@@ -314,8 +304,7 @@ if (!customElements.get('kaching-custom-display')) {
         tier,
         imageUrl: tier.kachingImageUrl || null,
         price: this.computeFallbackPrice(tier, variant),
-        comparePrice: basePrice != null ? basePrice * tier.quantity + (this.bfGiftValues[tier.quantity] || 0) : null,
-        baseCompare: basePrice != null ? basePrice * tier.quantity : null,
+        comparePrice: basePrice != null ? basePrice * tier.quantity : null,
         valid: available,
         validationMessage: available ? null : this.i18n.unavailable,
         dosage: this.computeDosage(tier, sizeIndex),
@@ -438,21 +427,13 @@ if (!customElements.get('kaching-custom-display')) {
 
       const hasSavings = selected.comparePrice != null && selected.comparePrice > selected.price + 0.005;
       this.headerPriceCompare.hidden = !hasSavings;
-      const hasValue = hasSavings && this.bfValueLabel && this.bfGiftValues[selected.tier.quantity];
-      if (hasValue) {
-        this.headerPriceCompare.style.textDecoration = 'none';
-        this.headerPriceCompare.innerHTML = `<span class="kcd-value-label">${this.bfValueLabel}</span> <s>${this.formatMoney(selected.comparePrice)}</s>`;
-      } else {
-        this.headerPriceCompare.style.textDecoration = '';
-        this.headerPriceCompare.textContent = hasSavings ? this.formatMoney(selected.comparePrice) : '';
-      }
+      this.headerPriceCompare.textContent = hasSavings ? this.formatMoney(selected.comparePrice) : '';
 
       this.savingsBadge.hidden = !hasSavings;
       if (hasSavings) {
-        const pct = Math.round((1 - selected.price / selected.comparePrice) * 100);
         this.savingsBadgeText.textContent = this.t(this.i18n.savingsPrefix, {
           amount: this.formatMoney(selected.comparePrice - selected.price),
-        }) + (hasValue ? ` (−${pct} %)` : '');
+        });
       }
     }
 
@@ -472,7 +453,7 @@ if (!customElements.get('kaching-custom-display')) {
         }
       });
 
-      tilesData.forEach(({ tier, imageUrl, price, comparePrice, baseCompare, valid, validationMessage, dosage }, index) => {
+      tilesData.forEach(({ tier, imageUrl, price, comparePrice, valid, validationMessage, dosage }, index) => {
         const position = index + 1;
         const badgeStyle = this.dataset[`tier${position}Style`] || 'none';
         const rawBadgeLabel = tier.label || tier.badgeText || '';
@@ -512,11 +493,8 @@ if (!customElements.get('kaching-custom-display')) {
               <span class="kaching-tile__title">${(this.giftsInTier && tier.quantity === heroQty && (this.dataset.heroTitle || '').trim()) ? this.dataset.heroTitle.trim() : (this.translateFromKaching(tier.title) || tier.title)}</span>
               <span class="kaching-tile__price-row">
                 <span class="kaching-tile__price">${this.formatMoney(price / tier.quantity)}</span>
-                ${this.giftsInTier && baseCompare && baseCompare > price
-                  ? `<s class="kaching-tile__price-compare">${this.formatMoney(baseCompare / tier.quantity)}</s>`
-                  : ''}
-                ${this.bfValueLabel && this.bfGiftValues[tier.quantity] && comparePrice > price
-                  ? `<span class="kcd-tile-pct">−${Math.round((1 - price / comparePrice) * 100)} %</span>`
+                ${this.giftsInTier && comparePrice && comparePrice > price
+                  ? `<s class="kaching-tile__price-compare">${this.formatMoney(comparePrice / tier.quantity)}</s>`
                   : ''}
               </span>
               ${dosageLines.map((line) => `<span class="kaching-tile__dosage">${line}</span>`).join('')}
