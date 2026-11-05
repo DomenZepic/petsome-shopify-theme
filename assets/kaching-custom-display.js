@@ -23,6 +23,7 @@ if (!customElements.get('kaching-custom-display')) {
         if (qty > 0 && !Number.isNaN(val)) this.bfGiftValues[qty] = val;
       });
       this.bfValueLabel = this.dataset.bfValueLabel || '';
+      this.bfTileValueLabel = this.dataset.bfTileValueLabel || 'vrednost';
       this.capsulesPerPackage = parseFloat(this.dataset.capsulesPerPackage) || 0;
       this.capsulesPerDayBySize = (this.dataset.capsulesPerDayBySize || '')
         .split(',')
@@ -513,7 +514,9 @@ if (!customElements.get('kaching-custom-display')) {
               <span class="kaching-tile__price-row">
                 <span class="kaching-tile__price">${this.formatMoney(price / tier.quantity)}</span>
                 ${this.giftsInTier && baseCompare && baseCompare > price
-                  ? `<s class="kaching-tile__price-compare">${this.formatMoney(((this.bfValueLabel && this.bfGiftValues[tier.quantity]) ? comparePrice : baseCompare) / tier.quantity)}</s>`
+                  ? ((this.bfValueLabel && this.bfGiftValues[tier.quantity])
+                    ? `<span class="kcd-tile-value">${this.bfTileValueLabel}</span> <s class="kaching-tile__price-compare">${this.formatMoney(comparePrice / tier.quantity)}</s>`
+                    : `<s class="kaching-tile__price-compare">${this.formatMoney(baseCompare / tier.quantity)}</s>`)
                   : ''}
                 ${this.bfValueLabel && this.bfGiftValues[tier.quantity] && comparePrice > price
                   ? `<span class="kcd-tile-pct">−${Math.round((1 - price / comparePrice) * 100)} %</span>`
