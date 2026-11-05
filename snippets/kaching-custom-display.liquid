@@ -33,6 +33,10 @@
       assign bf_kicker = 'OGRANIČENA PONUDA'
       assign bf_text = 'Uz pakete uštedi do −42 % + besplatni pokloni'
       assign bf_hero = 'OGRANIČENA PRE-BLACK FRIDAY PONUDA'
+    when 'it'
+      assign bf_kicker = 'OFFERTA LIMITATA'
+      assign bf_text = 'Con i pacchetti risparmi fino al −42 % + regali gratuiti'
+      assign bf_hero = 'OFFERTA LIMITATA PRE-BLACK FRIDAY'
     when 'cs'
       assign bf_kicker = 'OMEZENÁ NABÍDKA'
       assign bf_text = 'S balíčky ušetříte až −46 % + dárky zdarma'
@@ -48,6 +52,8 @@
       assign bf_duo_gift = 'POKLON: prijenosna sklopiva zdjelica — 9,00 €'
     when 'cs'
       assign bf_duo_gift = 'DÁREK: přenosná skládací miska — 225 Kč'
+    when 'it'
+      assign bf_duo_gift = 'REGALO: ciotola pieghevole portatile — 9,00 €'
     else
       assign bf_duo_gift = 'DARILO: prenosna zložljiva posoda — 9,00 €'
   endcase
@@ -58,12 +64,18 @@
     when 'cs'
       assign bf_hero_title = 'Zásoba na 3+ měsíce'
       assign bf_gifts_title = 'Dárkový balíček v hodnotě 600 Kč'
+    when 'it'
+      assign bf_hero_title = 'Scorta per 3+ mesi'
+      assign bf_gifts_title = 'Pacchetto regalo del valore di 23,90 €'
     else
       assign bf_hero_title = 'Zaloga za 3+ mesece'
       assign bf_gifts_title = 'Darilni paket v vrednosti 23,90 €'
   endcase
   assign bf_title = block.settings.bf_banner_title | default: 'Pre-Black Friday Exclusive'
   assign bf_tag = block.settings.bf_banner_tag | default: settings.bf_g_tag | default: 'do 12. 11.'
+  if bf_lang == 'it'
+    assign bf_tag = bf_tag | replace: 'do ', 'fino al '
+  endif
 
   assign offer_checklist = block.settings.offer_checklist | newline_to_br | split: '<br />'
   if bf_on
@@ -72,6 +84,8 @@
         assign bf_gift_prefix = 'POKLON: '
       when 'cs'
         assign bf_gift_prefix = 'DÁREK: '
+      when 'it'
+        assign bf_gift_prefix = 'REGALO: '
       else
         assign bf_gift_prefix = 'DARILO: '
     endcase
@@ -809,8 +823,8 @@
     data-hero-title=""
     data-bf-duo-gift="{% if bf_on %}{{ bf_duo_gift | escape }}{% endif %}"
     data-bf-gift-values="{% if bf_on %}{% if bf_lang == 'cs' %}2:225,4:600{% else %}2:9,4:23.9{% endif %}{% endif %}"
-    data-bf-tile-value-label="{% case bf_lang %}{% when 'hr' %}vrijednost{% when 'cs' %}hodnota{% else %}vrednost{% endcase %}"
-    data-bf-value-label="{% if bf_on %}{% case bf_lang %}{% when 'hr' %}Vrijednost paketa{% when 'cs' %}Hodnota balíčku{% else %}Vrednost paketa{% endcase %}{% endif %}"
+    data-bf-tile-value-label="{% case bf_lang %}{% when 'hr' %}vrijednost{% when 'cs' %}hodnota{% when 'it' %}valore{% else %}vrednost{% endcase %}"
+    data-bf-value-label="{% if bf_on %}{% case bf_lang %}{% when 'hr' %}Vrijednost paketa{% when 'cs' %}Hodnota balíčku{% when 'it' %}Valore del pacchetto{% else %}Vrednost paketa{% endcase %}{% endif %}"
     data-hero-label="{% if bf_on %}{{ bf_hero | escape }}{% else %}{{ block.settings.hero_label | escape }}{% endif %}"
     data-hero-tier-quantity="{{ block.settings.hero_tier_quantity | escape }}"
     data-product-title="{{ product.title | escape }}"
