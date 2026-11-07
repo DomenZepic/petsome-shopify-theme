@@ -379,7 +379,8 @@ if (!customElements.get('kaching-custom-display')) {
 
         let total = perItemPrice * data.tier.quantity;
         // Kaching kaze ceno na kos zaokrozeno (109,90 / 4 = 27,48) - pri fiksni ceni paketa obdrzi tocen znesek.
-        if (data.tier.discountType === 'specific' && Math.abs(total - data.tier.discountValue) < 0.01 * data.tier.quantity + 0.001) {
+        const roundStep = window.Shopify && window.Shopify.currency && window.Shopify.currency.active === 'CZK' ? 1 : 0.01;
+        if (data.tier.discountType === 'specific' && Math.abs(total - data.tier.discountValue) <= roundStep * data.tier.quantity + 0.001) {
           total = data.tier.discountValue;
         }
         if (Math.abs(total - data.price) > 0.005) {
