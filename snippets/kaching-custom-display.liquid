@@ -11,6 +11,13 @@
   {% render 'kaching-custom-display', block: block, section: section %}
 {% endcomment %}
 {%- liquid
+  assign kcd26_on = false
+  if settings.bf26_design
+    assign kcd26_list = settings.bf26_handles | default: '' | remove: ' ' | split: ','
+    if settings.bf26_handles == blank or kcd26_list contains product.handle
+      assign kcd26_on = true
+    endif
+  endif
   assign accent_color = product.metafields.custom.product_accent_color.value | default: block.settings.accent_color
   assign accent_color_dark = product.metafields.custom.product_accent_color_dark.value | default: block.settings.accent_color_dark
   assign secondary_color = product.metafields.custom.product_secondary_color.value | default: block.settings.secondary_color
@@ -797,6 +804,81 @@
     background-color: #0c0a10 !important;
     box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
   }
+  {%- if kcd26_on -%}
+    {%- liquid
+      assign kcd26_h = product.handle | downcase
+      assign kcd26_acc = '#6d388b'
+      if kcd26_h contains 'mobimix'
+        assign kcd26_acc = '#c4473d'
+      elsif kcd26_h contains 'dental'
+        assign kcd26_acc = '#2d6cb0'
+      endif
+    -%}
+    :root { --kcd26-brand: {{ kcd26_acc }}; }
+    .kcd-bf-banner { display: none !important; }
+    {%- case localization.language.iso_code -%}{%- when 'hr' -%}{%- assign kcd26_pack = 'Black Friday paket' -%}{%- assign kcd26_pill = 'BLACK FRIDAY PONUDA' -%}{%- when 'cs' -%}{%- assign kcd26_pack = 'Black Friday balíček' -%}{%- assign kcd26_pill = 'BLACK FRIDAY NABÍDKA' -%}{%- else -%}{%- assign kcd26_pack = 'Black Friday paket' -%}{%- assign kcd26_pill = 'BLACK FRIDAY PONUDBA' -%}{%- endcase -%}
+    .main-product__info-container > .heading.h1:first-of-type::before { content: '{{ kcd26_pack }}'; display: block; color: #e00000; font-size: 0.85em; line-height: 1.15; margin-bottom: 4px; }
+    .kcd26-kicker { margin: 0 0 10px; }
+    .kcd26-kicker__pill { display: inline-block; background: #e00000; color: #fff; font-size: 1.3rem; font-weight: 800; letter-spacing: .03em; padding: 9px 16px; border-radius: 4px; }
+    .product-form__submit.main-product-atc { background: #3ccb00 !important; background-color: #3ccb00 !important; color: #fff !important; border-radius: 6px !important; box-shadow: 0 6px 16px rgba(60, 203, 0, 0.28) !important; border: 0 !important; }
+    .product-form__submit.main-product-atc::before, .product-form__submit.main-product-atc::after { box-shadow: none !important; border: 0 !important; }
+    .product-form__submit.main-product-atc:hover { background: #35b500 !important; }
+    .product-form__submit.main-product-atc > span { color: #fff !important; }
+    variant-selects .product-form__input--pills input[type="radio"]:checked + label:not(.form__label), variant-selects input[type="radio"]:checked + label { background: var(--kcd26-brand) !important; color: #fff !important; border-color: var(--kcd26-brand) !important; }
+    variant-selects input[type="radio"] + label { border-radius: 12px; }
+  {%- endif -%}
+  /* ---- BF 2026 izgled ---- */
+  .kcd26 {
+    --kcd26-acc: var(--kcd26-brand, #6d388b);
+    --kcd26-tint: color-mix(in srgb, var(--kcd26-acc) 7%, white);
+    --kcd26-line: color-mix(in srgb, var(--kcd26-acc) 22%, white);
+  }
+  .kcd26, .kcd26 * { letter-spacing: normal; }
+  .kcd26 .kaching-custom-display__header { align-items: center; padding: 2px 0 4px; }
+  .kcd26 .kaching-custom-display__title { display: none; }
+  .kcd26 .kaching-custom-display__savings-badge { background: #e00000; color: #fff; border-radius: 99px; padding: 6px 12px; font-weight: 800; font-size: 1.35rem; }
+  .kcd26 .kaching-custom-display__price-current { font-size: 2.6rem; font-weight: 800; }
+  .kcd26 .kaching-custom-display__price-compare { font-size: 1.45rem; }
+  .kcd26 .kaching-custom-display__tiles { gap: 10px; }
+  .kcd26-card { background: #fff; border: 1px solid #e6e6e6; border-radius: 12px; overflow: hidden; cursor: pointer; transition: border-color .15s; }
+  .kcd26-card.is-selected { border: 2px solid var(--kcd26-acc); background: var(--kcd26-tint); }
+  .kcd26-card.is-disabled { opacity: .55; cursor: not-allowed; }
+  .kcd26-card__strip { background: #0e1111; color: #fff; font-size: 1.2rem; font-weight: 800; letter-spacing: .06em; padding: 9px 16px; }
+  .kcd26-card__main { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; padding: 14px 16px; }
+  .kcd26-card__left { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .kcd26-card__titlerow { display: flex; align-items: center; gap: 10px; }
+  .kcd26-dot { flex: 0 0 auto; width: 20px; height: 20px; box-sizing: border-box; border-radius: 99px; border: 2px solid var(--kcd26-acc); background: #fff; }
+  .kcd26-card.is-selected .kcd26-dot { border-width: 6px; }
+  .kcd26-card__title { font-size: 1.9rem; font-weight: 800; line-height: 1.2; color: rgb(var(--color-foreground)); }
+  .kcd26-card__qty { margin-left: 30px; font-size: 1.45rem; font-weight: 400; color: #555; line-height: 1.3; }
+  .kcd26-card__unavail { margin-left: 30px; font-size: 1.3rem; color: #c00; }
+  .kcd26-card__right { flex: 0 0 auto; display: flex; flex-direction: column; align-items: flex-end; }
+  .kcd26-save { margin-bottom: 3px; background: #e00000; color: #fff; font-size: 1rem; font-weight: 800; letter-spacing: .03em; padding: 2px 6px; border-radius: 4px; }
+  .kcd26-price { font-size: 2.1rem; font-weight: 900; line-height: 1.2; color: rgb(var(--color-foreground)); white-space: nowrap; }
+  .kcd26-strike { font-size: 1.3rem; color: #8a8a8a; white-space: nowrap; }
+  .kcd26-body { display: flex; flex-direction: column; gap: 12px; padding: 0 16px 16px; }
+  .kcd26-checks { display: flex; flex-direction: column; gap: 5px; padding-top: 12px; border-top: 1px solid var(--kcd26-line); }
+  .kcd26-check { font-size: 1.5rem; }
+  .kcd26-check::before { content: '✓'; color: var(--kcd26-acc); font-weight: 800; margin-right: 8px; }
+  .kcd26-gifts { align-self: flex-start; width: fit-content; max-width: 100%; background: #000; border-radius: 10px; overflow: hidden; }
+  .kcd26-gifts__head { margin: 0; background: #e00000; color: #fff; font-size: 1.35rem; font-weight: 600; padding: 7px 14px; line-height: 1.25; text-align: center; }
+  .kcd26-gifts__grid { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 92px); gap: 12px; padding: 16px 14px 12px; }
+  .kcd26-gift { min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 3px; }
+  .kcd26-gift__tag { position: relative; z-index: 1; margin-bottom: -9px; background: #d4a017; color: #fff; font-size: 1rem; font-weight: 700; padding: 1px 8px; border-radius: 99px; }
+  .kcd26-gift__img { width: 100%; aspect-ratio: 1 / 1; height: auto; box-sizing: border-box; object-fit: cover; background: #fff; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .kcd26-gift__img--icon .material-icon { font-size: 3.4rem; color: #1a1a1a; }
+  .kcd26-gift__was { order: 3; margin-top: 5px; font-size: 1.25rem; color: #ff5a5a; }
+  .kcd26-gift__name { order: 4; font-size: 1.3rem; font-weight: 500; line-height: 1.25; color: #fff; }
+  @media (max-width: 749px) {
+    .kcd26-gifts { align-self: stretch; width: auto; border-radius: 8px; }
+    .kcd26-gifts__head { font-size: 1.4rem; font-weight: 800; padding: 7px 10px; }
+    .kcd26-gifts__grid { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 6px; padding: 12px 8px 10px; }
+    .kcd26-gift { min-width: 0; max-width: none; }
+    .kcd26-gift__tag { margin-bottom: -9px; font-size: 0.95rem; font-weight: 900; padding: 1px 7px; border-radius: 4px; }
+    .kcd26-gift__img { width: 100%; max-width: 62px; height: auto; aspect-ratio: 1 / 1; border: 1.5px dashed #e8d6c5; border-radius: 8px; object-fit: cover; }
+    .kcd26-gift__name { order: 3; margin-top: 4px; font-size: 1.05rem; overflow-wrap: anywhere; hyphens: auto; font-weight: 700; color: #fff; }
+    .kcd26-gift__was { order: 4; margin-top: 0; font-size: 1.15rem; font-weight: 700; color: #ff3b3b; }
+  }
 </style>
 
 <div
@@ -816,13 +898,15 @@
     data-capsules-per-package="{{ kaching_amount_per_package }}"
     data-capsules-per-day-by-size="{{ kaching_amount_per_day_by_size }}"
     data-gifts-in-tier="{% if block.settings.gifts_in_tier %}1{% endif %}"
+    data-bf26="{% if kcd26_on %}1{% endif %}"
+    data-bf26-plan="{% if kcd26_on and settings.bf26_planned_gifts %}1{% endif %}"
     data-gifts-title="{{ kaching_gifts_heading | escape }}"
     data-protocol-label="{{ block.settings.protocol_label | default: '3-mesečni protokol' | escape }}"
     data-offer-checklist="{{ offer_checklist | json | escape }}"
     data-offer-total="{{ block.settings.offer_total_value | escape }}"
     data-hero-title=""
     data-bf-duo-gift="{% if bf_on %}{{ bf_duo_gift | escape }}{% endif %}"
-    data-bf-gift-values="{% if bf_on %}{% if bf_lang == 'cs' %}2:225,4:600{% else %}2:9,4:23.9{% endif %}{% endif %}"
+    data-bf-gift-values="{% if kcd26_on and bf_lang != 'cs' %}{% if settings.bf26_planned_gifts %}2:23.9,3:73.75,4:73.75{% else %}2:23.9,3:69.8,4:69.8{% endif %}{% elsif bf_on %}{% if bf_lang == 'cs' %}2:225,4:600{% else %}2:9,4:23.9{% endif %}{% endif %}"
     data-bf-tile-value-label="{% case bf_lang %}{% when 'hr' %}vrijednost{% when 'cs' %}hodnota{% when 'it' %}valore{% else %}vrednost{% endcase %}"
     data-bf-value-label="{% if bf_on %}{% case bf_lang %}{% when 'hr' %}Vrijednost paketa{% when 'cs' %}Hodnota balíčku{% when 'it' %}Valore del pacchetto{% else %}Vrednost paketa{% endcase %}{% endif %}"
     data-hero-label="{% if bf_on %}{{ bf_hero | escape }}{% else %}{{ block.settings.hero_label | escape }}{% endif %}"

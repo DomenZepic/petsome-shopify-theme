@@ -13,6 +13,8 @@ if (!customElements.get('kaching-custom-display')) {
         pricePerDay: this.dataset.i18nPricePerDay || '{{ amount }} / day',
       };
       this.giftsInTier = this.dataset.giftsInTier === '1';
+      this.bf26 = this.dataset.bf26 === '1';
+      if (this.bf26) this.classList.add('kcd26');
       // Vrednost paketa (BF): "2:9,4:23.9" = vrednost daril po kolicini.
       // Precrtana cena v glavi = doze + darila, zraven "Vrednost paketa" (Omnibus).
       this.bfGiftValues = {};
@@ -426,6 +428,7 @@ if (!customElements.get('kaching-custom-display')) {
 
     renderHeader(tilesData) {
       if (!this.headerContainer) return;
+      if (this.bf26) return this.renderHeader26(tilesData);
       const selected = tilesData.find((data) => data.tier.id === (this.selectedDealBarId || this.preselectedDealBarId))
         || tilesData[0];
       if (!selected) {
@@ -458,6 +461,7 @@ if (!customElements.get('kaching-custom-display')) {
     }
 
     renderTiles(tilesData) {
+      if (this.bf26) return this.renderTiles26(tilesData);
       this.tilesContainer.innerHTML = '';
       const maxQty = Math.max.apply(null, tilesData.map(function (t) { return t.tier.quantity || 0; }));
       // Katera plocica nosi ponudbo. Privzeto najvecja; nastavitev jo lahko
@@ -620,6 +624,7 @@ if (!customElements.get('kaching-custom-display')) {
 
     renderGifts() {
       if (!this.giftsContainer) return;
+      if (this.bf26) { if (this.giftsWrapper) this.giftsWrapper.hidden = true; return; }
 
       if (!this.gifts || this.gifts.length === 0) {
         this.giftsContainer.innerHTML = '';
@@ -662,6 +667,186 @@ if (!customElements.get('kaching-custom-display')) {
           `;
         })
         .join('');
+    }
+
+    // ---- BF 2026 izgled (vklop: nastavitev teme "BF 2026 dizajn paketov") ----
+    l26() {
+      const lang = (document.documentElement.lang || 'sl').split('-')[0].toLowerCase();
+      const L = {
+        sl: { save: 'Prihraniš', value: 'Vrednost', saveTag: 'PRIHRANI', unit: '/kos', months: '-mesečna zaloga', weeks: '-tedenska zaloga', excl: 'BLACK FRIDAY EKSKLUZIVNO', gratis: 'GRATIS',
+          chkGifts: 'Brezplačna darila', chkGiftsVal: (v) => `Brezplačna darila (${v} vrednosti)`, chkLowest: 'Najnižja cena na kos', chkShip: 'Brezplačna dostava', chkDose: 'Odmerek prilagojen teži psa', chkGuarantee: '90-dnevna garancija vračila kupnine',
+          gifts: (n) => (n === 1 ? '1 GRATIS darilo' : n === 2 ? '2 GRATIS darili' : n + ' GRATIS darila'),
+          giftsHead: (n) => (n === 1 ? 'GRATIS darilo ob tvojem nakupu!' : n === 2 ? '2 GRATIS darili ob tvojem nakupu!' : n + ' GRATIS darila ob tvojem nakupu!') },
+        hr: { save: 'Uštedi', value: 'Vrijednost', saveTag: 'UŠTEDI', unit: '/kom', months: '-mjesečna zaliha', weeks: '-tjedna zaliha', excl: 'BLACK FRIDAY EKSKLUZIVNO', gratis: 'GRATIS',
+          chkGifts: 'Besplatni pokloni', chkGiftsVal: (v) => `Besplatni pokloni (vrijednost ${v})`, chkLowest: 'Najniža cijena po komadu', chkShip: 'Besplatna dostava', chkDose: 'Doza prilagođena težini psa', chkGuarantee: '90-dnevno jamstvo povrata novca',
+          gifts: (n) => (n === 1 ? '1 GRATIS poklon' : n + ' GRATIS poklona'),
+          giftsHead: (n) => (n === 1 ? 'GRATIS poklon uz tvoju kupnju!' : n + ' GRATIS poklona uz tvoju kupnju!') },
+        cs: { save: 'Ušetříte', value: 'Hodnota', saveTag: 'UŠETŘÍTE', unit: '/ks', months: 'měsíční zásoba', weeks: 'týdenní zásoba', excl: 'BLACK FRIDAY EXKLUZIVNĚ', gratis: 'ZDARMA',
+          chkGifts: 'Dárky zdarma', chkGiftsVal: (v) => `Dárky zdarma (v hodnotě ${v})`, chkLowest: 'Nejnižší cena za kus', chkShip: 'Doprava zdarma', chkDose: 'Dávka podle váhy psa', chkGuarantee: '90denní záruka vrácení peněz',
+          gifts: (n) => (n === 1 ? '1 dárek ZDARMA' : n + ' dárky ZDARMA'),
+          giftsHead: (n) => (n === 1 ? 'Dárek ZDARMA k nákupu!' : n + ' dárky ZDARMA k nákupu!') }
+      };
+      return L[lang] || L.sl;
+    }
+
+    supplyTitle26(tier, dosage) {
+      const L = this.l26();
+      if (!dosage || !dosage.daysSupply) return this.translateFromKaching(tier.title) || tier.title;
+      const join = (n, s) => n + (s.charAt(0) === '-' ? s : ' ' + s);
+      const m = dosage.daysSupply / 30;
+      if (Math.abs(m - Math.round(m)) < 0.08) return join(Math.round(m), L.months);
+      return join(Math.round(dosage.daysSupply / 7), L.weeks);
+    }
+
+    heroQty26(tilesData) {
+      const maxQty = Math.max.apply(null, tilesData.map((t) => t.tier.quantity || 0));
+      const s = parseInt(this.dataset.heroTierQuantity || '', 10);
+      return s > 0 ? s : maxQty;
+    }
+
+    giftsForTier26(tier, heroQty) {
+      const cur26 = window.Shopify && window.Shopify.currency ? window.Shopify.currency.active : 'EUR';
+      if (this.dataset.bf26Plan === '1' && cur26 === 'EUR') return this.plannedGifts26(tier, heroQty);
+      if (tier.quantity === heroQty) {
+        return (this.gifts || []).map((g) => ({ title: g.title, image: g.image, icon: g.icon, compare: g.comparePrice || this.giftFallbackValue26(g.title) }));
+      }
+      const duo = (this.dataset.bfDuoGift || '').trim();
+      if (tier.quantity === 2 && duo) {
+        const m = duo.match(/^[^:]*:\s*(.*?)\s*[—–-]\s*([\d.,]+\s*\S*)$/);
+        const t = m ? m[1] : duo;
+        const key = t.toLowerCase().slice(0, 6);
+        const same = (this.gifts || []).find((g) => g.image && String(g.title || '').toLowerCase().indexOf(key) !== -1);
+        const ttl = same ? same.title : t;
+        return [{ title: ttl, image: same ? same.image : null, icon: 'redeem', compare: (same && same.comparePrice) || this.giftFallbackValue26(ttl), compareText: m ? m[2] : '' }];
+      }
+      return [];
+    }
+
+    // Nacrtovana BF darila (predogled, vklop: nastavitev "bf26_planned_gifts").
+    plannedGifts26(tier, heroQty) {
+      const CDN = 'https://cdn.shopify.com/s/files/1/0970/1284/2821/files/';
+      const title = String(this.productTitle || '').toLowerCase();
+      const heroGift = title.indexOf('dentalmix') !== -1
+        ? { title: 'MobiMix', image: CDN + '1xMobiMix.png?width=200', compare: 45.9 }
+        : { title: 'DentalMix', image: CDN + '1xDentalMix-no_bg.png?width=200', compare: 45.9 };
+      const hr = (document.documentElement.lang || '').toLowerCase().indexOf('hr') === 0;
+      const bowl = { title: hr ? 'Sklopiva zdjelica' : 'Zložljiva posodica', image: CDN + 'Ada0f20e1488b42368773869a28a63524b1.png?width=200', compare: 9.0 };
+      const sticks = { title: 'DentalSticks', image: CDN + 'hf_20260709_194728_f15d5b24-84c3-48bd-a64e-0545ecd72289.png?width=200', compare: 14.9 };
+      const ship = { title: hr ? 'Besplatna dostava' : 'Brezplačna dostava', image: null, icon: 'local_shipping', compare: 3.95 };
+      if (tier.quantity >= 3 || tier.quantity === heroQty) return [heroGift, bowl, sticks, ship];
+      if (tier.quantity === 2) return [bowl, sticks];
+      return [];
+    }
+
+    // Privzete vrednosti daril (EUR), dokler v Kachingu ni vpisane primerjalne cene.
+    giftFallbackValue26(title) {
+      const cur = window.Shopify && window.Shopify.currency ? window.Shopify.currency.active : 'EUR';
+      if (cur !== 'EUR') return null;
+      const t = String(title || '').toLowerCase();
+      if (t.indexOf('posod') !== -1 || t.indexOf('zdjel') !== -1 || t.indexOf('ciotol') !== -1) return 9.0;
+      if (t.indexOf('dentalstick') !== -1) return 14.9;
+      if (t.indexOf('dentalmix') !== -1 || t.indexOf('mobimix') !== -1 || t.indexOf('floramix') !== -1) return 45.9;
+      if (t.indexOf('dostav') !== -1 || t.indexOf('shipping') !== -1) return 3.95;
+      return null;
+    }
+
+    renderHeader26(tilesData) {
+      const L = this.l26();
+      const selected = tilesData.find((d) => d.tier.id === (this.selectedDealBarId || this.preselectedDealBarId)) || tilesData[0];
+      if (!selected) {
+        this.headerContainer.hidden = true;
+        return;
+      }
+      this.headerContainer.hidden = false;
+      this.headerTitle.textContent = '';
+      this.headerTitle.hidden = true;
+      this.headerPriceCurrent.textContent = this.formatMoney(selected.price);
+      const hasSavings = selected.comparePrice != null && selected.comparePrice > selected.price + 0.005;
+      this.headerPriceCompare.hidden = !hasSavings;
+      this.headerPriceCompare.style.textDecoration = 'none';
+      this.headerPriceCompare.innerHTML = hasSavings
+        ? `<span class="kcd-value-label">${L.value}</span> <s>${this.formatMoney(selected.comparePrice)}</s>`
+        : '';
+      this.savingsBadge.hidden = !hasSavings;
+      if (hasSavings) {
+        const pct = Math.round((1 - selected.price / selected.comparePrice) * 100);
+        this.savingsBadgeText.textContent = `${L.save} ${this.formatMoney(selected.comparePrice - selected.price)} (−${pct} %)`;
+      }
+    }
+
+    renderTiles26(tilesData) {
+      const L = this.l26();
+      this.tilesContainer.innerHTML = '';
+      const heroQty = this.heroQty26(tilesData);
+      const selId = this.selectedDealBarId || this.preselectedDealBarId;
+      tilesData.forEach(({ tier, price, comparePrice, baseCompare, valid, validationMessage, dosage }) => {
+        const isSel = tier.id === selId;
+        const isHero = tier.quantity === heroQty;
+        const gifts = this.giftsForTier26(tier, heroQty);
+        const qty = tier.quantity || 1;
+        const unit = price / qty;
+        const unitBase = comparePrice && comparePrice > (baseCompare || 0) ? comparePrice / qty : (baseCompare ? baseCompare / qty : null);
+        const pctBase = comparePrice && comparePrice > price ? comparePrice : baseCompare;
+        const pct = pctBase && pctBase > price ? Math.round((1 - price / pctBase) * 100) : 0;
+        const qtyLine = `${qty}× ${this.productTitle}${gifts.length ? ' + ' + L.gifts(gifts.length) : ''}`;
+
+        const giftTiles = gifts
+          .map((g) => {
+            const img = g.image
+              ? `<img class="kcd26-gift__img" src="${g.image}" alt="" loading="lazy">`
+              : `<span class="kcd26-gift__img kcd26-gift__img--icon"><span class="material-icon material-symbols-outlined">${g.icon || 'redeem'}</span></span>`;
+            const was = g.compare ? this.formatMoney(g.compare) : g.compareText || '';
+            return `<div class="kcd26-gift"><span class="kcd26-gift__tag">${L.gratis}</span>${img}<span class="kcd26-gift__name">${g.title}</span>${was ? `<s class="kcd26-gift__was">${was}</s>` : ''}</div>`;
+          })
+          .join('');
+
+        const giftSum = gifts.reduce((a, g) => a + (Number(g.compare) || (g.compareText ? this.parseMoneyText(g.compareText) || 0 : 0)), 0);
+        const checksArr = [];
+        if (gifts.length) checksArr.push(giftSum > 0 ? L.chkGiftsVal(this.formatMoney(giftSum)) : L.chkGifts);
+        if (isHero) checksArr.push(L.chkLowest);
+        if (isHero) checksArr.push(L.chkShip);
+        checksArr.push(L.chkDose);
+        checksArr.push(L.chkGuarantee);
+        const checklist = `<div class="kcd26-checks">${checksArr.map((x) => `<span class="kcd26-check">${x}</span>`).join('')}</div>`;
+
+        const giftsBox = gifts.length
+          ? `<div class="kcd26-gifts"><p class="kcd26-gifts__head">${L.giftsHead(gifts.length)}</p><div class="kcd26-gifts__grid">${giftTiles}</div></div>`
+          : '';
+        const body = isSel ? `<div class="kcd26-body">${checklist}${giftsBox}</div>` : '';
+
+        const el = document.createElement('div');
+        el.className = `kcd26-card${isSel ? ' is-selected' : ''}${isHero ? ' is-hero' : ''}${valid ? '' : ' is-disabled'}`;
+        el.setAttribute('role', 'button');
+        el.setAttribute('tabindex', '0');
+        el.setAttribute('aria-pressed', isSel ? 'true' : 'false');
+        el.dataset.dealBarId = tier.id;
+        el.innerHTML = `
+          ${isHero ? `<div class="kcd26-card__strip">${L.excl}</div>` : ''}
+          <div class="kcd26-card__main">
+            <div class="kcd26-card__left">
+              <div class="kcd26-card__titlerow"><span class="kcd26-dot" aria-hidden="true"></span><span class="kcd26-card__title">${this.supplyTitle26(tier, dosage)}</span></div>
+              <div class="kcd26-card__qty">${qtyLine}</div>
+              ${!valid ? `<div class="kcd26-card__unavail">${validationMessage || this.i18n.unavailable}</div>` : ''}
+            </div>
+            <div class="kcd26-card__right">
+              ${pct > 0 ? `<span class="kcd26-save">${L.saveTag} −${pct} %</span>` : ''}
+              <span class="kcd26-price">${this.formatMoney(unit)}${L.unit}</span>
+              ${unitBase && unitBase > unit + 0.005 ? `<s class="kcd26-strike">${this.formatMoney(unitBase)}${L.unit}</s>` : ''}
+            </div>
+          </div>
+          ${body}`;
+        const pick = () => {
+          if (valid) this.handleTileClick(tier);
+        };
+        el.addEventListener('click', pick);
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            pick();
+          }
+        });
+        this.tilesContainer.appendChild(el);
+      });
     }
 
     async handleTileClick(tier) {

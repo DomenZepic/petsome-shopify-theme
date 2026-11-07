@@ -925,7 +925,10 @@
         "disabled": false,
         "settings": {}
       }
-    }
+    },
+    "bf26_design": true,
+    "bf26_planned_gifts": true,
+    "bf26_handles": "floramix"
   },
   "platform_customizations": {
     "custom_css": []

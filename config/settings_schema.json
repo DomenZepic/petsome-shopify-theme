@@ -2875,6 +2875,23 @@
       },
       {
         "type": "checkbox",
+        "id": "bf26_design",
+        "label": "BF 2026 dizajn paketov (Kaching prikaz)",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "bf26_planned_gifts",
+        "label": "BF 2026: pokaži načrtovana darila (samo predogled)",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "bf26_handles",
+        "label": "BF 2026: samo za izdelke (handle, ločeno z vejico; prazno = vsi)"
+      },
+      {
+        "type": "checkbox",
         "id": "bf_global",
         "label": "Black Friday videz povsod",
         "default": false
