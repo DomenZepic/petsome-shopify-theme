@@ -928,7 +928,7 @@
     },
     "bf26_design": true,
     "bf26_planned_gifts": true,
-    "bf26_handles": "floramix"
+    "bf26_handles": "floramix,mobimix,dentalmix"
   },
   "platform_customizations": {
     "custom_css": []
