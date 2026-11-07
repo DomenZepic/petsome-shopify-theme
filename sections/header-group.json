@@ -85,7 +85,7 @@
         "bf-early-announcement": {
           "type": "announcement",
           "settings": {
-            "text": "<a href=\"/collections/black-friday\" title=\"Black Friday\"><strong>Early Black Friday: do −47 % na paketih</strong></a>  →",
+            "text": "<a href=\"/collections/black-friday\" title=\"Black Friday\"><strong>Black Friday: največji popusti v letu, do −47 % na paketih</strong></a>  →",
             "text_alignment": "center",
             "mobile_text_size": 14,
             "desktop_text_size": 14,

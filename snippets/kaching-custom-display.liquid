@@ -32,20 +32,20 @@
     when 'hr'
       assign bf_kicker = 'OGRANIČENA PONUDA'
       assign bf_text = 'Uz pakete uštedi do −42 % + besplatni pokloni'
-      assign bf_hero = 'OGRANIČENA PRE-BLACK FRIDAY PONUDA'
+      assign bf_hero = 'BLACK FRIDAY · NAJVEĆI POPUSTI GODINE'
     when 'it'
       assign bf_kicker = 'OFFERTA LIMITATA'
       assign bf_text = 'Con i pacchetti risparmi fino al −42 % + regali gratuiti'
-      assign bf_hero = 'OFFERTA LIMITATA PRE-BLACK FRIDAY'
+      assign bf_hero = 'BLACK FRIDAY · GLI SCONTI PIÙ GRANDI DELL’ANNO'
     when 'cs'
       assign bf_kicker = 'OMEZENÁ NABÍDKA'
       assign bf_text = 'S balíčky ušetříte až −46 % + dárky zdarma'
-      assign bf_hero = 'OMEZENÁ PRE-BLACK FRIDAY NABÍDKA'
+      assign bf_hero = 'BLACK FRIDAY · NEJVĚTŠÍ SLEVY ROKU'
     else
       assign bf_kicker = block.settings.bf_banner_kicker | default: 'OMEJENA PONUDBA'
       assign bf_text = block.settings.bf_banner_text | default: 'S paketi prihraniš do −42 % + brezplačna darila'
       assign bf_text = bf_text | replace: 'do 35 %', 'do −42 %' | replace: 'do -35 %', 'do −42 %' | replace: 'do −35 %', 'do −42 %'
-      assign bf_hero = block.settings.bf_hero_label | default: 'OMEJENA PRE-BLACK FRIDAY PONUDBA'
+      assign bf_hero = block.settings.bf_hero_label | default: 'BLACK FRIDAY · NAJVEČJI POPUSTI V LETU'
   endcase
   case bf_lang
     when 'hr'
@@ -71,8 +71,8 @@
       assign bf_hero_title = 'Zaloga za 3+ mesece'
       assign bf_gifts_title = 'Darilni paket v vrednosti 23,90 €'
   endcase
-  assign bf_title = block.settings.bf_banner_title | default: 'Pre-Black Friday Exclusive'
-  assign bf_tag = block.settings.bf_banner_tag | default: settings.bf_g_tag | default: 'do 12. 11.'
+  assign bf_title = block.settings.bf_banner_title | default: 'Black Friday'
+  assign bf_tag = block.settings.bf_banner_tag | default: settings.bf_g_tag | default: 'do 30. 11.'
   if bf_lang == 'it'
     assign bf_tag = bf_tag | replace: 'do ', 'fino al '
   endif

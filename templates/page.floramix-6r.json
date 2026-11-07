@@ -20,7 +20,7 @@
     "offer_bar": {
       "type": "petsome-ld-offer-bar",
       "settings": {
-        "headline": "Early Black Friday: do -42 %",
+        "headline": "Black Friday: do -42 %",
         "subline": "+ 2 gratis darili 🎁",
         "link": "",
         "show_timer": true,
