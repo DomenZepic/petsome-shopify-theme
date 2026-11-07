@@ -88,7 +88,7 @@
               "name": "Heading",
               "settings": {
                 "visibility": "always-display",
-                "title": "FloraMix — najbolj napreden probiotik za prebavo, kožo in dlako",
+                "title": "FloraMix: probiotik za prebavo, kožo in dlako",
                 "heading_size": "h1",
                 "custom_desktop_size": 39,
                 "custom_mobile_size": 28,
@@ -960,7 +960,7 @@
               "name": "Petsome: Guarantee",
               "settings": {
                 "image": "shopify://shop_images/Guarantee.png",
-                "text": "<p>Želimo, da je nakup FloraMixa zate brez skrbi. Če izdelek ne bo izpolnil pričakovanj, lahko v 60 dneh zahtevaš vračilo kupnine.</p>",
+                "text": "<p>Želimo, da je nakup FloraMixa zate brez skrbi. Če izdelek ne bo izpolnil pričakovanj, lahko v 90 dneh zahtevaš vračilo kupnine.</p>",
                 "background_color": "#e8d6c5",
                 "border_color": "#b6a87c",
                 "margin_top": 0,
