@@ -377,7 +377,11 @@ if (!customElements.get('kaching-custom-display')) {
           return;
         }
 
-        const total = perItemPrice * data.tier.quantity;
+        let total = perItemPrice * data.tier.quantity;
+        // Kaching kaze ceno na kos zaokrozeno (109,90 / 4 = 27,48) - pri fiksni ceni paketa obdrzi tocen znesek.
+        if (data.tier.discountType === 'specific' && Math.abs(total - data.tier.discountValue) < 0.01 * data.tier.quantity + 0.001) {
+          total = data.tier.discountValue;
+        }
         if (Math.abs(total - data.price) > 0.005) {
           data.price = total;
           changed = true;
