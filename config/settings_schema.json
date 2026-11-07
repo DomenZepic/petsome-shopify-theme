@@ -2882,8 +2882,7 @@
       {
         "type": "text",
         "id": "bf_g_tag",
-        "label": "Oznaka desno v bannerju",
-        "default": "do 30. 11."
+        "label": "Oznaka desno v bannerju"
       }
     ]
   }

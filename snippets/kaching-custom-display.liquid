@@ -72,7 +72,7 @@
       assign bf_gifts_title = 'Darilni paket v vrednosti 23,90 €'
   endcase
   assign bf_title = block.settings.bf_banner_title | default: 'Black Friday'
-  assign bf_tag = block.settings.bf_banner_tag | default: settings.bf_g_tag | default: 'do 30. 11.'
+  assign bf_tag = block.settings.bf_banner_tag | default: settings.bf_g_tag
   if bf_lang == 'it'
     assign bf_tag = bf_tag | replace: 'do ', 'fino al '
   endif
