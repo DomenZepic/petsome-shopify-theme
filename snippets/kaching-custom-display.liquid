@@ -906,7 +906,7 @@
     data-offer-total="{{ block.settings.offer_total_value | escape }}"
     data-hero-title=""
     data-bf-duo-gift="{% if bf_on %}{{ bf_duo_gift | escape }}{% endif %}"
-    data-bf-gift-values="{% if kcd26_on and bf_lang != 'cs' %}{% if settings.bf26_planned_gifts %}2:23.9,3:73.75,4:73.75{% else %}2:23.9,3:69.8,4:69.8{% endif %}{% elsif bf_on %}{% if bf_lang == 'cs' %}2:225,4:600{% else %}2:9,4:23.9{% endif %}{% endif %}"
+    data-bf-gift-values="{% if kcd26_on and bf_lang == 'cs' and settings.bf26_planned_gifts %}2:600,3:1839,4:1839{% elsif kcd26_on and bf_lang != 'cs' %}{% if settings.bf26_planned_gifts %}2:23.9,3:73.75,4:73.75{% else %}2:23.9,3:69.8,4:69.8{% endif %}{% elsif bf_on %}{% if bf_lang == 'cs' %}2:225,4:600{% else %}2:9,4:23.9{% endif %}{% endif %}"
     data-bf-tile-value-label="{% case bf_lang %}{% when 'hr' %}vrijednost{% when 'cs' %}hodnota{% when 'it' %}valore{% else %}vrednost{% endcase %}"
     data-bf-value-label="{% if bf_on %}{% case bf_lang %}{% when 'hr' %}Vrijednost paketa{% when 'cs' %}Hodnota balíčku{% when 'it' %}Valore del pacchetto{% else %}Vrednost paketa{% endcase %}{% endif %}"
     data-hero-label="{% if bf_on %}{{ bf_hero | escape }}{% else %}{{ block.settings.hero_label | escape }}{% endif %}"

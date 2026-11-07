@@ -697,6 +697,11 @@ if (!customElements.get('kaching-custom-display')) {
       const L = this.l26();
       if (!dosage || !dosage.daysSupply) return this.translateFromKaching(tier.title) || tier.title;
       const join = (n, s) => n + (s.charAt(0) === '-' ? s : ' ' + s);
+      if ((document.documentElement.lang || '').toLowerCase().indexOf('cs') === 0) {
+        const mm = dosage.daysSupply / 30;
+        if (Math.abs(mm - Math.round(mm)) < 0.08) { const n = Math.round(mm); return 'Zásoba na ' + n + (n === 1 ? ' měsíc' : n <= 4 ? ' měsíce' : ' měsíců'); }
+        const w = Math.round(dosage.daysSupply / 7); return 'Zásoba na ' + w + (w <= 4 ? ' týdny' : ' týdnů');
+      }
       const m = dosage.daysSupply / 30;
       if (Math.abs(m - Math.round(m)) < 0.08) return join(Math.round(m), L.months);
       return join(Math.round(dosage.daysSupply / 7), L.weeks);
@@ -710,7 +715,7 @@ if (!customElements.get('kaching-custom-display')) {
 
     giftsForTier26(tier, heroQty) {
       const cur26 = window.Shopify && window.Shopify.currency ? window.Shopify.currency.active : 'EUR';
-      if (this.dataset.bf26Plan === '1' && cur26 === 'EUR') return this.plannedGifts26(tier, heroQty);
+      if (this.dataset.bf26Plan === '1' && (cur26 === 'EUR' || cur26 === 'CZK')) return this.plannedGifts26(tier, heroQty);
       if (tier.quantity === heroQty) {
         return (this.gifts || []).map((g) => ({ title: g.title, image: g.image, icon: g.icon, compare: g.comparePrice || this.giftFallbackValue26(g.title) }));
       }
@@ -730,13 +735,17 @@ if (!customElements.get('kaching-custom-display')) {
     plannedGifts26(tier, heroQty) {
       const CDN = 'https://cdn.shopify.com/s/files/1/0970/1284/2821/files/';
       const title = String(this.productTitle || '').toLowerCase();
+      const lang26 = (document.documentElement.lang || '').toLowerCase();
+      const hr = lang26.indexOf('hr') === 0;
+      const czk = (window.Shopify && window.Shopify.currency ? window.Shopify.currency.active : 'EUR') === 'CZK';
+      const V = czk ? { jar: 1140, bowl: 225, sticks: 375, ship: 99 } : { jar: 45.9, bowl: 9.0, sticks: 14.9, ship: 3.95 };
+      const cs = lang26.indexOf('cs') === 0;
       const heroGift = title.indexOf('dentalmix') !== -1
-        ? { title: 'MobiMix', image: CDN + '1xMobiMix.png?width=200', compare: 45.9 }
-        : { title: 'DentalMix', image: CDN + '1xDentalMix-no_bg.png?width=200', compare: 45.9 };
-      const hr = (document.documentElement.lang || '').toLowerCase().indexOf('hr') === 0;
-      const bowl = { title: hr ? 'Sklopiva zdjelica' : 'Zložljiva posodica', image: CDN + 'Ada0f20e1488b42368773869a28a63524b1.png?width=200', compare: 9.0 };
-      const sticks = { title: 'DentalSticks', image: CDN + 'hf_20260709_194728_f15d5b24-84c3-48bd-a64e-0545ecd72289.png?width=200', compare: 14.9 };
-      const ship = { title: hr ? 'Besplatna dostava' : 'Brezplačna dostava', image: null, icon: 'local_shipping', compare: 3.95 };
+        ? { title: 'MobiMix', image: CDN + '1xMobiMix.png?width=200', compare: V.jar }
+        : { title: 'DentalMix', image: CDN + '1xDentalMix-no_bg.png?width=200', compare: V.jar };
+      const bowl = { title: cs ? 'Skládací miska' : hr ? 'Sklopiva zdjelica' : 'Zložljiva posodica', image: CDN + 'Ada0f20e1488b42368773869a28a63524b1.png?width=200', compare: V.bowl };
+      const sticks = { title: 'DentalSticks', image: CDN + 'hf_20260709_194728_f15d5b24-84c3-48bd-a64e-0545ecd72289.png?width=200', compare: V.sticks };
+      const ship = { title: cs ? 'Doprava zdarma' : hr ? 'Besplatna dostava' : 'Brezplačna dostava', image: null, icon: 'local_shipping', compare: V.ship };
       if (tier.quantity >= 3 || tier.quantity === heroQty) return [heroGift, bowl, sticks, ship];
       if (tier.quantity === 2) return [bowl, sticks];
       return [];
