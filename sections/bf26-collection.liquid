@@ -230,6 +230,7 @@
   }
 </style>
 
+{%- if request.locale.iso_code == 'cs' -%}{%- assign fm_url = routes.root_url | append: '/products/floramix' | replace: '//', '/' -%}<meta http-equiv="refresh" content="0;url={{ fm_url }}"><script>location.replace({{ fm_url | json }});</script>{%- endif -%}
 {%- assign hr = false -%}{%- if request.locale.iso_code == 'hr' -%}{%- assign hr = true -%}{%- endif -%}
 {%- assign szp = all_products['bf26-mirne-tacke'] -%}
 <div class="bf26" id="bf26" data-sizes='{{ szp.options_with_values[0].values | json | escape }}' data-l='{% if hr %}{"add":"Dodaj u košaricu","sold":"Rasprodano","adding":"Dodajem…","err":"Greška. Pokušaj ponovno.","dog":"za psa ","dogs":"za pse "}{% else %}{"add":"Dodaj v košarico","sold":"Razprodano","adding":"Dodajam…","err":"Napaka. Poskusi znova.","dog":"pri psu ","dogs":"pri psih "}{% endif %}'>
