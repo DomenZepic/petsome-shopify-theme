@@ -230,26 +230,28 @@
   }
 </style>
 
-<div class="bf26" id="bf26" data-sizes='["do 10 kg","10–25 kg","nad 25 kg"]'>
+{%- assign hr = false -%}{%- if request.locale.iso_code == 'hr' -%}{%- assign hr = true -%}{%- endif -%}
+{%- assign szp = all_products['bf26-mirne-tacke'] -%}
+<div class="bf26" id="bf26" data-sizes='{{ szp.options_with_values[0].values | json | escape }}' data-l='{% if hr %}{"add":"Dodaj u košaricu","sold":"Rasprodano","adding":"Dodajem…","err":"Greška. Pokušaj ponovno.","dog":"za psa ","dogs":"za pse "}{% else %}{"add":"Dodaj v košarico","sold":"Razprodano","adding":"Dodajam…","err":"Napaka. Poskusi znova.","dog":"pri psu ","dogs":"pri psih "}{% endif %}'>
   <section class="bf-hero">
-    <picture><source media="(min-width:990px)" srcset="{{ 'bf26-hero-wide.jpg' | asset_url }}"><img class="bf-hero__img" src="{{ 'bf26-hero-mobile.jpg' | asset_url }}" alt="MobiMix, FloraMix in DentalMix s sestavinami" width="1100" height="975" fetchpriority="high"></picture>
+    <picture><source media="(min-width:990px)" srcset="{{ 'bf26-hero-wide.jpg' | asset_url }}"><img class="bf-hero__img" src="{{ 'bf26-hero-mobile.jpg' | asset_url }}" alt="{% if hr %}MobiMix, FloraMix i DentalMix sa sastojcima{% else %}MobiMix, FloraMix in DentalMix s sestavinami{% endif %}" width="1100" height="975" fetchpriority="high"></picture>
     <div class="bf-hero__txt">
-      <div class="bf-rating bf-hero__rating--d"><span class="bf-stars">★★★★★</span>4,8 / 5 · 2.000+ zadovoljnih lastnikov</div>
+      <div class="bf-rating bf-hero__rating--d"><span class="bf-stars">★★★★★</span>{% if hr %}4,8 / 5 · 2.000+ zadovoljnih vlasnika{% else %}4,8 / 5 · 2.000+ zadovoljnih lastnikov{% endif %}</div>
       <span class="bf-hero__tag">Black Friday</span>
-      <h1>Do −60 % na paketih in do 5 daril gratis</h1>
-      <p class="bf-hero__sub">Paketi so sestavljeni po tem, kar opaziš pri psu: tačke in dlaka, vstajanje, zadah.<span class="bf-banner__more"> Večji paket pomeni nižjo ceno na lonček.</span></p>
-      <a class="bf-btn" href="#bf-bundles">Izberi paket</a>
-      <div class="bf-rating bf-hero__rating--m"><span class="bf-stars">★★★★★</span>4,8 / 5 · 2.000+ zadovoljnih lastnikov</div>
+      <h1>{% if hr %}Do −60 % na paketima i do 5 poklona gratis{% else %}Do −60 % na paketih in do 5 daril gratis{% endif %}</h1>
+      <p class="bf-hero__sub">{% if hr %}Paketi su složeni prema onome što primjećuješ kod psa: šape i dlaka, ustajanje, zadah.{% else %}Paketi so sestavljeni po tem, kar opaziš pri psu: tačke in dlaka, vstajanje, zadah.{% endif %}<span class="bf-banner__more">{% if hr %} Veći paket znači nižu cijenu po pakiranju.{% else %} Večji paket pomeni nižjo ceno na lonček.{% endif %}</span></p>
+      <a class="bf-btn" href="#bf-bundles">{% if hr %}Odaberi paket{% else %}Izberi paket{% endif %}</a>
+      <div class="bf-rating bf-hero__rating--m"><span class="bf-stars">★★★★★</span>{% if hr %}4,8 / 5 · 2.000+ zadovoljnih vlasnika{% else %}4,8 / 5 · 2.000+ zadovoljnih lastnikov{% endif %}</div>
     </div>
   </section>
 
   {%- capture check -%}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E9E00" stroke-width="3" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>{%- endcapture -%}
   <div class="bf-usp">
     <ul class="bf-usp__list">
-      <li>{{ check }}Brezplačna dostava v paketih</li>
-      <li>{{ check }}Dostava v 2–3 delovnih dneh</li>
-      <li>{{ check }}Plačilo po povzetju</li>
-      <li>{{ check }}90-dnevna garancija<span class="bf-banner__more">vračila kupnine</span></li>
+      <li>{{ check }}{% if hr %}Besplatna dostava u paketima{% else %}Brezplačna dostava v paketih{% endif %}</li>
+      <li>{{ check }}{% if hr %}Dostava za 2–3 radna dana{% else %}Dostava v 2–3 delovnih dneh{% endif %}</li>
+      <li>{{ check }}{% if hr %}Plaćanje pouzećem{% else %}Plačilo po povzetju{% endif %}</li>
+      <li>{{ check }}{% if hr %}90-dnevno jamstvo<span class="bf-banner__more">povrata novca</span>{% else %}90-dnevna garancija<span class="bf-banner__more">vračila kupnine</span>{% endif %}</li>
     </ul>
   </div>
 
@@ -257,13 +259,13 @@
     <section class="bf-size">
       <div class="bf-size__box">
         <div>
-          <h2>Koliko tehta tvoj pes?</h2>
-          <p class="bf-size__hint">Pri vsakem paketu ti pokažemo, koliko časa zdrži.</p>
+          <h2>{% if hr %}Koliko teži tvoj pas?{% else %}Koliko tehta tvoj pes?{% endif %}</h2>
+          <p class="bf-size__hint">{% if hr %}Uz svaki paket pokazujemo koliko dugo traje.{% else %}Pri vsakem paketu ti pokažemo, koliko časa zdrži.{% endif %}</p>
         </div>
-        <div class="bf-size__opts" role="radiogroup" aria-label="Velikost psa">
+        <div class="bf-size__opts" role="radiogroup" aria-label="{% if hr %}Veličina psa{% else %}Velikost psa{% endif %}">
           <button type="button" class="bf-size__opt" role="radio" aria-checked="false" data-bf-size="0">do 10 kg</button>
           <button type="button" class="bf-size__opt" role="radio" aria-checked="true" data-bf-size="1">10–25 kg</button>
-          <button type="button" class="bf-size__opt" role="radio" aria-checked="false" data-bf-size="2">nad 25 kg</button>
+          <button type="button" class="bf-size__opt" role="radio" aria-checked="false" data-bf-size="2">{% if hr %}preko 25 kg{% else %}nad 25 kg{% endif %}</button>
         </div>
       </div>
     </section>
@@ -276,14 +278,14 @@
           <img src="{{ 'bf26-banner-floramix-m.jpg' | file_img_url: '800x' }}" alt="" loading="lazy">
         </picture>
         <div class="bf-banner__txt">
-          <h2>Liže tačke in se praska?</h2>
-          <p>FloraMix podpira kožo, dlako in prebavo.<span class="bf-banner__more"> Lastniki najprej opazijo trdnejše blato, nato manj praskanja in lizanja tačk.</span></p>
+          <h2>{% if hr %}Liže šape i češe se?{% else %}Liže tačke in se praska?{% endif %}</h2>
+          <p>{% if hr %}FloraMix podržava kožu, dlaku i probavu.{% else %}FloraMix podpira kožo, dlako in prebavo.{% endif %}<span class="bf-banner__more">{% if hr %} Vlasnici najprije primijete čvršću stolicu, zatim manje češanja i lizanja šapa.{% else %} Lastniki najprej opazijo trdnejše blato, nato manj praskanja in lizanja tačk.{% endif %}</span></p>
         </div>
       </div>
       <div class="bf-row" data-bf-row>
-        {%- render 'bf26-card', handle: 'bf26-mirne-tacke', strip: '', save: 36, tubs: 2, name: 'Osnovni paket', sub: '2× FloraMix', supply: 'Zaloga za 6 mesecev|Zaloga za 3 mesece|Zaloga za 2 meseca', two_dogs: false, reason: '', value: '104,75 €', gifts: 0, sticks: false, default_gift: 'FloraMix', mob_order: 3 -%}
-        {%- render 'bf26-card', handle: 'bf26-mirne-noci', strip: 'rec', save: 53, tubs: 4, name: 'Popolni paket', sub: '3× FloraMix + 1 lonček gratis po izbiri', supply: 'Zaloga za 9 mesecev|Zaloga za 4,5 meseca|Zaloga za 3 mesece', two_dogs: false, reason: '', value: '211,45 €', gifts: 1, sticks: true, default_gift: 'FloraMix', mob_order: 2 -%}
-        {%- render 'bf26-card', handle: 'bf26-sijoca-dlaka', strip: 'low', save: 60, tubs: 6, name: 'Maksimalni paket', sub: '4× FloraMix + 2 lončka gratis po izbiri', supply: 'Zaloga za 12 mesecev|Zaloga za 6 mesecev|Zaloga za 4 mesece', two_dogs: false, reason: '', value: '303,25 €', gifts: 2, sticks: true, default_gift: 'FloraMix', mob_order: 1 -%}
+        {%- render 'bf26-card', handle: 'bf26-mirne-tacke', strip: '', save: 36, tubs: 2, name: 'Osnovni paket', sub: '2× FloraMix', supply: 'Zaloga za 6 mesecev|Zaloga za 3 mesece|Zaloga za 2 meseca', two_dogs: false, reason: '', value: '104,75 €', gifts: 0, sticks: false, default_gift: 'FloraMix', mob_order: 3, hr: hr, name_hr: 'Sretan trbuščić i mirna koža – osnovni paket', sub_hr: '2× FloraMix', supply_hr: 'Zaliha za 6 mjeseci|Zaliha za 3 mjeseca|Zaliha za 2 mjeseca', reason_hr: '' -%}
+        {%- render 'bf26-card', handle: 'bf26-mirne-noci', strip: 'rec', save: 53, tubs: 4, name: 'Popolni paket', sub: '3× FloraMix + 1 lonček gratis po izbiri', supply: 'Zaloga za 9 mesecev|Zaloga za 4,5 meseca|Zaloga za 3 mesece', two_dogs: false, reason: '', value: '211,45 €', gifts: 1, sticks: true, default_gift: 'FloraMix', mob_order: 2, hr: hr, name_hr: 'Sretan trbuščić i mirna koža – potpuni paket', sub_hr: '3× FloraMix + 1 pakiranje gratis po izboru', supply_hr: 'Zaliha za 9 mjeseci|Zaliha za 4,5 mjeseca|Zaliha za 3 mjeseca', reason_hr: '' -%}
+        {%- render 'bf26-card', handle: 'bf26-sijoca-dlaka', strip: 'low', save: 60, tubs: 6, name: 'Maksimalni paket', sub: '4× FloraMix + 2 lončka gratis po izbiri', supply: 'Zaloga za 12 mesecev|Zaloga za 6 mesecev|Zaloga za 4 mesece', two_dogs: false, reason: '', value: '303,25 €', gifts: 2, sticks: true, default_gift: 'FloraMix', mob_order: 1, hr: hr, name_hr: 'Sretan trbuščić i mirna koža – maksimalni paket', sub_hr: '4× FloraMix + 2 pakiranja gratis po izboru', supply_hr: 'Zaliha za 12 mjeseci|Zaliha za 6 mjeseci|Zaliha za 4 mjeseca', reason_hr: '' -%}
       </div>
       <div class="bf-dots" data-bf-dots></div>
     </section>
@@ -296,14 +298,14 @@
           <img src="{{ 'bf26-banner-mobimix-m.jpg' | file_img_url: '800x' }}" alt="" loading="lazy">
         </picture>
         <div class="bf-banner__txt">
-          <h2>Zjutraj težje vstane?</h2>
-          <p>MobiMix podpira sklepe in gibljivost.<span class="bf-banner__more"> Za lažje vstajanje po počitku. Primeren tudi za mačke.</span></p>
+          <h2>{% if hr %}Ujutro teže ustaje?{% else %}Zjutraj težje vstane?{% endif %}</h2>
+          <p>{% if hr %}MobiMix podržava zglobove i pokretljivost.{% else %}MobiMix podpira sklepe in gibljivost.{% endif %}<span class="bf-banner__more">{% if hr %} Za lakše ustajanje nakon odmora. Prikladan i za mačke.{% else %} Za lažje vstajanje po počitku. Primeren tudi za mačke.{% endif %}</span></p>
         </div>
       </div>
       <div class="bf-row" data-bf-row>
-        {%- render 'bf26-card', handle: 'bf26-lazje-vstajanje', strip: '', save: 36, tubs: 2, name: 'Osnovni paket', sub: '2× MobiMix', supply: 'Zaloga za 6 mesecev|Zaloga za 3 mesece|Zaloga za 2 meseca', two_dogs: false, reason: '', value: '104,75 €', gifts: 0, sticks: false, default_gift: 'MobiMix', mob_order: 3 -%}
-        {%- render 'bf26-card', handle: 'bf26-lazje-po-stopnicah', strip: 'rec', save: 53, tubs: 4, name: 'Popolni paket', sub: '3× MobiMix + 1 lonček gratis po izbiri', supply: 'Zaloga za 9 mesecev|Zaloga za 4,5 meseca|Zaloga za 3 mesece', two_dogs: false, reason: '', value: '211,45 €', gifts: 1, sticks: true, default_gift: 'MobiMix', mob_order: 2 -%}
-        {%- render 'bf26-card', handle: 'bf26-daljsi-sprehodi', strip: 'low', save: 60, tubs: 6, name: 'Maksimalni paket', sub: '4× MobiMix + 2 lončka gratis po izbiri', supply: 'Zaloga za 12 mesecev|Zaloga za 6 mesecev|Zaloga za 4 mesece', two_dogs: false, reason: '', value: '303,25 €', gifts: 2, sticks: true, default_gift: 'MobiMix', mob_order: 1 -%}
+        {%- render 'bf26-card', handle: 'bf26-lazje-vstajanje', strip: '', save: 36, tubs: 2, name: 'Osnovni paket', sub: '2× MobiMix', supply: 'Zaloga za 6 mesecev|Zaloga za 3 mesece|Zaloga za 2 meseca', two_dogs: false, reason: '', value: '104,75 €', gifts: 0, sticks: false, default_gift: 'MobiMix', mob_order: 3, hr: hr, name_hr: 'Lagan korak – osnovni paket', sub_hr: '2× MobiMix', supply_hr: 'Zaliha za 6 mjeseci|Zaliha za 3 mjeseca|Zaliha za 2 mjeseca', reason_hr: '' -%}
+        {%- render 'bf26-card', handle: 'bf26-lazje-po-stopnicah', strip: 'rec', save: 53, tubs: 4, name: 'Popolni paket', sub: '3× MobiMix + 1 lonček gratis po izbiri', supply: 'Zaloga za 9 mesecev|Zaloga za 4,5 meseca|Zaloga za 3 mesece', two_dogs: false, reason: '', value: '211,45 €', gifts: 1, sticks: true, default_gift: 'MobiMix', mob_order: 2, hr: hr, name_hr: 'Lagan korak – potpuni paket', sub_hr: '3× MobiMix + 1 pakiranje gratis po izboru', supply_hr: 'Zaliha za 9 mjeseci|Zaliha za 4,5 mjeseca|Zaliha za 3 mjeseca', reason_hr: '' -%}
+        {%- render 'bf26-card', handle: 'bf26-daljsi-sprehodi', strip: 'low', save: 60, tubs: 6, name: 'Maksimalni paket', sub: '4× MobiMix + 2 lončka gratis po izbiri', supply: 'Zaloga za 12 mesecev|Zaloga za 6 mesecev|Zaloga za 4 mesece', two_dogs: false, reason: '', value: '303,25 €', gifts: 2, sticks: true, default_gift: 'MobiMix', mob_order: 1, hr: hr, name_hr: 'Lagan korak – maksimalni paket', sub_hr: '4× MobiMix + 2 pakiranja gratis po izboru', supply_hr: 'Zaliha za 12 mjeseci|Zaliha za 6 mjeseci|Zaliha za 4 mjeseca', reason_hr: '' -%}
       </div>
       <div class="bf-dots" data-bf-dots></div>
     </section>
@@ -316,14 +318,14 @@
           <img src="{{ 'bf26-banner-dentalmix-m.jpg' | file_img_url: '800x' }}" alt="" loading="lazy">
         </picture>
         <div class="bf-banner__txt">
-          <h2>Ima neprijeten zadah?</h2>
-          <p>DentalMix za svež dih in čistejše zobe.<span class="bf-banner__more"> Ena merica na hrano. Preprosta dnevna nega, ko ščetkanje ne gre.</span></p>
+          <h2>{% if hr %}Ima neugodan zadah?{% else %}Ima neprijeten zadah?{% endif %}</h2>
+          <p>{% if hr %}DentalMix za svjež dah i čišće zube.{% else %}DentalMix za svež dih in čistejše zobe.{% endif %}<span class="bf-banner__more">{% if hr %} Jedna mjerica u hranu. Jednostavna dnevna njega kad četkanje ne ide.{% else %} Ena merica na hrano. Preprosta dnevna nega, ko ščetkanje ne gre.{% endif %}</span></p>
         </div>
       </div>
       <div class="bf-row" data-bf-row>
-        {%- render 'bf26-card', handle: 'bf26-svez-dih', strip: '', save: 36, tubs: 2, name: 'Osnovni paket', sub: '2× DentalMix', supply: 'Zaloga za 4 mesece|Zaloga za 2 meseca|Zaloga za 40 dni', two_dogs: false, reason: '', value: '104,75 €', gifts: 0, sticks: false, default_gift: 'DentalMix', mob_order: 3 -%}
-        {%- render 'bf26-card', handle: 'bf26-crkljanje-od-blizu', strip: 'rec', save: 53, tubs: 4, name: 'Popolni paket', sub: '3× DentalMix + 1 lonček gratis po izbiri', supply: 'Zaloga za 6 mesecev|Zaloga za 3 mesece|Zaloga za 2 meseca', two_dogs: false, reason: '', value: '211,45 €', gifts: 1, sticks: true, default_gift: 'DentalMix', mob_order: 2 -%}
-        {%- render 'bf26-card', handle: 'bf26-cistejsi-zobje', strip: 'low', save: 60, tubs: 6, name: 'Maksimalni paket', sub: '4× DentalMix + 2 lončka gratis po izbiri', supply: 'Zaloga za 8 mesecev|Zaloga za 4 mesece|Zaloga za 80 dni', two_dogs: false, reason: '', value: '303,25 €', gifts: 2, sticks: true, default_gift: 'DentalMix', mob_order: 1 -%}
+        {%- render 'bf26-card', handle: 'bf26-svez-dih', strip: '', save: 36, tubs: 2, name: 'Osnovni paket', sub: '2× DentalMix', supply: 'Zaloga za 4 mesece|Zaloga za 2 meseca|Zaloga za 40 dni', two_dogs: false, reason: '', value: '104,75 €', gifts: 0, sticks: false, default_gift: 'DentalMix', mob_order: 3, hr: hr, name_hr: 'Svjež dah i čisti zubi – osnovni paket', sub_hr: '2× DentalMix', supply_hr: 'Zaliha za 4 mjeseca|Zaliha za 2 mjeseca|Zaliha za 40 dana', reason_hr: '' -%}
+        {%- render 'bf26-card', handle: 'bf26-crkljanje-od-blizu', strip: 'rec', save: 53, tubs: 4, name: 'Popolni paket', sub: '3× DentalMix + 1 lonček gratis po izbiri', supply: 'Zaloga za 6 mesecev|Zaloga za 3 mesece|Zaloga za 2 meseca', two_dogs: false, reason: '', value: '211,45 €', gifts: 1, sticks: true, default_gift: 'DentalMix', mob_order: 2, hr: hr, name_hr: 'Svjež dah i čisti zubi – potpuni paket', sub_hr: '3× DentalMix + 1 pakiranje gratis po izboru', supply_hr: 'Zaliha za 6 mjeseci|Zaliha za 3 mjeseca|Zaliha za 2 mjeseca', reason_hr: '' -%}
+        {%- render 'bf26-card', handle: 'bf26-cistejsi-zobje', strip: 'low', save: 60, tubs: 6, name: 'Maksimalni paket', sub: '4× DentalMix + 2 lončka gratis po izbiri', supply: 'Zaloga za 8 mesecev|Zaloga za 4 mesece|Zaloga za 80 dni', two_dogs: false, reason: '', value: '303,25 €', gifts: 2, sticks: true, default_gift: 'DentalMix', mob_order: 1, hr: hr, name_hr: 'Svjež dah i čisti zubi – maksimalni paket', sub_hr: '4× DentalMix + 2 pakiranja gratis po izboru', supply_hr: 'Zaliha za 8 mjeseci|Zaliha za 4 mjeseca|Zaliha za 80 dana', reason_hr: '' -%}
       </div>
       <div class="bf-dots" data-bf-dots></div>
     </section>
@@ -336,46 +338,46 @@
           <img src="{{ 'bf26-banner-mix-m.jpg' | file_img_url: '800x' }}" alt="" loading="lazy">
         </picture>
         <div class="bf-banner__txt">
-          <h2>Starejši pes ali več skrbi hkrati?</h2>
-          <p>Izdelke kombiniraš, cena na lonček ostane enaka<span class="bf-banner__more"> kot pri paketih z enim izdelkom</span>.</p>
+          <h2>{% if hr %}Stariji pas ili više briga odjednom?{% else %}Starejši pes ali več skrbi hkrati?{% endif %}</h2>
+          <p>{% if hr %}Proizvode kombiniraš, cijena po pakiranju ostaje ista{% else %}Izdelke kombiniraš, cena na lonček ostane enaka{% endif %}<span class="bf-banner__more">{% if hr %} kao kod paketa s jednim proizvodom{% else %} kot pri paketih z enim izdelkom{% endif %}</span>.</p>
         </div>
       </div>
       <div class="bf-row bf-row--4" data-bf-row>
-        {%- render 'bf26-card', handle: 'bf26-starejsi-pes', strip: '', save: 36, tubs: 2, name: 'Starejši pes', sub: 'MobiMix + FloraMix', supply: 'Zaloga za vsaj 3 mesece|Zaloga za vsaj 45 dni|Zaloga za vsaj 30 dni', two_dogs: false, reason: 'Sklepi ter koža in prebava v enem paketu.', value: '104,75 €', gifts: 0, sticks: false, default_gift: 'FloraMix', mob_order: 3 -%}
-        {%- render 'bf26-card', handle: 'bf26-od-smrcka-do-tack', strip: '', save: 36, tubs: 2, name: 'Od smrčka do tačk', sub: 'FloraMix + DentalMix', supply: 'Zaloga za vsaj 2 meseca|Zaloga za vsaj 30 dni|Zaloga za vsaj 20 dni', two_dogs: false, reason: 'Za psa, ki ga radi crkljaš od blizu.', value: '104,75 €', gifts: 0, sticks: false, default_gift: 'FloraMix', mob_order: 4 -%}
-        {%- render 'bf26-card', handle: 'bf26-celotna-nega', strip: 'rec', save: 53, tubs: 4, name: 'Celotna nega', sub: 'FloraMix + MobiMix + DentalMix + 1 gratis po izbiri', supply: 'Zaloga za vsaj 2 meseca|Zaloga za vsaj 30 dni|Zaloga za vsaj 20 dni', two_dogs: false, reason: '', value: '211,45 €', gifts: 1, sticks: true, default_gift: 'FloraMix', mob_order: 2 -%}
-        {%- render 'bf26-card', handle: 'bf26-celotna-nega-za-dva-psa', strip: 'low', save: 60, tubs: 6, name: 'Celotna nega za dva psa', sub: '2× FloraMix, 2× MobiMix, 2× DentalMix', supply: 'Za 2 psa po 2 meseca|Za 2 psa po 30 dni|Za 2 psa po 20 dni', two_dogs: true, reason: '', value: '303,25 €', gifts: 0, sticks: true, default_gift: 'FloraMix', mob_order: 1 -%}
+        {%- render 'bf26-card', handle: 'bf26-starejsi-pes', strip: '', save: 36, tubs: 2, name: 'Starejši pes', sub: 'MobiMix + FloraMix', supply: 'Zaloga za vsaj 3 mesece|Zaloga za vsaj 45 dni|Zaloga za vsaj 30 dni', two_dogs: false, reason: 'Sklepi ter koža in prebava v enem paketu.', value: '104,75 €', gifts: 0, sticks: false, default_gift: 'FloraMix', mob_order: 3, hr: hr, name_hr: 'Stariji pas', sub_hr: 'MobiMix + FloraMix', supply_hr: 'Zaliha za najmanje 3 mjeseca|Zaliha za najmanje 45 dana|Zaliha za najmanje 30 dana', reason_hr: 'Zglobovi te koža i probava u jednom paketu.' -%}
+        {%- render 'bf26-card', handle: 'bf26-od-smrcka-do-tack', strip: '', save: 36, tubs: 2, name: 'Od smrčka do tačk', sub: 'FloraMix + DentalMix', supply: 'Zaloga za vsaj 2 meseca|Zaloga za vsaj 30 dni|Zaloga za vsaj 20 dni', two_dogs: false, reason: 'Za psa, ki ga radi crkljaš od blizu.', value: '104,75 €', gifts: 0, sticks: false, default_gift: 'FloraMix', mob_order: 4, hr: hr, name_hr: 'Od njuške do šapa', sub_hr: 'FloraMix + DentalMix', supply_hr: 'Zaliha za najmanje 2 mjeseca|Zaliha za najmanje 30 dana|Zaliha za najmanje 20 dana', reason_hr: 'Za psa kojeg rado maziš izbliza.' -%}
+        {%- render 'bf26-card', handle: 'bf26-celotna-nega', strip: 'rec', save: 53, tubs: 4, name: 'Celotna nega', sub: 'FloraMix + MobiMix + DentalMix + 1 gratis po izbiri', supply: 'Zaloga za vsaj 2 meseca|Zaloga za vsaj 30 dni|Zaloga za vsaj 20 dni', two_dogs: false, reason: '', value: '211,45 €', gifts: 1, sticks: true, default_gift: 'FloraMix', mob_order: 2, hr: hr, name_hr: 'Potpuna njega', sub_hr: 'FloraMix + MobiMix + DentalMix + 1 gratis po izboru', supply_hr: 'Zaliha za najmanje 2 mjeseca|Zaliha za najmanje 30 dana|Zaliha za najmanje 20 dana', reason_hr: '' -%}
+        {%- render 'bf26-card', handle: 'bf26-celotna-nega-za-dva-psa', strip: 'low', save: 60, tubs: 6, name: 'Celotna nega za dva psa', sub: '2× FloraMix, 2× MobiMix, 2× DentalMix', supply: 'Za 2 psa po 2 meseca|Za 2 psa po 30 dni|Za 2 psa po 20 dni', two_dogs: true, reason: '', value: '303,25 €', gifts: 0, sticks: true, default_gift: 'FloraMix', mob_order: 1, hr: hr, name_hr: 'Potpuna njega – maksimalni paket', sub_hr: '2× FloraMix, 2× MobiMix, 2× DentalMix', supply_hr: 'Za 2 psa po 2 mjeseca|Za 2 psa po 30 dana|Za 2 psa po 20 dana', reason_hr: '' -%}
       </div>
       <div class="bf-dots" data-bf-dots></div>
     </section>
 
     <section class="bf-reviews">
       <div class="bf-reviews__head">
-        <h2>Kaj opazijo lastniki</h2>
-        <div class="bf-rating"><span class="bf-stars">★★★★★</span>4,8 / 5 · 2.000+ zadovoljnih lastnikov</div>
+        <h2>{% if hr %}Što primjećuju vlasnici{% else %}Kaj opazijo lastniki{% endif %}</h2>
+        <div class="bf-rating"><span class="bf-stars">★★★★★</span>{% if hr %}4,8 / 5 · 2.000+ zadovoljnih vlasnika{% else %}4,8 / 5 · 2.000+ zadovoljnih lastnikov{% endif %}</div>
       </div>
       <div class="bf-reviews__list">
-        <figure class="bf-rev"><span class="bf-stars">★★★★★</span><blockquote>»Prej je ponoči velikokrat vstajal in si lizal tace. Zdaj je tega res precej manj.«</blockquote><cite>Ocena za FloraMix · pet-some.eu</cite></figure>
-        <figure class="bf-rev"><span class="bf-stars">★★★★★</span><blockquote>»Pri našem 11-letniku se je najprej poznalo zjutraj. Vstane precej lažje in ne rabi več toliko časa, da se razhodi.«</blockquote><cite>Ocena za MobiMix · pet-some.eu</cite></figure>
-        <figure class="bf-rev"><span class="bf-stars">★★★★★</span><blockquote>»Največja razlika je, da ga spet brez problema crkljamo čisto od blizu.«</blockquote><cite>Ocena za DentalMix · pet-some.eu</cite></figure>
+        <figure class="bf-rev"><span class="bf-stars">★★★★★</span><blockquote>{% if hr %}»Prije je noću često ustajao i lizao šape. Sada je toga stvarno puno manje.«{% else %}»Prej je ponoči velikokrat vstajal in si lizal tace. Zdaj je tega res precej manj.«{% endif %}</blockquote><cite>{% if hr %}Recenzija za {% else %}Ocena za {% endif %}FloraMix · pet-some.eu</cite></figure>
+        <figure class="bf-rev"><span class="bf-stars">★★★★★</span><blockquote>{% if hr %}»Kod našeg 11-godišnjaka prvo se primijetilo ujutro. Ustaje puno lakše i više mu ne treba toliko vremena da se razgiba.«{% else %}»Pri našem 11-letniku se je najprej poznalo zjutraj. Vstane precej lažje in ne rabi več toliko časa, da se razhodi.«{% endif %}</blockquote><cite>{% if hr %}Recenzija za {% else %}Ocena za {% endif %}MobiMix · pet-some.eu</cite></figure>
+        <figure class="bf-rev"><span class="bf-stars">★★★★★</span><blockquote>{% if hr %}»Najveća razlika je što ga opet bez problema mazimo sasvim izbliza.«{% else %}»Največja razlika je, da ga spet brez problema crkljamo čisto od blizu.«{% endif %}</blockquote><cite>{% if hr %}Recenzija za {% else %}Ocena za {% endif %}DentalMix · pet-some.eu</cite></figure>
       </div>
     </section>
   </div>
 
   <section class="bf-guar">
     <div class="bf-wrap">
-      <div class="bf-guar__big">90 dni</div>
+      <div class="bf-guar__big">{% if hr %}90 dana{% else %}90 dni{% endif %}</div>
       <div>
-        <h2>90-dnevna garancija vračila kupnine</h2>
-        <p>Če izdelek ne izpolni pričakovanj, lahko v 90 dneh zahtevaš vračilo kupnine.<span class="bf-banner__more"> Večji paket ti da dovolj časa, da vidiš, kako tvoj pes sprejme izdelek.</span></p>
+        <h2>{% if hr %}90-dnevno jamstvo povrata novca{% else %}90-dnevna garancija vračila kupnine{% endif %}</h2>
+        <p>{% if hr %}Ako proizvod ne ispuni očekivanja, u roku od 90 dana možeš zatražiti povrat novca.{% else %}Če izdelek ne izpolni pričakovanj, lahko v 90 dneh zahtevaš vračilo kupnine.{% endif %}<span class="bf-banner__more">{% if hr %} Veći paket ti daje dovoljno vremena da vidiš kako tvoj pas prihvaća proizvod.{% else %} Večji paket ti da dovolj časa, da vidiš, kako tvoj pes sprejme izdelek.{% endif %}</span></p>
       </div>
-      <a class="bf-btn" href="#bf-bundles">Izberi paket</a>
+      <a class="bf-btn" href="#bf-bundles">{% if hr %}Odaberi paket{% else %}Izberi paket{% endif %}</a>
     </div>
   </section>
 
   <section class="bf-single">
     <div class="bf-wrap">
-      <h2>Raje samo en lonček?</h2>
+      <h2>{% if hr %}Radije samo jedno pakiranje?{% else %}Raje samo en lonček?{% endif %}</h2>
       {%- assign any_off = false -%}
       <div class="bf-single__list">
         {%- assign single_handles = 'floramix,mobimix,dentalmix' | split: ',' -%}
@@ -383,9 +385,9 @@
           {%- assign sp = all_products[h] -%}
           {%- if sp and sp.id -%}
             {%- case h -%}
-              {%- when 'floramix' -%}{%- assign sdesc = 'Koža, dlaka in prebava' -%}
-              {%- when 'mobimix' -%}{%- assign sdesc = 'Sklepi in gibljivost' -%}
-              {%- else -%}{%- assign sdesc = 'Zobje in svež dih' -%}
+              {%- when 'floramix' -%}{%- if hr -%}{%- assign sdesc = 'Koža, dlaka i probava' -%}{%- else -%}{%- assign sdesc = 'Koža, dlaka in prebava' -%}{%- endif -%}
+              {%- when 'mobimix' -%}{%- if hr -%}{%- assign sdesc = 'Zglobovi i pokretljivost' -%}{%- else -%}{%- assign sdesc = 'Sklepi in gibljivost' -%}{%- endif -%}
+              {%- else -%}{%- if hr -%}{%- assign sdesc = 'Zubi i svjež dah' -%}{%- else -%}{%- assign sdesc = 'Zobje in svež dih' -%}{%- endif -%}
             {%- endcase -%}
             {%- assign sv = sp.selected_or_first_available_variant -%}
             <div class="bf-single__item" data-bf-single='[{%- for v in sp.variants -%}{{ v.id }}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]'>
@@ -408,7 +410,7 @@
 <script>
 (function(){
   var root = document.getElementById('bf26'); if (!root) return;
-  var SIZES = JSON.parse(root.getAttribute('data-sizes'));
+  var SIZES = JSON.parse(root.getAttribute('data-sizes')); var L = JSON.parse(root.getAttribute('data-l'));
   var ORDER = ['FloraMix','MobiMix','DentalMix'];
   var sizeIdx = 1;
   try { var s = localStorage.getItem('bf26_size'); if (s !== null && SIZES[+s]) sizeIdx = +s; } catch(e) {}
@@ -427,10 +429,10 @@
     var o1 = SIZES[sizeIdx], o2 = giftOption(card);
     var v = vs.filter(function(x){ return x.o1 === o1 && (o2 === null || x.o2 === o2); })[0];
     var btn = card.querySelector('[data-bf-add]');
-    if (v) { btn.dataset.variant = v.id; btn.disabled = !v.a; btn.textContent = v.a ? 'Dodaj v košarico' : 'Razprodano'; }
+    if (v) { btn.dataset.variant = v.id; btn.disabled = !v.a; btn.textContent = v.a ? L.add : L.sold; }
     var sup = card.dataset.supply.split('|');
     card.querySelector('[data-bf-supply]').textContent = sup[sizeIdx];
-    card.querySelector('[data-bf-supply-size]').textContent = (card.dataset.twoDogs === '1' ? 'pri psih ' : 'pri psu ') + SIZES[sizeIdx];
+    card.querySelector('[data-bf-supply-size]').textContent = (card.dataset.twoDogs === '1' ? L.dogs : L.dog) + SIZES[sizeIdx];
   }
   function setSize(i){
     sizeIdx = i;
@@ -447,13 +449,13 @@
   });
 
   function addToCart(id, btn){
-    var label = btn.textContent; btn.disabled = true; btn.textContent = 'Dodajam…';
+    var label = btn.textContent; btn.disabled = true; btn.textContent = L.adding;
     fetch((window.Shopify && Shopify.routes ? Shopify.routes.root : '/') + 'cart/add.js', {
       method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
       body: JSON.stringify({ items: [{ id: +id, quantity: 1 }] })
     }).then(function(r){ return r.json().then(function(j){ if (!r.ok) throw j; return j; }); })
       .then(function(){ window.location.href = (window.Shopify && Shopify.routes ? Shopify.routes.root : '/') + 'cart'; })
-      .catch(function(err){ btn.disabled = false; btn.textContent = label; alertInline(btn, (err && (err.description || err.message)) || 'Napaka. Poskusi znova.'); });
+      .catch(function(err){ btn.disabled = false; btn.textContent = label; alertInline(btn, (err && (err.description || err.message)) || L.err); });
   }
   function alertInline(btn, msg){
     var p = btn.parentNode.querySelector('.bf-card__err') || document.createElement('p');
