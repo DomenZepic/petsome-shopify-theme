@@ -190,7 +190,7 @@
   /* 9. nov: popravek hero (racunalnik) + manjse kartice (telefon) */
   @media (min-width:990px){
     .bf-hero{display:block;height:620px;min-height:0;overflow:hidden;background:linear-gradient(180deg,#320c35 0%,#21082a 35%,#11091a 70%,#0b0c11 100%)}
-    .bf-hero__img{position:absolute;top:0;right:0;left:auto;width:auto;max-width:none;height:100%;min-height:0;object-fit:contain;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12%);mask-image:linear-gradient(90deg,transparent 0,#000 12%)}
+    .bf-hero__img{position:absolute;top:0;right:0;left:auto;width:auto;max-width:none;height:100%;min-height:0;aspect-ratio:auto;object-fit:contain;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12%);mask-image:linear-gradient(90deg,transparent 0,#000 12%)}
     .bf-hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(14,17,17,.35) 0%,rgba(14,17,17,0) 45%)}
     .bf-hero__txt{position:relative;z-index:2;height:100%;max-width:calc(580px + max(24px,(100vw - 1200px)/2 + 24px));padding:40px 24px 40px max(24px,calc((100vw - 1200px)/2 + 24px))}
     .bf-hero__tag{font-size:80px;padding:10px 18px 12px;white-space:nowrap;align-self:flex-start}
