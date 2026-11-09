@@ -5,6 +5,7 @@
   default_gift ('FloraMix' | 'MobiMix' | 'DentalMix'), mob_order (int)
 {%- endcomment -%}
 {%- assign p = all_products[handle] -%}
+{%- assign name = p.title | split: ' (' | first | strip -%}
 {%- if p and p.id -%}
   {%- assign v0 = p.selected_or_first_available_variant -%}
   {%- assign per_tub = v0.price | times: 1.0 | divided_by: tubs | round -%}
