@@ -1,0 +1,119 @@
+{%- comment -%}
+  BF 2026 bundle card (Petsome). Native Shopify bundle product.
+  Params: handle, strip ('low' | 'rec' | ''), save, tubs (total incl. free), name, sub,
+  supply ('S|M|L'), two_dogs (bool), reason, value, gifts (0/1/2 free tubs), sticks (bool),
+  default_gift ('FloraMix' | 'MobiMix' | 'DentalMix'), mob_order (int)
+{%- endcomment -%}
+{%- assign p = all_products[handle] -%}
+{%- if p and p.id -%}
+  {%- assign v0 = p.selected_or_first_available_variant -%}
+  {%- assign per_tub = v0.price | times: 1.0 | divided_by: tubs | round -%}
+  {%- assign supply_arr = supply | split: '|' -%}
+  {%- comment -%} Gifts = free tubs + bowl + shipping (+ sticks). 2 free tubs show as one tile "2× po izbiri". {%- endcomment -%}
+  {%- assign gift_total = 2 | plus: gifts -%}
+  {%- if sticks -%}{%- assign gift_total = gift_total | plus: 1 -%}{%- endif -%}
+  {%- case gift_total -%}
+    {%- when 2 -%}{%- assign gift_word = 'darili' -%}
+    {%- when 3, 4 -%}{%- assign gift_word = 'darila' -%}
+    {%- else -%}{%- assign gift_word = 'daril' -%}
+  {%- endcase -%}
+  <article class="bf-card{% if strip == 'rec' %} bf-card--rec{% endif %}{% if strip == 'low' %} bf-card--low{% endif %}"
+    style="--mob-order: {{ mob_order }}"
+    data-bf-card
+    data-gifts="{{ gifts }}"
+    data-default-gift="{{ default_gift }}"
+    data-two-dogs="{% if two_dogs %}1{% else %}0{% endif %}"
+    data-supply="{{ supply | escape }}">
+    <script type="application/json" data-bf-variants>
+      [{%- for v in p.variants -%}{"id":{{ v.id }},"o1":{{ v.option1 | json }},"o2":{{ v.option2 | json }},"a":{{ v.available | json }}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]
+    </script>
+    {%- if strip == 'rec' -%}
+      <div class="bf-card__strip bf-card__strip--rec">Priporočamo</div>
+    {%- elsif strip == 'low' -%}
+      <div class="bf-card__strip bf-card__strip--low">Najnižja cena na lonček</div>
+    {%- endif -%}
+    <div class="bf-card__media">
+      {%- if p.featured_image -%}
+        {{ p.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', widths: '400, 600, 800', sizes: '(min-width: 990px) 380px, 330px', alt: name, class: 'bf-card__img' }}
+      {%- endif -%}
+      <span class="bf-card__save">Prihrani −{{ save }} %</span>
+      <span class="bf-card__count">{{ tubs }} {% if tubs == 2 %}lončka{% elsif tubs < 5 %}lončki{% else %}lončkov{% endif %}</span>
+    </div>
+    <div class="bf-card__body">
+      <h3 class="bf-card__name">{{ name }}</h3>
+      <p class="bf-card__sub">{{ sub }}</p>
+      <div class="bf-card__supply">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+        <strong data-bf-supply>{{ supply_arr[1] }}</strong>
+        <span data-bf-supply-size>{% if two_dogs %}pri psih{% else %}pri psu{% endif %} 10–25 kg</span>
+      </div>
+      {%- if reason != blank -%}<p class="bf-card__reason">{{ reason }}</p>{%- endif -%}
+      <div class="bf-card__price">
+        <div>
+          <div class="bf-card__now">{{ v0.price | money_without_currency }} €</div>
+          <div class="bf-card__was">Vrednost <s>{{ value }}</s></div>
+        </div>
+        <div class="bf-card__pertub">
+          <div class="bf-card__pertub-num">{{ per_tub | money_without_currency }} €</div>
+          <div class="bf-card__was">na lonček</div>
+        </div>
+      </div>
+      <div class="bf-gifts">
+        <div class="bf-gifts__head">{{ gift_total }} GRATIS {{ gift_word }} v paketu</div>
+        <div class="bf-gifts__row">
+          {%- if gifts > 0 -%}
+            <div class="bf-gift">
+              <div class="bf-gift__tile"><span class="bf-gift__tag">Gratis</span>{{ 'bf26-gift-tub.png' | file_img_url: '200x' | img_tag: 'Lonček v darilo', 'bf-gift__img' }}</div>
+              <s class="bf-gift__val">{% if gifts == 2 %}91,80 €{% else %}45,90 €{% endif %}</s>
+              <span class="bf-gift__label">{% if gifts == 2 %}2× po izbiri{% else %}Po izbiri{% endif %}</span>
+            </div>
+          {%- endif -%}
+          {%- assign bowl = all_products['prenosna-zlozljiva-posoda-za-pse-modra'] -%}
+          <div class="bf-gift">
+            <div class="bf-gift__tile"><span class="bf-gift__tag">Gratis</span>{% if bowl.featured_image %}{{ bowl.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: 'Posodica', class: 'bf-gift__img' }}{% endif %}</div>
+            <s class="bf-gift__val">9,00 €</s>
+            <span class="bf-gift__label">Posodica</span>
+          </div>
+          {%- if sticks -%}
+            {%- assign st = all_products['dentalsticks'] -%}
+            <div class="bf-gift">
+              <div class="bf-gift__tile"><span class="bf-gift__tag">Gratis</span>{% if st.featured_image %}{{ st.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: 'DentalSticks', class: 'bf-gift__img' }}{% endif %}</div>
+              <s class="bf-gift__val">14,90 €</s>
+              <span class="bf-gift__label">DentalSticks</span>
+            </div>
+          {%- endif -%}
+          <div class="bf-gift">
+            <div class="bf-gift__tile"><span class="bf-gift__tag">Gratis</span>
+              <svg class="bf-gift__icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0E1111" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h12v10H2zM14 9h4l3 3v4h-7z"/><circle cx="6" cy="17.5" r="1.8" fill="#fff"/><circle cx="17" cy="17.5" r="1.8" fill="#fff"/></svg>
+            </div>
+            <s class="bf-gift__val">3,95 €</s>
+            <span class="bf-gift__label">Dostava</span>
+          </div>
+        </div>
+      </div>
+      {%- if gifts > 0 -%}
+        <div class="bf-pick">
+          <p class="bf-pick__title">{% if gifts == 2 %}Izberi 2 gratis lončka{% else %}Izberi gratis lonček{% endif %}</p>
+          {%- for row in (1..gifts) -%}
+            {%- if gifts == 2 -%}<p class="bf-pick__row-label">{{ row }}. gratis lonček</p>{%- endif -%}
+            <div class="bf-pick__row" role="radiogroup" aria-label="{{ row }}. gratis lonček" data-bf-pick="{{ row }}">
+              {%- for prod in (1..3) -%}
+                {%- case prod -%}
+                  {%- when 1 -%}{%- assign pn = 'FloraMix' -%}{%- assign pf = 'floramix' -%}
+                  {%- when 2 -%}{%- assign pn = 'MobiMix' -%}{%- assign pf = 'mobimix' -%}
+                  {%- else -%}{%- assign pn = 'DentalMix' -%}{%- assign pf = 'dentalmix' -%}
+                {%- endcase -%}
+                <button type="button" class="bf-pick__opt" role="radio" aria-checked="{% if pn == default_gift %}true{% else %}false{% endif %}" data-value="{{ pn }}">
+                  {{ 'bf26-thumb-' | append: pf | append: '.png' | file_img_url: '96x' | img_tag: pn, 'bf-pick__img' }}
+                  <span>{{ pn }}</span>
+                </button>
+              {%- endfor -%}
+            </div>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+      <button type="button" class="bf-btn bf-card__add" data-bf-add data-variant="{{ v0.id }}">Dodaj v košarico</button>
+      <p class="bf-card__guar"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2E9E00" stroke-width="3" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>90-dnevna garancija vračila kupnine</p>
+    </div>
+  </article>
+{%- endif -%}

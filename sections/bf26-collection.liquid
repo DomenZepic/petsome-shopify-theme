@@ -1,0 +1,501 @@
+{%- comment -%}
+  Petsome · Black Friday 2026 collection page (version B: two-row free-tub picker).
+  Design: Figma zJgsgk45dlBlvE1iA6tqWi, frames 799:522 (desktop) and 799:901 (mobile).
+  Bundles are native Shopify bundle products tagged bf26-bundle (handles bf26-*).
+  Variant options: "Velikost psa" (do 10 kg / 10–25 kg / nad 25 kg) + "Lonček v darilo" / "Lončka v darilo".
+{%- endcomment -%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,700;7..72,800&family=Source+Sans+3:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+  .bf26{--ink:#0E1111;--cream:#FAF9F6;--red:#E00000;--gold:#D4A017;--green:#3CCB00;--green-d:#2E9E00;--sel:#E8D6C5;--sel-b:#B8916E;--line:#E3D5C6;--lilac:#EFEAF6;--muted:#6B6670;
+    background:var(--cream);color:var(--ink);font-family:'Source Sans 3','Source Sans Pro',system-ui,sans-serif;font-size:16px;line-height:1.45;overflow-x:clip}
+  .bf26 *{box-sizing:border-box}
+  .bf26 h1,.bf26 h2,.bf26 h3{font-family:'Literata',Georgia,serif;font-weight:800;letter-spacing:-.01em;margin:0;color:inherit}
+  .bf26 p{margin:0}
+  .bf-wrap{max-width:1200px;margin:0 auto;padding:0 16px}
+  .bf-btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;border:0;border-radius:6px;background:var(--green);color:#fff;font:700 15px/1 'Source Sans 3',sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:background .15s}
+  .bf-btn:hover{background:#34b400}
+  .bf-btn[disabled]{opacity:.6;cursor:default}
+
+  /* Hero */
+  .bf-hero{background:linear-gradient(160deg,#1d1226 0%,#0E1111 70%);color:#fff;position:relative}
+  .bf-hero__img{display:block;width:100%;height:300px;object-fit:cover;object-position:center 40%}
+  .bf-hero__txt{padding:24px 16px 28px}
+  .bf-hero__tag{display:inline-block;background:var(--red);color:#fff;font:900 40px/1 'Source Sans 3',sans-serif;letter-spacing:.01em;padding:8px 14px 9px;text-transform:uppercase}
+  .bf-hero h1{font-size:30px;line-height:1.2;margin:20px 0 12px}
+  .bf-hero__sub{color:#D9D4DE;font-size:16px;margin-bottom:22px;max-width:520px}
+  .bf-hero .bf-btn{max-width:358px}
+  .bf-rating{display:flex;align-items:center;gap:8px;font-size:14px;color:#E8E3EC}
+  .bf-stars{color:var(--gold);letter-spacing:2px;font-size:15px}
+  .bf-hero__rating--m{margin-top:16px}
+  .bf-hero__rating--d{display:none}
+
+  /* USPs */
+  .bf-usp{background:#fff;border-bottom:1px solid #ECE6DF}
+  .bf-usp__list{display:grid;grid-template-columns:1fr 1fr;gap:10px 12px;padding:14px 16px;list-style:none;margin:0 auto;max-width:1200px;font-size:13.5px;font-weight:600}
+  .bf-usp__list li{display:flex;align-items:center;gap:0 6px;flex-wrap:wrap}
+  .bf-usp__list svg{flex:0 0 auto}
+
+  /* Size selector */
+  .bf-size{padding:32px 0 8px}
+  .bf-size__box{display:block}
+  .bf-size h2{font-size:22px}
+  .bf-size__hint{color:var(--muted);font-size:15px;margin-top:6px}
+  .bf-size__opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:16px}
+  .bf-size__opt{min-height:48px;border:1px solid var(--line);background:#fff;border-radius:8px;font:700 15px/1 'Source Sans 3',sans-serif;color:var(--ink);cursor:pointer}
+  .bf-size__opt[aria-checked="true"]{background:var(--sel);border-color:var(--sel-b)}
+
+  /* Group banner */
+  .bf-group{padding-top:40px}
+  .bf-banner{position:relative;border-radius:10px;overflow:hidden;color:#fff;min-height:280px;display:flex;align-items:flex-end}
+  .bf-banner picture,.bf-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .bf-banner::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(14,17,17,0) 35%,rgba(14,17,17,.75) 100%)}
+  .bf-banner__txt{position:relative;z-index:1;padding:18px 16px}
+  .bf-banner h2{font-size:26px;line-height:1.2}
+  .bf-banner p{margin-top:6px;font-size:15px;color:#ECE8EF}
+  .bf-banner__more{display:none}
+
+  /* Card row: mobile = swipe row, biggest first */
+  .bf-row{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding:20px 16px 8px;margin:0 -16px;scrollbar-width:none;-webkit-overflow-scrolling:touch;align-items:flex-start}
+  .bf-row::-webkit-scrollbar{display:none}
+  .bf-row > .bf-card{flex:0 0 min(330px,84vw);scroll-snap-align:center;order:var(--mob-order)}
+  .bf-dots{display:flex;justify-content:center;gap:6px;padding:10px 0 0;align-items:center}
+  .bf-dots span{width:6px;height:6px;border-radius:50%;background:#C9C1B8;transition:all .15s}
+  .bf-dots span.is-on{width:8px;height:8px;background:var(--ink)}
+
+  /* Card */
+  .bf-card{background:#fff;border:1px solid #E7E1DA;border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+  .bf-card--rec,.bf-card--low{border:2px solid var(--ink)}
+  .bf-card__strip{font:700 12px/1 'Source Sans 3',sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:10px 16px;color:#fff}
+  .bf-card__strip--rec{background:var(--ink)}
+  .bf-card__strip--low{background:var(--red)}
+  .bf-card__media{position:relative;aspect-ratio:1/1;background:#2a2230}
+  .bf-card__img{width:100%;height:100%;object-fit:cover;display:block}
+  .bf-card__save{position:absolute;left:12px;top:12px;background:var(--red);color:#fff;font:700 12px/1 'Source Sans 3',sans-serif;letter-spacing:.04em;text-transform:uppercase;padding:6px 8px;border-radius:3px}
+  .bf-card__count{position:absolute;right:12px;top:14px;color:#fff;font-size:12px;font-weight:700;text-shadow:0 1px 3px rgba(0,0,0,.5)}
+  .bf-card__body{padding:16px 16px 14px;display:flex;flex-direction:column;gap:12px}
+  .bf-card__name{font-size:24px;line-height:1.15}
+  .bf-card__sub{font-weight:700;font-size:15px;margin-top:-8px}
+  .bf-card__supply{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--lilac);color:#3B2A55;border-radius:6px;padding:7px 10px;font-size:14px}
+  .bf-card__supply span{color:var(--muted);font-size:13px}
+  .bf-card__reason{font-size:14px;color:var(--muted);margin-top:-4px}
+  .bf-card__price{display:flex;justify-content:space-between;align-items:flex-end}
+  .bf-card__now{font:900 32px/1 'Source Sans 3',sans-serif}
+  .bf-card__pertub{text-align:right}
+  .bf-card__pertub-num{font:700 20px/1 'Source Sans 3',sans-serif}
+  .bf-card__was{font-size:13px;color:var(--muted);margin-top:6px}
+  .bf-gifts{border-radius:8px;overflow:hidden;background:#000}
+  .bf-gifts__head{background:var(--red);color:#fff;text-align:center;font-weight:700;font-size:13.5px;padding:7px 8px}
+  .bf-gifts__row{display:flex;justify-content:center;gap:6px;padding:14px 8px 12px}
+  .bf-gift{flex:0 1 64px;min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center}
+  .bf-gift__tile{position:relative;width:100%;aspect-ratio:1/1;background:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center;padding:6px}
+  .bf-gift__img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+  .bf-gift__tag{position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:var(--gold);color:#fff;font:700 9px/1 'Source Sans 3',sans-serif;letter-spacing:.05em;text-transform:uppercase;padding:3px 6px;border-radius:9px;white-space:nowrap}
+  .bf-gift__val{color:#FF4D4D;font-size:10.5px;font-weight:700;margin-top:6px}
+  .bf-gift__label{color:#fff;font-size:11px;font-weight:600;margin-top:2px;white-space:nowrap}
+  .bf-pick__title{font-weight:700;font-size:14.5px}
+  .bf-pick__row-label{font-size:13px;color:var(--muted);margin:8px 0 6px}
+  .bf-pick__title + .bf-pick__row{margin-top:8px}
+  .bf-pick__row{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+  .bf-pick__opt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:62px;padding:6px 4px;border:1px solid var(--line);background:#fff;border-radius:8px;font:600 12.5px/1.1 'Source Sans 3',sans-serif;color:var(--ink);cursor:pointer}
+  .bf-pick__opt[aria-checked="true"]{background:var(--sel);border-color:var(--sel-b);box-shadow:inset 0 0 0 1px var(--sel-b)}
+  .bf-pick__img{width:28px;height:28px;object-fit:contain}
+  .bf-card__add{margin-top:2px}
+  .bf-card__guar{display:flex;align-items:center;justify-content:center;gap:6px;font-size:13px;color:var(--muted)}
+  .bf-card__err{font-size:13px;color:var(--red);text-align:center}
+
+  /* Reviews */
+  .bf-reviews{padding:56px 0 40px}
+  .bf-reviews h2{font-size:26px;padding-bottom:16px;border-bottom:2px solid var(--ink)}
+  .bf-reviews__head .bf-rating{display:none;color:var(--ink)}
+  .bf-rev{padding:22px 0;border-bottom:1px solid #CFC8C0}
+  .bf-rev:last-child{border-bottom:0}
+  .bf-rev blockquote{margin:10px 0 8px;font-family:'Literata',Georgia,serif;font-weight:400;font-size:19px;line-height:1.45}
+  .bf-rev cite{font-style:normal;font-size:13px;color:var(--muted);font-weight:600}
+
+  /* Guarantee */
+  .bf-guar{background:var(--ink);color:#fff;padding:44px 0}
+  .bf-guar__big{font-family:'Literata',Georgia,serif;font-weight:800;font-size:72px;line-height:1;color:var(--gold)}
+  .bf-guar h2{font-size:24px;margin-top:14px}
+  .bf-guar p{margin-top:10px;color:#D6D2CE;font-size:15.5px}
+  .bf-guar .bf-btn{display:none}
+
+  /* Singles */
+  .bf-single{padding:44px 0 56px}
+  .bf-single h2{font-size:26px}
+  .bf-single__sub{color:var(--muted);margin-top:6px}
+  .bf-single__list{display:grid;gap:12px;margin-top:18px}
+  .bf-single__item{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid #E7E1DA;border-radius:10px;padding:10px 12px 10px 10px}
+  .bf-single__img{width:84px;height:84px;border-radius:8px;object-fit:cover;flex:0 0 auto;background:#eee}
+  .bf-single__info{flex:1;min-width:0}
+  .bf-single__name{font-family:'Literata',Georgia,serif;font-weight:800;font-size:19px}
+  .bf-single__desc{font-size:13.5px;color:var(--muted)}
+  .bf-single__price{font-weight:900;font-size:19px;margin-top:2px}
+  .bf-single__price s{font-weight:400;font-size:13px;color:var(--muted);margin-left:4px}
+  .bf-single__off{display:inline-block;background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:2px 5px;border-radius:3px;margin-left:6px;vertical-align:middle}
+  .bf-single .bf-btn{width:auto;min-height:40px;padding:0 16px;font-size:13px}
+  .bf-single__note{font-size:13px;color:var(--muted);margin-top:14px}
+
+  @media (min-width:990px){
+    .bf-wrap{padding:0 24px}
+    .bf-hero{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+    .bf-hero__img{order:2;height:100%;min-height:560px}
+    .bf-hero__txt{order:1;padding:72px 48px 64px max(24px,calc((100vw - 1200px)/2 + 24px));display:flex;flex-direction:column;justify-content:center}
+    .bf-hero__tag{font-size:72px;padding:10px 16px 12px;align-self:flex-start}
+    .bf-hero h1{font-size:44px;margin:26px 0 16px}
+    .bf-hero__sub{font-size:18px}
+    .bf-hero .bf-btn{max-width:220px}
+    .bf-hero__rating--m{display:none}
+    .bf-hero__rating--d{display:flex;margin-bottom:22px}
+    .bf-usp__list{display:flex;justify-content:space-between;padding:14px 24px;font-size:14.5px}
+    .bf-size{padding-top:32px}
+    .bf-size__box{display:flex;align-items:center;justify-content:space-between;gap:24px;background:#fff;border:1px solid #ECE6DF;border-radius:10px;padding:18px 24px}
+    .bf-size__opts{margin-top:0;width:440px;flex:0 0 auto}
+    .bf-group{padding-top:72px}
+    .bf-banner{min-height:360px;align-items:center}
+    .bf-banner::after{background:linear-gradient(90deg,rgba(14,17,17,.82) 0%,rgba(14,17,17,.45) 45%,rgba(14,17,17,0) 75%)}
+    .bf-banner__txt{padding:0 56px;max-width:640px}
+    .bf-banner h2{font-size:44px}
+    .bf-banner p{font-size:18px;margin-top:12px}
+    .bf-banner__more{display:inline}
+    .bf-row{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;overflow:visible;padding:28px 0 0;margin:0;align-items:start}
+    .bf-row--4{grid-template-columns:repeat(4,1fr);gap:18px}
+    .bf-row > .bf-card{order:0}
+    .bf-row > .bf-card:not(.bf-card--rec){margin-top:34px}
+    .bf-card--low{border:1px solid #E7E1DA}
+    .bf-card__strip--low{display:none}
+    .bf-dots{display:none}
+    .bf-row--4 .bf-card__name{font-size:22px}
+    .bf-row--4 .bf-card__now{font-size:28px}
+    .bf-row--4 .bf-gift__label{font-size:9px;white-space:normal;line-height:1.1;letter-spacing:-.2px}
+    .bf-reviews{padding:96px 0 64px}
+    .bf-reviews__head{display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid var(--ink);padding-bottom:18px}
+    .bf-reviews__head h2{border:0;padding:0;font-size:40px}
+    .bf-reviews__head .bf-rating{display:flex}
+    .bf-reviews__list{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+    .bf-rev{border:0}
+    .bf-rev blockquote{font-size:22px}
+    .bf-guar{padding:72px 0}
+    .bf-guar .bf-wrap{display:grid;grid-template-columns:auto 1fr auto;gap:56px;align-items:center}
+    .bf-guar__big{font-size:112px}
+    .bf-guar h2{font-size:32px;margin-top:0}
+    .bf-guar .bf-btn{display:flex;width:220px}
+    .bf-single{padding:80px 0 96px}
+    .bf-single h2{font-size:32px}
+    .bf-single__list{grid-template-columns:repeat(3,1fr);gap:24px}
+  }
+
+  /* 9. nov: popravek hero (racunalnik) + manjse kartice (telefon) */
+  @media (min-width:990px){
+    .bf-hero{display:block;height:620px;min-height:0;overflow:hidden;background:linear-gradient(180deg,#320c35 0%,#21082a 35%,#11091a 70%,#0b0c11 100%)}
+    .bf-hero__img{position:absolute;top:0;right:0;left:auto;width:auto;max-width:none;height:100%;min-height:0;object-fit:contain;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 12%);mask-image:linear-gradient(90deg,transparent 0,#000 12%)}
+    .bf-hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,rgba(14,17,17,.35) 0%,rgba(14,17,17,0) 45%)}
+    .bf-hero__txt{position:relative;z-index:2;height:100%;max-width:calc(580px + max(24px,(100vw - 1200px)/2 + 24px));padding:40px 24px 40px max(24px,calc((100vw - 1200px)/2 + 24px))}
+    .bf-hero__tag{font-size:80px;padding:10px 18px 12px;white-space:nowrap;align-self:flex-start}
+    .bf-hero h1{font-size:54px;line-height:1.08;margin:26px 0 18px;text-shadow:0 2px 18px rgba(0,0,0,.35)}
+    .bf-hero__sub{font-size:19px;max-width:520px}
+    .bf-hero .bf-btn{max-width:300px;min-height:58px;font-size:16px}
+  }
+  @media (max-width:989px){
+    .bf-row > .bf-card{flex:0 0 min(300px,80vw)}
+    .bf-card__media{aspect-ratio:7/5}
+    .bf-card__strip{padding:8px 12px;font-size:11px}
+    .bf-card__body{padding:12px 12px 12px;gap:9px}
+    .bf-card__name{font-size:20px}
+    .bf-card__sub{font-size:13px;margin-top:-6px}
+    .bf-card__supply{padding:5px 8px;font-size:12px;flex-wrap:nowrap;white-space:nowrap;gap:6px}
+    .bf-card__supply span{font-size:11px;overflow:hidden;text-overflow:ellipsis}
+    .bf-card__now{font-size:26px}
+    .bf-card__pertub-num{font-size:17px}
+    .bf-card__was{font-size:12px;margin-top:4px}
+    .bf-gifts__head{font-size:12.5px;padding:5px 8px}
+    .bf-gifts__row{padding:10px 4px 7px;gap:4px}
+    .bf-gift{flex:1 1 0;max-width:54px;min-width:0}
+    .bf-gift__tile{padding:4px}
+    .bf-gift__val{font-size:9.5px;margin-top:4px}
+    .bf-gift__label{font-size:9px;white-space:normal;line-height:1.1;letter-spacing:-.2px}
+    .bf-pick__title{font-size:13.5px}
+    .bf-pick__row-label{font-size:12px;margin:6px 0 4px}
+    .bf-pick__row{gap:5px}
+    .bf-pick__opt{flex-direction:row;min-height:34px;padding:3px 4px;font-size:11px;gap:4px}
+    .bf-pick__img{width:18px;height:18px}
+    .bf-pick__row-label{margin:5px 0 3px}
+    .bf-card .bf-btn{min-height:44px;font-size:14px}
+    .bf-card__guar{font-size:12px}
+  }
+</style>
+
+<div class="bf26" id="bf26" data-sizes='["do 10 kg","10–25 kg","nad 25 kg"]'>
+  <section class="bf-hero">
+    <picture><source media="(min-width:990px)" srcset="{{ 'bf26-hero-wide.jpg' | asset_url }}"><img class="bf-hero__img" src="{{ 'bf26-hero-kitchen.jpg' | file_img_url: '1600x' }}" alt="Pes čaka, da mu lastnik v posodo doda FloraMix" width="1600" height="1600" fetchpriority="high"></picture>
+    <div class="bf-hero__txt">
+      <div class="bf-rating bf-hero__rating--d"><span class="bf-stars">★★★★★</span>4,8 / 5 · 2.000+ zadovoljnih lastnikov</div>
+      <span class="bf-hero__tag">Black Friday</span>
+      <h1>Do −60 % na paketih in do 5 daril gratis</h1>
+      <p class="bf-hero__sub">Paketi so sestavljeni po tem, kar opaziš pri psu: tačke in dlaka, vstajanje, zadah.<span class="bf-banner__more"> Večji paket pomeni nižjo ceno na lonček.</span></p>
+      <a class="bf-btn" href="#bf-bundles">Izberi paket</a>
+      <div class="bf-rating bf-hero__rating--m"><span class="bf-stars">★★★★★</span>4,8 / 5 · 2.000+ zadovoljnih lastnikov</div>
+    </div>
+  </section>
+
+  {%- capture check -%}<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E9E00" stroke-width="3" aria-hidden="true"><path d="M4 12l5 5L20 6"/></svg>{%- endcapture -%}
+  <div class="bf-usp">
+    <ul class="bf-usp__list">
+      <li>{{ check }}Brezplačna dostava v paketih</li>
+      <li>{{ check }}Dostava v 2–3 delovnih dneh</li>
+      <li>{{ check }}Plačilo po povzetju</li>
+      <li>{{ check }}90-dnevna garancija<span class="bf-banner__more">vračila kupnine</span></li>
+    </ul>
+  </div>
+
+  <div class="bf-wrap" id="bf-bundles">
+    <section class="bf-size">
+      <div class="bf-size__box">
+        <div>
+          <h2>Koliko tehta tvoj pes?</h2>
+          <p class="bf-size__hint">Pri vsakem paketu ti pokažemo, koliko časa zdrži.</p>
+        </div>
+        <div class="bf-size__opts" role="radiogroup" aria-label="Velikost psa">
+          <button type="button" class="bf-size__opt" role="radio" aria-checked="false" data-bf-size="0">do 10 kg</button>
+          <button type="button" class="bf-size__opt" role="radio" aria-checked="true" data-bf-size="1">10–25 kg</button>
+          <button type="button" class="bf-size__opt" role="radio" aria-checked="false" data-bf-size="2">nad 25 kg</button>
+        </div>
+      </div>
+    </section>
+
+    {%- comment -%} 1 · FloraMix {%- endcomment -%}
+    <section class="bf-group">
+      <div class="bf-banner">
+        <picture>
+          <source media="(min-width:990px)" srcset="{{ 'bf26-banner-floramix-d.jpg' | file_img_url: '2000x' }}">
+          <img src="{{ 'bf26-banner-floramix-m.jpg' | file_img_url: '800x' }}" alt="" loading="lazy">
+        </picture>
+        <div class="bf-banner__txt">
+          <h2>Liže tačke in se praska?</h2>
+          <p>FloraMix podpira kožo, dlako in prebavo.<span class="bf-banner__more"> Lastniki najprej opazijo trdnejše blato, nato manj praskanja in lizanja tačk.</span></p>
+        </div>
+      </div>
+      <div class="bf-row" data-bf-row>
+        {%- render 'bf26-card', handle: 'bf26-mirne-tacke', strip: '', save: 36, tubs: 2, name: 'Osnovni paket', sub: '2× FloraMix', supply: 'Zaloga za 6 mesecev|Zaloga za 3 mesece|Zaloga za 2 meseca', two_dogs: false, reason: '', value: '104,75 €', gifts: 0, sticks: false, default_gift: 'FloraMix', mob_order: 3 -%}
+        {%- render 'bf26-card', handle: 'bf26-mirne-noci', strip: 'rec', save: 56, tubs: 4, name: 'Popolni paket', sub: '3× FloraMix + 1 lonček gratis po izbiri', supply: 'Zaloga za 9 mesecev|Zaloga za 4,5 meseca|Zaloga za 3 mesece', two_dogs: false, reason: '', value: '211,45 €', gifts: 1, sticks: true, default_gift: 'FloraMix', mob_order: 2 -%}
+        {%- render 'bf26-card', handle: 'bf26-sijoca-dlaka', strip: 'low', save: 60, tubs: 6, name: 'Maksimalni paket', sub: '4× FloraMix + 2 lončka gratis po izbiri', supply: 'Zaloga za 12 mesecev|Zaloga za 6 mesecev|Zaloga za 4 mesece', two_dogs: false, reason: '', value: '303,25 €', gifts: 2, sticks: true, default_gift: 'FloraMix', mob_order: 1 -%}
+      </div>
+      <div class="bf-dots" data-bf-dots></div>
+    </section>
+
+    {%- comment -%} 2 · MobiMix {%- endcomment -%}
+    <section class="bf-group">
+      <div class="bf-banner">
+        <picture>
+          <source media="(min-width:990px)" srcset="{{ 'bf26-banner-mobimix-d.jpg' | file_img_url: '1400x' }}">
+          <img src="{{ 'bf26-banner-mobimix-m.jpg' | file_img_url: '800x' }}" alt="" loading="lazy">
+        </picture>
+        <div class="bf-banner__txt">
+          <h2>Zjutraj težje vstane?</h2>
+          <p>MobiMix podpira sklepe in gibljivost.<span class="bf-banner__more"> Za lažje vstajanje po počitku. Primeren tudi za mačke.</span></p>
+        </div>
+      </div>
+      <div class="bf-row" data-bf-row>
+        {%- render 'bf26-card', handle: 'bf26-lazje-vstajanje', strip: '', save: 36, tubs: 2, name: 'Osnovni paket', sub: '2× MobiMix', supply: 'Zaloga za 6 mesecev|Zaloga za 3 mesece|Zaloga za 2 meseca', two_dogs: false, reason: '', value: '104,75 €', gifts: 0, sticks: false, default_gift: 'MobiMix', mob_order: 3 -%}
+        {%- render 'bf26-card', handle: 'bf26-lazje-po-stopnicah', strip: 'rec', save: 56, tubs: 4, name: 'Popolni paket', sub: '3× MobiMix + 1 lonček gratis po izbiri', supply: 'Zaloga za 9 mesecev|Zaloga za 4,5 meseca|Zaloga za 3 mesece', two_dogs: false, reason: '', value: '211,45 €', gifts: 1, sticks: true, default_gift: 'MobiMix', mob_order: 2 -%}
+        {%- render 'bf26-card', handle: 'bf26-daljsi-sprehodi', strip: 'low', save: 60, tubs: 6, name: 'Maksimalni paket', sub: '4× MobiMix + 2 lončka gratis po izbiri', supply: 'Zaloga za 12 mesecev|Zaloga za 6 mesecev|Zaloga za 4 mesece', two_dogs: false, reason: '', value: '303,25 €', gifts: 2, sticks: true, default_gift: 'MobiMix', mob_order: 1 -%}
+      </div>
+      <div class="bf-dots" data-bf-dots></div>
+    </section>
+
+    {%- comment -%} 3 · DentalMix {%- endcomment -%}
+    <section class="bf-group">
+      <div class="bf-banner">
+        <picture>
+          <source media="(min-width:990px)" srcset="{{ 'bf26-banner-dentalmix-d.jpg' | file_img_url: '1400x' }}">
+          <img src="{{ 'bf26-banner-dentalmix-m.jpg' | file_img_url: '800x' }}" alt="" loading="lazy">
+        </picture>
+        <div class="bf-banner__txt">
+          <h2>Ima neprijeten zadah?</h2>
+          <p>DentalMix za svež dih in čistejše zobe.<span class="bf-banner__more"> Ena merica na hrano. Preprosta dnevna nega, ko ščetkanje ne gre.</span></p>
+        </div>
+      </div>
+      <div class="bf-row" data-bf-row>
+        {%- render 'bf26-card', handle: 'bf26-svez-dih', strip: '', save: 36, tubs: 2, name: 'Osnovni paket', sub: '2× DentalMix', supply: 'Zaloga za 4 mesece|Zaloga za 2 meseca|Zaloga za 40 dni', two_dogs: false, reason: '', value: '104,75 €', gifts: 0, sticks: false, default_gift: 'DentalMix', mob_order: 3 -%}
+        {%- render 'bf26-card', handle: 'bf26-crkljanje-od-blizu', strip: 'rec', save: 56, tubs: 4, name: 'Popolni paket', sub: '3× DentalMix + 1 lonček gratis po izbiri', supply: 'Zaloga za 6 mesecev|Zaloga za 3 mesece|Zaloga za 2 meseca', two_dogs: false, reason: '', value: '211,45 €', gifts: 1, sticks: true, default_gift: 'DentalMix', mob_order: 2 -%}
+        {%- render 'bf26-card', handle: 'bf26-cistejsi-zobje', strip: 'low', save: 60, tubs: 6, name: 'Maksimalni paket', sub: '4× DentalMix + 2 lončka gratis po izbiri', supply: 'Zaloga za 8 mesecev|Zaloga za 4 mesece|Zaloga za 80 dni', two_dogs: false, reason: '', value: '303,25 €', gifts: 2, sticks: true, default_gift: 'DentalMix', mob_order: 1 -%}
+      </div>
+      <div class="bf-dots" data-bf-dots></div>
+    </section>
+
+    {%- comment -%} 4 · Older dog / several concerns {%- endcomment -%}
+    <section class="bf-group">
+      <div class="bf-banner">
+        <picture>
+          <source media="(min-width:990px)" srcset="{{ 'bf26-banner-mix-d.jpg' | file_img_url: '1400x' }}">
+          <img src="{{ 'bf26-banner-mix-m.jpg' | file_img_url: '800x' }}" alt="" loading="lazy">
+        </picture>
+        <div class="bf-banner__txt">
+          <h2>Starejši pes ali več skrbi hkrati?</h2>
+          <p>Izdelke kombiniraš, cena na lonček ostane enaka<span class="bf-banner__more"> kot pri paketih z enim izdelkom</span>.</p>
+        </div>
+      </div>
+      <div class="bf-row bf-row--4" data-bf-row>
+        {%- render 'bf26-card', handle: 'bf26-starejsi-pes', strip: '', save: 36, tubs: 2, name: 'Starejši pes', sub: 'MobiMix + FloraMix', supply: 'Zaloga za vsaj 3 mesece|Zaloga za vsaj 45 dni|Zaloga za vsaj 30 dni', two_dogs: false, reason: 'Sklepi ter koža in prebava v enem paketu.', value: '104,75 €', gifts: 0, sticks: false, default_gift: 'FloraMix', mob_order: 3 -%}
+        {%- render 'bf26-card', handle: 'bf26-od-smrcka-do-tack', strip: '', save: 36, tubs: 2, name: 'Od smrčka do tačk', sub: 'FloraMix + DentalMix', supply: 'Zaloga za vsaj 2 meseca|Zaloga za vsaj 30 dni|Zaloga za vsaj 20 dni', two_dogs: false, reason: 'Za psa, ki ga radi crkljaš od blizu.', value: '104,75 €', gifts: 0, sticks: false, default_gift: 'FloraMix', mob_order: 4 -%}
+        {%- render 'bf26-card', handle: 'bf26-celotna-nega', strip: 'rec', save: 56, tubs: 4, name: 'Celotna nega', sub: 'FloraMix + MobiMix + DentalMix + 1 gratis po izbiri', supply: 'Zaloga za vsaj 2 meseca|Zaloga za vsaj 30 dni|Zaloga za vsaj 20 dni', two_dogs: false, reason: '', value: '211,45 €', gifts: 1, sticks: true, default_gift: 'FloraMix', mob_order: 2 -%}
+        {%- render 'bf26-card', handle: 'bf26-celotna-nega-za-dva-psa', strip: 'low', save: 60, tubs: 6, name: 'Celotna nega za dva psa', sub: '2× FloraMix, 2× MobiMix, 2× DentalMix', supply: 'Za 2 psa po 2 meseca|Za 2 psa po 30 dni|Za 2 psa po 20 dni', two_dogs: true, reason: '', value: '303,25 €', gifts: 0, sticks: true, default_gift: 'FloraMix', mob_order: 1 -%}
+      </div>
+      <div class="bf-dots" data-bf-dots></div>
+    </section>
+
+    <section class="bf-reviews">
+      <div class="bf-reviews__head">
+        <h2>Kaj opazijo lastniki</h2>
+        <div class="bf-rating"><span class="bf-stars">★★★★★</span>4,8 / 5 · 2.000+ zadovoljnih lastnikov</div>
+      </div>
+      <div class="bf-reviews__list">
+        <figure class="bf-rev"><span class="bf-stars">★★★★★</span><blockquote>»Prej je ponoči velikokrat vstajal in si lizal tace. Zdaj je tega res precej manj.«</blockquote><cite>Ocena za FloraMix · pet-some.eu</cite></figure>
+        <figure class="bf-rev"><span class="bf-stars">★★★★★</span><blockquote>»Pri našem 11-letniku se je najprej poznalo zjutraj. Vstane precej lažje in ne rabi več toliko časa, da se razhodi.«</blockquote><cite>Ocena za MobiMix · pet-some.eu</cite></figure>
+        <figure class="bf-rev"><span class="bf-stars">★★★★★</span><blockquote>»Največja razlika je, da ga spet brez problema crkljamo čisto od blizu.«</blockquote><cite>Ocena za DentalMix · pet-some.eu</cite></figure>
+      </div>
+    </section>
+  </div>
+
+  <section class="bf-guar">
+    <div class="bf-wrap">
+      <div class="bf-guar__big">90 dni</div>
+      <div>
+        <h2>90-dnevna garancija vračila kupnine</h2>
+        <p>Če izdelek ne izpolni pričakovanj, lahko v 90 dneh zahtevaš vračilo kupnine.<span class="bf-banner__more"> Večji paket ti da dovolj časa, da vidiš, kako tvoj pes sprejme izdelek.</span></p>
+      </div>
+      <a class="bf-btn" href="#bf-bundles">Izberi paket</a>
+    </div>
+  </section>
+
+  <section class="bf-single">
+    <div class="bf-wrap">
+      <h2>Raje samo en lonček?</h2>
+      {%- assign any_off = false -%}
+      <div class="bf-single__list">
+        {%- assign single_handles = 'floramix,mobimix,dentalmix' | split: ',' -%}
+        {%- for h in single_handles -%}
+          {%- assign sp = all_products[h] -%}
+          {%- if sp and sp.id -%}
+            {%- case h -%}
+              {%- when 'floramix' -%}{%- assign sdesc = 'Koža, dlaka in prebava' -%}
+              {%- when 'mobimix' -%}{%- assign sdesc = 'Sklepi in gibljivost' -%}
+              {%- else -%}{%- assign sdesc = 'Zobje in svež dih' -%}
+            {%- endcase -%}
+            {%- assign sv = sp.selected_or_first_available_variant -%}
+            <div class="bf-single__item" data-bf-single='[{%- for v in sp.variants -%}{{ v.id }}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}]'>
+              {%- if sp.featured_image -%}{{ sp.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', class: 'bf-single__img', alt: sp.title }}{%- endif -%}
+              <div class="bf-single__info">
+                <div class="bf-single__name">{{ sp.title }}</div>
+                <div class="bf-single__desc">{{ sdesc }}</div>
+                <div class="bf-single__price">{{ sv.price | money_without_currency }} €{% if sv.compare_at_price > sv.price %}{%- assign any_off = true -%}<s>{{ sv.compare_at_price | money_without_currency }} €</s><span class="bf-single__off">−{{ sv.compare_at_price | minus: sv.price | times: 100 | divided_by: sv.compare_at_price }} %</span>{% endif %}</div>
+              </div>
+              <button type="button" class="bf-btn" data-bf-add-single>Dodaj</button>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+      {%- if any_off and section.settings.singles_note != blank -%}<p class="bf-single__note">{{ section.settings.singles_note }}</p>{%- endif -%}
+    </div>
+  </section>
+</div>
+
+<script>
+(function(){
+  var root = document.getElementById('bf26'); if (!root) return;
+  var SIZES = JSON.parse(root.getAttribute('data-sizes'));
+  var ORDER = ['FloraMix','MobiMix','DentalMix'];
+  var sizeIdx = 1;
+  try { var s = localStorage.getItem('bf26_size'); if (s !== null && SIZES[+s]) sizeIdx = +s; } catch(e) {}
+
+  function giftOption(card){
+    var n = +card.dataset.gifts; if (!n) return null;
+    var picks = [].map.call(card.querySelectorAll('[data-bf-pick]'), function(row){
+      var on = row.querySelector('[aria-checked="true"]'); return on ? on.dataset.value : card.dataset.defaultGift;
+    });
+    if (n === 1) return picks[0];
+    picks.sort(function(a,b){ return ORDER.indexOf(a) - ORDER.indexOf(b); });
+    return picks[0] === picks[1] ? '2x ' + picks[0] : picks[0] + ' + ' + picks[1];
+  }
+  function updateCard(card){
+    var vs = card._vs || (card._vs = JSON.parse(card.querySelector('[data-bf-variants]').textContent));
+    var o1 = SIZES[sizeIdx], o2 = giftOption(card);
+    var v = vs.filter(function(x){ return x.o1 === o1 && (o2 === null || x.o2 === o2); })[0];
+    var btn = card.querySelector('[data-bf-add]');
+    if (v) { btn.dataset.variant = v.id; btn.disabled = !v.a; btn.textContent = v.a ? 'Dodaj v košarico' : 'Razprodano'; }
+    var sup = card.dataset.supply.split('|');
+    card.querySelector('[data-bf-supply]').textContent = sup[sizeIdx];
+    card.querySelector('[data-bf-supply-size]').textContent = (card.dataset.twoDogs === '1' ? 'pri psih ' : 'pri psu ') + SIZES[sizeIdx];
+  }
+  function setSize(i){
+    sizeIdx = i;
+    try { localStorage.setItem('bf26_size', i); } catch(e) {}
+    root.querySelectorAll('[data-bf-size]').forEach(function(b){ b.setAttribute('aria-checked', +b.dataset.bfSize === i ? 'true' : 'false'); });
+    root.querySelectorAll('[data-bf-card]').forEach(updateCard);
+  }
+  root.querySelectorAll('[data-bf-size]').forEach(function(b){ b.addEventListener('click', function(){ setSize(+b.dataset.bfSize); }); });
+  root.querySelectorAll('.bf-pick__opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      b.parentNode.querySelectorAll('.bf-pick__opt').forEach(function(x){ x.setAttribute('aria-checked', x === b ? 'true' : 'false'); });
+      updateCard(b.closest('[data-bf-card]'));
+    });
+  });
+
+  function addToCart(id, btn){
+    var label = btn.textContent; btn.disabled = true; btn.textContent = 'Dodajam…';
+    fetch((window.Shopify && Shopify.routes ? Shopify.routes.root : '/') + 'cart/add.js', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ items: [{ id: +id, quantity: 1 }] })
+    }).then(function(r){ return r.json().then(function(j){ if (!r.ok) throw j; return j; }); })
+      .then(function(){ window.location.href = (window.Shopify && Shopify.routes ? Shopify.routes.root : '/') + 'cart'; })
+      .catch(function(err){ btn.disabled = false; btn.textContent = label; alertInline(btn, (err && (err.description || err.message)) || 'Napaka. Poskusi znova.'); });
+  }
+  function alertInline(btn, msg){
+    var p = btn.parentNode.querySelector('.bf-card__err') || document.createElement('p');
+    p.className = 'bf-card__err'; p.textContent = msg; btn.insertAdjacentElement('afterend', p);
+  }
+  root.querySelectorAll('[data-bf-add]').forEach(function(b){ b.addEventListener('click', function(){ addToCart(b.dataset.variant, b); }); });
+  root.querySelectorAll('[data-bf-add-single]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var ids = JSON.parse(b.closest('[data-bf-single]').getAttribute('data-bf-single'));
+      addToCart(ids[Math.min(sizeIdx, ids.length - 1)], b);
+    });
+  });
+
+  // Swipe dots (mobile)
+  root.querySelectorAll('[data-bf-row]').forEach(function(row){
+    var dots = row.nextElementSibling; if (!dots || !dots.hasAttribute('data-bf-dots')) return;
+    var cards = [].slice.call(row.children).filter(function(c){ return c.matches('[data-bf-card]'); });
+    cards.sort(function(a,b){ return (+getComputedStyle(a).order) - (+getComputedStyle(b).order); });
+    dots.innerHTML = cards.map(function(_, i){ return '<span' + (i === 0 ? ' class="is-on"' : '') + '></span>'; }).join('');
+    var raf;
+    row.addEventListener('scroll', function(){
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(function(){
+        var mid = row.getBoundingClientRect().left + row.clientWidth / 2, best = 0, bd = 1e9;
+        cards.forEach(function(c, i){ var r = c.getBoundingClientRect(); var d = Math.abs(r.left + r.width / 2 - mid); if (d < bd) { bd = d; best = i; } });
+        [].forEach.call(dots.children, function(d, i){ d.classList.toggle('is-on', i === best); });
+      });
+    }, { passive: true });
+  });
+
+  setSize(sizeIdx);
+})();
+</script>
+
+{% schema %}
+{
+  "name": "BF 2026 kolekcija",
+  "tag": "div",
+  "settings": [
+    {
+      "type": "text",
+      "id": "singles_note",
+      "label": "Opomba pod posameznimi izdelki",
+      "info": "Prikaže se samo, če ima vsaj en posamezni izdelek primerjalno ceno (npr. »*Najnižja cena v zadnjih 30 dneh: 45,90 €«)."
+    }
+  ]
+}
+{% endschema %}
