@@ -451,11 +451,21 @@
 
   function addToCart(id, btn){
     var label = btn.textContent; btn.disabled = true; btn.textContent = L.adding;
-    fetch((window.Shopify && Shopify.routes ? Shopify.routes.root : '/') + 'cart/add.js', {
+    var rootUrl = (window.Shopify && Shopify.routes ? Shopify.routes.root : '/');
+    var drawer = document.querySelector('cart-drawer');
+    var useDrawer = drawer && typeof drawer.renderContents === 'function' && typeof drawer.getSectionsToRender === 'function';
+    var payload = { items: [{ id: +id, quantity: 1 }] };
+    if (useDrawer) { payload.sections = drawer.getSectionsToRender().map(function(s){ return s.id; }); payload.sections_url = window.location.pathname; }
+    fetch(rootUrl + 'cart/add.js', {
       method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ items: [{ id: +id, quantity: 1 }] })
+      body: JSON.stringify(payload)
     }).then(function(r){ return r.json().then(function(j){ if (!r.ok) throw j; return j; }); })
-      .then(function(){ window.location.href = (window.Shopify && Shopify.routes ? Shopify.routes.root : '/') + 'cart'; })
+      .then(function(j){
+        if (useDrawer) {
+          try { drawer.classList.remove('is-empty'); drawer.renderContents(j); btn.disabled = false; btn.textContent = label; return; } catch (e) {}
+        }
+        window.location.href = rootUrl + 'cart';
+      })
       .catch(function(err){ btn.disabled = false; btn.textContent = label; alertInline(btn, (err && (err.description || err.message)) || L.err); });
   }
   function alertInline(btn, msg){
