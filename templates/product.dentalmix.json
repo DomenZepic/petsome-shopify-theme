@@ -667,7 +667,7 @@
                 "capsules_per_package": 90,
                 "capsules_per_day_by_size": "1, 2, 3",
                 "grams_per_package": 120,
-                "grams_per_day_by_size": "1.33, 2.67, 4.00, 5.32",
+                "grams_per_day_by_size": "2, 4, 5.33, 5.33",
                 "margin_top": 15,
                 "margin_bottom": 15
               },
@@ -968,7 +968,7 @@
               "name": "Petsome: Guarantee",
               "settings": {
                 "image": "shopify://shop_images/Guarantee.png",
-                "text": "<p>Želimo, da je nakup DentalMixa zate brez skrbi. Če z izdelkom ne boš zadovoljen, lahko v 60 dneh zahtevaš vračilo kupnine.</p>",
+                "text": "<p>Želimo, da je nakup DentalMixa zate brez skrbi. Če z izdelkom ne boš zadovoljen, lahko v 90 dneh zahtevaš vračilo kupnine.</p>",
                 "background_color": "#e8d6c5",
                 "border_color": "#b6a87c",
                 "margin_top": 0,
