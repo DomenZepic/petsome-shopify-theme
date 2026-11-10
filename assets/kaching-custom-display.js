@@ -76,6 +76,17 @@ if (!customElements.get('kaching-custom-display')) {
       this.onSizeChange = this.onSizeChange.bind(this);
       this.sizeRadios.forEach((radio) => radio.addEventListener('change', this.onSizeChange));
 
+      // Privzeta teza = srednja (npr. 15-30 kg), razen ce link ze doloca varianto.
+      try {
+        if (!window.__kcdDefaultSizeSet && this.sizeRadios.length >= 3 && this.getSelectedSizeIndex() === 0
+            && !new URLSearchParams(window.location.search).has('variant')) {
+          window.__kcdDefaultSizeSet = true;
+          const mid = this.sizeRadios[1];
+          const lab = mid.id ? document.querySelector('label[for="' + mid.id + '"]') : null;
+          setTimeout(() => { (lab || mid).click(); }, 0);
+        }
+      } catch (e) {}
+
       // Everything needed to render (dealBars, gifts, variant prices) is
       // already in the page synchronously - no need to wait on the live
       // Kaching widget just to paint. It's only touched at add-to-cart time.
