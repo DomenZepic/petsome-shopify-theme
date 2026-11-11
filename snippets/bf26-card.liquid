@@ -12,9 +12,12 @@
   {%- assign per_tub = v0.price | times: 1.0 | divided_by: tubs | round -%}
   {%- assign supply_arr = supply | split: '|' -%}
   {%- comment -%} Gifts = free tubs + bowl + shipping (+ sticks). 2 free tubs show as one tile "2× po izbiri". {%- endcomment -%}
-  {%- assign gift_total = 2 | plus: gifts -%}
+  {%- comment -%} Brezplacna dostava samo nad 80 EUR -> duo (2 loncka) je nima {%- endcomment -%}
+  {%- assign gift_total = 1 | plus: gifts -%}
+  {%- if tubs > 2 -%}{%- assign gift_total = gift_total | plus: 1 -%}{%- endif -%}
   {%- if sticks -%}{%- assign gift_total = gift_total | plus: 1 -%}{%- endif -%}
   {%- case gift_total -%}
+    {%- when 1 -%}{%- if hr -%}{%- assign gift_word = 'poklon' -%}{%- else -%}{%- assign gift_word = 'darilo' -%}{%- endif -%}
     {%- when 2 -%}{%- if hr -%}{%- assign gift_word = 'poklona' -%}{%- else -%}{%- assign gift_word = 'darili' -%}{%- endif -%}
     {%- when 3, 4 -%}{%- if hr -%}{%- assign gift_word = 'poklona' -%}{%- else -%}{%- assign gift_word = 'darila' -%}{%- endif -%}
     {%- else -%}{%- if hr -%}{%- assign gift_word = 'poklona' -%}{%- else -%}{%- assign gift_word = 'daril' -%}{%- endif -%}
@@ -84,6 +87,7 @@
               <span class="bf-gift__label">DentalSticks</span>
             </div>
           {%- endif -%}
+          {%- if tubs > 2 -%}
           <div class="bf-gift">
             <div class="bf-gift__tile"><span class="bf-gift__tag">Gratis</span>
               <svg class="bf-gift__icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0E1111" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M2 6h12v10H2zM14 9h4l3 3v4h-7z"/><circle cx="6" cy="17.5" r="1.8" fill="#fff"/><circle cx="17" cy="17.5" r="1.8" fill="#fff"/></svg>
@@ -91,6 +95,7 @@
             <s class="bf-gift__val">3,95 €</s>
             <span class="bf-gift__label">Dostava</span>
           </div>
+          {%- endif -%}
         </div>
       </div>
       {%- if gifts > 0 -%}
