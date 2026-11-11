@@ -338,6 +338,7 @@ if (!customElements.get('kaching-custom-display')) {
       this.renderHeader(tilesData);
       this.renderTiles(tilesData);
       this.renderGifts();
+      this.updateOmnibusLine();
 
       // computeFallbackPrice re-implements Kaching's discount math just to
       // paint instantly - it WILL go stale the next time the deal's
@@ -871,6 +872,43 @@ if (!customElements.get('kaching-custom-display')) {
           }
         });
         this.tilesContainer.appendChild(el);
+      });
+    }
+
+    // Omnibus: "*Najnizja cena v zadnjih 30 dneh: X" (rich text blok na strani)
+    // pokaze prejsnjo najnizjo ceno za TOCNO izbrani paket. Cene = pred BF (7. 11. 2026).
+    updateOmnibusLine() {
+      const LOWEST = {
+        EUR: {
+          floramix: { 1: 45.9, 2: 69.8, 4: 119.6 },
+          dentalmix: { 1: 45.9, 2: 69.8, 4: 119.6 },
+          mobimix: { 1: 45.9, 2: 79.8, 4: 119.6 },
+        },
+        CZK: {
+          floramix: { 1: 999, 2: 1598, 4: 2796 },
+        },
+      };
+      const cur = window.Shopify && window.Shopify.currency ? window.Shopify.currency.active : 'EUR';
+      const handle = (this.dataset.productHandle || '').toLowerCase();
+      const tier = this.dealBars.find((t) => t.id === (this.selectedDealBarId || this.preselectedDealBarId)) || this.dealBars[0];
+      if (!tier) return;
+      const table = (LOWEST[cur] || {})[handle] || null;
+      const value = table ? table[tier.quantity] : undefined;
+      if (!this.omnibusEls) {
+        this.omnibusEls = Array.from(document.querySelectorAll('.rich-text-block p, .rte p'))
+          .filter((p) => /^\s*\*?.{0,40}30\s*(dneh|dana|dní|dnů|days)\s*:/i.test(p.textContent || ''));
+        this.omnibusEls.forEach((p) => {
+          p.dataset.omniPrefix = p.textContent.slice(0, p.textContent.indexOf(':') + 1);
+        });
+      }
+      this.omnibusEls.forEach((p) => {
+        const block = p.closest('.rich-text-block') || p;
+        if (value == null) {
+          block.style.display = 'none';
+          return;
+        }
+        block.style.display = '';
+        p.textContent = `${p.dataset.omniPrefix} ${this.formatMoney(value)}`;
       });
     }
 
