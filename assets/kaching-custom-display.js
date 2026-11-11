@@ -900,6 +900,26 @@ if (!customElements.get('kaching-custom-display')) {
         this.omnibusEls.forEach((p) => {
           p.dataset.omniPrefix = p.textContent.slice(0, p.textContent.indexOf(':') + 1);
         });
+        // Landerji nimajo bloka -> ustvari vrstico pod gumbom za kosarico
+        if (this.omnibusEls.length === 0 && !document.querySelector('.kcd-omnibus')) {
+          const PREFIX = {
+            sl: '*Najnižja cena v zadnjih 30 dneh:',
+            hr: '*Najniža cijena u posljednjih 30 dana:',
+            cs: '*Nejnižší cena za posledních 30 dní:',
+            it: '*Prezzo più basso negli ultimi 30 giorni:',
+            sk: '*Najnižšia cena za posledných 30 dní:',
+          };
+          const loc = ((window.Shopify && window.Shopify.locale) || 'sl').slice(0, 2).toLowerCase();
+          const sec = this.closest('.shopify-section') || document;
+          const btn = sec.querySelector('button[name="add"], button[type="submit"]');
+          const anchor = btn ? (btn.closest('product-form') || btn.closest('form') || btn) : this;
+          const p = document.createElement('p');
+          p.className = 'kcd-omnibus';
+          p.style.cssText = 'margin:10px 0 0;text-align:center;font-size:12px;line-height:1.4;opacity:.75;';
+          p.dataset.omniPrefix = PREFIX[loc] || PREFIX.sl;
+          anchor.insertAdjacentElement('afterend', p);
+          this.omnibusEls = [p];
+        }
       }
       this.omnibusEls.forEach((p) => {
         const block = p.closest('.rich-text-block') || p;
