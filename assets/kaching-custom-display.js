@@ -710,6 +710,10 @@ if (!customElements.get('kaching-custom-display')) {
       const L = this.l26();
       if (!dosage || !dosage.daysSupply) return this.translateFromKaching(tier.title) || tier.title;
       const join = (n, s) => n + (s.charAt(0) === '-' ? s : ' ' + s);
+      if (this.dataset.marketId === '103847461189') {
+        // 16. 11. 2026: CZ = kosi (1x/2x/4x), ne zaloga po mesecih.
+        return (tier.quantity || 1) + '× ' + (this.productTitle || 'FloraMix');
+      }
       if ((document.documentElement.lang || '').toLowerCase().indexOf('cs') === 0) {
         const mm = dosage.daysSupply / 30;
         if (Math.abs(mm - Math.round(mm)) < 0.08) { const n = Math.round(mm); return 'Zásoba na ' + n + (n === 1 ? ' měsíc' : n <= 4 ? ' měsíce' : ' měsíců'); }
@@ -814,7 +818,9 @@ if (!customElements.get('kaching-custom-display')) {
         const unitBase = comparePrice && comparePrice > (baseCompare || 0) ? comparePrice / qty : (baseCompare ? baseCompare / qty : null);
         const pctBase = comparePrice && comparePrice > price ? comparePrice : baseCompare;
         const pct = pctBase && pctBase > price ? Math.round((1 - price / pctBase) * 100) : 0;
-        const qtyLine = `${qty}× ${this.productTitle}${gifts.length ? ' + ' + L.gifts(gifts.length) : ''}`;
+        const qtyLine = this.dataset.marketId === '103847461189'
+          ? (gifts.length ? '+ ' + L.gifts(gifts.length) : '')
+          : `${qty}× ${this.productTitle}${gifts.length ? ' + ' + L.gifts(gifts.length) : ''}`;
 
         const giftTiles = gifts
           .map((g) => {
