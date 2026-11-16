@@ -78,7 +78,7 @@ if (!customElements.get('kaching-custom-display')) {
 
       // Privzeta teza = srednja (npr. 15-30 kg), razen ce link ze doloca varianto.
       try {
-        if (!window.__kcdDefaultSizeSet && this.sizeRadios.length >= 3 && this.getSelectedSizeIndex() === 0
+        if (!window.__kcdDefaultSizeSet && this.dataset.marketId !== '103847461189' && this.sizeRadios.length >= 3 && this.getSelectedSizeIndex() === 0
             && !new URLSearchParams(window.location.search).has('variant')) {
           window.__kcdDefaultSizeSet = true;
           const mid = this.sizeRadios[1];
