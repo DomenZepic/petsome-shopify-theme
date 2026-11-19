@@ -795,7 +795,7 @@ if (!customElements.get('kaching-custom-display')) {
       }
       this.headerContainer.hidden = false;
       // 19. 11.: FloraMix SLO+HR - nad ceno dinamicno kaj dobis (npr. '2× FloraMix + 2 GRATIS darili'), kot Tasty Dose
-      const showT26 = this.swapQty26() && this.dataset.marketId !== '103847461189';
+      const showT26 = this.swapQty26(); // SLO+HR FloraMix + CZ (vsi jeziki: sl/hr/cs)
       if (showT26) {
         const q26 = selected.tier.quantity || 1;
         const g26 = this.giftsForTier26(selected.tier, this.heroQty26(tilesData));
