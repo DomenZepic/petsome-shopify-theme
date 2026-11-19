@@ -706,11 +706,17 @@ if (!customElements.get('kaching-custom-display')) {
       return L[lang] || L.sl;
     }
 
+    // 16. 11. CZ; 19. 11. TEST: tudi FloraMix SLO+HR (naslov 1x/2x/4x, zaloga v podvrstici)
+    swapQty26() {
+      if (this.dataset.marketId === '103847461189') return true;
+      return /floramix/i.test(String(this.productTitle || '')) && /^(sl|hr)/i.test(document.documentElement.lang || 'sl');
+    }
+
     supplyTitle26(tier, dosage) {
       const L = this.l26();
       if (!dosage || !dosage.daysSupply) return this.translateFromKaching(tier.title) || tier.title;
       const join = (n, s) => n + (s.charAt(0) === '-' ? s : ' ' + s);
-      if (this.dataset.marketId === '103847461189' && !this.__czSupply) {
+      if (this.swapQty26() && !this.__czSupply) {
         // 16. 11. 2026: CZ = naslov kosi (1x/2x/4x), zaloga po mesecih v vrstici pod njim.
         return (tier.quantity || 1) + '× ' + (this.productTitle || 'FloraMix');
       }
@@ -819,8 +825,8 @@ if (!customElements.get('kaching-custom-display')) {
         const pctBase = comparePrice && comparePrice > price ? comparePrice : baseCompare;
         const pct = pctBase && pctBase > price ? Math.round((1 - price / pctBase) * 100) : 0;
         let czSup = '';
-        if (this.dataset.marketId === '103847461189') { this.__czSupply = true; czSup = this.supplyTitle26(tier, dosage); this.__czSupply = false; }
-        const qtyLine = this.dataset.marketId === '103847461189'
+        if (this.swapQty26()) { this.__czSupply = true; czSup = this.supplyTitle26(tier, dosage); this.__czSupply = false; }
+        const qtyLine = this.swapQty26()
           ? `${czSup}${gifts.length ? ' + ' + L.gifts(gifts.length) : ''}`
           : `${qty}× ${this.productTitle}${gifts.length ? ' + ' + L.gifts(gifts.length) : ''}`;
 
