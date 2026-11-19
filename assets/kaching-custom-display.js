@@ -801,7 +801,7 @@ if (!customElements.get('kaching-custom-display')) {
         const g26 = this.giftsForTier26(selected.tier, this.heroQty26(tilesData));
         this.headerTitle.textContent = `${q26}× ${this.productTitle}${g26.length ? ' + ' + L.gifts(g26.length) : ''}`;
         this.headerTitle.hidden = false;
-        this.headerTitle.style.cssText = 'display:block;font-size:1.6rem;font-weight:800;margin:0 0 6px;line-height:1.25;color:rgb(var(--color-foreground));';
+        this.headerTitle.style.cssText = 'display:block;font-size:2.1rem;font-weight:800;margin:0 0 8px;line-height:1.25;color:rgb(var(--color-foreground));';
       } else {
         this.headerTitle.textContent = '';
         this.headerTitle.hidden = true;
